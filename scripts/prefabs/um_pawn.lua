@@ -253,7 +253,7 @@ local function FindTarget(inst, radius) return FindEntity(inst, radius, function
 local function NormalRetarget(inst) return FindTarget(inst, 8) end
 
 local function ExplodePing(inst)
-	if inst.components.combat.target ~= nil then
+	--if inst.components.combat.target ~= nil then
 		if inst.task ~= nil then
 			inst.task:Cancel()
 			inst.task = nil
@@ -265,7 +265,7 @@ local function ExplodePing(inst)
 			end
 		else
 			inst.explode_timer_count = inst.explode_timer_count - .1
-			inst:DoTaskInTime(inst.explode_timer_count, ExplodePing)
+			inst:DoTaskInTime(inst.explode_timer_count / 1.2, ExplodePing)
 			
 			local fxname = "dr_warm_loop_1"
 			
@@ -273,7 +273,7 @@ local function ExplodePing(inst)
 				fxname = "dr_warm_loop_2"
 			elseif inst.explode_timer_count < 0.6 and inst.explode_timer_count >= 0.3 then
 				fxname = "dr_warmer_loop"
-			else
+			elseif inst.explode_timer_count < 0.3 then
 				fxname = "dr_hot_loop"
 			end
 			
@@ -284,23 +284,33 @@ local function ExplodePing(inst)
             inst.fxlight = SpawnPrefab(fxname .. "_light" .. inst.pawntype)
             inst.fxlight.entity:AddFollower()
             inst.fxlight.Follower:FollowSymbol(inst.GUID, "body", 0, -40, 0)
+			
+			inst.sparks = SpawnPrefab("sparks")
+            inst.sparks.entity:AddFollower()
+            inst.sparks.Follower:FollowSymbol(inst.GUID, "body", 0 + math.random(-0.2, .2), -40, 0 + math.random(-0.2, .2))
 
 		end
-	else
-		if inst.task == nil then
-			inst.task = inst:DoTaskInTime(PAWN_DIVINING_DEFAULTPING, CheckTargetPiece)
-		end
+	--else
+		--if inst.task == nil then
+			--inst.task = inst:DoTaskInTime(PAWN_DIVINING_DEFAULTPING, CheckTargetPiece)
+		--end
 		
-		inst.explode_timer_count = 1
-	end
+		--inst.explode_timer_count = 1
+	--end
 end
 
 local function OnNewTarget(inst)
-	if inst.components.combat.target ~= nil then
+	if inst.components.combat.target ~= nil and inst.force_explode == nil then
 		if inst.task ~= nil then
 			inst.task:Cancel()
 			inst.task = nil
 		end
+
+		inst.force_explode = true
+			
+		inst.sparks = SpawnPrefab("sparks")
+		inst.sparks.entity:AddFollower()
+		inst.sparks.Follower:FollowSymbol(inst.GUID, "body", 0 + math.random(-0.2, .2), -40, 0 + math.random(-0.2, .2))
 		
 		inst.explode_timer_count = 1
 		inst:DoTaskInTime(0, ExplodePing)

@@ -522,7 +522,7 @@ local states=
 								ent.sg:GoToState("electrocute")
 							end
 							
-							ent.components.health:DoDelta(10 * mult, nil, inst, nil, inst) --From the onhit stuff...
+							ent.components.health:DoDelta(-10 * mult, nil, inst, nil, inst) --From the onhit stuff...
 						end
 					end
 				end
@@ -579,7 +579,7 @@ local states=
 							ent.sg:GoToState("electrocute")
 						end
 							
-						ent.components.health:DoDelta(10 * mult, nil, inst, nil, inst) --From the onhit stuff...
+						ent.components.health:DoDelta(-10 * mult, nil, inst, nil, inst) --From the onhit stuff...
 					end
 				end
 			end
