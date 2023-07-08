@@ -57,7 +57,7 @@ local function TriggerLLA(self)
 		self.inst.components.oldager:StopDamageOverTime()
 		self:DoDelta(49, true, "pocketwatch_heal", true)
 	else
-		self:DoDelta(49, false, item, true)--set 25%
+		self:DoDelta(49, false, item, true) --set 25%
 	end
 	if self.inst:HasTag("wathom") then
 		self.inst.AnimState:SetBuild("wathom")
@@ -75,8 +75,11 @@ end
 
 local function HasLLA(self)
 	if self.inst.components.inventory then
-		local item = self.inst.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY)
-		if item and item.prefab == "amulet" and self.inst.components.timer ~= nil and not self.inst.components.timer:TimerExists("shadowwathomcooldown")  then
+		local item = picker.components.inventory:GetEquippedItem(EQUIPSLOTS.NECK)
+		if item == nil then
+			item = picker.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY)
+		end
+		if item and item.prefab == "amulet" and self.inst.components.timer ~= nil and not self.inst.components.timer:TimerExists("shadowwathomcooldown") then
 			return true
 		end
 	end
@@ -100,17 +103,17 @@ env.AddComponentPostInit("health", function(self)
 				end
 				TriggerLLA(self) --Don't trigger the LLA here, let it happen in our own component, so this doesn't break whenever canis moves it to his own mod.
 			elseif self.inst:HasTag("deathamp") and cause ~= "deathamp" then
-				self.inst.components.adrenaline:DoDelta(amount*1)
+				self.inst.components.adrenaline:DoDelta(amount * 1)
 			elseif MayKill(self, amount) and (self.inst:HasTag("wathom") and self.inst:HasTag("amped")) and cause ~= "deathamp" then --suggest that we add a trigger here to show that wathom is still being hit, despite his lack of flinching or anything.
 				if not self.inst:HasTag("deathamp") then
 					self.inst:AddTag("deathamp")
 					self.inst:ToggleUndeathState(self.inst, true)
 					_DoDelta(self, -self.currenthealth + 1, false, cause, true, afflicter, ignore_absorb, ...) --needed to do this for ignore_invincible...
 				end
-			elseif not self.inst:HasTag("deathamp") then -- No positive healing if you're on your last breath
+			elseif not self.inst:HasTag("deathamp") then                                        -- No positive healing if you're on your last breath
 				_DoDelta(self, amount, overtime, cause, ignore_invincible, afflicter, ignore_absorb, ...)
 			end
-        elseif MayKill(self, amount) and HasLLA(self) then
+		elseif MayKill(self, amount) and HasLLA(self) then
 			TriggerLLA(self)
 		else
 			_DoDelta(self, amount, overtime, cause, ignore_invincible, afflicter, ignore_absorb, ...)
