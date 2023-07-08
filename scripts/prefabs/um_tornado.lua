@@ -28,7 +28,7 @@ local function Init(inst)
 
         inst.Advance_Task = inst:ListenForEvent("animover", Advance_Full)
 
-		--SendModRPCToClient(GetClientModRPC("UncompromisingSurvival", "ToggleLagCompOn"), nil)
+        --SendModRPCToClient(GetClientModRPC("UncompromisingSurvival", "ToggleLagCompOn"), nil)
         inst.is_full = true
     else
         Advance_Full(inst)
@@ -457,10 +457,10 @@ local function TornadoTask(inst)
 
         local players = TheSim:FindEntities(x, y, z, 300, nil, { "playerghost" }, { "player", "um_windturbine" })
 
-        if math.random() > 0.9 then
+        if math.random() > 0.9 and config ~= "minimal" then
             local lightning = SpawnPrefab("hound_lightning")
             lightning.Transform:SetPosition(x + math.random(-300, 300), 0, z + math.random(-300, 300))
-			lightning.NoTags = { "INLIMBO", "shadow", "structure", "wall", "companion", "abigail", "bird", "prey" }
+            lightning.NoTags = { "INLIMBO", "shadow", "structure", "wall", "companion", "abigail", "bird", "prey" }
             lightning.Delay = 1.5
         end
 
@@ -487,7 +487,8 @@ local function TornadoTask(inst)
                     if math.random() > 0.99 then
                         local lightning = SpawnPrefab("hound_lightning")
                         lightning.Transform:SetPosition(px + math.random(-5, 5), 0, pz + math.random(-5, 5))
-						lightning.NoTags = { "INLIMBO", "shadow", "structure", "wall", "companion", "abigail", "bird", "prey" }
+                        lightning.NoTags = { "INLIMBO", "shadow", "structure", "wall", "companion", "abigail", "bird",
+                            "prey" }
                         lightning.Delay = 1.5
                     end
 
@@ -583,7 +584,7 @@ local function TornadoTask(inst)
                     for k, v in ipairs(inst.components.inventory.itemslots) do
                         local item = inst.components.inventory:RemoveItem(v)
                         local pos = getrandomposition(inst)
-                        item.Transform:SetPosition(pos.x+math.random(-8,8), pos.y, pos.z+math.random(-8,8))
+                        item.Transform:SetPosition(pos.x + math.random(-8, 8), pos.y, pos.z + math.random(-8, 8))
                     end
 
                     if destination ~= nil then
@@ -607,7 +608,7 @@ local function TornadoTask(inst)
                     for k, v in ipairs(inst.components.inventory.itemslots) do
                         local item = inst.components.inventory:RemoveItem(v)
                         local pos = getrandomposition(inst)
-                        item.Transform:SetPosition(pos.x+math.random(-8,8), pos.y, pos.z+math.random(-8,8))
+                        item.Transform:SetPosition(pos.x + math.random(-8, 8), pos.y, pos.z + math.random(-8, 8))
                     end
 
                     inst.startmoving = false
@@ -667,6 +668,10 @@ local function fn()
 
     if not TheWorld.ismastersim then
         return inst
+    end
+
+    if not TUNING.DSTU.STORMS then
+        inst:DoTaskInTime(0, inst.Remove)
     end
 
     inst.Advance_Task = nil
