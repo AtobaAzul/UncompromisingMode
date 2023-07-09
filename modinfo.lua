@@ -6,7 +6,7 @@ if not folder_name:find("workshop-") then
 end
 
 description = [[
-󰀔 [ Version 1.0.1.6: "Under the Weather Pt.1" ]
+󰀔 [ Version 1.0.1.7: "Under the Weather Pt.1" ]
 
 Uncompromising Mode increases the risk and reward for those who have mastered Don't Starve Together.
 
@@ -20,7 +20,7 @@ Latest update features:
 
 author = "󰀈 The Uncomp Dev Team 󰀈"
 
-version = "Under the Weather Pt.1 v1.0.1.6"
+version = "Under the Weather Pt.1 v1.0.1.7"
 -- VERSION SCHEME
 -- first num is major release (e.g. "Under the weather", so, 2, UTW2 will be 3, and so on.) DO NOT BRING THIS NUMBER *DOWN* AGAIN PLEASE
 -- second is new content (something like a new large addition)
@@ -624,7 +624,7 @@ configuration_options = {
     Header("General Food Tweaks"),
     BinaryConfig("monstersmallmeat", "Monster Morsel",
         "Small creatures like Spiders drop monster morsels instead of Monster Meat.", true),
-    BinaryConfig("nowintergrowing", "No Winter Growing",
+    BinaryConfig("no_winter_growing", "No Winter Growing",
         "Makes a few food sources such as Kelp and Stone Fruit not grow in Winter.", true),
     BinaryConfig("beebox_nerf", "Bee Box Nerf", "Bee Boxes only release 2 Bees max.", true),
     {
