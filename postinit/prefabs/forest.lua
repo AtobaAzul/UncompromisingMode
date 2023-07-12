@@ -15,5 +15,8 @@ env.AddPrefabPostInit("forest", function(inst)
 			_worldstate.israining and TUNING.CACTUS_REGROWTH_RAINING_MULT or 1
 		) * TUNING.CACTUS_REGROWTH_TIME_MULT
 	end
-	inst.components.regrowthmanager:SetRegrowthForType("tentacle", TUNING.CACTUS_REGROWTH_TIME, "tentacle", TentacleRegrowth)
+	
+	if inst.components.regrowthmanager ~= nil then
+		inst.components.regrowthmanager:SetRegrowthForType("tentacle", TUNING.CACTUS_REGROWTH_TIME, "tentacle", TentacleRegrowth)
+	end
 end)

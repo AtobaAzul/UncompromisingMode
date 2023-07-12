@@ -96,18 +96,14 @@ return Class(function(self, inst)
 				destination.Transform:SetPosition(x_dest, 0, z_dest)
 
 				if x > 0 and z > 0 then
-					print("green x > 0 and z > 0")
 					destination.danumber = 90
 				elseif x > 0 and z < 0 then
-					print("green x > 0 and z < 0")
 					destination.danumber = -90
 					wise = -90
 				elseif x < 0 and z > 0 then
-					print("green x < 0 and z > 0")
 					destination.danumber = -90
 					wise = -90
 				else
-					print("green")
 					destination.danumber = 90
 				end
 
@@ -140,17 +136,13 @@ return Class(function(self, inst)
 				destination.Transform:SetPosition(x_dest, 0, z_dest)
 
 				if x > 0 and z > 0 then
-					print("red x > 0 and z > 0")
 					destination.danumber = -90
 					wise = -90
 				elseif x > 0 and z < 0 then
-					print("red x > 0 and z < 0")
 					destination.danumber = 90
 				elseif x < 0 and z > 0 then
-					print("red x < 0 and z > 0")
 					destination.danumber = 90
 				else
-					print("red")
 					destination.danumber = -90
 					wise = -90
 				end
@@ -188,9 +180,7 @@ return Class(function(self, inst)
 	end
 
 	local function SpawnCaveTornado(inst, data)
-		print("SpawnCaveTornado")
 		if data ~= nil and data.xdata ~= nil then
-			--print("xdata"..data.xdata)
 			local x = data.xdata
 			local z = data.zdata
 			local wise = data.wisedata

@@ -85,158 +85,171 @@ local function OnKilled(inst)
 	local creature = nil
 	if inst.size ~= nil then
 		if inst.size == 1 then
-			creature = "deer"
-			inst.components.lootdropper:AddChanceLoot("meat", 1.00)
-			inst.components.lootdropper:AddChanceLoot("meat", 0.5)
-			inst.components.lootdropper:AddChanceLoot("deer_antler", 1.00)
-			inst.components.lootdropper:AddChanceLoot("bluegem", 0.5)
-			inst.components.lootdropper:AddChanceLoot("redgem", 0.5)
+			creature = "beeguard"
+			inst.components.lootdropper:AddChanceLoot("honeycomb", 1.00)
+			inst.components.lootdropper:AddChanceLoot("honeycomb", 1.00)
+			inst.components.lootdropper:AddChanceLoot("honey", 1.00)
+			inst.components.lootdropper:AddChanceLoot("honey", 1.00)
+			inst.components.lootdropper:AddChanceLoot("honey", 1.00)
+			inst.components.lootdropper:AddChanceLoot("honey", 1.00)
+			inst.components.lootdropper:AddChanceLoot("honey", 1.00)
+			inst.components.lootdropper:AddChanceLoot("honey", 0.50)
+			inst.components.lootdropper:AddChanceLoot("stinger", 0.10)
 		end
 		if inst.size == 2 then
-			creature = "beefalo"
-			inst.components.lootdropper:AddChanceLoot("meat", 1.00)
-			inst.components.lootdropper:AddChanceLoot("meat", 1.00)
-			inst.components.lootdropper:AddChanceLoot("beefalowool", 1.00)
-			inst.components.lootdropper:AddChanceLoot("beefalowool", 1.00)
-			inst.components.lootdropper:AddChanceLoot("beefalowool", 0.5)
-			inst.components.lootdropper:AddChanceLoot("horn", 0.5)
-			inst.components.lootdropper:AddChanceLoot("poop", 0.5)
-		end
+			creature = "pied_rat"
+			inst.components.lootdropper:AddChanceLoot("monstermeat", 1.00)
+			inst.components.lootdropper:AddChanceLoot("monstermeat", 1.00)
+			inst.components.lootdropper:AddChanceLoot("monstermeat", 0.50)
+			inst.components.lootdropper:AddChanceLoot("rat_tail", 1.00)
+			inst.components.lootdropper:AddChanceLoot("rat_tail", 1.00)
+		end	
 		if inst.size == 3 then
-			creature = "mossling"
-			inst.components.lootdropper:AddChanceLoot("meat", 1.00)
-			inst.components.lootdropper:AddChanceLoot("drumstick", 1.00)
-			inst.components.lootdropper:AddChanceLoot("goose_feather", 1.00)
-			inst.components.lootdropper:AddChanceLoot("goose_feather", 1.00)
+			creature = "eyeofterror_mini"
+			inst.components.lootdropper:AddChanceLoot("milkywhites", 1.00)
+			inst.components.lootdropper:AddChanceLoot("milkywhites", 1.00)
+			inst.components.lootdropper:AddChanceLoot("monstermeat", 1.00)
+			inst.components.lootdropper:AddChanceLoot("monstermeat", 5.00)
 		end
 		if inst.size == 4 then
+			creature = "catcoon"
+			inst.components.lootdropper:AddChanceLoot("meat", 0.50)
+			inst.components.lootdropper:AddChanceLoot("coontail", 1.00)
+		end
+		if inst.size == 5 then
+			creature = "lightninggoat"
+			inst.components.lootdropper:AddChanceLoot("meat", 1.00)
+			inst.components.lootdropper:AddChanceLoot("meat", 0.25)
+			inst.components.lootdropper:AddChanceLoot("lightninggoathorn", 1.00)
+			inst.components.lootdropper:AddChanceLoot("lightninggoathorn", 1.00)
+		end			
+		if inst.size == 6 then
+			creature = "bishop"
+			inst.components.lootdropper:AddChanceLoot("trinket_6", 1.00)
+			inst.components.lootdropper:AddChanceLoot("trinket_6", 1.00)
+		end
+		if inst.size == 7 then
+			creature = "merm"
+			inst.components.lootdropper:AddChanceLoot("froglegs", 0.50)
+			inst.components.lootdropper:AddChanceLoot("tentaclespots", 1.00)
+			inst.components.lootdropper:AddChanceLoot("tentaclespots", 1.00)
+		end
+		if inst.size == 8 then
 			creature = "pigman"
 			inst.components.lootdropper:AddChanceLoot("meat", 1.00)
 			inst.components.lootdropper:AddChanceLoot("pigskin", 1.00)
 			inst.components.lootdropper:AddChanceLoot("tophat", 1.00)
-		end
-		if inst.size == 5 then
-			creature = "bunnyman"
-			inst.components.lootdropper:AddChanceLoot("meat", 1.00)
-			inst.components.lootdropper:AddChanceLoot("carrot", 1.00)
-			inst.components.lootdropper:AddChanceLoot("carrot", 1.00)
-			inst.components.lootdropper:AddChanceLoot("manrabbit_tail", 1.00)
-			inst.components.lootdropper:AddChanceLoot("manrabbit_tail", 0.5)
-		end
-		if inst.size == 6 then
-			creature = "koalefant_summer"
-			inst.components.lootdropper:AddChanceLoot("meat", 1.00)
-			inst.components.lootdropper:AddChanceLoot("meat", 1.00)
-			inst.components.lootdropper:AddChanceLoot("meat", 1.00)
-			inst.components.lootdropper:AddChanceLoot("meat", 1.00)
-			inst.components.lootdropper:AddChanceLoot("poop", 1.00)
-			inst.components.lootdropper:AddChanceLoot("poop", 0.5)
-			inst.components.lootdropper:AddChanceLoot("phlegm", 0.5)
-		end
-		if inst.size == 7 then
-			creature = "grassgator"
-			inst.components.lootdropper:AddChanceLoot("plantmeat", 1.00)
-			inst.components.lootdropper:AddChanceLoot("cutgrass", 1.00)
-			inst.components.lootdropper:AddChanceLoot("twigs", 1.00)
-		end
-		if inst.size == 8 then
-			creature = "tallbird"
-			inst.components.lootdropper:AddChanceLoot("meat", 1.00)
-			inst.components.lootdropper:AddChanceLoot("smallmeat", 0.5)
-			inst.components.lootdropper:AddChanceLoot("tallbirdegg", 1.00)
-			inst.components.lootdropper:AddChanceLoot("cutgrass", 1.00)
-			inst.components.lootdropper:AddChanceLoot("cutgrass", 0.5)
-			inst.components.lootdropper:AddChanceLoot("twigs", 1.00)
-			inst.components.lootdropper:AddChanceLoot("twigs", 0.5)
+			inst.components.lootdropper:AddChanceLoot("pig_token", 0.10)
 		end
 		if inst.size == 9 then
-			creature = "spiderqueen"
+			creature = "mossling"
 		end
 		if inst.size == 10 then
+			creature = "tallbird"
+			inst.components.lootdropper:AddChanceLoot("tallbirdegg", 1.00)
+			inst.components.lootdropper:AddChanceLoot("meat", 1.00)
+			inst.components.lootdropper:AddChanceLoot("meat", 0.5)
+			inst.components.lootdropper:AddChanceLoot("feather_crow", 1.00)
+			inst.components.lootdropper:AddChanceLoot("feather_crow", 1.00)
+			inst.components.lootdropper:AddChanceLoot("feather_crow", 0.25)
+			inst.components.lootdropper:AddChanceLoot("feather_robin", 1.00)
+			inst.components.lootdropper:AddChanceLoot("feather_robin", 1.00)
+			inst.components.lootdropper:AddChanceLoot("feather_robin", 0.25)
+			inst.components.lootdropper:AddChanceLoot("feather_robin_winter", 1.00)
+			inst.components.lootdropper:AddChanceLoot("feather_robin_winter", 1.00)
+			inst.components.lootdropper:AddChanceLoot("feather_robin_winter", 0.25)
+			inst.components.lootdropper:AddChanceLoot("feather_canary", 1.00)
+			inst.components.lootdropper:AddChanceLoot("feather_canary", 1.00)
+			inst.components.lootdropper:AddChanceLoot("feather_canary", 0.25)	
+		end		
+		if inst.size == 11 then
+			creature = "deer"
+			inst.components.lootdropper:AddChanceLoot("meat", 1.00)
+			inst.components.lootdropper:AddChanceLoot("meat", 0.5)
+			inst.components.lootdropper:AddChanceLoot("deer_antler", 1.00)
+			inst.components.lootdropper:AddChanceLoot("bluegem", 1.00)
+			inst.components.lootdropper:AddChanceLoot("redgem", 1.00)
+		end
+		if inst.size == 12 then
+			creature = "krampus"
+			inst.components.lootdropper:AddChanceLoot("monstermeat", 0.50)
+			inst.components.lootdropper:AddChanceLoot("charcoal", 1.00)
+			inst.components.lootdropper:AddChanceLoot("charcoal", 1.00)
+			inst.components.lootdropper:AddChanceLoot("boneshard", 1.00)
+			inst.components.lootdropper:AddChanceLoot("krampus_sack", 0.05)
+			inst.components.lootdropper:AddChanceLoot("bluegem", 1.00)
+			inst.components.lootdropper:AddChanceLoot("redgem", 1.00)
+		end
+		if inst.size == 13 then
+			creature = "snapdragon"
+			inst.components.lootdropper:AddChanceLoot("plantmeat", 0.50)
+			inst.components.lootdropper:AddChanceLoot("livinglog", 1.00)
+			inst.components.lootdropper:AddChanceLoot("livinglog", 1.00)
+			inst.components.lootdropper:AddChanceLoot("livinglog", 1.00)
+			inst.components.lootdropper:AddChanceLoot("livinglog", 1.00)
+			inst.components.lootdropper:AddChanceLoot("whisperpod", 1.00)
+		end
+		if inst.size == 14 then
+			creature = "walrus"
+			inst.components.lootdropper:AddChanceLoot("meat", 0.50)
+			inst.components.lootdropper:AddChanceLoot("walrus_tusk", 1.00)
+		end
+		if inst.size == 15 then
+			creature = "lordfruitfly"
+			inst.components.lootdropper:AddChanceLoot("plantmeat", 0.50)
+			inst.components.lootdropper:AddChanceLoot("seeds", 1.00)
+			inst.components.lootdropper:AddChanceLoot("seeds", 1.00)
+			inst.components.lootdropper:AddChanceLoot("seeds", 1.00)
+			inst.components.lootdropper:AddChanceLoot("seeds", 1.00)
+			inst.components.lootdropper:AddChanceLoot("seeds", 0.25)
+			inst.components.lootdropper:AddChanceLoot("seeds", 0.25)
+			inst.components.lootdropper:AddChanceLoot("seeds", 0.25)
+			inst.components.lootdropper:AddChanceLoot("seeds", 0.25)
+		end
+		if inst.size == 16 then
+			creature = "spiderqueen"
+			inst.components.lootdropper:AddChanceLoot("monstermeat", 1.00)
+			inst.components.lootdropper:AddChanceLoot("monstermeat", 0.50)
+			inst.components.lootdropper:AddChanceLoot("silk", 1.00)
+			inst.components.lootdropper:AddChanceLoot("silk", 0.50)
+		end
+		if inst.size == 17 then
+			creature = "beefalo"
+			inst.components.lootdropper:AddChanceLoot("meat", 1.00)
+			inst.components.lootdropper:AddChanceLoot("meat", 0.50)
+			inst.components.lootdropper:AddChanceLoot("beefalowool", 1.00)
+			inst.components.lootdropper:AddChanceLoot("beefalowool", 0.50)
+			inst.components.lootdropper:AddChanceLoot("horn", 1.00)
+			inst.components.lootdropper:AddChanceLoot("poop", 0.50)
+		end
+		if inst.size == 18 then
 			creature = "warg"
 			inst.components.lootdropper:AddChanceLoot("monstermeat", 1.00)
-			if TUNING.DSTU.MONSTERSMALLMEAT then
-				inst.components.lootdropper:AddChanceLoot("monstersmallmeat", 0.5)
-			else
-				inst.components.lootdropper:AddChanceLoot("monstermeat", 0.5)
-			end
+			inst.components.lootdropper:AddChanceLoot("houndstooth", 1.00)
 			inst.components.lootdropper:AddChanceLoot("houndstooth", 1.00)
 			inst.components.lootdropper:AddChanceLoot("houndstooth", 0.5)
 			inst.components.lootdropper:AddChanceLoot("boneshard", 1.00)
 			inst.components.lootdropper:AddChanceLoot("boneshard", 0.5)
-			inst.components.lootdropper:AddChanceLoot("bluegem", 0.5)
-			inst.components.lootdropper:AddChanceLoot("redgem", 0.5)
+			inst.components.lootdropper:AddChanceLoot("bluegem", 1.00)
+			inst.components.lootdropper:AddChanceLoot("redgem", 1.00)
 		end
-		if inst.size == 11 then
-			creature = "krampus"
-			inst.components.lootdropper:AddChanceLoot("monstermeat", 1.00)
-			if TUNING.DSTU.MONSTERSMALLMEAT then
-				inst.components.lootdropper:AddChanceLoot("monstersmallmeat", 0.5)
-			else
-				inst.components.lootdropper:AddChanceLoot("monstermeat", 0.5)
-			end
-			inst.components.lootdropper:AddChanceLoot("charcoal", 1.00)
-			inst.components.lootdropper:AddChanceLoot("charcoal", 0.5)
-			inst.components.lootdropper:AddChanceLoot("boneshard", 1.00)
-			inst.components.lootdropper:AddChanceLoot("krampus_sack", 0.05)
-			inst.components.lootdropper:AddChanceLoot("bluegem", 0.5)
-			inst.components.lootdropper:AddChanceLoot("redgem", 0.5)
-		end
-		if inst.size == 12 then
-			creature = "walrus"
-			inst.components.lootdropper:AddChanceLoot("meat", 1.00)
-			inst.components.lootdropper:AddChanceLoot("meat", 0.5)
-			inst.components.lootdropper:AddChanceLoot("blowdart_pipe", 0.5)
-			inst.components.lootdropper:AddChanceLoot("walrus_tusk", 1.0)
-		end
-		if inst.size == 13 then
-			creature = "bishop"
-			inst.components.lootdropper:AddChanceLoot("trinket_6", 1.00)
-		end
-		if inst.size == 14 then
+		if inst.size == 19 then
 			creature = "spat"
 			inst.components.lootdropper:AddChanceLoot("meat", 1.00)
 			inst.components.lootdropper:AddChanceLoot("meat", 0.5)
 			inst.components.lootdropper:AddChanceLoot("steelwool", 1.00)
+			inst.components.lootdropper:AddChanceLoot("steelwool", 1.00)
 			inst.components.lootdropper:AddChanceLoot("steelwool", 0.5)
 			inst.components.lootdropper:AddChanceLoot("phlegm", 1.00)
+			inst.components.lootdropper:AddChanceLoot("phlegm", 1.00)
 		end
-		if inst.size == 15 then
-			creature = "lightninggoat"
+		if inst.size == 20 then
+			creature = "koalefant_summer"
 			inst.components.lootdropper:AddChanceLoot("meat", 1.00)
-			inst.components.lootdropper:AddChanceLoot("meat", 0.5)
-			inst.components.lootdropper:AddChanceLoot("lightninggoathorn", 1.00)
-			inst.components.lootdropper:AddChanceLoot("lightninggoathorn", 1.00)
-		end
-		if inst.size == 16 then
-			creature = "snapdragon"
-			inst.components.lootdropper:AddChanceLoot("plantmeat", 1.00)
-			inst.components.lootdropper:AddChanceLoot("plantmeat", 0.5)
-			inst.components.lootdropper:AddChanceLoot("livinglog", 1.00)
-			inst.components.lootdropper:AddChanceLoot("livinglog", 1.00)
-			inst.components.lootdropper:AddChanceLoot("livinglog", 1.00)
-			inst.components.lootdropper:AddChanceLoot("livinglog", 0.50)
-			inst.components.lootdropper:AddChanceLoot("whisperpod", 1.0)
-		end
-		if inst.size == 17 then
-			creature = "catcoon"
 			inst.components.lootdropper:AddChanceLoot("meat", 1.00)
-			inst.components.lootdropper:AddChanceLoot("coontail", 1.00)
-			inst.components.lootdropper:AddChanceLoot("coontail", 1.00)
-		end
-		if inst.size == 18 then
-			creature = "eyeofterror_mini"
-			inst.components.lootdropper:AddChanceLoot("milkywhites", 1.00)
-			inst.components.lootdropper:AddChanceLoot("milkywhites", 1.00)
-			inst.components.lootdropper:AddChanceLoot("milkywhites", 0.50)
-			inst.components.lootdropper:AddChanceLoot("monstermeat", 1.00)
-			inst.components.lootdropper:AddChanceLoot("monstermeat", 5.00)
-		end
-		if inst.size == 19 then
-			creature = "pied_rat"
-			inst.components.lootdropper:AddChanceLoot("rat_tail", 1.00)
-			inst.components.lootdropper:AddChanceLoot("rat_tail", 1.00)
-			inst.components.lootdropper:AddChanceLoot("rat_tail", 0.50)
+			inst.components.lootdropper:AddChanceLoot("meat", 1.00)
+			inst.components.lootdropper:AddChanceLoot("meat", 0.50)
+			inst.components.lootdropper:AddChanceLoot("poop", 0.5)
 		end
 		inst.components.lootdropper:DropLoot()
 		--[[if creature ~= nil and not creature == "spiderqueen" then
@@ -272,7 +285,7 @@ local function onsave(inst, data)
 	if inst.size ~= nil then
 		data.size = inst.size
 	else
-		data.size = math.random(1, 18)
+		data.size = math.random(1, 20)
 	end
 end
 
@@ -280,99 +293,90 @@ local function onload(inst, data)
 	if data and data.size ~= nil then
 		inst.size = data.size
 	else
-		inst.size = math.random(1, 18)
+		inst.size = math.random(1, 20)
 	end
 end
 
 local function SetSize(inst)
-	if inst.size == 1 then --No Eyed Deer
-		SetMedium(inst)
-		inst.components.named:SetName("Fuzzy Cocoon")
-	end
-
-	if inst.size == 2 then --Beefalo
-		SetLarge(inst)
-		inst.components.named:SetName("Hairy Cocoon")
-	end
-
-	if inst.size == 3 then --Mossling
-		SetMedium(inst)
-		inst.components.named:SetName("Feathery Cocoon")
-	end
-
-	if inst.size == 4 then --Pigman
+	if inst.size == 1 then --Grumble Bee
 		SetSmall(inst)
-		inst.components.named:SetName("Leathery Cocoon")
-	end
-
-	if inst.size == 5 then --Bunnyman
+		inst.components.named:SetName("Buggy Cocoon")
+	end	
+	if inst.size == 2 then --Pied Rat
 		SetSmall(inst)
-		inst.components.named:SetName("Fuzzy Cocoon")
-	end
-
-	if inst.size == 6 then --koalefant
-		SetLarge(inst)
-		inst.components.named:SetName("Leathery Cocoon")
-	end
-
-	if inst.size == 7 then --grass gator
-		SetLarge(inst)
-		inst.components.named:SetName("Leafy Cocoon")
-	end
-
-	if inst.size == 8 then --Tallbird
-		SetMedium(inst)
-		inst.components.named:SetName("Feathery Cocoon")
-	end
-
-	if inst.size == 9 then --SpiderQueen
-		SetLarge(inst)
 		inst.components.named:SetName("Grotesque Cocoon")
 	end
-
-	if inst.size == 10 then --Varg
-		SetLarge(inst)
-		inst.components.named:SetName("Hairy Cocoon")
-	end
-
-	if inst.size == 11 then --Krampus
-		SetMedium(inst)
+	if inst.size == 3 then --Sussy peeper
+		SetSmall(inst)
 		inst.components.named:SetName("Grotesque Cocoon")
 	end
-
-	if inst.size == 12 then --Mactusk
-		SetMedium(inst)
-		inst.components.named:SetName("Leathery Cocoon")
+	if inst.size == 4 then --Catcoon
+		SetSmall(inst)
+		inst.components.named:SetName("Hairy Cocoon")
 	end
-
-	if inst.size == 13 then --Clockwork Knight
+	if inst.size == 5 then --Volt goat
+		SetSmall(inst)
+		inst.components.named:SetName("Hairy Cocoon")
+	end	
+	if inst.size == 6 then --Clockwork Bishop
 		SetSmall(inst)
 		inst.components.named:SetName("Hardened Cocoon")
 	end
-
-	if inst.size == 14 then --Ewecus
-		SetLarge(inst)
-		inst.components.named:SetName("Hardened Cocoon")
-	end
-	if inst.size == 15 then --Volt goat
+	if inst.size == 7 then --Merm
 		SetSmall(inst)
+		inst.components.named:SetName("Leathery Cocoon")
+	end
+	if inst.size == 8 then --Pigman
+		SetSmall(inst)
+		inst.components.named:SetName("Leathery Cocoon")
+	end	
+	if inst.size == 9 then --Mossling
+		SetMedium(inst)
+		inst.components.named:SetName("Feathery Cocoon")
+	end
+	if inst.size == 10 then --Tallbird
+		SetMedium(inst)
+		inst.components.named:SetName("Feathery Cocoon")
+	end
+	if inst.size == 11 then --No Eyed Deer
+		SetMedium(inst)
 		inst.components.named:SetName("Hairy Cocoon")
 	end
-	if inst.size == 16 then --Snapdragon
+	if inst.size == 12 then --Krampus
+		SetMedium(inst)
+		inst.components.named:SetName("Grotesque Cocoon")
+	end
+	if inst.size == 13 then --Snapdragon
 		SetMedium(inst)
 		inst.components.named:SetName("Leafy Cocoon")
 	end
-	if inst.size == 17 then --Catcoon
-		SetSmall(inst)
-		inst.components.named:SetName("Fuzzy Cocoon")
+	if inst.size == 14 then --Mactusk
+		SetMedium(inst)
+		inst.components.named:SetName("Leathery Cocoon")
 	end
-	if inst.size == 18 then --Sussy peeper
-		SetSmall(inst)
+	if inst.size == 15 then --Lord of the Fruit Flies
+		SetLarge(inst)
+		inst.components.named:SetName("Buggy Cocoon")
+	end
+	if inst.size == 16 then --SpiderQueen
+		SetLarge(inst)
 		inst.components.named:SetName("Grotesque Cocoon")
 	end
-	if inst.size == 19 then --Pied Rat
-		SetSmall(inst)
-		inst.components.named:SetName("Stinky Cocoon")
+	if inst.size == 17 then --Beefalo
+		SetLarge(inst)
+		inst.components.named:SetName("Hairy Cocoon")
+	end
+	if inst.size == 18 then --Varg
+		SetLarge(inst)
+		inst.components.named:SetName("Hairy Cocoon")
+	end
+	if inst.size == 19 then --Ewecus
+		SetLarge(inst)
+		inst.components.named:SetName("Hardened Cocoon")
+	end
+	if inst.size == 20 then --koalefant
+		SetLarge(inst)
+		inst.components.named:SetName("Leathery Cocoon")
 	end
 end
 
@@ -411,7 +415,6 @@ local function fn()
 	inst.entity:AddSoundEmitter()
 
 	--MakeObstaclePhysics(inst, .5)
-
 
 	inst.AnimState:SetBank("wackycocoons")
 	inst.AnimState:SetBuild("wackycocoons")
@@ -456,7 +459,7 @@ local function fn()
 	inst.OnLoad = onload
 	inst.OnEntitySleep = OnEntitySleep
 	inst.OnEntityWake = OnEntityWake
-	inst.size = math.random(1, 19)
+	inst.size = math.random(1, 20)
 	return inst
 end
 
