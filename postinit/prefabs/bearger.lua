@@ -197,7 +197,7 @@ env.AddPrefabPostInit("bearger", function(inst)
 		inst.components.combat:SetAreaDamage(6 + 0.5, 0.8)
 	end
 	
-	inst:ListenForEvent("oneat", function(inst, data)
+	--inst:ListenForEvent("oneat", function(inst, data)
 		--inst.components.timer:StopTimer("FindNewFood")
 		--inst.components.timer:StartTimer("FindNewFood", 10)
                 
@@ -209,20 +209,20 @@ env.AddPrefabPostInit("bearger", function(inst)
 				inst.components.health:DoDelta(100 + (data.food.components.edible.hungervalue * 10))
 			end
 		end]]
-	end)
-		local function OnHitOther(inst, other)
-			if other:HasTag("creatureknockbackable") then
-			other:PushEvent("knockback", {knocker = inst, radius = 125, strengthmult = 1})
-			else
-			if other ~= nil and other.components.inventory ~= nil and not other:HasTag("fat_gang") and not other:HasTag("foodknockbackimmune") and not (other.components.rider ~= nil and other.components.rider:IsRiding()) and 
+	--end)
+		--local function OnHitOther(inst, other)
+			--if other:HasTag("creatureknockbackable") then
+			--other:PushEvent("knockback", {knocker = inst, radius = 125, strengthmult = 1})
+			--else
+			--if other ~= nil and other.components.inventory ~= nil and not other:HasTag("fat_gang") and not other:HasTag("foodknockbackimmune") and not (other.components.rider ~= nil and other.components.rider:IsRiding()) and 
 			--Don't knockback if you wear marble
-			(other.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY) ==nil or not other.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY):HasTag("marble") and not other.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY):HasTag("knockback_protection")) then
-				other:PushEvent("knockback", {knocker = inst, radius = 125, strengthmult = 1})
-			end
-			end
-		end
+			--(other.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY) ==nil or not other.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY):HasTag("marble") and not other.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY):HasTag("knockback_protection")) then
+				--other:PushEvent("knockback", {knocker = inst, radius = 125, strengthmult = 1})
+			--end
+			--end
+		--end
 	
-		if inst.components.combat ~= nil then
-			inst.components.combat.onhitotherfn = OnHitOther
-		end
+		--if inst.components.combat ~= nil then
+			--inst.components.combat.onhitotherfn = OnHitOther
+		--end
 end)
