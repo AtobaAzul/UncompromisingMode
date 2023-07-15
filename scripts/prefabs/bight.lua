@@ -50,7 +50,6 @@ local function keeptargetfn(inst, target)
           and not target.components.health:IsDead()
 end
 
-
 local function OnAttacked(inst, data)
 	if inst:HasTag("electrified") and data ~= nil and data.attacker ~= nil then
 		if data.attacker.components.health ~= nil and not data.attacker.components.health:IsDead() and
@@ -75,21 +74,6 @@ local function OnAttacked(inst, data)
     inst.components.combat:ShareTarget(data.target, SHARE_TARGET_DIST, function(dude) return dude:HasTag("chess") and not dude.components.health:IsDead() end, 5)
 end
 
-local function OnAttackOther(inst, data)
-    if data ~= nil and data.target ~= nil then
-            if data.target.components.health ~= nil and not data.target.components.health:IsDead() and
-                (data.weapon == nil or ((data.weapon.components.weapon == nil or data.weapon.components.weapon.projectile == nil) and data.weapon.components.projectile == nil)) and
-                not (data.target.components.inventory ~= nil and data.target.components.inventory:IsInsulated()) then
-
-                if data.target:HasTag("player") then
-					local shockvictim = data.target.sg:GoToState("electrocute")
-					inst:DoTaskInTime(2, shockvictim)
-                end
-            end
-        end
-inst.components.combat:SetTarget(data.target)
-end
-
 local function Shockness(inst,x,y,z)
 	x = x + math.random(-3,3)
 	z = z + math.random(-3,3)
@@ -109,7 +93,7 @@ local function Shockness(inst,x,y,z)
 						and TUNING.ELECTRIC_DAMAGE_MULT + TUNING.ELECTRIC_WET_DAMAGE_MULT * (v.components.moisture ~= nil and v.components.moisture:GetMoisturePercent() or (v:GetIsWet() and 1 or 0))
 						or 1
 							
-					local damage = -6.7 * mult
+					local damage = -10 * mult
 
 					if v.sg ~= nil and not v.sg:HasStateTag("nointerrupt") and not insulated then
 						v.sg:GoToState("electrocute")
@@ -233,7 +217,6 @@ local function fn(Sim)
 
     ------------------
 	inst:ListenForEvent("attacked", OnAttacked)
-	inst:ListenForEvent("onattackother", OnAttackOther)	
     inst:SetStateGraph("SGbight")
     inst:SetBrain(brain)
 	inst.sg:GoToState("waken")
