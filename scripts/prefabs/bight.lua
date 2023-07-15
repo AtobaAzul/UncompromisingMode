@@ -59,12 +59,8 @@ local function OnAttacked(inst, data)
 			if not (data.attacker.components.inventory ~= nil and data.attacker.components.inventory:IsInsulated()) then
 				local insulated = (data.attacker:HasTag("electricdamageimmune") or
 					(data.attacker.components.inventory ~= nil and data.attacker.components.inventory:IsInsulated()))
-
-				local mult = not insulated
-					and TUNING.ELECTRIC_DAMAGE_MULT + TUNING.ELECTRIC_WET_DAMAGE_MULT * (data.attacker.components.moisture ~= nil and data.attacker.components.moisture:GetMoisturePercent() or (data.attacker:GetIsWet() and 1 or 0))
-					or 1
 					
-				local damage = -6.7 * mult
+				local damage = -TUNING.LIGHTNING_GOAT_DAMAGE
 					
 				if data.attacker.sg ~= nil and not data.attacker.sg:HasStateTag("nointerrupt") and not insulated then
 					data.attacker.sg:GoToState("electrocute")
@@ -77,6 +73,21 @@ local function OnAttacked(inst, data)
 	
     inst.components.combat:SetTarget(data.attacker)
     inst.components.combat:ShareTarget(data.target, SHARE_TARGET_DIST, function(dude) return dude:HasTag("chess") and not dude.components.health:IsDead() end, 5)
+end
+
+local function OnAttackOther(inst, data)
+    if data ~= nil and data.target ~= nil then
+            if data.target.components.health ~= nil and not data.target.components.health:IsDead() and
+                (data.weapon == nil or ((data.weapon.components.weapon == nil or data.weapon.components.weapon.projectile == nil) and data.weapon.components.projectile == nil)) and
+                not (data.target.components.inventory ~= nil and data.target.components.inventory:IsInsulated()) then
+
+                if data.target:HasTag("player") then
+					local shockvictim = data.target.sg:GoToState("electrocute")
+					inst:DoTaskInTime(2, shockvictim)
+                end
+            end
+        end
+inst.components.combat:SetTarget(data.target)
 end
 
 local function Shockness(inst,x,y,z)
@@ -221,7 +232,8 @@ local function fn(Sim)
     inst:AddComponent("inspectable")
 
     ------------------
-	inst:ListenForEvent("attacked", OnAttacked)    
+	inst:ListenForEvent("attacked", OnAttacked)
+	inst:ListenForEvent("onattackother", OnAttackOther)	
     inst:SetStateGraph("SGbight")
     inst:SetBrain(brain)
 	inst.sg:GoToState("waken")
