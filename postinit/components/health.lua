@@ -49,7 +49,11 @@ local function TriggerLLA(self)
 		end
 	end
 
-	local item = self.inst.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY)
+	local item = self.inst.components.inventory:GetEquippedItem(EQUIPSLOTS.NECK)
+	if item == nil then
+		item = self.inst.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY)
+	end
+
 	local item2
 	FindSleepoPeepo(self.inst)
 	self:SetCurrentHealth(1)
@@ -59,15 +63,20 @@ local function TriggerLLA(self)
 	else
 		self:DoDelta(49, false, item, true) --set 25%
 	end
+
 	if self.inst:HasTag("wathom") then
 		self.inst.AnimState:SetBuild("wathom")
 	end
+
 	SpawnPrefab("slingshotammo_hitfx_gold").Transform:SetPosition(self.inst.Transform:GetWorldPosition())
 	SpawnPrefab("shadow_despawn").Transform:SetPosition(self.inst.Transform:GetWorldPosition())
+
 	self:SetInvincible(true)
+
 	if self.inst.components.sanity then
 		self.inst.components.sanity:DoDelta(-50)
 	end
+	
 	self.inst:DoTaskInTime(1,
 		function(inst) if inst.components.health then inst.components.health:SetInvincible(false) end end)
 	item:DoTaskInTime(0, function(item) item:Remove() end)
