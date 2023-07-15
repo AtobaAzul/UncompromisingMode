@@ -1,33 +1,21 @@
 local function OnHitZap(inst)
-	local x, y, z = inst.Transform:GetWorldPosition()
+    local x, y, z = inst.Transform:GetWorldPosition()
     
-	SpawnPrefab("electric_explosion").Transform:SetPosition(x,0,z)
-	SpawnPrefab("bishop_charge_hit").Transform:SetPosition(inst.Transform:GetWorldPosition())
-	
-	local ents = TheSim:FindEntities(x, 0, z, 5, {"_health"}, { "shadow", "INLIMBO", "chess" })
-	
-	if #ents > 0 then
-		for i, v in ipairs(ents) do			
-			if v:HasTag("player") and v.components.health ~= nil and not v.components.health:IsDead() then
-				local insulated = (v:HasTag("electricdamageimmune") or
-					(v.components.inventory ~= nil and v.components.inventory:IsInsulated()))
-				
-				v.components.combat:GetAttacked(inst, 20, nil, "electric")
-					
-				if v.sg ~= nil and not v.sg:HasStateTag("nointerrupt") and not insulated then
-					v.sg:GoToState("electrocute")
-				end
-			elseif v.components.combat ~= nil then
-				if not v:HasTag("electricdamageimmune") and v.components.health ~= nil then
-					--v.components.health:DoDelta(-30, nil, inst.prefab, nil, inst) --From the onhit stuff...
-					v.components.combat:GetAttacked(inst, 30, nil, "electric")
-				end
-			end
-		end
-    end
-	
+    SpawnPrefab("electric_explosion").Transform:SetPosition(x,0,z)
+    SpawnPrefab("bishop_charge_hit").Transform:SetPosition(inst.Transform:GetWorldPosition())
+    
+    local ents = TheSim:FindEntities(x, 0, z, 5, {"_health"}, { "shadow", "INLIMBO", "chess" })
+    
+    if #ents > 0 then
+        for i, v in ipairs(ents) do            
+            if v.components.health ~= nil and not v.components.health:IsDead() then
+                v.components.combat:GetAttacked(inst, 50, nil)
+            end
+        end
+	end
     inst:Remove()
 end
+	
 local function onthrown(inst)
 	inst.Light:Enable(true)
     inst:AddTag("NOCLICK")
@@ -60,6 +48,7 @@ end
 local function fn()
     local inst = CreateEntity()
 
+	
     inst.entity:AddTransform()
     inst.entity:AddAnimState()
     inst.entity:AddSoundEmitter()

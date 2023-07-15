@@ -131,7 +131,7 @@ local function fn(Sim)
     inst.components.combat:SetAttackPeriod(TUNING.BISHOP_ATTACK_PERIOD)
     inst.components.combat:SetRange(TUNING.BISHOP_ATTACK_DIST*2)
     inst.components.combat:SetRetargetFunction(1, NormalRetarget)
-	inst.components.combat:SetDefaultDamage(40)
+	inst.components.combat:SetDefaultDamage(50)
     ------------------
     
     ------------------
