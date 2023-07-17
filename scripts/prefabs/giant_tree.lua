@@ -368,7 +368,7 @@ local function UnInfestMe(inst)
 end
 
 local function InfestedInit(inst)
-	if inst.infested and inst.infested then
+	if inst.infested then
 		inst:AddTag("infestedtree")
 		inst:AddComponent("childspawner")
 		inst.components.childspawner.childname = "aphid"
@@ -518,7 +518,7 @@ local mosses = {
 local function HideAllMoss(inst, poof) --Depricated
 	--TheNet:Announce("inst.mossy is false")
 	for i, moss in ipairs(mosses) do
-		if poof and poof then
+		if poof then
 			local pine = SpawnPrefab("pine_needles_chop")
 			pine.entity:AddFollower()
 			pine.Follower:FollowSymbol(inst.GUID, moss, 0, 0, 0)
@@ -531,7 +531,7 @@ local function ShowAllMoss(inst, poof)
 	--TheNet:Announce("inst.mossy is true")
 	inst.mossy = true
 	for i, moss in ipairs(mosses) do
-		if poof and poof then
+		if poof then
 			local pine = SpawnPrefab("pine_needles_chop")
 			pine.entity:AddFollower()
 			pine.Follower:FollowSymbol(inst.GUID, moss, 0, 0, 0)
