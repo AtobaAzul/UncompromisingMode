@@ -180,7 +180,7 @@ local um_preparedfoods =
 				tags.veggie >= 2 and (names.wobster_sheller_land or tags.fish and tags.fish >= 2)
 		end,
 		hunger = 75,
-		health = 5,
+		health = 20,
 		sanity = 60,
 		priority = 30,
 		weight = 1,
