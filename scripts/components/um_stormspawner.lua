@@ -33,7 +33,7 @@ return Class(function(self, inst)
 	--[[ Private Member Variables ]]
 	--------------------------------------------------------------------------
 
-	local _tornadotime = (TheWorld.state.springlength / 4) * 480
+	local _tornadotime = (TestForIA() and (TheWorld.state.winterlenght / 4) * 480) or (TheWorld.state.springlength / 4) * 480
 
 	--------------------------------------------------------------------------
 	--[[ Private member functions ]]
@@ -227,7 +227,7 @@ return Class(function(self, inst)
 	--------------------------------------------------------------------------
 
 	local function OnSeasonChange(self)
-		if TheWorld.state.season == "spring" and TheWorld.state.cycles >= TUNING.DSTU.WEATHERHAZARD_START_DATE_SPRING then
+		if TestForIA() and TheWorld.state.season == "winter" or TheWorld.state.season == "spring" and TheWorld.state.cycles >= TUNING.DSTU.WEATHERHAZARD_START_DATE_SPRING then
 			StartStorms()
 		else
 			_locationtags = {

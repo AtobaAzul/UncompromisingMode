@@ -1,6 +1,5 @@
 --------------------------------------------------------------------------
---[[ Dependencies ]]
---------------------------------------------------------------------------
+--[[ Dependencies ]] --------------------------------------------------------------------------
 local easing = require("easing")
 
 --------------------------------------------------------------------------
@@ -16,7 +15,6 @@ return Class(function(self, inst)
 	--------------------------------------------------------------------------
 	--[[ Private constants ]]
 	--------------------------------------------------------------------------
-
 
 	--------------------------------------------------------------------------
 	--[[ Public Member Variables ]]
@@ -59,9 +57,9 @@ return Class(function(self, inst)
 			_storming = true
 
 			for i, v in ipairs(AllPlayers) do
-				--if v.components ~= nil and v.components.talker ~= nil and TheWorld.state.cycles >= TUNING.DSTU.WEATHERHAZARD_START_DATE_WINTER then
+				-- if v.components ~= nil and v.components.talker ~= nil and TheWorld.state.cycles >= TUNING.DSTU.WEATHERHAZARD_START_DATE_WINTER then
 				v.components.talker:Say(GetString(v, "ANNOUNCE_SNOWSTORM"))
-				--end
+				-- end
 			end
 
 			TheWorld:PushEvent("ms_forceprecipitation", true)
@@ -114,10 +112,7 @@ return Class(function(self, inst)
 	end
 
 	function self:OnSave()
-		local data =
-		{
-			storming = _storming,
-		}
+		local data = {storming = _storming}
 
 		return data
 	end
@@ -131,12 +126,14 @@ return Class(function(self, inst)
 	end
 
 	function self:OnPostInit()
-		_worldsettingstimer:AddTimer(UM_SNOW_STORM_TIMERNAME, _spawninterval + math.random(0, 120), true, StartStorming)
-		_worldsettingstimer:AddTimer(UM_STOP_SNOW_STORM_TIMERNAME, _despawninterval + math.random(80, 120), true, StopStorming)
+		if not TestForIA() then
+			_worldsettingstimer:AddTimer(UM_SNOW_STORM_TIMERNAME, _spawninterval + math.random(0, 120), true, StartStorming)
+			_worldsettingstimer:AddTimer(UM_STOP_SNOW_STORM_TIMERNAME, _despawninterval + math.random(80, 120), true, StopStorming)
 
-		OnSeasonChange()
+			OnSeasonChange()
+		end
 	end
 
 	self:WatchWorldState("season", OnSeasonChange)
-	--self.inst:ListenForEvent("forcetornado", PickAttackTarget)
+	-- self.inst:ListenForEvent("forcetornado", PickAttackTarget)
 end)

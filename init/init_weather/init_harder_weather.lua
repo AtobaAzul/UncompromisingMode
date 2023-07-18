@@ -122,7 +122,8 @@ env.AddPrefabPostInit("forest", function(inst)
 		inst:AddComponent("um_stormspawner")
 	end
 
-	inst:DoTaskInTime(0, function(inst)
+	inst:DoTaskInTime(0, function(inst)--doesn't work for some components, but works for others.
+		print("HERE TestForIA:", TestForIA())
 		if TestForIA() then --remove components if the world is IA island/volcano, instead of checking for the mod or delaying adding components.
 			inst:RemoveComponent("uncompromising_deerclopsspawner")
 			inst:RemoveComponent("toadrain")
