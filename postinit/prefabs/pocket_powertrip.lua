@@ -42,7 +42,7 @@ local function DoPockets(inst, widget)
         return inst
     end
     inst:AddComponent("container")
-    inst.components.container:WidgetSetup("widget")
+    inst.components.container:WidgetSetup(widget)
     if inst.components.equippable ~= nil then
         local OnEquip_old = inst.components.equippable.onequipfn
 
