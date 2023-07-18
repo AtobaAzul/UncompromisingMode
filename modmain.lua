@@ -97,6 +97,7 @@ end)
 
 modimport("init/init_gamemodes/init_uncompromising_mode")
 modimport("init/init_wathom")
+modimport("init/init_descriptions/announcestrings.lua")
 
 if GetModConfigData("funny rat") then
     AddModCharacter("winky", "FEMALE")
