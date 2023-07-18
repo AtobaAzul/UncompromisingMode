@@ -164,6 +164,7 @@ local function fn()
 	inst:AddTag("shadowcreature")
 	inst:AddTag("shadow_wixie")
 	inst:AddTag("prime_shadow_wixie")
+	inst:AddTag("shadow_aligned")
 
     inst._unchained = net_bool(inst.GUID, "klaus._unchained", "musicdirty")
     inst._pausemusic = net_bool(inst.GUID, "klaus_pausemusic", "musicdirty")
@@ -313,6 +314,7 @@ local function helperfn()
     inst:AddTag("shadow_wixie")
     inst:AddTag("shadow_wixie_helper")
     inst:AddTag("shadow_wixie_clone")
+	inst:AddTag("shadow_aligned")
 
     inst.entity:SetPristine()
 
@@ -581,6 +583,7 @@ local function shadowclone_fn()
     inst:AddTag("notraptrigger")
     inst:AddTag("shadowchesspiece")
     inst:AddTag("shadow_wixie_clone")
+	inst:AddTag("shadow_aligned")
 
     inst.entity:SetPristine()
 

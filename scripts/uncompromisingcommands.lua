@@ -196,3 +196,34 @@ function c_um_heatwave()
         end
     end
 end
+
+local uncompfoods = {
+	"beefalowings",
+	"blueberrypancakes",
+	"californiaking",
+	"hardshelltacos",
+	"liceloaf",
+	"seafoodpaella",
+	"snotroast",
+	"snowcone",
+	"stuffed_peeper_poppers",
+	"theatercorn",
+	"um_deviled_eggs",
+	"purplesteamedhams",
+	"greensteamedhams",
+	"viperjam",
+	"zaspberryparfait",
+}
+
+function c_um_givefoods()
+    if ThePlayer ~= nil then
+		for i, v in pairs(uncompfoods) do
+			if ThePlayer.components.inventory ~= nil then
+				local food = SpawnPrefab(v)
+				food.Transform:SetPosition(ThePlayer.Transform:GetWorldPosition())
+				
+				ThePlayer.components.inventory:GiveItem(food)
+			end
+		end
+    end
+end

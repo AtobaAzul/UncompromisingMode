@@ -227,20 +227,13 @@ env.AddPrefabPostInit("winona", function(inst)
 						and ((action.target.components.pickable.jostlepick and "dojostleaction") or
 							(action.target.components.pickable.quickpick and "doshortaction") or
 							(inst:HasTag("fastpicker") and "doshortaction") or
+							(inst:HasTag("woodiequickpicker") and "dowoodiefastpick") or
 							(inst:HasTag("quagmire_fasthands") or fast and "domediumaction") or
 							(slow and "dohungrybuild") or
 							"dolongaction"))
 					or nil
 			else
-				return (inst.components.rider ~= nil and inst.components.rider:IsRiding() and "dolongaction")
-					or (action.target ~= nil
-						and action.target.components.pickable ~= nil
-						and ((action.target.components.pickable.jostlepick and "dojostleaction") or
-							(action.target.components.pickable.quickpick and "doshortaction") or
-							(inst:HasTag("fastpicker") and "doshortaction") or
-							(inst:HasTag("quagmire_fasthands") and "domediumaction") or
-							"dolongaction"))
-					or nil
+				return _PickActionOld(inst, action)
 			end
 		end
 	end

@@ -782,7 +782,7 @@ Assets = {
 	Asset("ANIM", "anim/speaker_test.zip"),
 
 	Asset("ANIM", "anim/siren_throne.zip"),
-
+	
 	Asset("ANIM", "anim/sunken_royalchest.zip"),
 	Asset("ANIM", "anim/sunken_royalchest_rainbow.zip"),
 	Asset("ANIM", "anim/sunken_royalchest_purple.zip"),
@@ -1130,8 +1130,6 @@ Assets = {
 	Asset("ANIM", "anim/magnerang.zip"),
 	Asset("ANIM", "anim/um_magnerang_reel.zip"),
 
-	Asset("ANIM", "anim/hardshelltacos.zip"),
-
 	Asset("ANIM", "anim/californiaking.zip"),
 
 	Asset("ANIM", "anim/cursed_antler.zip"),
@@ -1143,14 +1141,7 @@ Assets = {
 
 	Asset("ANIM", "anim/hat_widowshead.zip"),
 
-	Asset("ANIM", "anim/purplesteamedhams.zip"),
-	Asset("ANIM", "anim/greensteamedhams.zip"),
-
 	Asset("ANIM", "anim/greenfoliage.zip"),
-
-	Asset("ANIM", "anim/blueberrypancakes.zip"),
-
-	Asset("ANIM", "anim/simpsalad.zip"),
 
 	Asset("ANIM", "anim/beefalowings.zip"),
 
@@ -1159,9 +1150,16 @@ Assets = {
 	Asset("ANIM", "anim/scorpioncarapace.zip"),
 	Asset("ANIM", "anim/scorpioncarapace_dried.zip"),
 
-	--Asset("ANIM", "anim/liceloaf.zip"),
-
+	Asset("ANIM", "anim/liceloaf.zip"),
+	Asset("ANIM", "anim/stuffed_peeper_poppers.zip"),
+	Asset("ANIM", "anim/seafoodpaella.zip"),
+	Asset("ANIM", "anim/um_deviled_eggs.zip"),
 	Asset("ANIM", "anim/zaspberryparfait.zip"),
+	Asset("ANIM", "anim/blueberrypancakes.zip"),
+	Asset("ANIM", "anim/simpsalad.zip"),
+	Asset("ANIM", "anim/purplesteamedhams.zip"),
+	Asset("ANIM", "anim/greensteamedhams.zip"),
+	Asset("ANIM", "anim/hardshelltacos.zip"),
 
 	Asset("ANIM", "anim/berniebox.zip"),
 
@@ -1639,9 +1637,17 @@ Assets = {
 	--ASSET("ATLAS_BUILD", "images/inventoryimages/scorpioncarapacecooked.xml"),
 	Asset("ATLAS", "images/inventoryimages/scorpioncarapacecooked.xml"),
 
-	--Asset("IMAGE", "images/inventoryimages/liceloaf.tex"),
+	Asset("IMAGE", "images/inventoryimages/liceloaf.tex"),
 	----ASSET("ATLAS_BUILD", "images/inventoryimages/liceloaf.xml"),
-	--Asset("ATLAS", "images/inventoryimages/liceloaf.xml"),
+	Asset("ATLAS", "images/inventoryimages/liceloaf.xml"),
+
+	Asset("IMAGE", "images/inventoryimages/stuffed_peeper_poppers.tex"),
+	----ASSET("ATLAS_BUILD", "images/inventoryimages/stuffed_peeper_poppers.xml"),
+	Asset("ATLAS", "images/inventoryimages/stuffed_peeper_poppers.xml"),
+
+	Asset("IMAGE", "images/inventoryimages/um_deviled_eggs.tex"),
+	----ASSET("ATLAS_BUILD", "images/inventoryimages/um_deviled_eggs.xml"),
+	Asset("ATLAS", "images/inventoryimages/um_deviled_eggs.xml"),
 
 	Asset("IMAGE", "images/inventoryimages/theatercorn.tex"),
 	--ASSET("ATLAS_BUILD", "images/inventoryimages/theatercorn.xml"),
@@ -2072,7 +2078,7 @@ Assets = {
 	Asset("ATLAS", "images/map_icons/telebase_active.xml"),
 	
 	Asset("IMAGE", "images/map_icons/um_pyre_nettles_map.tex"),
-	Asset("ATLAS", "images/map_icons/um_pyre_nettles_map.xml"),	
+	Asset("ATLAS", "images/map_icons/um_pyre_nettles_map.xml"),
 	
 	Asset("IMAGE", "images/map_icons/um_tornado_map.tex"),
 	Asset("ATLAS", "images/map_icons/um_tornado_map.xml"),

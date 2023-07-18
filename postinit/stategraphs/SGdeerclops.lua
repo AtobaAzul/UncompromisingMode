@@ -1019,11 +1019,14 @@ env.AddStategraphPostInit("deerclops", function(inst)
 
             },
 
+            onexit = function(inst)
+				inst.components.locomotor.walkspeed = 3
+            end,
+
             events =
             {
                 EventHandler("animover", function(inst)
                     inst.sg:GoToState("idle")
-                    inst.components.locomotor.walkspeed = 3
                 end),
             },
         },

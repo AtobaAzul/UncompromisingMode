@@ -169,7 +169,7 @@ local function DoPop(inst, remaining, total, level, hissvol)
                         v.components.combat:GetAttacked(inst, 10, inst)
 
                         if v.components.combat ~= nil then
-							v:PushEvent("attacked", {attacker = inst.attacker or nil, damage = 0, weapon = inst })
+							--v:PushEvent("attacked", {attacker = inst.attacker, damage = 0, weapon = inst })
                             v.components.combat:RemoveShouldAvoidAggro(inst.attacker)
                         end
                     end
@@ -270,6 +270,8 @@ local function fn()
     inst:AddTag("projectile")
     inst:AddTag("explosive")
     inst:AddTag("scarytoprey")
+    inst:AddTag("slingshotammo")
+    inst:AddTag("reloaditem_ammo")
 
     MakeInventoryFloatable(inst)
 

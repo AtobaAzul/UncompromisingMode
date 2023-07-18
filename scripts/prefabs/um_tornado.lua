@@ -238,7 +238,7 @@ local function TornadoEnviromentTask(inst)
     if config ~= "minimal" then
         -- if GetClosestInstWithTag("player", inst, PLAYER_CAMERA_SEE_DISTANCE * 1.125) ~= nil then -- tornado doesn't sleep. Using alt distance-based check.
         -- PICKABLES
-        local pickables = TheSim:FindEntities(x, y, z, 12, { "pickable" }, { "INLIMBO", "trap" })
+        local pickables = TheSim:FindEntities(x, y, z, 12, { "pickable" }, { "INLIMBO", "trap", "flower" })
         for k, v in ipairs(pickables) do
             if v.components.pickable:CanBePicked() then
                 if not v:IsAsleep() and not config == "reduced" then
@@ -890,13 +890,13 @@ local function destfn()
     local inst = CreateEntity()
 
     inst.entity:AddTransform()
-    --inst.entity:AddMiniMapEntity()
+    inst.entity:AddMiniMapEntity()
     inst.entity:AddNetwork()
 
     inst:AddTag("NOCLICK")
     inst:AddTag("NOBLOCK")
     inst:AddTag("um_tornado_destination")
-    --inst.MiniMapEntity:SetIcon("redmooneye.png")
+    inst.MiniMapEntity:SetIcon("redmooneye.png")
 
     inst.entity:SetCanSleep(false)
 
@@ -931,12 +931,12 @@ local function marker()
 
     inst.entity:AddTransform()
     inst.entity:AddAnimState()
-    --inst.entity:AddMiniMapEntity()
+    inst.entity:AddMiniMapEntity()
     inst.entity:AddNetwork()
 
-    --inst.MiniMapEntity:SetIcon("greenmooneye.png")
-    --inst.MiniMapEntity:SetCanUseCache(false)
-    --inst.MiniMapEntity:SetDrawOverFogOfWar(true)
+    inst.MiniMapEntity:SetIcon("greenmooneye.png")
+    inst.MiniMapEntity:SetCanUseCache(false)
+    inst.MiniMapEntity:SetDrawOverFogOfWar(true)
 
     inst.entity:SetPristine()
 
@@ -964,12 +964,12 @@ local function marker2()
 
     inst.entity:AddTransform()
     inst.entity:AddAnimState()
-    --inst.entity:AddMiniMapEntity()
+    inst.entity:AddMiniMapEntity()
     inst.entity:AddNetwork()
 
-    --inst.MiniMapEntity:SetIcon("yellowmooneye.png")
-    --inst.MiniMapEntity:SetCanUseCache(false)
-    --inst.MiniMapEntity:SetDrawOverFogOfWar(true)
+    inst.MiniMapEntity:SetIcon("yellowmooneye.png")
+    inst.MiniMapEntity:SetCanUseCache(false)
+    inst.MiniMapEntity:SetDrawOverFogOfWar(true)
 
     inst.entity:SetPristine()
 
@@ -997,12 +997,12 @@ local function marker3()
 
     inst.entity:AddTransform()
     inst.entity:AddAnimState()
-    --inst.entity:AddMiniMapEntity()
+    inst.entity:AddMiniMapEntity()
     inst.entity:AddNetwork()
 
-    --inst.MiniMapEntity:SetIcon("redmooneye.png")
-    --inst.MiniMapEntity:SetCanUseCache(false)
-    --inst.MiniMapEntity:SetDrawOverFogOfWar(true)
+    inst.MiniMapEntity:SetIcon("redmooneye.png")
+    inst.MiniMapEntity:SetCanUseCache(false)
+    inst.MiniMapEntity:SetDrawOverFogOfWar(true)
 
     inst.entity:SetPristine()
 
