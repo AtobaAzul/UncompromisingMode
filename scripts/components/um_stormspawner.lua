@@ -33,13 +33,17 @@ return Class(function(self, inst)
 	--[[ Private Member Variables ]]
 	--------------------------------------------------------------------------
 
-	local _tornadotime = (TestForIA() and (TheWorld.state.winterlenght / 4) * 480) or (TheWorld.state.springlength / 4) * 480
+	local _tornadotime = (TheWorld.state.springlength / 4) * 480
 
 	--------------------------------------------------------------------------
 	--[[ Private member functions ]]
 	--------------------------------------------------------------------------
 
 	local function PickAttackTarget()
+		if TheWorld:HasTag("volcano") or TheWorld:HasTag("cave") then
+			return
+		end
+
 		if #_locationtags == 0 then
 			_locationtags = {
 				"siren_bird_spawner",
