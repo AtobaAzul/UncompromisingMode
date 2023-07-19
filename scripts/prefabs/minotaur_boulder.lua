@@ -21,13 +21,6 @@ local prefabs =
     "cavein_dust_high",
 }
 
-SetSharedLootTable("cavein_boulder",
-{
-	{ "rocks",  .05 },
-    { "flint",  .05 },
-})
-
-
 
 local PHYSICS_RADIUS = 1
 

@@ -5,8 +5,6 @@ local function ExplodeInventory(inst)
     if inst.components.container ~= nil then
         inst.components.container:DropEverything()
     end
-
-    inst:Remove()
 end
 
 local function Folded(inst)
@@ -72,11 +70,26 @@ local function DoPockets(inst, widget)
     end
 
     if inst.components.inventoryitem ~= nil then
-        inst.components.inventoryitem:SetOnPutInInventoryFn(Folded)
+        local _onputininventoryfn = inst.components.inventoryitem.onputininventoryfn
+
+        inst.components.inventoryitem:SetOnPutInInventoryFn(function(inst)
+            Folded(inst)
+
+            if _onputininventoryfn ~= nil then
+                _onputininventoryfn(inst)
+            end
+        end)
     end
 
     if inst.components.fueled ~= nil then
-        inst.components.fueled:SetDepletedFn(ExplodeInventory)
+        local _depleted = inst.components.fueled.depleted
+        inst.components.fueled:SetDepletedFn(function(inst)
+            ExplodeInventory(inst)
+
+            if _depleted ~= nil then
+                _depleted(inst)
+            end
+        end)
     end
 
     if EQUIPSLOTS["BACK"] ~= nil then
@@ -102,13 +115,12 @@ env.AddPrefabPostInit("trunkvest_summer", function(inst)
 end)
 
 env.AddPrefabPostInit("trunkvest_winter", function(inst)
-
     DoPockets(inst, "puffvest")
 end)
 
 env.AddPrefabPostInit("reflectivevest", function(inst)
-DoPockets(inst, "puffvest_big")
- end)
+    DoPockets(inst, "puffvest_big")
+end)
 
 env.AddPrefabPostInit("hawaiianshirt", function(inst)
     DoPockets(inst, "puffvest")
