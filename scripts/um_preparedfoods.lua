@@ -246,7 +246,7 @@ local um_preparedfoods =
 	{
 		test = function(cooker, names, tags)
 			return (names.milkywhites) and (tags.monster and tags.monster >= 2) and
-				(names.durian or names_durian_cooked) and not tags.inedible
+				(names.durian or names.durian_cooked) and not tags.inedible
 		end,
 		hunger = 37.5,
 		health = -3,
