@@ -783,7 +783,7 @@ local wathombark = AddAction(
 			--also scare enemies near wathom, at a smaller radius
 			local x, y, z = act.doer.Transform:GetWorldPosition()
 			ents = GLOBAL.TheSim:FindEntities(x, y, z, 4, { "_combat" },
-				{ "companion", "INLIMBO", "notarget", "player", "playerghost", "wall", "abigail", "shadow" }) --added playertags because of the taunt.
+				{ "companion", "INLIMBO", "notarget", "player", "playerghost", "wall", "abigail", "shadow", "trap"}) --added playertags because of the taunt.
 			for i, v in ipairs(ents) do
 				if v.components.hauntable ~= nil and v.components.hauntable.panicable and not
 					(
