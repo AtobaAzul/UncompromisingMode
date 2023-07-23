@@ -509,6 +509,6 @@ STRINGS.UM_ARMOR_PYRE_NETTLES = "Pyre Mantle"
 STRINGS.UM_BLOWDART_PYRE = "Pyre Dart"
 
 -- Under the Weather Part 1
-STRINGS.ALPHA_LIGHTNINGGOAT = "Alpha Voltgoat"
+STRINGS.ALPHA_LIGHTNINGGOAT = "Alpha Volt Goat"
 STRINGS.UM_TORNADO = "Giant Tornado"
 STRINGS.UM_WATERFALL = "Waterfall"
