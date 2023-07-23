@@ -172,7 +172,12 @@ env.AddStategraphPostInit("minotaur", function(inst)
 
 			ontimeout = function(inst, target)
 				inst.components.groundpounder.numRings = 2 -- The quick combo jumps have a smaller groundpound than the first one, which gives a longer window for the player to move.
-				inst.sg:GoToState("leap_attack",{targetpos = inst.sg.statemem.targetpos ~= nil and inst.sg.statemem.targetpos or Vector3(inst.Transform:GetWorldPosition())}) 
+				
+				if inst.sg.statemem.targetpos ~= nil then
+					inst.sg:GoToState("leap_attack",{targetpos = inst.sg.statemem.targetpos}) 
+				else
+					inst.sg:GoToState("leap_attack",{targetpos = Vector3(inst.Transform:GetWorldPosition())})
+				end
 			end,
 		},
 		

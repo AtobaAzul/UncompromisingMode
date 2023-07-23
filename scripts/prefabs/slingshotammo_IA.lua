@@ -55,7 +55,8 @@ local function DealDamage(inst, attacker, target, salty)
         end
 
         if target.components.combat ~= nil then
-			target.components.combat:SetTarget(attacker)
+			target:PushEvent("attacked", {attacker = attacker or nil, damage = 0, weapon = inst })
+							
             target.components.combat.temp_disable_aggro = false
             target.components.combat:RemoveShouldAvoidAggro(attacker)
         end

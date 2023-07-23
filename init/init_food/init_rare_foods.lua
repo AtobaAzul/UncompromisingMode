@@ -109,7 +109,7 @@ function GLOBAL.MakeNoGrowInWinter(inst)
     _MakeNoGrowInWinter(inst)
 end
 
-if GetModConfigData("nowintergrowing") then
+if GetModConfigData("no_winter_growing") then
     -- Stone fruits bushs
     AddPrefabPostInit("rock_avocado_bush", function(inst)
         if inst ~= nil and inst.components.pickable ~= nil then
@@ -174,7 +174,7 @@ if GetModConfigData("nowintergrowing") then
         local _OldResume = self.Resume
 
         function self:Resume()
-            if (self.inst:HasTag("bananabush") or self.inst.prefab == "rock_avocado_bush") and GLOBAL.TheWorld.state.iswinter then
+            if (self.inst:HasTag("farm_plant") or self.inst:HasTag("bananabush") or self.inst.prefab == "rock_avocado_bush") and GLOBAL.TheWorld.state.iswinter then
 				return false
             else
                 return _OldResume(self)
@@ -190,19 +190,19 @@ if GetModConfigData("nowintergrowing") then
                 return _OldStartGrowing(self, time)
             end
         end
-
-        AddComponentPostInit("pickable", function(self)
-            local _OldResume = self.Resume
-
-            function self:Resume()
-                if (self.inst:HasTag("bananabush") or self.inst.prefab == "rock_avocado_bush") and GLOBAL.TheWorld.state.iswinter then
-                    return false
-                else
-                    return _OldResume(self)
-                end
-            end
-        end)
     end)
+
+	AddComponentPostInit("pickable", function(self)
+		local _OldResume = self.Resume
+
+		function self:Resume()
+			if (self.inst:HasTag("bananabush") or self.inst.prefab == "rock_avocado_bush") and GLOBAL.TheWorld.state.iswinter then
+				return false
+			else
+				return _OldResume(self)
+			end
+		end
+	end)
 
     PLANT_DEFS.potato.good_seasons = { autumn = true, spring = true }
     PLANT_DEFS.carrot.good_seasons = { autumn = true, spring = true, summer = true }

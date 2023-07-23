@@ -43,9 +43,9 @@ local function DealDamage(inst, attacker, target, salty)
                 target.wixieammo_hitstuncd = nil
             end)
 
-            target.components.combat:GetAttacked(inst, inst.finaldamage, inst)
+            target.components.combat:GetAttacked(target:HasTag("shadowcreature") and attacker or inst, inst.finaldamage, inst)
         else
-            target.components.combat:GetAttacked(inst, 0, inst)
+            target.components.combat:GetAttacked(target:HasTag("shadowcreature") and attacker or inst, 0, inst)
 
             target.components.health:DoDelta(-inst.finaldamage, false, attacker, false, attacker, false)
         end
@@ -55,7 +55,7 @@ local function DealDamage(inst, attacker, target, salty)
         end
 
         if target.components.combat ~= nil then
-			target.components.combat:SetTarget(attacker)
+			target:PushEvent("attacked", {attacker = attacker, damage = 0, weapon = inst })
             target.components.combat:RemoveShouldAvoidAggro(attacker)
         end
 
@@ -155,9 +155,8 @@ local function DoPop(inst, remaining, total, level, hissvol)
             if not (v.components.follower ~= nil and v.components.follower:GetLeader() ~= nil and v.components.follower:GetLeader():HasTag("player")) then
                 if not v.components.health:IsDead() then
                     --
-                    -- v:PushEvent("attacked", {attacker = inst.attacker or nil, damage = 5, weapon = nil})
                     if v:HasTag("epic") then
-                        v.components.health:DoDelta(-10, inst.attacker)
+                        v.components.health:DoDelta(-5, inst.attacker)
 
                         if v.components.combat:GetImpactSound(v) ~= nil then
                             v.SoundEmitter:PlaySound(v.components.combat:GetImpactSound(v))
@@ -170,7 +169,7 @@ local function DoPop(inst, remaining, total, level, hissvol)
                         v.components.combat:GetAttacked(inst, 10, inst)
 
                         if v.components.combat ~= nil then
-                            v.components.combat:SetTarget(inst.attacker or nil)
+							--v:PushEvent("attacked", {attacker = inst.attacker, damage = 0, weapon = inst })
                             v.components.combat:RemoveShouldAvoidAggro(inst.attacker)
                         end
                     end
@@ -271,6 +270,8 @@ local function fn()
     inst:AddTag("projectile")
     inst:AddTag("explosive")
     inst:AddTag("scarytoprey")
+    inst:AddTag("slingshotammo")
+    inst:AddTag("reloaditem_ammo")
 
     MakeInventoryFloatable(inst)
 
@@ -1052,9 +1053,9 @@ local function GlassCut(inst)
                             v.wixieammo_hitstuncd = nil
                         end)
 
-                        v.components.combat:GetAttacked(inst, (7 * inst.finallevel) * (attacker.components.combat ~= nil and attacker.components.combat.externaldamagemultipliers:Get() or 1), inst)
+                        v.components.combat:GetAttacked(v:HasTag("shadowcreature") and attacker or inst, (7 * inst.finallevel) * (attacker.components.combat ~= nil and attacker.components.combat.externaldamagemultipliers:Get() or 1), inst)
 				   else
-                        v.components.combat:GetAttacked(inst, 0, inst)
+                        v.components.combat:GetAttacked(v:HasTag("shadowcreature") and attacker or inst, 0, inst)
 
                         v.components.health:DoDelta(-((7 * inst.finallevel) * (attacker.components.combat ~= nil and attacker.components.combat.externaldamagemultipliers:Get() or 1)), false, attacker, false, attacker, false)
                     end
@@ -1101,9 +1102,9 @@ local function GlassCut(inst)
                             v.wixieammo_hitstuncd = nil
                         end)
 
-                        v.components.combat:GetAttacked(inst, (7 * inst.finallevel) * (attacker.components.combat ~= nil and attacker.components.combat.externaldamagemultipliers:Get() or 1), inst)
+                        v.components.combat:GetAttacked(v:HasTag("shadowcreature") and attacker or inst, (7 * inst.finallevel) * (attacker.components.combat ~= nil and attacker.components.combat.externaldamagemultipliers:Get() or 1), inst)
 				  else
-                        v.components.combat:GetAttacked(inst, 0, inst)
+                        v.components.combat:GetAttacked(v:HasTag("shadowcreature") and attacker or inst, 0, inst)
 						
                         v.components.health:DoDelta(-((7 * inst.finallevel) * (attacker.components.combat ~= nil and attacker.components.combat.externaldamagemultipliers:Get() or 1)), false, attacker, false, attacker, false)
                     end

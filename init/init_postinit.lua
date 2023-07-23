@@ -44,7 +44,8 @@ local component_post = {
     "weather",
     "worldtemperature",
     "worldwind",
-	"planarentity"
+	"planarentity",
+    "geyserfx",
 }
 
 local prefab_post = {
@@ -186,7 +187,8 @@ local prefab_post = {
 	"staff_tornado",
 	"rainometer",
     "winterometer",
-	"mooneye"
+	"mooneye",
+    "dragoonegg",
 }
 
 local stategraph_post = {

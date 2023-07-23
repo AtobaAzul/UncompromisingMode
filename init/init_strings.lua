@@ -115,6 +115,17 @@ STRINGS.STANTON_POET3 = { "If you draw against his hand, you can never win." }
 STRINGS.STANTON_POET4 = { "Go ahead… drink with the living dead." }
 STRINGS.STANTON_POET5 = { "Drink with the living dead." }
 
+
+STRINGS.UI.COOKBOOK.UM_BEEFALOWINGS = "Prevents Knockback"
+STRINGS.UI.COOKBOOK.UM_CALIFORNIAKING = "Immunity to Hayfever"
+STRINGS.UI.COOKBOOK.UM_LICELOAF = "Moderate Hayfever Relief"
+STRINGS.UI.COOKBOOK.UM_SEAFOODPAELLA = "Huge Hayfever Relief"
+STRINGS.UI.COOKBOOK.UM_SNOTROAST = "Reduces Hunger Drain"
+STRINGS.UI.COOKBOOK.UM_STUFFED_PEEPER_POPPERS = "Spawns Friendly Al-'eyes'"
+STRINGS.UI.COOKBOOK.UM_THEATERCORN = "Sanity For Spectacle"
+STRINGS.UI.COOKBOOK.UM_VIPERJAM = "Spawns Friendly Vipers"
+STRINGS.UI.COOKBOOK.UM_ZASPBERRYPARFAIT = "Shocks Your Attackers"
+
 --TIDDLER FRIENDLY MAN STRINGS BELOW--
 
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.SPEAKER_SPECTER = "This is making me feel under the weather..."

@@ -46,7 +46,7 @@ env.AddPrefabPostInit("frog", function (inst)
     end
 
 	if inst.components.combat ~= nil then
-		inst.components.combat:SetRetargetFunction(2, NewRetargetfn)
+		--inst.components.combat:SetRetargetFunction(2, NewRetargetfn)
 	end
 	
 	if not inst.components.eater then

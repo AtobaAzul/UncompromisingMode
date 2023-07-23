@@ -181,8 +181,6 @@ AddRoom("RattyLink", {
 										cavelight_small = 0.05,
 										cavelight_tiny = 0.05,
 										ratacombs_junkpile_spawner = 3,
-										cavelight_small = 0.5,
-										cavelight_tiny = 0.5,
 										ratacombs_totem_short = 0.33,
 										ratacombs_totem_medium = 0.33,
 										ratacombs_totem_tall = 0.33,

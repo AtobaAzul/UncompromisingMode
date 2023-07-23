@@ -18,7 +18,6 @@ local function gotocannon(inst)
             local targets = TheSim:FindEntities(pos.x, pos.y, pos.z, 32, TARGETS_MUST, TARGETS_CANT)
             if #targets > 0 then
                 for i, target in ipairs(targets) do
-                    print(target)
                     local cx, cy, cz = cannon.Transform:GetWorldPosition()
                     if not cannon.components.timer:TimerExists("monkey_biz") and target.prefab ~= "merm" and not TheWorld.Map:IsOceanAtPoint(cx, cy, cz) then
                         local boatpos = Vector3(target.Transform:GetWorldPosition())
@@ -55,7 +54,6 @@ local function firecannon(inst)
         local targets = TheSim:FindEntities(pos.x, pos.y, pos.z, 25, TARGETS_MUST, TARGETS_CANT)
         if #targets > 0 then
             for i, target in ipairs(targets) do
-                print(target)
                 if not cannon.components.timer:TimerExists("monkey_biz") and target.prefab ~= "merm" and TheWorld.Map:GetTileAtPoint(target.Transform:GetWorldPosition()) ~= WORLD_TILES.MONKEY_DOCK then
                     local boatpos = Vector3(target.Transform:GetWorldPosition())
                     local angle = cannon:GetAngleToPoint(boatpos.x, boatpos.y, boatpos.z)

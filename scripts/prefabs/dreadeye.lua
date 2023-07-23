@@ -959,6 +959,8 @@ local function shadowdisguise_fn(bank, build, anim, icon, tag, multcolour)
 		end
 	end)
 	
+	inst:DoTaskInTime(21, inst.Remove)
+	
 	MakeSnowCovered(inst)
 	
     return inst

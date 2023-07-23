@@ -106,7 +106,7 @@ local function onequip_ice(inst, owner)
                 owner.components.moisture:DoDelta(-delta, true)
                 inst.absorbed_moisture = math.min(inst.absorbed_moisture + delta, (TUNING.ARMOR_RUINSHAT * 0.333))
             end
-            print(inst.absorbed_moisture)
+			
             inst.components.armor.absorb_percent = Lerp(0.4, 0.90,
                 inst.absorbed_moisture / (TUNING.ARMOR_RUINSHAT * 0.333))
         end

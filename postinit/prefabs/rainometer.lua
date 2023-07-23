@@ -22,7 +22,6 @@ local function CheckForTornadoRevealers(inst)
 		
 		for i, v in pairs(players) do
 			if v ~= nil then
-				print(v.prefab)
 				if v.um_tornado_revealer_task ~= nil then
 					v.um_tornado_revealer_task:Cancel()
 				end

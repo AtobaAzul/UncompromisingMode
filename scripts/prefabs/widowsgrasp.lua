@@ -27,11 +27,12 @@ local function onattack(inst,attaker,target)
 		target.components.health:Kill()
 	end
 	if inst.components.finiteuses.current > 0 and inst.components.finiteuses.current ~= nil then
-		if target:HasTag("mediumcocoon") then
+		if target:HasTag("smallcocoon") then
 			inst.components.finiteuses:Use(1)
-		end
-		if target:HasTag("largecocoon") then
+		elseif target:HasTag("mediumcocoon") then
 			inst.components.finiteuses:Use(2)
+		elseif target:HasTag("largecocoon") then
+			inst.components.finiteuses:Use(3)
 		end
 	else
 		inst.components.finiteuses.onfinished(inst)
@@ -62,10 +63,6 @@ local function fn()
     end
 
     inst:AddComponent("inspectable")
-	--[[
-	inst:AddComponent("burnable")
-    inst.components.burnable.canlight = false
-    inst.components.burnable.fxprefab = nil]]
 	
 	inst:AddComponent("weapon")
     inst:AddTag("weapon")
@@ -78,15 +75,14 @@ local function fn()
     inst.components.finiteuses:SetMaxUses(9)
     inst.components.finiteuses:SetUses(9)
     inst.components.finiteuses:SetOnFinished(inst.Remove)
+    inst.components.finiteuses:SetIgnoreCombatDurabilityLoss(true)
+	
     inst:AddComponent("equippable")
 
     MakeHauntableLaunch(inst)
 
     inst.components.equippable:SetOnEquip(onequip)
     inst.components.equippable:SetOnUnequip(onunequip)
-
-
-
 
     return inst
 end

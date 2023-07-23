@@ -282,20 +282,12 @@ AddShardModRPCHandler("UncompromisingSurvival", "DeerclopsStored_caves", functio
 end)
 
 AddShardModRPCHandler("UncompromisingSurvival", "CaveTornado", function(def, x, z, wise, dest_can_move)
-    print("====")
-    print(def)
-    print(x)
-    print(z)
-    print("====")
     if not GLOBAL.TheWorld.ismastershard then
         GLOBAL.TheWorld:PushEvent("spawncavetornado", {xdata = x, zdata = z, wisedata = wise, dest_can_movedata = dest_can_move})
     end
 end)
 
 AddShardModRPCHandler("UncompromisingSurvival", "ToggleCaveHeatWave", function(sender_list, toggle)
-    print("sender_list", sender_list)
-    print("toggle", toggle)
-    print("TheWorld.prefab", GLOBAL.TheWorld.prefab)
     if toggle then
         GLOBAL.TheWorld:AddTag("heatwavestart")
         GLOBAL.TheWorld.net:AddTag("heatwavestartnet")

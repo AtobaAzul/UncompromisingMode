@@ -402,6 +402,7 @@ local states =
 					local offset = FindWalkableOffset(inst:GetPosition(), math.random() * 2 * math.pi, 4, 12) or Vector3(0,0,0)
 					local pt = offset + inst:GetPosition()
 					egg.Transform:SetPosition(pt:Get())
+					egg.components.guardian:SetGuardian(inst)
 					TheWorld:PushEvent("ms_sendlightningstrike", pt)
 					inst.components.entitytracker:TrackEntity("egg", egg)
 					egg.components.entitytracker:TrackEntity("mother", inst)

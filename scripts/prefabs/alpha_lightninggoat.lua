@@ -286,7 +286,8 @@ local function fn()
 				inst.recharging_electric = nil
 			end
 		end)
-	end,
+	end
+
     ------------------------------------------
 
     inst:AddComponent("locomotor")

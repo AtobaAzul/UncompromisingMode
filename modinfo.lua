@@ -6,7 +6,7 @@ if not folder_name:find("workshop-") then
 end
 
 description = [[
-󰀔 [ Version 1.0.1.2: "Under the Weather Pt.1" ]
+󰀔 [ Version 1.0.2.3: "Under the Weather Pt.1" ]
 
 Uncompromising Mode increases the risk and reward for those who have mastered Don't Starve Together.
 
@@ -20,7 +20,7 @@ Latest update features:
 
 author = "󰀈 The Uncomp Dev Team 󰀈"
 
-version = "Under the Weather Pt.1 v1.0.1.2"
+version = "Under the Weather Pt.1 v1.0.2.3"
 -- VERSION SCHEME
 -- first num is major release (e.g. "Under the weather", so, 2, UTW2 will be 3, and so on.) DO NOT BRING THIS NUMBER *DOWN* AGAIN PLEASE
 -- second is new content (something like a new large addition)
@@ -297,20 +297,20 @@ configuration_options = {
         "Wickerbottom/Maxwell can no longer read books while insane.", true),
     BinaryConfig("on tentacles", "Wickerbottom: On Tentacles",
         "On Tentacles now spawns friendly tentacles that die over time, and do not drop tentacle spots.", true),
-    -- BinaryConfig("applied horticulture", "Wickerbottom: Horticulture, Abr.",
-    -- "\"Horticulture, Abridged\" now takes 1 Leafy Meat instead of 5 seeds, to better balance it from being too easily spammable early game.",
-    -- true),
+    BinaryConfig("applied horticulture", "Wickerbottom: Horticulture, Abr.",
+		"\"Horticulture, Abridged\" now takes 1 Leafy Meat, instead of 5 seeds.", true),
     BinaryConfig("horticulture, expanded", "Wickerbottom: Horticulture, Exp.",
-        "\"Horticulture, Expanded\" now grows 20 plants, instead of 15.", true),
-    BinaryConfig("lux aeterna", "Wickerbottom: Lux and Redux",
-        "\"Lux Aeterna\" and \"Lux Aeterna Redux\" now both last longer.", true),
-    BinaryConfig("lunar grimoire", "Wickerbottom: Lunar Grimoire", "\"Lunar Grimoire\" now mutates things around you.",
-        true),
+        "\"Horticulture, Expanded\" now grows 20 plants, instead of 15. Now takes a Tree Jam, instead of a Feather Pencil.", true),
+    BinaryConfig("the angler", "Wickerbottom: The Angler's",
+		"\"The Angler's Survival Guide\" now takes 2 Hardened Slip Bobbers, instead of 2 Wooden Ball Bobbers.", true),
+	BinaryConfig("lux aeterna", "Wickerbottom: Lux and Redux",
+        "\"Lux Aeterna\" and \"Lux Aeterna Redux\" now both last longer. \"Lux Aeterna Redux\" now takes a Glow Berry, instead of a Feather Pencil. ", true),
+    BinaryConfig("lunar grimoire", "Wickerbottom: Lunar Grimoire",
+		"\"Lunar Grimoire\" now has 4 uses and mutates things around you. Now takes 2 Moon Rocks and 2 Moon Shrooms.", true),
     BinaryConfig("apicultural notes", "Wickerbottom: Apicultural Notes",
-        "\"Apicultural Notes\" now fills Bee Boxes around you to max.", true),
-    BinaryConfig("book_recipes", "Wickerbottom: Recipe Tweaks", "Changes some book recipes to be slightly more balanced.",
-        true),
-        BinaryConfig("wicker_inv_regen", "Wickerbottom: Inventory Book Regen.", "Wicker's books now regenerate in her inventory, instead of the bookcase.", true),
+        "\"Apicultural Notes\" now adds 1 Honey to up to 20 Bee Boxes around. Doesn't work on Dusk, Night and/or Winter. Now takes a Honeycomb.", true),
+    BinaryConfig("wicker_inv_regen", "Wickerbottom: Inventory Regen.",
+		"Wicker's books now regenerate in her inventory, instead of the Bookcase. Bookcase now takes 4 Boards, instead of 2 Living Logs.", true),
     BinaryConfig("wanda_nerf", "Wanda",
         "A bunch of changes to some of Wanda's more overpowered items to make them more balanced.", true),
     BinaryConfig("wormwood_extrafiredmg", "Wormwood: Extra Fire Damage",
@@ -624,7 +624,7 @@ configuration_options = {
     Header("General Food Tweaks"),
     BinaryConfig("monstersmallmeat", "Monster Morsel",
         "Small creatures like Spiders drop monster morsels instead of Monster Meat.", true),
-    BinaryConfig("nowintergrowing", "No Winter Growing",
+    BinaryConfig("no_winter_growing", "No Winter Growing",
         "Makes a few food sources such as Kelp and Stone Fruit not grow in Winter.", true),
     BinaryConfig("beebox_nerf", "Bee Box Nerf", "Bee Boxes only release 2 Bees max.", true),
     {

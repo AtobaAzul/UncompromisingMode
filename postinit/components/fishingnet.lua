@@ -21,6 +21,7 @@ end)
 env.AddComponentPostInit("fishingnetvisualizer", function(self)
 	local _OldBeginOpening = self.BeginOpening
 	local _OldDropItem = self.DropItem
+	local _OldBeginFinalPickup = self.BeginFinalPickup
 	local SHOAL_MUST_TAGS = { "oceanshoalspawner" }
 	
 	function self:BeginOpening()
@@ -139,6 +140,32 @@ env.AddComponentPostInit("fishingnetvisualizer", function(self)
 			end)
 		else 
 			return _OldDropItem(self, item, last_dir_x, last_dir_z, idx)
+		end
+	end
+	
+	function self:BeginFinalPickup()
+		if self.inst:HasTag("uncompromising_fishingnetvisualizer") then
+			if self.thrower ~= nil and self.thrower:IsValid() then
+				self.thrower:PushEvent("begin_final_pickup")
+
+				--??? Thrower position is gathered for no reason in the regular function.
+				local thrower_x, thrower_y, thrower_z = self.thrower.Transform:GetWorldPosition()
+			end
+
+			--TODO(YOG): Fix me
+			self.thrower.AnimState:Show("ARM_carry")
+			self.thrower.AnimState:Hide("ARM_normal")
+			
+			local idx = 0
+			for k,v in pairs(self.captured_entities) do
+
+				self:DropItem(v, self.last_dir_x, self.last_dir_z, idx)
+				idx = idx + 1
+			end
+
+			self.inst:Remove()
+		else 
+			return _OldBeginFinalPickup(self)
 		end
 	end
 end)

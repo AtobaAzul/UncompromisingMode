@@ -3,7 +3,7 @@ GLOBAL.setfenv(1, GLOBAL)
 
 local function BossPlayerScan(bossmonster)
     local x, y, z = bossmonster.Transform:GetWorldPosition()
-    local ents = TheSim:FindEntities(x, y, z, 32, { "player" }, { "playerghost" })
+    local ents = TheSim:FindEntities(x, y, z, 24, { "player" }, { "playerghost" })
 
     return #ents
 end
@@ -38,9 +38,9 @@ env.AddComponentPostInit("combat", function(self)
                     local old_damage = damage
                     damage = damage * self.inst.damage_res
 
-                    local min_dmg = 1 - ((NearbyPlayers / 10) - 0.1)
-                    if min_dmg <= 0.25 then
-                        min_dmg = 0.25
+                    local min_dmg = 1 - ((NearbyPlayers / 10) - 0.05)
+                    if min_dmg <= 0.45 then
+                        min_dmg = 0.45
                     end
 
                     if damage < old_damage * min_dmg then

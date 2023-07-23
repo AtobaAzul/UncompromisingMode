@@ -1,7 +1,7 @@
 -- This file handles the spawning of Pyre Nettles around the player during Summer.
 local _worldsettingstimer = TheWorld.components.worldsettingstimer
 local PYRENETTLES_TIMER = "um_pyre_nettles_timer"
-local _spawninterval = 1 --TUNING.TOTAL_DAY_TIME
+local _spawninterval = TUNING.TOTAL_DAY_TIME
 
 return Class(function(self, inst)
 	assert(TheWorld.ismastersim, "um_pyre_nettles_summer_spawner should not exist on client!")
@@ -57,7 +57,6 @@ return Class(function(self, inst)
 
 	local function OnSeasonChange()
 		if TheWorld.state.season == "summer" and TheWorld.state.cycles >= TUNING.DSTU.WEATHERHAZARD_START_DATE_SUMMER then
-			
 			if _worldsettingstimer:GetTimeLeft(PYRENETTLES_TIMER) == nil then
 				_worldsettingstimer:StartTimer(PYRENETTLES_TIMER, _spawninterval + math.random(-120, 120))
 			end

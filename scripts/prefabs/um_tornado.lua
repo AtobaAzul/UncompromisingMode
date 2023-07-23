@@ -28,7 +28,7 @@ local function Init(inst)
 
         inst.Advance_Task = inst:ListenForEvent("animover", Advance_Full)
 
-		--SendModRPCToClient(GetClientModRPC("UncompromisingSurvival", "ToggleLagCompOn"), nil)
+        --SendModRPCToClient(GetClientModRPC("UncompromisingSurvival", "ToggleLagCompOn"), nil)
         inst.is_full = true
     else
         Advance_Full(inst)
@@ -238,7 +238,7 @@ local function TornadoEnviromentTask(inst)
     if config ~= "minimal" then
         -- if GetClosestInstWithTag("player", inst, PLAYER_CAMERA_SEE_DISTANCE * 1.125) ~= nil then -- tornado doesn't sleep. Using alt distance-based check.
         -- PICKABLES
-        local pickables = TheSim:FindEntities(x, y, z, 12, { "pickable" }, { "INLIMBO", "trap" })
+        local pickables = TheSim:FindEntities(x, y, z, 12, { "pickable" }, { "INLIMBO", "trap", "flower" })
         for k, v in ipairs(pickables) do
             if v.components.pickable:CanBePicked() then
                 if not v:IsAsleep() and not config == "reduced" then
@@ -457,10 +457,10 @@ local function TornadoTask(inst)
 
         local players = TheSim:FindEntities(x, y, z, 300, nil, { "playerghost" }, { "player", "um_windturbine" })
 
-        if math.random() > 0.9 then
+        if math.random() > 0.9 and config ~= "minimal" then
             local lightning = SpawnPrefab("hound_lightning")
             lightning.Transform:SetPosition(x + math.random(-300, 300), 0, z + math.random(-300, 300))
-			lightning.NoTags = { "INLIMBO", "shadow", "structure", "wall", "companion", "abigail", "bird", "prey" }
+            lightning.NoTags = { "INLIMBO", "shadow", "structure", "wall", "companion", "abigail", "bird", "prey" }
             lightning.Delay = 1.5
         end
 
@@ -487,7 +487,8 @@ local function TornadoTask(inst)
                     if math.random() > 0.99 then
                         local lightning = SpawnPrefab("hound_lightning")
                         lightning.Transform:SetPosition(px + math.random(-5, 5), 0, pz + math.random(-5, 5))
-						lightning.NoTags = { "INLIMBO", "shadow", "structure", "wall", "companion", "abigail", "bird", "prey" }
+                        lightning.NoTags = { "INLIMBO", "shadow", "structure", "wall", "companion", "abigail", "bird",
+                            "prey" }
                         lightning.Delay = 1.5
                     end
 
@@ -583,7 +584,7 @@ local function TornadoTask(inst)
                     for k, v in ipairs(inst.components.inventory.itemslots) do
                         local item = inst.components.inventory:RemoveItem(v)
                         local pos = getrandomposition(inst)
-                        item.Transform:SetPosition(pos.x+math.random(-8,8), pos.y, pos.z+math.random(-8,8))
+                        item.Transform:SetPosition(pos.x + math.random(-8, 8), pos.y, pos.z + math.random(-8, 8))
                     end
 
                     if destination ~= nil then
@@ -607,7 +608,7 @@ local function TornadoTask(inst)
                     for k, v in ipairs(inst.components.inventory.itemslots) do
                         local item = inst.components.inventory:RemoveItem(v)
                         local pos = getrandomposition(inst)
-                        item.Transform:SetPosition(pos.x+math.random(-8,8), pos.y, pos.z+math.random(-8,8))
+                        item.Transform:SetPosition(pos.x + math.random(-8, 8), pos.y, pos.z + math.random(-8, 8))
                     end
 
                     inst.startmoving = false
@@ -669,6 +670,10 @@ local function fn()
         return inst
     end
 
+    if not TUNING.DSTU.STORMS then
+        inst:DoTaskInTime(0, inst.Remove)
+    end
+
     inst.Advance_Task = nil
     inst.is_full = false
     inst.danumber = 0
@@ -687,10 +692,10 @@ local function fn()
     inst.components.inventory.maxslots = 100
     inst:DoTaskInTime(0, Init)
 
-    inst:DoPeriodicTask(30, function(inst)
+	--[[inst:DoPeriodicTask(30, function(inst)
         local x, y, z = inst.Transform:GetWorldPosition()
         SpawnPrefab("um_tornado_destination_marker2").Transform:SetPosition(x, 0, z)
-    end)
+    end)]]
 
     if config ~= "minimal" then
         inst:DoPeriodicTask(5, TornadoItemTossTask)
@@ -834,10 +839,10 @@ local function cavefn()
 
     inst:DoPeriodicTask(5, TrySpawnWaterfall)
 
-    inst:DoPeriodicTask(30, function(inst)
+    --[[inst:DoPeriodicTask(30, function(inst)
         local x, y, z = inst.Transform:GetWorldPosition()
         SpawnPrefab("um_tornado_destination_marker2").Transform:SetPosition(x, 0, z)
-    end)
+    end)]]
 
     return inst
 end
@@ -885,13 +890,13 @@ local function destfn()
     local inst = CreateEntity()
 
     inst.entity:AddTransform()
-    --inst.entity:AddMiniMapEntity()
+    inst.entity:AddMiniMapEntity()
     inst.entity:AddNetwork()
 
     inst:AddTag("NOCLICK")
     inst:AddTag("NOBLOCK")
     inst:AddTag("um_tornado_destination")
-    --inst.MiniMapEntity:SetIcon("redmooneye.png")
+    inst.MiniMapEntity:SetIcon("redmooneye.png")
 
     inst.entity:SetCanSleep(false)
 
@@ -910,10 +915,10 @@ local function destfn()
 
     inst:DoPeriodicTask(1, MoveDestination)
 
-    inst:DoPeriodicTask(30, function(inst)
+    --[[inst:DoPeriodicTask(30, function(inst)
         local x, y, z = inst.Transform:GetWorldPosition()
         SpawnPrefab(inst.marker).Transform:SetPosition(x, 0, z)
-    end)
+    end)]]
 
     inst.OnSave = OnSave_Dest
     inst.OnLoad = OnLoad_Dest
@@ -926,12 +931,12 @@ local function marker()
 
     inst.entity:AddTransform()
     inst.entity:AddAnimState()
-    --inst.entity:AddMiniMapEntity()
+    inst.entity:AddMiniMapEntity()
     inst.entity:AddNetwork()
 
-    --inst.MiniMapEntity:SetIcon("greenmooneye.png")
-    --inst.MiniMapEntity:SetCanUseCache(false)
-    --inst.MiniMapEntity:SetDrawOverFogOfWar(true)
+    inst.MiniMapEntity:SetIcon("greenmooneye.png")
+    inst.MiniMapEntity:SetCanUseCache(false)
+    inst.MiniMapEntity:SetDrawOverFogOfWar(true)
 
     inst.entity:SetPristine()
 
@@ -959,12 +964,12 @@ local function marker2()
 
     inst.entity:AddTransform()
     inst.entity:AddAnimState()
-    --inst.entity:AddMiniMapEntity()
+    inst.entity:AddMiniMapEntity()
     inst.entity:AddNetwork()
 
-    --inst.MiniMapEntity:SetIcon("yellowmooneye.png")
-    --inst.MiniMapEntity:SetCanUseCache(false)
-    --inst.MiniMapEntity:SetDrawOverFogOfWar(true)
+    inst.MiniMapEntity:SetIcon("yellowmooneye.png")
+    inst.MiniMapEntity:SetCanUseCache(false)
+    inst.MiniMapEntity:SetDrawOverFogOfWar(true)
 
     inst.entity:SetPristine()
 
@@ -992,12 +997,12 @@ local function marker3()
 
     inst.entity:AddTransform()
     inst.entity:AddAnimState()
-    --inst.entity:AddMiniMapEntity()
+    inst.entity:AddMiniMapEntity()
     inst.entity:AddNetwork()
 
-    --inst.MiniMapEntity:SetIcon("redmooneye.png")
-    --inst.MiniMapEntity:SetCanUseCache(false)
-    --inst.MiniMapEntity:SetDrawOverFogOfWar(true)
+    inst.MiniMapEntity:SetIcon("redmooneye.png")
+    inst.MiniMapEntity:SetCanUseCache(false)
+    inst.MiniMapEntity:SetDrawOverFogOfWar(true)
 
     inst.entity:SetPristine()
 

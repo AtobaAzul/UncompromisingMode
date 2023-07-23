@@ -102,13 +102,7 @@ function UM_Ripplespawner:OnUpdate(dt)
         ents = TheSim:FindEntities(x,y,z, self.range, nil,{"flying","INLIMBO", "shadowcreature"}, {"monster","animal","character","isinventoryitem","tree","structure", "_burnable"})
     end
 
-    local templist = {}
-
     for i, ent in ipairs(ents) do
-        templist[ent.GUID] = ent
-    end
-
-    for GUID, ent in pairs(templist)do
 		if ent.um_rippletask == nil then
 			ent.um_rippletask = ent:DoTaskInTime(ent.components.locomotor ~= nil and (1.8 / ent.components.locomotor:GetRunSpeed()) or .3,
 				function(ent) 

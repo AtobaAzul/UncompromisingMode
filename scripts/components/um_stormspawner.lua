@@ -40,6 +40,10 @@ return Class(function(self, inst)
 	--------------------------------------------------------------------------
 
 	local function PickAttackTarget()
+		if TheWorld:HasTag("volcano") or TheWorld:HasTag("cave") then
+			return
+		end
+
 		if #_locationtags == 0 then
 			_locationtags = {
 				"siren_bird_spawner",
@@ -96,18 +100,14 @@ return Class(function(self, inst)
 				destination.Transform:SetPosition(x_dest, 0, z_dest)
 
 				if x > 0 and z > 0 then
-					print("green x > 0 and z > 0")
 					destination.danumber = 90
 				elseif x > 0 and z < 0 then
-					print("green x > 0 and z < 0")
 					destination.danumber = -90
 					wise = -90
 				elseif x < 0 and z > 0 then
-					print("green x < 0 and z > 0")
 					destination.danumber = -90
 					wise = -90
 				else
-					print("green")
 					destination.danumber = 90
 				end
 
@@ -140,17 +140,13 @@ return Class(function(self, inst)
 				destination.Transform:SetPosition(x_dest, 0, z_dest)
 
 				if x > 0 and z > 0 then
-					print("red x > 0 and z > 0")
 					destination.danumber = -90
 					wise = -90
 				elseif x > 0 and z < 0 then
-					print("red x > 0 and z < 0")
 					destination.danumber = 90
 				elseif x < 0 and z > 0 then
-					print("red x < 0 and z > 0")
 					destination.danumber = 90
 				else
-					print("red")
 					destination.danumber = -90
 					wise = -90
 				end
@@ -188,9 +184,7 @@ return Class(function(self, inst)
 	end
 
 	local function SpawnCaveTornado(inst, data)
-		print("SpawnCaveTornado")
 		if data ~= nil and data.xdata ~= nil then
-			--print("xdata"..data.xdata)
 			local x = data.xdata
 			local z = data.zdata
 			local wise = data.wisedata
@@ -237,7 +231,7 @@ return Class(function(self, inst)
 	--------------------------------------------------------------------------
 
 	local function OnSeasonChange(self)
-		if TheWorld.state.season == "spring" and TheWorld.state.cycles >= TUNING.DSTU.WEATHERHAZARD_START_DATE_SPRING then
+		if TestForIA() and TheWorld.state.season == "winter" or TheWorld.state.season == "spring" and TheWorld.state.cycles >= TUNING.DSTU.WEATHERHAZARD_START_DATE_SPRING then
 			StartStorms()
 		else
 			_locationtags = {

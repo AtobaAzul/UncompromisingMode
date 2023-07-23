@@ -129,47 +129,58 @@ AllRecipes["walterhat"].ingredients = {
     Ingredient("pinecone", 1)
 }
 
-if GetModConfigData("book_recipes") then
-    -- AllRecipes["book_rain"].ingredients = {
-    -- Ingredient("papyrus", 2),
-    -- Ingredient("moon_tear", 1),
-    -- Ingredient("waterballoon", 4)
-    -- }
-    -- AllRecipes["book_rain"].level = TechTree.Create(TECH.MAGIC_THREE)
-    AllRecipes["book_fish"].ingredients = {
-        Ingredient("papyrus", 2),
-        Ingredient("oceanfishingbobber_oval", 2)
-    }
-    AllRecipes["book_light_upgraded"].ingredients = {
-        Ingredient("book_light", 1),
-        Ingredient("wormlight", 1),
-        Ingredient("papyrus", 2)
-    }
-    -- AllRecipes["book_light_upgraded"].level = TechTree.Create(TECH.LOST)
+if GetModConfigData("wicker_inv_regen") then
     AllRecipes["bookstation"].ingredients = {
 		Ingredient("boards", 4),
 		Ingredient("papyrus", 4),
 		Ingredient("featherpencil", 1)
 	}
-    AllRecipes["book_moon"].ingredients = {
-        Ingredient("papyrus", 2),
-        Ingredient("moonrocknugget", 2),
-        Ingredient("moon_cap", 2)
-    }
-    AllRecipes["book_bees"].ingredients = {
-        Ingredient("papyrus", 2),
-        Ingredient("honeycomb", 1),
-        Ingredient("stinger", 8)
-    }
+end
+
+if GetModConfigData("applied horticulture") then
     AllRecipes["book_horticulture"].ingredients = {
         Ingredient("papyrus", 2),
         Ingredient("plantmeat", 1),
         Ingredient("poop", 5)
     }
-    AllRecipes["book_horticulture_upgraded"].ingredients = {
-        Ingredient("book_horticulture", 1),
+end
+
+if GetModConfigData("horticulture, expanded") then
+	AllRecipes["book_horticulture_upgraded"].ingredients = {
+		Ingredient("book_horticulture", 1),
         Ingredient("treegrowthsolution", 1),
         Ingredient("papyrus", 2)
+    }
+end
+
+if GetModConfigData("the angler") then
+    AllRecipes["book_fish"].ingredients = {
+        Ingredient("papyrus", 2),
+        Ingredient("oceanfishingbobber_oval", 2)
+    }
+end
+
+if GetModConfigData("lux aeterna") then
+    AllRecipes["book_light_upgraded"].ingredients = {
+		Ingredient("book_light", 1),
+        Ingredient("wormlight", 1),
+		Ingredient("papyrus", 2)
+    }
+end
+
+if GetModConfigData("lunar grimoire") then
+    AllRecipes["book_moon"].ingredients = {
+        Ingredient("papyrus", 2),
+        Ingredient("moonrocknugget", 2),
+        Ingredient("moon_cap", 2)
+    }
+end
+
+if GetModConfigData("apicultural notes") then
+    AllRecipes["book_bees"].ingredients = {
+        Ingredient("papyrus", 2),
+        Ingredient("honeycomb", 1),
+        Ingredient("stinger", 8)
     }
 end
 
@@ -1278,35 +1289,94 @@ if GetModConfigData("wixie_walter") then
 
     AddPrefabPostInit("forest", function(inst)
         inst:DoTaskInTime(0, function(inst)
-            if GLOBAL.TheWorld:HasTag("island") then
-                AllRecipes["slingshotammo_tar"].ingredients = { Ingredient("tar", 1) }
+            if Prefabs["obsidian"] then
                 AllRecipes["slingshotammo_obsidian"].ingredients = { Ingredient("obsidian", 1) }
-            elseif Prefabs["obsidian"] then
-                AllRecipes["slingshotammo_obsidian"].ingredients = { Ingredient("obsidian", 1) }
-            else
-                AllRecipes["slingshotammo_tar"].ingredients = { Ingredient("sludge", 1) }
             end
         end)
     end)
 end
 
 --recipe postinits
-AddRecipePostInitAny(function(recipe)
-    if recipe.FindAndConvertIngredient ~= nil then
-        local tar = recipe:FindAndConvertIngredient("tar") --tar/sludge can replace eachother!
-        local sludge = recipe:FindAndConvertIngredient("sludge")
+AddPrefabPostInit("forest", function(inst)
+	AddRecipePostInitAny(function(recipe)
+		if recipe.FindAndConvertIngredient ~= nil then
+			local tar = recipe:FindAndConvertIngredient("tar") -- tar/sludge can replace eachother!
+			local sludge = recipe:FindAndConvertIngredient("sludge")
+			local shark_fin = recipe:FindAndConvertIngredient("shark_fin") -- shark fins/rockjaw leather can replace eachother!
+			local rockjawleather = recipe:FindAndConvertIngredient("rockjawleather")
+			local mosquitosack = recipe:FindAndConvertIngredient("mosquitosack")
 
-        if tar and tar.AddDictionaryPrefab ~= nil then
-            tar:AddDictionaryPrefab("sludge")
-        end
+			if tar and tar.AddDictionaryPrefab ~= nil then
+				tar:AddDictionaryPrefab("sludge")
+			end
 
-        if sludge and sludge.AddDictionaryPrefab ~= nil then
-            if GLOBAL.Prefabs["tar"] ~= nil then
-                sludge:AddDictionaryPrefab("tar")
-            end
-        end
-    end
+			if sludge and sludge.AddDictionaryPrefab ~= nil then
+				if GLOBAL.Prefabs["tar"] ~= nil then
+					sludge:AddDictionaryPrefab("tar")
+				end
+			end
+
+			if sludge and sludge.AddDictionaryPrefab ~= nil and GLOBAL.Prefabs["tar"] ~= nil then
+				sludge:AddDictionaryPrefab("tar")
+			end
+
+			if shark_fin and shark_fin.AddDictionaryPrefab ~= nil then
+				shark_fin:AddDictionaryPrefab("rockjawleather")
+			end
+
+			if rockjawleather and rockjawleather.AddDictionaryPrefab ~= nil and GLOBAL.Prefabs["shark_fin"] ~= nil then
+				rockjawleather:AddDictionaryPrefab("shark_fin")
+			end
+
+			if mosquitosack and mosquitosack.AddDictionaryPrefab ~= nil and GLOBAL.Prefabs["mosquitosack_yellow"] then
+				mosquitosack:AddDictionaryPrefab("mosquitosack_yellow")
+			end
+		end
+	end)
+
+	AddRecipePostInit("slingshot_matilda", function(recipe)
+		if recipe.FindAndConvertIngredient ~= nil then
+			local coontail = recipe:FindAndConvertIngredient("coontail")
+			if coontail and coontail.AddDictionaryPrefab ~= nil and GLOBAL.Prefabs["vine"] ~= nil then
+				coontail:AddDictionaryPrefab("vine")
+			end
+
+			local driftwood_log = recipe:FindAndConvertIngredient("driftwood_log")
+			if driftwood_log and driftwood_log.AddDictionaryPrefab ~= nil and GLOBAL.Prefabs["ox_horn"] ~= nil then
+				driftwood_log:AddDictionaryPrefab("ox_horn")
+			end
+		end
+	end)
+
+    AddRecipePostInit("brine_balm", function(recipe)
+		if recipe.FindAndConvertIngredient ~= nil then
+			local kelp = recipe:FindAndConvertIngredient("kelp")
+			if kelp and kelp.AddDictionaryPrefab ~= nil and GLOBAL.Prefabs["seaweed"] ~= nil then
+				kelp:AddDictionaryPrefab("seaweed")
+			end
+		end
+	end)
+
+    AddRecipePostInit("sludge_oil", function(recipe)
+		if recipe.FindAndConvertIngredient ~= nil then
+			local bottle = recipe:FindAndConvertIngredient("messagebottleempty")
+			if bottle and bottle.AddDictionaryPrefab ~= nil and GLOBAL.Prefabs["ia_messagebottleempty"] ~= nil then
+				bottle:AddDictionaryPrefab("ia_messagebottleempty")
+			end
+		end
+	end)
+
+    AddRecipePostInit("gasmask", function(recipe)
+		if recipe.FindAndConvertIngredient ~= nil then
+			local feather = recipe:FindAndConvertIngredient("goose_feather")
+			if feather and feather.AddDictionaryPrefab ~= nil and GLOBAL.Prefabs["doydoyfeather"] ~= nil then
+				feather:AddDictionaryPrefab("doydoyfeather")
+			end
+		end
+	end)
 end)
+
+
 
 STRINGS.UI.CRAFTING.NEEDSTECH.BOMBMIXER = "Put an explosive on the Bomb Mixer to start mixing!"
 STRINGS.ACTIONS.OPEN_CRAFTING.BOMBMIXER = "Mix at"

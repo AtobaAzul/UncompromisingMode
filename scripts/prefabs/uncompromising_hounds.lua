@@ -279,10 +279,10 @@ local function OnAttacked(inst, data)
             if data.attacker.components.health ~= nil and not data.attacker.components.health:IsDead() and
                 (data.weapon == nil or ((data.weapon.components.weapon == nil or data.weapon.components.weapon.projectile == nil) and data.weapon.components.projectile == nil and data.weapon.components.complexprojectile == nil and data.weapon.components.linearprojectile == nil)) then
                 if data.attacker.sg ~= nil and data.attacker:HasTag("player") and not (data.attacker.components.inventory ~= nil and data.attacker.components.inventory:IsInsulated()) then
-                    data.attacker.components.health:DoDelta(-5, nil, inst.prefab, nil, inst)
+                    data.attacker.components.health:DoDelta(-TUNING.LIGHTNING_GOAT_DAMAGE, nil, inst.prefab, nil, inst)
                     data.attacker.sg:GoToState("electrocute")
                 elseif not data.attacker:HasTag("player") then
-                    data.attacker.components.health:DoDelta(-5, nil, inst.prefab, nil, inst)
+                    data.attacker.components.health:DoDelta(-TUNING.LIGHTNING_GOAT_DAMAGE, nil, inst.prefab, nil, inst)
                 end
             end
         end
@@ -302,11 +302,13 @@ local function OnAttackOther(inst, data)
         if data.target.components.health ~= nil and not data.target.components.health:IsDead() and
             (data.weapon == nil or ((data.weapon.components.weapon == nil or data.weapon.components.weapon.projectile == nil) and data.weapon.components.projectile == nil)) and
             not (data.target.components.inventory ~= nil and data.target.components.inventory:IsInsulated()) then
-            data.target.components.health:DoDelta(-5, nil, inst.prefab, nil, inst)
+            --data.target.components.health:DoDelta(-5, nil, inst.prefab, nil, inst)
             if data.target:HasTag("player") and not data.target.components.health:IsDead() then
                 local shockvictim = data.target.sg ~= nil and data.target.sg:GoToState("electrocute")
                 inst:DoTaskInTime(2, shockvictim)
             end
+		
+			
         end
     end
 

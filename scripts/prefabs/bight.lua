@@ -50,7 +50,6 @@ local function keeptargetfn(inst, target)
           and not target.components.health:IsDead()
 end
 
-
 local function OnAttacked(inst, data)
 	if inst:HasTag("electrified") and data ~= nil and data.attacker ~= nil then
 		if data.attacker.components.health ~= nil and not data.attacker.components.health:IsDead() and
@@ -59,12 +58,8 @@ local function OnAttacked(inst, data)
 			if not (data.attacker.components.inventory ~= nil and data.attacker.components.inventory:IsInsulated()) then
 				local insulated = (data.attacker:HasTag("electricdamageimmune") or
 					(data.attacker.components.inventory ~= nil and data.attacker.components.inventory:IsInsulated()))
-
-				local mult = not insulated
-					and TUNING.ELECTRIC_DAMAGE_MULT + TUNING.ELECTRIC_WET_DAMAGE_MULT * (data.attacker.components.moisture ~= nil and data.attacker.components.moisture:GetMoisturePercent() or (data.attacker:GetIsWet() and 1 or 0))
-					or 1
 					
-				local damage = -6.7 * mult
+				local damage = -TUNING.LIGHTNING_GOAT_DAMAGE
 					
 				if data.attacker.sg ~= nil and not data.attacker.sg:HasStateTag("nointerrupt") and not insulated then
 					data.attacker.sg:GoToState("electrocute")
@@ -98,7 +93,7 @@ local function Shockness(inst,x,y,z)
 						and TUNING.ELECTRIC_DAMAGE_MULT + TUNING.ELECTRIC_WET_DAMAGE_MULT * (v.components.moisture ~= nil and v.components.moisture:GetMoisturePercent() or (v:GetIsWet() and 1 or 0))
 						or 1
 							
-					local damage = -6.7 * mult
+					local damage = -10 * mult
 
 					if v.sg ~= nil and not v.sg:HasStateTag("nointerrupt") and not insulated then
 						v.sg:GoToState("electrocute")
@@ -221,7 +216,7 @@ local function fn(Sim)
     inst:AddComponent("inspectable")
 
     ------------------
-	inst:ListenForEvent("attacked", OnAttacked)    
+	inst:ListenForEvent("attacked", OnAttacked)
     inst:SetStateGraph("SGbight")
     inst:SetBrain(brain)
 	inst.sg:GoToState("waken")

@@ -34,24 +34,20 @@ local brain = require("brains/shockwormbrain")
 local MAX_LIGHT_FRAME = 20
 ---Added Stuff
 local function OnAttacked(inst, data)
-    if data ~= nil and data.attacker ~= nil then
-            if data.attacker.components.health ~= nil and not data.attacker.components.health:IsDead() and
-                (data.weapon == nil or ((data.weapon.components.weapon == nil or data.weapon.components.weapon.projectile == nil) and data.weapon.components.projectile == nil)) and
-                not (data.attacker.components.inventory ~= nil and data.attacker.components.inventory:IsInsulated()) then
+    if data ~= nil and data.attacker ~= nil and not data.redirected then
+		if data.attacker.components.health ~= nil and not data.attacker.components.health:IsDead() and
+			(data.weapon == nil or ((data.weapon.components.weapon == nil or data.weapon.components.weapon.projectile == nil) and data.weapon.components.projectile == nil)) and
+			not (data.attacker.components.inventory ~= nil and data.attacker.components.inventory:IsInsulated()) then
 
-                data.attacker.components.health:DoDelta(-TUNING.LIGHTNING_GOAT_DAMAGE, nil, inst.prefab, nil, inst)
-                if data.attacker:HasTag("player") and not data.attacker.sg:HasStateTag("dead") then
-                    data.attacker.sg:GoToState("electrocute")
-                end
-				local x, y, z = data.attacker.Transform:GetWorldPosition()
-				SpawnPrefab("sparks").Transform:SetPosition(x, y + .25 + math.random() * 2, z)
-				SpawnPrefab("sparks").Transform:SetPosition(x, y + .25 + math.random() * 2, z)
-				SpawnPrefab("sparks").Transform:SetPosition(x, y + .25 + math.random() * 2, z)
-				SpawnPrefab("sparks").Transform:SetPosition(x, y + .25 + math.random() * 2, z)
-				SpawnPrefab("sparks").Transform:SetPosition(x, y + .25 + math.random() * 2, z)
-            end
-        end
-inst.components.combat:SetTarget(data.attacker)
+			data.attacker.components.health:DoDelta(-TUNING.LIGHTNING_GOAT_DAMAGE, nil, inst.prefab, nil, inst)
+			
+			if data.attacker:HasTag("player") and not data.attacker.sg:HasStateTag("dead") then
+				data.attacker.sg:GoToState("electrocute")
+			end
+		end
+	end
+		
+	inst.components.combat:SetTarget(data.attacker)
 end
 
 
@@ -61,29 +57,14 @@ local function OnAttackOther(inst, data)
                 (data.weapon == nil or ((data.weapon.components.weapon == nil or data.weapon.components.weapon.projectile == nil) and data.weapon.components.projectile == nil)) and
                 not (data.target.components.inventory ~= nil and data.target.components.inventory:IsInsulated()) then
 
-                --data.target.components.health:DoDelta(-25, nil, inst.prefab, nil, inst)
                 if data.target:HasTag("player") then
 					local shockvictim = data.target.sg:GoToState("electrocute")
 					inst:DoTaskInTime(2, shockvictim)
                 end
-				local x, y, z = data.target.Transform:GetWorldPosition()
-				SpawnPrefab("sparks").Transform:SetPosition(x, y + .25 + math.random() * 2, z)
-				SpawnPrefab("sparks").Transform:SetPosition(x, y + .25 + math.random() * 2, z)
-				SpawnPrefab("sparks").Transform:SetPosition(x, y + .25 + math.random() * 2, z)
-				SpawnPrefab("sparks").Transform:SetPosition(x, y + .25 + math.random() * 2, z)
-				SpawnPrefab("sparks").Transform:SetPosition(x, y + .25 + math.random() * 2, z)
             end
         end
 inst.components.combat:SetTarget(data.target)
 end
-
-
-
-
-
-
-
-
 
 -- Depth worm stuff
 local function OnUpdateLight(inst, dframes)

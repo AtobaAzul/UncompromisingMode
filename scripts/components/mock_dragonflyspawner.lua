@@ -305,6 +305,7 @@ return Class(function(self, inst)
         end
 
         function self:OnPostInit()
+            if not TestForIA() then
             -- Shorten the time used for winter to account for the time deerclops spends stomping around
             -- Then add one to _attacksperseason to shift the attacks so the last attack isn't right when the season changes to spring
             _attackdelay = ((TheWorld.state.summerlength - 1) * TUNING.TOTAL_DAY_TIME / (_attacksperseason + 1)) * 2
@@ -314,6 +315,7 @@ return Class(function(self, inst)
                 _worldsettingstimer:StartTimer(MOCKFLY_TIMERNAME, math.min(_timetoattack, _attackdelay))
             end
             TryStartAttacks()
+        end
         end
 
         local function _DoWarningSpeech(player)

@@ -97,7 +97,7 @@ return Class(function(self, inst)
 		local x, y, z = inst.Transform:GetWorldPosition()
 
 		local function IsValidRatBurrowPosition(x, z)
-			if #TheSim:FindEntities(x, 0, z, (TUNING.ANTLION_SINKHOLE.RADIUS * 2), { "antlion_sinkhole_blocker" }) > 0 then
+			if #TheSim:FindEntities(x, 0, z, (TUNING.ANTLION_SINKHOLE.RADIUS * 2), nil, nil, {"antlion_sinkhole_blocker", "structure", "giant_tree"}) > 0 then
 				return false
 			end
 			if #TheSim:FindEntities(x, 0, z, 50, { "player", "playerghost" }) > 0 then
@@ -296,8 +296,6 @@ return Class(function(self, inst)
 		if _ratsnifftimer then
 			if _ratsnifftimer > 0 then
 				_ratsnifftimer = _ratsnifftimer - dt --(dt * _ratburrows)
-				print(_ratsnifftimer)
-				print(_ratburrows)
 			else
 				_ratsnifftimer = TUNING.DSTU.RATSNIFFER_TIMER
 				--TheWorld:PushEvent("rat_sniffer")

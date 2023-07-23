@@ -18,7 +18,6 @@ env.AddPrefabPostInitAny(function(inst)
         local _OnIgnite = inst.components.burnable.onignite
 
         inst.components.burnable.onignite = function(inst, source, doer, ...)
-            inst.smog_count = math.random(3, 9)
             if TheWorld.state.issummer then
                 inst.smog_task = inst:DoTaskInTime(math.random(5, 15) / 10, DoSmog)
             end

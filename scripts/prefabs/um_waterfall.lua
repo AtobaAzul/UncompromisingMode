@@ -310,11 +310,7 @@ local function IsNearFloodTile(map, x, y, z)
 			map:IsPassableAtPoint(x + offx, y, z + offz) then
 			is_valid_tile = false
 		end
-		
-		print(current_tile)
 	end
-	
-	print(is_valid_tile)
 	
 	return is_valid_tile
 end
@@ -349,12 +345,9 @@ local function OnEntityWake(inst)
 				local current_tile = _map:GetTileAtPoint(x1, y, z1)
 				if current_tile == WORLD_TILES.UM_FLOODWATER then
 					if IsNearFloodTile(_map, x1, 0, z1) then
-						print("spawn rain")
 						local shimmer = SpawnPrefab("um_waterfall_wave")
 						shimmer.Transform:SetPosition(x1, 0, z1)
 						shimmer.Transform:SetScale(0.9, 0.9, 0.9)
-					else
-						print("no spawn rain")
 					end
 				end
 			end)
@@ -377,12 +370,9 @@ local function Init(inst)
 		local current_tile = _map:GetTileAtPoint(x1, y, z1)
 		if current_tile == WORLD_TILES.UM_FLOODWATER then
 			if IsNearFloodTile(_map, x1, 0, z1) then
-				print("spawn rain")
-					local shimmer = SpawnPrefab("um_waterfall_wave")
-					shimmer.Transform:SetPosition(x1, 0, z1)
-					shimmer.Transform:SetScale(0.9, 0.9, 0.9)
-			else
-				print("no spawn rain")
+				local shimmer = SpawnPrefab("um_waterfall_wave")
+				shimmer.Transform:SetPosition(x1, 0, z1)
+				shimmer.Transform:SetScale(0.9, 0.9, 0.9)
 			end
 		end
 	end)

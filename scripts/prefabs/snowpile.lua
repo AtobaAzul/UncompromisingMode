@@ -207,7 +207,6 @@ local function workcallback(inst, worker, workleft)
     end
 
     if inst.components.workable.workleft > 0 and inst.components.workable.workleft < 1 then
-		inst.components.lootdropper:SpawnLootPrefab("snowball_throwable")
         inst.components.workable.workleft = 0
     elseif inst.components.workable.workleft > 1 and inst.components.workable.workleft < 2 then
         inst.components.workable.workleft = 1
@@ -231,6 +230,7 @@ local function workcallback(inst, worker, workleft)
         inst:Remove()
     end
     if inst.components.workable.workleft <= 0 then
+		inst.components.lootdropper:SpawnLootPrefab("snowball_throwable")
         inst:Remove()
     else
         startregen(inst)
@@ -273,9 +273,6 @@ local function LongUpdate(inst, dt)
         end
     end
 end
-
-local function onwake(inst) end
-
 local function TryColdness(v)
     if v.components.moisture ~= nil then
         if v.components.inventory ~= nil and (v.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY) ~= nil and v.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY).prefab ~= "beargervest" or v.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY) == nil) or v.components.inventory == nil then
@@ -409,13 +406,23 @@ local function OnSeasonChange(inst)
     end
 end
 
+local function onwake(inst)
+	if inst._coldtask == nil then
+		inst._coldtask = inst:DoPeriodicTask(inst.components.aura.tickperiod, DoAreaColdness, inst.components.aura.tickperiod / 2)
+	end
+end
+
+local function onsleep(inst)
+	if inst._coldtask ~= nil then
+		inst._coldtask:Cancel()
+		inst._coldtask = nil
+	end
+end
+
+
 local function snowpilefn(Sim)
     -- print ('sandhillfn')
     local inst = CreateEntity()
-    inst.OnLongUpdate = LongUpdate
-    inst.OnSave = onsave
-    inst.OnLoad = onload
-    inst.OnEntityWake = onwake
 
     inst.entity:AddTransform()
     inst.entity:AddAnimState()
@@ -450,12 +457,11 @@ local function snowpilefn(Sim)
     inst.components.aura.tickperiod = TUNING.TOADSTOOL_SPORECLOUD_TICK
     inst.components.aura.auraexcludetags = AURA_EXCLUDE_TAGS
     inst.components.aura:Enable(true)
-    inst._coldtask = inst:DoPeriodicTask(inst.components.aura.tickperiod, DoAreaColdness, inst.components.aura.tickperiod / 2)
+    inst._coldtask = inst:DoPeriodicTask(inst.components.aura.tickperiod, DoAreaColdness, inst.components.aura.tickperiod)
 
     inst:AddComponent("unevenground")
     inst.components.unevenground.radius = 2
-
-    inst.OnLongUpdate = LongUpdate
+	
     ----------------------
     inst:AddComponent("inspectable")
     ----------------------
@@ -497,6 +503,12 @@ local function snowpilefn(Sim)
     startregen(inst)
     inst:DoTaskInTime(0, Init)
     inst.DoColdMenace = DoColdMenace
+	
+    inst.OnLongUpdate = LongUpdate
+    inst.OnSave = onsave
+    inst.OnLoad = onload
+    inst.OnEntityWake = onwake
+    inst.OnEntitySleep = onsleep
 
     inst:DoPeriodicTask(10, function(inst)
         if TheWorld.state.israining and not TheWorld.state.iswinter then
