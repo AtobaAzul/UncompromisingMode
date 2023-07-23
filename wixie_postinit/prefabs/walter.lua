@@ -135,6 +135,7 @@ env.AddPrefabPostInit("walter", function(inst)
 	inst:AddTag("polite")
 	inst:RemoveTag("pebblemaker")
 	inst:RemoveTag("slingshot_sharpshooter")
+	inst:RemoveTag("allow_special_point_action_on_impassable")
 	
     inst:ListenForEvent("setowner", OnSetOwner)
 	
