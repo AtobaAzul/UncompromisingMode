@@ -56,7 +56,7 @@ local function RightClickPicker(inst, target, pos)
 
 	return target ~= nil and
 			target ~= inst and
-			(inst:GetCurrentPlatform() == nil and not target:HasTag("outofreach") and target:IsOnPassablePoint() or target:HasTag("_combat")) and not
+			(inst:GetCurrentPlatform() == nil and not target:HasTag("outofreach") and (TUNING.DSTU.ISLAND_ADVENTURES or target:IsOnPassablePoint()) or target:HasTag("_combat")) and not
 			target:HasTag("woby") and not
 			target:HasTag("customwobytag") and not
 			target:HasTag("shadow") and not
