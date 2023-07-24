@@ -224,6 +224,8 @@ if TUNING.DSTU.POCKET_POWERTRIP ~= 0 then
 	TOOLTIPS.REFLECTIVEVEST = "- Now has pockets!"
 	TOOLTIPS.RAINCOAT = "- Now has pockets!"
 	TOOLTIPS.HAWAIIANSHIRT = "- Increased durability.\n- Now has pockets!"
+	TOOLTIPS.ARMOR_SNAKESKIN = "- Now has pockets!"
+	TOOLTIPS.ARMOR_WINDBREAKER = "- Now has pockets!"
 end
 
 if GetModConfigData("canedurability") then
