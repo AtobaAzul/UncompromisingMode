@@ -35,7 +35,7 @@ SetSharedLootTable('um_smolder_spore',
 		{ 'houndfire', 1.0 },
 		{ 'houndfire', 0.5 },
 		{ 'houndfire', 0.25 },
-		{ 'smog',	  1.0 }
+		{ 'smog',      1.0 }
 	})
 
 
@@ -63,7 +63,9 @@ local function PlantSelf(inst)
 	if not inst:HasTag("BUSYSMOLDERSPORE")
 		and blockers == nil
 		and nettlescrowding == nil
-		and #findnettles < 16
+		and #findnettles < 16 
+		and TheWorld.Map:IsPassableAtPoint(x, y, z) 
+		and TheWorld.Map:CanPlantAtPoint(x, y, z)
 	then
 		inst:AddTag("BUSYSMOLDERSPORE")
 
@@ -71,9 +73,7 @@ local function PlantSelf(inst)
 		inst.AnimState:PlayAnimation("divebomb", false)
 		inst:ListenForEvent("animover", function()
 			inst:Hide()
-			if TheWorld.Map:IsPassableAtPoint(x, y, z) then
-				SpawnPrefab("um_pyre_nettles").Transform:SetPosition(x, y, z)
-			end
+			SpawnPrefab("um_pyre_nettles").Transform:SetPosition(x, y, z)
 			inst:DoTaskInTime(0, function()
 				inst:Remove()
 			end)
@@ -92,7 +92,7 @@ local function FireSpread(inst)
 	inst:AddTag("notarget")
 	inst:AddTag("noattack")
 	inst.Light:Enable(false)
-	
+
 	-- Explody noises.
 	inst.SoundEmitter:PlaySound("dontstarve/common/balloon_pop")
 	inst.SoundEmitter:PlaySound("dontstarve/creatures/hound/firehound_explo")
@@ -125,15 +125,15 @@ local function PopSpore(inst)
 		if inst.components.locomotor ~= nil then
 			inst.components.locomotor:Stop()
 		end
-		
+
 		inst:Show()
 		inst.AnimState:PlayAnimation("explode", false)
 		FireSpread(inst)
-		
+
 		inst:ListenForEvent("animover", function()
 			inst:Hide()
 		end)
-		
+
 		inst:DoTaskInTime(2, function()
 			inst:Remove()
 		end)
@@ -173,7 +173,7 @@ local function TargetCheck(inst)
 		and not nextvictim:HasTag("plantkin")
 		and not (nextvictim.components.health ~= nil and nextvictim.components.health:IsDead())
 		and not (nextvictim:HasTag("SmolderSporeAvoid") and math.random() > 0.01) -- This keeps them from constantly seeking pyre nettles.
-		and (nextvictim:HasTag("player") or math.random() > 0.5)			-- For anything but a player, chance to not activate.
+		and (nextvictim:HasTag("player") or math.random() > 0.5)            -- For anything but a player, chance to not activate.
 	then
 		Divebomb(inst)
 	end
@@ -356,7 +356,7 @@ local function fn()
 	--	inst:AddTag("flying") -- Makes them ignore platform borders entirely. Flying over the void isn't ideal...
 
 	inst:AddTag("show_spoilage")
-	
+
 	-- Sporepack tag
 	inst:AddTag("spore_special")
 	-- Slingshot tags
@@ -390,8 +390,8 @@ local function fn()
 	inst.components.lootdropper:SetChanceLootTable("um_smolder_spore")
 
 	inst:AddComponent("health")
-	inst.components.health:SetMaxHealth(5) -- To make it poppable via ranged attacks or earthquake drops.
-	inst.components.health:SetMinHealth(1) -- We don't want it to die a 'normal' death.
+	inst.components.health:SetMaxHealth(5)    -- To make it poppable via ranged attacks or earthquake drops.
+	inst.components.health:SetMinHealth(1)    -- We don't want it to die a 'normal' death.
 	inst.components.health.fire_damage_scale = 0 -- Take no damage from fire.
 	inst.components.health.canmurder = false
 	inst:ListenForEvent("attacked", PopSpore)
@@ -428,7 +428,7 @@ local function fn()
 	inst.components.inventoryitem.canbepickedup = false
 	inst:ListenForEvent("ondropped", OnDropped)
 	inst:ListenForEvent("onputininventory", OnPickup)
-	
+
 	inst:AddComponent("reloaditem") -- Makes it acceptable Slingshot ammo.
 
 	inst:AddComponent("fuel")
@@ -470,7 +470,7 @@ local function pop_fn()
 	inst.entity:AddSoundEmitter()
 	inst.entity:AddLight()
 	inst.entity:AddNetwork()
-	
+
 	inst:SetPrefabNameOverride("um_smolder_spore")
 
 	inst.AnimState:SetBank("um_smolder_spore")
@@ -480,7 +480,7 @@ local function pop_fn()
 	inst:AddTag("PyreToxinImmune")
 	inst:AddTag("flying")
 	inst:AddTag("thorny")
-	
+
 	inst.Light:Enable(true)
 	inst.Light:SetRadius(0.5)
 	inst.Light:SetFalloff(0.5)
@@ -515,7 +515,7 @@ end
 -------------------------------
 --- SLINGSHOT FUNCTIONALITY ---
 -------------------------------
-local AURA_EXCLUDE_TAGS = {"noclaustrophobia", "playerghost", "abigail", "companion", "ghost", "shadow", "shadowminion", "noauradamage", "INLIMBO", "notarget", "noattack", "invisible"}
+local AURA_EXCLUDE_TAGS = { "noclaustrophobia", "playerghost", "abigail", "companion", "ghost", "shadow", "shadowminion", "noauradamage", "INLIMBO", "notarget", "noattack", "invisible" }
 
 if not TheNet:GetPVPEnabled() then
 	table.insert(AURA_EXCLUDE_TAGS, "player")
@@ -537,11 +537,11 @@ local function DealDamage(inst, attacker, target, salty)
 			inst.finaldamage = inst.finaldamage * 2
 		end
 	end
-	
+
 	if no_aggro(attacker, target) then
 		target.components.combat:SetShouldAvoidAggro(attacker)
 	end
-	
+
 	if target:HasTag("shadowcreature") or target.sg == nil or target.wixieammo_hitstuncd == nil and not (target.sg:HasStateTag("busy") or target.sg:HasStateTag("caninterrupt")) or target.sg:HasStateTag("frozen") then
 		target.wixieammo_hitstuncd = target:DoTaskInTime(8, function()
 			if target.wixieammo_hitstuncd ~= nil then
@@ -549,24 +549,24 @@ local function DealDamage(inst, attacker, target, salty)
 			end
 			target.wixieammo_hitstuncd = nil
 		end)
-		
+
 		target.components.combat:GetAttacked(inst, inst.finaldamage, inst, "fire")
 	else
 		target.components.combat:GetAttacked(inst, 0, inst, "fire")
-		
+
 		target.components.health:DoDelta(-inst.finaldamage, false, inst, false, inst, false)
 	end
-	
+
 	if target.components.sleeper ~= nil and target.components.sleeper:IsAsleep() then
 		target.components.sleeper:WakeUp()
 	end
-	
+
 	if target.components.combat ~= nil then
 		target.components.combat:SetTarget(attacker)
 		target.components.combat.temp_disable_aggro = false
 		target.components.combat:RemoveShouldAvoidAggro(attacker)
 	end
-	
+
 	if attacker.components.combat ~= nil then
 		attacker.components.combat:SetTarget(target)
 	end
@@ -577,28 +577,28 @@ local function SS_OnHit(inst, attacker, target)
 	inst:Hide()
 
 	SpawnPrefab("um_smolder_spore_pop").Transform:SetPosition(inst.Transform:GetWorldPosition()) -- Big badda boom.
-	
+
 	-- Damage anything within a radius.	
 	local x, y, z = inst.Transform:GetWorldPosition()
 	local ents = TheSim:FindEntities(x, y, z, 3, nil, { "SmolderSporeAvoid", "BUSYSMOLDERSPORE", "INLIMBO", "invisible", "noattack" })
 	if #ents > 0 then
 		for i, v in pairs(ents) do
 			local target = v
-			
+
 			if target ~= nil and target:IsValid() and target.components.combat ~= nil then
 				DealDamage(inst, attacker, target)
 			end
 		end
 	end
-	
+
 	inst:Remove()
 end
 
 local function SS_CollisionCheck(inst)
 	local x, y, z = inst.Transform:GetWorldPosition()
 	local attacker = inst.components.projectile.owner or nil
-	
-	for i, v in ipairs(TheSim:FindEntities(x, y, z, 3, {"_combat"}, AURA_EXCLUDE_TAGS)) do
+
+	for i, v in ipairs(TheSim:FindEntities(x, y, z, 3, { "_combat" }, AURA_EXCLUDE_TAGS)) do
 		if v:GetPhysicsRadius(0) > 1.5 and v:IsValid() and v.components.combat ~= nil and v.components.health ~= nil and not (v.sg ~= nil and (v.sg:HasStateTag("swimming") or v.sg:HasStateTag("invisible"))) and (v:HasTag("bird_mutant") or not v:HasTag("bird")) then
 			if not (v.components.follower ~= nil and v.components.follower:GetLeader() ~= nil and v.components.follower:GetLeader():HasTag("player")) then
 				if not (v.components.health:IsDead() or v == attacker or v:HasTag("playerghost") or (v:HasTag("player") and not TheNet:GetPVPEnabled())) then
@@ -609,8 +609,8 @@ local function SS_CollisionCheck(inst)
 			end
 		end
 	end
-	
-	for i, v in ipairs(TheSim:FindEntities(x, y, z, 2, {"_combat"}, AURA_EXCLUDE_TAGS)) do	
+
+	for i, v in ipairs(TheSim:FindEntities(x, y, z, 2, { "_combat" }, AURA_EXCLUDE_TAGS)) do
 		if v:IsValid() and v.components.combat ~= nil and v.components.health ~= nil and not (v.sg ~= nil and (v.sg:HasStateTag("swimming") or v.sg:HasStateTag("invisible"))) and (v:HasTag("bird_mutant") or not v:HasTag("bird")) then
 			if not (v.components.follower ~= nil and v.components.follower:GetLeader() ~= nil and v.components.follower:GetLeader():HasTag("player")) then
 				if not (v.components.health:IsDead() or v == attacker or v:HasTag("playerghost") or (v:HasTag("player") and not TheNet:GetPVPEnabled())) then
@@ -626,49 +626,49 @@ end
 
 local function projectile_fn()
 	local inst = CreateEntity()
-	
+
 	inst.entity:AddTransform()
 	inst.entity:AddAnimState()
 	inst.entity:AddSoundEmitter()
 	inst.entity:AddLight()
 	inst.entity:AddNetwork()
-	
+
 	inst:SetPrefabNameOverride("um_smolder_spore")
-	
+
 	MakeProjectilePhysics(inst)
-	
+
 	inst.AnimState:SetBank("um_smolder_spore")
 	inst.AnimState:SetBuild("um_smolder_spore")
 	inst.Transform:SetScale(0.9, 0.9, 0.9)
 	inst.AnimState:PlayAnimation("idle", true)
-	
+
 	--projectile (from projectile component) added to pristine state for optimization
 	inst:AddTag("projectile")
 	inst:AddTag("scarytoprey")
 	inst:AddTag("flying")
-	
+
 	inst.Light:Enable(true)
 	inst.Light:SetRadius(0.4)
 	inst.Light:SetFalloff(0.4)
 	inst.Light:SetIntensity(0.75)
 	inst.Light:SetColour(235 / 255, 121 / 255, 12 / 255)
-	
-	
+
+
 	inst.entity:SetPristine()
-	
+
 	if not TheWorld.ismastersim then
 		return inst
 	end
-	
+
 	if inst.powerlevel == nil then
-        inst.powerlevel = 1
-    end
-	
+		inst.powerlevel = 1
+	end
+
 	inst:AddComponent("locomotor")
-	
+
 	inst:AddComponent("weapon")
 	inst:AddComponent("projectile")
-	
+
 	inst:AddComponent("projectile")
 	inst.components.projectile.hascustomattack = true
 	inst.components.projectile:SetSpeed(25)
@@ -679,16 +679,16 @@ local function projectile_fn()
 	inst.components.projectile:SetOnMissFn(SS_OnHit)
 	inst.components.projectile.range = 30
 	inst.components.projectile:SetLaunchOffset(Vector3(1, 0.5, 0))
-	
-	
+
+
 	inst.damage = 75
-	
+
 	inst:DoPeriodicTask(FRAMES, SS_CollisionCheck)
 	inst:DoTaskInTime(2 - (inst.powerlevel * inst.powerlevel), inst.Remove)
-	
-	
+
+
 	inst.persists = false
-	
+
 	return inst
 end
 

@@ -29,10 +29,14 @@ local spore_cooldown_max = 60
 local HOME_TILES =
 {
 	[WORLD_TILES.OCEAN_WATERLOG] = true, -- PLACEHOLDER
-	--	[WORLD_TILES.MAGMA_ASH] = true,
-	--	[WORLD_TILES.MAGMA_ROCK] = true,
-	--	[WORLD_TILES.MAGMAFIELD] = true,
 }
+
+if WORLD_TILES.MAGMA_ASH ~= nil then
+	HOME_TILES[WORLD_TILES.MAGMA_ASH] = true --IA compat teehee
+	HOME_TILES[WORLD_TILES.MAGMA_ROCK] = true
+	HOLE_TILES[WORLD_TILES.MAGMAFIELD] = true
+end
+
 
 SetSharedLootTable('um_pyre_nettles_1',
 	{
@@ -308,7 +312,7 @@ local function OnAttacked(inst, data)
 	if inst.components.health:GetPercent() > 0.01 then
 		if (math.random() * inst.stage) > 3 and not (data.attacker ~= nil and data.attacker:HasTag("HASHEATER")) then
 			SpawnPrefab("um_smolder_spore").Transform:SetPosition(inst.Transform:GetWorldPosition())
-			
+
 			if data.weapon ~= nil and data.weapon.prefab == "voidcloth_scythe" then
 				inst.components.health:DoDelta(-TUNING.VOIDCLOTH_SCYTHE_DAMAGE * 2)
 			end
@@ -415,7 +419,7 @@ local function StageSpawner(name, SpawnAtStage)
 
 		inst.prefab = "um_pyre_nettles" -- In case we're a spawned-in stage-specifying prefab.
 
-	--	MakeObstaclePhysics(inst, 0.1)
+		--	MakeObstaclePhysics(inst, 0.1)
 
 		local minimap = inst.entity:AddMiniMapEntity()
 		inst.MiniMapEntity:SetIcon("um_pyre_nettles_map.tex")

@@ -37,7 +37,7 @@ return Class(function(self, inst)
 
 				for i = 1, math.random(10, 15) do
 					local ix, iy, iz = x + math.random(-i, i), y, z + math.random(-i, i)
-					if TheWorld.Map:IsPassableAtPoint(ix, iy, iz) then
+					if TheWorld.Map:IsPassableAtPoint(ix, iy, iz) and TheWorld.Map:CanPlantAtPoint(ix,iy,iz) then
 						TheWorld:DoTaskInTime(math.random(), function()
 							local nettle = SpawnPrefab("um_pyre_nettles")
 							nettle.Transform:SetPosition(ix, iy, iz)
