@@ -436,6 +436,12 @@ if GetModConfigData("reworked_ck") then
     table.insert(stategraph_post, "crabking")
 end
 
+if GetModConfigData("changed_shadowpieces") then
+	table.insert(prefab_post, "shadow_knight")
+	table.insert(stategraph_post, "shadow_bishop")
+	table.insert(stategraph_post, "shadow_knight")
+end
+
 if GetModConfigData("hambatnerf") then
     table.insert(prefab_post, "hambat")
 end
