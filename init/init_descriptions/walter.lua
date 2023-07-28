@@ -71,8 +71,8 @@ DESCRIBE.WIXIE = {
     GENERIC = "What's the matter? Don't you want to be friends, %s?",
     ATTACKER = "Violence will get you no where, %s!",
     MURDERER = "I think somethings wrong with %s!",
-    REVIVER = "See %s? Helping others feels good!",
-    GHOST = "A pinetree pioneer always helps those in need! Even if they are mean.",
+    REVIVER = "See, %s? Helping others feels good!",
+    GHOST = "A Pinetree Pioneer always helps those in need! Even if they are mean.",
     FIRESTARTER = "Fire is no joke, %s! Please stop laughing."
 }
 
@@ -92,12 +92,12 @@ DESCRIBE.MUSHROOMSPROUT_OVERWORLD = "I've never seen caps like those before!"
 DESCRIBE.TOADLING =
     "He could swallow me whole... I think I'll keep my distance."
 
-DESCRIBE.GASMASK = "Smelly saftey first!"
+DESCRIBE.GASMASK = "Smelly safety first!"
 DESCRIBE.MOCK_DRAGONFLY = DESCRIBE.DRAGONFLY
 DESCRIBE.MOTHERGOOSE = DESCRIBE.MOOSE
 DESCRIBE.SPIDERQUEENCORPSE =
     "I think the spiders will manage fine without a queen."
-ANNOUNCE.ANNOUNCE_SNEEZE = "ooAaaAGH-CHU"
+ANNOUNCE.ANNOUNCE_SNEEZE = "ooAaaAGH-CHU!"
 ANNOUNCE.ANNOUNCE_HAYFEVER = "My allergies are acting up again!"
 ANNOUNCE.ANNOUNCE_HAYFEVER_OFF = "Back to my regular level of allergies."
 ANNOUNCE.ANNOUNCE_FIREFALL = {
@@ -123,8 +123,8 @@ DESCRIBE.SNOWGOGGLES = "They're a bit big, but they're warm!"
 DESCRIBE.SNOWMONG =
     "Big burrowing bugs and beetles bite back big burrowing bugs and beagles-- aww..."
 DESCRIBE.SHOCKWORM = "Don't touch it! It's a living electrical hazard!"
-DESCRIBE.ZASPBERRY = "A whats berry?"
-DESCRIBE.ZASPBERRYPARFAIT = "Oh boy, Dessert!"
+DESCRIBE.ZASPBERRY = "This berry has quite the shocking taste... heh."
+DESCRIBE.ZASPBERRYPARFAIT = "Oh boy, dessert!"
 DESCRIBE.ICEBOOMERANG = "No Woby, don't fetch this one!"
 DESCRIBE.MINOTAUR_BOULDER = "Watch out for land slides!"
 DESCRIBE.MINOTAUR_BOULDER_BIG = "That one could hurt it!"
@@ -212,12 +212,12 @@ DESCRIBE.FRUITBAT = "Maybe if we're lucky it'll turn me into a fruit!"
 DESCRIBE.PITCHERPLANT = "Is something moving in there?"
 DESCRIBE.APHID = "It's fuzzy!"
 DESCRIBE.NYMPH = "I wonder what they're doing?"
-DESCRIBE.GIANT_TREE_INFESTED = "Get out'a there!"
+DESCRIBE.GIANT_TREE_INFESTED = "Get out of there!"
 DESCRIBE.GIANT_BLUEBERRY =
     "Good thing a Pinetree Pioneer's outfit is resistant to stains!"
 DESCRIBE.STEAMEDHAMS = "I'm ready for an unforgettable luncheon!"
 DESCRIBE.BLUEBERRYPANCAKES = "Ah, sweet eats!"
-DESCRIBE.SIMPSALAD = "A Pinetree Pioneer always eats his greens! Er purples...."
+DESCRIBE.SIMPSALAD = "A Pinetree Pioneer always eats his... er... purples!"
 DESCRIBE.BEEFALOWINGS = "Haven't had hot wings in ages!"
 ANNOUNCE.ANNOUNCE_ATTACH_BUFF_KNOCKBACKIMMUNE = "I'm planting my feet!"
 ANNOUNCE.ANNOUNCE_DETACH_BUFF_KNOCKBACKIMMUNE = "I've lost my balance again!"
@@ -381,7 +381,7 @@ ANNOUNCE.ANNOUNCE_RATSNIFFER_ITEMS = {
     LEVEL_1 = "All our items might get stolen if they're left on the ground!"
 }
 ANNOUNCE.ANNOUNCE_RATSNIFFER_FOOD = {
-    LEVEL_1 = "A pinetree pioneer should keep his food fresh and put away!"
+    LEVEL_1 = "A Pinetree Pioneer should keep his food fresh and put away!"
 }
 ANNOUNCE.ANNOUNCE_RATSNIFFER_BURROWS = {
     LEVEL_1 = "Smell that, Woby? There's a bunch of rats out there somewhere!"
@@ -430,7 +430,7 @@ DESCRIBE.OCUPUS_TENTACLE_COOKED = ""
 
 DESCRIBE.ARMOR_REED_UM = "It just might help me blend in."
 DESCRIBE.ARMOR_SHARKSUIT_UM = "I don't need help swimming!"
-DESCRIBE.ROCKJAWLEATHER = "Woah, geniune shark skin."
+DESCRIBE.ROCKJAWLEATHER = "Woah, genuine shark skin."
 
 DESCRIBE.EYEOFTERROR_MINI_ALLY = "I spy with my friendly eyes..."
 DESCRIBE.EYEOFTERROR_MINI_GROUNDED_ALLY = DESCRIBE.EYEOFTERROR_MINI_GROUNDED
@@ -452,7 +452,7 @@ DESCRIBE.BOAT_BUMPER_SLUDGE = "It reminds me of a rubber raft!"
 DESCRIBE.BOAT_BUMBER_SLUDGE_KIT = "Better safe than sorry!"
 DESCRIBE.BOATPATCH_SLUDGE = "The best kind of hole is a plugged one."
 DESCRIBE.UM_COPPER_PIPE = "Metalworking wasn't a part of my training..."
-DESCRIBE.BRINE_BALM = "M-maybe I should just stick to bandaids."
+DESCRIBE.BRINE_BALM = "M-maybe I should just stick to bandages."
 DESCRIBE.UNCOMPROMISING_FISHINGNET = DESCRIBE.FISHINGNET
 DESCRIBE.UM_AMBER = "Ooh, are there any bugs in it?"
 DESCRIBE.UM_BEEGUN = "K-keep your enemies close, right?" -- please make Walter lose 20 sanity per minute with this equipped I think that would be a cool flavour perk
