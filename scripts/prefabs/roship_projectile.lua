@@ -1,29 +1,29 @@
 local function OnHitZap(inst)
     local x, y, z = inst.Transform:GetWorldPosition()
-    
-    SpawnPrefab("electric_explosion").Transform:SetPosition(x,0,z)
+
+    SpawnPrefab("electric_explosion").Transform:SetPosition(x, 0, z)
     SpawnPrefab("bishop_charge_hit").Transform:SetPosition(inst.Transform:GetWorldPosition())
-    
-    local ents = TheSim:FindEntities(x, 0, z, 5, {"_health"}, { "shadow", "INLIMBO", "chess" })
-    
+
+    local ents = TheSim:FindEntities(x, 0, z, 5, { "_health" }, { "shadow", "INLIMBO", "chess" })
+
     if #ents > 0 then
-        for i, v in ipairs(ents) do            
-            if v.components.health ~= nil and not v.components.health:IsDead() then
+        for i, v in ipairs(ents) do
+            if v.components.health ~= nil and not v.components.health:IsDead() and v.components.combat ~= nil then
                 v.components.combat:GetAttacked(inst, 50, nil)
             end
         end
-	end
+    end
     inst:Remove()
 end
-	
+
 local function onthrown(inst)
-	inst.Light:Enable(true)
+    inst.Light:Enable(true)
     inst:AddTag("NOCLICK")
     inst.persists = false
 
     inst.AnimState:SetBank("roship_attack")
     inst.AnimState:SetBuild("roship_attack")
-    inst.AnimState:PlayAnimation("idle",true)
+    inst.AnimState:PlayAnimation("idle", true)
 
     inst.Physics:SetMass(3)
 end
@@ -48,12 +48,12 @@ end
 local function fn()
     local inst = CreateEntity()
 
-	
+
     inst.entity:AddTransform()
     inst.entity:AddAnimState()
     inst.entity:AddSoundEmitter()
     inst.entity:AddNetwork()
-    inst.entity:AddLight()    
+    inst.entity:AddLight()
     inst.Light:SetIntensity(.6)
     inst.Light:SetRadius(2)
     inst.Light:SetFalloff(1)
@@ -63,16 +63,16 @@ local function fn()
 
     --projectile (from complexprojectile component) added to pristine state for optimization
 
-	
+
     inst:AddTag("projectile")
-	inst:AddTag("weapon")
-    
-	
+    inst:AddTag("weapon")
+
+
     MakeInventoryFloatable(inst, "med", 0.05, 0.65)
 
     inst.entity:SetPristine()
-	
-	--[[inst:AddComponent("reticule")
+
+    --[[inst:AddComponent("reticule")
     inst.components.reticule.targetfn = ReticuleTargetFn
     inst.components.reticule.ease = true]]
 

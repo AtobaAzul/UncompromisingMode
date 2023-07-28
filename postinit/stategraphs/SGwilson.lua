@@ -89,14 +89,14 @@ env.AddStategraphPostInit("wilson", function(inst)
 
     local function DoMockAttack(inst)
         local target = inst.components.combat ~= nil and inst.components.combat.target
-		local equip = inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
-		
-		if equip ~= nil and target ~= nil and target.components.health ~= nil and not target.components.health:IsDead() then
-			inst.components.combat:DoNaughtAttack(target)
-			
-			equip.components.weapon:OnAttack_NoDurabilityLoss(inst, target)
-		end
-		--[[
+        local equip = inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
+
+        if equip ~= nil and target ~= nil and target.components.health ~= nil and not target.components.health:IsDead() then
+            inst.components.combat:DoNaughtAttack(target)
+
+            equip.components.weapon:OnAttack_NoDurabilityLoss(inst, target)
+        end
+        --[[
         local equip = inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
         local dist = target ~= nil and
             distsq(target:GetPosition(), inst:GetPosition()) <= inst.components.combat:CalcAttackRangeSq(target) or false
@@ -132,7 +132,7 @@ env.AddStategraphPostInit("wilson", function(inst)
 
 
     local SLEEPREPEL_MUST_TAGS = { "_combat" }
-    local SLEEPREPEL_CANT_TAGS = { "player", "companion", "shadow", "playerghost", "INLIMBO", "wixieshoved", "invisible",
+    local SLEEPREPEL_CANT_TAGS = { "player", "companion", "abigail", "shadow", "playerghost", "INLIMBO", "wixieshoved", "invisible",
         "hiding", "NOTARGET", "flight", "toadstool" }
 
     local function Check_Bowling(inst)
@@ -170,20 +170,13 @@ env.AddStategraphPostInit("wilson", function(inst)
                                 local ground = TheWorld.Map:IsPassableAtPoint(dx, dy, dz)
                                 local boat = TheWorld.Map:GetPlatformAtPoint(dx, dz)
                                 local ocean_collision = TheWorld.Map:IsOceanAtPoint(dx, dy, dz)
-                                local on_water = nil
-
-                                if TUNING.DSTU.ISLAND_ADVENTURES then
-                                    on_water = IsOnWater(dx, dy, dz)
-                                end
 
                                 if not (v.sg ~= nil and (v.sg:HasStateTag("swimming") or v.sg:HasStateTag("invisible"))) then
                                     if v ~= nil and dx ~= nil and (ground or boat or ocean_collision and v.components.locomotor:CanPathfindOnWater() or v.components.tiletracker ~= nil and not v:HasTag("whale")) then
-                                        if not v:HasTag("aquatic") and not on_water or v:HasTag("aquatic") and on_water then
-                                            --[[if ocean_collision and v.components.amphibiouscreature and not v.components.amphibiouscreature.in_water then
+                                        --[[if ocean_collision and v.components.amphibiouscreature and not v.components.amphibiouscreature.in_water then
 												v.components.amphibiouscreature:OnEnterOcean()
 											end]]
-                                            v.Transform:SetPosition(dx, dy, dz)
-                                        end
+                                        v.Transform:SetPosition(dx, dy, dz)
                                     end
                                 end
 
@@ -757,8 +750,8 @@ env.AddStategraphPostInit("wilson", function(inst)
                     inst.sg.statemem.ismoose = true
                     inst.AnimState:PlayAnimation(
                         (
-                        (inst.AnimState:IsCurrentAnimation("punch_a") or inst.AnimState:IsCurrentAnimation("punch_c"))
-                        and "punch_b") or
+                            (inst.AnimState:IsCurrentAnimation("punch_a") or inst.AnimState:IsCurrentAnimation("punch_c"))
+                            and "punch_b") or
                         (inst.AnimState:IsCurrentAnimation("punch_b") and "punch_c") or
                         "punch_a"
                     )
@@ -822,10 +815,10 @@ env.AddStategraphPostInit("wilson", function(inst)
                 end),
                 TimeEvent(8 * FRAMES, function(inst)
                     if not (inst.sg.statemem.isbeaver or
-                        inst.sg.statemem.ismoose or
-                        inst.sg.statemem.iswhip or
-                        inst.sg.statemem.ispocketwatch or
-                        inst.sg.statemem.isbook) and
+                            inst.sg.statemem.ismoose or
+                            inst.sg.statemem.iswhip or
+                            inst.sg.statemem.ispocketwatch or
+                            inst.sg.statemem.isbook) and
                         inst.sg.statemem.projectiledelay == nil then
                         DoMockAttack(inst)
                         inst:ClearBufferedAction()
@@ -1341,10 +1334,10 @@ env.AddStategraphPostInit("wilson", function(inst)
             tags = { "attack", "notalking", "abouttoattack" },
 
             onenter = function(inst)
-				if inst.components.rider:IsRiding() then
-					inst.Transform:SetFourFaced()
-				end
-				
+                if inst.components.rider:IsRiding() then
+                    inst.Transform:SetFourFaced()
+                end
+
                 inst.sg.statemem.target = inst.components.combat.target
                 inst.components.combat:StartAttack()
                 inst.components.locomotor:Stop()
@@ -1359,11 +1352,11 @@ env.AddStategraphPostInit("wilson", function(inst)
                 end
             end,
 
-			onexit = function(inst)
-				if inst.components.rider:IsRiding() then
-					inst.Transform:SetSixFaced()
-				end
-			end,
+            onexit = function(inst)
+                if inst.components.rider:IsRiding() then
+                    inst.Transform:SetSixFaced()
+                end
+            end,
 
             timeline =
             {
@@ -1402,10 +1395,10 @@ env.AddStategraphPostInit("wilson", function(inst)
             tags = { "attack", "notalking", "abouttoattack" },
 
             onenter = function(inst)
-				if inst.components.rider:IsRiding() then
-					inst.Transform:SetFourFaced()
-				end
-				
+                if inst.components.rider:IsRiding() then
+                    inst.Transform:SetFourFaced()
+                end
+
                 inst.sg.statemem.target = inst.components.combat.target
                 inst.components.combat:StartAttack()
                 inst.components.locomotor:Stop()
@@ -1421,11 +1414,11 @@ env.AddStategraphPostInit("wilson", function(inst)
                 end
             end,
 
-			onexit = function(inst)
-				if inst.components.rider:IsRiding() then
-					inst.Transform:SetSixFaced()
-				end
-			end,
+            onexit = function(inst)
+                if inst.components.rider:IsRiding() then
+                    inst.Transform:SetSixFaced()
+                end
+            end,
 
             timeline =
             {
@@ -1654,101 +1647,101 @@ env.AddStategraphPostInit("wilson", function(inst)
                 inst.Physics:ClearMotorVelOverride()
             end,
         },
-		
-		State{
-			name = "um_tornado_teleport",
-			tags = { "busy", "nopredict", "nomorph", "nointerrupt" },
 
-			onenter = function(inst, shore_pt)
-				ForceStopHeavyLifting(inst)
-				inst:ClearBufferedAction()
+        State {
+            name = "um_tornado_teleport",
+            tags = { "busy", "nopredict", "nomorph", "nointerrupt" },
 
-				inst.components.locomotor:Stop()
-				inst.components.locomotor:Clear()
-				
-				inst.components.health:SetInvincible(true)
-				inst.DynamicShadow:Enable(false)
+            onenter = function(inst, shore_pt)
+                ForceStopHeavyLifting(inst)
+                inst:ClearBufferedAction()
 
-				inst.AnimState:PlayAnimation("grabbedbytheghoulie")
-				
-				if inst.deathsoundoverride ~= nil then
-					inst.SoundEmitter:PlaySound(inst.deathsoundoverride)
-				elseif not inst:HasTag("mime") then
-					inst.SoundEmitter:PlaySound((inst.talker_path_override or "dontstarve/characters/") ..
-						(inst.soundsname or inst.prefab) .. "/death_voice")
-				end
+                inst.components.locomotor:Stop()
+                inst.components.locomotor:Clear()
 
-				inst.components.rider:ActualDismount()
+                inst.components.health:SetInvincible(true)
+                inst.DynamicShadow:Enable(false)
 
-				inst:ShowHUD(false)
+                inst.AnimState:PlayAnimation("grabbedbytheghoulie")
 
-				if inst.components.playercontroller ~= nil then
-					inst.components.playercontroller:Enable(false)
-				end
-			end,
+                if inst.deathsoundoverride ~= nil then
+                    inst.SoundEmitter:PlaySound(inst.deathsoundoverride)
+                elseif not inst:HasTag("mime") then
+                    inst.SoundEmitter:PlaySound((inst.talker_path_override or "dontstarve/characters/") ..
+                        (inst.soundsname or inst.prefab) .. "/death_voice")
+                end
 
-			events =
-			{
-				EventHandler("animover", function(inst)
-					inst:ScreenFade(false, 1)
-				end),
-			},
+                inst.components.rider:ActualDismount()
 
-			onexit = function(inst)
-				inst.components.health:SetInvincible(false)
-				inst.DynamicShadow:Enable(true)
-				inst:Show()
+                inst:ShowHUD(false)
 
-				if inst.sg.statemem.teleport_task ~= nil then
-					-- Still have a running teleport_task
-					-- Interrupt!
-					inst.sg.statemem.teleport_task:Cancel()
-					inst.sg.statemem.teleport_task = nil
-					inst:ScreenFade(true, .5)
-				end
+                if inst.components.playercontroller ~= nil then
+                    inst.components.playercontroller:Enable(false)
+                end
+            end,
 
-				if inst.components.playercontroller ~= nil then
-					inst.components.playercontroller:Enable(true)
-				end
-			end,
-		},
-		
-		State{
-			name = "um_tornado_wakeup",
-			tags = { "busy", "canrotate", "nopredict", "nomorph", "nointerrupt" },
-			
-			onenter = function(inst)
-				inst.components.locomotor:Stop()
-				
-				if inst.components.playercontroller ~= nil then
-					inst.components.playercontroller:Enable(true)
-				end
-			
-				inst.AnimState:PlayAnimation("enter")
-				if inst.components.drownable ~= nil then
-					inst.components.drownable:TakeDrowningDamage()
-				end
-			end,
-			
-			timeline=
-			{
-				TimeEvent(11*FRAMES, function(inst) 
-					inst.SoundEmitter:PlaySound("dontstarve/movement/bodyfall_dirt")
-					
-					if inst.components.health ~= nil then
-						inst.components.health:DoDelta(-50, false, "Tornado")
-					end
-				end),
-			},        
-			
-			
-			events=
-			{
-				EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
-			},
+            events =
+            {
+                EventHandler("animover", function(inst)
+                    inst:ScreenFade(false, 1)
+                end),
+            },
 
-		},   
-	
+            onexit = function(inst)
+                inst.components.health:SetInvincible(false)
+                inst.DynamicShadow:Enable(true)
+                inst:Show()
+
+                if inst.sg.statemem.teleport_task ~= nil then
+                    -- Still have a running teleport_task
+                    -- Interrupt!
+                    inst.sg.statemem.teleport_task:Cancel()
+                    inst.sg.statemem.teleport_task = nil
+                    inst:ScreenFade(true, .5)
+                end
+
+                if inst.components.playercontroller ~= nil then
+                    inst.components.playercontroller:Enable(true)
+                end
+            end,
+        },
+
+        State {
+            name = "um_tornado_wakeup",
+            tags = { "busy", "canrotate", "nopredict", "nomorph", "nointerrupt" },
+
+            onenter = function(inst)
+                inst.components.locomotor:Stop()
+
+                if inst.components.playercontroller ~= nil then
+                    inst.components.playercontroller:Enable(true)
+                end
+
+                inst.AnimState:PlayAnimation("enter")
+                if inst.components.drownable ~= nil then
+                    inst.components.drownable:TakeDrowningDamage()
+                end
+            end,
+
+            timeline =
+            {
+                TimeEvent(11 * FRAMES, function(inst)
+                    inst.SoundEmitter:PlaySound("dontstarve/movement/bodyfall_dirt")
+
+                    if inst.components.health ~= nil then
+                        inst.components.health:DoDelta(-50, false, "Tornado")
+                    end
+                end),
+            },
+
+
+            events =
+            {
+                EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
+            },
+
+        },
+
     }
 
     for k, v in pairs(events) do

@@ -23,7 +23,7 @@ end
 
 -- temp aggro system for the slingshots
 local function no_aggro(attacker, target)
-	local targets_target = target.components.combat ~= nil and target.components.combat.target or nil
+    local targets_target = target.components.combat ~= nil and target.components.combat.target or nil
     return targets_target ~= nil and targets_target:IsValid() and targets_target ~= attacker
         and (GetTime() - target.components.combat.lastwasattackedbytargettime) < 4
         and (targets_target.components.health ~= nil and not targets_target.components.health:IsDead())
@@ -31,59 +31,57 @@ end
 
 local function DealDamage(inst, attacker, target, salty)
     if target ~= nil and target:IsValid() and target.components.combat ~= nil then
-	
-		inst.finaldamage = (inst.damage * (1 + (inst.powerlevel / 2))) * (attacker.components.combat ~= nil and attacker.components.combat.externaldamagemultipliers:Get() or 1)
-		
-		if salty ~= nil and salty and target.components.health ~= nil then
-			inst.finaldamage = inst.finaldamage / target.components.health:GetPercent()
-			
-			if target:HasTag("snowish") then
-				inst.finaldamage = inst.finaldamage * 2
-			end
-		end
-		
-		if no_aggro(attacker, target) then
-			target.components.combat:SetShouldAvoidAggro(attacker)
-		end
-		
-		if target:HasTag("shadowcreature") or 
-			target.sg == nil or 
-			target.wixieammo_hitstuncd == nil and not 
-			(target.sg:HasStateTag("busy") or 
-			target.sg:HasStateTag("caninterrupt")) or
-			target.sg:HasStateTag("frozen")	then
-			
-			target.wixieammo_hitstuncd = target:DoTaskInTime(8, function()
-				if target.wixieammo_hitstuncd ~= nil then
-					target.wixieammo_hitstuncd:Cancel()
-				end
-							
-				target.wixieammo_hitstuncd = nil
-			end)
-			
-			target.components.combat:GetAttacked(attacker, inst.finaldamage, attacker)
-		else
-			target.components.combat:GetAttacked(attacker, 0, attacker)
-			
-			if target.components.combat ~= nil then
-				target.components.combat:SetTarget(attacker)
-			end
-			
-			target.components.health:DoDelta(-inst.finaldamage, false, attacker, false, attacker, false)
-		end
+        inst.finaldamage = (inst.damage * (1 + (inst.powerlevel / 2))) * (attacker.components.combat ~= nil and attacker.components.combat.externaldamagemultipliers:Get() or 1)
 
-		if target.components.sleeper ~= nil and target.components.sleeper:IsAsleep() then
-			target.components.sleeper:WakeUp()
-		end
-		
-		if target.components.combat ~= nil then
-			target.components.combat.temp_disable_aggro = false
-			target.components.combat:RemoveShouldAvoidAggro(attacker)
-		end
-		
-		if attacker.components.combat ~= nil then
-			attacker.components.combat:SetTarget(target)
-		end
+        if salty ~= nil and salty and target.components.health ~= nil then
+            inst.finaldamage = inst.finaldamage / target.components.health:GetPercent()
+
+            if target:HasTag("snowish") then
+                inst.finaldamage = inst.finaldamage * 2
+            end
+        end
+
+        if no_aggro(attacker, target) then
+            target.components.combat:SetShouldAvoidAggro(attacker)
+        end
+
+        if target:HasTag("shadowcreature") or
+            target.sg == nil or
+            target.wixieammo_hitstuncd == nil and not
+            (target.sg:HasStateTag("busy") or
+                target.sg:HasStateTag("caninterrupt")) or
+            target.sg:HasStateTag("frozen") then
+            target.wixieammo_hitstuncd = target:DoTaskInTime(8, function()
+                if target.wixieammo_hitstuncd ~= nil then
+                    target.wixieammo_hitstuncd:Cancel()
+                end
+
+                target.wixieammo_hitstuncd = nil
+            end)
+
+            target.components.combat:GetAttacked(attacker, inst.finaldamage, attacker)
+        else
+            target.components.combat:GetAttacked(attacker, 0, attacker)
+
+            if target.components.combat ~= nil then
+                target.components.combat:SetTarget(attacker)
+            end
+
+            target.components.health:DoDelta(-inst.finaldamage, false, attacker, false, attacker, false)
+        end
+
+        if target.components.sleeper ~= nil and target.components.sleeper:IsAsleep() then
+            target.components.sleeper:WakeUp()
+        end
+
+        if target.components.combat ~= nil then
+            target.components.combat.temp_disable_aggro = false
+            target.components.combat:RemoveShouldAvoidAggro(attacker)
+        end
+
+        if attacker.components.combat ~= nil then
+            attacker.components.combat:SetTarget(target)
+        end
     end
 end
 
@@ -153,30 +151,23 @@ local function OnHit_Limestone(inst, attacker, target)
                 local tx2, ty2, tz2 = target.Transform:GetWorldPosition()
 
                 --local rad = math.rad(inst:GetAngleToPoint(tx, ty, tz))
-                local velx = math.cos(rad) --* 4.5
+                local velx = math.cos(rad)  --* 4.5
                 local velz = -math.sin(rad) --* 4.5
 
                 local giantreduction = target:HasTag("epic") and 6 or target:HasTag("smallcreature") and 2 or 3
 
                 local dx, dy, dz = tx2 + (((inst.powerlevel) / (i + 1.5)) * velx) / giantreduction, ty2,
-                tz2 + (((inst.powerlevel) / (i + 1.5)) * velz) / giantreduction
+                    tz2 + (((inst.powerlevel) / (i + 1.5)) * velz) / giantreduction
                 local ground = TheWorld.Map:IsPassableAtPoint(dx, dy, dz)
                 local boat = TheWorld.Map:GetPlatformAtPoint(dx, dz)
                 local ocean = TheWorld.Map:IsOceanAtPoint(dx, dy, dz)
-                local on_water = nil
-
-                if TUNING.DSTU.ISLAND_ADVENTURES then
-                    on_water = IsOnWater(dx, dy, dz)
-                end
 
                 if not (target.sg ~= nil and (target.sg:HasStateTag("swimming") or target.sg:HasStateTag("invisible"))) then
                     if target ~= nil and target.components.locomotor ~= nil and dx ~= nil and (ground or boat or ocean and target.components.locomotor:CanPathfindOnWater() or target.components.tiletracker ~= nil and not target:HasTag("whale")) then
-                        if not target:HasTag("aquatic") and not on_water or target:HasTag("aquatic") and on_water then
-                            --[[if ocean and target.components.amphibiouscreature and not target.components.amphibiouscreature.in_water then
+                        --[[if ocean and target.components.amphibiouscreature and not target.components.amphibiouscreature.in_water then
 								target.components.amphibiouscreature:OnEnterOcean()
 							end]]
-                            target.Transform:SetPosition(dx, dy, dz)
-                        end
+                        target.Transform:SetPosition(dx, dy, dz)
                     end
                 end
             end
@@ -244,7 +235,7 @@ local function DoHoneyTrail(inst)
         if TheWorld.Map:IsPassableAtPoint(hx, hy, hz) then
             fx = SpawnPrefab("wixietar_trail")
             fx:SetVariation(PickHoney(inst), GetRandomMinMax(level.min_scale, level.max_scale),
-            level.duration + math.random() * .5)
+                level.duration + math.random() * .5)
         else
             fx = SpawnPrefab("splash_sink")
         end
@@ -294,11 +285,11 @@ local function OnHit_Tar(inst, attacker, target)
         target.tarslowtask:Cancel()
         target.tarslowtask = nil
     end
-	
-	if target.honeyslowtask ~= nil then
-		target.honeyslowtask:Cancel()
-		target.honeyslowtask = nil
-	end
+
+    if target.honeyslowtask ~= nil then
+        target.honeyslowtask:Cancel()
+        target.honeyslowtask = nil
+    end
 
     if target.sg ~= nil or target.components.locomotor ~= nil then
         target.tarslowtask = target:DoPeriodicTask(HONEY_PERIOD, DoHoneyTrail)
@@ -317,11 +308,11 @@ local function DoAreaBurn(inst)
     for i, v in ipairs(ents) do
         if not (v.components.follower ~= nil and v.components.follower:GetLeader() ~= nil and v.components.follower:GetLeader():HasTag("player")) then
             if inst.components.propagator ~= nil and v.components.combat ~= nil and v.components.health ~= nil and (v:HasTag("bird_mutant") or not v:HasTag("bird")) then
-				if v.components.sleeper ~= nil and v.components.sleeper:IsAsleep() then
-					v.components.sleeper:WakeUp()
-				end
+                if v.components.sleeper ~= nil and v.components.sleeper:IsAsleep() then
+                    v.components.sleeper:WakeUp()
+                end
 
-				v.components.health:DoDelta(-8, inst.attacker)
+                v.components.health:DoDelta(-8, inst.attacker)
                 SpawnPrefab("halloween_firepuff_1").Transform:SetPosition(v.Transform:GetWorldPosition())
 
                 --v:PushEvent("onignite")
@@ -355,8 +346,8 @@ local function OnHit_Obsidian(inst, attacker, target)
         inst.powerlevel = inst.powerlevel + 1
         target:PushEvent("wixiebite")
     end
-	
-	inst.attacker = attacker
+
+    inst.attacker = attacker
 
     DealDamage(inst, attacker, target)
     ImpactFx(inst, attacker, target)

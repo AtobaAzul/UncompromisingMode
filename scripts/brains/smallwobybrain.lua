@@ -194,7 +194,7 @@ local function HasWobyTarget(inst)
 			inst.wobytarget:IsValid() and not
 			inst.wobytarget:HasTag("outofreach") and not
 			inst.wobytarget:HasTag("INLIMBO") and
-			(inst.wobytarget:IsOnPassablePoint() ~= nil and inst.wobytarget:IsOnPassablePoint() or TestForIA()) and
+			(TUNING.DSTU.ISLAND_ADVENTURES or inst.wobytarget:IsOnPassablePoint() ~= nil and inst.wobytarget:IsOnPassablePoint()) and
 			-- is my pal walter near?
 			(inst.components.follower.leader ~= nil and
             inst:IsNear(inst.components.follower.leader, 25)) and
@@ -219,7 +219,7 @@ local function DoTargetAction(inst)
 			inst.wobytarget:IsValid() and not
 			inst.wobytarget:HasTag("outofreach") and not
 			inst.wobytarget:HasTag("INLIMBO") and
-			(inst.wobytarget:IsOnPassablePoint() ~= nil and inst.wobytarget:IsOnPassablePoint() or TestForIA()) and
+			(TUNING.DSTU.ISLAND_ADVENTURES or inst.wobytarget:IsOnPassablePoint() ~= nil and inst.wobytarget:IsOnPassablePoint()) and
 			-- is my pal walter near?
 			(inst.components.follower.leader ~= nil and
             inst:IsNear(inst.components.follower.leader, 25)) and
@@ -244,7 +244,7 @@ local function DoTargetAction(inst)
 end
 
 local function HasSitTarget(inst)
-    return inst.wobytarget ~= nil and inst.wobytarget:HasTag("wobysittarget") and (inst.wobytarget:IsOnPassablePoint() or TestForIA()) or nil
+    return inst.wobytarget ~= nil and inst.wobytarget:HasTag("wobysittarget") and (TUNING.DSTU.ISLAND_ADVENTURES or inst.wobytarget:IsOnPassablePoint()) or nil
 end
 
 local function GoSitAction(inst)

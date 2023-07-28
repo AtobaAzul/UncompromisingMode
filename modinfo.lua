@@ -6,7 +6,7 @@ if not folder_name:find("workshop-") then
 end
 
 description = [[
-󰀔 [ Version 1.0.2.3: "Under the Weather Pt.1" ]
+󰀔 [ Version 1.0.2.7: "Under the Weather Pt.1" ]
 
 Uncompromising Mode increases the risk and reward for those who have mastered Don't Starve Together.
 
@@ -20,7 +20,7 @@ Latest update features:
 
 author = "󰀈 The Uncomp Dev Team 󰀈"
 
-version = "Under the Weather Pt.1 v1.0.2.3"
+version = "Under the Weather Pt.1 v1.0.2.7"
 -- VERSION SCHEME
 -- first num is major release (e.g. "Under the weather", so, 2, UTW2 will be 3, and so on.) DO NOT BRING THIS NUMBER *DOWN* AGAIN PLEASE
 -- second is new content (something like a new large addition)
@@ -844,6 +844,8 @@ configuration_options = {
         "Eye of Terror and the Twins have new attacks, inspired by their Terraria counterparts.", true),
     BinaryConfig("reworked_ck", "Reworked Crab King",
         "Crab King has his main attack altered, freeze removed, and some new mechanics.", true),
+    BinaryConfig("changed_shadowpieces", "Shadow Pieces tweaks",
+		"Shadow Bishop has a different attack and Shadow Knight had his values changed.", true),
     SkipSpace(),
 
     Header("Boss Quality of Life"),

@@ -411,21 +411,13 @@ local function slipperymarblesfn()
 								local ground = TheWorld.Map:IsPassableAtPoint(dx, dy, dz)
 								local boat = TheWorld.Map:GetPlatformAtPoint(dx, dz)
 								local ocean = TheWorld.Map:IsOceanAtPoint(dx, dy, dz)
-								local on_water = nil
-																					
-								if TUNING.DSTU.ISLAND_ADVENTURES then
-									on_water = IsOnWater(dx, dy, dz)
-								end
-								
 								if not (v.sg ~= nil and (v.sg:HasStateTag("swimming") or v.sg:HasStateTag("invisible"))) then	
 									if v ~= nil and v.components.locomotor ~= nil and dx ~= nil and (ground or boat or ocean and v.components.locomotor:CanPathfindOnWater() or v.components.tiletracker ~= nil and not v:HasTag("whale")) then
-										if not v:HasTag("aquatic") and not on_water or v:HasTag("aquatic") and on_water then
 											--[[if ocean and v.components.amphibiouscreature and not v.components.amphibiouscreature.in_water then
 												v.components.amphibiouscreature:OnEnterOcean()
 											end]]
 											
 											v.Transform:SetPosition(dx, dy, dz)
-										end
 									end
 								end
 							end

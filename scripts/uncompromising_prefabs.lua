@@ -425,4 +425,5 @@ return {
 	"um_blowdart_pyre",
 	
 	"um_preparedfoods",
+	"um_foliage",
 }

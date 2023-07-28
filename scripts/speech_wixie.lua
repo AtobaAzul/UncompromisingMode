@@ -849,6 +849,34 @@ return{
     ANNOUNCE_COZY_SLEEP = "Oh, so this wasn't a dream after all...",
 	
 	ANNOUNCE_TOOL_TOOWEAK = "Loathed as a I am to say it, we need a stronger tool!",
+
+    ANNOUNCE_LUNAR_RIFT_MAX = "Oh, neat. You don't see that every day.",
+    ANNOUNCE_SHADOW_RIFT_MAX = "A dark, scary, cramped hole in the ground. What's not to love...?",
+
+    ANNOUNCE_SCRAPBOOK_FULL = "I already know everything, stop trying to teach me!",
+
+    ANNOUNCE_COACH = 
+    {
+        "only_used_by_wolfgang",
+        "only_used_by_wolfgang",
+        "only_used_by_wolfgang",
+        "only_used_by_wolfgang",
+        "only_used_by_wolfgang",
+        "only_used_by_wolfgang",
+        "only_used_by_wolfgang",
+        "only_used_by_wolfgang",
+        "only_used_by_wolfgang",
+    },
+    ANNOUNCE_WOLFGANG_WIMPY_COACHING = "only_used_by_wolfgang",
+    ANNOUNCE_WOLFGANG_MIGHTY_COACHING = "only_used_by_wolfgang",
+    ANNOUNCE_WOLFGANG_BEGIN_COACHING = "only_used_by_wolfgang",
+    ANNOUNCE_WOLFGANG_END_COACHING = "only_used_by_wolfgang",
+    ANNOUNCE_WOLFGANG_NOTEAM = 
+    {
+        "only_used_by_wolfgang",
+        "only_used_by_wolfgang",
+        "only_used_by_wolfgang",
+    },
 	
 	BATTLECRY =
 	{
@@ -4517,6 +4545,9 @@ return{
         DUMBBELL_GEM = "I wouldn't want to waste perfectly good gems by throwing this thing around!",
         POTATOSACK = "One hundred percent sack, zero percent potato.",
 
+        DUMBBELL_HEAT = "Does that guy EVER stop working out?",
+        DUMBBELL_REDGEM = "That's one way to lie about 'working up a sweat'.",
+        DUMBBELL_BLUEGEM = "I think he's got an addiction.",
 
         TERRARIUMCHEST = 
 		{
@@ -4767,16 +4798,19 @@ return{
         PUREBRILLIANCE = "Turn that light off! You're going to blind me!",
         LUNARPLANT_HUSK = "Can I eat it? No? Oh well.",
 
-		LUNAR_FORGE = "Let's make something, Woby!",
-		LUNAR_FORGE_KIT = "Woby and I can have that set up in a jiffy!",
+		LUNAR_FORGE = "I don't trust that stinkin' moon!",
+		LUNAR_FORGE_KIT = "I guess I'm a little curious...",
 
+		LUNARPLANT_KIT = "Why fix it? I'm just going to break it again!",
 		ARMOR_LUNARPLANT = "It's not my style.",
 		LUNARPLANTHAT = "A knight, with no steed in sight...",
 		BOMB_LUNARPLANT = "Bombs? You want em'?", -- :)
 		STAFF_LUNARPLANT = "Hey, that's my idea!",
 		SWORD_LUNARPLANT = "I'm not really a *sword* person.",
 		PICKAXE_LUNARPLANT = "For percise work, or messy destruction!",
-		SHOVEL_LUNARPLANT = "Your power over dirt is mine to command!",
+		SHOVEL_LUNARPLANT = "What a stupid name!",
+
+		BROKEN_FORGEDITEM = "Oops! He-he-he...",
 
         PUNCHINGBAG = "I love a target that can't fight back!",
 
@@ -4790,6 +4824,7 @@ return{
         FUSED_SHADELING_BOMB = "Get away from me you creep!",
 
 		VOIDCLOTH = "Tattered tatters.",
+		VOIDCLOTH_KIT = "Why fix it? I'm just going to break it again!",
 		VOIDCLOTHHAT = "Seems dark and stuffy in there.",
 		ARMOR_VOIDCLOTH = "The chains rattle around all creepy like!",
 
@@ -4807,6 +4842,34 @@ return{
         DREADSTONE_STACK = "A whole lotta rock.",
         
         SCRAPBOOK_PAGE = "Another page in my book of victories!",
+
+        LEIF_IDOL = "Something's telling me not to burn it... No one tells me what to do!",
+        WOODCARVEDHAT = "Who carved this? It... it sucks!",
+        WALKING_STICK = "What a stupid... giraffe?",
+
+        IPECACSYRUP = "Gross! Get that away from me!",
+        BOMB_LUNARPLANT_WORMWOOD = "Bombs? You want em'?", -- Unused
+        WORMWOOD_MUTANTPROXY_CARRAT =
+        {
+        	DEAD = "Is it okay to eat now?",
+        	GENERIC = "Food shouldn't run away!",
+        	HELD = "I can feel it squirming in my pocket.",
+        	SLEEPING = "Now it's just like a regular old carrot.",
+        },
+        WORMWOOD_MUTANTPROXY_LIGHTFLIER = "Hey, watch it! No crowding!",
+		WORMWOOD_MUTANTPROXY_FRUITDRAGON =
+		{
+			GENERIC = "We have a lot in common. Except being green.",
+			RIPE = "You come in RED?!",
+			SLEEPING = "Let sleeping salads lie.",
+		},
+
+        SUPPORT_PILLAR_SCAFFOLD = "What are you hiding?",
+        SUPPORT_PILLAR = "I think someone broke it. Someone who isn't me.",
+        SUPPORT_PILLAR_COMPLETE = "Oh, it's some rocks.",
+        SUPPORT_PILLAR_BROKEN = "Not much of a pillar anymore.",
+
+        WOLFGANG_WHISTLE = "Quit it with that awful noise!",
     },
 
     DESCRIBE_GENERIC = "That sure is... something!",

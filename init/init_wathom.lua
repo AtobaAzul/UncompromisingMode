@@ -111,7 +111,6 @@ local function ConfigureRunState(inst)
 
 		local mount = inst.components.rider:GetMount()
 		inst.sg.statemem.ridingwoby = mount and mount:HasTag("woby")
-
 	elseif inst.components.inventory ~= nil and inst.components.inventory:IsHeavyLifting() then
 		inst.sg.statemem.heavy = true
 		inst.sg.statemem.heavy_fast = inst.components.mightiness ~= nil and inst.components.mightiness:IsMighty()
@@ -150,7 +149,7 @@ AddStategraphPostInit("wilson", function(inst)
 	local _RunOnEnter = inst.states["run_start"].onenter
 
 	local function NewOnEnter(inst)
-		if inst:HasTag("wathom") and inst:HasTag("wathomrun") and inst.components.rider ~= nil and not inst.components.rider:IsRiding() or inst:HasTag("wathom") and inst:HasTag("wathomrun")then
+		if inst:HasTag("wathom") and inst:HasTag("wathomrun") and inst.components.rider ~= nil and not inst.components.rider:IsRiding() or inst:HasTag("wathom") and inst:HasTag("wathomrun") and inst.components.rider == nil then
 			inst.sg.mem.footsteps = 0
 			inst.sg:GoToState("run_wathom")
 			return
@@ -170,7 +169,7 @@ AddStategraphPostInit("wilson", function(inst)
 			function(inst, action)
 				if inst._cantbarkcdtask == nil and
 					(
-					inst.components.adrenaline ~= nil and inst.components.adrenaline:GetPercent() < 0.5 or
+						inst.components.adrenaline ~= nil and inst.components.adrenaline:GetPercent() < 0.5 or
 						inst.replica ~= nil and inst.replica.currentadrenaline < 5) and not inst:HasTag("amped") then
 					inst._cantbarkcdtask = inst:DoTaskInTime(5, OnCooldownCantBark)
 					return "cantbark"
@@ -182,7 +181,7 @@ AddStategraphPostInit("wilson", function(inst)
 					return "wathombark"
 				elseif inst._barkcdtask == nil and
 					(
-					inst.components.adrenaline ~= nil and inst.components.adrenaline:GetPercent() >= 0.5 or
+						inst.components.adrenaline ~= nil and inst.components.adrenaline:GetPercent() >= 0.5 or
 						inst.replica ~= nil and inst.replica.currentadrenaline >= 50) then
 					inst._barkcdtask = inst:DoTaskInTime(12, OnCooldownBark)
 					return "wathombark"
@@ -213,13 +212,12 @@ AddStategraphPostInit("wilson", function(inst)
 
 				--V2C: adding half a frame time so it rounds up
 				inst.sg:SetTimeout(inst.AnimState:GetCurrentAnimationLength() + .5 * FRAMES)
-
 			end,
 
 			timeline =
 			{
-				TimeEvent(6*FRAMES, function(inst) GLOBAL.PlayFootstep(inst, 0.5)  end),
-				TimeEvent(7*FRAMES, function(inst) GLOBAL.PlayFootstep(inst, 0.5) end),
+				TimeEvent(6 * FRAMES, function(inst) GLOBAL.PlayFootstep(inst, 0.5) end),
+				TimeEvent(7 * FRAMES, function(inst) GLOBAL.PlayFootstep(inst, 0.5) end),
 			},
 
 			onupdate = function(inst)
@@ -387,7 +385,7 @@ AddStategraphPostInit("wilson", function(inst)
 			{
 				TimeEvent(12 * FRAMES, function(inst)
 					inst.SoundEmitter:PlaySound("wathomcustomvoice/wathomvoiceevent/leap") --place your funky sounds here
-				end), --bark twice.
+				end),                                                       --bark twice.
 			},
 			events =
 			{
@@ -422,7 +420,6 @@ AddStategraphPostInit("wilson", function(inst)
 				if inst.components.playercontroller ~= nil then
 					inst.components.playercontroller:RemotePausePrediction()
 				end
-
 			end,
 
 			onexit = function(inst)
@@ -506,7 +503,7 @@ AddStategraphPostInit("wilson", function(inst)
 					inst.sg:RemoveStateTag("nointerrupt")
 					inst.sg:RemoveStateTag("pausepredict")
 					inst.sg:AddStateTag("idle")
-					inst.leapvelocity = 0 -- Stops Wathom's sliding.
+					inst.leapvelocity = 0                   -- Stops Wathom's sliding.
 					inst.Physics:Stop()
 					inst.Physics:CollidesWith(GLOBAL.COLLISION.CHARACTERS) -- Re-enabling Wathom's normal collision.
 					inst.components.playercontroller:Enable(true)
@@ -536,13 +533,11 @@ AddStategraphPostInit("wilson", function(inst)
 		GLOBAL.assert(v:is_a(GLOBAL.ActionHandler), "Non-action added in mod state table!")
 		inst.actionhandlers[v.action] = v
 	end
-
 end)
 
 --client. Uses a "pre" as this should only be used if there's lag.
 
 AddStategraphPostInit("wilson_client", function(inst)
-
 	local _RunOnEnter = inst.states["run_start"].onenter
 
 	local function NewOnEnter(inst)
@@ -765,14 +760,14 @@ local wathombark = AddAction(
 			for i, v in ipairs(ents) do
 				if v.components.hauntable ~= nil and v.components.hauntable.panicable and not
 					(
-					v.components.follower ~= nil and v.components.follower:GetLeader() and
+						v.components.follower ~= nil and v.components.follower:GetLeader() and
 						v.components.follower:GetLeader():HasTag("player")) then
 					v.components.hauntable:Panic(10) -- Fallback to TUNING.BATTLESONG_PANIC_TIME (6 seconds) if needed
 					AddEnemyDebuffFx("battlesong_instant_panic_fx", v)
 				end
 				if v.components.hauntable == nil or
 					v.components.hauntable ~= nil and not v.components.hauntable.panicable and not (
-					v.components.follower ~= nil and v.components.follower:GetLeader() and
+						v.components.follower ~= nil and v.components.follower:GetLeader() and
 						v.components.follower:GetLeader():HasTag("player")) and not v:HasTag("player") then
 					if not v:HasTag("bird") and v.components.combat then
 						v.components.combat:SetTarget(act.doer)
@@ -783,17 +778,17 @@ local wathombark = AddAction(
 			--also scare enemies near wathom, at a smaller radius
 			local x, y, z = act.doer.Transform:GetWorldPosition()
 			ents = GLOBAL.TheSim:FindEntities(x, y, z, 4, { "_combat" },
-				{ "companion", "INLIMBO", "notarget", "player", "playerghost", "wall", "abigail", "shadow", "trap"}) --added playertags because of the taunt.
+				{ "companion", "INLIMBO", "notarget", "player", "playerghost", "wall", "abigail", "shadow", "trap" }) --added playertags because of the taunt.
 			for i, v in ipairs(ents) do
 				if v.components.hauntable ~= nil and v.components.hauntable.panicable and not
 					(
-					v.components.follower ~= nil and v.components.follower:GetLeader() and
+						v.components.follower ~= nil and v.components.follower:GetLeader() and
 						v.components.follower:GetLeader():HasTag("player")) then
 					v.components.hauntable:Panic(8) -- Fallback to TUNING.BATTLESONG_PANIC_TIME (6 seconds) if needed
 				end
 				if v.components.hauntable == nil or
 					v.components.hauntable ~= nil and not v.components.hauntable.panicable and not (
-					v.components.follower ~= nil and v.components.follower:GetLeader() and
+						v.components.follower ~= nil and v.components.follower:GetLeader() and
 						v.components.follower:GetLeader():HasTag("player")) and not v:HasTag("player") then
 					if not v:HasTag("bird") and v.components.combat then
 						v.components.combat:SetTarget(act.doer)
@@ -858,7 +853,7 @@ local function AmpbadgeDisplays(self)
 
 		self.combinedmod = GetModName("Combined Status")
 
-        self.adrenaline = self:AddChild(ampbadge(self.owner))
+		self.adrenaline = self:AddChild(ampbadge(self.owner))
 
 		if self.combinedmod ~= nil then
 			self.brain:SetPosition(0, 35, 0)
@@ -875,7 +870,7 @@ local function AmpbadgeDisplays(self)
 			self.adrenaline.bg:SetPosition(-.5, -40, 0)
 
 			if self.boatmeter then
-				self.boatmeter:SetPosition(-124 , -52)
+				self.boatmeter:SetPosition(-124, -52)
 			end
 
 			self.adrenaline.num:SetFont(NUMBERFONT)

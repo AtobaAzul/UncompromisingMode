@@ -197,6 +197,23 @@ local um_preparedfoods =
 		card_def = {ingredients = {{"wobster_sheller_land", 1}, {"rice", 1}, {"carrot", 1}}},
 	},
 	
+	simpsalad =
+	{
+		test = function(cooker, names, tags)
+			return tags.foliage and tags.foliage > 1 and
+				not (tags.frozen and tags.frozen >= 1 and tags.sweetener and tags.sweetener >= 1)
+		end,
+		hunger = 4.9,
+		health = 1,
+		sanity = 1,
+		priority = 53,
+		weight = 20,
+		cooktime = 0.4,
+		foodtype = FOODTYPE.VEGGIE,
+		perishtime = 2 * TUNING.PERISH_TWO_DAY,
+		floater = {"med", 0.05, 0.65},
+	},
+	
 	snotroast =
 	{
 		test = function(cooker, names, tags)

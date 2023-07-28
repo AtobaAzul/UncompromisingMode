@@ -56,7 +56,7 @@ local function RightClickPicker(inst, target, pos)
 
 	return target ~= nil and
 			target ~= inst and
-			(inst:GetCurrentPlatform() == nil and not target:HasTag("outofreach") and target:IsOnPassablePoint() or target:HasTag("_combat")) and not
+			(inst:GetCurrentPlatform() == nil and not target:HasTag("outofreach") and (TUNING.DSTU.ISLAND_ADVENTURES or target:IsOnPassablePoint()) or target:HasTag("_combat")) and not
 			target:HasTag("woby") and not
 			target:HasTag("customwobytag") and not
 			target:HasTag("shadow") and not
@@ -135,6 +135,7 @@ env.AddPrefabPostInit("walter", function(inst)
 	inst:AddTag("polite")
 	inst:RemoveTag("pebblemaker")
 	inst:RemoveTag("slingshot_sharpshooter")
+	inst:RemoveTag("allow_special_point_action_on_impassable")
 	
     inst:ListenForEvent("setowner", OnSetOwner)
 	

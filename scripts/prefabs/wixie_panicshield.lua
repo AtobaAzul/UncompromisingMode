@@ -1,6 +1,6 @@
 local assets =
 {
-    Asset("ANIM", "anim/stalker_shield.zip"),
+	Asset("ANIM", "anim/stalker_shield.zip"),
 }
 
 local SLEEPREPEL_MUST_TAGS = { "_combat" }
@@ -15,7 +15,7 @@ local function StartRepel(inst)
 		for i, v in ipairs(ents) do
 			if v.components.combat ~= nil then
 				--v.components.combat:GetAttacked(inst.host, 0, nil)
-				v:PushEvent("attacked", {attacker = inst.host, damage = 0, weapon = nil})
+				v:PushEvent("attacked", { attacker = inst.host, damage = 0, weapon = nil })
 			end
 
 			if v.components.locomotor ~= nil and not v:HasTag("stageusher") and (v.sg ~= nil and not v.sg:HasStateTag("noshove") or v.sg == nil) then
@@ -37,21 +37,14 @@ local function StartRepel(inst)
 								local ground = TheWorld.Map:IsPassableAtPoint(dx, dy, dz)
 								local boat = TheWorld.Map:GetPlatformAtPoint(dx, dz)
 								local ocean_collision = TheWorld.Map:IsOceanAtPoint(dx, dy, dz)
-								local on_water = nil
-
-								if TUNING.DSTU.ISLAND_ADVENTURES then
-									on_water = IsOnWater(dx, dy, dz)
-								end
 
 								if not (v.sg ~= nil and (v.sg:HasStateTag("swimming") or v.sg:HasStateTag("invisible"))) then
 									if v ~= nil and dx ~= nil and (ground or boat or ocean_collision and v.components.locomotor:CanPathfindOnWater() or v.components.tiletracker ~= nil and not v:HasTag("whale")) then
-										if not v:HasTag("aquatic") and not on_water or v:HasTag("aquatic") and on_water then
-											--[[if ocean_collision and v.components.amphibiouscreature and not v.components.amphibiouscreature.in_water then
+										--[[if ocean_collision and v.components.amphibiouscreature and not v.components.amphibiouscreature.in_water then
 												v.components.amphibiouscreature:OnEnterOcean()
 											end]]
 
-											v.Transform:SetPosition(dx, dy, dz)
-										end
+										v.Transform:SetPosition(dx, dy, dz)
 									end
 								end
 							end
@@ -75,7 +68,7 @@ local function fn()
 
 	inst.AnimState:SetBank("stalker_shield")
 	inst.AnimState:SetBuild("stalker_shield")
-	inst.AnimState:PlayAnimation("idle"..math.random(3))
+	inst.AnimState:PlayAnimation("idle" .. math.random(3))
 	inst.AnimState:SetFinalOffset(2)
 	--inst.AnimState:SetScale(1, 1, 1)
 
