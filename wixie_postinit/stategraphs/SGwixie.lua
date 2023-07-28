@@ -409,7 +409,7 @@ env.AddStategraphPostInit("wilson", function(inst)
 
 		State {
 			name = "slingshot_charge",
-			tags = { "abouttoattack" },
+			tags = { "abouttoattack", "notalking" },
 
 			onenter = function(inst)
 				inst.sg.slingshot_charge = true
@@ -673,7 +673,7 @@ env.AddStategraphPostInit("wilson", function(inst)
 
 		State {
 			name = "slingshot_cast",
-			tags = { "attack" },
+			tags = { "attack", "notalking" },
 
 			onenter = function(inst)
 				if inst.components.combat:InCooldown() then
