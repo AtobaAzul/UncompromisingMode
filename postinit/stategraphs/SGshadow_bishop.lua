@@ -129,7 +129,7 @@ env.AddStategraphPostInit("shadow_bishop", function(inst) --First time properly 
                     inst.sg.statemem.speed = scale[inst.level]
                     if inst:IsNear(target, .5) then
                         inst.Physics:Stop()
-                    else
+                    elseif inst.sg.statemem.target and inst.sg.statemem.target:IsValid() then
                         inst.sg.statemem.charge_delay = true
                         inst:ForceFacePoint(inst.sg.statemem.target.Transform:GetWorldPosition())
                         inst:DoTaskInTime(0.5, function(inst)
