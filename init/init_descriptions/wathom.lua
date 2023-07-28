@@ -62,7 +62,14 @@ DESCRIBE.WINKY = {
     GHOST = "%s, dead.",
     FIRESTARTER = "Problems, rodent-instigated, increasing constantly."
 }
-
+DESCRIBE.WIXIE = {
+    GENERIC = "Problems, often cause.",
+    ATTACKER = "Pick elsewhere, your fights.",
+    MURDERER = "With poor aim, slingshot ineffective!",
+    REVIVER = "You are bearable.",
+    GHOST = "Pick your fights, %s. Skill, valuable.",
+    FIRESTARTER = "Liabilities, mounting."
+}
 DESCRIBE.WATHOM = {
     GENERIC = "%s, meaning? Maker's replacement?",
     ATTACKER = "%s, self-sabotaging.",
