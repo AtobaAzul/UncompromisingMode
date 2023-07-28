@@ -134,7 +134,9 @@ env.AddStategraphPostInit("shadow_bishop", function(inst) --First time properly 
                         inst:ForceFacePoint(inst.sg.statemem.target.Transform:GetWorldPosition())
                         inst:DoTaskInTime(0.5, function(inst)
                             inst.sg.statemem.charge_delay = nil
-                            inst:ForceFacePoint(inst.sg.statemem.target.Transform:GetWorldPosition())
+                            if inst.sg.statemem.target and inst.sg.statemem.target:IsValid() then
+                                inst:ForceFacePoint(inst.sg.statemem.target.Transform:GetWorldPosition())
+                            end
                         end) --added delay for reacting
                     end
                 end
@@ -144,7 +146,7 @@ env.AddStategraphPostInit("shadow_bishop", function(inst) --First time properly 
                 inst.sg.statemem.task = inst:DoPeriodicTask(0.15, DoSwarmAttack, TUNING.SHADOW_BISHOP.ATTACK_START_TICK)
                 inst.sg.statemem.fxtask = inst:DoPeriodicTask(0.25, DoSwarmFX, .5) --moves a lot faster so should probably check for targets nearby faster too (and fx is pretty with this amount)
 
-                inst.sg:SetTimeout(50 * FRAMES)                                --seems a bit long for earlier levels, should this dynamically scale too?
+                inst.sg:SetTimeout(50 * FRAMES)                                    --seems a bit long for earlier levels, should this dynamically scale too?
             end,
 
             onupdate = function(inst)
