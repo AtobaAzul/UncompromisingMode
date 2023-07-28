@@ -182,26 +182,6 @@ GLOBAL.ACTIONS.USESPELLBOOK.strfn = function(act)
     return target:HasTag("telestaff") and "TELESTAFF" or _UseSpellBookStrFn ~= nil and _UseSpellBookStrFn(act) or "BOOK"
 end
 
-local _RepairFn = GLOBAL.ACTIONS.REPAIR.fn
-
-GLOBAL.ACTIONS.REPAIR.fn = function(act)
-    if act.target ~= nil and act.target.components.repairable ~= nil then
-        local material
-
-        if act.doer ~= nil and act.doer.components.inventory ~= nil and act.doer.components.inventory:IsHeavyLifting() and not (act.doer.components.rider ~= nil and act.doer.components.rider:IsRiding()) then
-            material = act.doer.components.inventory:GetEquippedItem(GLOBAL.EQUIPSLOTS.BODY)
-        else
-            material = act.invobject
-        end
-
-        if material ~= nil and material.prefab == "boatpatch_sludge" then
-            return
-        else
-            return _RepairFn(act)
-        end
-    end
-end
-
 local SET_CUSTOM_NAME = GLOBAL.Action({distance = 2, mount_valid = true})
 SET_CUSTOM_NAME.id = "SET_CUSTOM_NAME"
 SET_CUSTOM_NAME.str = STRINGS.ACTIONS.SET_CUSTOM_NAME
