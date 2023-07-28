@@ -21,14 +21,14 @@ ANNOUNCE.ANNOUNCE_ATTACH_BUFF_LESSERELECTRICATTACK =
     ANNOUNCE.ANNOUNCE_ATTACH_BUFF_ELECTRICATTACK
 ANNOUNCE.ANNOUNCE_ATTACH_BUFF_ELECTRICRETALIATION =
     ANNOUNCE.ANNOUNCE_ATTACH_BUFF_ELECTRICATTACK
-ANNOUNCE.ANNOUNCE_ATTACH_BUFF_FROZENFURY = "ssSsooo cCccold"
+ANNOUNCE.ANNOUNCE_ATTACH_BUFF_FROZENFURY = "Aaah, feelin' like I'm back home."
 ANNOUNCE.ANNOUNCE_ATTACH_BUFF_VETCURSE =
 "Another curse? I'll throw it on the pile."
 ANNOUNCE.ANNOUNCE_DETACH_BUFF_LESSERELECTRICATTACK =
     ANNOUNCE.ANNOUNCE_DETACH_BUFF_ELECTRICATTACK
 ANNOUNCE.ANNOUNCE_DETACH_BUFF_ELECTRICRETALIATION =
     ANNOUNCE.ANNOUNCE_DETACH_BUFF_ELECTRICATTACK
-ANNOUNCE.ANNOUNCE_DETACH_BUFF_FROZENFURY = "Feeling better now"
+ANNOUNCE.ANNOUNCE_DETACH_BUFF_FROZENFURY = "Is it getting hotter around here?"
 -- FoodBuffs
 
 -- CaliforniaKing
@@ -39,15 +39,15 @@ DESCRIBE.CALIFORNIAKING = "That better not be what I think it is."
 
 ANNOUNCE.ANNOUNCE_RNEFOG = "I'm not sure aboot this..."
 DESCRIBE.UNCOMPROMISING_RAT = "More vermin come to steal my kit!"
-DESCRIBE.UNCOMPROMISING_RATHERD = "That's where the varments are shackin' up!"
-DESCRIBE.UNCOMPROMISING_RATBURROW = "That's where the varments are shackin' up!"
-DESCRIBE.UNCOMPROMISING_WINKYBURROW = "This one looks like it's gonna collaspe."
+DESCRIBE.UNCOMPROMISING_RATHERD = "That's where the varmints are shackin' up!"
+DESCRIBE.UNCOMPROMISING_RATBURROW = "That's where the varmints are shackin' up!"
+DESCRIBE.UNCOMPROMISING_WINKYBURROW = "This one looks like it's gonna collapse."
 DESCRIBE.UNCOMPROMISING_WINKYHOMEBURROW =
 "It's the big rats home, nice of them to help out, eh?"
 
 DESCRIBE.WINKY = {
     GENERIC = "Are you cursed like me, %s?",
-    ATTACKER = "The only one who gnaws on logs here is me!",
+    ATTACKER = "What do you think yer up to, %s?",
     MURDERER = "Keep your teeth to yourself, %s!",
     REVIVER = "I love these critters!",
     GHOST = "Save the woodland animals!",
@@ -91,14 +91,14 @@ ANNOUNCE.ANNOUNCE_SNEEZE = "Achoo! Excuse me. Sorry."
 ANNOUNCE.ANNOUNCE_HAYFEVER = "You have allergies like me, Lucy?"
 ANNOUNCE.ANNOUNCE_HAYFEVER_OFF = "Ah! Clean air again."
 ANNOUNCE.ANNOUNCE_FIREFALL = {
-    "Cool it, hozer!", "Fires A comin', Save the trees!",
+    "Cool it, hoser!", "Fire's a comin', brace Lucy!",
     "This is nothing like Canadian weather!"
 }
 ANNOUNCE.ANNOUNCE_ROOTING = "You're up, Lucy!"
 ANNOUNCE.ANNOUNCE_SNOWSTORM =
-"Storms a brewin'. Don't worry Lucy, I'll hold on tight."
+"Storm's a brewin'. Don't worry Lucy, I'll hold on tight."
 ANNOUNCE.SHADOWTALKER = {
-    "THEY DON'T TRUST ME", "THEY THINK IM CRAZY", "SHES ALL I HAVE LEFT"
+    "THE CURSE GNAWS AWAY", "THEY THINK IM CRAZY", "SHES ALL I HAVE LEFT"
 }
 ANNOUNCE.ANNOUNCE_OVER_EAT = {
     STUFFED = "Feels like my first thanksgiving.",
@@ -127,7 +127,7 @@ DESCRIBE.HOODEDTRAPDOOR = "Familiar, eh?"
 DESCRIBE.WICKER_TENTACLE = "Lookin' a bit green, eh?"
 DESCRIBE.HONEY_LOG = "It's... been awhile since I've had a taste."
 
-DESCRIBE.BUSHCRAB = "Farm from a freshwater."
+DESCRIBE.BUSHCRAB = "Huh. A surprise supper."
 DESCRIBE.LAVAE2 = DESCRIBE.LAVAE
 DESCRIBE.DISEASECUREBOMB = "Aboot time the moon started doing me some favors."
 DESCRIBE.SHROOM_SKIN_FRAGMENT =
@@ -169,19 +169,19 @@ DESCRIBE.POLLENMITES = "Lotta those guys in the lumber camps."
 DESCRIBE.SHADOW_CROWN = "I ain't a king of nothing, least of which fools."
 DESCRIBE.RNEGHOST = DESCRIBE.GHOST
 DESCRIBE.TRAPDOORGRASS = DESCRIBE.GRASS
-DESCRIBE.LUREPLAGUE_RAT = "Not comin for kit this time, eh?"
-DESCRIBE.MARSH_GRASS = "It's a bush, eh."
+DESCRIBE.LUREPLAGUE_RAT = "Not comin' for kit this time, eh?"
+DESCRIBE.MARSH_GRASS = "That's an awfully tall bush, eh?"
 DESCRIBE.CURSED_ANTLER = "This'll last us forever!"
 DESCRIBE.BERNIEBOX = "I'm not one for stuffed things."
 DESCRIBE.HOODED_FERN = "I love the outdoors."
-DESCRIBE.HOODEDWIDOW = "You can have the trees!!"
+DESCRIBE.HOODEDWIDOW = "That ain't no normal spider."
 DESCRIBE.GIANT_TREE = "That's a real beaut."
 DESCRIBE.ANCIENTHOODEDTURF = DESCRIBE.TURF_FOREST
 DESCRIBE.HOODEDMOSS = DESCRIBE.TURF_FOREST
 DESCRIBE.WIDOWSGRASP = "Maybe this could rip open those cocoons, eh?"
 DESCRIBE.WEBBEDCREATURE =
 "Should I really put my neck out to find out what it has?"
-ANNOUNCE.WEBBEDCREATURE = "Not even a moose can break it. Maybe a spider could?"
+ANNOUNCE.WEBBEDCREATURE = "This ain't a cocoon Luce'll be choppin'. Best to leave 'em to the spiders."
 DESCRIBE.SNAPDRAGON_BUDDY = "This one seems friendly enough."
 DESCRIBE.SNAPDRAGON = "Seems like a well endowed bunch."
 DESCRIBE.SNAPPLANT = "Ah, the beauty of nature!"
@@ -203,7 +203,7 @@ DESCRIBE.BEEFALOWINGS = "Shew- that's hot!"
 ANNOUNCE.ANNOUNCE_ATTACH_BUFF_KNOCKBACKIMMUNE =
 "I'm standin' as stiff as a moose!"
 ANNOUNCE.ANNOUNCE_DETACH_BUFF_KNOCKBACKIMMUNE = "Well, that's over."
-DESCRIBE.WIDOWSHEAD = "Hmm, not bad!"
+DESCRIBE.WIDOWSHEAD = "Not bad if I do say so myself."
 DESCRIBE.HOODED_MUSHTREE_TALL = DESCRIBE.MUSHTREE_TALL
 DESCRIBE.HOODED_MUSHTREE_MEDIUM = DESCRIBE.MUSHTREE_MEDIUM
 DESCRIBE.HOODED_MUSHTREE_SMALL = DESCRIBE.MUSHTREE_SMALL
@@ -221,9 +221,9 @@ DESCRIBE.BLUEBERRYPLANT = {
 }
 DESCRIBE.BERNIE_INACTIVE = {
     BROKEN = "Poor lil thing.",
-    GENERIC = "Cute, isn't it 'Luce?",
+    GENERIC = "Cute, isn't it Luce?",
     ASHLEY_BROKEN = "Poor lil thing.",
-    ASHLEY = "Cute, isn't it 'Luce?"
+    ASHLEY = "Cute, isn't it Luce?"
 }
 
 DESCRIBE.BERNIE_ACTIVE = {
@@ -288,11 +288,11 @@ DESCRIBE.BLOWGUNAMMO_ELECTRIC = DESCRIBE.BLOWDART_YELLOW
 
 DESCRIBE.ANCIENT_AMULET_RED =
 "I can keep myself together if I get chopped to bits."
-DESCRIBE.UM_BEAR_TRAP = "Surprised they can lay em that fast."
+DESCRIBE.UM_BEAR_TRAP = "Surprised they can lay 'em that fast."
 DESCRIBE.UM_BEAR_TRAP_OLD = "Someone left their kit out."
 DESCRIBE.UM_BEAR_TRAP_EQUIPPABLE_TOOTH = "Dangerous game."
 DESCRIBE.UM_BEAR_TRAP_EQUIPPABLE_GOLD = "Dangerous game."
-DESCRIBE.CORNCAN = "I'll get at 'cha with lucy."
+DESCRIBE.CORNCAN = "I'll get at'cha with Lucy."
 DESCRIBE.SKULLCHEST_CHILD = "Who knew wood and magic made such a great pair!"
 
 DESCRIBE.SLOBBERLOBBER = "I'll never lose another spitting contest!"
@@ -334,18 +334,17 @@ DESCRIBE.ARMORLAVAE = DESCRIBE.LAVAE
 
 DESCRIBE.THEATERCORN = "Would be nice to eat it with some entertainment."
 DESCRIBE.DEERCLOPS_BARRIER = "It's tryin' to box us in."
-
-DESCRIBE.MOONMAW_DRAGONFLY = "Maybe my curse isn't so bad."
+DESCRIBE.MOONMAW_DRAGONFLY = "Huh. I don't got it as bad as you."
 DESCRIBE.MOONMAW_LAVAE = "Look out!"
 DESCRIBE.SNAPPERTURTLE = "I know better than to pet 'em."
 DESCRIBE.SNAPPERTURTLEBABY = "They'll still snap at'cha."
 DESCRIBE.SNAPPERTURTLENEST = ""
-DESCRIBE.GLASS_SCALES = "Well, would you look at that, Luce'!"
+DESCRIBE.GLASS_SCALES = "Well, would you look at that, Luce!"
 DESCRIBE.MOONGLASS_GEODE =
 "Don't want to hold onto it for too long, it might turn me, eh?"
 DESCRIBE.ARMOR_GLASSMAIL =
 "Is it worth the risk of having the moon so close to my body?"
-DESCRIBE.ARMOR_GLASSMAIL_SHARDS = "I'd hate to be on the receiving end."
+DESCRIBE.ARMOR_GLASSMAIL_SHARDS = "Best not be close to those."
 DESCRIBE.MOONMAW_GLASSSHARDS_RING = DESCRIBE.ARMOR_GLASSMAIL_SHARDS
 DESCRIBE.MOONMAW_GLASSSHARDS = DESCRIBE.ARMOR_GLASSMAIL_SHARDS
 DESCRIBE.MOONMAW_LAVAE_RING = DESCRIBE.MOONMAW_LAVAE
@@ -355,7 +354,7 @@ DESCRIBE.MUTATOR_TRAPDOOR = DESCRIBE.MUTATOR_WARRIOR
 DESCRIBE.WOODPECKER = "They're on to me!"
 DESCRIBE.SNOTROAST = "It'll be so messy..."
 ANNOUNCE.ANNOUNCE_ATTACH_BUFF_LARGEHUNGERSLOW = "It's all up in my beard!"
-ANNOUNCE.ANNOUNCE_DETACH_BUFF_LARGEHUNGERSLOW = ""
+ANNOUNCE.ANNOUNCE_DETACH_BUFF_LARGEHUNGERSLOW = "Ain't ever gonna eat like a pig again."
 DESCRIBE.BOOK_RAIN_UM = "I'd rather be chopping lumber than reading this."
 DESCRIBE.FLORAL_BANDAGE = "I'll keep this for dire circumstances."
 DESCRIBE.DORMANT_RAIN_HORN = "This is pretty nice, ain't it, Lucy?"
@@ -401,7 +400,7 @@ DESCRIBE.OCEAN_SPEAKER = "Ya think what it's saying is important, Lucy?"
 -- DESCRIBE.UM_SIREN = "Not half bad lookin' for an ocean critter, eh?"
 
 -- DESCRIBE.OCUPUS_BEAK = ""
-DESCRIBE.OCUPUS_TENTACLE = ""
+DESCRIBE.OCUPUS_TENTACLE = "Nope. I don't want anythin' to do with it."
 DESCRIBE.OCUPUS_TENTACLE_EYE = "I can't eat it while it's staring right at me."
 DESCRIBE.OCUPUS_TENTACLE_COOKED = "it's not that bad once peel back the skin."
 
@@ -414,26 +413,26 @@ DESCRIBE.EYEOFTERROR_MINI_ALLY =
 DESCRIBE.EYEOFTERROR_MINI_GROUNDED_ALLY = DESCRIBE.EYEOFTERROR_MINI_GROUNDED
 
 DESCRIBE.STUFFED_PEEPER_POPPERS = "This definitely won't go down right."
-DESCRIBE.UM_DEVILED_EGGS = "The birds true nature is revealed."
-DESCRIBE.LUSH_ENTRANCE = "Ya think there's something worth explorin' for, Lucy?"
+DESCRIBE.UM_DEVILED_EGGS = "The bird's true nature is revealed."
+DESCRIBE.LUSH_ENTRANCE = "Ya' think there's something worth explorin' for, Lucy?"
 DESCRIBE.CRITTER_FIGGY =
 "I ain't go no beef with ya' so long as you keep away from the trees, ya' hear?"
 DESCRIBE.GIANT_TREE_BIRDNEST =
-"I've got the perfect opportunity to snuff it out is sitting right there."
+"I've got the perfect opportunity to snuff it out."
 
 DESCRIBE.SLUDGE = "It's sludge, sure, but what kind of sludge?"
-DESCRIBE.SLUDGE_OIL = "I don't think that there is safe to breath in."
+DESCRIBE.SLUDGE_OIL = "I don't think that there is safe to breathe in."
 DESCRIBE.SLUDGE_SACK = "I prefer something less soggy."
 DESCRIBE.CANNONBALL_SLUDGE_ITEM =
-"A ball of crud, might as well shoot it somewhere."
+"A ball of crud."
 DESCRIBE.BOAT_BUMPER_SLUDGE = "My boat won't be scratched at least."
-DESCRIBE.BOAT_BUMBER_SLUDGE_KIT = "This sludge is real bouncy, eh."
+DESCRIBE.BOAT_BUMBER_SLUDGE_KIT = "This sludge is real bouncy, eh?"
 DESCRIBE.BOATPATCH_SLUDGE = "A little blemish, but she'll be fine."
 DESCRIBE.UM_COPPER_PIPE = "Smells like pennies."
 DESCRIBE.BRINE_BALM = "It hurts like a bee sting!" -- haha you thought he'd say bitch.
 DESCRIBE.UNCOMPROMISING_FISHINGNET = DESCRIBE.FISHINGNET
 DESCRIBE.UM_AMBER = "Eh, this stuff comes from trees, doesn't it?"
-DESCRIBE.UM_BEEGUN = "I wouldn't be too happy about this if it were me."
+DESCRIBE.UM_BEEGUN = "I wouldn't be too happy aboot this if it were me."
 DESCRIBE.BULLETBEE = DESCRIBE.KILLERBEE
 DESCRIBE.CHERRYBULLETBEE = DESCRIBE.KILLERBEE
 DESCRIBE.SUNKENCHEST_ROYAL_RANDOM = "No wonder he was a king."
@@ -452,7 +451,7 @@ DESCRIBE.BOAT_BUMPER_COPPER_KIT = "Not wood, but close enough."
 DESCRIBE.UM_DREAMCATCHER = "Haven't seen one of these in a while."
 DESCRIBE.UM_BRINEISHMOSS = "Eyup. Moss."
 DESCRIBE.UM_COALESCED_NIGHTMARE = "Someone must have had a bad dream."
-DESCRIBE.SLUDGE_CORK = "Carved for a big hole, eh."
+DESCRIBE.SLUDGE_CORK = "Carved for a big hole."
 DESCRIBE.SLUDGESTACK = "That ought to have some sort of use?"
 DESCRIBE.SPECTER_SHIPWRECK = "Wood gone down the drain."
 
@@ -482,7 +481,7 @@ DESCRIBE.CODEX_MANTRA = DESCRIBE.WAXWELLJOURNAL
 
 -- WIXIE RELATED STRINGS
 
-DESCRIBE.WIXIE_PIANO = "She's a beaut'! Shame it's been smashed up..."
+DESCRIBE.WIXIE_PIANO = "She's a beaut! Shame it's been smashed up..."
 DESCRIBE.WIXIE_CLOCK = "Excellent craftmanship!"
 DESCRIBE.WIXIE_WARDROBE =
 "It's got a nice oak smell, with a hint of nightmares."
@@ -529,10 +528,10 @@ ANNOUNCE.GAS_DAMAGE = "Cough! Cough! Ahem."
 -- Pyre Nettle stuff
 DESCRIBE.UM_PYRE_NETTLES = "I reckon that one's a doozy."
 DESCRIBE.UM_SMOLDER_SPORE = "Is it looking for something?"
-ANNOUNCE.ANNOUNCE_SMOLDER_SPORE_EATEN = "I feel like I coulda prevented that."
+ANNOUNCE.ANNOUNCE_SMOLDER_SPORE_EATEN = "I feel like I could'a prevented that."
 ANNOUNCE.ANNOUNCE_SMOLDER_SPORE_INVENTORY_POP = "I feel like I coulda prevented that."
 DESCRIBE.UM_ARMOR_PYRE_NETTLES = "It makes me feel one with nature. Really hot, annoyin' nature."
-DESCRIBE.UM_BLOWDART_PYRE = "Feels real likely to spark up somethin' I care aboot." -- god what did i just write
+DESCRIBE.UM_BLOWDART_PYRE = "It don't feel right for me to be usin' this." -- i dont know what you wrote mara
 
 -- Under the Weather Part 1
 DESCRIBE.ALPHA_LIGHTNINGGOAT = "Steer clear of this bleeter."
