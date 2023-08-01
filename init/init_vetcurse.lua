@@ -14,7 +14,7 @@ AddPlayerPostInit(function(inst)
 			data.vetscurse = inst.vetcurse
 		end
 		
-		_OldOnSave(inst, data)
+		return _OldOnSave(inst, data, ...)
 	end
 
 	local function OnLoad(inst, data)
@@ -37,7 +37,7 @@ AddPlayerPostInit(function(inst)
 			end
 		end
 	
-		_OldOnLoad(inst, data)
+		return _OldOnLoad(inst, data, ...)
 	end
 	
 	inst.OnSave = OnSave

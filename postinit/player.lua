@@ -21,6 +21,10 @@ end
 
 
 env.AddPlayerPostInit(function(inst)
+	if TheWorld.ismastersim then
+		--return inst
+    end
+	
     if TUNING.DSTU.VETCURSE == "always" then
         if inst ~= nil and inst.components.health ~= nil and
             not inst:HasTag("playerghost") then
@@ -60,29 +64,33 @@ env.AddPlayerPostInit(function(inst)
                 if k.components.health then
                     k.components.health:SetInvincible(true)
                 end
-                k:DoTaskInTime(math.random() * 0.2, function(k)
-                    local fx = SpawnPrefab("spawn_fx_small")
-                    fx.Transform:SetPosition(k.Transform:GetWorldPosition())
-                    k:RemoveFromScene()
-                end)
+				k:DoTaskInTime(math.random()*0.2, function(k)
+					local fx = SpawnPrefab("spawn_fx_small")
+					fx.Transform:SetPosition(k.Transform:GetWorldPosition())
+					if not k.components.colourtweener then
+						k:AddComponent("colourtweener")
+					end
+					k.components.colourtweener:StartTween({ 0, 0, 0, 1 }, 13 * FRAMES, k.Remove)
+				end)
             end
         end
-        _OnDespawn(inst, migrationdata, ...)
+		
+		return _OnDespawn(inst, migrationdata, ...)
     end
 
     local _OnSave = inst.OnSave
 
-    inst.OnSave = function(inst, data)
+    inst.OnSave = function(inst, data, ...)
         data.um_all_followers = inst.um_all_followers
 		
         if _OnSave ~= nil then 
-			return _OnSave(inst, data)
+			return _OnSave(inst, data, ...)
 		end
     end
 
     local _OnLoad = inst.OnLoad
 
-    inst.OnLoad = function(inst, data)
+    inst.OnLoad = function(inst, data, ...)
         if data and data.um_all_followers then
             for k, v in pairs(data.um_all_followers) do
                 inst:DoTaskInTime(0.2 * math.random(), function(inst)
@@ -99,19 +107,15 @@ env.AddPlayerPostInit(function(inst)
                     fx.Transform:SetPosition(
                         follower.Transform:GetWorldPosition())
                 end)
-                data.um_all_followers = {} -- empty the table to prevent duping.
             end
         end
 		
         if _OnLoad ~= nil then 
-			return _OnLoad(inst, data) 
+			return _OnLoad(inst, data, ...) 
 		end
     end
 	
 	--Client after this
-	if TheWorld.ismastersim then
-        return inst
-    end
-	
+	--inst:AddTag("um_darkwood")
 	--CreateMousePositioning(inst)
 end)

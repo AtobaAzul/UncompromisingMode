@@ -92,10 +92,12 @@ local function ActionHungerDrain(inst, data)
 						local snap = SpawnPrefab("impact")
 						local x, y, z = inst.Transform:GetWorldPosition()
 						local x1, y1, z1 = data.action.target.Transform:GetWorldPosition()
-						local angle = -math.atan2(z1 - z, x1 - x)
-						snap.Transform:SetPosition(x1, y1, z1)
-						snap.Transform:SetRotation(angle * RADIANS)
-						snap.Transform:SetScale(0.8, 0.8, 0.8)
+						if z1 ~= nil then
+							local angle = -math.atan2(z1 - z, x1 - x)
+							snap.Transform:SetPosition(x1, y1, z1)
+							snap.Transform:SetRotation(angle * RADIANS)
+							snap.Transform:SetScale(0.8, 0.8, 0.8)
+						end
 					end
 
 					inst.components.hunger:DoDelta(-0.2 * burnrate, true) --.333
@@ -105,10 +107,12 @@ local function ActionHungerDrain(inst, data)
 						local snap = SpawnPrefab("impact")
 						local x, y, z = inst.Transform:GetWorldPosition()
 						local x1, y1, z1 = data.action.target.Transform:GetWorldPosition()
-						local angle = -math.atan2(z1 - z, x1 - x)
-						snap.Transform:SetPosition(x1, y1, z1)
-						snap.Transform:SetRotation(angle * RADIANS)
-						snap.Transform:SetScale(0.8, 0.8, 0.8)
+						if z1 ~= nil then
+							local angle = -math.atan2(z1 - z, x1 - x)
+							snap.Transform:SetPosition(x1, y1, z1)
+							snap.Transform:SetRotation(angle * RADIANS)
+							snap.Transform:SetScale(0.8, 0.8, 0.8)
+						end
 					end
 
 					inst.components.hunger:DoDelta(-0.333 * burnrate, true) --.5

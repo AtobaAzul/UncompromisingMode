@@ -468,6 +468,7 @@ local states=
         tags = { "busy", "attack" },
 
         onenter = function(inst)
+			inst.stomp_count = 0
             inst.Physics:Stop()
             inst.AnimState:PlayAnimation("stompy")
 			inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/lightninggoat/taunt")
@@ -540,11 +541,7 @@ local states=
         tags = { "busy", "attack" },
 
         onenter = function(inst)
-			if inst.stomp_count == nil then
-				inst.stomp_count = 1
-			else
-				inst.stomp_count = inst.stomp_count + 1
-			end
+			inst.stomp_count = inst.stomp_count + 1
 				
             inst.Physics:Stop()
             inst.AnimState:PlayAnimation("stompy_loop")
@@ -591,7 +588,8 @@ local states=
         events =
         {
             EventHandler("animover", function(inst)
-				if inst.stomp_count == 2 then
+				if inst.stomp_count >= 2 then
+					inst.stomp_count = 0
 					inst.sg:GoToState("stomp_attack_stop")
 				else
 					inst.sg:GoToState("stomp_attack_loop")
