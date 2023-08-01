@@ -253,7 +253,6 @@ local um_preparedfoods =
 		cooktime = 0.5,
 		foodtype = FOODTYPE.VEGGIE,
 		perishtime = 2*TUNING.PERISH_TWO_DAY,
-		priority = 15,
 		temperature = TUNING.COLD_FOOD_BONUS_TEMP,
 		temperatureduration = TUNING.FOOD_TEMP_BRIEF,
 		floater = {nil, 0.1, 0.6},
