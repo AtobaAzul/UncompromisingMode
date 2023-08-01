@@ -454,7 +454,6 @@ local function TornadoTask(inst)
     if inst.startmoving then
         local x, y, z = inst.Transform:GetWorldPosition()
         local destination = TheSim:FindFirstEntityWithTag("um_tornado_destination")
-
         local players = TheSim:FindEntities(x, y, z, 300, nil, { "playerghost" }, { "player", "um_windturbine" })
 
         if math.random() > 0.9 and config ~= "minimal" then
@@ -466,6 +465,7 @@ local function TornadoTask(inst)
 
         for k, v in pairs(players) do
             local px, py, pz = v.Transform:GetWorldPosition()
+			print("player loc"..px, py, pz)
 
             if v:HasTag("player") or v:HasTag("um_windturbine") then
                 v:AddTag("under_the_weather")
@@ -485,11 +485,11 @@ local function TornadoTask(inst)
             if not v:HasTag("um_windturbine") then
                 if not v:HasTag("um_windturbine") then
                     if math.random() > 0.99 then
-                        local lightning = SpawnPrefab("hound_lightning")
-                        lightning.Transform:SetPosition(px + math.random(-5, 5), 0, pz + math.random(-5, 5))
-                        lightning.NoTags = { "INLIMBO", "shadow", "structure", "wall", "companion", "abigail", "bird",
+                        local lightning_targeted = SpawnPrefab("hound_lightning")
+                        lightning_targeted.Transform:SetPosition(px + math.random(-5, 5), 0, pz + math.random(-5, 5))
+                        lightning_targeted.NoTags = { "INLIMBO", "shadow", "structure", "wall", "companion", "abigail", "bird",
                             "prey" }
-                        lightning.Delay = 1.5
+                        lightning_targeted.Delay = 1.5
                     end
 
                     if v ~= nil and v:IsValid() and v:HasTag("player") and v.sg ~= nil and not v.sg:HasStateTag("gotgrabbed") and v:GetDistanceSqToInst(inst) < 300 or v.prefab ~= "bullkelp_beachedroot" and v.components.inventoryitem ~= nil and v:GetDistanceSqToInst(inst) < 600 and not v:HasTag("tornado_nosucky") or v.components.oceanfishable ~= nil and not v:HasTag("INLIMBO") then
