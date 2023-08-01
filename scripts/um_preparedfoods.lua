@@ -74,7 +74,7 @@ local um_preparedfoods =
 				tags.egg > 1
 		end,
 		hunger = TUNING.CALORIES_LARGE,
-		health = 75,
+		health = 5,
 		sanity = 20,
 		priority = 20,
 		weight = 30,
