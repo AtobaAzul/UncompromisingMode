@@ -923,6 +923,9 @@ env.AddStategraphPostInit("wilson", function(inst)
 				inst.components.locomotor:Stop()
 				inst.AnimState:PlayAnimation("action_uniqueitem_pre")
 				inst.AnimState:PushAnimation("whistle", false)
+				
+				inst.AnimState:SetDeltaTimeMultiplier(1.5)
+				
 				inst.AnimState:OverrideSymbol("hound_whistle01", "walterwhistle", "hound_whistle01")
 				--inst.AnimState:Hide("ARM_carry")
 				inst.AnimState:Show("ARM_normal")
@@ -930,16 +933,16 @@ env.AddStategraphPostInit("wilson", function(inst)
 
 			timeline =
 			{
-				TimeEvent(20 * FRAMES, function(inst)
+				TimeEvent(10 * FRAMES, function(inst)
 					local buffaction = inst:GetBufferedAction()
 					if buffaction ~= nil and buffaction.target ~= nil and buffaction.target:HasTag("CHOP_workable") then
 						inst.sg:AddStateTag("chopping")
 					end
 
 					inst:PerformBufferedAction()
-					inst.SoundEmitter:PlaySound("wixie/characters/wixie/walterwhistle", nil, nil, false)
+					inst.SoundEmitter:PlaySound("wixie/characters/wixie/walterwhistle_fast", nil, nil, false)
 				end),
-				TimeEvent(24 * FRAMES, function(inst)
+				TimeEvent(12 * FRAMES, function(inst)
 					inst.sg:RemoveStateTag("busy")
 				end),
 			},
@@ -954,6 +957,8 @@ env.AddStategraphPostInit("wilson", function(inst)
 			},
 
 			onexit = function(inst)
+				inst.AnimState:SetDeltaTimeMultiplier(1)
+				
 				if inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS) then
 					inst.AnimState:Show("ARM_carry")
 					inst.AnimState:Hide("ARM_normal")

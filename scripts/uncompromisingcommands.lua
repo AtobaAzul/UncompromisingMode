@@ -157,8 +157,8 @@ function c_um_setadrenaline(p)
     end
 end
 
-local function CountLocalPrefabs(prefab, pos)
-    local ents = TheSim:FindEntities(pos.x, 0, pos.z, 50)
+local function CountLocalPrefabs(prefab, pos, set_radius)
+    local ents = TheSim:FindEntities(pos.x, 0, pos.z, set_radius)
     local count = 0
 
     for k, v in pairs(ents) do
@@ -170,18 +170,21 @@ local function CountLocalPrefabs(prefab, pos)
     print("There are ", count, prefab .. "s in this vicinity.")
 end
 
-function c_um_findents()
+function c_um_findents(radius, awake)
     local pos = ConsoleWorldPosition()
-    local ents = TheSim:FindEntities(pos.x, 0, pos.z, 50)
+    local set_radius = radius ~= nil and radius or 50
+    local ents = TheSim:FindEntities(pos.x, 0, pos.z, set_radius)
     local alreadycounted_ents = {}
 
     for i, v in ipairs(ents) do
-        local count = 0
+		if awake == nil or awake and v.entity:IsAwake() then
+			local count = 0
 
-        if v ~= nil and v.prefab ~= nil and not table.contains(alreadycounted_ents, v.prefab) then
-            table.insert(alreadycounted_ents, v.prefab)
-            CountLocalPrefabs(v.prefab, pos)
-        end
+			if v ~= nil and v.prefab ~= nil and not table.contains(alreadycounted_ents, v.prefab) then
+				table.insert(alreadycounted_ents, v.prefab)
+				CountLocalPrefabs(v.prefab, pos, set_radius)
+			end
+		end
     end
 end
 

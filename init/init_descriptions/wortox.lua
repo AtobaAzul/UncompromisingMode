@@ -536,7 +536,7 @@ DESCRIBE.UM_ARMOR_PYRE_NETTLES = "It doesn't quite match my fur, but I could get
 DESCRIBE.UM_BLOWDART_PYRE = "These could ruin someone's whole LIFE in a heartbeat. How silly!"
 
 -- Under the Weather Part 1
-DESCRIBE.ALPHA_LIGHTNINGGOAT = "We're much alike, me and you! Minus the bleeting."
+DESCRIBE.ALPHA_LIGHTNINGGOAT = "We're much alike, me and you! Minus the bleating."
 DESCRIBE.UM_TORNADO = "Hyu-hyu, this looks like fun!"
 DESCRIBE.UM_WATERFALL = "The water has come to us!"
 ANNOUNCE.ANNOUNCE_UM_NO_TORNADO = "There's no surprises to ruin!"

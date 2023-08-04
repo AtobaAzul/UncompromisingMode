@@ -534,7 +534,7 @@ DESCRIBE.UM_ARMOR_PYRE_NETTLES = "It makes me feel one with nature. Really hot, 
 DESCRIBE.UM_BLOWDART_PYRE = "It don't feel right for me to be usin' this." -- i dont know what you wrote mara
 
 -- Under the Weather Part 1
-DESCRIBE.ALPHA_LIGHTNINGGOAT = "Steer clear of this bleeter."
+DESCRIBE.ALPHA_LIGHTNINGGOAT = "Steer clear of this bleater."
 DESCRIBE.UM_TORNADO = "Mother nature is a cruel mistress."
 DESCRIBE.UM_WATERFALL = "What a disaster."
 ANNOUNCE.ANNOUNCE_UM_NO_TORNADO = "No tornadoes around, but I coulda told you that."

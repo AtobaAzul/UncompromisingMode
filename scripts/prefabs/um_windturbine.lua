@@ -37,8 +37,10 @@ local function UpdateLight(inst)
 
 	local boat = TheWorld.Map:GetPlatformAtPoint(x, z)
 	
-	if boat ~= nil and boat:HasTag("boat") and boat.components ~= nil and boat.components.boatphysics ~= nil then
-		velocity = boat.components.boatphysics:GetVelocity()
+	if boat ~= nil and boat:HasTag("boat") and boat.components ~= nil and 
+		(boat.components.boatphysics ~= nil or boat.components.boatphysics_common ~= nil) then
+		
+		velocity = boat.components.boatphysics_common ~= nil and boat.components.boatphysics_common:GetVelocity() or boat.components.boatphysics:GetVelocity()
 	end
 	
 	if TheWorld.components.sandstorms then

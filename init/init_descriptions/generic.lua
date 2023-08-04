@@ -623,7 +623,7 @@ DESCRIBE.UM_ARMOR_PYRE_NETTLES = "The plants won't suspect a thing!"
 DESCRIBE.UM_BLOWDART_PYRE = "The reaction is fascinating!"
 
 -- Under the Weather Part 1
-DESCRIBE.ALPHA_LIGHTNINGGOAT = "It'll leaving me bleeting! I mean, bleeding!"
+DESCRIBE.ALPHA_LIGHTNINGGOAT = "It'll leaving me bleating! I mean, bleeding!"
 DESCRIBE.UM_TORNADO = "Hang on to your hats!"
 DESCRIBE.UM_WATERFALL = "Wheres a pair of wellingtons when you need them?"
 ANNOUNCE.ANNOUNCE_UM_NO_TORNADO = "There aren't any tornadoes around."

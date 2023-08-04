@@ -428,6 +428,7 @@ Assets = {
 	Asset("ANIM", "anim/meatrack_hat_swap.zip"),
 	Asset("ANIM", "anim/meatrack_hat_swap_batnose.zip"),
 	Asset("ANIM", "anim/meatrack_hat_swap_batwing.zip"),
+	Asset("ANIM", "anim/meatrack_hat_swap_default.zip"),
 	Asset("ANIM", "anim/meatrack_hat_swap_drumstick.zip"),
 	Asset("ANIM", "anim/meatrack_hat_swap_eel.zip"),
 	Asset("ANIM", "anim/meatrack_hat_swap_fish.zip"),
@@ -440,7 +441,6 @@ Assets = {
 	Asset("ANIM", "anim/meatrack_hat_swap_monstermeat.zip"),
 	Asset("ANIM", "anim/meatrack_hat_swap_plantmeat.zip"),
 	Asset("ANIM", "anim/meatrack_hat_swap_smallmeat.zip"),
-	Asset("ANIM", "anim/meatrack_hat_swap_default.zip"),
 
 	--Uncompromising Mode
 	Asset("ANIM", "anim/meatrack_hat_swap_monstersmallmeat.zip"),
@@ -498,6 +498,8 @@ Assets = {
 	Asset("ATLAS", "images/inventoryimages/meatrack_hat_batnose.xml"),
 	Asset("IMAGE", "images/inventoryimages/meatrack_hat_batwing.tex"),
 	Asset("ATLAS", "images/inventoryimages/meatrack_hat_batwing.xml"),
+	Asset("IMAGE", "images/inventoryimages/meatrack_hat_default.tex"),
+	Asset("ATLAS", "images/inventoryimages/meatrack_hat_default.xml"),
 	Asset("IMAGE", "images/inventoryimages/meatrack_hat_drumstick.tex"),
 	Asset("ATLAS", "images/inventoryimages/meatrack_hat_drumstick.xml"),
 	Asset("IMAGE", "images/inventoryimages/meatrack_hat_eel.tex"),

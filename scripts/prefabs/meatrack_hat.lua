@@ -7,7 +7,11 @@ local assets=
 
 local function onequip(inst, owner)
 	if inst.meat ~= nil then
-		owner.AnimState:OverrideSymbol("swap_hat", "meatrack_hat_swap_"..inst.meat, "swap_hat")
+		if softresolvefilepath("images/inventoryimages/meatrack_hat_"..inst.meat..".xml") then
+			owner.AnimState:OverrideSymbol("swap_hat", "meatrack_hat_swap_"..inst.meat, "swap_hat")
+		else
+			owner.AnimState:OverrideSymbol("swap_hat", "meatrack_hat_swap_default", "swap_hat")
+		end
 	else
 		owner.AnimState:OverrideSymbol("swap_hat", "meatrack_hat_swap", "swap_hat")	
 	end
@@ -47,7 +51,8 @@ local function onstartdrying(inst, ingredient, buildfile)
 	inst.meat = ingredient
 	inst.SoundEmitter:PlaySound("dontstarve/common/together/put_meat_rack")
 	
-	if resolvefilepath("images/inventoryimages/meatrack_hat_"..inst.meat..".xml") ~= nil then
+	if softresolvefilepath("images/inventoryimages/meatrack_hat_"..inst.meat..".xml") then
+			print("soft resolve")
 		local owner = inst.components.inventoryitem.owner
 		inst.AnimState:SetBank("meatrack_hat_swap")
 		inst.AnimState:SetBuild("meatrack_hat_swap_"..inst.meat)
@@ -62,6 +67,7 @@ local function onstartdrying(inst, ingredient, buildfile)
 			--inst.components.dryer:Pause()
 		end
 	else
+		print("default")
 		local owner = inst.components.inventoryitem.owner
 		inst.AnimState:SetBank("meatrack_hat_swap")
 		inst.AnimState:SetBuild("meatrack_hat_swap_default")
@@ -106,10 +112,12 @@ end
 
 local function ToGround(inst)
 	if inst.meat ~= nil then
-		if "images/inventoryimages/meatrack_hat_"..inst.meat..".xml" ~= nil then
+		if softresolvefilepath("images/inventoryimages/meatrack_hat_"..inst.meat..".xml") then
+			print("soft resolve")
 			inst.components.inventoryitem.atlasname = "images/inventoryimages/meatrack_hat_"..inst.meat..".xml"
 			inst.components.inventoryitem:ChangeImageName("meatrack_hat_"..inst.meat)
 		else
+			print("default")
 			inst.components.inventoryitem:ChangeImageName("meatrack_hat_default")
 			inst.components.inventoryitem.atlasname = "images/inventoryimages/meatrack_hat_default.xml"
 		end
@@ -121,10 +129,12 @@ end
 
 local function ToInventory(inst)
 	if inst.meat ~= nil then
-		if "images/inventoryimages/meatrack_hat_"..inst.meat..".xml" ~= nil then
+		if softresolvefilepath("images/inventoryimages/meatrack_hat_"..inst.meat..".xml") then
+			print("soft resolve")
 			inst.components.inventoryitem.atlasname = "images/inventoryimages/meatrack_hat_"..inst.meat..".xml"
 			inst.components.inventoryitem:ChangeImageName("meatrack_hat_"..inst.meat)
 		else
+			print("default")
 			inst.components.inventoryitem:ChangeImageName("meatrack_hat_default")
 			inst.components.inventoryitem.atlasname = "images/inventoryimages/meatrack_hat_default.xml"
 		end
