@@ -62,63 +62,65 @@ end]]
 
 
 local function LaunchSpit(inst, caster, target, shadow)
-    local x, y, z = caster.Transform:GetWorldPosition()
-	local ammo = shadow ~= nil and "slingshotammo_shadow_proj_secondary" or inst.components.weapon.projectile.."_secondary"
-	
-	if ammo ~= nil then 
-		if ammo == "slingshotammo_spread_proj_secondary" and inst.powerlevel >= 2 then --spread ammo is not a thing, im just removing the spread from rock ammo
-			for i = 1, 5 do
-				local targetpos = target:GetPosition()
-				targetpos.x = targetpos.x + math.random(-2.2, 2.2)
-				targetpos.y = 0.5
-				targetpos.z = targetpos.z + math.random(-2.2, 2.2)
+	if caster ~= nil then
+		local x, y, z = caster.Transform:GetWorldPosition()
+		local ammo = shadow ~= nil and "slingshotammo_shadow_proj_secondary" or inst.components.weapon.projectile.."_secondary"
+		
+		if ammo ~= nil then 
+			if ammo == "slingshotammo_spread_proj_secondary" and inst.powerlevel >= 2 then --spread ammo is not a thing, im just removing the spread from rock ammo
+				for i = 1, 5 do
+					local targetpos = target:GetPosition()
+					targetpos.x = targetpos.x + math.random(-2.2, 2.2)
+					targetpos.y = 0.5
+					targetpos.z = targetpos.z + math.random(-2.2, 2.2)
 
-				local projectile = SpawnPrefab("slingshotammo_spread_proj_secondary")
-				projectile.Transform:SetPosition(x, y, z)
-				projectile.powerlevel = inst.powerlevel / 4
-				projectile.Transform:SetScale(0.7, 0.7, 0.7)
-				projectile.Physics:SetCapsule(0.6, 0.6)
-				
-				projectile.components.projectile:SetSpeed(60 * projectile.powerlevel)
-				projectile.components.projectile:Throw(caster, target, caster)
-				projectile:DoTaskInTime(1, projectile.Remove)
-				SpawnPrefab("slingshotammo_hitfx_rocks").Transform:SetPosition(x, y, z)
-			end
-		else
-			local targetpos = target:GetPosition()
-			targetpos.y = 0.5
-
-			local projectile = SpawnPrefab(ammo)
-			projectile.Transform:SetPosition(x, y, z)
-			
-			projectile.powerlevel = inst.powerlevel
-			
-			if projectile.components.complexprojectile ~= nil then
-				local theta = caster.Transform:GetRotation()
-				theta = theta*DEGREES
-	
-				local dx = targetpos.x - x
-				local dz = targetpos.z - z
-				
-				--local rangesq = (dx * dx + dz * dz) / 1.2
-				local rangesq = dx * dx + dz * dz
-				local maxrange = TUNING.FIRE_DETECTOR_RANGE * 2
-				--local speed = easing.linear(rangesq, 15, 3, maxrange * maxrange)
-				local speed = easing.linear(rangesq, maxrange, 1, maxrange * maxrange)
-				projectile.caster = caster
-				projectile.components.complexprojectile.usehigharc = true
-				projectile.components.complexprojectile:SetHorizontalSpeed(speed)
-				projectile.components.complexprojectile:SetGravity(-45)
-				projectile.components.complexprojectile:Launch(targetpos, caster, caster)
-				projectile.components.complexprojectile:SetLaunchOffset(Vector3(1.5, 1.5, 0))
-			else
-				if ammo == "slingshotammo_moonglass_proj_secondary" then
-					projectile.components.projectile:SetSpeed(10 + 10 * projectile.powerlevel)
-				else
-					projectile.components.projectile:SetSpeed(10 + 10 * projectile.powerlevel)
+					local projectile = SpawnPrefab("slingshotammo_spread_proj_secondary")
+					projectile.Transform:SetPosition(x, y, z)
+					projectile.powerlevel = inst.powerlevel / 4
+					projectile.Transform:SetScale(0.7, 0.7, 0.7)
+					projectile.Physics:SetCapsule(0.6, 0.6)
+					
+					projectile.components.projectile:SetSpeed(60 * projectile.powerlevel)
+					projectile.components.projectile:Throw(caster, target, caster)
+					projectile:DoTaskInTime(1, projectile.Remove)
+					SpawnPrefab("slingshotammo_hitfx_rocks").Transform:SetPosition(x, y, z)
 				end
+			else
+				local targetpos = target:GetPosition()
+				targetpos.y = 0.5
+
+				local projectile = SpawnPrefab(ammo)
+				projectile.Transform:SetPosition(x, y, z)
 				
-				projectile.components.projectile:Throw(caster, target, caster)
+				projectile.powerlevel = inst.powerlevel
+				
+				if projectile.components.complexprojectile ~= nil then
+					local theta = caster.Transform:GetRotation()
+					theta = theta*DEGREES
+		
+					local dx = targetpos.x - x
+					local dz = targetpos.z - z
+					
+					--local rangesq = (dx * dx + dz * dz) / 1.2
+					local rangesq = dx * dx + dz * dz
+					local maxrange = TUNING.FIRE_DETECTOR_RANGE * 2
+					--local speed = easing.linear(rangesq, 15, 3, maxrange * maxrange)
+					local speed = easing.linear(rangesq, maxrange, 1, maxrange * maxrange)
+					projectile.caster = caster
+					projectile.components.complexprojectile.usehigharc = true
+					projectile.components.complexprojectile:SetHorizontalSpeed(speed)
+					projectile.components.complexprojectile:SetGravity(-45)
+					projectile.components.complexprojectile:Launch(targetpos, caster, caster)
+					projectile.components.complexprojectile:SetLaunchOffset(Vector3(1.5, 1.5, 0))
+				else
+					if ammo == "slingshotammo_moonglass_proj_secondary" then
+						projectile.components.projectile:SetSpeed(10 + 10 * projectile.powerlevel)
+					else
+						projectile.components.projectile:SetSpeed(10 + 10 * projectile.powerlevel)
+					end
+					
+					projectile.components.projectile:Throw(caster, target, caster)
+				end
 			end
 		end
 	end

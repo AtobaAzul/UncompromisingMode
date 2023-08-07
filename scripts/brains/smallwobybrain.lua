@@ -200,7 +200,7 @@ local function HasWobyTarget(inst)
             inst:IsNear(inst.components.follower.leader, 25)) and
 			(
 			-- Check for Picking (plants)
-			(inst.wobytarget.components.pickable ~= nil and inst.wobytarget.components.pickable.canbepicked) or
+			(inst.wobytarget.components.pickable ~= nil and inst.wobytarget.components.pickable.canbepicked and inst.wobytarget.components.pickable.caninteractwith) or
 			-- Check for item to pick up		
 			(inst.wobytarget.components.inventoryitem ~= nil and inst.wobytarget.components.inventoryitem.canbepickedup and not inst.wobytarget.components.combat) or
 			-- Check for harvestable target	
@@ -225,7 +225,7 @@ local function DoTargetAction(inst)
             inst:IsNear(inst.components.follower.leader, 25)) and
 			(
 			-- Check for Picking (plants)
-			(inst.wobytarget.components.pickable ~= nil and inst.wobytarget.components.pickable.canbepicked and
+			(inst.wobytarget.components.pickable ~= nil and inst.wobytarget.components.pickable.canbepicked and inst.wobytarget.components.pickable.caninteractwith and
 			BufferedAction(inst, inst.wobytarget, ACTIONS.PICK)) or
 			-- Check for item to pick up		
 			(inst.wobytarget.components.inventoryitem ~= nil and inst.wobytarget.components.inventoryitem.canbepickedup and not inst.wobytarget.components.combat and

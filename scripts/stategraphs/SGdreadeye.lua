@@ -194,22 +194,25 @@ local states =
 				local max_tries = 20
 				for k = 1, max_tries do
 					local x, y, z = inst.Transform:GetWorldPosition()
-					local x1, y1, z1 = nil, nil, nil
 					
-					if inst.disguisetarget ~= nil then
-						local x1, y1, z1 = inst.disguisetarget.Transform:GetWorldPosition()
-						x = x1
-						y = y1
-						z = z1
-					end
-					
-					local offset = 25
-					x = x + math.random(2 * offset) - offset
-					z = z + math.random(2 * offset) - offset
-					local playercheck = TheSim:FindEntities(x, y, z, 10, {"player", "antlion_sinkhole_blocker"})
-					if not TheWorld.Map:GetPlatformAtPoint(x, z) and (TheWorld.Map:IsOceanAtPoint(x, y, z) or TheWorld.Map:IsPassableAtPoint(x, y, z)) and (playercheck == nil or #playercheck == 0) then
-						inst.Physics:Teleport(x, y, z)
-						break
+					if x ~= nil then
+						local x1, y1, z1 = nil, nil, nil
+						
+						if inst.disguisetarget ~= nil then
+							local x1, y1, z1 = inst.disguisetarget.Transform:GetWorldPosition()
+							x = x1
+							y = y1
+							z = z1
+						end
+						
+						local offset = 25
+						x = x + math.random(2 * offset) - offset
+						z = z + math.random(2 * offset) - offset
+						local playercheck = TheSim:FindEntities(x, y, z, 10, {"player", "antlion_sinkhole_blocker"})
+						if not TheWorld.Map:GetPlatformAtPoint(x, z) and (TheWorld.Map:IsOceanAtPoint(x, y, z) or TheWorld.Map:IsPassableAtPoint(x, y, z)) and (playercheck == nil or #playercheck == 0) then
+							inst.Physics:Teleport(x, y, z)
+							break
+						end
 					end
 				end
 			
@@ -442,30 +445,36 @@ local states =
 					local max_tries = 8
 					for k = 1, max_tries do
 						local x, y, z = target.Transform:GetWorldPosition()
-						local offset = 15
-						x = x + math.random(2 * offset) - offset
-						z = z + math.random(2 * offset) - offset
 						
-						local playercheck = TheSim:FindEntities(x, y, z, 5, {"player", "antlion_sinkhole_blocker"})
-					
-						if not TheWorld.Map:GetPlatformAtPoint(x, z) and (TheWorld.Map:IsOceanAtPoint(x, y, z) or TheWorld.Map:IsPassableAtPoint(x, y, z)) and (playercheck == nil or #playercheck == 0) then
-							inst.Physics:Teleport(x, y, z)
-							break
+						if x ~= nil then
+							local offset = 15
+							x = x + math.random(2 * offset) - offset
+							z = z + math.random(2 * offset) - offset
+							
+							local playercheck = TheSim:FindEntities(x, y, z, 5, {"player", "antlion_sinkhole_blocker"})
+						
+							if not TheWorld.Map:GetPlatformAtPoint(x, z) and (TheWorld.Map:IsOceanAtPoint(x, y, z) or TheWorld.Map:IsPassableAtPoint(x, y, z)) and (playercheck == nil or #playercheck == 0) then
+								inst.Physics:Teleport(x, y, z)
+								break
+							end
 						end
 					end
 				else
 					local max_tries = 8
-					for k = 1, max_tries do
-						local x, y, z = inst.Transform:GetWorldPosition()
-						local offset = 15
-						x = x + math.random(2 * offset) - offset
-						z = z + math.random(2 * offset) - offset
 						
-						local playercheck = TheSim:FindEntities(x, y, z, 5, {"player", "antlion_sinkhole_blocker"})
-						
-						if not TheWorld.Map:GetPlatformAtPoint(x, z) and (TheWorld.Map:IsOceanAtPoint(x, y, z) or TheWorld.Map:IsPassableAtPoint(x, y, z)) and (playercheck == nil or #playercheck == 0) then
-							inst.Physics:Teleport(x, y, z)
-							break
+					if x ~= nil then
+						for k = 1, max_tries do
+							local x, y, z = inst.Transform:GetWorldPosition()
+							local offset = 15
+							x = x + math.random(2 * offset) - offset
+							z = z + math.random(2 * offset) - offset
+							
+							local playercheck = TheSim:FindEntities(x, y, z, 5, {"player", "antlion_sinkhole_blocker"})
+							
+							if not TheWorld.Map:GetPlatformAtPoint(x, z) and (TheWorld.Map:IsOceanAtPoint(x, y, z) or TheWorld.Map:IsPassableAtPoint(x, y, z)) and (playercheck == nil or #playercheck == 0) then
+								inst.Physics:Teleport(x, y, z)
+								break
+							end
 						end
 					end
 				end
@@ -631,30 +640,36 @@ local states =
 					local max_tries = 8
 					for k = 1, max_tries do
 						local x, y, z = target.Transform:GetWorldPosition()
-						local offset = 13
-						x = x + math.random(2 * offset) - offset
-						z = z + math.random(2 * offset) - offset
 						
-						local playercheck = TheSim:FindEntities(x, y, z, 5, {"player", "antlion_sinkhole_blocker"})
-					
-						if not TheWorld.Map:GetPlatformAtPoint(x, z) and (TheWorld.Map:IsOceanAtPoint(x, y, z) or TheWorld.Map:IsPassableAtPoint(x, y, z)) and (playercheck == nil or #playercheck == 0) then
-							inst.Physics:Teleport(x, y, z)
-							break
+						if x ~= nil then
+							local offset = 13
+							x = x + math.random(2 * offset) - offset
+							z = z + math.random(2 * offset) - offset
+							
+							local playercheck = TheSim:FindEntities(x, y, z, 5, {"player", "antlion_sinkhole_blocker"})
+						
+							if not TheWorld.Map:GetPlatformAtPoint(x, z) and (TheWorld.Map:IsOceanAtPoint(x, y, z) or TheWorld.Map:IsPassableAtPoint(x, y, z)) and (playercheck == nil or #playercheck == 0) then
+								inst.Physics:Teleport(x, y, z)
+								break
+							end
 						end
 					end
 				else
 					local max_tries = 8
 					for k = 1, max_tries do
 						local x, y, z = inst.Transform:GetWorldPosition()
-						local offset = 15
-						x = x + math.random(2 * offset) - offset
-						z = z + math.random(2 * offset) - offset
 						
-						local playercheck = TheSim:FindEntities(x, y, z, 5, {"player", "antlion_sinkhole_blocker"})
-						
-						if not TheWorld.Map:GetPlatformAtPoint(x, z) and (TheWorld.Map:IsOceanAtPoint(x, y, z) or TheWorld.Map:IsPassableAtPoint(x, y, z)) and (playercheck == nil or #playercheck == 0) then
-							inst.Physics:Teleport(x, y, z)
-							break
+						if x ~= nil then
+							local offset = 15
+							x = x + math.random(2 * offset) - offset
+							z = z + math.random(2 * offset) - offset
+							
+							local playercheck = TheSim:FindEntities(x, y, z, 5, {"player", "antlion_sinkhole_blocker"})
+							
+							if not TheWorld.Map:GetPlatformAtPoint(x, z) and (TheWorld.Map:IsOceanAtPoint(x, y, z) or TheWorld.Map:IsPassableAtPoint(x, y, z)) and (playercheck == nil or #playercheck == 0) then
+								inst.Physics:Teleport(x, y, z)
+								break
+							end
 						end
 					end
 				end

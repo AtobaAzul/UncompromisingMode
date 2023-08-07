@@ -37,6 +37,14 @@ env.AddStategraphPostInit("wilson", function(inst)
 				end
 
 				return _OldAttack(inst, action, ...)
+			--[[elseif inst:HasTag("pinetreepioneer") and inst.components.rider:IsRiding() and inst.components.rider.mount:HasTag("woby") then
+				local equip = inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
+				
+				if equip ~= nil and not (equip.components.projectile ~= nil or equip:HasTag("rangedweapon")) then
+					return "special_woby_attack"
+				else
+					return "shake"
+				end]]
 			else
 				return _OldAttack(inst, action, ...)
 			end
@@ -962,6 +970,106 @@ env.AddStategraphPostInit("wilson", function(inst)
 				if inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS) then
 					inst.AnimState:Show("ARM_carry")
 					inst.AnimState:Hide("ARM_normal")
+				end
+			end,
+		},
+		State{
+			name = "special_woby_attack",
+			tags = { "attack", "notalking", "abouttoattack", "autopredict" },
+
+			onenter = function(inst)
+				if inst.components.combat:InCooldown() then
+					inst.sg:RemoveStateTag("abouttoattack")
+					inst:ClearBufferedAction()
+					inst.sg:GoToState("idle", true)
+					return
+				end
+				
+				if inst.sg.laststate == inst.sg.currentstate then
+					inst.sg.statemem.chained = true
+				end
+				
+				local buffaction = inst:GetBufferedAction()
+				local target = buffaction ~= nil and buffaction.target or nil
+				local equip = inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
+				inst.components.combat:SetTarget(target)
+				inst.components.combat:StartAttack()
+				inst.components.locomotor:Stop()
+				local cooldown = inst.components.combat.min_attack_period
+				inst.AnimState:PlayAnimation("player_atk_pre")
+				inst.AnimState:PushAnimation("player_atk", false)
+				
+				if equip ~= nil and equip:HasTag("toolpunch") then
+					inst.sg.statemem.istoolpunch = true
+					inst.SoundEmitter:PlaySound("dontstarve/wilson/attack_whoosh", nil, inst.sg.statemem.attackvol, true)
+					cooldown = math.max(cooldown, 13 * FRAMES)
+				elseif equip ~= nil and equip:HasTag("whip") then
+					inst.sg.statemem.iswhip = true
+					inst.SoundEmitter:PlaySound("dontstarve/common/whip_pre", nil, nil, true)
+					cooldown = math.max(cooldown, 17 * FRAMES)
+				elseif equip ~= nil and (equip:HasTag("light") or equip:HasTag("nopunch")) then
+					inst.SoundEmitter:PlaySound("dontstarve/wilson/attack_weapon", nil, nil, true)
+					cooldown = math.max(cooldown, 13 * FRAMES)
+				else
+                    inst.SoundEmitter:PlaySound(
+						(equip:HasTag("icestaff") and "dontstarve/wilson/attack_icestaff") or
+						(equip:HasTag("shadow") and "dontstarve/wilson/attack_nightsword") or
+						(equip:HasTag("firestaff") and "dontstarve/wilson/attack_firestaff") or
+						(equip:HasTag("firepen") and "wickerbottom_rework/firepen/launch") or
+						"dontstarve/wilson/attack_weapon",
+						nil, nil, true
+					)
+					cooldown = math.max(cooldown, 13 * FRAMES)
+				end
+
+				inst.sg:SetTimeout(cooldown)
+
+				if target ~= nil then
+					inst.components.combat:BattleCry()
+					if target:IsValid() then
+						inst:FacePoint(target:GetPosition())
+						inst.sg.statemem.attacktarget = target
+						inst.sg.statemem.retarget = target
+					end
+				end
+			end,
+
+			timeline =
+			{
+				TimeEvent(8 * FRAMES, function(inst)
+					if not inst.sg.statemem.iswhip then
+						inst:PerformBufferedAction()
+						inst.sg:RemoveStateTag("abouttoattack")
+					end
+				end),
+				TimeEvent(10 * FRAMES, function(inst)
+					if inst.sg.statemem.iswhip then
+						inst:PerformBufferedAction()
+						inst.sg:RemoveStateTag("abouttoattack")
+					end
+				end),
+			},
+
+			ontimeout = function(inst)
+				inst.sg:RemoveStateTag("attack")
+				inst.sg:AddStateTag("idle")
+			end,
+
+			events =
+			{
+				EventHandler("equip", function(inst) inst.sg:GoToState("idle") end),
+				EventHandler("unequip", function(inst) inst.sg:GoToState("idle") end),
+				EventHandler("animqueueover", function(inst)
+					if inst.AnimState:AnimDone() then
+						inst.sg:GoToState("idle")
+					end
+				end),
+			},
+
+			onexit = function(inst)
+				inst.components.combat:SetTarget(nil)
+				if inst.sg:HasStateTag("abouttoattack") then
+					inst.components.combat:CancelAttack()
 				end
 			end,
 		},

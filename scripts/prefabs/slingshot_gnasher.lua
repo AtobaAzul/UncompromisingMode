@@ -107,43 +107,45 @@ local function ReticuleUpdatePositionFn(inst, pos, reticule, ease, smoothing, dt
 end
 
 local function LaunchSpit(inst, caster, target, shadow)
-    local x, y, z = caster.Transform:GetWorldPosition()
-	local ammo = shadow ~= nil and "slingshotammo_shadow_proj_secondary" or inst.components.weapon.projectile.."_secondary"
-	
-	if ammo ~= nil then
-		local targetpos = target:GetPosition()
-		targetpos.y = 0.5
+	if caster ~= nil then
+		local x, y, z = caster.Transform:GetWorldPosition()
+		local ammo = shadow ~= nil and "slingshotammo_shadow_proj_secondary" or inst.components.weapon.projectile.."_secondary"
+		
+		if ammo ~= nil then
+			local targetpos = target:GetPosition()
+			targetpos.y = 0.5
 
-		local projectile = SpawnPrefab(ammo)
-		projectile.Transform:SetPosition(x, y, z)
-		projectile.powerlevel = inst.powerlevel
-			
-		if projectile.components.complexprojectile ~= nil then
-			local theta = caster.Transform:GetRotation()
-			theta = theta*DEGREES
-	
-			local dx = targetpos.x - x
-			local dz = targetpos.z - z
+			local projectile = SpawnPrefab(ammo)
+			projectile.Transform:SetPosition(x, y, z)
+			projectile.powerlevel = inst.powerlevel
 				
-			--local rangesq = (dx * dx + dz * dz) / 1.2
-			local rangesq = dx * dx + dz * dz
-			local maxrange = TUNING.FIRE_DETECTOR_RANGE * 2
-			--local speed = easing.linear(rangesq, 15, 3, maxrange * maxrange)
-			local speed = easing.linear(rangesq, maxrange, 1, maxrange * maxrange)
-			projectile.caster = caster
-			projectile.components.complexprojectile.usehigharc = true
-			projectile.components.complexprojectile:SetHorizontalSpeed(speed)
-			projectile.components.complexprojectile:SetGravity(-45)
-			projectile.components.complexprojectile:Launch(targetpos, caster, caster)
-			projectile.components.complexprojectile:SetLaunchOffset(Vector3(1.5, 1.5, 0))
-		else
-			if ammo == "slingshotammo_moonglass_proj_secondary" then
-				projectile.components.projectile:SetSpeed(10 + 10 * projectile.powerlevel)
+			if projectile.components.complexprojectile ~= nil then
+				local theta = caster.Transform:GetRotation()
+				theta = theta*DEGREES
+		
+				local dx = targetpos.x - x
+				local dz = targetpos.z - z
+					
+				--local rangesq = (dx * dx + dz * dz) / 1.2
+				local rangesq = dx * dx + dz * dz
+				local maxrange = TUNING.FIRE_DETECTOR_RANGE * 2
+				--local speed = easing.linear(rangesq, 15, 3, maxrange * maxrange)
+				local speed = easing.linear(rangesq, maxrange, 1, maxrange * maxrange)
+				projectile.caster = caster
+				projectile.components.complexprojectile.usehigharc = true
+				projectile.components.complexprojectile:SetHorizontalSpeed(speed)
+				projectile.components.complexprojectile:SetGravity(-45)
+				projectile.components.complexprojectile:Launch(targetpos, caster, caster)
+				projectile.components.complexprojectile:SetLaunchOffset(Vector3(1.5, 1.5, 0))
 			else
-				projectile.components.projectile:SetSpeed(10 + 10 * projectile.powerlevel)
+				if ammo == "slingshotammo_moonglass_proj_secondary" then
+					projectile.components.projectile:SetSpeed(10 + 10 * projectile.powerlevel)
+				else
+					projectile.components.projectile:SetSpeed(10 + 10 * projectile.powerlevel)
+				end
+					
+				projectile.components.projectile:Throw(caster, target, caster)
 			end
-				
-			projectile.components.projectile:Throw(caster, target, caster)
 		end
 	end
 end

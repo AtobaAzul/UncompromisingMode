@@ -124,7 +124,7 @@ local function CheckForMoreTargets(inst)
 		end
 				
 		if v ~= nil and not v:HasTag("INLIMBO") and inst.oldwobytarget ~= nil and v ~= inst.oldwobytarget and v.prefab == inst.oldwobytarget.prefab and v:IsValid() then
-			if v.components.pickable == nil and v.components.harvestable == nil or v.components.pickable ~= nil and v.components.pickable.canbepicked or v.components.harvestable ~= nil and v.components.harvestable:CanBeHarvested() and v.components.combat == nil then
+			if v.components.pickable == nil and v.components.harvestable == nil or v.components.pickable ~= nil and v.components.pickable.canbepicked and v.components.pickable.caninteractwith or v.components.harvestable ~= nil and v.components.harvestable:CanBeHarvested() and v.components.combat == nil then
 				if v.components.inventoryitem then
 					for k = 1, inst.components.container.numslots do
 						if inst.components.container:GetItemInSlot(k) ~= nil and inst.components.container:GetItemInSlot(k).prefab == v.prefab and inst.components.container:GetItemInSlot(k).components.stackable ~= nil and not inst.components.container:GetItemInSlot(k).components.stackable:IsFull() then
@@ -153,6 +153,7 @@ env.AddPrefabPostInit("wobysmall", function(inst)
 	inst:AddTag("customwobytag")
 	inst:AddTag("noauradamage")
 	inst:AddTag("tiddlevirusimmune")
+    inst:AddTag("notraptrigger")
 	
 	if not TheWorld.ismastersim then
 		return

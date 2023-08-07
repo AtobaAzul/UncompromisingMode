@@ -105,7 +105,7 @@ local wobycommand = AddAction(
 			if act.target then
 				if act.target.components ~= nil then
 				
-					if (act.target:HasTag("DIG_workable") and not (act.target.components.pickable ~= nil and act.target.components.pickable.canbepicked) or act.target:HasTag("snowpile_basic")) and not act.doer.woby:HasTag("woby") then
+					if (act.target:HasTag("DIG_workable") and not (act.target.components.pickable ~= nil and (act.target.components.pickable.canbepicked and act.target.components.pickable.caninteractwith)) or act.target:HasTag("snowpile_basic")) and not act.doer.woby:HasTag("woby") then
 						
 						act.doer.woby.wobytarget = nil
 						act.doer.woby.oldwobytarget = nil
