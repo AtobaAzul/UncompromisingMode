@@ -31,7 +31,6 @@ return Class(function(self, inst)
         --[[ Private Member Variables ]]
         --------------------------------------------------------------------------
         local _warning = false
-        local _timetoattack = nil
         local _spawmmoonmaw = true
         local _warnduration = 60
         local _timetonextwarningsound = 0
@@ -46,6 +45,8 @@ return Class(function(self, inst)
         local _activehassler = nil
         local _storedhassler = nil
 
+        local _timetoattack
+		
         local _activeplayers = {}
 
         --------------------------------------------------------------------------
@@ -113,12 +114,8 @@ return Class(function(self, inst)
 
         local function TryStartAttacks(killed)
             if AllowedToAttack() then
-                if _activehassler == nil and _attacksperseason > 0 and _timetoattack == nil then
-                    -- Shorten the time used for winter to account for the time deerclops spends stomping around
-                    -- Then add one to _attacksperwinter to shift the attacks so the last attack isn't right when the season changes to spring
-                    --local attackdelay = (TheWorld.state.summerlength - 1) * TUNING.TOTAL_DAY_TIME / (_attacksperseason + 1)
+                if _activehassler == nil and _attacksperseason > 0 and _worldsettingstimer:GetTimeLeft(MOCKFLY_TIMERNAME) == nil then
                     local attackdelay = killed == true and _attackdelay * HASSLER_KILLED_DELAY_MULT or _attackdelay
-
                     _worldsettingstimer:StartTimer(MOCKFLY_TIMERNAME, attackdelay)
                 end
 

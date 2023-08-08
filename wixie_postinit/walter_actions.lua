@@ -350,4 +350,5 @@ wobybark.mount_valid = false
 
 GLOBAL.ACTIONS.CAST_NET.mount_valid = false
 GLOBAL.ACTIONS.DRY.mount_valid = true
+GLOBAL.ACTIONS.ACTIVATE.mount_valid = true
 GLOBAL.ACTIONS.CASTSPELL.distance = 40

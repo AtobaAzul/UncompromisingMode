@@ -31,7 +31,7 @@ self.inst = inst
 --[[ Private Member Variables ]]
 --------------------------------------------------------------------------
 local _warning = false
-local _timetoattack = nil
+local _timetoattack
 local _moonmawdelay = nil
 local _warnduration = 60
 local _timetonextwarningsound = 0
@@ -113,7 +113,7 @@ end
 
 local function TryStartAttacks(killed)
     if AllowedToAttack() then
-        if _activehassler == nil and _attacksperseason > 0 and _timetoattack == nil then
+        if _activehassler == nil and _attacksperseason > 0 and _worldsettingstimer:GetTimeLeft(MOTHERGOOSE_TIMERNAME) == nil then
             -- Shorten the time used for winter to account for the time deerclops spends stomping around
             -- Then add one to _attacksperwinter to shift the attacks so the last attack isn't right when the season changes to spring
             --local attackdelay = (TheWorld.state.summerlength - 1) * TUNING.TOTAL_DAY_TIME / (_attacksperseason + 1) 

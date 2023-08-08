@@ -17,12 +17,70 @@ local function CreateMousePositioning(inst)
 	end)
 end
 
+local function CheckAndApplyTempDamage(inst, data)
+	if data ~= nil and data.amount ~= nil and data.amount < 0 and data.cause ~= nil and (data.cause == "cold" or data.cause == "hot")
+	and inst.um_temp_healthdelta_task == nil then
+		if inst.um_temp_healthdelta_task_buffer == nil then
+			inst.um_temp_healthdelta_task_buffer = inst:DoTaskInTime(5, function()
+				inst.um_temp_healthdelta_buffer = true
+			end)
+		end
+		
+		if inst.um_temp_healthdelta_buffer then
+			inst.um_temp_healthdelta_task = inst:DoTaskInTime(1, function()
+				if inst.um_temp_healthdelta_task ~= nil then
+					inst.um_temp_healthdelta_task:Cancel()
+				end
+				
+				inst.um_temp_healthdelta_task = nil
+			end)
+			
+			if inst.um_temp_healthdelta_buffer_reset ~= nil then
+				inst.um_temp_healthdelta_buffer_reset:Cancel()
+			end
+			inst.um_temp_healthdelta_buffer_reset = nil
+			
+			inst.um_temp_healthdelta_buffer_reset = inst:DoTaskInTime(10, function()
+				if inst.um_temp_healthdelta_buffer_reset ~= nil then
+					inst.um_temp_healthdelta_buffer_reset:Cancel()
+				end
 
-
+				if inst.um_temp_healthdelta_task_buffer ~= nil then
+					inst.um_temp_healthdelta_task_buffer:Cancel()
+				end
+					
+				inst.um_temp_healthdelta_task_buffer = nil
+				inst.um_temp_healthdelta_buffer_reset = nil
+				inst.um_temp_healthdelta_buffer = nil
+			end)
+			
+			if inst.components.temperature ~= nil then
+				if data.cause == "cold" then
+					local coldrate = inst.components.temperature.hurtrate and (inst.components.temperature.hurtrate - .25) or 1
+					
+					if coldrate < 0 then
+						coldrate = 0
+					end
+					
+					inst.components.health:DeltaPenalty(0.01 * coldrate)
+				elseif data.cause == "hot" then
+					local heatrate = inst.components.temperature.overheathurtrate and (inst.components.temperature.overheathurtrate - .25) or 1
+					
+					if heatrate < 0 then
+						heatrate = 0
+					end
+					
+					inst.components.health:DeltaPenalty(0.01 * heatrate)
+				end
+				
+			end
+		end
+	end
+end
 
 env.AddPlayerPostInit(function(inst)
-	if TheWorld.ismastersim then
-		--return inst
+	if not TheWorld.ismastersim then
+		return inst
     end
 	
     if TUNING.DSTU.VETCURSE == "always" then
@@ -114,6 +172,8 @@ env.AddPlayerPostInit(function(inst)
 			return _OnLoad(inst, data, ...) 
 		end
     end
+	
+	inst:ListenForEvent("healthdelta", CheckAndApplyTempDamage)
 	
 	--Client after this
 	--inst:AddTag("um_darkwood")

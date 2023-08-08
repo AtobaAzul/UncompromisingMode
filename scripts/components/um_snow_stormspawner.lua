@@ -44,7 +44,7 @@ return Class(function(self, inst)
 			TheWorld.net:RemoveTag("snowstormstartnet")
 		end
 
-		if not _worldsettingstimer:ActiveTimerExists(UM_SNOW_STORM_TIMERNAME) then
+		if _worldsettingstimer:GetTimeLeft(UM_SNOW_STORM_TIMERNAME) == nil then
 			_worldsettingstimer:StartTimer(UM_SNOW_STORM_TIMERNAME, _spawninterval + math.random(0, 120))
 		end
 
@@ -71,7 +71,7 @@ return Class(function(self, inst)
 					TheWorld.net:AddTag("snowstormstartnet")
 				end
 
-				if not _worldsettingstimer:ActiveTimerExists(UM_STOP_SNOW_STORM_TIMERNAME) then
+				if _worldsettingstimer:GetTimeLeft(UM_STOP_SNOW_STORM_TIMERNAME) == nil then
 					_worldsettingstimer:StartTimer(UM_STOP_SNOW_STORM_TIMERNAME, _despawninterval + math.random(80, 120))
 				end
 
@@ -82,17 +82,24 @@ return Class(function(self, inst)
 
 	local function StartStorms()
 		print("StartStorms")
-		if not _worldsettingstimer:ActiveTimerExists(UM_SNOW_STORM_TIMERNAME) then
+		if _worldsettingstimer:GetTimeLeft(UM_SNOW_STORM_TIMERNAME) == nil then
 			_worldsettingstimer:StartTimer(UM_SNOW_STORM_TIMERNAME, _spawninterval + math.random(0, 120))
 		end
 
 		_worldsettingstimer:ResumeTimer(UM_SNOW_STORM_TIMERNAME)
 	end
 
+	local function PauseStorms()
+		_worldsettingstimer:PauseTimer(UM_SNOW_STORM_TIMERNAME, true)
+		_worldsettingstimer:PauseTimer(UM_STOP_SNOW_STORM_TIMERNAME, true)
+	end
+
 	local function StopStorms()
 		print("StopStorms")
 		_worldsettingstimer:StopTimer(UM_SNOW_STORM_TIMERNAME)
 		_worldsettingstimer:StopTimer(UM_STOP_SNOW_STORM_TIMERNAME)
+		
+		PauseStorms()
 	end
 
 	--------------------------------------------------------------------------
@@ -126,12 +133,12 @@ return Class(function(self, inst)
 	end
 
 	function self:OnPostInit()
-		if not TestForIA() then
+		--if not TestForIA() then
 			_worldsettingstimer:AddTimer(UM_SNOW_STORM_TIMERNAME, _spawninterval + math.random(0, 120), true, StartStorming)
 			_worldsettingstimer:AddTimer(UM_STOP_SNOW_STORM_TIMERNAME, _despawninterval + math.random(80, 120), true, StopStorming)
 
 			OnSeasonChange()
-		end
+		--end
 	end
 
 	self:WatchWorldState("season", OnSeasonChange)
