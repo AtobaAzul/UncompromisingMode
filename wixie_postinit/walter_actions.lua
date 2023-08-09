@@ -119,7 +119,11 @@ local wobycommand = AddAction(
 						
 						return false, "WOBYTOOSMALL"
 					end
-				
+					
+					if act.target:HasTag("blueberrybomb") then
+						return false, "WOBYTOODANGEROUS"
+					end
+					
 					if act.target.components.combat ~= nil then
 						if hasfollowers then
 							act.doer.components.talker:Say(GLOBAL.GetString(act.doer, "ANNOUNCE_TROUP_ATTACK"))

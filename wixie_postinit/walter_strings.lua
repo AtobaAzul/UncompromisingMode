@@ -98,6 +98,7 @@ STRINGS = GLOBAL.STRINGS
 	ACTIONFAIL.WOBY_COMMAND = {
 		WOBYHUNGRY = "I think Woby is hungry!",
 		WOBYTOOSMALL = "I think she's too small to do that!",
+		WOBYTOODANGEROUS = "Wait, Woby! That's too dangerous!",
 		WOBYNEEDTODISMOUNT = "Woby can't do that while I'm riding her!",
 		WOBYNEVERMIND = "Uh, nevermind, Woby...",
 		TROUPNEVERMIND = "Uh, nevermind, troup..."
