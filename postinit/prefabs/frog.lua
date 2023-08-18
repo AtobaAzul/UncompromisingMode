@@ -26,7 +26,7 @@ local function NewRetargetfn(inst)
     if not inst.components.health:IsDead() and not inst.components.sleeper:IsAsleep() then
         return FindEntity(inst, TUNING.FROG_TARGET_DIST, function(guy) 
             if not guy.components.health:IsDead() then
-                return guy.components.inventory ~= nil
+                return inst._um_oldretarget
             end
         end,
         {"_combat","_health"}, -- see entityreplica.lua
@@ -46,7 +46,11 @@ env.AddPrefabPostInit("frog", function (inst)
     end
 
 	if inst.components.combat ~= nil then
-		--inst.components.combat:SetRetargetFunction(2, NewRetargetfn)
+		if inst.components.combat.targetfn ~= nil then
+			inst._um_oldretarget = inst.components.combat.targetfn
+		
+			inst.components.combat:SetRetargetFunction(2, NewRetargetfn)
+		end
 	end
 	
 	if not inst.components.eater then

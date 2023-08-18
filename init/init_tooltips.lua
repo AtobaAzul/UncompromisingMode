@@ -68,7 +68,8 @@ STRINGS.UNCOMP_TOOLTIP = {
 	HAT_CRAB = "- Repairs & sewing are twice as effective when worn.",
 	HAT_CRAB_ICE = "- Resistance scales with wetness.\n- Prevents the wearer from drying up.",
 	ARMOR_CRAB_MAXHP = "- Increases maximum health when worn.",
-	ARMOR_CRAB_REGEN = "- Self-healing."
+	ARMOR_CRAB_REGEN = "- Self-healing.",
+	BEEMINE = "- Now has 5 uses.\n- Spawns faster, more fragile bees."
 }
 
 STRINGS.PINETREE_TOOLTIP = {

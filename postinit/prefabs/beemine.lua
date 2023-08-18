@@ -83,7 +83,9 @@ env.AddPrefabPostInit("beemine", function(inst)
 	if inst.components.mine ~= nil then
         inst.components.mine:SetOnExplodeFn(OnExplode)
 		inst:DoTaskInTime(1, function()
-			inst.components.mine:Reset()
+			if inst.components.inventoryitem ~= nil and not inst.components.inventoryitem:IsHeld() then
+				inst.components.mine:Reset()
+			end
 		end)
 	end
 end)
