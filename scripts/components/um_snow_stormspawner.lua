@@ -83,7 +83,9 @@ return Class(function(self, inst)
 	local function StartStorms()
 		print("StartStorms")
 		if _worldsettingstimer:GetTimeLeft(UM_SNOW_STORM_TIMERNAME) == nil then
-			_worldsettingstimer:StartTimer(UM_SNOW_STORM_TIMERNAME, _spawninterval + math.random(0, 120))
+			if not _storming then
+				_worldsettingstimer:StartTimer(UM_SNOW_STORM_TIMERNAME, _spawninterval + math.random(0, 120))
+			end
 		end
 
 		_worldsettingstimer:ResumeTimer(UM_SNOW_STORM_TIMERNAME)
@@ -109,9 +111,9 @@ return Class(function(self, inst)
 	local function OnSeasonChange(self)
 		if TheWorld.state.season == "winter" then
 			if TheWorld.state.cycles >= TUNING.DSTU.WEATHERHAZARD_START_DATE_WINTER then
-				if not _storming then
+				--if not _storming then
 					StartStorms()
-				end
+				--end
 			end
 		else
 			StopStorms()
@@ -133,12 +135,12 @@ return Class(function(self, inst)
 	end
 
 	function self:OnPostInit()
-		--if not TestForIA() then
+		if not TestForIA() then
 			_worldsettingstimer:AddTimer(UM_SNOW_STORM_TIMERNAME, _spawninterval + math.random(0, 120), true, StartStorming)
 			_worldsettingstimer:AddTimer(UM_STOP_SNOW_STORM_TIMERNAME, _despawninterval + math.random(80, 120), true, StopStorming)
 
 			OnSeasonChange()
-		--end
+		end
 	end
 
 	self:WatchWorldState("season", OnSeasonChange)

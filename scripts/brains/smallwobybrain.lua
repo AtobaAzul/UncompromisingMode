@@ -310,8 +310,14 @@ function SmallWobyBrain:OnStart()
                             StandStill(self.inst),
                         },
                     }),
-                Follow(self.inst, function() return self.inst.components.follower.leader end, 0, TARGET_FOLLOW_DIST, MAX_FOLLOW_DIST),
-                FailIfRunningDecorator(FaceEntity(self.inst, GetOwner, KeepFaceTargetFn)),
+					
+                WhileNode(function() return TheWorld.state.isnight end, "NightFollow",
+					Follow(self.inst, function() return self.inst.components.follower.leader end, 0, TARGET_FOLLOW_DIST / 1.5, MAX_FOLLOW_DIST / 1.5)
+				),
+                
+				Follow(self.inst, function() return self.inst.components.follower.leader end, 0, TARGET_FOLLOW_DIST, MAX_FOLLOW_DIST),
+               
+				FailIfRunningDecorator(FaceEntity(self.inst, GetOwner, KeepFaceTargetFn)),
                 WhileNode(function() return OwnerIsClose(self.inst) and self.inst:IsAffectionate() end, "Affection",
                     SequenceNode{
                         WaitNode(4),

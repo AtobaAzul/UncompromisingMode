@@ -73,9 +73,9 @@ function Vetcursewidget:RefreshTooltips()
 	local vet_text = ""
 
     if self.owner:HasTag("clockmaker") then
-        vet_text = "Veteran's Curse:\n - Age faster when damaged.\n - Hunger drains faster.\n - Sanity from foods is applied over time.\n - Gain the ability to wield cursed items, dropped by certain bosses."
+        vet_text = "Veteran's Curse:\n - Age faster when damaged.\n - Hunger drains faster.\n - Sanity from foods is applied *slowly* over time.\n - Gain the ability to wield cursed items, dropped by certain bosses."
     else
-        vet_text = "Veteran's Curse:\n - Receive more damage when attacked.\n - Hunger drains faster.\n - Health and Sanity from foods is applied over time.\n - Gain the ability to wield cursed items, dropped by certain bosses."
+        vet_text = "Veteran's Curse:\n - Receive more damage when attacked.\n - Hunger drains faster.\n - Health and Sanity from foods is applied *slowly* over time.\n - Gain the ability to wield cursed items, dropped by certain bosses."
     end
 	
 	for i, v in pairs(skulls) do

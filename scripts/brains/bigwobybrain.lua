@@ -335,6 +335,11 @@ function WobyBigBrain:OnStart()
         FaceEntity(self.inst, GetRiderFn, KeepRiderFn),
         FaceEntity(self.inst, GetWalterInteractionFn, KeepGenericInteractionFn, nil, "sit_alert_tailwag"),
 
+		WhileNode(function() return TheWorld.state.isnight end, "NightFollow",
+			Follow(self.inst, function() return self.inst.components.follower.leader end,
+                     MIN_FOLLOW_DIST, TARGET_FOLLOW_DIST / 1.5, MAX_FOLLOW_DIST / 1.5, true)
+		),
+		
         Follow(self.inst, function() return self.inst.components.follower.leader end,
                      MIN_FOLLOW_DIST, TARGET_FOLLOW_DIST, MAX_FOLLOW_DIST, true),
 

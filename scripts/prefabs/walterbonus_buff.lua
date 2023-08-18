@@ -2,6 +2,11 @@ local function OnTick(inst, target, data)
     if target.components.health ~= nil and
         not target.components.health:IsDead() and
         not target:HasTag("playerghost") then
+		
+		local fx = SpawnPrefab("walter_heal_fx")
+		fx.entity:SetParent(target.entity)
+		fx.Transform:SetPosition(0, 0, 0)
+		
         target.components.health:DoDelta(target:HasTag("player") and 1 or 2, nil, inst.prefab)
     else
         inst.components.debuff:Stop()
@@ -75,4 +80,33 @@ local function fn_health()
     return inst
 end
 
-return Prefab("walterbonus_buff", fn_health)
+local function fn_fx()
+    local inst = CreateEntity()
+
+    inst.entity:AddTransform()
+    inst.entity:AddAnimState()
+    inst.entity:AddSoundEmitter()
+	inst.entity:AddNetwork()
+
+    inst.AnimState:SetBank("walter_heal_fx")
+    inst.AnimState:SetBuild("walter_heal_fx")
+    inst.AnimState:PlayAnimation("heal_"..math.random(2))
+	inst.AnimState:SetFinalOffset(1)
+
+	inst:AddTag("FX")
+
+	inst.entity:SetPristine()
+
+    if not TheWorld.ismastersim then
+        return inst
+    end
+
+    inst.persists = false
+	
+	inst:ListenForEvent("animover", inst.Remove)
+
+    return inst
+end
+
+return Prefab("walterbonus_buff", fn_health),
+		Prefab("walter_heal_fx", fn_fx)

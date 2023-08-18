@@ -112,14 +112,14 @@ local function onattack(inst, attacker, target)
 			icefx.Transform:SetPosition(x + math.random(-1.5, 1.5), 0, z + math.random(-1.5, 1.5))
 		end
 
-		if target.components.freezable ~= nil and target.components.health ~= nil and not target.components.health:IsDead() then
-			target.components.freezable:AddColdness(1)
-			target.components.freezable:SpawnShatterFX()
-		end
-
 		if target.components.health ~= nil and not target.components.health:IsDead() and target.components.combat ~= nil then
 			--target.components.health:DoDelta(-66 * 200, false, attacker, false, attacker)
 			target.components.combat:GetAttacked(attacker, 66, nil)
+		end
+
+		if target.components.freezable ~= nil and not target.components.freezable:IsFrozen() and target.components.health ~= nil and not target.components.health:IsDead() then
+			target.components.freezable:AddColdness(1)
+			target.components.freezable:SpawnShatterFX()
 		end
 
 		local ents = TheSim:FindEntities(x, y, z, 2.5, nil, { "INLIMBO", "player", "companion", "abigail" })
@@ -127,9 +127,8 @@ local function onattack(inst, attacker, target)
 			if v ~= inst and v ~= target and v:IsValid() and not v:IsInLimbo() then
 				if v.components.combat ~= nil and not (v.components.health ~= nil and v.components.health:IsDead()) then
 					v.components.combat:GetAttacked(attacker, 34, nil)
-
-					if v.components.freezable ~= nil and v.components.health ~= nil and not v.components.health:IsDead() and
-						not v.components.freezable:IsFrozen() then
+					
+					if v.components.freezable ~= nil and not v.components.freezable:IsFrozen() and v.components.health ~= nil and not v.components.health:IsDead() then
 						v.components.freezable:AddColdness(0.5)
 						v.components.freezable:SpawnShatterFX()
 					end

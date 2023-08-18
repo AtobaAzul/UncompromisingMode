@@ -1,7 +1,8 @@
 local env = env
 GLOBAL.setfenv(1, GLOBAL)
 
-env.AddStategraphActionHandler("frog", ActionHandler(ACTIONS.EAT, "eat"))
+--env.AddStategraphActionHandler("frog", ActionHandler(ACTIONS.EAT, "eat"))
+env.AddStategraphActionHandler("frog", ActionHandler(ACTIONS.PICKUP, "eat"))
 
 env.AddStategraphPostInit("frog", function(inst)
 

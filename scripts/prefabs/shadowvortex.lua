@@ -36,7 +36,11 @@ local function Vac(inst)
 	end
 	
 	for i, v in ipairs(ents) do
-		if v.sg ~= nil and not v.sg:HasStateTag("gotgrabbed") then
+		if v.sg ~= nil and not v.sg:HasStateTag("gotgrabbed") and not v.sg:HasStateTag("waking") then
+			if v.components.sleepingbaguser ~= nil and v.components.sleepingbaguser.sleeptask ~= nil then
+				v.components.sleepingbaguser:DoWakeUp()
+			end
+			
 			local px, py, pz = v.Transform:GetWorldPosition()
 				
 			local rad = math.rad(v:GetAngleToPoint(x, y, z))

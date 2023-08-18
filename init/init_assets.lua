@@ -409,6 +409,7 @@ Assets = {
 	Asset("ANIM", "anim/curse_muncher.zip"),
 	Asset("ANIM", "anim/bowlingping.zip"),
 	Asset("ANIM", "anim/walterwhistle.zip"),
+	Asset("ANIM", "anim/walter_heal_fx.zip"),
 	Asset("ANIM", "anim/marblebag.zip"),
 	Asset("ANIM", "anim/swap_marblebag.zip"),
 	Asset("ANIM", "anim/baggedmarbles.zip"),
@@ -600,6 +601,7 @@ Assets = {
 
 	Asset("ANIM", "anim/um_bq_actions.zip"),
 	Asset("ANIM", "anim/um_beeguard.zip"),
+	Asset("ANIM", "anim/bee_mine_explode_reset.zip"),
 
 	Asset("ANIM", "anim/uncompromising_dragonflyactions.zip"),
 	Asset("ANIM", "anim/uncompromising_goosemooseactions.zip"),

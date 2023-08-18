@@ -140,6 +140,7 @@ local prefab_post = {
     "siestahut",
     "bedroll_furry",
     "bees",
+	"beemine",
     "farmplants",
     "rainhat",
     "darts",

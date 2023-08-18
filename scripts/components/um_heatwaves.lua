@@ -76,7 +76,9 @@ return Class(function(self, inst)
 
     local function StartHeatWaves()
         if _worldsettingstimer:GetTimeLeft(UM_HEATWAVE_TIMERNAME) == nil then
-            _worldsettingstimer:StartTimer(UM_HEATWAVE_TIMERNAME, _spawninterval + math.random(0, 120))
+			if not _storming then
+				_worldsettingstimer:StartTimer(UM_HEATWAVE_TIMERNAME, _spawninterval + math.random(0, 120))
+			end
         end
 
         _worldsettingstimer:ResumeTimer(UM_HEATWAVE_TIMERNAME)
@@ -94,9 +96,9 @@ return Class(function(self, inst)
     local function OnSeasonChange(self)
         if TheWorld.state.season == "summer" then
             if TheWorld.state.cycles >= TUNING.DSTU.WEATHERHAZARD_START_DATE_SUMMER then
-                if not _storming then
+                --if not _storming then
                     StartHeatWaves()
-                end
+                --end
             end
         else
             StopHeatwave()

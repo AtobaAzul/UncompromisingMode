@@ -943,8 +943,12 @@ env.AddStategraphPostInit("wilson", function(inst)
 			{
 				TimeEvent(10 * FRAMES, function(inst)
 					local buffaction = inst:GetBufferedAction()
-					if buffaction ~= nil and buffaction.target ~= nil and buffaction.target:HasTag("CHOP_workable") then
-						inst.sg:AddStateTag("chopping")
+					if buffaction ~= nil and buffaction.target ~= nil then
+						if buffaction.target:HasTag("CHOP_workable") then
+							inst.sg:AddStateTag("chopping")
+						elseif buffaction.target:HasTag("MINE_workable") then
+							inst.sg:AddStateTag("mining")
+						end
 					end
 
 					inst:PerformBufferedAction()

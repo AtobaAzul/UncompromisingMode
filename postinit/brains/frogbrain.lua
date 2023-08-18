@@ -32,7 +32,7 @@ local function EatFoodAction(inst)
         FINDFOOD_CANT_TAGS
     )
     if target ~= nil then
-        return BufferedAction(inst, target, ACTIONS.EAT) or nil
+        return BufferedAction(inst, target, ACTIONS.PICKUP) or nil
     end
 end
 

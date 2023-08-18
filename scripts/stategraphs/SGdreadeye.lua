@@ -118,7 +118,7 @@ local states =
 {
     State{
         name = "idle_busy",
-        tags = { "busy"--[[, "canrotate"]] },
+        tags = { "idle"--[[, "canrotate"]] },
 
         onenter = function(inst)
             if inst.wantstodespawn then

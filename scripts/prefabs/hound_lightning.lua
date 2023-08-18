@@ -88,9 +88,9 @@ local function fn()
 
 	inst.task = inst:DoPeriodicTask(0.05, Sparks)
 
-	inst.SoundEmitter:PlaySound("dontstarve/rain/thunder_far")
 	inst:DoTaskInTime(0, function() --modern problems require modern solutions
 		-- need this or else when something sets inst.Delay the task will already have started with 1.
+		inst.SoundEmitter:PlaySound("dontstarve/rain/thunder_far")
 		Sparks(inst)
 		inst:DoTaskInTime(inst.Delay ~= nil and inst.Delay or 1, Zap)
 	end)

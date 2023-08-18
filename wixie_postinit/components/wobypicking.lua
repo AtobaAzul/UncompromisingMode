@@ -6,6 +6,104 @@ GLOBAL.setfenv(1, GLOBAL)
 -- IT WILL CRASH THE GAME. SO I HAD TO REROUTE THE PICKABLE COMPONENT AND
 -- THE PICKUP ACTION TO INCLUDE CONTAINER TARGETS
 
+-- Later I duped the container components GiveItem function because I needed to push a custom event in case
+-- the item fails to get added to wobys inventory
+
+env.AddComponentPostInit("container", function(self)
+	function self:GiveWobyItem(item, slot, src_pos, drop_on_fail)
+		if item == nil then
+			return false
+		elseif item.components.inventoryitem ~= nil and self:CanTakeItemInSlot(item, slot) then
+			if slot == nil then
+				slot = self:GetSpecificSlotForItem(item)
+			end
+
+			--try to burn off stacks if we're just dumping it in there
+			if item.components.stackable ~= nil and self.acceptsstacks then
+				--Added this for when we want to dump a stack back into a
+				--specific spot (e.g. moving half a stack failed, so we
+				--need to dump the leftovers back into the original stack)
+				if slot ~= nil and slot <= self.numslots then
+					local other_item = self.slots[slot]
+					if other_item ~= nil and other_item.prefab == item.prefab and other_item.skinname == item.skinname and not other_item.components.stackable:IsFull() then
+						if self.inst.components.inventoryitem ~= nil and self.inst.components.inventoryitem.owner ~= nil then
+							self.inst.components.inventoryitem.owner:PushEvent("gotnewitem", { item = item, slot = slot })
+						end
+
+						item = other_item.components.stackable:Put(item, src_pos)
+						if item == nil then
+							return true
+						end
+
+						slot = self:GetSpecificSlotForItem(item)
+					end
+				end
+
+				if slot == nil then
+					for k = 1, self.numslots do
+						local other_item = self.slots[k]
+						if other_item and other_item.prefab == item.prefab and other_item.skinname == item.skinname and not other_item.components.stackable:IsFull() then
+							if self.inst.components.inventoryitem ~= nil and self.inst.components.inventoryitem.owner ~= nil then
+								self.inst.components.inventoryitem.owner:PushEvent("gotnewitem", { item = item, slot = k })
+							end
+
+							item = other_item.components.stackable:Put(item, src_pos)
+							if item == nil then
+								return true
+							end
+						end
+					end
+				end
+			end
+
+			local in_slot = nil
+			if slot ~= nil and slot <= self.numslots and not self.slots[slot] then
+				in_slot = slot
+			elseif not self.usespecificslotsforitems and self.numslots > 0 then
+				for i = 1, self.numslots do
+					if not self.slots[i] then
+						in_slot = i
+						break
+					end
+				end
+			end
+
+			if in_slot then
+				--weird case where we are trying to force a stack into a non-stacking container. this should probably have been handled earlier, but this is a failsafe
+				if not self.acceptsstacks and item.components.stackable and item.components.stackable:StackSize() > 1 then
+					item = item.components.stackable:Get()
+					self.slots[in_slot] = item
+					item.components.inventoryitem:OnPutInInventory(self.inst)
+					self.inst:PushEvent("itemget", { slot = in_slot, item = item, src_pos = src_pos, })
+					return false
+				end
+
+				self.slots[in_slot] = item
+				item.components.inventoryitem:OnPutInInventory(self.inst)
+				self.inst:PushEvent("itemget", { slot = in_slot, item = item, src_pos = src_pos })
+
+				if not self.ignoresound and self.inst.components.inventoryitem ~= nil and self.inst.components.inventoryitem.owner ~= nil then
+					self.inst.components.inventoryitem.owner:PushEvent("gotnewitem", { item = item, slot = in_slot })
+				end
+
+				return true
+			end
+		end
+
+		--default to true if nil
+		if drop_on_fail ~= false then
+			--@V2C NOTE: not supported when using container_proxy
+			item.Transform:SetPosition(self.inst.Transform:GetWorldPosition())
+			if item.components.inventoryitem ~= nil then
+				item.components.inventoryitem:OnDropped(true)
+			end
+			
+			self.inst:PushEvent("woby_dropped_item")
+		end
+		return false
+	end
+end)
+
 env.AddComponentPostInit("pickable", function(self)
 	local _OldPick = self.Pick
 	
@@ -41,7 +139,7 @@ env.AddComponentPostInit("pickable", function(self)
 							end
 							for i, item in ipairs(loot) do
 								if item.components.inventoryitem ~= nil then
-									picker.components.container:GiveItem(item, nil, self.inst:GetPosition())
+									picker.components.container:GiveWobyItem(item, nil, self.inst:GetPosition())
 								end
 							end
 						else
@@ -54,7 +152,7 @@ env.AddComponentPostInit("pickable", function(self)
 									loot.components.stackable:SetStackSize(self.numtoharvest)
 								end
 								picker:PushEvent("picksomething", { object = self.inst, loot = loot })
-								picker.components.container:GiveItem(loot, nil, self.inst:GetPosition())
+								picker.components.container:GiveWobyItem(loot, nil, self.inst:GetPosition())
 							end
 						end
 					end
@@ -127,7 +225,7 @@ ACTIONS.PICKUP.fn = function(act)
             return false, "NOTMINE_SPIDER"
         end
 
-        act.doer.components.container:GiveItem(act.target, nil, act.target:GetPosition())
+        act.doer.components.container:GiveWobyItem(act.target, nil, act.target:GetPosition())
         return true
 	else
 		return _PickupFn(act)

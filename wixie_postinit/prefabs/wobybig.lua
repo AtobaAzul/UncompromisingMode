@@ -201,6 +201,19 @@ env.AddPrefabPostInit("wobybig", function(inst)
 		inst.components.inspectable.getstatus = inspect_woby
 	end
 	
+	if inst.components.health ~= nil then
+		inst.components.health.canheal = false
+	end
+	
+	inst:ListenForEvent("woby_dropped_item", function()
+		print("dropitem")
+		if inst._playerlink ~= nil and inst._playerlink.components.health ~= nil and not inst._playerlink.components.health:IsDead() then
+			inst._playerlink.components.talker:Say(GetString(inst._playerlink, "ANNOUNCE_WOBY_TOOFULL"))
+			inst.wobytarget = nil
+			inst.oldwobytarget = nil
+		end
+	end)
+	
     inst:ListenForEvent("riderchanged", RemoveTarget)
 	
 	inst:DoPeriodicTask(2, CheckForMoreTargets)

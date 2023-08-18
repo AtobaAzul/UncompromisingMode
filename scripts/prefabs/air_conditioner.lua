@@ -112,7 +112,7 @@ local function TryPuff(player, inst)
     
 end
 
-local function SmokePuff(inst)
+local function SmokePuff(inst, channeler)
 	local x, y, z = inst.Transform:GetWorldPosition()
 	if inst.components.container ~= nil then
 		local bluecaps = inst.components.container:FindItems( function(item) return item:HasTag("blue_mushroom_fuel") end )
@@ -133,7 +133,13 @@ local function SmokePuff(inst)
 			sporepuff.AnimState:SetMultColour(red, green, blue, 0.2)
 			
 			local air_conditioner_cloud = SpawnPrefab("air_conditioner_cloud")
-			air_conditioner_cloud.Transform:SetPosition(x + math.random(-10, 10), 0, z + math.random(-10, 10))
+			
+			if channeler ~= nil and channeler:IsValid() then
+				air_conditioner_cloud.Transform:SetPosition(channeler.Transform:GetWorldPosition())
+			else
+				air_conditioner_cloud.Transform:SetPosition(x + math.random(-10, 10), 0, z + math.random(-10, 10))
+			end
+			
 			air_conditioner_cloud.AnimState:SetMultColour(red, green, blue, 0.2)
 			air_conditioner_cloud.red = numredcaps
 			air_conditioner_cloud.blue = numbluecaps
@@ -197,7 +203,9 @@ local function DoPuff(inst, channeler)
 			v:DoTaskInTime(0, function(v) v.components.perishable:Perish() end)
 		end
 		
-		inst:DoTaskInTime(0.2, SmokePuff)
+		inst:DoTaskInTime(0.2, function()
+			SmokePuff(inst, channeler)
+		end)
 
 		--[[local x, y, z = inst.Transform:GetWorldPosition()
 		

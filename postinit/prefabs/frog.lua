@@ -56,7 +56,16 @@ env.AddPrefabPostInit("frog", function (inst)
 		inst.components.eater:SetCanEatRaw()
 		inst.components.eater.strongstomach = true -- can eat monster meat!
 	end
-
+	
+	if not inst.components.inventory then
+		inst:AddComponent("inventory")
+	end
+	
+	if not inst.components.um_dynamic_digester then
+		inst:AddComponent("um_dynamic_digester")
+		inst.components.um_dynamic_digester.digesttime = 5
+		inst.components.um_dynamic_digester.digest_per = 20
+	end
 end)
 
 env.AddPrefabPostInit("uncompromising_toad", function (inst)
@@ -71,5 +80,14 @@ env.AddPrefabPostInit("uncompromising_toad", function (inst)
 		inst.components.eater:SetCanEatRaw()
 		inst.components.eater.strongstomach = true -- can eat monster meat!
 	end
-
+	
+	if not inst.components.inventory then
+		inst:AddComponent("inventory")
+	end
+	
+	if not inst.components.um_dynamic_digester then
+		inst:AddComponent("um_dynamic_digester")
+		inst.components.um_dynamic_digester.digesttime = 5
+		inst.components.um_dynamic_digester.digest_per = 20
+	end
 end)

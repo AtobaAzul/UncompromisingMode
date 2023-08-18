@@ -45,15 +45,15 @@ local function fn_ia_um()
 end
 
 if GetValidRecipe("slingshotammo_tar") then
-	if Prefabs["tar"] then
+	if Prefabs["tar"] and Prefabs["slingshotammo_tar"] ~= nil then
 		AllRecipes["slingshotammo_tar"].ingredients = { Ingredient("tar", 1) }
-	elseif Prefabs["sludge"] then
+	elseif Prefabs["sludge"] and Prefabs["slingshotammo_tar"] ~= nil then
 		AllRecipes["slingshotammo_tar"].ingredients = { Ingredient("sludge", 1) }
 	end
 end
 
 
-if Prefabs["obsidian"] then
+if Prefabs["obsidian"] and Prefabs["slingshotammo_obsidian"] ~= nil then
     AllRecipes["slingshotammo_obsidian"].ingredients = { Ingredient("obsidian", 1) }
 end
 

@@ -16,12 +16,17 @@ local wobycommand = AddAction(
 	function(act)
 	
 	local hasfollowers = false
+	local hasmerms = false
 	
 	if act.doer ~= nil and act.doer.components.leader ~= nil and act.target ~= nil then
 		for k,v in pairs(act.doer.components.leader.followers) do
             if not k:HasTag("customwobytag") and k.components.follower ~= nil then 
 				if k.components.combat ~= nil and act.target.components.combat and k.components.follower.canaccepttarget then
 					k.components.combat:SuggestTarget(act.target)
+				end
+				
+				if k:HasTag("merm") then
+					hasmerms = true
 				end
 				
 				hasfollowers = true
@@ -131,7 +136,7 @@ local wobycommand = AddAction(
 							act.doer.components.talker:Say(GLOBAL.GetString(act.doer, "ANNOUNCE_WOBY_BARK"))
 						end
 					else
-						if hasfollowers and act.target:HasTag("CHOP_workable") then
+						if hasfollowers and (act.target:HasTag("CHOP_workable") or hasmerms and act.target:HasTag("MINE_workable")) then
 							act.doer.components.talker:Say(GLOBAL.GetString(act.doer, "ANNOUNCE_TROUP_ATTENTION"))
 						
 							return true
@@ -356,3 +361,6 @@ GLOBAL.ACTIONS.CAST_NET.mount_valid = false
 GLOBAL.ACTIONS.DRY.mount_valid = true
 GLOBAL.ACTIONS.ACTIVATE.mount_valid = true
 GLOBAL.ACTIONS.CASTSPELL.distance = 40
+-- Increasing the HEAL priority allows you to heal other players, instead of giving them the item.
+-- This lets Walter put his bonus healing perk to good use on other players!
+GLOBAL.ACTIONS.HEAL.priority = 4
