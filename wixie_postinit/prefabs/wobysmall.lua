@@ -115,7 +115,7 @@ local function CheckForMoreTargets(inst)
 				
 	for i, v in ipairs(ents) do
 		if inst.wobytarget ~= nil and inst.wobytarget:IsValid() and not inst.wobytarget:HasTag("outofreach") and not inst.wobytarget:HasTag("INLIMBO") or inst.components.hunger:GetPercent() == 0 then
- 			if inst._playerlink ~= nil and inst._playerlink:IsValid() and inst.wobytarget ~= nil and inst.wobytarget:IsValid() and not inst._playerlink:IsNear(inst.wobytarget, 25) then
+ 			if inst._playerlink ~= nil and inst._playerlink:IsValid() and inst.wobytarget ~= nil and inst.wobytarget:IsValid() and not inst._playerlink:IsNear(inst.wobytarget, 35) then
 				inst.oldwobytarget = inst.wobytarget
 				inst.wobytarget = nil
 			end

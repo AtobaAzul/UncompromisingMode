@@ -585,7 +585,7 @@ local function OnSleep(inst)
 end
 
 local RETARGET_MUST_TAGS = { "_combat", "_health" }
-local RETARGET_CANT_TAGS = { "insect", "INLIMBO", "player" }
+local RETARGET_CANT_TAGS = { "insect", "INLIMBO", "player", "abigail", "companion" }
 local RETARGET_ONEOF_TAGS = { "character", "animal", "monster" }
 local function BeeRetarget(inst)
     return FindEntity(inst, SpringCombatMod(8),

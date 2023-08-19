@@ -315,6 +315,10 @@ function WobyBigBrain:OnStart()
 		WhileNode( function() return HasWobyTarget(self.inst) end, "Has Target",
 			DoAction(self.inst, DoTargetAction, nil, true )
 		),
+				
+		WhileNode( function() return HasSitTarget(self.inst) end, "Has Target",
+			DoAction(self.inst, GoSitAction, nil, true )
+		),
 		
 		PriorityNode{
 			JukeAndJive(self.inst, {tags={"_combat", "_health"}, notags={"player", "wall", "INLIMBO", "prey"},
@@ -326,10 +330,6 @@ function WobyBigBrain:OnStart()
 				FaceEntity(self.inst, GetOwner, KeepFaceOwnerFn, nil, "cower")
 				),
 		},
-				
-		WhileNode( function() return HasSitTarget(self.inst) end, "Has Target",
-			DoAction(self.inst, GoSitAction, nil, true )
-		),
 
         -- These two are kept separatly because we have different animations for mounting vs. opening and feeding
         FaceEntity(self.inst, GetRiderFn, KeepRiderFn),

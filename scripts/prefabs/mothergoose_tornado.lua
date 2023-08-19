@@ -189,9 +189,7 @@ local function tornado_fn()
     inst.SetDuration = SetDuration
     inst:SetDuration(3000)
 	
-	inst:DoTaskInTime(1, function(inst)
-		inst:DoPeriodicTask(.4, destroystuff)
-	end)
+	inst:DoPeriodicTask(.4, destroystuff, 1)
 
     return inst
 end
