@@ -178,18 +178,16 @@ configuration_options = {
             {
                 description = "Dynamic",
                 hover = "Bosses change their resistance based on hits taken.",
-                data =
-                "Dynamic"
+                data = 1
             },
             {
                 description = "Static",
                 hover = "Bosses change their resistance based on nearby players.",
-                data =
-                "Static"
+                data = 2
             },
-            { description = "Disabled", data = false } },
-        default =
-        "dynamic"
+            { description = "Disabled", data = 3 },
+        },
+        default = 1,
     },
     {
         name = "vetcurse",
