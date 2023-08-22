@@ -172,6 +172,14 @@ local function updateclaustrophobia(inst)
 end
 
 local function EquipedCount(inst, data)
+	if data ~= nil and data.item ~= nil and data.item.components.equippable ~= nil and data.item.components.equippable.equipslot ~= nil then
+		if data.item.components.equippable.equipslot == EQUIPSLOTS.BODY then
+			inst.components.talker:Say(GetString(inst, "UNCOMFORTABLE_ARMOR"))
+		elseif data.item.components.equippable.equipslot == EQUIPSLOTS.HEAD then
+			inst.components.talker:Say(GetString(inst, "UNCOMFORTABLE_HAT"))
+		end
+	end
+	
 	local headequipped = inst.components.inventory ~= nil and inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HEAD) or nil
 	local bodyequipped = inst.components.inventory ~= nil and inst.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY) or nil
 
@@ -179,14 +187,6 @@ local function EquipedCount(inst, data)
 	inst.bodymodifier = bodyequipped ~= nil and bodyequipped.components.armor ~= nil and not bodyequipped:HasTag("grass") and not bodyequipped:HasTag("shadow_item") and 0.2 or 0
 
 	inst.claustrophobiamodifier = inst.headmodifier + inst.bodymodifier
-	
-	if inst.headmodifier > 0 then
-		inst.components.talker:Say(GetString(inst, "UNCOMFORTABLE_HAT"))
-	end
-	
-	if inst.bodymodifier > 0 then
-		inst.components.talker:Say(GetString(inst, "UNCOMFORTABLE_ARMOR"))
-	end
 	
 	SendModRPCToClient(GetClientModRPC("WixieTheDelinquent", "ClaustrophobiaEquipMult"), inst.userid, inst.claustrophobiamodifier)
 end
@@ -284,7 +284,6 @@ local function common_postinit(inst)
 	
 	if TheWorld.ismastersim	then
 		inst:ListenForEvent("equip", EquipedCount)
-		inst:ListenForEvent("unequip", EquipedCount)
 		inst:ListenForEvent("newstate", OnNewState)
 	end
 end

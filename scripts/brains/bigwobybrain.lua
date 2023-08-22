@@ -321,7 +321,7 @@ function WobyBigBrain:OnStart()
 		),
 		
 		PriorityNode{
-			JukeAndJive(self.inst, {tags={"_combat", "_health"}, notags={"player", "wall", "INLIMBO", "prey"},
+			JukeAndJive(self.inst, {tags={"_combat", "_health"}, notags={"player", "wall", "INLIMBO", "rabbit", "bird"},
 					fn=CombatAvoidanceFindEntityCheck(self)},
 					COMBAT_TOO_CLOSE_DIST,
 					COMBAT_SAFE_TO_WATCH_FROM_DIST),

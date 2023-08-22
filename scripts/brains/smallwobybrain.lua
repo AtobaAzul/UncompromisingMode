@@ -296,7 +296,7 @@ function SmallWobyBrain:OnStart()
 				
                 -- Combat Avoidance
 				PriorityNode{
-					JukeAndJive(self.inst, {tags={"_combat", "_health"}, notags={"player", "wall", "INLIMBO", "prey"}, fn=CombatAvoidanceFindEntityCheck(self)}, COMBAT_TOO_CLOSE_DIST, COMBAT_SAFE_TO_WATCH_FROM_DIST),
+					JukeAndJive(self.inst, {tags={"_combat", "_health"}, notags={"player", "wall", "INLIMBO", "rabbit", "bird"}, fn=CombatAvoidanceFindEntityCheck(self)}, COMBAT_TOO_CLOSE_DIST, COMBAT_SAFE_TO_WATCH_FROM_DIST),
 					WhileNode( function() return ValidateCombatAvoidance(self) end, "Is Near Combat",
 						FaceEntity(self.inst, GetOwner, KeepFaceTargetFn)),
 				},

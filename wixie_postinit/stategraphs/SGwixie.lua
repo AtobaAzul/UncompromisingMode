@@ -759,6 +759,13 @@ env.AddStategraphPostInit("wilson", function(inst)
 						if inst.slingshot_amount == nil then
 							inst.slingshot_amount = 1
 						end
+						
+						local gnasher_charged = false
+						
+						if equip ~= nil and equip:HasTag("gnasher") and inst.slingshot_power == 2 then
+							gnasher_charged = true
+							inst.SoundEmitter:PlaySound("wolfgang2/common/gym/success")
+						end
 
 						equip.powerlevel = inst.slingshot_power
 						equip.slingshot_amount = inst.slingshot_amount
@@ -772,6 +779,16 @@ env.AddStategraphPostInit("wilson", function(inst)
 						equip.slingshot_amount = inst.slingshot_amount
 
 						inst.SoundEmitter:PlaySound("dontstarve/characters/walter/slingshot/shoot")
+						
+						if gnasher_charged then
+							if equip ~= nil and equip.components.weapon ~= nil and equip.components.weapon.projectile ~= nil then
+								inst.wixiequickshot = true
+								inst.sg:GoToState("slingshot_charge")
+							else
+								inst.sg:GoToState("idle")
+							end
+						end
+						
 					else -- out of ammo
 						inst:ClearBufferedAction()
 						inst.components.talker:Say(GetString(inst, "ANNOUNCE_SLINGHSOT_OUT_OF_AMMO"))
