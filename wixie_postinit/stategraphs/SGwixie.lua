@@ -764,7 +764,7 @@ env.AddStategraphPostInit("wilson", function(inst)
 						
 						if equip ~= nil and equip:HasTag("gnasher") and inst.slingshot_power == 2 then
 							gnasher_charged = true
-							inst.SoundEmitter:PlaySound("wolfgang2/common/gym/success")
+							--inst.SoundEmitter:PlaySound("wolfgang2/common/gym/success")
 						end
 
 						equip.powerlevel = inst.slingshot_power
