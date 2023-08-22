@@ -69,6 +69,10 @@ local function OnAttack(inst, attacker, target)
         if attacker.components.combat ~= nil then
             attacker.components.combat:SetTarget(target)
         end
+					
+		if target.components.health ~= nil and target.components.health:IsDead() then
+			attacker:PushEvent("killed", { victim = target, attacker = attacker })
+		end
     end
 end
 
@@ -413,6 +417,10 @@ local function OnHit_Gold(inst, attacker, target)
                             v:PushEvent("attacked", { attacker = attacker, damage = 0, weapon = inst })
                             v.components.combat:RemoveShouldAvoidAggro(attacker)
                         end
+						
+						if v.components.health ~= nil and v.components.health:IsDead() then
+							attacker:PushEvent("killed", { victim = v, attacker = attacker })
+						end
                     end
                 end
             end

@@ -18,7 +18,7 @@ local function no_aggro(attacker, target)
 end
 
 local function DealDamage(inst, attacker, target, salty)
-    if target ~= nil and target:IsValid() and target.components.combat ~= nil then
+    if target ~= nil and target:IsValid() and target.components.combat ~= nil and target.components.health ~= nil and not target.components.health:IsDead() then
         inst.finaldamage = (inst.damage * (1 + (inst.powerlevel / 2))) * (attacker.components.combat ~= nil and attacker.components.combat.externaldamagemultipliers:Get() or 1)
 
         if salty ~= nil and salty and target.components.health ~= nil then
@@ -62,6 +62,10 @@ local function DealDamage(inst, attacker, target, salty)
         if attacker.components.combat ~= nil then
             attacker.components.combat:SetTarget(target)
         end
+		
+		if target.components.health ~= nil and target.components.health:IsDead() then
+			attacker:PushEvent("killed", { victim = target, attacker = attacker })
+		end
     end
 end
 
@@ -177,6 +181,10 @@ local function DoPop(inst, remaining, total, level, hissvol)
                     if v.components.sleeper ~= nil and v.components.sleeper:IsAsleep() then
                         v.components.sleeper:WakeUp()
                     end
+
+					if v.components.health ~= nil and v.components.health:IsDead() then
+						inst.attacker:PushEvent("killed", { victim = v, attacker = inst.attacker })
+					end
                 end
             end
         end
@@ -363,13 +371,19 @@ local function Damage(inst, attacker, target)
     local damageents = TheSim:FindEntities(x, y, z, 1 * inst.Transform:GetScale(), { "_combat" }, AURA_EXCLUDE_TAGS)
 
     for i, v in ipairs(damageents) do
-        if v.components.combat ~= nil and (v:HasTag("bird_mutant") or not v:HasTag("bird")) then
+        if v.components.combat ~= nil and v.components.health and not v.components.health:IsDead() and (v:HasTag("bird_mutant") or not v:HasTag("bird")) then
             if not (v.components.follower ~= nil and v.components.follower:GetLeader() ~= nil and v.components.follower:GetLeader():HasTag("player")) then
                 v.components.combat:GetAttacked(inst, 2 * inst.Transform:GetScale(), inst)
 
-                if v.components.combat ~= nil then
-                    v.components.combat:SetTarget(attacker)
-                end
+				if attacker ~= nil then
+					if v.components.combat ~= nil then
+						v.components.combat:SetTarget(attacker)
+					end
+						
+					if v.components.health ~= nil and v.components.health:IsDead() then
+						attacker:PushEvent("killed", { victim = v, attacker = attacker })
+					end
+				end
             end
         end
     end
@@ -721,7 +735,7 @@ local function OnHit_Slime(inst, attacker, target)
 
             hitfx:ListenForEvent("onignite", function(inst)
                 if target ~= nil then
-                    if target.components.combat ~= nil then
+                    if target.components.combat ~= nil and target.components.health ~= nil and not target.components.health:IsDead() then
                         if no_aggro(attacker, target) then
                             target.components.combat:SetShouldAvoidAggro(attacker)
                         end
@@ -732,6 +746,10 @@ local function OnHit_Slime(inst, attacker, target)
                             target.components.combat:SetTarget(attacker)
                             target.components.combat:RemoveShouldAvoidAggro(attacker)
                         end
+						
+						if target.components.health ~= nil and target.components.health:IsDead() then
+							attacker:PushEvent("killed", { victim = target, attacker = attacker })
+						end
                     end
 
                     local debuffkey = hitfx.prefab
@@ -740,14 +758,14 @@ local function OnHit_Slime(inst, attacker, target)
                     target.slingshot_slime = nil
 
                     SpawnPrefab("explode_small").Transform:SetPosition(target.Transform:GetWorldPosition())
-                end
+				end
 
                 hitfx:Remove()
             end, target)
 
             hitfx:DoPeriodicTask(.2, function()
                 if target.components.burnable ~= nil and target.components.burnable:IsBurning() or target.components.propagator and target.components.propagator.spreading then
-                    if target ~= nil then
+                    if target ~= nil and target.components.health ~= nil and not target.components.health:IsDead() then
                         if target.components.combat ~= nil then
                             if no_aggro(attacker, target) then
                                 target.components.combat:SetShouldAvoidAggro(attacker)
@@ -759,6 +777,10 @@ local function OnHit_Slime(inst, attacker, target)
                                 target.components.combat:SetTarget(attacker)
                                 target.components.combat:RemoveShouldAvoidAggro(attacker)
                             end
+						
+							if target.components.health ~= nil and target.components.health:IsDead() then
+								attacker:PushEvent("killed", { victim = target, attacker = attacker })
+							end
                         end
 
                         local debuffkey = hitfx.prefab
@@ -1059,6 +1081,10 @@ local function GlassCut(inst)
                         v.components.combat:SetTarget(attacker)
                         v.components.combat:RemoveShouldAvoidAggro(attacker)
                     end
+					
+					if v.components.health ~= nil and v.components.health:IsDead() then
+						attacker:PushEvent("killed", { victim = v, attacker = attacker })
+					end
                 end
             end
         end
@@ -1107,6 +1133,10 @@ local function GlassCut(inst)
                         v.components.combat:SetTarget(attacker)
                         v.components.combat:RemoveShouldAvoidAggro(attacker)
                     end
+					
+					if v.components.health ~= nil and v.components.health:IsDead() then
+						attacker:PushEvent("killed", { victim = v, attacker = attacker })
+					end
                 end
             end
         end
@@ -1579,7 +1609,7 @@ local function Rebound(inst, attacker, target)
             target.SoundEmitter:PlaySound("dontstarve/characters/walter/slingshot/shoot")
         end
 
-        if not target:HasTag("wall") and not target:HasTag("structure") then
+        if not target:HasTag("wall") and not target:HasTag("structure") and target.components.health ~= nil and not target.components.health:IsDead() then
             if no_aggro(set_attacker, target) then
                 target.components.combat:SetShouldAvoidAggro(attacker)
             end
@@ -1596,6 +1626,10 @@ local function Rebound(inst, attacker, target)
                 target.components.combat:SetTarget(set_attacker)
                 target.components.combat:RemoveShouldAvoidAggro(attacker)
             end
+				
+			if target.components.health ~= nil and target.components.health:IsDead() then
+				attacker:PushEvent("killed", { victim = target, attacker = attacker })
+			end
         end
 
         if inst.bouncecount <= inst.maxbounces then
@@ -1910,7 +1944,7 @@ local function Tremor(inst)
                     end)
                 end
 
-                if v:IsValid() and v.components.combat ~= nil and v.components.combat ~= nil and v.components.health ~= nil then
+                if v:IsValid() and v.components.combat ~= nil and v.components.combat ~= nil and v.components.health ~= nil and not v.components.health:IsDead() then
                     inst.finaldamage = TUNING.SLINGSHOT_AMMO_DAMAGE_GOLD * (1 + inst.powerlevel) / 2
 
                     if inst.attacker ~= nil and inst.attacker.components ~= nil and inst.attacker.components.combat then
@@ -1931,6 +1965,10 @@ local function Tremor(inst)
                         v.components.combat:SetTarget(inst.attacker)
                         v.components.combat:RemoveShouldAvoidAggro(inst.attacker)
                     end
+						
+					if v.components.health ~= nil and v.components.health:IsDead() then
+						inst.attacker:PushEvent("killed", { victim = v, attacker = inst.attacker })
+					end
                 end
             end
         end

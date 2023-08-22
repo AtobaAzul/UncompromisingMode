@@ -17,7 +17,7 @@ local function no_aggro(attacker, target)
 end
 
 local function DealDamage(inst, attacker, target, salty)
-    if target ~= nil and target:IsValid() and target.components.combat ~= nil then
+    if target ~= nil and target:IsValid() and target.components.combat ~= nil and target.components.health ~= nil and not target.components.health:IsDead() then
         inst.finaldamage = (inst.damage * (1 + (inst.powerlevel / 2))) * (attacker.components.combat ~= nil and attacker.components.combat.externaldamagemultipliers:Get() or 1)
 
         if salty ~= nil and salty and target.components.health ~= nil then
@@ -62,6 +62,10 @@ local function DealDamage(inst, attacker, target, salty)
         if attacker.components.combat ~= nil then
             attacker.components.combat:SetTarget(target)
         end
+					
+		if target.components.health ~= nil and target.components.health:IsDead() then
+			attacker:PushEvent("killed", { victim = target, attacker = attacker })
+		end
     end
 end
 
@@ -257,7 +261,7 @@ local function DoAreaBurn(inst)
     local ents = TheSim:FindEntities(x, y, z, 5, nil, OBSIDIAN_AURA_EXCLUDE_TAGS)
     for i, v in ipairs(ents) do
         if not (v.components.follower ~= nil and v.components.follower:GetLeader() ~= nil and v.components.follower:GetLeader():HasTag("player")) then
-            if inst.components.propagator ~= nil and v.components.combat ~= nil and v.components.health ~= nil and (v:HasTag("bird_mutant") or not v:HasTag("bird")) then
+            if inst.components.propagator ~= nil and v.components.combat ~= nil and v.components.health ~= nil and not v.components.health:IsDead() and (v:HasTag("bird_mutant") or not v:HasTag("bird")) then
                 if v.components.sleeper ~= nil and v.components.sleeper:IsAsleep() then
                     v.components.sleeper:WakeUp()
                 end
@@ -266,6 +270,10 @@ local function DoAreaBurn(inst)
                 SpawnPrefab("halloween_firepuff_1").Transform:SetPosition(v.Transform:GetWorldPosition())
 
                 -- v:PushEvent("onignite")
+					
+				if v.components.health ~= nil and v.components.health:IsDead() then
+					inst.attacker:PushEvent("killed", { victim = v, attacker = inst.attacker })
+				end
             end
 
             v:PushEvent("onignite")
