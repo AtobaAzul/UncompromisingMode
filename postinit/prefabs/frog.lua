@@ -26,11 +26,11 @@ local function NewRetargetfn(inst)
     if not inst.components.health:IsDead() and not inst.components.sleeper:IsAsleep() then
         return FindEntity(inst, TUNING.FROG_TARGET_DIST, function(guy) 
             if not guy.components.health:IsDead() then
-                return inst._um_oldretarget
+                return guy.components.inventory ~= nil and inst._um_oldretarget
             end
         end,
         {"_combat","_health"}, -- see entityreplica.lua
-        {"frog","toadstool","toad", "merm", "bird", "invisible"} -- see entityreplica.lua
+        {"frog","toadstool","toad", "merm", "bird", "invisible", "wall", "structure"} -- see entityreplica.lua
         )
     end
 end

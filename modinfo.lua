@@ -6,7 +6,7 @@ if not folder_name:find("workshop-") then
 end
 
 description = [[
-󰀔 [ Version 1.2.1.0: "Under the Weather Pt.1" ]
+󰀔 [ Version 1.3.0.0: "Under the Weather Pt.1" ]
 
 Uncompromising Mode increases the risk and reward for those who have mastered Don't Starve Together.
 
@@ -20,7 +20,7 @@ Latest update features:
 
 author = "󰀈 The Uncomp Dev Team 󰀈"
 
-version = "Under the Weather Pt.1 v1.2.1.0"
+version = "Under the Weather Pt.1 v1.3.0.0"
 -- VERSION SCHEME
 -- first num is major release (e.g. "Under the weather", so, 2, UTW2 will be 3, and so on.) DO NOT BRING THIS NUMBER *DOWN* AGAIN PLEASE
 -- second is new content (something like a new large addition)
@@ -359,7 +359,7 @@ configuration_options = {
     BinaryConfig("winter_burning", "Harder Burning",
         "Winter makes it so setting stuff alight takes more time, and also finish burning faster.", true),
     SkipSpace(),
-
+	
     {
         name = "weatherhazard_spring",
         label = "Start Date for Spring weather",
@@ -370,10 +370,7 @@ configuration_options = {
             { description = "Third Year", data = 120 } },
         default = 5
     },
-    BinaryConfig("hayfever_disable", "Hayfever",
-        "Hayfever makes a return from Hamlet, but tweaked so it doesn't make you want to die. Prevent sneezing with antihistamines and certain hats.",
-        false),
-    BinaryConfig("um_storms", "Tornadoes", "Tornadoes sweep across the land and kidnap your cows.", true),
+    BinaryConfig("um_storms", "Tornadoes", "Tornadoes sweep across the land, bringing heavy rain and lightning!", true),
     {
         name = "um_storms_performance",
         label = "Tornadoes: Less Lag",
@@ -386,6 +383,9 @@ configuration_options = {
         },
         default = "off"
     },
+    BinaryConfig("hayfever_disable", "[BROKEN] Hayfever",
+        "Hayfever makes a return from Hamlet, but tweaked so it doesn't make you want to die. Prevent sneezing with antihistamines and certain hats.",
+        false),
     SkipSpace(),
 
     {
@@ -408,6 +408,7 @@ configuration_options = {
     BinaryConfig("pyrenettles", "Pyre Nettles", "Pyre Nettles are a new invasive plant that grows with heat.", true),
     BinaryConfig("smog", "Smog",
         "Burning plants in summer releases large quantities of smoke. Meant to interact with heatwaves.", true),
+	BinaryConfig("maxtempdamage", "Max Health Temperature Damage", "Freezing and Overheating will deal max health damage after a brief delay.", true),
     SkipSpace(),
 
     --[[ This section disabled until we actually use it.
@@ -741,6 +742,9 @@ configuration_options = {
     BinaryConfig("trepidations", "Ancient Trepidations",
         "Enabling this allows Trepidations to roam the halls of the ruins during the Nightmare Phase, seeking out the weak of mind.",
         true),
+    BinaryConfig("nodespawn_trepidation", "Harder Trepidations",
+        "Enabling this will prevent the Ancient Trepidation from despawning after the Nightmare Phase calms down.",
+        false),
     BinaryConfig("pawns", "Clockwork Pawns",
         "Enabling this allows Pawns to patrol the depths of the caves, drawing unwanted attention to the foolish and lost.",
         true),

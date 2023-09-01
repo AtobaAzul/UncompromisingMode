@@ -14,7 +14,7 @@ local function NewCustom(inst, dt)
 		end
 	end
 	
-	local wobystarving = inst.woby ~= nil and inst.woby.wobystarving and -0.15 or 0
+	local wobystarving = inst.woby ~= nil and inst.woby.wobystarving and -0.1 or 0
 	
 	local rate = inst._OldRate(inst, dt)
 

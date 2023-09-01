@@ -799,6 +799,8 @@ local function OnTagTimer(inst, data)
 end
 
 env.AddPrefabPostInit("beequeenhive", function(inst)
+	inst:AddTag("um_beequeenhive")
+
 	if not TheWorld.ismastersim then
 		return
 	end

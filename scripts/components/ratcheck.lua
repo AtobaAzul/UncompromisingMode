@@ -190,14 +190,13 @@ return Class(function(self, inst)
 	-- Commented out the ratburrow spawning stuff because it could get annoying, and im a HORDER --
 	-- _________________________________________________________________________________________ --
 	-----------------------------------------------------------------------------------------------
-	local function StartRaid(inst)
+	local function StartRaid(inst, doer)
 		local x, y, z = inst.Transform:GetWorldPosition()
 		local players = FindPlayersInRange(x, y, z, 50)
 
 		local ratburrow = TheSim:FindFirstEntityWithTag("ratburrow")
 
 		--if ratburrow ~= nil then
-		TheWorld:PushEvent("ratcooldown", inst)
 
 		if ratwarning == nil then
 			ratwarning = 0
@@ -244,7 +243,8 @@ return Class(function(self, inst)
 
 					_raided = true
 
-					data.container:DoTaskInTime(0, StartRaid, data.doer)
+					self:StartRaid(data.container, data.doer)
+					TheWorld:PushEvent("ratcooldown", inst)
 				else
 
 					if #ents <= 20 then

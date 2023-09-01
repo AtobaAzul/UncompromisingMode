@@ -328,9 +328,12 @@ local function onothercollide(inst, other, owner)
 	elseif other.components.workable ~= nil
 		and other.components.workable:CanBeWorked()
 		and other.components.workable.action ~= ACTIONS.NET then
-		other.components.workable:WorkedBy(owner, 0)
+		
+		other.components.workable:WorkedBy(owner, other:HasTag("tree") and 1 or 0)
+		
 		if other:IsValid() and other.components.workable ~= nil and other.components.workable:CanBeWorked() then
 			inst.recentlycharged[other] = true
+			SpawnPrefab("round_puff_fx_sm").Transform:SetPosition(other.Transform:GetWorldPosition())
 			inst:DoTaskInTime(3, ClearRecentlyCharged, other)
 		end
 
@@ -364,7 +367,7 @@ local function onothercollide(inst, other, owner)
 	end
 end
 
-local NOTAGS = { "fx", "INLIMBO", "shadow", "player", "DIG_workable", "prey", "bird" }
+local NOTAGS = { "fx", "INLIMBO", "shadow", "player", "DIG_workable", "prey", "bird", "um_beequeenhive" }
 local function oncollide(inst)
 	if inst.owner ~= nil then
 		local x, y, z = inst.owner.Transform:GetWorldPosition()

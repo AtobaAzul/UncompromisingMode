@@ -19,8 +19,13 @@ end
 
 local function CheckAndApplyTempDamage(inst, data)
 	if data ~= nil and data.amount ~= nil and data.amount < 0 and data.cause ~= nil and (data.cause == "cold" or data.cause == "hot") then
-		if inst.um_temp_healthdelta ~= nil and inst.um_temp_healthdelta >= 3 then
-			inst.um_temp_healthdelta = 2
+		local worldtemperature = inst.um_world_temperature ~= nil and math.abs(inst.um_world_temperature - 35) / 20 or 0
+		print("World Temperature = "..worldtemperature)
+		local temp_buffer = 7 - worldtemperature
+		print("Temperature Buffer = "..temp_buffer)
+		
+		if inst.um_temp_healthdelta ~= nil and inst.um_temp_healthdelta >= temp_buffer then
+			inst.um_temp_healthdelta = temp_buffer / 2
 			
 			if inst.components.temperature ~= nil then
 				if data.cause == "cold" then
@@ -164,7 +169,14 @@ env.AddPlayerPostInit(function(inst)
 		end
     end
 	
-	inst:ListenForEvent("healthdelta", CheckAndApplyTempDamage)
+	if TUNING.DSTU.MAXTEMPDAMAGE then
+		inst:ListenForEvent("temperaturetick", function(src, temperature)
+				inst.um_world_temperature = temperature
+				print(inst.um_world_temperature)
+			end, TheWorld)
+		
+		inst:ListenForEvent("healthdelta", CheckAndApplyTempDamage)
+	end
 	
 	--Client after this
 	--inst:AddTag("um_darkwood")

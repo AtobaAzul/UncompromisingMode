@@ -1,4 +1,4 @@
-return {
+local prefabs = {
 	--Characters
 	"winky",
 	"winky_none",
@@ -400,7 +400,6 @@ return {
 	"woby_target",
 	"wixie_stinkcloud",
 	"wixiegun",
-	"placeholder_recipe_item",
 	
 	"winona_structure_item",
 	"boiling_water",
@@ -427,3 +426,9 @@ return {
 	"um_preparedfoods",
 	"um_foliage",
 }
+
+if TUNING.DSTU.WIXIE then
+	table.insert(prefabs, "placeholder_recipe_item")
+end
+
+return prefabs

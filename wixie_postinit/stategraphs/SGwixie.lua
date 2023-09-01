@@ -491,7 +491,7 @@ env.AddStategraphPostInit("wilson", function(inst)
 				end),
 
 				TimeEvent(13 * FRAMES, function(inst)
-					inst.SoundEmitter:PlaySound("dontstarve/characters/walter/slingshot/stretch")
+					inst.SoundEmitter:PlaySound("wixie/characters/wixie/slingshot_verylow")
 				end),
 
 				TimeEvent(14 * FRAMES, function(inst) -- start of slingshot
@@ -523,7 +523,7 @@ env.AddStategraphPostInit("wilson", function(inst)
 							fx.Transform:SetPosition(0, 2.35, 0)
 
 							inst.slingshot_power = 1.25
-							inst.SoundEmitter:PlaySound("dontstarve/characters/walter/slingshot/stretch")
+							inst.SoundEmitter:PlaySound("wixie/characters/wixie/slingshot_low")
 						end
 					end
 				end),
@@ -539,7 +539,7 @@ env.AddStategraphPostInit("wilson", function(inst)
 
 							inst.slingshot_power = 1.25
 							inst.slingshot_amount = 2
-							inst.SoundEmitter:PlaySound("dontstarve/characters/walter/slingshot/stretch")
+							inst.SoundEmitter:PlaySound("wixie/characters/wixie/slingshot_low")
 						end
 					end
 				end),
@@ -561,14 +561,14 @@ env.AddStategraphPostInit("wilson", function(inst)
 							fx.Transform:SetPosition(0, 2.35, 0)
 
 							inst.slingshot_power = 2
-							inst.SoundEmitter:PlaySound("dontstarve/characters/walter/slingshot/stretch")
+							inst.SoundEmitter:PlaySound("wixie/characters/wixie/slingshot_veryhigh")
 						else
 							local fx = SpawnPrefab("dr_warm_loop_2")
 							fx.entity:SetParent(inst.entity)
 							fx.Transform:SetPosition(0, 2.35, 0)
 
 							inst.slingshot_power = 1.5
-							inst.SoundEmitter:PlaySound("dontstarve/characters/walter/slingshot/stretch")
+							inst.SoundEmitter:PlaySound("wixie/characters/wixie/slingshot_med")
 						end
 					end
 				end),
@@ -584,7 +584,7 @@ env.AddStategraphPostInit("wilson", function(inst)
 
 							inst.slingshot_power = 1.5
 							inst.slingshot_amount = 3
-							inst.SoundEmitter:PlaySound("dontstarve/characters/walter/slingshot/stretch")
+							inst.SoundEmitter:PlaySound("wixie/characters/wixie/slingshot_med")
 						end
 					end
 				end),
@@ -606,14 +606,14 @@ env.AddStategraphPostInit("wilson", function(inst)
 							fx.Transform:SetPosition(0, 2.35, 0)
 
 							inst.slingshot_power = 1.25
-							inst.SoundEmitter:PlaySound("dontstarve/characters/walter/slingshot/stretch")
+							inst.SoundEmitter:PlaySound("wixie/characters/wixie/slingshot_low")
 						else
 							local fx = SpawnPrefab("dr_warmer_loop")
 							fx.entity:SetParent(inst.entity)
 							fx.Transform:SetPosition(0, 2.35, 0)
 
 							inst.slingshot_power = 1.75
-							inst.SoundEmitter:PlaySound("dontstarve/characters/walter/slingshot/stretch")
+							inst.SoundEmitter:PlaySound("wixie/characters/wixie/slingshot_high")
 						end
 					end
 				end),
@@ -634,14 +634,14 @@ env.AddStategraphPostInit("wilson", function(inst)
 							fx.entity:SetParent(inst.entity)
 							fx.Transform:SetPosition(0, 2.35, 0)
 							fx.Transform:SetScale(0.8, 0.8, 0.8)
-							inst.SoundEmitter:PlaySound("dontstarve/characters/walter/slingshot/stretch")
+							inst.SoundEmitter:PlaySound("wixie/characters/wixie/slingshot_low")
 						else
 							local fx = SpawnPrefab("dr_hot_loop")
 							fx.entity:SetParent(inst.entity)
 							fx.Transform:SetPosition(0, 2.35, 0)
 
 							inst.slingshot_power = 2
-							inst.SoundEmitter:PlaySound("dontstarve/characters/walter/slingshot/stretch")
+							inst.SoundEmitter:PlaySound("wixie/characters/wixie/slingshot_veryhigh")
 						end
 					end
 				end),
@@ -764,7 +764,8 @@ env.AddStategraphPostInit("wilson", function(inst)
 						
 						if equip ~= nil and equip:HasTag("gnasher") and inst.slingshot_power == 2 then
 							gnasher_charged = true
-							--inst.SoundEmitter:PlaySound("wolfgang2/common/gym/success")
+							inst.SoundEmitter:PlaySound("wixie/characters/wixie/gnasher_bark")
+							inst.SoundEmitter:PlaySound("dontstarve/wilson/attack_nightsword")
 						end
 
 						equip.powerlevel = inst.slingshot_power

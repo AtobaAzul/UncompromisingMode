@@ -593,7 +593,7 @@ local function AttachCurse(inst, target)
         --target.components.combat.externaldamagemultipliers:SetModifier(inst, .75)    Effect Removed
 		target.vetcurse = true
 		
-		if target:HasTag("clockmaker") then
+		if target.components ~= nil and target.components.oldager ~= nil then
 			ForceToTakeMoreTime(target)
 		else
 			ForceToTakeMoreDamage(target)
@@ -640,7 +640,7 @@ local function DetachCurse(inst, target)
         --target.components.combat.externaldamagemultipliers:RemoveModifier(inst)
 		--target.vetcurse = false
 		
-		if target:HasTag("clockmaker") then --taking a guess thats what her tag is, I swear, I actually don't know
+		if target.components ~= nil and target.components.oldager ~= nil then --taking a guess thats what her tag is, I swear, I actually don't know
 			ForceToTakeUsualTime(target)
 		else
 			ForceToTakeUsualDamage(target)

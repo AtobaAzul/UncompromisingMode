@@ -271,7 +271,10 @@ local function OnNightmarePhaseChanged(inst, phase)
 		inst.AnimState:SetMultColour(1, 1, 1, .7)
 	elseif phase == "calm" then
 		inst.AnimState:SetMultColour(1, 1, 1, .4)
-		inst.wantstodespawn = true
+		
+		if not TUNING.DSTU.HARDER_TREPIDATION then
+			inst.wantstodespawn = true
+		end
 	end
 end
 

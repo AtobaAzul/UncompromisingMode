@@ -6,7 +6,9 @@ local assets =
 }
 
 	local function onequip(inst, owner)
-    owner.AnimState:OverrideSymbol("swap_hat", "hat_snowgoggles", "swap_hat")
+        owner.AnimState:ClearOverrideSymbol("headbase_hat") --clear out previous overrides
+		
+		owner.AnimState:OverrideSymbol("swap_hat", "hat_snowgoggles", "swap_hat")
 
         owner.AnimState:Show("HAT")
         owner.AnimState:Show("HAIR_HAT")
@@ -14,8 +16,10 @@ local assets =
         owner.AnimState:Hide("HAIR")
 		
 		if owner:HasTag("player") then
-			owner.AnimState:Hide("HEAD")
-			owner.AnimState:Show("HEAD_HAT")
+            owner.AnimState:Hide("HEAD")
+            owner.AnimState:Show("HEAD_HAT")
+			owner.AnimState:Show("HEAD_HAT_NOHELM")
+			owner.AnimState:Hide("HEAD_HAT_HELM")
 		end
 		
 
@@ -26,6 +30,8 @@ local assets =
 
 	local function onunequip(inst, owner)
 
+        owner.AnimState:ClearOverrideSymbol("headbase_hat") --it might have been overriden by _onequip
+		
         owner.AnimState:ClearOverrideSymbol("swap_hat")
         owner.AnimState:Hide("HAT")
         owner.AnimState:Hide("HAIR_HAT")
@@ -35,6 +41,8 @@ local assets =
         if owner:HasTag("player") then
             owner.AnimState:Show("HEAD")
             owner.AnimState:Hide("HEAD_HAT")
+			owner.AnimState:Hide("HEAD_HAT_NOHELM")
+			owner.AnimState:Hide("HEAD_HAT_HELM")
         end
 
         if inst.components.fueled ~= nil then

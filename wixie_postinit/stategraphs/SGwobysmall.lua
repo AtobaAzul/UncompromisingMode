@@ -337,6 +337,7 @@ local states = {
 				if inst.wobytarget ~= nil then
 					if inst.wobytarget:HasTag("snowpile") then
 						inst.components.hunger:DoDelta(-3)
+						inst.SoundEmitter:PlaySound("wixie/characters/wixie/woby_hunger")
 					end
 
 					inst.oldwobytarget = inst.wobytarget
@@ -400,25 +401,29 @@ local states = {
 				inst.sg:RemoveStateTag("busy")
 
 				if inst.wobytarget ~= nil then
-					if inst.wobytarget:HasTag("stump") then
-						inst.components.hunger:DoDelta(-1)
+					local stump_or_pile = inst.wobytarget:HasTag("stump") and "stump" or inst.wobytarget:HasTag("snowpile_basic") and "snowpile_basic" or nil
+				
+					if stump_or_pile ~= nil then
+						inst.components.hunger:DoDelta(stump_or_pile == "snowpile_basic" and -5 or -1)
+						inst.SoundEmitter:PlaySound("wixie/characters/wixie/woby_hunger")
 						inst.oldwobytarget = inst.wobytarget
 						inst.wobytarget = nil
 
 						local x, y, z = inst.Transform:GetWorldPosition()
-						local ents = TheSim:FindEntities(x, y, z, 17, nil, { "INLIMBO", "NOCLICK" }, { "stump" })
+						local ents = TheSim:FindEntities(x, y, z, 17, nil, { "INLIMBO", "NOCLICK" }, { stump_or_pile })
 						for i, v in ipairs(ents) do
 							if inst.wobytarget ~= nil or inst.components.hunger:GetPercent() == 0 then
 								break
 							end
 
-							if v ~= nil and v:IsValid() and not v:HasTag("INLIMBO") and inst.oldwobytarget ~= nil and inst.oldwobytarget:HasTag("stump") and v ~= inst.oldwobytarget then
+							if v ~= nil and v:IsValid() and not v:HasTag("INLIMBO") and inst.oldwobytarget ~= nil and inst.oldwobytarget:HasTag(stump_or_pile) and v ~= inst.oldwobytarget then
 								inst.wobytarget = v
 								break
 							end
 						end
 					else
 						inst.components.hunger:DoDelta(-1)
+						inst.SoundEmitter:PlaySound("wixie/characters/wixie/woby_hunger")
 						inst.oldwobytarget = nil
 						inst.wobytarget = nil
 

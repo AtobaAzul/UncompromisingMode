@@ -378,6 +378,8 @@ TUNING.DSTU = {
     PYRENETTLES = GetModConfigData("pyrenettles"),
     HEATWAVES = GetModConfigData("heatwaves"),
     SMOG = GetModConfigData("smog"),
+	MAXTEMPDAMAGE = GetModConfigData("maxtempdamage"),
+	HARDER_TREPIDATION = GetModConfigData("nodespawn_trepidation"),
     -- boss hp qol
     BEEQUEEN_HEALTH = GetModConfigData("bee queen health"),
     TOADSTOOL_HEALTH = GetModConfigData("toadstool health"),
@@ -406,6 +408,13 @@ if GetModConfigData("wixie_walter") then
 
     TUNING.WOBY_SMALL_HUNGER = GLOBAL.TUNING.WALTER_HUNGER
     TUNING.WOBY_SMALL_HUNGER_RATE = GLOBAL.TUNING.WILSON_HUNGER_RATE / 2
+	
+	TUNING.WOBY_BIG_SPEED =
+        {
+            FAST = 11,
+            MEDIUM = 10,
+            SLOW = 9
+        }
 
     TUNING.GAMEMODE_STARTING_ITEMS.DEFAULT.WALTER = { "walterhat", "meatrack_hat", "meat", "monstermeat" }
     TUNING.GAMEMODE_STARTING_ITEMS.DEFAULT.WIXIE = { "slingshot", "slingshotammo_rock", "slingshotammo_rock",

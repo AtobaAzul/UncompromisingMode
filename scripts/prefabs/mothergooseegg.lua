@@ -74,14 +74,14 @@ local function MakeWorkable(inst, bool)
         inst.components.workable:SetWorkLeft(4)
         inst.components.workable:SetOnFinishCallback(onhammered)
 
-        inst.components.workable:SetOnWorkCallback(function(inst, worker)
+        inst.components.workable:SetOnWorkCallback(function(inst, worker, workleft, numworks)
             if worker.components.combat then
                 -- Don't electrocute the worker if they're insulated.
                 if worker.components.inventory == nil or not worker.components.inventory:IsInsulated() then
                     worker.components.combat:GetAttacked(inst, TUNING.MOOSE_EGG_DAMAGE, nil, "electric")
                 end
             end
-            if not inst.sg:HasStateTag("busy") then
+            if not inst.sg:HasStateTag("busy") and numworks > 0 then
                 inst.sg:GoToState("hit")
 				inst.components.lootdropper:SpawnLootPrefab("goldnugget")
             end
