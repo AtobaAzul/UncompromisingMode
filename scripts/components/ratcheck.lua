@@ -243,7 +243,7 @@ return Class(function(self, inst)
 
 					_raided = true
 
-					self:StartRaid(data.container, data.doer)
+					StartRaid(data.container, data.doer)
 					TheWorld:PushEvent("ratcooldown", inst)
 				else
 
