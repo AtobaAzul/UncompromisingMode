@@ -54,6 +54,8 @@ if TUNING.DSTU.WICKERNERF_TENTACLES then
         if not TheWorld.ismastersim then
             return
         end
+			
+		inst.components.book:SetReadSanity(-TUNING.SANITY_LARGE)
 
         if inst.components.book ~= nil then
             inst.components.book.onread = newtentacles
@@ -329,15 +331,17 @@ if TUNING.DSTU.WICKERNERF_MOONBOOK then
         if not TheWorld.ismastersim then
             return
         end
-
+		
+		inst.components.book:SetReadSanity(-TUNING.SANITY_HUGE)
+		
         if inst.components.book ~= nil then
             inst.components.book:SetOnRead(OnRead_moon)
             inst.components.book:SetOnPeruse(OnPerUse_moon)
         end
 
         if inst.components.finiteuses ~= nil then
-            inst.components.finiteuses:SetMaxUses(4)
-            inst.components.finiteuses:SetUses(4)
+            inst.components.finiteuses:SetMaxUses(3)
+            inst.components.finiteuses:SetUses(3)
         end
     end)
 end
@@ -348,16 +352,13 @@ local function OnRead_bees(inst, reader)
     local found = false
 
     for k, v in ipairs(beeboxes) do
-        if k > 20 then
+        if k > 10 then
             break
         end
         local x, y, z = v.Transform:GetWorldPosition()
 
         if (v.components.harvestable.maxproduce - v.components.harvestable.produce) ~= 0 and not TheWorld.state.iswinter and not TheWorld.state.isdusk and not TheWorld.state.isnight then
             v.components.harvestable:Grow(1)
-            if (v.components.harvestable.maxproduce - v.components.harvestable.produce) ~= 0 and TheWorld.state.isspring then
-                v.components.harvestable:Grow(1)
-            end
             local fx = SpawnPrefab("fx_book_bees")
             fx.Transform:SetPosition(x, y, z)
             found = true
@@ -375,13 +376,17 @@ if TUNING.DSTU.WICKERNERF_BEEBOOK then
             return
         end
 
+local book_defs =
+
+		inst.components.book:SetReadSanity(-TUNING.SANITY_HUGE)
+		
         if inst.components.book ~= nil then
             inst.components.book:SetOnRead(OnRead_bees)
         end
 
         if inst.components.finiteuses ~= nil then
-            inst.components.finiteuses:SetMaxUses(4)
-            inst.components.finiteuses:SetUses(4)
+            inst.components.finiteuses:SetMaxUses(5)
+            inst.components.finiteuses:SetUses(5)
         end
     end)
 end
@@ -391,7 +396,7 @@ local function WickerCaresForHerBooks(inst)
         if v:HasTag("book") and v.components.finiteuses then
             local percent = v.components.finiteuses:GetPercent()
             if percent < 1 then
-                v.components.finiteuses:SetPercent(math.min(1, percent + 0.015))
+                v.components.finiteuses:SetPercent(math.min(1, percent + 0.015625))
             end
         end
     end

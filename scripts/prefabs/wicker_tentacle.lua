@@ -133,7 +133,7 @@ local function fn()
 
     inst:ListenForEvent("attacked", OnAttacked)
 	
-	inst.task = inst:DoPeriodicTask(2.4, degenerate)
+	inst.task = inst:DoPeriodicTask(4.8, degenerate)
 	
     inst.persists = false
 
