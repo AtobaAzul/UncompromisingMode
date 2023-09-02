@@ -427,7 +427,7 @@ local prefabs = {
 	"um_foliage",
 }
 
-if TUNING.DSTU.WIXIE then
+if TUNING.DSTU ~= nil and TUNING.DSTU.WIXIE ~= nil and TUNING.DSTU.WIXIE then
 	table.insert(prefabs, "placeholder_recipe_item")
 end
 

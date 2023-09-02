@@ -411,9 +411,9 @@ if GetModConfigData("wixie_walter") then
 	
 	TUNING.WOBY_BIG_SPEED =
         {
-            FAST = 11,
-            MEDIUM = 10,
-            SLOW = 9
+            FAST = 12,
+            MEDIUM = 11,
+            SLOW = 10
         }
 
     TUNING.GAMEMODE_STARTING_ITEMS.DEFAULT.WALTER = { "walterhat", "meatrack_hat", "meat", "monstermeat" }
