@@ -152,7 +152,11 @@ end
 local function OnDeath(inst, data)
 	if inst.disguiseprefab ~= nil then
 		local px, py, pz = inst.disguiseprefab.Transform:GetWorldPosition()
-		SpawnPrefab("mini_dreadeye_fx").Transform:SetPosition(px, py, pz)
+		
+		if px ~= nil then
+			SpawnPrefab("mini_dreadeye_fx").Transform:SetPosition(px, py, pz)
+		end
+		
 		inst.disguiseprefab:Remove()
 		inst.disguiseprefab = nil
 	end
@@ -183,7 +187,11 @@ local function ShadowSuprise(inst)
 		
 		if inst.disguiseprefab ~= nil then
 			local px, py, pz = inst.disguiseprefab.Transform:GetWorldPosition()
-			SpawnPrefab("mini_dreadeye_fx").Transform:SetPosition(px, py, pz)
+			
+			if px ~= nil then
+				SpawnPrefab("mini_dreadeye_fx").Transform:SetPosition(px, py, pz)
+			end
+			
 			--inst.SoundEmitter:PlaySound("dontstarve/maxwell/disappear")
 			inst.disguiseprefab:Remove()
 			inst.disguiseprefab = nil

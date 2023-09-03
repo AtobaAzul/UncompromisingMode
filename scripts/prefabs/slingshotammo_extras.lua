@@ -33,6 +33,8 @@ local function DealDamage(inst, attacker, target, salty)
         if no_aggro(attacker, target) then
             target.components.combat:SetShouldAvoidAggro(attacker)
         end
+		
+        local weapon = attacker.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS) or nil
 
         if target:HasTag("shadowcreature") or target.sg == nil or target.wixieammo_hitstuncd == nil and not (target.sg:HasStateTag("busy") or target.sg:HasStateTag("caninterrupt")) or target.sg:HasStateTag("frozen") then
             target.wixieammo_hitstuncd = target:DoTaskInTime(8, function()
@@ -43,9 +45,9 @@ local function DealDamage(inst, attacker, target, salty)
                 target.wixieammo_hitstuncd = nil
             end)
 
-            target.components.combat:GetAttacked(target:HasTag("shadowcreature") and attacker or inst, inst.finaldamage, inst)
+			target.components.combat:GetAttacked(weapon ~= nil and attacker or inst, inst.finaldamage, weapon)
         else
-            target.components.combat:GetAttacked(target:HasTag("shadowcreature") and attacker or inst, 0, inst)
+			target.components.combat:GetAttacked(weapon ~= nil and attacker or inst, 0, weapon)
 
             target.components.health:DoDelta(-inst.finaldamage, false, attacker, false, attacker, false)
         end
@@ -55,7 +57,6 @@ local function DealDamage(inst, attacker, target, salty)
         end
 
         if target.components.combat ~= nil then
-            target:PushEvent("attacked", { attacker = attacker, damage = 0, weapon = inst })
             target.components.combat:RemoveShouldAvoidAggro(attacker)
         end
 
@@ -169,11 +170,12 @@ local function DoPop(inst, remaining, total, level, hissvol)
                         if no_aggro(inst.attacker, v) then
                             v.components.combat:SetShouldAvoidAggro(inst.attacker)
                         end
+						
+						local weapon = inst.attacker.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS) or nil
 
-                        v.components.combat:GetAttacked(inst, 10, inst)
+						v.components.combat:GetAttacked(weapon ~= nil and inst.attacker or inst, 10, weapon)
 
                         if v.components.combat ~= nil then
-                            --v:PushEvent("attacked", {attacker = inst.attacker, damage = 0, weapon = inst })
                             v.components.combat:RemoveShouldAvoidAggro(inst.attacker)
                         end
                     end
@@ -1056,6 +1058,8 @@ local function GlassCut(inst)
                         inst.finallevel = inst.finallevel + 1
                         v:PushEvent("wixiebite")
                     end
+		
+					local weapon = attacker.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS) or nil
 
                     if v:HasTag("shadowcreature") or v.sg == nil or v.wixieammo_hitstuncd == nil and not (v.sg:HasStateTag("busy") or v.sg:HasStateTag("caninterrupt")) or v.sg:HasStateTag("frozen") then
                         v.wixieammo_hitstuncd = v:DoTaskInTime(8, function()
@@ -1066,9 +1070,9 @@ local function GlassCut(inst)
                             v.wixieammo_hitstuncd = nil
                         end)
 
-                        v.components.combat:GetAttacked(v:HasTag("shadowcreature") and attacker or inst, (7 * inst.finallevel) * (attacker.components.combat ~= nil and attacker.components.combat.externaldamagemultipliers:Get() or 1), inst)
+						v.components.combat:GetAttacked(weapon ~= nil and attacker or inst, (7 * inst.finallevel) * (attacker.components.combat ~= nil and attacker.components.combat.externaldamagemultipliers:Get() or 1), weapon)
                     else
-                        v.components.combat:GetAttacked(v:HasTag("shadowcreature") and attacker or inst, 0, inst)
+						v.components.combat:GetAttacked(weapon ~= nil and attacker or inst, 0, weapon)
 
                         v.components.health:DoDelta(-((7 * inst.finallevel) * (attacker.components.combat ~= nil and attacker.components.combat.externaldamagemultipliers:Get() or 1)), false, attacker, false, attacker, false)
                     end
@@ -1078,7 +1082,6 @@ local function GlassCut(inst)
                     end
 
                     if v.components.combat ~= nil then
-                        v.components.combat:SetTarget(attacker)
                         v.components.combat:RemoveShouldAvoidAggro(attacker)
                     end
 					
@@ -1108,6 +1111,8 @@ local function GlassCut(inst)
                         inst.finallevel = inst.finallevel + 1
                         v:PushEvent("wixiebite")
                     end
+		
+					local weapon = attacker.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS) or nil
 
                     if v:HasTag("shadowcreature") or v.sg == nil or v.wixieammo_hitstuncd == nil and not (v.sg:HasStateTag("busy") or v.sg:HasStateTag("caninterrupt")) or v.sg:HasStateTag("frozen") then
                         v.wixieammo_hitstuncd = v:DoTaskInTime(8, function()
@@ -1118,9 +1123,9 @@ local function GlassCut(inst)
                             v.wixieammo_hitstuncd = nil
                         end)
 
-                        v.components.combat:GetAttacked(v:HasTag("shadowcreature") and attacker or inst, (7 * inst.finallevel) * (attacker.components.combat ~= nil and attacker.components.combat.externaldamagemultipliers:Get() or 1), inst)
+						v.components.combat:GetAttacked(weapon ~= nil and attacker or inst, (7 * inst.finallevel) * (attacker.components.combat ~= nil and attacker.components.combat.externaldamagemultipliers:Get() or 1), weapon)
                     else
-                        v.components.combat:GetAttacked(v:HasTag("shadowcreature") and attacker or inst, 0, inst)
+						v.components.combat:GetAttacked(weapon ~= nil and attacker or inst, 0, weapon)
 
                         v.components.health:DoDelta(-((7 * inst.finallevel) * (attacker.components.combat ~= nil and attacker.components.combat.externaldamagemultipliers:Get() or 1)), false, attacker, false, attacker, false)
                     end
@@ -1130,7 +1135,6 @@ local function GlassCut(inst)
                     end
 
                     if v.components.combat ~= nil then
-                        v.components.combat:SetTarget(attacker)
                         v.components.combat:RemoveShouldAvoidAggro(attacker)
                     end
 					

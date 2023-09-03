@@ -30,6 +30,8 @@ local function OnAttack(inst, attacker, target)
         if inst.ammo_def ~= nil and inst.ammo_def.onhit ~= nil then
             inst.ammo_def.onhit(inst, attacker, target)
         end
+		
+        local weapon = attacker.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS) or nil
 
         if inst.ammo_def ~= nil and inst.ammo_def.damage ~= nil then
             inst.finaldamage = (inst.ammo_def.damage * (1 + (inst.powerlevel / 2))) * (attacker.components.combat ~= nil and attacker.components.combat.externaldamagemultipliers:Get() or 1)
@@ -47,9 +49,9 @@ local function OnAttack(inst, attacker, target)
                     target.wixieammo_hitstuncd = nil
                 end)
 
-                target.components.combat:GetAttacked(inst, inst.finaldamage, inst)
+				target.components.combat:GetAttacked(weapon ~= nil and attacker or inst, inst.finaldamage, weapon)
             else
-                target.components.combat:GetAttacked(inst, 0, inst)
+                target.components.combat:GetAttacked(weapon ~= nil and attacker or inst, 0, weapon)
 
                 target.components.health:DoDelta(-inst.finaldamage, false, attacker, false, attacker, false)
             end
@@ -62,7 +64,6 @@ local function OnAttack(inst, attacker, target)
         end
 
         if target.components.combat ~= nil then
-            target:PushEvent("attacked", { attacker = attacker, damage = 0, weapon = inst })
             target.components.combat:RemoveShouldAvoidAggro(attacker)
         end
 
@@ -406,15 +407,16 @@ local function OnHit_Gold(inst, attacker, target)
                         if no_aggro(attacker, v) then
                             v.components.combat:SetShouldAvoidAggro(attacker)
                         end
+		
+						local weapon = attacker.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS) or nil
 
-                        v.components.combat:GetAttacked(inst, damage, inst)
+						v.components.combat:GetAttacked(weapon ~= nil and attacker or inst, damage, weapon)
 
                         if v.components.sleeper ~= nil and v.components.sleeper:IsAsleep() then
                             v.components.sleeper:WakeUp()
                         end
 
                         if v.components.combat ~= nil then
-                            v:PushEvent("attacked", { attacker = attacker, damage = 0, weapon = inst })
                             v.components.combat:RemoveShouldAvoidAggro(attacker)
                         end
 						

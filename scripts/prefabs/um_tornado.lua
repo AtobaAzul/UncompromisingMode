@@ -456,7 +456,7 @@ local function TornadoTask(inst)
         local destination = TheSim:FindFirstEntityWithTag("um_tornado_destination")
         local players = TheSim:FindEntities(x, y, z, 300, nil, { "playerghost" }, { "player", "um_windturbine" })
 
-        if math.random() > 0.9 and config ~= "minimal" then
+        if math.random() > 0.99 and config ~= "minimal" then
             local lightning = SpawnPrefab("hound_lightning")
             lightning.Transform:SetPosition(x + math.random(-300, 300), 0, z + math.random(-300, 300))
             lightning.NoTags = { "INLIMBO", "shadow", "structure", "wall", "companion", "abigail", "bird", "prey" }

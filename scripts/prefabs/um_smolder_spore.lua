@@ -312,7 +312,7 @@ local function OnPickup(inst)
 	if inst.components.inventoryitem:IsHeld() then
 		local holder = inst.components.inventoryitem:GetGrandOwner()
 
-		if holder:HasTag("plantkin") then
+		if holder ~= nil and holder:HasTag("plantkin") then
 			inst.components.perishable:SetLocalMultiplier(TUNING.SEG_TIME * 3 / TUNING.PERISH_SLOW) -- From mushtree_spores.lua.
 		end
 	end
