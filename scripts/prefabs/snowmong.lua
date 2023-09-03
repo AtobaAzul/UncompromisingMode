@@ -191,7 +191,7 @@ local function fn(Sim)
     inst:AddComponent("hauntable")
 		
 	inst:AddComponent("combat")
-	inst.components.combat:SetDefaultDamage(51)
+	inst.components.combat:SetDefaultDamage(50)
 	inst.components.combat:SetAttackPeriod(3)
 	inst.components.combat:SetRange(3, 3)
 	inst.components.combat:SetRetargetFunction(3, Retarget)

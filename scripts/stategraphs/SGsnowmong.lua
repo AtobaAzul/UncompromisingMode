@@ -100,7 +100,7 @@ local states =
 				local ents = TheSim:FindEntities(x, y, z, 3, nil, {"snowish", "ghost", "playerghost", "shadow", "INLIMBO","structure","wall","companion"})
 				for i, v in ipairs(ents) do
 					if v.components.combat ~= nil then
-					v.components.combat:GetAttacked(inst, TUNING.METEOR_DAMAGE * 1.25, nil)
+					v.components.combat:GetAttacked(inst, TUNING.METEOR_DAMAGE, nil)
 					end
 				end 
 			end),
@@ -210,7 +210,7 @@ local states =
 
 		timeline =
 		{
-			TimeEvent(4 * FRAMES, function(inst) 
+			TimeEvent(8 * FRAMES, function(inst) 
 			if math.random() > 0.3 then
 			inst.components.combat:DoAttack()
 			else
