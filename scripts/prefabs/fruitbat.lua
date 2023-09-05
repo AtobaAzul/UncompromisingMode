@@ -111,7 +111,7 @@ local function OnPreLoad(inst, data)
     end
 end
 
-local RETARGET_CANT_TAGS = { "bat", "EPIC", "player", "fruitbat_eating" }
+local RETARGET_CANT_TAGS = { "friendlyfruitfly", "fruitfly", "lordfruitfly", "bat", "EPIC", "player", "fruitbat_eating" }
 local RETARGET_ONEOF_TAGS = { "insect", "spider" }
 local function Retarget(inst)
     local newtarget = FindEntity(inst, 4 * TUNING.BAT_TARGET_DIST, function(guy)
