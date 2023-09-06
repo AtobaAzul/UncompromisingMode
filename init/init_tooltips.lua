@@ -260,7 +260,7 @@ if GetModConfigData("lunar grimoire") then
 end
 
 if GetModConfigData("apicultural notes") then
-	TOOLTIPS.BOOK_BEES = "- Now adds Honey to 20 nearby Bee Boxes.\n- Doesn't work during Dusk, Night and/or Winter."
+	TOOLTIPS.BOOK_BEES = "- Now adds Honey to 10 nearby Bee Boxes.\n- Doesn't work during Dusk, Night and/or Winter."
 end
 
 if GetModConfigData("disable_megaflare") then
