@@ -247,13 +247,15 @@ if GetModConfigData("telestaff_rework") then
     }
 end
 
-AddRecipe2(
-    "ghostlyelixir_fastregen",
-    { Ingredient(GLOBAL.CHARACTER_INGREDIENT.HEALTH, 50), Ingredient("ghostflower", 4) },
-    TECH.MAGIC_TWO,
-    { builder_tag = "elixirbrewer" },
-    { "CHARACTER" }
-)
+if GetModConfigData("longpig") then
+	AddRecipe2(
+		"ghostlyelixir_fastregen",
+		{ Ingredient(GLOBAL.CHARACTER_INGREDIENT.HEALTH, 50), Ingredient("ghostflower", 4) },
+		TECH.NONE,
+		{ builder_tag = "elixirbrewer" },
+		{ "CHARACTER" }
+	)
+end
 
 local winona_portables = { "battery_high", "battery_low", "spotlight", "catapult" }
 if GetModConfigData("winona_portables_") then
