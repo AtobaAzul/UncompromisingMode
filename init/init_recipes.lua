@@ -1011,7 +1011,7 @@ end
 AddRecipe2(
     "um_armor_pyre_nettles",
     { Ingredient("firenettles", 5), Ingredient("silk", 1) },
-    TECH.NONE,
+    TECH.SCIENCE_TWO,
     nil,
     { "ARMOUR", "WINTER" }
 )
