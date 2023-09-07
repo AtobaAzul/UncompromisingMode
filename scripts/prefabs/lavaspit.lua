@@ -58,6 +58,13 @@ local function TrySlowdown(inst, target)
         end
 
         SpawnPrefab("halloween_firepuff_1").Transform:SetPosition(target.Transform:GetWorldPosition())
+		
+		--especial case handling for walls.
+        if target:HasTag("wall") and target.components.combat.onhitfn ~= nil then
+            target.components.health:DoDelta(inst.prefab == "lavaspit_slobber" and -9 or -4)
+
+            target.components.combat.onhitfn(target, inst.lobber, 0, 0) --fences don't really take damage to break, onhit they get hammered, normal walls update their visuals onhit.
+        end
     end
 end
 
@@ -76,6 +83,14 @@ local function DoAreaSlow(inst)
             if v.components ~= nil and v.components.locomotor ~= nil then
                 TrySlowdown(inst, v)
             end
+        end
+    end
+	
+	local walls = TheSim:FindEntities(x, y, z, inst.components.aura.radius, { "wall" }, { "INLIMBO", "_inventoryitem" })
+
+    for i, v in ipairs(walls) do
+        if v.components ~= nil then
+            TrySlowdown(inst, v)
         end
     end
 end
