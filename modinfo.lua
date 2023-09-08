@@ -6,7 +6,7 @@ if not folder_name:find("workshop-") then
 end
 
 description = [[
-󰀔 [ Version 1.3.1.0: "Under the Weather Pt.1" ]
+󰀔 [ Version 1.3.2.1: "Under the Weather Pt.1" ]
 
 Uncompromising Mode increases the risk and reward for those who have mastered Don't Starve Together.
 
@@ -20,7 +20,7 @@ Latest update features:
 
 author = "󰀈 The Uncomp Dev Team 󰀈"
 
-version = "Under the Weather Pt.1 v1.3.1.0"
+version = "Under the Weather Pt.1 v1.3.2.1"
 -- VERSION SCHEME
 -- first num is major release (e.g. "Under the weather", so, 2, UTW2 will be 3, and so on.) DO NOT BRING THIS NUMBER *DOWN* AGAIN PLEASE
 -- second is new content (something like a new large addition)
@@ -255,45 +255,10 @@ configuration_options = {
 		"Willow's insulation is tweaked to be 120 on Summer and -120 on Winter.", false),
     BinaryConfig("bernie_buffs", "Willow: Bernie Buffs",
         "Bernie has 80% resistance against shadows\nHolding Bernie prevents shadows from aggro'ing.", true),
-    BinaryConfig("warly", "Warly's Food Taste",
-        "Warly gets increased stats from food, like Singleplayer. However, he remembers foods for 3 days instead of 2.",
-        true),
-    BinaryConfig("warly_butcher_", "Warly's Butchering",
-        "Warly is a certified butcher, he can sometimes get more resources from his kills.", true),
-    BinaryConfig("waxwell", "Maxwell",
-        "Maxwell gets buffed versions of his classic shadows by reading the Codex Umbra. Disable for Maxwell mod compatibility!",
-        true),
-    --	BinaryConfig("wolfgang", "Improved/Balanced Wolfgang", "Wolfgang gains new perks and downsides. Read the patch notes included in the mod folder or workshop for details.", false),
-    BinaryConfig("wigfrid", "Wigfrid", "Reduced Wigfrids combat leeching effect to more balanced levels.", true),
     BinaryConfig("wolfgang", "Experimental Wolfgang",
         "Wolfgang gains mightiness based on hunger level. Hunger drain increases the longer mighty is maintained.", false),
-    BinaryConfig("winonaworker", "Winona: Faster Working",
-        "Winona now scales her work/picking efficiency, and tool/weapon durability, off of her hunger level. Drains hunger when taking actions.",
-        true),
-    BinaryConfig("winonawackycats", "Experimental Winona Catapults",
-        "Catapults no longer regenerate, have reduced health, and deal 34 AOE damage.", false),
-    BinaryConfig("winona_gen_", "Winona: Generators",
-        "Limits access to Winona's Generators to only allow her to use them.", false),
-    BinaryConfig("winona_portables_", "Winona: Portable Structures",
-        "Makes Winona's structures portable, and reworks the toolbox into the Contraption Container.", true),
-    {
-        name = "wortox",
-        label = "Wortox",
-        hover =
-        "Wortox has different settings that change his characteristics.",
-        options = {
-            { description = "SHOT",    data = "SHOT",   hover = "Souls heal over time." },
-            { description = "Classic", data = "UMNERF", hover = "Less soul sources, less max health." },
-            {
-                description = "Apollo\'s",
-                data = "APOLLO",
-                hover =
-                "Souls heal less and overtime. Sanity loss from eating souls increased.\nIncreased map hop range. Food penalty increased to 75%."
-            },
-            { description = "Vanilla", data = "off" } },
-        default =
-        "UMNERF"
-    },
+    BinaryConfig("wendy", "Wendy", "Abigail is nerfed to not increase Wendy's maximum damage above average.", true),
+    BinaryConfig("wx78", "WX-78", "No longer heals from lightning.", true),		
     BinaryConfig("wickerbottom", "Wickerbottom: Sane Reading",
         "Wickerbottom/Maxwell can no longer read books while insane.", true),
     BinaryConfig("on tentacles", "Wickerbottom: On Tentacles",
@@ -312,8 +277,42 @@ configuration_options = {
         "\"Apicultural Notes\" now adds 1 Honey to up to 20 Bee Boxes around. Doesn't work on Dusk, Night and/or Winter. Now takes a Honeycomb.", true),
     BinaryConfig("wicker_inv_regen", "Wickerbottom: Inventory Regen.",
 		"Wicker's books now regenerate in her inventory, instead of the Bookcase. Bookcase now takes 4 Boards, instead of 2 Living Logs.", true),
-    BinaryConfig("wanda_nerf", "Wanda",
-        "A bunch of changes to some of Wanda's more overpowered items to make them more balanced.", true),
+    BinaryConfig("waxwell", "Maxwell",
+        "Maxwell gets buffed versions of his classic shadows by reading the Codex Umbra. Disable for Maxwell mod compatibility!",
+        true),
+    --	BinaryConfig("wolfgang", "Improved/Balanced Wolfgang", "Wolfgang gains new perks and downsides. Read the patch notes included in the mod folder or workshop for details.", false),
+    BinaryConfig("wigfrid", "Wigfrid", "Reduced Wigfrids combat leeching effect to more balanced levels.", true),
+    BinaryConfig("winonaworker", "Winona: Faster Working",
+        "Winona now scales her work/picking efficiency, and tool/weapon durability, off of her hunger level. Drains hunger when taking actions.",
+        true),
+    BinaryConfig("winonawackycats", "Experimental Winona Catapults",
+        "Catapults no longer regenerate, have reduced health, and deal 34 AOE damage.", false),
+    BinaryConfig("winona_gen_", "Winona: Generators",
+        "Limits access to Winona's Generators to only allow her to use them.", false),
+    BinaryConfig("winona_portables_", "Winona: Portable Structures",
+        "Makes Winona's structures portable, and reworks the toolbox into the Contraption Container.", true),
+	BinaryConfig("warly", "Warly's Food Taste",
+        "Warly gets increased stats from food, like Singleplayer. However, he remembers foods for 3 days instead of 2.", true),
+	BinaryConfig("warly_butcher_", "Warly's Butchering",
+        "Warly is a certified butcher, he can sometimes get more resources from his kills.", true),
+    {
+        name = "wortox",
+        label = "Wortox",
+        hover =
+        "Wortox has different settings that change his characteristics.",
+        options = {
+            { description = "SHOT",    data = "SHOT",   hover = "Souls heal over time." },
+            { description = "Classic", data = "UMNERF", hover = "Less soul sources, less max health." },
+            {
+                description = "Apollo\'s",
+                data = "APOLLO",
+                hover =
+                "Souls heal less and overtime. Sanity loss from eating souls increased.\nIncreased map hop range. Food penalty increased to 75%."
+            },
+            { description = "Vanilla", data = "off" } },
+        default =
+        "UMNERF"
+    },
     BinaryConfig("wormwood_extrafiredmg", "Wormwood: Extra Fire Damage",
         "Increases Wormwood's fire damage multiplier to 1.75x, from 1.25x.", true),
     BinaryConfig("wormwood_trapbuffs", "Wormwood: Trap Buffs",
@@ -321,8 +320,8 @@ configuration_options = {
         true),
     BinaryConfig("wormwood_plants", "Wormwood: Planting Sanity", "Increases the sanity loss from digging plants by 5.",
         true),
-    BinaryConfig("wendy", "Wendy", "Abigail is nerfed to not increase Wendy's maximum damage above average.", true),
-    BinaryConfig("wx78", "WX-78", "No longer heals from lightning.", true),
+    BinaryConfig("wanda_nerf", "Wanda",
+        "A bunch of changes to some of Wanda's more overpowered items to make them more balanced.", true),
     SkipSpace(),
 
     ------------------------------
