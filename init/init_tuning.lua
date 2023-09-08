@@ -234,6 +234,10 @@ TUNING.DSTU = {
     -- Wickerbottom
     WICKERNERF = GetModConfigData("wickerbottom"),
     WICKERNERF_TENTACLES = GetModConfigData("on tentacles"),
+	
+	-- Willow
+	WILLOW_INSULATION = GetModConfigData("willow insulation"),
+	
     -- WICKERNERF_HORTICULTURE = GetModConfigData("applied horticulture"),
     WICKERNERF_BEEBOOK = GetModConfigData("apicultural notes"),
     WICKERNERF_MOONBOOK = GetModConfigData("lunar grimoire"),

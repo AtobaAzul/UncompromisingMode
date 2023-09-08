@@ -269,4 +269,15 @@ AllRecipes["bernie_inactive"].sortkey = AllRecipes["healingsalve"].sortkey - .1
 
 		--inst.GoBig = gobig
 	end)
+	
+	if TUNING.DSTU.WILLOW_INSULATION then
+		env.AddPrefabPostInit("willow", function(inst)
+			if not TheWorld.ismastersim then
+				return
+			end
+			inst.components.temperature.inherentinsulation = -TUNING.INSULATION_MED
+			inst.components.temperature.inherentsummerinsulation = TUNING.INSULATION_MED
+		end)
+	end
 end
+	

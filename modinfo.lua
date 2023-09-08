@@ -250,7 +250,9 @@ configuration_options = {
         default = true
     },
     BinaryConfig("willow", "Willow",
-        "Willow's Lighter now lasts forever when she holds it, and she will retaliate when attacked by shadows.", true),
+        "Willow's Lighter now lasts forever when she holds it, and she will retaliate when attacked by shadows.", true),	
+	BinaryConfig("willow insulation", "Willow's Experimental Insulation",
+		"Willow's insulation is tweaked to be 120 on Summer and -120 on Winter.", false),
     BinaryConfig("bernie_buffs", "Willow: Bernie Buffs",
         "Bernie has 80% resistance against shadows\nHolding Bernie prevents shadows from aggro'ing.", true),
     BinaryConfig("warly", "Warly's Food Taste",
