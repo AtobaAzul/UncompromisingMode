@@ -6,10 +6,10 @@ local assets =
 local easing = require("easing")
 
 local AURA_EXCLUDE_TAGS = { "player", "playerghost", "companion", "ghost", "shadow", "shadowminion", "noauradamage",
-    "INLIMBO", "notarget", "noattack", "flight", "flying", "dragonfly", "lavae", "invisible" }
+    "INLIMBO", "notarget", "noattack", "flight", "flying", "dragonfly", "lavae", "invisible", "rabbit", "bird" }
 
 local AURA_EXCLUDE_TAGS_DRAGONFLY = { "playerghost", "ghost", "shadow", "shadowminion", "noauradamage", "INLIMBO",
-    "notarget", "noattack", "flight", "flying", "dragonfly", "lavae", "invisible" }
+    "notarget", "noattack", "flight", "flying", "dragonfly", "lavae", "invisible", "rabbit", "bird" }
 
 local function OnLoad(inst, data)
     inst:Remove()
@@ -37,7 +37,7 @@ end
 local function TrySlowdown(inst, target)
     local debuffkey = inst.prefab
 
-    if not target:HasTag("player") then
+    if not target:HasTag("player") and target.components.locomotor ~= nil then
         if target._lavavomit_speedmulttask ~= nil then
             target._lavavomit_speedmulttask:Cancel()
         end
