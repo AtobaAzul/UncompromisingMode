@@ -18,59 +18,42 @@ local function CreateMousePositioning(inst)
 end
 
 local function CheckAndApplyTempDamage(inst, data)
-	if data ~= nil and data.amount ~= nil and data.amount < 0 and data.cause ~= nil and (data.cause == "cold" or data.cause == "hot") then
-		local worldtemperature = inst.um_world_temperature ~= nil and math.abs(inst.um_world_temperature - 35) / 20 or 0
-		print("World Temperature = "..worldtemperature)
-		local temp_buffer = 7 - worldtemperature
-		print("Temperature Buffer = "..temp_buffer)
-		
-		if inst.um_temp_healthdelta ~= nil and inst.um_temp_healthdelta >= temp_buffer then
-			inst.um_temp_healthdelta = temp_buffer / 2
+	if data ~= nil and data.amount ~= nil and data.amount < 0 and data.cause ~= nil and inst.components.health ~= nil then
+		if TUNING.DSTU.MAXTEMPDAMAGE and (data.cause == "cold" or data.cause == "hot") then
+			local worldtemperature = inst.um_world_temperature ~= nil and math.abs(inst.um_world_temperature - 35) / 20 or 0
+			local temp_buffer = 7 - worldtemperature
 			
-			if inst.components.temperature ~= nil then
-				if data.cause == "cold" then
-					local coldrate = inst.components.temperature.hurtrate and (inst.components.temperature.hurtrate - .25) or 1
-					
-					if coldrate < 0 then
-						coldrate = 0
-					end
-					
-					inst.components.health:DeltaPenalty(0.01 * coldrate)
-				elseif data.cause == "hot" then
-					local heatrate = inst.components.temperature.overheathurtrate and (inst.components.temperature.overheathurtrate - .25) or 1
-						
-					if heatrate < 0 then
-						heatrate = 0
-					end
-						
-					inst.components.health:DeltaPenalty(0.01 * heatrate)
+			if inst.um_temp_healthdelta ~= nil and inst.um_temp_healthdelta >= temp_buffer then
+				inst.components.health:DeltaPenalty(math.abs(data.amount / inst.components.health.maxhealth))
+			else
+				if inst.um_temp_healthdelta == nil then
+					inst.um_temp_healthdelta = 0
 				end
-			end
-		else
-			if inst.um_temp_healthdelta == nil then
-				inst.um_temp_healthdelta = 0
-			end
-			
-			inst.um_temp_healthdelta = inst.um_temp_healthdelta + FRAMES
-		end
-
-		if inst.um_temp_healthdelta_task ~= nil then
-			inst.um_temp_healthdelta_task:Cancel()
-		end
-			
-		inst.um_temp_healthdelta_task = inst:DoPeriodicTask(1, function()
-			inst.um_temp_healthdelta = inst.um_temp_healthdelta - 1
-			
-			if inst.um_temp_healthdelta <= 0 then
-				inst.um_temp_healthdelta = 0
 				
-				if inst.um_temp_healthdelta_task ~= nil then
-					inst.um_temp_healthdelta_task:Cancel()
-				end
-					
-				inst.um_temp_healthdelta_task = nil
+				inst.um_temp_healthdelta = inst.um_temp_healthdelta + FRAMES
 			end
-		end)
+
+			if inst.um_temp_healthdelta_task ~= nil then
+				inst.um_temp_healthdelta_task:Cancel()
+			end
+				
+			inst.um_temp_healthdelta_task = inst:DoPeriodicTask(1, function()
+				inst.um_temp_healthdelta = inst.um_temp_healthdelta - 1
+				
+				if inst.um_temp_healthdelta <= 0 then
+					inst.um_temp_healthdelta = 0
+					
+					if inst.um_temp_healthdelta_task ~= nil then
+						inst.um_temp_healthdelta_task:Cancel()
+					end
+						
+					inst.um_temp_healthdelta_task = nil
+				end
+			end)
+		elseif TUNING.DSTU.MAXHUNGERDAMAGE and data.cause == "hunger" then
+			inst.components.health:DeltaPenalty(math.abs(data.amount / inst.components.health.maxhealth))
+			--inst.components.health:DeltaPenalty(0.01)
+		end
 	end
 end
 
@@ -169,10 +152,9 @@ env.AddPlayerPostInit(function(inst)
 		end
     end
 	
-	if TUNING.DSTU.MAXTEMPDAMAGE then
+	if TUNING.DSTU.MAXTEMPDAMAGE or TUNING.DSTU.MAXHUNGERDAMAGE then
 		inst:ListenForEvent("temperaturetick", function(src, temperature)
 				inst.um_world_temperature = temperature
-				print(inst.um_world_temperature)
 			end, TheWorld)
 		
 		inst:ListenForEvent("healthdelta", CheckAndApplyTempDamage)

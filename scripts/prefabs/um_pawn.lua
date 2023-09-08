@@ -108,7 +108,11 @@ end
 
 local function StartDusk(inst) end
 
-local function OnAttacked(inst, data) if inst.components.health ~= nil and not inst.components.health:IsDead() then inst.sg:GoToState("hide_pre") end end
+local function OnAttacked(inst, data) 
+	if not inst.components.health:IsDead() then
+		inst.components.explosive:OnBurnt()
+	end
+end
 
 local function DisplayName(inst)
     if inst.sg:HasStateTag("invisible") then
@@ -311,6 +315,8 @@ local function OnNewTarget(inst)
 		inst.sparks = SpawnPrefab("sparks")
 		inst.sparks.entity:AddFollower()
 		inst.sparks.Follower:FollowSymbol(inst.GUID, "body", 0 + math.random(-0.2, .2), -40, 0 + math.random(-0.2, .2))
+		
+		inst:ListenForEvent("attacked", OnAttacked)
 		
 		inst.explode_timer_count = 1
 		inst:DoTaskInTime(0, ExplodePing)

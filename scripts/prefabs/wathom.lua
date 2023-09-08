@@ -154,7 +154,7 @@ end
 
 local function AmpTimer(inst)
 	if inst.components.grogginess ~= nil and
-		(inst.components.adrenaline:GetPercent() < 0.24 and not inst:HasTag("amped") and not inst:HasTag("deathamp")) then
+		(inst.components.adrenaline:GetPercent() < 0.25 and not inst:HasTag("amped") and not inst:HasTag("deathamp")) then
 		inst.components.grogginess.grog_amount = 0.5
 	end
 
@@ -165,7 +165,7 @@ local function AmpTimer(inst)
 		else
 			inst.components.adrenaline:DoDelta(-4)
 		end
-	elseif inst.components.adrenaline:GetPercent() > 0.25 then
+	elseif inst.components.adrenaline:GetPercent() >= 0.25 then
 		if not inst.adrenalpause then
 			inst.components.adrenaline:DoDelta(-1)
 		end
@@ -218,7 +218,7 @@ local function AmpTimer(inst)
 end
 
 local function OnAttackOther(inst, data)
-	if data and data.target and not data.projectile and inst.components.adrenaline:GetPercent() > 0.24 and
+	if data and data.target and not data.projectile and inst.components.adrenaline:GetPercent() >= 0.25 and
 		((data.target.components.combat and data.target.components.combat.defaultdamage > 0) or
 		(
 		data.target.prefab == "dummytarget" or data.target.prefab == "antlion" or data.target.prefab == "stalker_atrium" or
@@ -230,9 +230,9 @@ local function OnAttackOther(inst, data)
 		end
 		inst.adrenalresume = inst:DoTaskInTime(10, function(inst) inst.adrenalpause = false end)
 		if not (inst:HasTag("amped") or inst:HasTag("deathamp")) then
-			if inst.components.adrenaline:GetPercent() > 0.24 and inst.components.adrenaline:GetPercent() < 0.51 then
+			if inst.components.adrenaline:GetPercent() >= 0.25 and inst.components.adrenaline:GetPercent() < 0.5 then
 				inst.components.adrenaline:DoDelta(5)
-			elseif inst.components.adrenaline:GetPercent() > 0.50 and inst.components.adrenaline:GetPercent() < 0.75 then
+			elseif inst.components.adrenaline:GetPercent() >= 0.50 and inst.components.adrenaline:GetPercent() < 0.75 then
 				inst.components.adrenaline:DoDelta(4)
 			else
 				inst.components.adrenaline:DoDelta(3)
@@ -243,7 +243,7 @@ end
 
 local function OnHealthDelta(inst, data)
 	inst:DoTaskInTime(FRAMES * 2, function(inst)
-		if data.amount < 0 and not inst:HasTag("amped") and inst.components.adrenaline:GetPercent() > 0.24 and
+		if data.amount < 0 and not inst:HasTag("amped") and inst.components.adrenaline:GetPercent() >= 0.25 and
 			data.cause ~= "deathamp" then
 			inst.components.adrenaline:DoDelta(math.floor(data.amount * -0.25)) -- This gives Wathom adrenaline when attacked!
 		end
@@ -342,10 +342,10 @@ local function UpdateAdrenaline(inst, data)
 			"wathom_breathe")
 	end
 
-	if (AmpLevel > 0.75 or inst:HasTag("amped")) and
+	if (AmpLevel >= 0.75 or inst:HasTag("amped")) and
 		(inst.components.rider ~= nil and not inst.components.rider:IsRiding() or inst.components.rider == nil) then --Handle VVathom Running
 		inst:AddTag("wathomrun")
-	elseif inst:HasTag("wathomrun") and not (AmpLevel > 0.75 or inst:HasTag("amped")) or inst.components.rider ~= nil and inst.components.rider:IsRiding() then
+	elseif inst:HasTag("wathomrun") and not (AmpLevel >= 0.75 or inst:HasTag("amped")) or inst.components.rider ~= nil and inst.components.rider:IsRiding() then
 		inst:RemoveTag("wathomrun")
 	end
 
@@ -368,7 +368,7 @@ local function UpdateAdrenaline(inst, data)
 	elseif AmpLevel >= 1 and not inst:HasTag("amped") then
 		Amp(inst)
 		inst.AmpDamageTakenModifier = TUNING.DSTU.WATHOM_AMPED_VULNERABILITY
-	elseif AmpLevel > 0.75 and not inst:HasTag("amped") then
+	elseif AmpLevel >= 0.75 and not inst:HasTag("amped") then
 		if item ~= nil then
 			inst.components.combat.attackrange = 6
 		else
@@ -376,7 +376,7 @@ local function UpdateAdrenaline(inst, data)
 		end
 		inst.components.health:SetAbsorptionAmount(-0.50)
 		inst.AmpDamageTakenModifier = 2
-	elseif AmpLevel > 0.5 and not inst:HasTag("amped") then
+	elseif AmpLevel >= 0.5 and not inst:HasTag("amped") then
 		if item ~= nil then
 			inst.components.combat.attackrange = 5
 		else
@@ -468,6 +468,7 @@ local common_postinit = function(inst)
 	inst:ListenForEvent("wathommusic_start", UpdateMusic)
 	inst:ListenForEvent("wathommusic_end", UpdateMusic)
 	inst:ListenForEvent("ms_playerreroll", UpdateMusic)
+	inst:ListenForEvent("player_despawn", UpdateMusic)
 	inst:ListenForEvent("setowner", OnSetOwner)
 	inst:ListenForEvent("ondeath", function(inst)
 		if inst:HasTag("amped") then
@@ -593,6 +594,7 @@ local master_postinit = function(inst)
 	inst:ListenForEvent("wathommusic_start", UpdateMusic)
 	inst:ListenForEvent("wathommusic_end", UpdateMusic)
 	inst:ListenForEvent("ms_playerreroll", UpdateMusic)
+	inst:ListenForEvent("player_despawn", UpdateMusic)
 
 	inst:ListenForEvent("ondeath", function(inst)
 		if inst:HasTag("amped") then

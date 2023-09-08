@@ -379,6 +379,7 @@ TUNING.DSTU = {
     HEATWAVES = GetModConfigData("heatwaves"),
     SMOG = GetModConfigData("smog"),
 	MAXTEMPDAMAGE = GetModConfigData("maxtempdamage"),
+	MAXHUNGERDAMAGE = GetModConfigData("maxhungerdamage"),
 	HARDER_TREPIDATION = GetModConfigData("nodespawn_trepidation"),
     -- boss hp qol
     BEEQUEEN_HEALTH = GetModConfigData("bee queen health"),

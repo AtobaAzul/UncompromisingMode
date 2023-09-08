@@ -559,3 +559,15 @@ for k, v in ipairs(froglegs) do
 		inst.components.tradable.goldvalue = TUNING.GOLD_VALUES.MEAT
 	end)
 end
+
+AddPrefabPostInit("wetgoop", function(inst)
+	if not GLOBAL.TheWorld.ismastersim then
+		return
+	end
+	
+	if inst.components.perishable ~= nil and inst.components.perishable.onperishreplacement ~= nil then
+		if inst.components.perishable.onperishreplacement == "spoiled_food" then
+			inst.components.perishable.onperishreplacement = nil
+		end
+	end
+end)

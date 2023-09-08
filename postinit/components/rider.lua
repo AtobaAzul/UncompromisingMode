@@ -15,7 +15,7 @@ env.AddComponentPostInit("rider", function(self)
                     and not (weapon ~= nil and (
                         weapon.components.projectile ~= nil or
                             weapon.components.complexprojectile ~= nil or
-                            weapon.components.weapon:CanRangedAttack()
+                            weapon.components.weapon ~= nil and weapon.components.weapon:CanRangedAttack()
                         ))
                     and stimuli ~= "electric"
                     and stimuli ~= "darkness"

@@ -69,6 +69,18 @@ local function GetVerb(inst)
 	return "UM_TORNADOTRACKER"
 end
 
+local function BurntCheck(inst)
+	if inst:HasTag("burnt") then
+		if inst.CheckTornadoTask ~= nil then
+			inst.CheckTornadoTask:Cancel()
+			inst.CheckTornadoTask = nil
+		end
+		
+		inst:RemoveComponent("activatable")
+		inst:RemoveComponent("mapspotrevealer")
+	end
+end
+
 env.AddPrefabPostInit("rainometer", function(inst)
 	inst.GetActivateVerb = GetVerb
 	
@@ -88,9 +100,8 @@ env.AddPrefabPostInit("rainometer", function(inst)
     inst.components.activatable.inactive = true
 	inst.components.activatable.quickaction = true
 	
-    inst:ListenForEvent("burntup", function()
-		inst:RemoveComponent("mapspotrevealer")
-	end)
+    inst:ListenForEvent("burntup", BurntCheck)
+    inst:DoTaskInTime(0, BurntCheck)
 	
-	inst:DoPeriodicTask(1, CheckForTornadoRevealers)
+	inst.CheckTornadoTask = inst:DoPeriodicTask(1, CheckForTornadoRevealers)
 end)

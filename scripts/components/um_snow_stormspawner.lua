@@ -51,7 +51,7 @@ return Class(function(self, inst)
 		_worldsettingstimer:ResumeTimer(UM_SNOW_STORM_TIMERNAME)
 	end
 
-	local function StartStorming(immediately)
+	local function StartStorming(self, immediately)
 		if TheWorld.state.season == "winter" then
 			print("StartStorming")
 			_storming = true
@@ -130,7 +130,7 @@ return Class(function(self, inst)
 		_storming = data.storming
 
 		if _storming then
-			StartStorming(true)
+			StartStorming(self, true)
 		end
 	end
 
