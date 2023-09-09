@@ -112,14 +112,14 @@ local function createlight(staff, target, pos)
 				
 				if vowner ~= nil then
 					if vowner == owner or vowner.components.inventoryitem ~= nil and vowner.components.inventoryitem.owner ~= nil and vowner.components.inventoryitem.owner == owner then
-						v.components.rechargeable:Discharge(13)
+						v.components.rechargeable:Discharge(26)
 						
 					end
 				end
 			end
 		end
 		
-		staff.components.rechargeable:Discharge(13)	--whatever, do what you want with that number
+		staff.components.rechargeable:Discharge(26)	--whatever, do what you want with that number
 	
 		else
 	
