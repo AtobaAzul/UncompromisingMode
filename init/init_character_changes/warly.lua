@@ -8,17 +8,17 @@ env.AddPrefabPostInit("warly", function(inst)
 	end
 
 if TUNING.DSTU.WARLY_BUTCHER then
-	local function onbutchered(target, data)
-		local target = data.target
-		if target ~= nil and not target:HasTag("butchermark") then
-			target:AddTag("butchermark")
-		end	
-		if target ~= nil and target.butcher_cancel_task ~= nil then
-			target.butcher_cancel_task:Cancel()
-			target.butcher_cancel_task = nil
-		end
-		target.butcher_cancel_task = target:DoTaskInTime(3, function() target:RemoveTag("butchermark") end)
-	end
+	--local function onbutchered(target, data)
+		--local target = data.target
+		--if target ~= nil and not target:HasTag("butchermark") then
+			--target:AddTag("butchermark")
+		--end	
+		--if target ~= nil and target.butcher_cancel_task ~= nil then
+			--target.butcher_cancel_task:Cancel()
+			--target.butcher_cancel_task = nil
+		--end
+		--target.butcher_cancel_task = target:DoTaskInTime(3, function() target:RemoveTag("butchermark") end)
+	--end
 
 	local function inventorystuff(item, data)
 		local item = data.item
@@ -39,7 +39,7 @@ if TUNING.DSTU.WARLY_BUTCHER then
 	end
 	
 	if inst.components.combat ~= nil then
-		inst:ListenForEvent("onattackother", onbutchered)
+		--inst:ListenForEvent("onattackother", onbutchered)
 		inst:ListenForEvent("itemget", inventorystuff)
 		inst:ListenForEvent("dropitem", ondropitem)
 	end
