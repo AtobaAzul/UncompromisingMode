@@ -33,6 +33,9 @@ local function livingtree_postinit(inst)
 	local function OnWorked(inst, chopper, workleft)
 		if chopper ~= nil and not chopper:HasTag("playerghost") then
 			spawn_root_attack(inst, chopper)
+			if _onworked then
+				_onworked(inst,chopper,workleft)
+			end
 		end
 	end
 	-- Change the onworked callback to the above
