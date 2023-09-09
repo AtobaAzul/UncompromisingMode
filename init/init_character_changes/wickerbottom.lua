@@ -396,7 +396,7 @@ local function WickerCaresForHerBooks(inst)
         if v:HasTag("book") and v.components.finiteuses then
             local percent = v.components.finiteuses:GetPercent()
             if percent < 1 then
-                v.components.finiteuses:SetPercent(math.min(1, percent + 0.015625))
+                v.components.finiteuses:SetPercent(math.min(1, percent + 0.01))
             end
         end
     end

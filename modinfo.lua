@@ -276,7 +276,7 @@ configuration_options = {
     BinaryConfig("apicultural notes", "Wickerbottom: Apicultural Notes",
         "\"Apicultural Notes\" now adds 1 Honey to up to 20 Bee Boxes around. Doesn't work on Dusk, Night and/or Winter. Now takes a Honeycomb.", true),
     BinaryConfig("wicker_inv_regen", "Wickerbottom: Inventory Regen.",
-		"Wicker's books now regenerate in her inventory, instead of the Bookcase. Bookcase now takes 4 Boards, instead of 2 Living Logs.", true),
+		"Wicker's books now regenerate in her inventory, instead of the Bookcase. Bookcase now takes 4 Boards, instead of 2 Living Logs.", false),
     BinaryConfig("waxwell", "Maxwell",
         "Maxwell gets buffed versions of his classic shadows by reading the Codex Umbra. Disable for Maxwell mod compatibility!",
         true),
