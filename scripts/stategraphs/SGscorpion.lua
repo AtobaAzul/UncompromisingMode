@@ -7,6 +7,33 @@ local actionhandlers =
     ActionHandler(ACTIONS.INVESTIGATE, "investigate"),
 }
 
+local function ArtificialLocomote(inst, destination, speed) --Locomotor is basically running a similar code anyhow, this bypasses any physics interactions preventing
+	if destination and speed then --our locomote from working... Inconsistencies in when the entity is supposed to walk forward led to this.
+		speed = speed * FRAMES
+		local hypoten = math.sqrt(inst:GetDistanceSqToPoint(destination))
+		local x, y, z = inst.Transform:GetWorldPosition()
+		local x_final, y_final, z_final
+		local speedmult = inst.components.locomotor ~= nil and inst.components.locomotor:GetSpeedMultiplier() or 1
+		x_final = ((destination.x - x) / hypoten) * (speed * speedmult) + x
+		z_final = ((destination.z - z) / hypoten) * (speed * speedmult) + z
+
+		inst.Transform:SetPosition(x_final, y, z_final)
+	end
+end
+
+local function FindFarLandingPoint(inst, destination) --This makes the geese aim for a point behind the player instead of where the player is at.
+	if destination then --If it aimed directly at the player, it'll do something similar to the bugged version.
+		inst.evadePoint = destination
+		local hypoten = math.sqrt(inst:GetDistanceSqToPoint(destination))
+		local x, y, z = inst.Transform:GetWorldPosition()
+		local x_far, z_far
+		x_far = - ((destination.x - x) / hypoten) * 20 + x --20 is arbitrary, another number could be used if desired, if it is low enough it may make m/goose undershoot the player too.
+		z_far = - ((destination.z - z) / hypoten) * 20 + z
+		inst.evadePoint.x = x_far
+		inst.evadePoint.z = z_far
+	end
+end
+
 local events=
 {
     EventHandler("attacked", function(inst) 
@@ -328,7 +355,7 @@ local states=
             TimeEvent(8	*FRAMES, function(inst) inst.Physics:SetMotorVelOverride(20,0,0) end),
             TimeEvent(8*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/Scorpion/snap_pre") end),
             TimeEvent(9*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/Scorpion/snap") end),
-            TimeEvent(19*FRAMES, function(inst) inst.components.combat:SetRange(3, 3)
+            TimeEvent(19*FRAMES, function(inst) inst.components.combat:SetRange(2, 2)
 			inst.components.combat:DoAttack(inst.sg.statemem.target) 
         end),
             TimeEvent(20*FRAMES,
@@ -385,8 +412,15 @@ local states=
             inst.AnimState:PlayAnimation("evade")
             inst.components.locomotor:EnableGroundSpeedMultiplier(false)
 			inst.components.combat:SetRange(TUNING.SPIDER_WARRIOR_ATTACK_RANGE, TUNING.SPIDER_WARRIOR_HIT_RANGE)
+			if inst.components.combat and inst.components.combat.target then
+				FindFarLandingPoint(inst, inst.components.combat.target:GetPosition())
+			end
         end,
-
+		
+		onupdate = function(inst)
+			ArtificialLocomote(inst, inst.evadePoint, 15)
+		end,
+		
         events=
         {
             EventHandler("animover", function(inst)		

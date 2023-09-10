@@ -5,6 +5,7 @@ local splashprefabs =
     "web_splash_fx_med",
     "web_splash_fx_full",
 }
+
 local function doprojectilehit(inst, attacker, other)
 	inst.SoundEmitter:PlaySound("dontstarve/creatures/spider/spider_egg_sack")
     local x, y, z = inst.Transform:GetWorldPosition()
@@ -80,29 +81,21 @@ local function OnProjectileHit(inst, attacker, other)
     doprojectilehit(inst, attacker, other)
     inst:Remove()
 end
+
 local function oncollide(inst, other)
     -- If there is a physics collision, try to do some damage to that thing.
     -- This is so you can't hide forever behind walls etc.
 
-    local attacker = inst.components.complexprojectile.attacker
-    if other ~= doprojectilehit(inst, attacker) and
-        other ~= nil and
-        other:IsValid() and
-        other.components.combat ~= nil then
-        if attacker ~= nil and attacker:IsValid() and attacker.components.weapon then
-            attacker.components.combat:DoAttack(other, inst.components.complexprojectile.owningweapon, inst)
-        end
-        if other.components.pinnable ~= nil then
-            other.components.pinnable:Stick("web_net_trap", splashprefabs)
-        end
+    local attacker = inst.components.projectile.attacker
+    if other ~= doprojectilehit(inst, attacker) and other ~= nil and other:IsValid() and other.components.combat and other.components.pinnable then
+		other.components.pinnable:Stick("web_net_trap", splashprefabs)
     end
-
     inst:Remove()
 end
 
 local function SpawnString(inst)
-local x,y,z = inst.Transform:GetWorldPosition()
-SpawnPrefab("widow_web_detrius").Transform:SetPosition(x,y,z)
+	local x,y,z = inst.Transform:GetWorldPosition()
+	SpawnPrefab("widow_web_detrius").Transform:SetPosition(x,y,z)
 end
 
 local function projectilefn()
@@ -114,15 +107,8 @@ local function projectilefn()
     inst.entity:AddPhysics()
     inst.entity:AddNetwork()
 
-    inst.Physics:SetMass(1)
-    inst.Physics:SetFriction(10)
-    inst.Physics:SetDamping(5)
-    inst.Physics:SetCollisionGroup(COLLISION.CHARACTERS)
-    inst.Physics:ClearCollisionMask()
-    inst.Physics:CollidesWith(COLLISION.WORLD)
-    inst.Physics:CollidesWith(COLLISION.OBSTACLES)
-    inst.Physics:CollidesWith(COLLISION.CHARACTERS)
-    inst.Physics:SetCapsule(0.02, 0.02)
+    MakeInventoryPhysics(inst)
+    RemovePhysicsColliders(inst)
 
     inst.AnimState:SetBank("spat_bomb")
     inst.AnimState:SetBuild("web_net_shot")
@@ -137,14 +123,19 @@ local function projectilefn()
     inst.Physics:SetCollisionCallback(oncollide)
 
     inst.persists = false
-
-    inst:AddComponent("locomotor")
-    inst:AddComponent("complexprojectile")
-    inst.components.complexprojectile:SetOnHit(OnProjectileHit)
-    inst.components.complexprojectile:SetHorizontalSpeed(30)
-    inst.components.complexprojectile:SetLaunchOffset(Vector3(3, 2, 0))
-    inst.components.complexprojectile.usehigharc = false
+    inst:AddComponent("weapon")
+    inst.components.weapon:SetDamage(0)
+	
 	inst:DoPeriodicTask(0.05, SpawnString)
+	inst:AddComponent("projectile")
+    inst.components.projectile:SetSpeed(25)
+    inst.components.projectile:SetHoming(false)
+    inst.hitdist = math.sqrt(2)
+    inst.components.projectile:SetHitDist(inst.hitdist)
+    inst.components.projectile:SetOnHitFn(OnProjectileHit)
+    inst.components.projectile:SetOnMissFn(function(inst) inst:Remove() end)
+    inst.components.projectile:SetLaunchOffset(Vector3(0, 0.5, 0))
+    inst:DoTaskInTime(5, function(inst) inst:Remove() end)
 
     return inst
 end
@@ -284,6 +275,7 @@ local function onthrown(inst)
     inst.Physics:CollidesWith(COLLISION.OBSTACLES)
     inst.Physics:CollidesWith(COLLISION.ITEMS)
 end
+
 local function projectilelobfn()
     local inst = CreateEntity()
 
@@ -322,64 +314,64 @@ end
 
 
 local function webbingfn()
-		local inst = CreateEntity()
-		inst.entity:AddTransform()
-		inst.entity:AddAnimState()
-		inst.entity:AddNetwork()
-		inst.entity:AddDynamicShadow()
-		inst.entity:AddSoundEmitter()
-		inst.entity:AddGroundCreepEntity()
+	local inst = CreateEntity()
+	inst.entity:AddTransform()
+	inst.entity:AddAnimState()
+	inst.entity:AddNetwork()
+	inst.entity:AddDynamicShadow()
+	inst.entity:AddSoundEmitter()
+	inst.entity:AddGroundCreepEntity()
 
-		inst.AnimState:SetBank("widowwebgoop")
-		inst.AnimState:SetBuild("widowwebgoop")
-		inst.AnimState:PlayAnimation("idle")
-		MakeInventoryPhysics(inst)
-		inst.GroundCreepEntity:SetRadius(3)
-		inst:AddTag("queensstuff")
-		inst:AddTag("noauradamage")
-		
-		inst.entity:SetPristine()
+	inst.AnimState:SetBank("widowwebgoop")
+	inst.AnimState:SetBuild("widowwebgoop")
+	inst.AnimState:PlayAnimation("idle")
+	MakeInventoryPhysics(inst)
+	inst.GroundCreepEntity:SetRadius(3)
+	inst:AddTag("queensstuff")
+	inst:AddTag("noauradamage")
+	
+	inst.entity:SetPristine()
 
-		if not TheWorld.ismastersim then
-			return inst
-		end
-		--inst:DoPeriodicTask(60,function(inst) if inst.components.health ~= nil then inst.components.health:DoDelta(-25) end end)
-		inst:ListenForEvent("death", function(inst) inst:Remove() end)
-		-------------------
-		inst:AddComponent("health")
-		inst.components.health:SetMaxHealth(100)
-		inst:AddTag("soulless")
-		inst:AddComponent("combat")
-		inst:ListenForEvent("death", function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/spider/spiderLair_destroy") end)
-		inst:DoTaskInTime(0,function(inst)
-			if not TheWorld.Map:IsPassableAtPoint(inst.Transform:GetWorldPosition()) then
-				inst:Remove()
-			end
-		end)
-		inst:DoPeriodicTask(3,function(inst) if inst.components.health ~= nil then inst.components.health:DoDelta(-5) end end)
+	if not TheWorld.ismastersim then
 		return inst
+	end
+	--inst:DoPeriodicTask(60,function(inst) if inst.components.health ~= nil then inst.components.health:DoDelta(-25) end end)
+	inst:ListenForEvent("death", function(inst) inst:Remove() end)
+	-------------------
+	inst:AddComponent("health")
+	inst.components.health:SetMaxHealth(100)
+	inst:AddTag("soulless")
+	inst:AddComponent("combat")
+	inst:ListenForEvent("death", function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/spider/spiderLair_destroy") end)
+	inst:DoTaskInTime(0,function(inst)
+		if not TheWorld.Map:IsPassableAtPoint(inst.Transform:GetWorldPosition()) then
+			inst:Remove()
+		end
+	end)
+	inst:DoPeriodicTask(3,function(inst) if inst.components.health ~= nil then inst.components.health:DoDelta(-5) end end)
+	return inst
 end
 
 local function webdetriusfn()
-		local inst = CreateEntity()
-		inst.entity:AddTransform()
-		inst.entity:AddAnimState()
-		inst.entity:AddNetwork()
-		inst.entity:AddDynamicShadow()
-		inst.entity:AddSoundEmitter()
+	local inst = CreateEntity()
+	inst.entity:AddTransform()
+	inst.entity:AddAnimState()
+	inst.entity:AddNetwork()
+	inst.entity:AddDynamicShadow()
+	inst.entity:AddSoundEmitter()
 
-		inst.AnimState:SetBank("widowwebgoop")
-		inst.AnimState:SetBuild("widowwebgoop")
-		inst.AnimState:PlayAnimation("idle")
-		MakeInventoryPhysics(inst)
-		inst:AddTag("webchord")
-		inst.entity:SetPristine()
+	inst.AnimState:SetBank("widowwebgoop")
+	inst.AnimState:SetBuild("widowwebgoop")
+	inst.AnimState:PlayAnimation("idle")
+	MakeInventoryPhysics(inst)
+	inst:AddTag("webchord")
+	inst.entity:SetPristine()
 
-		if not TheWorld.ismastersim then
-			return inst
-		end
-		inst:DoTaskInTime(1.8,function(inst) inst:Remove() end)
+	if not TheWorld.ismastersim then
 		return inst
+	end
+	inst:DoTaskInTime(1.8,function(inst) inst:Remove() end)
+	return inst
 end
 
 return Prefab("widow_web_detrius", webdetriusfn),

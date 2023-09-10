@@ -60,44 +60,6 @@ local function DoDespawn(inst)
 	
 end
 
-local function EquipWeapons(inst)
-    if inst.components.inventory ~= nil and not inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS) then
-        local snotbomb = CreateEntity()
-        snotbomb.name = "Snotbomb"
-        --[[Non-networked entity]]
-        snotbomb.entity:AddTransform()
-        snotbomb:AddComponent("weapon")
-        snotbomb.components.weapon:SetDamage(TUNING.SPAT_PHLEGM_DAMAGE)
-        snotbomb.components.weapon:SetRange(TUNING.SPAT_PHLEGM_ATTACKRANGE)
-        snotbomb.components.weapon:SetProjectile("web_bomb")
-        snotbomb:AddComponent("inventoryitem")
-        snotbomb.persists = false
-        snotbomb.components.inventoryitem:SetOnDroppedFn(snotbomb.Remove)
-        snotbomb:AddComponent("equippable")
-        snotbomb:AddTag("snotbomb")
-
-        inst.components.inventory:GiveItem(snotbomb)
-        inst.weaponitems.snotbomb = snotbomb
-
-        local meleeweapon = CreateEntity()
-        meleeweapon.name = "Claw"
-        --[[Non-networked entity]]
-        meleeweapon.entity:AddTransform()
-        meleeweapon:AddComponent("weapon")
-        meleeweapon.components.weapon:SetDamage(160)
-        meleeweapon.components.weapon:SetRange(TUNING.SPAT_MELEE_ATTACKRANGE/4)
-        meleeweapon:AddComponent("inventoryitem")
-        meleeweapon.persists = false
-        meleeweapon.components.inventoryitem:SetOnDroppedFn(meleeweapon.Remove)
-        meleeweapon:AddComponent("equippable")
-        meleeweapon:AddTag("meleeweapon")
-
-        inst.components.inventory:GiveItem(meleeweapon)
-        inst.weaponitems.meleeweapon = meleeweapon
-
-    end
-end
-
 local function OnLoad(inst)
 	inst.investigated = false
 end
@@ -105,10 +67,10 @@ end
 local function TryPowerMove(inst,data)
 	if not inst.sg:HasStateTag("busy") and (inst.components.health ~= nil and not inst.components.health:IsDead()) and (inst.components.combat ~= nil and inst.components.combat.target ~= nil) and not inst.sg:HasStateTag("attack") and not inst.sg:HasStateTag("ability") then
 		if data and data.name == "pounce" then
-			inst.sg:GoToState("preleapattack")	
+			--inst.sg:GoToState("preleapattack")	
 		end
 		if data and data.name == "mortar" then
-			inst.sg:GoToState("lobprojectile")	
+			--inst.sg:GoToState("lobprojectile")	
 		end
 	end
 end
@@ -119,28 +81,25 @@ local function Reset(inst)
 end
 
 local function OnKilledOther(inst)
-  if inst.components.combat ~= nil then
-    inst.components.combat:TryRetarget()
-  end
-
-  if inst.investigatedtask ~= nil then
-    inst.investigatedtask:Cancel()
-    inst.investigatedtask = nil
-  end
-  inst.investigated = nil
-  inst.investigatedtask = inst:DoTaskInTime(5, function(inst) inst.investigated = true end)
+	if inst.components.combat ~= nil then
+		inst.components.combat:TryRetarget()
+	end
+	if inst.investigatedtask ~= nil then
+		inst.investigatedtask:Cancel()
+		inst.investigatedtask = nil
+	end
+	inst.investigated = nil
+	inst.investigatedtask = inst:DoTaskInTime(5, function(inst) inst.investigated = true end)
 end
 
-local function GettingBullied(inst)
+local function EpicsCheck(inst)  --Widow will not tolerate being bullied by epics, you go fight them yourself!
 	local x, y, z = inst.Transform:GetWorldPosition()
-    local ents = TheSim:FindEntities(x, y, z, 20, { "epic" }, { "hoodedwidow","leif" } )
+	local ents = TheSim:FindEntities(x, y, z, 20, { "epic" }, { "hoodedwidow","leif" } )
 	if #ents >= 1 or inst.components.homeseeker ~= nil and inst.components.homeseeker.home and inst:GetDistanceSqToInst(inst.components.homeseeker.home) > TUNING.DRAGONFLY_RESET_DIST*20 then
-	inst.bullier = true
-	else
-	inst.bullier = false
+		inst.bullier = true
 	end
 end
------HE:LP [ASME] MEE 
+
 local function OnHitOther(inst, data)
 	local other = data.target
 	local blocked = false
@@ -148,7 +107,7 @@ local function OnHitOther(inst, data)
 		blocked = true
 	end
 	if other and not other:HasTag("webbedcreature") and blocked == false then
-		if inst.combosucceed == false then
+		if not inst.combosucceed then
 			--TheNet:SystemMessage("Combo Succeed!")
 			inst.combosucceed = true
 		end
@@ -156,7 +115,7 @@ local function OnHitOther(inst, data)
 			inst.combo = inst.combo/10
 		end
 	end
-	if other ~= nil and other.components.inventory ~= nil and inst.armorcrunch and blocked == false then
+	if other ~= nil and other.components.inventory ~= nil and inst.armorcrunch and blocked == false then -- Armor Crunch
 		local helm = other.components.inventory:GetEquippedItem(EQUIPSLOTS.HEAD)
 		local chest = other.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY)
 		local hand = other.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
@@ -170,7 +129,7 @@ local function OnHitOther(inst, data)
 			hand.components.armor:TakeDamage(200)
 		end
 	end
-	inst.armorcrunch = false
+	inst.armorcrunch = nil
 end
 
 local function fn()
@@ -270,8 +229,8 @@ local function fn()
     inst:AddComponent("locomotor")
     inst.components.locomotor:SetSlowMultiplier( 1 )
     inst.components.locomotor:SetTriggersCreep(false)
-    inst.components.locomotor.pathcaps = { ignorecreep = true }
-    inst.components.locomotor.walkspeed = 3
+    --inst.components.locomotor.pathcaps = { ignorecreep = true }
+    inst.components.locomotor.walkspeed = 4
 
     ------------------
 
@@ -299,9 +258,6 @@ local function fn()
 	inst.investigated = false
 	inst.Reset = Reset
     inst.DoDespawn = DoDespawn
-	inst:AddComponent("inventory")
-    inst.weaponitems = {}
-	EquipWeapons(inst)
     inst:SetBrain(brain)
 	inst.OnLoad = OnLoad
     inst:ListenForEvent("attacked", OnAttacked)
@@ -310,11 +266,11 @@ local function fn()
 	inst:ListenForEvent("timerdone", TryPowerMove)
 	inst.components.timer:StartTimer("pounce",10+math.random(-3,1))
 	inst.components.timer:StartTimer("mortar",20+math.random(-1,5))
-	inst:DoPeriodicTask(3, GettingBullied)
-	inst.bullier = nil
-	inst.armorcrunch = false
+	inst:DoPeriodicTask(3, EpicsCheck)
+
 	inst.combosucceed = true
 	inst.docombo = false
+	
 	inst:ListenForEvent("killed", OnKilledOther)
 	inst:ListenForEvent("onhitother", OnHitOther)
 

@@ -17,6 +17,7 @@ RemapSoundEvent("dontstarve/characters/winky/sinking", "winky/characters/winky/s
 local inventoryitems =
 {
 	"air_conditioner",
+	"houndious_observious",
 	"ancient_amulet_red",
 	"aphid",
 	"armor_glassmail",
@@ -202,6 +203,7 @@ local inventoryitems =
 	"ocupus_tentacle_eye",
 	"ocupus_tentacle_cooked",
 	"ocupus_beak",
+	"beakbasher",
 	"um_brineishmoss",
 	"brine_balm",
 	"sludge_oil",

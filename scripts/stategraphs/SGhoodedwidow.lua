@@ -1,41 +1,39 @@
 require("stategraphs/commonstates")
 local easing = require("easing")
+
 local actionhandlers =
 {
-ActionHandler(ACTIONS.GOHOME, "jumphome"),
+	ActionHandler(ACTIONS.GOHOME, "jumphome"),
 }
 
---sdfqocipqowiecjAAAAAAASSDFFASDFASDFQWCQWCQWE
+local function ShootWebBomb(inst)
+	if inst.components.combat and inst.components.combat.target then
+		local target = inst.components.combat.target
+		local web_attack = SpawnPrefab("web_bomb")
+		web_attack.Transform:SetPosition(inst.Transform:GetWorldPosition())
+		web_attack.components.projectile:Throw(inst, target, inst)
+	end
+end
+
+local function RunningForAbility(inst) --Widow is making some space to use her ability
+	if inst.components.timer and (not inst.components.timer:TimerExists("pounce") or not inst.components.timer:TimerExists("mortar")) then
+		return true
+	end
+end
+
 local events=
 {
-    EventHandler("attacked", function(inst) if not inst.components.health:IsDead() and not inst.sg:HasStateTag("ability") and not inst.sg:HasStateTag("attack") then inst.sg:GoToState("hit") end end),
+    EventHandler("attacked", function(inst) 
+		if not inst.components.health:IsDead() and not inst.sg:HasStateTag("ability") and not inst.sg:HasStateTag("attack") and not RunningForAbility(inst) then 
+			inst.sg:GoToState("hit") 
+		end 
+	end),
     EventHandler("death", function(inst) inst.sg:GoToState("death") end),
     EventHandler("doattack", function(inst, data)
-		if not inst.sg:HasStateTag("busy") then
-			if not inst.components.health:IsDead() then
-				local weapon = inst.components.combat and inst.components.combat:GetWeapon()
-				if weapon then
-					if weapon:HasTag("snotbomb") then
-						inst.sg:GoToState("launchprojectile", data.target)
-					else
-						if inst.components.timer and not inst.components.timer:TimerExists("pounce") then
-							inst.sg:GoToState("preleapattack")
-						else
-							if inst.components.timer and not inst.components.timer:TimerExists("mortar") then
-								inst.sg:GoToState("lobprojectile")
-							else
-								inst.sg:GoToState("attack", data.target)
-							end
-						end
-					end
-				else
-					inst.components.inventory:Equip(inst.weaponitems.meleeweapon)
-					inst.sg:GoToState("attack", data.target)
-				end
-			end
+		if not inst.sg:HasStateTag("busy") and not inst.components.health:IsDead() then
+			inst.sg:GoToState("attack", data.target)
 		end
     end),
-
     CommonHandlers.OnSleep(),
     CommonHandlers.OnLocomote(false,true),
     CommonHandlers.OnFreeze(),
@@ -56,44 +54,30 @@ local splashprefabs =
     "web_splash_fx_med",
     "web_splash_fx_full",
 }
+
 local function WebMortar(inst,angle)
-
 	if inst.components.combat.target ~= nil then
-	local target = inst.components.combat.target
-    local x, y, z = inst.Transform:GetWorldPosition()
-    local projectile = SpawnPrefab("web_mortar")
-    projectile.shadow = SpawnPrefab("warningshadow")
-	local scaleFactor = Lerp(.5, 1.5, 1)
-	projectile.shadow.scaleFactor = scaleFactor
-	projectile.shadow.Transform:SetScale(scaleFactor, scaleFactor, scaleFactor)
-	projectile.shadow = projectile.shadow:DoPeriodicTask(FRAMES, ShadowFade, nil, 5)	
-	
-    projectile.Transform:SetPosition(x, y, z)
-    local a, b, c = target.Transform:GetWorldPosition()
-	local targetpos = target:GetPosition()
-	if angle == nil then
-	angle = 0
-	end
-	local theta = inst.Transform:GetRotation()+angle
-	theta = theta*DEGREES
-
-	targetpos.x = targetpos.x + 15*math.cos(theta)
-
-	targetpos.z = targetpos.z - 15*math.sin(theta)
-
-	local rangesq = ((a-x)^2) + ((c-z)^2)
-    local maxrange = 15
-    local bigNum = 10
-    local speed = easing.linear(rangesq, bigNum, 3, maxrange * maxrange)
-	projectile:AddTag("canthit")
-	speed = speed*2*math.random(0.5,1)
-	
-	if speed < 5 then
-		speed = 14*math.random(100,200)*0.01
-	end
-	
-    projectile.components.complexprojectile:SetHorizontalSpeed(speed)
-    projectile.components.complexprojectile:Launch(targetpos, inst, inst)
+		local target = inst.components.combat.target
+		local x, y, z = inst.Transform:GetWorldPosition()
+		local projectile = SpawnPrefab("web_mortar")
+		projectile.Transform:SetPosition(x,y,z)
+		local scaleFactor = Lerp(.5, 1.5, 1)
+		projectile.shadow = SpawnPrefab("warningshadow")
+		projectile.shadow.scaleFactor = scaleFactor
+		projectile.shadow.Transform:SetScale(scaleFactor, scaleFactor, scaleFactor)
+		projectile.shadow = projectile.shadow:DoPeriodicTask(FRAMES, ShadowFade, nil, 5)	
+		local a, b, c = target.Transform:GetWorldPosition()
+		local targetpos = target:GetPosition()
+		if not angle then
+			angle = 0
+		end
+		local theta = inst.Transform:GetRotation()+angle
+		theta = theta*DEGREES
+		targetpos.x = targetpos.x + 15*math.cos(theta)
+		targetpos.z = targetpos.z - 15*math.sin(theta)
+		
+		projectile.components.complexprojectile:SetHorizontalSpeed(math.random(20,30))
+		projectile.components.complexprojectile:Launch(targetpos, inst, inst)
 	end
 end
 
@@ -107,12 +91,12 @@ local states=
 			if inst.should_go_tired then
 				inst.should_go_tired = false
 				inst.sg:GoToState("tired")
-			end
-		
-            inst.Physics:Stop()
-			inst.AnimState:PlayAnimation("idle", true)
-			if math.random() < .2 then
-				inst.SoundEmitter:PlaySound("dontstarve/creatures/spiderqueen/scream_short")
+			else
+				inst.Physics:Stop()
+				inst.AnimState:PlayAnimation("idle", true)
+				if math.random() < .2 then
+					inst.SoundEmitter:PlaySound("dontstarve/creatures/spiderqueen/scream_short")
+				end
 			end
         end,
 
@@ -131,17 +115,11 @@ local states=
 			if math.random() < 0.5/inst.combo and inst.components.health ~= nil and inst.components.health.currenthealth < TUNING.DSTU.WIDOW_HEALTH*0.5 then
 				inst.docombo = true
 				if inst.combo == 1 then
-					--TheNet:SystemMessage("Starting Attack/Combo!")
 					inst.combosucceed = false
 				end
 			end
-			local weapon = inst.components.combat and inst.components.combat:GetWeapon()
-            if weapon ~= nil and weapon:HasTag("snotbomb") then
-				inst.sg:GoToState("launchprojectile",target)
-			else
-				inst.components.combat:StartAttack()
-				inst.AnimState:PlayAnimation("atk")
-			end
+			inst.components.combat:StartAttack()
+			inst.AnimState:PlayAnimation("atk")
         end,
 
         timeline=
@@ -150,7 +128,7 @@ local states=
             TimeEvent(25*FRAMES, function(inst) inst:PerformBufferedAction() inst.SoundEmitter:PlaySound("dontstarve/creatures/spiderqueen/attack_grunt") end),
             TimeEvent(28*FRAMES, function(inst) inst:PerformBufferedAction() inst.SoundEmitter:PlaySound("dontstarve/creatures/spiderqueen/swipe") end),
             TimeEvent(28*FRAMES, function(inst) 
-			inst.components.inventory:Equip(inst.weaponitems.meleeweapon)
+			--inst.components.inventory:Equip(inst.weaponitems.meleeweapon)
 			inst.components.combat:DoAttack()
 			end),
         },
@@ -201,7 +179,7 @@ local states=
 
         onenter = function(inst, cb)
             inst.Physics:Stop()
-            inst.AnimState:PlayAnimation("tired")
+            inst.AnimState:PlayAnimation("tired",false)
             inst.SoundEmitter:PlaySound("dontstarve/creatures/spiderqueen/scream")
         end,
 
@@ -257,7 +235,7 @@ local states=
         timeline=
         {
             TimeEvent(47*FRAMES, function(inst)
-			inst.components.combat:DoAttack(inst.sg.statemem.target)
+				ShootWebBomb(inst)
             end),
         },
         
@@ -343,7 +321,7 @@ local states=
 		timeline =
         {
             TimeEvent(10*FRAMES, function(inst) 
-			inst.components.combat:DoAreaAttack(inst, TUNING.SPIDERQUEEN_ATTACKRANGE * 1.2) --GroundPound Is purely visual
+			inst.components.combat:DoAreaAttack(inst, TUNING.SPIDERQUEEN_ATTACKRANGE) --GroundPound Is purely visual
 			inst.components.groundpounder:GroundPound() end),
 
         },
@@ -389,7 +367,7 @@ local states=
 			if inst.brain then
 				inst.brain:Stop()
 			end
-			inst.components.inventory:Equip(inst.weaponitems.meleeweapon)
+			--inst.components.inventory:Equip(inst.weaponitems.meleeweapon)
 			inst.AnimState:PlayAnimation("leap", true)
 			inst.Physics:SetMotorVelOverride(speed,0,0)
         end,
@@ -399,7 +377,7 @@ local states=
             TimeEvent(8*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/spiderqueen/attack_grunt") end),
 			TimeEvent(20*FRAMES, function(inst) inst.components.locomotor:Stop()
 			
-			inst.components.combat:DoAreaAttack(inst, TUNING.SPIDERQUEEN_ATTACKRANGE) --GroundPound Is purely visual
+			inst.components.combat:DoAreaAttack(inst, 1.5*TUNING.SPIDERQUEEN_ATTACKRANGE) --GroundPound Is purely visual
 			inst.components.groundpounder:GroundPound()
 			
 			local x,y,z = inst.Transform:GetWorldPosition()

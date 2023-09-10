@@ -4,36 +4,16 @@ require "behaviours/follow"
 require "behaviours/doaction"
 require "behaviours/minperiod"
 require "behaviours/panic"
-
+require "behaviours/runaway"
 
 local HoodedWidowBrain = Class(Brain, function(self, inst)
     Brain._ctor(self, inst)
 end)
 
 -----------------------------------------------------------------
-local MAX_CHASE_TIME = 5
-local MAX_CHASE_DIST = 30
-local FLEE_WARNING_DELAY = 3.5
 local FORCE_MELEE_DIST = 4
 local MAX_WANDER_DIST = 7
-local function EquipMeleeAndResetCooldown(inst)
-    if not inst.weaponitems.meleeweapon.components.equippable:IsEquipped() then
-        inst.components.combat:ResetCooldown()
-        inst.components.inventory:Equip(inst.weaponitems.meleeweapon)
-    end
-end
 
-local function EquipMelee(inst)
-    if not inst.weaponitems.meleeweapon.components.equippable:IsEquipped() then
-        inst.components.inventory:Equip(inst.weaponitems.meleeweapon)
-    end
-end
-local function EquipLeapAndResetCooldown(inst)
-    if not inst.weaponitems.meleeweapon.components.equippable:IsEquipped() then
-        inst.components.combat:ResetCooldown()
-        inst.components.inventory:Equip(inst.weaponitems.leapweapon)
-    end
-end
 
 local function GoHomeAction(inst)
     local home = inst.components.homeseeker ~= nil and inst.components.homeseeker.home or nil
@@ -44,6 +24,13 @@ local function GoHomeAction(inst)
         and BufferedAction(inst, home, ACTIONS.GOHOME)
         or nil
 end
+
+local function WebSlingerAction(inst)
+	if not inst.sg:HasStateTag("busy") then
+		return inst.sg:GoToState("launchprojectile")
+	end
+end
+
 local function JumpHomeAction(inst)
     local home = inst.components.homeseeker ~= nil and inst.components.homeseeker.home or nil
     return home ~= nil
@@ -53,32 +40,7 @@ local function JumpHomeAction(inst)
         and inst.sg:GoToState("jumphome") --Instead we should be just jumping back into the canopy
         or nil
 end
-local function EquipLeap(inst)
-    if not inst.weaponitems.meleeweapon.components.equippable:IsEquipped() then
-        inst.components.inventory:Equip(inst.weaponitems.leapweapon)
-    end
-end
-local function CanLeapNow(inst)
-    local target = inst.components.combat.target
-    return target ~= nil and inst.LeapReady and not inst.sg:HasStateTag("noleap")
-end
-local function CanRangeNow(inst)
-    local target = inst.components.combat.target
-    return target ~= nil and target.components.pinnable and target.components.pinnable:IsValidPinTarget() and inst:GetDistanceSqToInst(target) > 3
-end
 
-local function EquipRange(inst)
-    if not inst.weaponitems.snotbomb.components.equippable:IsEquipped() then
-        inst.components.inventory:Equip(inst.weaponitems.snotbomb)
-    end
-end
-local function BossCheck(inst)
-	local x, y, z = inst.Transform:GetWorldPosition()
-    local ents = TheSim:FindEntities(x, y, z, 50, { "epic" }, { "hoodedwidow" } )
-	if #ents >= 1 then
-	inst.sg:GoToState("jumphome")
-	end
-end
 local function CanMeleeNow(inst)
     local target = inst.components.combat.target
     if target == nil or inst.components.combat:InCooldown() then
@@ -88,18 +50,6 @@ local function CanMeleeNow(inst)
         return not target.components.pinnable:IsValidPinTarget()
     end
     return inst:IsNear(target, FORCE_MELEE_DIST)
-end
-local function EquipMeleeAndResetCooldown(inst)
-    if not inst.weaponitems.meleeweapon.components.equippable:IsEquipped() then
-        inst.components.combat:ResetCooldown()
-        inst.components.inventory:Equip(inst.weaponitems.meleeweapon)
-    end
-end
-
-local function EquipMelee(inst)
-    if not inst.weaponitems.meleeweapon.components.equippable:IsEquipped() then
-        inst.components.inventory:Equip(inst.weaponitems.meleeweapon)
-    end
 end
 
 local function TargetLeavingArena(inst)
@@ -121,36 +71,46 @@ local function TargetLeavingArena(inst)
 end
 
 
-local function NoTarget(inst)
+local function ShouldLeave(inst)
 	if inst.investigated and inst.components.combat.target == nil then
-	return true
+		return true
 	end
 end
-local function GettingBullied(inst)
-	local x, y, z = inst.Transform:GetWorldPosition()
-    local ents = TheSim:FindEntities(x, y, z, 50, { "epic" }, { "hoodedwidow" } )
-	if #ents >= 1 then
-	return true
-	else
-	return false
+
+local function ReadyToLeapOrStick(inst)
+	return inst.components.timer and (not inst.components.timer:TimerExists("mortar") or not inst.components.timer:TimerExists("pounce"))
+end
+
+local function DistancedFromTarget(inst)
+	if inst.components.combat and inst.components.combat.target then
+		return inst:GetDistanceSqToInst(inst.components.combat.target) > 5^2
 	end
 end
+
+local function DoSpecial(inst)
+	if not inst.sg:HasStateTag("busy") then
+		if not inst.components.timer:TimerExists("pounce") then --If both are done from counter, first pounce THEN lob
+			return inst.sg:GoToState("preleapattack")
+		elseif not inst.components.timer:TimerExists("mortar") then
+			return inst.sg:GoToState("lobprojectile")
+		end
+	end
+end
+
 function HoodedWidowBrain:OnStart()
     local root = PriorityNode(
     {	
-		WhileNode(function() return self.inst.bullier end,"Being Bullied",
-		DoAction(self.inst, JumpHomeAction)),
-        WhileNode(function() return CanMeleeNow(self.inst) or not TargetLeavingArena(self.inst) end, "Hit Stuck Target or Creature",
-            SequenceNode({
-                ActionNode(function() EquipMeleeAndResetCooldown(self.inst) end, "Equip melee"),
-                ChaseAndAttack(self.inst) })),
-        WhileNode(function() return TargetLeavingArena(self.inst) and CanRangeNow(self.inst) end, "AttackMomentarily",
-            SequenceNode({
-                ActionNode(function() EquipRange(self.inst) end, "Equip phlegm"),
-                ChaseAndAttack(self.inst) })),
-                
-		WhileNode(function() return NoTarget(self.inst) end,"No Target",
-		DoAction(self.inst, GoHomeAction)),
+		
+		WhileNode(function() return self.inst.bullier end,"BeingBullied", DoAction(self.inst, JumpHomeAction)), -- Under any circumstances where an epic is nearby, leave the fight.
+		
+		WhileNode(function() return TargetLeavingArena(self.inst) end, "PullThemBack", DoAction(self.inst, WebSlingerAction)), -- Target is leaving arena... pull them back.
+		
+		
+		WhileNode(function() return ReadyToLeapOrStick(self.inst) and DistancedFromTarget(self.inst) end, "DoSpecial", DoAction(self.inst, DoSpecial)), --Ready to pounce or Web, get some distance first
+		WhileNode(function() return ReadyToLeapOrStick(self.inst) end, "GetDistanceToSpecial", RunAway(self.inst, function() return self.inst.components.combat.target end, 5, 6)), --Ready to pounce or Web, get some distance first
+		WhileNode(function() return not (ReadyToLeapOrStick(self.inst) and (self.inst.components.combat.target and self.inst.components.combat:InCooldown())) end, "ChaseAndAttack", ChaseAndAttack(self.inst,30)), --Chase and attack for 30 seconds, if the player stops after that then quit and go home
+		
+		WhileNode(function() return ShouldLeave(self.inst) end,"NoTarget", DoAction(self.inst, GoHomeAction)), --No target and done investigating? we should probably go home then.
         Wander(self.inst, function() return self.inst.components.knownlocations:GetLocation("home") end, MAX_WANDER_DIST),
     }, 2)
     
