@@ -569,5 +569,7 @@ AddPrefabPostInit("wetgoop", function(inst)
 		if inst.components.perishable.onperishreplacement == "spoiled_food" then
 			inst.components.perishable.onperishreplacement = nil
 		end
+		
+		inst.components.perishable:SetOnPerishFn(inst.Remove)
 	end
 end)
