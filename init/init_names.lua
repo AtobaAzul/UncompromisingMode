@@ -335,10 +335,7 @@ STRINGS.CHERRYBULLETBEE = "Bullet Hibeescus"
 STRINGS.UM_BULLETBEE_PROJ = "Bullet Bee"
 STRINGS.UM_CHERRYBULLETBEE_PROJ = "Bullet Hibeescus"
 
-STRINGS.WINONA_TOOLBOX = "Contraption Container"
-if not GetModConfigData("winona_portables_") then
-    STRINGS.WINONA_TOOLBOX = "Winona's Toolbox"
-end
+STRINGS.WINONA_TOOLBOX = "Winona's Toolbox"
 STRINGS.OCEAN_SPEAKER = "Dilapidated Speaker" --Kinda lame dunno what else though.
 STRINGS.OCEAN_SPEAKER_TEASER = STRINGS.OCEAN_SPEAKER
 STRINGS.SUNKENCHEST_ROYAL_RANDOM = "Royal Sunken Chest"
