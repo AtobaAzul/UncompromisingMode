@@ -8,6 +8,8 @@ require("constants")
 env.AddClassPostConstruct("widgets/itemtile", function(self, invitem)
 	local _OldUpdateToolTip = self.UpdateTooltip
 
+
+
 	self.acid = self:AddChild(UIAnim())
 	self.acid:GetAnimState():SetBank("acid_meter")
 	self.acid:GetAnimState():SetBuild("acid_meter")
@@ -30,14 +32,26 @@ env.AddClassPostConstruct("widgets/itemtile", function(self, invitem)
 		end
 	end
 
+	self.inst:ListenForEvent("overcharged", function(inst, toggle)
+		self:SetPercent(inst.components.fueled:GetPercent())
+	end)
+
 	local _SetPercent = self.SetPercent
 
-	function self:SetPercent(percent)
+	function self:SetPercent(percent, doyellow)
 		_SetPercent(self, percent)
-
-		if percent > 1 and self.item ~= nil and self.item:HasTag("overchargeable") then
-			local r, g, b, a = self.percent:GetColour()[1], self.percent:GetColour()[2], self.percent:GetColour()[3], self.percent:GetColour()[4]
-			self.percent:SetColour({(255/255)*Lerp(0.25, 1, percent),(240/255)*Lerp(0.25, 1, percent),0,a})
+		if percent > 1 then
+			self.item.yellowtask = self.item:DoPeriodicTask(FRAMES * 2, function()
+				self.percent:SetColour({ 1, 1, 0, 1 })
+			end)
+		else
+			if self.item.yellowtask ~= nil then --this fucker won't due and I give up. 
+				self.item.yellowtask:Cancel()
+				self.item.yellowtask = nil
+			end
+			self.item:DoTaskInTime(FRAMES, function()
+				self.percent:SetColour({ 1, 1, 1, 1 })
+			end)
 		end
 	end
 end)
