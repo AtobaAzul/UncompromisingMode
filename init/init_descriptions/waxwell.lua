@@ -204,6 +204,7 @@ DESCRIBE.GIANT_BLUEBERRY = "This is going to get messy. Sigh."
 DESCRIBE.PURPLESTEAMEDHAMS = "They're obviously grilled."
 DESCRIBE.GREENSTEAMEDHAMS = "They're obviously grilled."
 DESCRIBE.BLUEBERRYPANCAKES = "It was a mess to make."
+DESCRIBE.DEVILSFRUITCAKE = "A cake made of dark magic. Or dark chocolate."
 DESCRIBE.SIMPSALAD = "It's nothing more than a bit of roughage."
 DESCRIBE.BEEFALOWINGS = "Beefalo in heat."
 ANNOUNCE.ANNOUNCE_ATTACH_BUFF_KNOCKBACKIMMUNE =
@@ -416,11 +417,17 @@ DESCRIBE.OCEAN_SPEAKER =
 "You know, I used to be king. Here I am unable to recognize half the stuff I find in these wretched waters."
 -- DESCRIBE.UM_SIREN = "How grotesque. Yet somewhat alluring... hrmpf."
 
-DESCRIBE.OCUPUS_BEAK = ""
+DESCRIBE.OCUPUS_BEAK = "Not quite as big as the one from the archipelago."
 DESCRIBE.OCUPUS_TENTACLE = "Inky black and probably tastes like ink too."
 DESCRIBE.OCUPUS_TENTACLE_EYE =
 "I'm not sure if the eye makes it less or more appetizing."
 DESCRIBE.OCUPUS_TENTACLE_COOKED = "Nice and grilled now at least."
+DESCRIBE.UM_OCUPUS_EYE = "I don't recognize this."
+DESCRIBE.UM_OCUPUS_EYETACLE = "If we remove the eyes, we will be freed."
+DESCRIBE.UM_OCUPUS_TENTACLE = "You're not related to our other acquaintances are you?"
+DESCRIBE.UM_OCUPUS_BEAK = "Definately seems like some sort of Quacken."
+DESCRIBE.BEAKBASHER = "Another tool of destruction."
+DESCRIBE.HOUNDIOUS_OBSERVIOUS = "My, it didn't require any fuel and still turned out monstrous."
 
 DESCRIBE.ARMOR_REED_UM = "At least it'll keep my suit clean."
 DESCRIBE.ARMOR_SHARKSUIT_UM =

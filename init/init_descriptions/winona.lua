@@ -205,6 +205,7 @@ DESCRIBE.GIANT_BLUEBERRY = "It's packed to the brim with liquid!"
 DESCRIBE.PURPLESTEAMEDHAMS = "It's obviously grilled."
 DESCRIBE.GREENSTEAMEDHAMS = "It's obviously grilled."
 DESCRIBE.BLUEBERRYPANCAKES = "It was messy, but it was worth it."
+DESCRIBE.DEVILSFRUITCAKE = "That's a sturdy cake right there."
 DESCRIBE.SIMPSALAD = "It's just some roughage."
 DESCRIBE.BEEFALOWINGS = "That's good eatin' there."
 ANNOUNCE.ANNOUNCE_ATTACH_BUFF_KNOCKBACKIMMUNE =
@@ -412,9 +413,15 @@ DESCRIBE.OCEAN_SPEAKER = "Now if I could just see its insides..."
 -- DESCRIBE.UM_SIREN = "Heh, she certainly knows how to run her workplace."
 
 DESCRIBE.OCUPUS_BEAK = "Has a nice sheen to 'er."
-DESCRIBE.OCUPUS_TENTACLE = "" -- It'll wriggle on down yer gullet.
+DESCRIBE.OCUPUS_TENTACLE = "It'll wriggle on down yer gullet."
 DESCRIBE.OCUPUS_TENTACLE_EYE = "Not one for eatin' eyes and all."
 DESCRIBE.OCUPUS_TENTACLE_COOKED = "Smells a lot better now."
+DESCRIBE.UM_OCUPUS_EYE = "That looks like bad news."
+DESCRIBE.UM_OCUPUS_EYETACLE = "If we put an end to that staring, they might let us go!"
+DESCRIBE.UM_OCUPUS_TENTACLE = "Get your grabby suckers off of my ship!"
+DESCRIBE.UM_OCUPUS_BEAK = "It's yellin' at me something fierce."
+DESCRIBE.BEAKBASHER = "Never used a hammer like that before."
+DESCRIBE.HOUNDIOUS_OBSERVIOUS = "He'll start yelling if something's not right."
 
 DESCRIBE.ARMOR_REED_UM = DESCRIBE.ARMORGRASS
 DESCRIBE.ARMOR_SHARKSUIT_UM = "I did my best with the materials at hand."

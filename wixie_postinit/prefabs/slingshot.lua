@@ -203,7 +203,7 @@ local function createlight(inst, target, pos)
 end
 
 local function can_cast_fn(doer, target, pos)
-	if doer:HasTag("pebblemaker") then
+	if doer:HasTag("troublemaker") then
 		return true
 	else
 		return false
@@ -230,6 +230,10 @@ env.AddPrefabPostInit("slingshot", function(inst)
 	
 	if not TheWorld.ismastersim then
 		return
+	end
+	
+	if inst.components.equippable ~= nil then
+		inst.components.equippable.restrictedtag = "troublemaker"
 	end
 	
 	inst.powerlevel = 1

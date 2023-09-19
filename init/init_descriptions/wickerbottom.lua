@@ -223,6 +223,7 @@ DESCRIBE.GIANT_BLUEBERRY = "I hope that it's no longer volatile."
 DESCRIBE.PURPLESTEAMEDHAMS = "I am prepared for an unforgettable luncheon."
 DESCRIBE.GREENSTEAMEDHAMS = "I am prepared for an unforgettable luncheon."
 DESCRIBE.BLUEBERRYPANCAKES = "I believe the juice has been stabilized."
+DESCRIBE.DEVILSFRUITCAKE = "It's rich flavor is 'devilishly' tempting, thus the name."
 DESCRIBE.SIMPSALAD =
 "It may not be calorie dense, but it is still good for you."
 DESCRIBE.BEEFALOWINGS = "Not a very posh dish, but good none-the-less."
@@ -448,8 +449,14 @@ DESCRIBE.OCEAN_SPEAKER =
 
 DESCRIBE.OCUPUS_BEAK = "The beak of a large unidentified cephalopod."
 DESCRIBE.OCUPUS_TENTACLE = "It's rather inedible in this state."
-DESCRIBE.OCUPUS_TENTACLE_EYE = "."
+DESCRIBE.OCUPUS_TENTACLE_EYE = "Its eye is mostly intact."
 DESCRIBE.OCUPUS_TENTACLE_COOKED = "Chewing is very important, now."
+DESCRIBE.UM_OCUPUS_EYE = "That's strange, is it a gathering of something?"
+DESCRIBE.UM_OCUPUS_EYETACLE = "It appears to be connected to the same creature. It may let us go if we disable them."
+DESCRIBE.UM_OCUPUS_TENTACLE = "Its following the discresion of the eyes."
+DESCRIBE.UM_OCUPUS_BEAK = "A beak? This is all probably a cephalopod then."
+DESCRIBE.BEAKBASHER = "Hammerheads don't have beaks. Though this one certainly does."
+DESCRIBE.HOUNDIOUS_OBSERVIOUS = "The tree is connecting the mandragora officinarum with the cephalopod eyes. It should see quite far."
 
 DESCRIBE.ARMOR_REED_UM = "Surprisngly effective when bundled close enough."
 DESCRIBE.ARMOR_SHARKSUIT_UM =

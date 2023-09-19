@@ -382,6 +382,14 @@ local function Init(inst)
 	end
 end
 
+local function WatchSeason(inst, season)
+	if season ~= SEASONS.SPRING then
+		if not inst.components.timer:TimerExists("disappear") then
+			inst.components.timer:StartTimer("disappear", math.random(2,400))
+		end
+	end
+end
+
 local COLOUR_R, COLOUR_G, COLOUR_B = 227/255, 227/255, 227/255
 local function fn()
     local inst = CreateEntity()
@@ -450,7 +458,8 @@ local function fn()
     timer_cmp:StartTimer("initialize", 0)
     timer_cmp:StartTimer("trynextstage", STAGEUP_TIME)
 	
-
+    WatchSeason(inst, TheWorld.state.season)
+    inst:WatchWorldState("season", WatchSeason)
     ----------------------------------------------------------
     inst:ListenForEvent("timerdone", on_timer_done)
     inst:ListenForEvent("onremove", on_portal_removed)
