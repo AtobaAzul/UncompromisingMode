@@ -294,7 +294,7 @@ configuration_options = {
     BinaryConfig("warly", "Warly's Food Taste",
         "Warly gets increased stats from food, like Singleplayer. However, he remembers foods for 3 days instead of 2.",
         true),
-    BinaryConfig("warly_butcher", "Warly's Butchering",
+    BinaryConfig("warly_butcher_", "Warly's Butchering",
         "Warly is a certified butcher, he will get more resources from kills in his inventory.",
         true),
     {
