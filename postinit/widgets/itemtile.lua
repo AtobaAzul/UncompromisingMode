@@ -40,9 +40,11 @@ env.AddClassPostConstruct("widgets/itemtile", function(self, invitem)
 
 	function self:SetPercent(percent, doyellow)
 		_SetPercent(self, percent)
-		if percent > 1 then
+		if percent ~= nil and percent > 1 then
 			self.item.yellowtask = self.item:DoPeriodicTask(FRAMES * 2, function()
-				self.percent:SetColour({ 1, 1, 0, 1 })
+				if self.percent ~= nil then
+					self.percent:SetColour({ 1, 1, 0, 1 })
+				end
 			end)
 		else
 			if self.item.yellowtask ~= nil then --this fucker won't due and I give up. 
@@ -50,7 +52,9 @@ env.AddClassPostConstruct("widgets/itemtile", function(self, invitem)
 				self.item.yellowtask = nil
 			end
 			self.item:DoTaskInTime(FRAMES, function()
-				self.percent:SetColour({ 1, 1, 1, 1 })
+				if self.percent ~= nil then
+					self.percent:SetColour({ 1, 1, 1, 1 })
+				end
 			end)
 		end
 	end
