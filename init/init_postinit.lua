@@ -447,6 +447,10 @@ if GetModConfigData("hambatnerf") then
     table.insert(prefab_post, "hambat")
 end
 
+if GetModConfigData("mermtweaks") then
+    table.insert(prefab_post, "mermhouse")
+end
+
 if GetModConfigData("townportal_rework") then
     table.insert(prefab_post, "townportal")
 end

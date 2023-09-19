@@ -2266,7 +2266,7 @@ return{
             BURNT = "Well, it's not much of a home anymore.",
         },
         MINERHAT = "I'm a bright minded individual!",
-        MONKEY = "You better not give me monkeynucleosis.",
+        MONKEY = "You'd better not give me monkeynucleosis.",
         MONKEYBARREL = "It's where they live, of course.",
         MONSTERLASAGNA = "Looks tasty... at a distance.",
         FLOWERSALAD = "Eat your greens! Or else!",

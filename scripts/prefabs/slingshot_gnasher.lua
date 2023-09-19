@@ -227,7 +227,7 @@ local function createlight(inst, target, pos)
 end
 
 local function can_cast_fn(doer, target, pos)
-	if doer:HasTag("pebblemaker") then
+	if doer:HasTag("troublemaker") then
 		return true
 	else
 		return false
@@ -295,7 +295,7 @@ local function fn()
 	inst.components.inventoryitem.atlasname = "images/inventoryimages/slingshot_gnasher.xml"
 
     inst:AddComponent("equippable")
-    inst.components.equippable.restrictedtag = "slingshot_sharpshooter"
+    inst.components.equippable.restrictedtag = "troublemaker"
     inst.components.equippable:SetOnEquip(OnEquip)
     inst.components.equippable:SetOnUnequip(OnUnequip)
 

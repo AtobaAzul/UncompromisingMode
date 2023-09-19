@@ -266,6 +266,7 @@ DESCRIBE.GIANT_BLUEBERRY = "This'll be messy, for sure."
 DESCRIBE.PURPLESTEAMEDHAMS = "Science says it's a hamburger."
 DESCRIBE.GREENSTEAMEDHAMS = "Science says it's a hamburger."
 DESCRIBE.BLUEBERRYPANCAKES = "Exploding with flavor."
+DESCRIBE.DEVILSFRUITCAKE = "Devillisious!"
 DESCRIBE.SIMPSALAD = "It's a rather light meal."
 DESCRIBE.BEEFALOWINGS = "I'm sure the beefalo didn't mind."
 ANNOUNCE.ANNOUNCE_ATTACH_BUFF_KNOCKBACKIMMUNE = "Never gonna knock me down."
@@ -418,7 +419,7 @@ DESCRIBE.THEATERCORN = "I should find something interesting to watch."
 DESCRIBE.DEERCLOPS_BARRIER = "I need to mine my way out of here!"
 
 DESCRIBE.MOONMAW_DRAGONFLY = "Crys-terrifying!"
-DESCRIBE.MOONMAW_LAVAE = "They're protecting it's mom!"
+DESCRIBE.MOONMAW_LAVAE = "They're protecting their mom!"
 DESCRIBE.SNAPPERTURTLE =
 "These are the kind that don't bite your hand off, right?"
 DESCRIBE.SNAPPERTURTLEBABY =
@@ -482,9 +483,15 @@ DESCRIBE.MINERHAT_ELECTRICAL = "Hands-free and scientifically powered!"
 DESCRIBE.OCEAN_SPEAKER = "Well this seems awfully out of place." -- Lame guy. Lame quote.
 
 DESCRIBE.OCUPUS_BEAK = "Better that I ate you, than you eat me."
-DESCRIBE.OCUPUS_TENTACLE = ""
+DESCRIBE.OCUPUS_TENTACLE = "It's slimy."
 DESCRIBE.OCUPUS_TENTACLE_EYE = "Everyone around here seems to be watching me."
 DESCRIBE.OCUPUS_TENTACLE_COOKED = "It doesn't look that bad..."
+DESCRIBE.UM_OCUPUS_EYE = "I've seen this one a thousand times, big monster right up ahead."
+DESCRIBE.UM_OCUPUS_EYETACLE = "Go for the eyes!"
+DESCRIBE.UM_OCUPUS_TENTACLE = "It's trying to sink us, hooray."
+DESCRIBE.UM_OCUPUS_BEAK = "Ah, a cousin of the Quacken, it would seem."
+DESCRIBE.BEAKBASHER = "I put the beak on the stick. Now what?"
+DESCRIBE.HOUNDIOUS_OBSERVIOUS = "IT'S ALIVE!"
 
 DESCRIBE.ARMOR_REED_UM = "I'll still be light on my feet with it on."
 DESCRIBE.ARMOR_SHARKSUIT_UM = "It makes me feel like the alpha predator."

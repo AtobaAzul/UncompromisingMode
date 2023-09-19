@@ -587,7 +587,10 @@ local states =
 			
 			if inst.disguiseprefab ~= nil then
 				local px, py, pz = inst.disguiseprefab.Transform:GetWorldPosition()
-				SpawnPrefab("mini_dreadeye_fx").Transform:SetPosition(px, py, pz)
+				
+				if px ~= nil then
+					SpawnPrefab("mini_dreadeye_fx").Transform:SetPosition(px, py, pz)
+				end
 				--inst.SoundEmitter:PlaySound("dontstarve/maxwell/disappear")
 				inst.disguiseprefab:Remove()
 				inst.disguiseprefab = nil
@@ -618,7 +621,10 @@ local states =
 			
 			if inst.disguiseprefab ~= nil then
 				local px, py, pz = inst.disguiseprefab.Transform:GetWorldPosition()
-				SpawnPrefab("mini_dreadeye_fx").Transform:SetPosition(px, py, pz)
+				
+				if px ~= nil then
+					SpawnPrefab("mini_dreadeye_fx").Transform:SetPosition(px, py, pz)
+				end
 				--inst.SoundEmitter:PlaySound("dontstarve/maxwell/disappear")
 				inst.disguiseprefab:Remove()
 				inst.disguiseprefab = nil

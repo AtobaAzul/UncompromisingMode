@@ -279,386 +279,390 @@ return {
 		BLUBBER = "It's what that strongman is made of!",
 		HARPOON = "I can't launch it with my slingshot...",
 
-		SAIL_PALMLEAF = "It's always impressive how much you can make with things found in the wild!", -- CONTINUE WRITING FROM HERE
-		SAIL_CLOTH = "A Pinetree Pioneer can adapt to any environment!",
-		SAIL_SNAKESKIN = "The snakes wouldn't end up like this if they didn't try to eat me!",
-		SAIL_FEATHER = "It's eye-catching. Maybe it'll draw the attention of a big sea monster?",
-		IRONWIND = "Yup, definitely not something you'd usually find in nature.",
+		SAIL_PALMLEAF = "Now whose going to fan me?",
+		SAIL_CLOTH = "I was trying to make a coat...",
+		SAIL_SNAKESKIN = "The slimiest sail around!",
+		SAIL_FEATHER = "I'm feeling pretty good about myself right now!",
+		IRONWIND = "I call it the 'fish blender'!",
 
 
-		BERMUDATRIANGLE = "Hey, I heard about those in the radio! Let's take a closer look!",
+		BERMUDATRIANGLE = "Don't get mathematical on me!",
 	
-		PACKIM_FISHBONE = "Ugh, rotten fish- Oh, it doesn't reek.",
-		PACKIM = "It's not that monster-like, but I still like it!",
+		PACKIM_FISHBONE = "Picked clean... what a waste!",
+		PACKIM = "You smell like rotten fish!",
 
-		TIGERSHARK = "This makes so much more sense, honestly.",
-		MYSTERYMEAT = "Ugh, that sure ruined my appetite.",
-		SHARK_GILLS = "Was she a fish or a cat?",
-		TIGEREYE = "I think it's keeping an eye on us. Get it? Because it's an eye?",
-		DOUBLE_UMBRELLAHAT = "This feels silly...",
-		SHARKITTEN = "Aww, they're so cute!",
+		TIGERSHARK = "This is why I HATE the ocean!",
+		MYSTERYMEAT = "Gross!",
+		SHARK_GILLS = "She ain't breathing anymore! Ha-ha!",
+		TIGEREYE = "Keep your peepers off of me!",
+		DOUBLE_UMBRELLAHAT = "Double the umbrellas, double the protection!",
+		SHARKITTEN = "Beat it, squirt! This is MY beach!",
 		SHARKITTENSPAWNER = 
 		{
-			GENERIC = "It must be the home of a giant monster! I need to take a closer look!",
-			INACTIVE = "Well, now it's just a pile of sand.",
+			GENERIC = "I'd rather not live in a cave.",
+			INACTIVE = "More sand... how fun.",
 		},
 
-		WOODLEGS_KEY1 = "Not a skeleton... But even better! A spooky key!",--Unused
-		WOODLEGS_KEY2 = "What do you think this'll open, Woby?",--Unused
-		WOODLEGS_KEY3 = "Oh, it's a key!",--Unused
-		WOODLEGS_CAGE = "Woah! Who left you locked up in there, mister?",--Unused
+		WOODLEGS_KEY1 = "Not quite a skeleton key...",--Unused
+		WOODLEGS_KEY2 = "It's old, and gold.",--Unused
+		WOODLEGS_KEY3 = "It's a key, see?",--Unused
+		WOODLEGS_CAGE = "Why would I want to let some smelly old pirate loose?!",--Unused
 
-		CORAL = "That's some coral.",
-		ROCK_CORAL = "Hey, I think those are coral reefs!",
-		LIMESTONENUGGET = "Maybe they could make a really nifty fire pit.",
-		NUBBIN = "It's nubbin important. Get it? Nubbin?",
-		CORALLARVE = "Where should we put the corals, Woby?",
-		WALL_LIMESTONE = "Looks pretty sturdy.",
-		WALL_LIMESTONE_ITEM = "Looks pretty sturdy.",
-		WALL_ENFORCEDLIMESTONE = "This'll make a good sea monster enclosure.",
-		WALL_ENFORCEDLIMESTONE_ITEM = "Yup, walls that float.",
-		ARMORLIMESTONE = "Can I even walk wearing that?",
-		CORAL_BRAIN_ROCK = "That's one bright coral. Get it, bright- Oh, forget it.",
-		CORAL_BRAIN = "It's pretty cool to look at, at least.",
-		BRAINJELLYHAT = "Fills your head with the equivalent of ten- no, twenty Pinetree Pioneer handbooks!",
+		CORAL = "Looks crunchy.",
+		ROCK_CORAL = "Fish homes! Time to wreck em'!",
+		LIMESTONENUGGET = "I'm sure some dork could tell me a lot about this rock.",
+		NUBBIN = "I think I could grow my own rocks?",
+		CORALLARVE = "Ew, is it alive?",
+		WALL_LIMESTONE = "More dumb walls.",
+		WALL_LIMESTONE_ITEM = "Let's just toss it into the ocean.",
+		WALL_ENFORCEDLIMESTONE = "Now we'll have an even harder time removing it...",
+		WALL_ENFORCEDLIMESTONE_ITEM = "Let's just toss it in the ocean.",
+		ARMORLIMESTONE = "It looks big, heavy, and uncomfortable!",
+		CORAL_BRAIN_ROCK = "You've sure got a small brain for such a big sea.",
+		CORAL_BRAIN = "See? Told you I had a bigger brain!",
+		BRAINJELLYHAT = "I'm plenty smart without it!",
 
-		SEASHELL = "Is there anything inside it? No? Aw...",
-		SEASHELL_BEACHED = "Hey, that's a shell!",
-		ARMORSEASHELL = "Shells are pretty handy when you get a bunch of them.",
+		SEASHELL = "She shells shea shells by the sheashore! I'm great at tongue twishters!",
+		SEASHELL_BEACHED = "Ooh! Gimme!",
+		ARMORSEASHELL = "All the clinking and clanking will give me away!",
 
-		ARMOR_LIFEJACKET = "Finally, a real life jacket- Uh, no offense, Wes.",
-		ARMOR_WINDBREAKER = "Seems a bit out of place in the wilderness, but it has an use.",
+		ARMOR_LIFEJACKET = "I don't want to wear some stupid dork vest!",
+		ARMOR_WINDBREAKER = "Fight the wind!",
 
-		SNAKE = "Woah, when did I last see one of these?",
-		SNAKE_POISON = "Watch out! Look at the colors on that one!",
-		SNAKESKIN = "It's slick. We might be able to use this for something.",
-		SNAKEOIL = "Come on, even a child wouldn't fall for this...",
-		SNAKESKINHAT = "Can I make Woby a little, matching one?",
-		ARMOR_SNAKESKIN = "Wearing hunted animal skins, that's some real survivor stuff!",
+		SNAKE = "What is THAT supposed to be!?",
+		SNAKE_POISON = "Ooh, that one is yellow!",
+		SNAKESKIN = "How does it move without legs!?",
+		SNAKEOIL = "I could make a quick buck off of this stuff!",
+		SNAKESKINHAT = "I made a hat out of whatever that was.",
+		ARMOR_SNAKESKIN = "This is what fashion is all about!",
 		SNAKEDEN =
 		{
-			BURNING = "That's, one way to get rid of snakes?",
-			BURNT = "At least the snakes can't bother us again.",
-			CHOPPED = "Nothing left to gather here.",
-			GENERIC = "Some vines. With snakes in it, if we're lucky.",
+			BURNING = "I can't be bothered to untangle them!",
+			BURNT = "They will never be tangled again!",
+			CHOPPED = "I untangled them. You're welcome.",
+			GENERIC = "Some twisty, tangled vines.",
 		},
 
 		OBSIDIANFIREPIT =
 		{
-			EMBERS = "We need more fuel for the fire!",
-			GENERIC = "Anyone want to hear a scary story?",
-			HIGH = "Woah! I don't think that's safe...",
-			LOW = "It might need some fuel.",
-			NORMAL = "Perfect temperature for marshmallows.",
-			OUT = "All we'll need later is more wood!",
+			EMBERS = "It's gonna go out!",
+			GENERIC = "Light of my life!",
+			HIGH = "Now THAT'S a good fire!",
+			LOW = "It's a wimpy little fire.",
+			NORMAL = "Let there be light! Or life. I forget which.",
+			OUT = "Let's get a bonfire going!",
 		},
 
-		OBSIDIAN = "I'd better be careful not to cut myself with this.",
-		ROCK_OBSIDIAN = "It's really hardy for glass.",
-		OBSIDIAN_WORKBENCH = "I wonder if an alien dumped it here?",
-		OBSIDIANAXE = "This seems like a fire hazard...",
-		OBSIDIANMACHETE = "This must be what adventurers use in the North Pole.",
-		SPEAR_OBSIDIAN = "Great for getting your points across... Heh.",
-		VOLCANOSTAFF = "Yeah... If Willow gets her hands on this, we're doomed.",
-		ARMOROBSIDIAN = "Woah! It's not even burning me!",
+		OBSIDIAN = "Oh, this could be good...",
+		ROCK_OBSIDIAN = "How am I supposed to break this dumb rock?",
+		OBSIDIAN_WORKBENCH = "I made it! I promise!",
+		OBSIDIANAXE = "I was going to burn the logs anyways!",
+		OBSIDIANMACHETE = "Like a hot knife through butter!",
+		SPEAR_OBSIDIAN = "Still too close range for me.",
+		VOLCANOSTAFF = "I BRING DOOM!",
+		ARMOROBSIDIAN = "That's taking jewelry a bit too far.",
 		COCONADE =
 		{
-			BURNING = "Get clear!",
-			GENERIC = "Yup. That's an exploding coconut.",
+			BURNING = "Watch your heads! He-he-he!",
+			GENERIC = "Double donk!",
 		},
 
 		OBSIDIANCOCONADE =
 		{
-			BURNING = "Stay clear of the blast!",
-			GENERIC = "An exploding glass coconut. What could go wrong?",
+			BURNING = "Watch your heads! He-he-he!",
+			GENERIC = "Bombs? You want em'?!",
 		},
 
 		VOLCANO_ALTAR =
 		{
-			GENERIC = "Did that bowl-thing just whisper something?",
-			OPEN = "What will happen if it's not sated? Aah, the suspense!",
+			GENERIC = "Okay, but whats it do?",
+			OPEN = "You'd better not be a picky eater!",
 		},
 
-		VOLCANO = "It's a real volcano! I have to get a closer look!",
-		VOLCANO_EXIT = "Maybe we should go back down.",
-		ROCK_CHARCOAL = "We won't have to burn more trees if we get our coal from here!",
-		VOLCANO_SHRUB = "I'm surprised they grew up until that point at all, honestly.",
-		LAVAPOOL = "Yep, that's toasty alright.",
+		VOLCANO = "My new evil lair!",
+		VOLCANO_EXIT = "A secret escape!",
+		ROCK_CHARCOAL = "Is it a rock? Or a tree? Maybe both?",
+		VOLCANO_SHRUB = "Don't let anyone tell you where you can and can't grow!\nExcept for me, of course.",
+		LAVAPOOL = "I'm not looking for a bath.",
 		COFFEEBUSH =
 		{
-			BARREN = "Oh, all it needs is... Drat, my handbook has nothing about growing coffee.",
-			WITHERED = "It doesn't like the weather.",
-			GENERIC = "Some people call it java because it grows near lava. Makes sense!",
-			PICKED = "If I wait long enough, they'll grow back.",
+			BARREN = "It might need a special type of dirt to grow.",
+			WITHERED = "What? What do you want?!",
+			GENERIC = "This is what adults drink? Bean water?",
+			PICKED = "No more beans.",
 		},
 
-		COFFEEBEANS = "I wish these were cocoa beans.",
-		COFFEEBEANS_COOKED = "Smells great!",
-		DUG_COFFEEBUSH = "You are coming  with me, florp.",
-		COFFEE = "Mom would kill me if she caught me drinking this.",
+		COFFEEBEANS = "I just boil them in water, right?",
+		COFFEEBEANS_COOKED = "Nope, that's not coffee...",
+		DUG_COFFEEBUSH = "All the beans belong to me!",
+		COFFEE = "Of course I've had coffee before... Of course...",
 
 		ELEPHANTCACTUS =
 		{
-			BARREN = "I-I think I'm fine with not feeding it ashes, honestly.",
-			WITHERED = "It doesn't like the weather. Maybe that's a good thing...?",
-			GENERIC = "I think that's a monster in disguise!",
-			PICKED = "Ow!! Does anyone have a bandage?!",
+			BARREN = "It needs some food. Ashy food.",
+			WITHERED = "Aw, I kind of miss it.",
+			GENERIC = "We have nothing in common, I don't know what they are talking about...",
+			PICKED = "Hey! You can't just go around hurting anyone near you!",
 		},
 
-		DUG_ELEPHANTCACTUS = "I'm not too keen on planting that one, honestly.",
-		ELEPHANTCACTUS_ACTIVE = "I think that one's a monster in disguise!",
-		ELEPHANTCACTUS_STUMP = "Ow!! Does anyone have a bandage?!",
-		NEEDLESPEAR = "Just in case we needle something pointy... Okay, that was bad.",
-		ARMORCACTUS = "No hugging while you're wearing that.",
+		DUG_ELEPHANTCACTUS = "I like you, you're coming with me!",
+		ELEPHANTCACTUS_ACTIVE = "We have nothing in common, I don't know what they are talking about...",
+		ELEPHANTCACTUS_STUMP = "It's buried its head in the sand.",
+		NEEDLESPEAR = "Can I sling it? Nah.",
+		ARMORCACTUS = "No hugs! Ever!",
 		
-		TWISTER = "The wind is alive! Hello, wind! Can you hear me?",
-		TWISTER_SEAL = "Huh. Aw... It was just a little seal.",
-		MAGIC_SEAL = "This'll come in handy... I think.",
-		WIND_CONCH = "You can really hear the wind if you hold it by your ear! ...Wait a minute.",
-		WINDSTAFF = "This looks like it could be very useful while sailing.",
+		TWISTER = "The wind! My mortal enemy!",
+		TWISTER_SEAL = "You... you can't fool me! You... adorable little...",
+		MAGIC_SEAL = "This gets my SEAL of approval! This really SEALS the deal!",
+		WIND_CONCH = "Alright magic conch, what do we do now?\n...Nothing?",
+		WINDSTAFF = "I'm a wind wizard!",
 
-		DRAGOON = "They remind me of Wolfgang. Just harder to get along with!",
-		DRAGOONHEART = "This wouldn't have happened if it wasn't such a goon.",
-		DRAGOONSPIT = "It not nice to spit!",
-		DRAGOONEGG = "A real dragon egg!",
-		DRAGOONDEN = "You can really tell it houses a gym rat. Or, gym goon.",
+		DRAGOON = "You know what rhymes with Dragoon! Buffoon! Hah!",
+		DRAGOONHEART = "I'll eat it, and gain it's power! Or just heartburn...",
+		DRAGOONSPIT = "Hah! Nice one!",
+		DRAGOONEGG = "It's already hard boiled.",
+		DRAGOONDEN = "I KNEW Wolfgang was a cave man!",
 
 		ICEMAKER = 
 		{
-			OUT = "It just needs something to burn, right?",
-			VERYLOW = "We'd better fetch it some fuel!",
-			LOW = "It could probably use some more fuel",
-			NORMAL = "That's ice! Get it, like nice? Ugh, forget it.",
-			HIGH = "Brr, that's cold!",
+			OUT = "Needs something to burn, so it can make ice.",
+			VERYLOW = "It's slowing down!",
+			LOW = "Let's keep this party going!",
+			NORMAL = "I need more ice!",
+			HIGH = "ICE! MORE ICE!",
 		},
 
-		HAIL_ICE = "They hurt a bit when they fall on your head.",
+		HAIL_ICE = "It's like snow! But awful!",
 	
 		BAMBOOTREE =
 		{
-			BURNING = "Hey, that's how forest fires start!",
-			BURNT = "What a waste.",
-			CHOPPED = "I think these grow back fast.",
-			GENERIC = "They're called bamBOO, but there's nothing ghost-like about them.",
+			BURNING = "Bam-bye!",
+			BURNT = "Oh well.",
+			CHOPPED = "Will it grow? Will anyone care?",
+			GENERIC = "What a dumb plant! What's the point?",
 		},
 
-		BAMBOO = "Tropical foraged material!",
-		FABRIC = "This would make a superb scout scarf.",
-		DUG_BAMBOOTREE = "Woby, do you see a good spot to plant this?",
+		BAMBOO = "It makes a fun sound when you swing it around.",
+		FABRIC = "I had a stick, now I have cloth. I think I'm a witch!",
+		DUG_BAMBOOTREE = "Pick up sticks!",
 		
 		JUNGLETREE =
 		{
-			BURNING = "That's not how campfires work!",
-			BURNT = "That one couldn't wait to be a campfire...",
-			CHOPPED = "This tree looks stumped. Heh, nice one Walter.",
-			GENERIC = "Look at the size of that tree! Well, I guess we've seen bigger...",
+			BURNING = "Someone likes their trees well done.",
+			BURNT = "Crispy.",
+			CHOPPED = "Hey, shorty!",
+			GENERIC = "I bet I could climb it. If I wanted to...",
 		},
 
-		JUNGLETREESEED = "I'd better find a good spot to plant this.",
-		JUNGLETREESEED_SAPLING = "One day you'll be a nice big tree.",
-		LIVINGJUNGLETREE = "Can you talk? What's it like being a tree?",
+		JUNGLETREESEED = "Maybe I could chuck it at someone.",
+		JUNGLETREESEED_SAPLING = "This should only take... what, thirty years?",
+		LIVINGJUNGLETREE = "If I chop you down and no one is around, will you make a sound?",
 
 
-		OX = "Woby smells like that when she's drenched.",
-		BABYOX = "Hey little guy!",--unused
-		OX_HORN = "Nope, not a decent bugle.",
-		OXHAT = "Hey, that came out looking pretty good!",
-		OX_FLUTE = "Being able to control nature is pretty nifty.",
+		OX = "Beefalo were bad enough, now we have smelly WET cow...",
+		BABYOX = "Hey, stinky.",--unused
+		OX_HORN = "It doesn't make sound when you blow in it. Lame!",
+		OXHAT = "A stupid hat for stupid brutes.",
+		OX_FLUTE = "Clean the spit outta your reeds!",
 
-		MOSQUITO_POISON = "You wouldn't want to make me sick, right little guy?",
-		MOSQUITOSACK_YELLOW = "I'm not... squeamish...",
+		MOSQUITO_POISON = "You make me SICK!",
+		MOSQUITOSACK_YELLOW = "I hope it doesn't poison me.",
 
-		STUNGRAY = "Woah, someone's had chili day!",
-		POISONHOLE = "That's a safety hazard!",
-		GASHAT = "I could really have used something like this before.",
+		STUNGRAY = "Oh, GROSS! I hate skunks! And I hate whatever a 'Ray' is!",
+		POISONHOLE = "It's a belching hole.",
+		GASHAT = "I mask would have been better.",
 
-		ANTIVENOM = "It's bitter, so it's good for you!",
-		VENOMGLAND = "It's brimming with venom... Haha...",
-		POISONBALM = "I'll gladly take a balm over a syrup...",
+		ANTIVENOM = "It LOOKS like poison...",
+		VENOMGLAND = "Ain'tcha gland to see me?",
+		POISONBALM = "Twig for brains finally did something useful!",
 		
-		SPEAR_POISON = "Now we can sting them back!",
-		BLOWDART_POISON = "Not as good as my slingshot, but it'll do.",
+		SPEAR_POISON = "One poke is enough!",
+		BLOWDART_POISON = "Poison shots... interesting.",
 
-		SHARX = "Is that a dog that mutated into a shark? Or a shark that turned dog-like?",
-		SHARK_FIN = "You could probably scare people if you swam with this strapped on your head.",
-		SHARKFINSOUP = "It's tasty, I like it!",
-		SHARK_TEETHHAT = "Really makes you look dangerous.",
-		AERODYNAMICHAT = "It's like a good walking stick, but for your head.",
+		SHARX = "Shark in the water!",
+		SHARK_FIN = "Got their finny fin fin.",
+		SHARKFINSOUP = "It's rich folk food!",
+		SHARK_TEETHHAT = "I'm the shark queen!",
+		AERODYNAMICHAT = "I'm fast as heck!",
 
-		IA_MESSAGEBOTTLE = "There's a note inside.",
-		IA_MESSAGEBOTTLEEMPTY = "I could shove a few more bugs in there. My pockets are getting full.",
-		BURIEDTREASURE = "Let's get to digging, Woby!",
+		IA_MESSAGEBOTTLE = "It better be a treasure map...",
+		IA_MESSAGEBOTTLEEMPTY = "Hey! Where's the treasure map?!",
+		BURIEDTREASURE = "It's mine! All mine!",
 
-		SAND = "That's sand.",
-		SANDDUNE = "Woby likes digging into those the most.",
-		SANDBAGSMALL = "This'll keep the camp flood-proof.",
-		SANDBAGSMALL_ITEM = "Sand. In a bag.",
+		SAND = "Pocket sand! Hiya!",
+		SANDDUNE = "It gets everywhere.",
+		SANDBAGSMALL = "It's a bag! Of sand.",
+		SANDBAGSMALL_ITEM = "How far do you think I could toss it?",
 		SANDCASTLE =
 		{
-			SAND = "Yeah, it's not meant to last anyway.",
-			GENERIC = "Hey, that's a nice castle."
+			SAND = "Is that supposed to be a castle or something?",
+			GENERIC = "Watch out, castles! Beach bully coming through!"
 		},
 
-		SUPERTELESCOPE = "Eye sure can see a lot from here! Heh, good one Walter.",
-		TELESCOPE = "That's an ingenious use for a bottle.",
+		SUPERTELESCOPE = "Eye spy with my giant eye...",
+		TELESCOPE = "Nothing escapes my eyes!",
 		
-		DOYDOY = "It's not dumb, it's just... Distracted. Very easily.",
-		DOYDOYBABY = "Aw, look who's a sweet round thing!",
-		DOYDOYEGG = "Oh, that's a big egg!",
-		DOYDOYEGG_COOKED = "That's just how nature goes sometimes.",
-		DOYDOYFEATHER = "Pillow material.",
-		DOYDOYNEST = "Woah, did they build the doydoy head themselves?",
-		TROPICALFAN = "I'm a big fan of keeping cool. Get it? Because... Forget it.",
+		DOYDOY = "I'd have called it a dumb-dumb.",
+		DOYDOYBABY = "It's even dumber!",
+		DOYDOYEGG = "Mmm, eggs!",
+		DOYDOYEGG_COOKED = "Delicious!",
+		DOYDOYFEATHER = "It's soft! I want more!",
+		DOYDOYNEST = "They sure are creative, for dumb birds!",
+		TROPICALFAN = "Now I just need a cool drink and a relaxing chair!",
 	
 		PALMTREE =
 		{
-			BURNING = "That's not good...",
-			BURNT = "Fire safety is important, everyone.",
-			CHOPPED = "That palm looks stumped... Haha, this never gets old.",
-			GENERIC = "That's a palm tree.",
+			BURNING = "Someone likes their trees well done.",
+			BURNT = "Crispy.",
+			CHOPPED = "Hey, shorty!",
+			GENERIC = "I bet I could climb it. If I wanted to...",
 		},
 
-		COCONUT = "Something tasty in the palm of my hand... Get it? Because it came from a palm tree?",
-		COCONUT_HALVED = "Island food! Well, specifically an island fruit.",
-		COCONUT_COOKED = "Goes to show you can forage for your own food anywhere.",
-		COCONUT_SAPLING = "It'll be a tree someday.",
-		PALMLEAF = "That's a big leaf.",
-		PALMLEAF_UMBRELLA = "Improvisation is a top-importance skill in the wilderness.",
-		PALMLEAF_HUT = "A perfect shelter, built from foraged material!",
-		LEIF_PALM = "They've come to take their revenge!!",
+		COCONUT = "These would make GREAT ammo!",
+		COCONUT_HALVED = "I can make some killer horse hoof noises with these...",
+		COCONUT_COOKED = "Hot cocoa with coconut shavings... how I miss thee!",
+		COCONUT_SAPLING = "Not quite eel guts, but it'll do.",
+		PALMLEAF = "Fan me! Fan me!!",
+		PALMLEAF_UMBRELLA = "Don't expect a song and dance.",
+		PALMLEAF_HUT = "It's a pathetic attempt at a house.",
+		LEIF_PALM = "You're crazy as a coconut!",
 
 		CRAB = 
 		{
-			GENERIC = "That's a crabbit. Come here little guy!",
-			HIDDEN = "C'mon, get back here!",
+			GENERIC = "Try running foward, I promise it will be faster!",
+			HIDDEN = "I know where you live!",
 		},
 
-		CRABHOLE = "That's its den!",
+		CRABHOLE = "Don't sit on it.",
 
 		TRAWLNETDROPPED = 
 		{
-			SOON = "That's about to sink.",
-			SOONISH = "It's going to sink soon.",
-			GENERIC = "Let's see if it's caught anything interesting.",
+			SOON = "It's almost full.",
+			SOONISH = "I've caught some junk.",
+			GENERIC = "I hope it was a good haul.",
 		},
 
-		TRAWLNET = "Fishing with a hand-woven net, real survivor stuff.",
-		IA_TRIDENT = "What's the point? Well, there's three points.",
+		TRAWLNET = "Perfect for catching boots, and other junk.",
+		IA_TRIDENT = "I'd still prefer to keep my distance.",
 
-		KRAKEN = "Finally!! A real sea monster!",
-		KRAKENCHEST = "Hey, it dropped treasure!",
-		KRAKEN_TENTACLE = "It's attached to that big sea monster!",
-		QUACKENBEAK = "That's a big beak.",
-		QUACKENDRILL = "I'm not too keen on polluting the ocean, honestly.",
-		QUACKERINGRAM = "Self-defense at sea, obviously.",
+		KRAKEN = "Shoot it! SHOOT IT!!",
+		KRAKENCHEST = "It was all worth it!",
+		KRAKEN_TENTACLE = "Don't touch me!",
+		QUACKENBEAK = "No more quacking!",
+		QUACKENDRILL = "Eat up!",
+		QUACKERINGRAM = "Ramming speed!",
 
-		MAGMAROCK = "It's a pile of rocks.",
-		MAGMAROCK_GOLD = "Hey, that might be worth digging into!",
-		FLAMEGEYSER = "A real geyser! Oh, I should probably keep my distance.",
+		MAGMAROCK = "It's a pile of hot rocks.",
+		MAGMAROCK_GOLD = "Something shiny is hiding within!",
+		FLAMEGEYSER = "Woah! Cool!",
 
-		TELEPORTATO_SW_RING = "This doesn't seem all that natural...",--unused
-		TELEPORTATO_SW_BOX = "Yup, definitely not something you'd find in nature.",--unused
-		TELEPORTATO_SW_CRANK = "I wonder what left this here... Aliens, maybe?",--unused
-		TELEPORTATO_SW_BASE = "This looks important.",--unused
-		TELEPORTATO_SW_POTATO = "If you squint it looks like an alien's head.",--unused
+		TELEPORTATO_SW_RING = "To bind them all?",--unused
+		TELEPORTATO_SW_BOX = "It's grass, bound with grass.",--unused
+		TELEPORTATO_SW_CRANK = "It's a... whatsamahoozit.",--unused
+		TELEPORTATO_SW_BASE = "Some kind of witches altar.",--unused
+		TELEPORTATO_SW_POTATO = "Might be beaver food.",--unused
 
-		PRIMEAPE = "I don't think I've ever seen this kind of them in zoos!",
-		PRIMEAPEBARREL = "If I left my room that messy, mom would yell at me.",
-		MONKEYBALL = "This'll buy us some time with those monkeys.",
-		WILBUR_UNLOCK = "A Pinetree Pioneer always helps those in need!",--unused
-		WILBUR_CROWN = "It fits Woby's head, but not mine.",--unused
+		PRIMEAPE = "You'd better not give me monkeynucleosis.",
+		MONKEYBARREL = "It's where they live, of course.",
+		MONKEYBALL = "Fetch, you dumb-apes!",
+		WILBUR_UNLOCK = "Okay, bye?",--unused
+		WILBUR_CROWN = "This crown is too small for someone as royal as me!",--unused
 
-		MERMFISHER = "W-wait, I just want you to teach me how to spearfish!",
-		MERMHOUSE_FISHER = "Smells like someone deserves their fishing badge.",
+		MERMFISHER = "I'll reap their rewards!",
+		MERMHOUSE_FISHER = "Double the fishy smell.",
 
-		OCTOPUSKING = "It's a retired pirate! That's so cool.",
-		OCTOPUSCHEST = "Um, thanks!",
+		OCTOPUSKING = "You're a crappy pirate.",
+		OCTOPUSCHEST = "Atleast you've got loot!",
 
-		SWEET_POTATO = "Sweet, a potato! Of the sweet kind!",
-		SWEET_POTATO_COOKED = "Reminds me of mom's casserole. Sigh...",
-		SWEET_POTATO_PLANTED = "I don't think that one's a carrot.",
-		SWEET_POTATO_SEEDS = "We should find a place to plant these.",
-		SWEETPOTATOSOUFFLE = "That smells superb! I'll dig right in, thanks Warly!",
+		SWEET_POTATO = "I yam what I yam!",
+		SWEET_POTATO_COOKED = "That's all that I yam!",
+		SWEET_POTATO_PLANTED = "You're mine!",
+		SWEET_POTATO_SEEDS = "Oh great, more gardening.",
+		SWEETPOTATOSOUFFLE = "Thanks, chef man.",
 
-		BOAT_WOODLEGS = "A real pirate ship! Does it have any ghosts?",
-		WOODLEGSHAT = "That's a real pirate's hat!",
-		SAIL_WOODLEGS = "The skull-and-bones is really iconic, isn't it?",
+		BOAT_WOODLEGS = "I'm commandeering your vessel!",
+		WOODLEGSHAT = "Captain Wixie sails again!",
+		SAIL_WOODLEGS = "No mercy!",
 
-		PEG_LEG = "I don't think anyone would want to wear this for real, Wilson...",
-		PIRATEGHOST = "I knew it, pirate curses were real! This would make a great midnight broadcast...",
+		PEG_LEG = "It's always good to have a spare leg.",
+		PIRATEGHOST = "They've probably stolen something cursed.",
 
-		WILDBORE = "Oh, that's an angry pig!",
-		WILDBOREHEAD = "Wait, Woby, don't chew on it!",
-		WILDBOREHOUSE = "Honestly, I'd rather just camp forever.",
+		WILDBORE = "There's water everywhere! Take a bath!",
+		WILDBOREHEAD = "He's lost his head.",
+		WILDBOREHOUSE = "Plenty of flies to keep them company.",
 
-		MANGROVETREE = "Not the first seaborne tree we've seen.",
-		MANGROVETREE_BURNT = "I don't know what to say, honestly.",
+		MANGROVETREE = "Why wait for the water to come to you, am I right?",
+		MANGROVETREE_BURNT = "You got burnt down? That's pathetic.",
 
-		PORTAL_SHIPWRECKED = "It's not working.",--In SW it's used for broken seaworthy --unused
-		SHIPWRECKED_ENTRANCE = "Just a kid's novelty ride... Or is it? Aah, the suspense!",
-		SHIPWRECKED_EXIT = "I don't know why I never expected this to work, honestly.",
+		PORTAL_SHIPWRECKED = "Nothing doing.",--In SW it's used for broken seaworthy --unused
+		SHIPWRECKED_ENTRANCE = "My bonnie lies over the ocean...",
+		SHIPWRECKED_EXIT = "Perfect for when you're sick of all that REAL sailing...",
 
-		TIDALPOOL = "That's a pool left from tidal movement. Here, it's in my handbook.",
-		FISHINHOLE = "I could try my hand at fishing there.",
-		FISH_TROPICAL = "Look at the colors on that one!",
-		TIDAL_PLANT = "It's a plant by the pool.",
-		MARSH_PLANT_TROPICAL = "I wonder if there's any bugs living there.",
+		TIDALPOOL = "Looks salty.",
+		FISHINHOLE = "How'd the fish get in there?",
+		FISH_TROPICAL = "It better taste as good as it looks!",
+		TIDAL_PLANT = "More greenery.",
+		MARSH_PLANT_TROPICAL = "More greenery.",
 
-		FLUP = "Eye can see you... Get it, because-AAH!",
-		BLOWDART_FLUP = "Well, this is pretty pathetic...",
+		FLUP = "Go Flup yourself!",
+		BLOWDART_FLUP = "May as well be shooting peas!",
 
-		SEA_LAB = "They don't teach you how to build labs on water at school.",
-		BUOY = "It's good to leave marks behind so you don't get lost.", 
-		WATERCHEST = "A supply box that swims will come in handy.",
+		SEA_LAB = "For all my evil sea sciencing needs.",
+		BUOY = "You're a bit dim.", 
+		WATERCHEST = "Keeps my stuff dry.",
 
-		LUGGAGECHEST = "Should we take a peek inside, Woby?",
-		WATERYGRAVE = "Well, we know there's no skeleton down there.",
-		SHIPWRECK = "That's a ship's wreck.",
-		BARREL_GUNPOWDER = "I'd better make sure none of the younger kids sail near that.",
-		RAWLING = "A real talking object! Are you a ghost haunting a basketball?",
-		GRASS_WATER = "That's some waterlogged grass.",
-		KNIGHTBOAT = "Quit horsing around!",
+		LUGGAGECHEST = "It probably just has old socks in it.",
+		WATERYGRAVE = "It's just a soggy old box.",
+		SHIPWRECK = "Learn to drive, dummy!",
+		BARREL_GUNPOWDER = "Boom! Bang!",
+		RAWLING = "Shut up! SHUT UP!!",
+		GRASS_WATER = "Soggy grass.",
+		KNIGHTBOAT = "It's a seahorse! Please let me ride you!",
 
-		DEPLETED_BAMBOOTREE = "It needs something to help it grow.",--unused?
-		DEPLETED_BUSH_VINE = "It could use something to help it grow.",--unused?
-		DEPLETED_GRASS_WATER = "Well, at least we know it's not thirsty.",--unused?
+		DEPLETED_BAMBOOTREE = "You gonna grow yet?",--unused?
+		DEPLETED_BUSH_VINE = "You gonna grow yet?",--unused?
+		DEPLETED_GRASS_WATER = "You gonna grow yet?",--unused?
 
-		WALLYINTRO_DEBRIS = "I'm sure we could salvage something from it", 
-		BOOK_METEOR = "I'd better make sure not to get on her bad side.",
-		CRATE = "I should bust that open.",
-		SPEAR_LAUNCHER = "It gets your points across- Okay, fine, this joke got old.",
-		MUTATOR_TROPICAL_SPIDER_WARRIOR = "Hey, cookies! Um... What are these made of, exactly?",
+		WALLYINTRO_DEBRIS = "Someone couldn't sail.", 
+		BOOK_METEOR = "Looks like a good read!",
+		CRATE = "Smash it!",
+		SPEAR_LAUNCHER = "Finally, a use for all those spears!",
+		MUTATOR_TROPICAL_SPIDER_WARRIOR = "Gross!",
+
+		CHESSPIECE_KRAKEN = "I can still hear it...",
+		CHESSPIECE_TIGERSHARK = "I doubt it will go swimming any time soon.",
+		CHESSPIECE_TWISTER = "It's pretty difficult to sculpt WIND.",
+		CHESSPIECE_SEAL = "Adorable... I mean, how stupid...",
 
 		--SWC
-		BOAT_SURFBOARD = "Uh, maybe I'll learn to surf someday.",
-		SURFBOARD_ITEM = "That's Walani's.",
+		BOAT_SURFBOARD = "That boat sucks!",
+		SURFBOARD_ITEM = "It's a big plank of wood.",
 
 		WALANI = {
-		    GENERIC = "What's up, %s?",
-	        ATTACKER = "Maybe you need to 'chillax' a bit, %s.",
-	        MURDERER = "You... How could you do such a thing?",
-	        REVIVER = "%s is very dependable.",
-	        GHOST = "Don't worry %s, Woby and I will get you back to napping in no time!",
-	        FIRESTARTER = "Setting a real campfire isn't that much effort, %s.",
+		    GENERIC = "It's that layabout, %s!",
+	        ATTACKER = "What happened to 'relaxing', %s?",
+	        MURDERER = "%s takes a casual approach to murder.",
+	        REVIVER = "Finally decided to do something worthwhile, %s?",
+	        GHOST = "All that laziness killed her.",
+	        FIRESTARTER = "Too lazy for a real fire, %s?",
 		},
 
 		WILBUR = {
-            GENERIC = "Hello, %s!",
-            ATTACKER = "That's enough monkeying around, %s.",
-            MURDERER = "You've gone bananas, %s!",
-            REVIVER = "%s would make a good Pinetree Pioneer captain.",
-            GHOST = "Will a banana make you feel better? Alright, alright I'll fetch a heart!",
-            FIRESTARTER = "No, no! Fire bad, fire bad!",
+            GENERIC = "I refuse to converse with a monkey.",
+            ATTACKER = "%s is a wild animal, of course they're dangerous!",
+            MURDERER = "%s is rabid!",
+            REVIVER = "%s knows a few tricks.",
+            GHOST = "Nothing of value was lost.",
+            FIRESTARTER = "%s is evolving.",
 		},
 
 		WOODLEGS = {
-            GENERIC = "It's a real pirate! Do you have any cool stories, %s?",
-            ATTACKER = "%s seems worked up.",
-            MURDERER = "I knew it! Once a pirate, always a pirate!",
-            REVIVER = "%s is good at handling ghosts.",
-            GHOST = "This reminds me of that one podcast with the cursed pirate- Fine, I'll fix you up!",
-            FIRESTARTER = "We really need that fire safety meeting.",
+            GENERIC = "%s is a creepy old pirate!",
+            ATTACKER = "Find someone else to plunder, %s!",
+            MURDERER = "Kill and plunder, %s?",
+            REVIVER = "%s knows his way around ghosts.",
+            GHOST = "You'd better not curse me!",
+            FIRESTARTER = "You can't loot anything if you burn everything, %s!",
 		},
-		
 	},
 }

@@ -242,8 +242,8 @@ DESCRIBE.GIANT_TREE_INFESTED =
     "What kind of weirdo would live in a place like that?"
 DESCRIBE.GIANT_BLUEBERRY = "That'd make a mess for sure!"
 DESCRIBE.STEAMEDHAMS = "At this time of day, in this part of the wilderness?"
-DESCRIBE.BLUEBERRYPANCAKES =
-    "Mum taught me how to make them! They're my favorite!"
+DESCRIBE.BLUEBERRYPANCAKES = "Mum taught me how to make them! They're my favorite!"
+DESCRIBE.DEVILSFRUITCAKE = "Hey! Who took the first slice!?"
 DESCRIBE.SIMPSALAD = "It's... leafy? And... purple?"
 DESCRIBE.BEEFALOWINGS = "Perfect for bulking up!"
 ANNOUNCE.ANNOUNCE_ATTACH_BUFF_KNOCKBACKIMMUNE = "No one can knock me over!"

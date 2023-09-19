@@ -13,7 +13,7 @@ local EFFECTS = {hot = "dr_hot_loop", warmer = "dr_warmer_loop", warm = "dr_warm
 
 SetSharedLootTable('um_pawn', {{'nightmarefuel', 0.2}, {'thulecite_pieces', 0.1}, {'trinket_6', 0.4}})
 
-local PAWN_DIVINING_DISTANCES = {{maxdist = 12, describe = "hot", pingtime = 1}, {maxdist = 24, describe = "warmer", pingtime = 2}, {maxdist = 48, describe = "warm", pingtime = 4}, {maxdist = 98, describe = "cold", pingtime = 8}}
+local PAWN_DIVINING_DISTANCES = {{maxdist = 12, describe = "hot", pingtime = 1}, {maxdist = 24, describe = "warmer", pingtime = 2}, {maxdist = 48, describe = "warm", pingtime = 3}, {maxdist = 98, describe = "cold", pingtime = 6}}
 
 local PAWN_DIVINING_MAXDIST = 72
 local PAWN_DIVINING_DEFAULTPING = 1.8
@@ -405,7 +405,7 @@ local function pawn_common(pawntype)
     -- inst:ListenForEvent("freeze", OnPause)
     -- inst:ListenForEvent("unfreeze", TryUnpause)
 
-    if inst.task == nil then inst.task = inst:DoTaskInTime(5, CheckTargetPiece) end
+    if inst.task == nil then inst.task = inst:DoTaskInTime(1, CheckTargetPiece) end
 
     inst:AddTag("soulless")
     inst.sg:GoToState("hide_post")

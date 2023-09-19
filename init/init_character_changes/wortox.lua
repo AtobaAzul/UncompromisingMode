@@ -150,12 +150,16 @@ if GLOBAL.TUNING.DSTU.WORTOX == "SHOT" or GLOBAL.TUNING.DSTU.WORTOX == "APOLLO" 
     end)
 end
 
-if GLOBAL.TUNING.DSTU.WORTOX == "APOLLO" then
-    AddPrefabPostInit("wortox", function(inst)
-        if not GLOBAL.TheWorld.ismastersim then
-            return
-        end
-
+AddPrefabPostInit("wortox", function(inst)
+	if not GLOBAL.TheWorld.ismastersim then
+		return
+	end
+	
+	if inst.components.foodaffinity ~= nil then
+		inst.components.foodaffinity:AddPrefabAffinity("devilsfruitcake", 1.24)
+	end
+	
+	if GLOBAL.TUNING.DSTU.WORTOX == "APOLLO" then
         if inst.components.souleater ~= nil then
             local oneatsoulfn_ = inst.components.souleater.oneatsoulfn
 
@@ -164,5 +168,5 @@ if GLOBAL.TUNING.DSTU.WORTOX == "APOLLO" then
                 inst.components.sanity:DoDelta(-TUNING.SANITY_TINY)
             end
         end
-    end)
-end
+	end
+end)

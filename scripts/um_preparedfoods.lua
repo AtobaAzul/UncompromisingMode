@@ -73,7 +73,7 @@ local um_preparedfoods =
 			return names.giant_blueberry and names.giant_blueberry >= 2 and tags.egg and
 				tags.egg > 1
 		end,
-		hunger = TUNING.CALORIES_LARGE,
+		hunger = 75,
 		health = 5,
 		sanity = 20,
 		priority = 20,
@@ -133,6 +133,25 @@ local um_preparedfoods =
 		floater = {"small", nil, 0.6},
 		card_def = {ingredients = {{"iceboomerang", 1}, {"honey", 1}}},
 	},]]
+	
+	devilsfruitcake =
+	{
+		test = function(cooker, names, tags)
+			return (names.pomegranate or names.pomegranate) and not tags.meat and tags.egg and tags.egg >= 2 and UncompromisingFillers(tags)
+		end,
+		hunger = 62.5,
+		health = 60,
+		sanity = -0.6,
+		temperature = TUNING.HOT_FOOD_BONUS_TEMP,
+		temperatureduration = TUNING.FOOD_TEMP_AVERAGE,
+		priority = 1,
+		weight = 1,
+		cooktime = 2,
+		foodtype = FOODTYPE.VEGGIE,
+		perishtime = TUNING.PERISH_SLOW,
+		floater = {"med", 0.05, 0.65},
+		card_def = {ingredients = {{"pomegranate", 1}, {"bird_egg", 2}}},
+	},
 	
 	hardshelltacos =
 	{

@@ -4,7 +4,7 @@ local assets_firecrackers = { Asset("ANIM", "anim/firecrackers.zip") }
 
 local prefabs_firecrackers = { "explode_firecrackers" }
 
-local AURA_EXCLUDE_TAGS = { "noclaustrophobia", "playerghost", "abigail", "companion", "ghost", "shadow", "shadowminion", "noauradamage", "INLIMBO", "notarget", "noattack", "invisible" }
+local AURA_EXCLUDE_TAGS = { "noclaustrophobia", "rabbit", "playerghost", "abigail", "companion", "ghost", "shadow", "shadowminion", "noauradamage", "INLIMBO", "notarget", "noattack", "invisible" }
 
 if not TheNet:GetPVPEnabled() then
     table.insert(AURA_EXCLUDE_TAGS, "player")
@@ -69,28 +69,10 @@ local function DealDamage(inst, attacker, target, salty)
     end
 end
 
-local function ImpactFx(inst, attacker, target, salty)
+local function ImpactFx(inst, attacker, target, cocobonk)
     if target ~= nil and target:IsValid() and target.components.combat ~= nil and target.components.combat.hiteffectsymbol ~= nil and inst.impactfx ~= nil then
         local impactfx = SpawnPrefab(inst.impactfx)
         impactfx.Transform:SetPosition(target.Transform:GetWorldPosition())
-
-        if salty ~= nil and salty then
-            local saltyfx = SpawnPrefab("impact")
-
-            if target.components.health ~= nil then
-                local percent = 0.1 / target.components.health:GetPercent()
-
-                if percent > 1.25 then
-                    percent = 1.25
-                end
-
-                saltyfx.Transform:SetPosition(target.Transform:GetWorldPosition())
-                saltyfx.Transform:SetScale(percent, percent, percent)
-            else
-                saltyfx.Transform:SetPosition(target.Transform:GetWorldPosition())
-                saltyfx.Transform:SetScale(0.1, 0.1, 0.1)
-            end
-        end
     end
 end
 
@@ -515,7 +497,7 @@ local function coconutproj_fn()
     inst.Physics:SetCollisionCallback(nil)
     inst.components.projectile:SetOnHitFn(OnHit_Coconut)
 
-    inst.impactfx = "impact"
+    inst.impactfx = "slingshotammo_coconut_impact"
 
     inst.damage = TUNING.SLINGSHOT_AMMO_DAMAGE_GOLD
 
@@ -703,6 +685,38 @@ local function impactobsidianfn()
     return inst
 end
 
+local function impactcoconutfn()
+    local inst = CreateEntity()
+
+    inst.entity:AddTransform()
+    inst.entity:AddAnimState()
+    inst.entity:AddSoundEmitter()
+    inst.entity:AddNetwork()
+
+    inst.AnimState:SetBank("slingshotammo")
+    inst.AnimState:SetBuild("wixieammo_IA")
+    inst.AnimState:PlayAnimation("used")
+    inst.AnimState:SetRayTestOnBB(true)
+    inst.AnimState:SetFinalOffset(FINALOFFSET_MAX)
+    inst.AnimState:OverrideSymbol("rock", "wixieammo_IA", "gold")
+
+    inst:AddTag("FX")
+
+    inst.entity:SetPristine()
+
+    if not TheWorld.ismastersim then
+        return inst
+    end
+	
+	inst.SoundEmitter:PlaySound("wixie/characters/wixie/coconut_bonk")
+
+    inst:ListenForEvent("animover", inst.Remove)
+
+    inst.persists = false
+
+    return inst
+end
+
 return Prefab("slingshotammo_limestone", limestone_fn, assets, prefabs),
     Prefab("slingshotammo_limestone_proj_secondary", limestoneproj_fn, assets, prefabs),
     Prefab("slingshotammo_limestone_impact", impactlimestonefn, assets, prefabs),
@@ -712,4 +726,5 @@ return Prefab("slingshotammo_limestone", limestone_fn, assets, prefabs),
     Prefab("slingshotammo_obsidian", obsidian_fn, assets, prefabs),
     Prefab("slingshotammo_obsidian_proj_secondary", obsidianproj_fn, assets, prefabs),
     Prefab("slingshotammo_obsidian_impact", impactobsidianfn, assets, prefabs),
-    Prefab("coconut_proj_secondary", coconutproj_fn, assets, prefabs)
+    Prefab("coconut_proj_secondary", coconutproj_fn, assets, prefabs),
+    Prefab("slingshotammo_coconut_impact", impactcoconutfn, assets, prefabs)

@@ -46,6 +46,7 @@ local inventoryitems =
 	"critterlab_real",
 	"cursed_antler",
 	"dart_red",
+	"devilsfruitcake",
 	"diseasebomb",
 	"diseasecurebomb",
 	"dormant_rain_horn",
@@ -1160,6 +1161,7 @@ Assets = {
 	Asset("ANIM", "anim/um_deviled_eggs.zip"),
 	Asset("ANIM", "anim/zaspberryparfait.zip"),
 	Asset("ANIM", "anim/blueberrypancakes.zip"),
+	Asset("ANIM", "anim/devilsfruitcake.zip"),
 	Asset("ANIM", "anim/simpsalad.zip"),
 	Asset("ANIM", "anim/purplesteamedhams.zip"),
 	Asset("ANIM", "anim/greensteamedhams.zip"),
@@ -1615,6 +1617,10 @@ Assets = {
 	--ASSET("ATLAS_BUILD", "images/inventoryimages/blueberrypancakes.xml"),
 	Asset("ATLAS", "images/inventoryimages/blueberrypancakes.xml"),
 	Asset("IMAGE", "images/inventoryimages/blueberrypancakes.tex"),
+
+	--ASSET("ATLAS_BUILD", "images/inventoryimages/devilsfruitcake.xml"),
+	Asset("ATLAS", "images/inventoryimages/devilsfruitcake.xml"),
+	Asset("IMAGE", "images/inventoryimages/devilsfruitcake.tex"),
 
 	--ASSET("ATLAS_BUILD", "images/inventoryimages/simpsalad.xml"),
 	Asset("ATLAS", "images/inventoryimages/simpsalad.xml"),

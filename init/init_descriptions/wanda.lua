@@ -205,6 +205,7 @@ DESCRIBE.GIANT_BLUEBERRY = "Disarmed, and ready to eat."
 DESCRIBE.PURPLESTEAMEDHAMS = "Would've been easier to take it from the real chefs."
 DESCRIBE.GREENSTEAMEDHAMS = "Would've been easier to take it from the real chefs."
 DESCRIBE.BLUEBERRYPANCAKES = "The syrup took some sweet time, but it was worth every second."
+DESCRIBE.DEVILSFRUITCAKE = "Looks like a lifetime of sugar."
 DESCRIBE.SIMPSALAD = "This was a horrible waste of time."
 DESCRIBE.BEEFALOWINGS = "I don't know, it looks too heavy on my stomach."
 ANNOUNCE.ANNOUNCE_ATTACH_BUFF_KNOCKBACKIMMUNE =
@@ -406,11 +407,16 @@ DESCRIBE.OCEAN_SPEAKER =
 "I remember these! I can't quite... remember what they do though..."
 -- DESCRIBE.UM_SIREN = "Oh botheration! Its YOU again."
 
--- DESCRIBE.OCUPUS_BEAK = ""
+DESCRIBE.OCUPUS_BEAK = "Whatever this is, I have it now."
 DESCRIBE.OCUPUS_TENTACLE = "Hands off."
 DESCRIBE.OCUPUS_TENTACLE_EYE = "This is what happens when you keep staring."
 DESCRIBE.OCUPUS_TENTACLE_COOKED = "Smells like desperation."
-
+DESCRIBE.UM_OCUPUS_EYE = "If I go over there, I may be in for a bit of a bad time."
+DESCRIBE.UM_OCUPUS_EYETACLE = "When we eliminated those eyes it has let us go."
+DESCRIBE.UM_OCUPUS_TENTACLE = "Hands off."
+DESCRIBE.UM_OCUPUS_BEAK = "I wasn't expecting that one."
+DESCRIBE.BEAKBASHER = "A rudimentary application, it will do for now."
+DESCRIBE.HOUNDIOUS_OBSERVIOUS = "It'll see into the future to determine when trouble arives."
 DESCRIBE.ARMOR_REED_UM = "Helps with the damper parts of where I work."
 DESCRIBE.ARMOR_SHARKSUIT_UM =
 "Quite the interesting way to protect myself."

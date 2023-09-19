@@ -201,6 +201,7 @@ DESCRIBE.GIANT_BLUEBERRY = "Will it explode in my mouth?"
 DESCRIBE.PURPLESTEAMEDHAMS = "Old family recipe."
 DESCRIBE.GREENSTEAMEDHAMS = "Old family recipe."
 DESCRIBE.BLUEBERRYPANCAKES = "A flavor explosion."
+DESCRIBE.DEVILSFRUITCAKE = "Tempt not the tooth that aches."
 DESCRIBE.SIMPSALAD = "This is not the time to fast."
 DESCRIBE.BEEFALOWINGS = "Would you like to try some, Abigail?"
 ANNOUNCE.ANNOUNCE_ATTACH_BUFF_KNOCKBACKIMMUNE = "My stance will not falter."
@@ -397,10 +398,16 @@ DESCRIBE.OCEAN_SPEAKER =
 "It's busted and hollow inside. Only playing dreary tunes."
 -- DESCRIBE.UM_SIREN = "She manipulates her pawns through song. A very potentent ability..."
 
--- DESCRIBE.OCUPUS_BEAK = ""
+DESCRIBE.OCUPUS_BEAK = "What's the purpose of this?"
 DESCRIBE.OCUPUS_TENTACLE = "It wanted to pull me down into the abyss."
-DESCRIBE.OCUPUS_TENTACLE_EYE = ""
+DESCRIBE.OCUPUS_TENTACLE_EYE = "Probably should just toss this back."
 DESCRIBE.OCUPUS_TENTACLE_COOKED = "A delicately cooked tendril."
+DESCRIBE.UM_OCUPUS_EYE = "Looks like an abyssal observer."
+DESCRIBE.UM_OCUPUS_EYETACLE = "This abyss is staring back. We should destroy it if we don't want to join them."
+DESCRIBE.UM_OCUPUS_TENTACLE = "Its trying to take us down."
+DESCRIBE.UM_OCUPUS_BEAK = "I need to cover my ears."
+DESCRIBE.BEAKBASHER = "A destroyer created from the abyssal creature."
+DESCRIBE.HOUNDIOUS_OBSERVIOUS = "The mandrake may be resurrected, but it has no life."
 
 DESCRIBE.ARMOR_REED_UM = DESCRIBE.ARMORGRASS
 DESCRIBE.ARMOR_SHARKSUIT_UM =

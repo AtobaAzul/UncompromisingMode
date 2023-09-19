@@ -394,6 +394,10 @@ TUNING.DSTU = {
     --mod chekcs
     ISLAND_ADVENTURES = ia_check,
     TREATS_FOR_WEBBER = tfw_check,
+	
+	--MEME CONFIG
+	ADVERTISEMENTS = GetModConfigData("um_advertisements"),
+	SHRINK = GetModConfigData("um_shrink"),
 
     --CLIENT CONFIGS
 
