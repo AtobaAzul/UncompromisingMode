@@ -9,17 +9,29 @@ local mermhouses = {
 
 local function StartSpawning_Winter(inst)
     if not inst:HasTag("burnt") and TheWorld.state.iswinter and
-        inst.components.childspawner ~= nil then
+        inst.components.childspawner ~= nil and not inst.components.childspawner.spawning then
         inst.components.childspawner:StartSpawning()
+		
+		print(inst.components.childspawner.spawning)
+    end
+end
+
+local function StopSpawning(inst)
+    if not inst:HasTag("burnt") and inst.components.childspawner ~= nil then
+        inst.components.childspawner:StopSpawning()
     end
 end
 
 local function OnIsDay_Winter(inst, isday)
-    if not isday and not inst:HasTag("burnt") then
+    if isday then
+        StopSpawning(inst)
+    elseif not inst:HasTag("burnt") then
         if TheWorld.state.iswinter then
             inst.components.childspawner:ReleaseAllChildren()
         end
         StartSpawning_Winter(inst)
+		
+		print(inst.components.childspawner.spawning)
     end
 end
 
@@ -42,17 +54,17 @@ for i, v in pairs(mermhouses) do
 			return
 		end
 
-		if inst.components.childspawner ~= nil then
+		--[[if inst.components.childspawner ~= nil then
 			local _OldOnGoHome = inst.components.childspawner.ongohome
 		
 			inst.components.childspawner:SetGoHomeFn(function(inst, child)
+				_OldOnGoHome(inst, child)
+				
 				if TheWorld.state.iswinter then
 					StartSpawning_Winter(inst, child)
 				end
-
-				return _OldOnGoHome(inst, child)
 			end)
-		end
+		end]]
 		
 		inst.um_base_regen_time = v == "mermhouse_crafted" and TUNING.MERMHOUSE_REGEN_TIME / 2 or TUNING.MERMHOUSE_REGEN_TIME
 		
