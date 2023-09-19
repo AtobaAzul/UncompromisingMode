@@ -49,7 +49,7 @@ local function TrySlowdown(inst, target)
 
     if (inst.prefab ~= "lavaspit_slobber" and inst.components.propagator ~= nil or inst.prefab == "lavaspit_slobber") and target.components.combat ~= nil and target.components.health ~= nil and
         not target:HasTag("dragonfly") and not target:HasTag("lavae") then
-        target.components.health:DoDelta(inst.prefab == "lavaspit_slobber" and -6 or -3)
+        target.components.health:DoDelta(inst.prefab == "lavaspit_slobber" and -6 or -4)
 
         target:PushEvent("onignite")
 
@@ -61,7 +61,7 @@ local function TrySlowdown(inst, target)
 		
 		--especial case handling for walls.
         if target:HasTag("wall") and target.components.combat.onhitfn ~= nil then
-            target.components.health:DoDelta(inst.prefab == "lavaspit_slobber" and -6 or -3)
+            target.components.health:DoDelta(inst.prefab == "lavaspit_slobber" and -6 or -4)
 
             target.components.combat.onhitfn(target, inst.lobber, 0, 0) --fences don't really take damage to break, onhit they get hammered, normal walls update their visuals onhit.
         end
