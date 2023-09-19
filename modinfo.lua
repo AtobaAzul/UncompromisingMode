@@ -778,6 +778,7 @@ configuration_options = {
     BinaryConfig("angrypenguins", "Territorial Penguins", "Penguins will aggresively defend their land.", true),
     BinaryConfig("harder_pigs", "Harder Pigs", "Pigs have a new counter and charge attack.", true),
     BinaryConfig("angry_werepigs", "Angry Werepigs", "Werepigs prioritize attacking over eating.", true),
+    BinaryConfig("mermtweaks", "Merm Tweaks", "- Regular Merms can now leave their houses during winter, Merm Guards respawn slower.", true),
     BinaryConfig("harder_walrus", "Harder MacTusk", "MacTusk has a counter attack and can throw traps.", true),
     BinaryConfig("harder_beefalo", "Harder Beefalo", "Beefalo ocasionally charge after a telegraph.", true),
     BinaryConfig("harder_koalefants", "Harder Koalefants", "Koalefants have brand new attacks and doubled health.", true),
