@@ -41,7 +41,10 @@ if TUNING.DSTU.WARLY_BUTCHER then
 	if inst.components.combat ~= nil then
 		--inst:ListenForEvent("onattackother", onbutchered)
 		inst:ListenForEvent("itemget", inventorystuff)
+		inst:ListenForEvent("inventoryfull", inventorystuff)
+		inst:ListenForEvent("gotnewitem", inventorystuff)
 		inst:ListenForEvent("dropitem", ondropitem)
+		inst:ListenForEvent("itemlose", ondropitem)
 	end
 end
 
