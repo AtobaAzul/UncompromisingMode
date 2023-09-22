@@ -48,6 +48,7 @@ if TUNING.DSTU.WARLY_BUTCHER then
 	end
 end
 
+if TUNING.DSTU.WARLY_FOOD_TASTE then
 	local function oneat(inst, data)
 		local food = data.food
 		if food and food.components.edible then
@@ -69,17 +70,18 @@ end
 		end
 	end
 	
-		inst:AddTag("warlybuffed")
+	inst:AddTag("warlybuffed")
 		
-		if inst.components.eater ~= nil then
-			inst:ListenForEvent("oneat", oneat)
-			--inst.components.eater:SetOnEatFn(oneat)
-			--inst.components.eater:SetAbsorptionModifiers(1.2, 1.2, 1.2)
-		end
+	if inst.components.eater ~= nil then
+		inst:ListenForEvent("oneat", oneat)
+		--inst.components.eater:SetOnEatFn(oneat)
+		--inst.components.eater:SetAbsorptionModifiers(1.2, 1.2, 1.2)
+	end
 		
-		if inst.components.foodmemory ~= nil then
-			inst.components.foodmemory:SetDuration(TUNING.DSTU.WARLY_SAME_OLD_COOLDOWN)
-			inst.components.foodmemory:SetMultipliers(TUNING.DSTU.WARLY_SAME_OLD_MULTIPLIERS)
-		end
-		
+	if inst.components.foodmemory ~= nil then
+		inst.components.foodmemory:SetDuration(TUNING.DSTU.WARLY_SAME_OLD_COOLDOWN)
+		inst.components.foodmemory:SetMultipliers(TUNING.DSTU.WARLY_SAME_OLD_MULTIPLIERS)
+	end
+end
+
 end)

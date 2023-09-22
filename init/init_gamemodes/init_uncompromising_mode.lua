@@ -142,9 +142,9 @@ modimport("init/init_character_changes/willow_bernie")
 		modimport("init/init_character_changes/waxwell")
 	end]]
 
-if GetModConfigData("warly") then
-	modimport("init/init_character_changes/warly")
-end
+--if GetModConfigData("warly") then
+	--modimport("init/init_character_changes/warly")
+--end
 
 --if GetModConfigData("wolfgang") then
 --modimport("init/init_character_changes/wolfgang")
@@ -177,6 +177,7 @@ modimport("init/init_character_changes/webber")
 modimport("init/init_character_changes/winona")
 modimport("init/init_character_changes/wanda")
 modimport("init/init_character_changes/wortox")
+modimport("init/init_character_changes/warly")
 
 if GetModConfigData("waxwell") then
 	modimport("init/init_character_changes/waxwell")

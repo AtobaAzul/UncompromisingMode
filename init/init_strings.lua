@@ -80,10 +80,16 @@ end
 STRINGS.CHARACTER_DESCRIPTIONS.wolfgang = STRINGS.CHARACTER_DESCRIPTIONS.wolfgang ..
 	"\n󰀕Too big to push around when mighty"
 
-if GetModConfigData("warly") then
+if GetModConfigData("warly_food_taste_") then
 	STRINGS.CHARACTER_DESCRIPTIONS.warly = STRINGS.CHARACTER_DESCRIPTIONS.warly ..
 		"\n󰀕Absorbs nutrients better, but prefers more variety"
 end
+
+if GetModConfigData("warly_butcher_") then
+	STRINGS.CHARACTER_DESCRIPTIONS.warly = STRINGS.CHARACTER_DESCRIPTIONS.warly ..
+		"\n󰀕Is a certified butcher"
+end
+
 if GetModConfigData("winona_gen_") then
 	STRINGS.CHARACTER_DESCRIPTIONS.winona = STRINGS.CHARACTER_DESCRIPTIONS.winona .. "\n󰀕Generators are for workers only"
 end

@@ -291,7 +291,7 @@ configuration_options = {
         "Limits access to Winona's Generators to only allow her to use them.", false),
 	BinaryConfig("winonawackycats", "Experimental Winona Catapults",
         "Catapults no longer regenerate, have reduced health, and deal 34 AOE damage.", false),
-    BinaryConfig("warly", "Warly's Food Taste",
+    BinaryConfig("warly_food_taste_", "Warly's Food Taste",
         "Warly gets increased stats from food, like Singleplayer. However, he remembers foods for 3 days instead of 2.",
         true),
     BinaryConfig("warly_butcher_", "Warly's Butchering",
