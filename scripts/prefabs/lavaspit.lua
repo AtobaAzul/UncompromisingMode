@@ -49,7 +49,7 @@ local function TrySlowdown(inst, target)
 
     if (inst.prefab ~= "lavaspit_slobber" and inst.components.propagator ~= nil or inst.prefab == "lavaspit_slobber") and target.components.combat ~= nil and target.components.health ~= nil and
         not target:HasTag("dragonfly") and not target:HasTag("lavae") then
-        target.components.health:DoDelta(inst.prefab == "lavaspit_slobber" and -6 or -4)
+        target.components.health:DoFireDamage(inst.prefab == "lavaspit_slobber" and 6 or 4, inst.lobber, true)
 
         target:PushEvent("onignite")
 
