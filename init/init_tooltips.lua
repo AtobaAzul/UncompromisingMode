@@ -94,7 +94,7 @@ STRINGS.ENGINEERING_TOOLTIP = {
 	BUGZAPPER = "- Can be overcharged."
 }
 
-if GetModConfigData("winona_portables_") then
+if TUNING.DSTU.WINONA_PORTABLES then
 	STRINGS.ENGINEERING_TOOLTIP.WINONA_CATAPULT = "- Now portable."
 	STRINGS.ENGINEERING_TOOLTIP.WINONA_SPOTLIGHT = "- Now portable."
 	STRINGS.ENGINEERING_TOOLTIP.WINONA_BATTERY_LOW = "- Now portable."
@@ -103,12 +103,12 @@ end
 
 local TOOLTIPS = STRINGS.UNCOMP_TOOLTIP
 
-if GetModConfigData("telestaff_rework") then
+if TUNING.DSTU.TELESTAFF_REWORK then
 	TOOLTIPS.TELESTAFF = "- Can select its destination.\n- Increased uses."
 	TOOLTIPS.TELEBASE = "- No longer requires gems per teleport."
 end
 
-if GetModConfigData("beebox_nerf") then
+if TUNING.DSTU.BEEBOX_NERF then
 	TOOLTIPS.BEEBOX = "- Reduced maximum active Bees."
 end
 
@@ -229,7 +229,7 @@ if TUNING.DSTU.POCKET_POWERTRIP ~= 0 then
 	TOOLTIPS.ARMOR_WINDBREAKER = "- Now has pockets!"
 end
 
-if GetModConfigData("canedurability") then
+if TUNING.DSTU.CANEDURABILITY then
 	TOOLTIPS.CANE = "- Has durability, only drains when walking."
 end
 
@@ -246,7 +246,7 @@ if TUNING.DSTU.WICKERNERF_TENTACLES then
 	"- Summons Sickly Tentacles\n- Sickly Tentacles die over time, drop no loot but don't attack players."
 end
 
-if GetModConfigData("woodie") then
+if TUNING.DSTU.WOODIE then
 	TOOLTIPS.WEREITEM_GOOSE = "- Walking on water makes you wet."
 end
 
@@ -255,14 +255,14 @@ if TUNING.DSTU.WINONA_GEN then
 	TOOLTIPS.WINONA_BATTERY_LOW = TOOLTIPS.WINONA_BATTERY_LOW .. "\n- Access limited to Winona."
 end
 
-if GetModConfigData("lunar grimoire") then
+if TUNING.DSTU.WICKERNERF_MOONBOOK then
 	TOOLTIPS.BOOK_MOON = "- Now mutates everything around on use."
 end
 
-if GetModConfigData("apicultural notes") then
+if TUNING.DSTU.WICKERNERF_BEEBOOK then
 	TOOLTIPS.BOOK_BEES = "- Now adds Honey to 10 nearby Bee Boxes.\n- Doesn't work during Dusk, Night and/or Winter."
 end
 
-if GetModConfigData("disable_megaflare") then
+if TUNING.DSTU.DISABLE_MEGAFLARE then
 	TOOLTIPS.MEGAFLARE = "- No longer summons Deerclops."
 end

@@ -471,10 +471,10 @@ local function CheckTargetPiece(inst)
 end
 
 local function rat_enable(inst)
-    inst.components.fueled:StartConsuming()
-	
 	local owner = inst.components.inventoryitem.owner
-	if owner then
+	
+	if owner ~= nil and not owner:HasTag("equipmentmodel") then
+		inst.components.fueled:StartConsuming()
 		owner:AddTag("ratfriend")
 		owner.SoundEmitter:PlaySound("turnoftides/creatures/together/carrat/emerge")
 	end
@@ -560,7 +560,9 @@ local function onequip(inst, owner)
 		inst.customequip(inst)
 	end
 	
-	inst.components.fueled:StartConsuming()
+	if owner ~= nil and not owner:HasTag("equipmentmodel") then
+		inst.components.fueled:StartConsuming()
+	end
 end
  
 local function onunequip(inst, owner)

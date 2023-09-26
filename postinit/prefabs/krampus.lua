@@ -7,7 +7,9 @@ GLOBAL.setfenv(1, GLOBAL)
 
 local function OnHitOther(inst, data)
     if data.target ~= nil then
-		inst.components.thief:StealItem(data.target)
+		if inst.components.thief ~= nil then
+			inst.components.thief:StealItem(data.target)
+		end
 	
 		if data.target:HasTag("creatureknockbackable") or data.target:HasTag("player") and data.target.components.inventory ~= nil and not data.target:HasTag("fat_gang") and
 			not data.target:HasTag("foodknockbackimmune") and

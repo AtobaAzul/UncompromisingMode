@@ -386,6 +386,10 @@ TUNING.DSTU = {
 	MAXTEMPDAMAGE = GetModConfigData("maxtempdamage"),
 	MAXHUNGERDAMAGE = GetModConfigData("maxhungerdamage"),
 	HARDER_TREPIDATION = GetModConfigData("nodespawn_trepidation"),
+	WINONA_PORTABLES = GetModConfigData("winona_portables_"),
+	TELESTAFF_REWORK = GetModConfigData("telestaff_rework"),
+	BEEBOX_NERF = GetModConfigData("beebox_nerf"),
+	CANEDURABILITY = GetModConfigData("canedurability"),
     -- boss hp qol
     BEEQUEEN_HEALTH = GetModConfigData("bee queen health"),
     TOADSTOOL_HEALTH = GetModConfigData("toadstool health"),

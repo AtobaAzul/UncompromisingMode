@@ -44,7 +44,7 @@ return Class(function(self, inst)
 			TheWorld.net:RemoveTag("snowstormstartnet")
 		end
 
-		if _worldsettingstimer:GetTimeLeft(UM_SNOW_STORM_TIMERNAME) == nil then
+		if _worldsettingstimer:GetTimeLeft(UM_SNOW_STORM_TIMERNAME) == nil or not _worldsettingstimer:ActiveTimerExists(UM_SNOW_STORM_TIMERNAME) then
 			_worldsettingstimer:StartTimer(UM_SNOW_STORM_TIMERNAME, _spawninterval + math.random(0, 120))
 		end
 
@@ -71,7 +71,7 @@ return Class(function(self, inst)
 					TheWorld.net:AddTag("snowstormstartnet")
 				end
 
-				if _worldsettingstimer:GetTimeLeft(UM_STOP_SNOW_STORM_TIMERNAME) == nil then
+				if _worldsettingstimer:GetTimeLeft(UM_STOP_SNOW_STORM_TIMERNAME) == nil or not _worldsettingstimer:ActiveTimerExists(UM_STOP_SNOW_STORM_TIMERNAME) then
 					_worldsettingstimer:StartTimer(UM_STOP_SNOW_STORM_TIMERNAME, _despawninterval + math.random(80, 120))
 				end
 
@@ -82,7 +82,7 @@ return Class(function(self, inst)
 
 	local function StartStorms()
 		print("StartStorms")
-		if _worldsettingstimer:GetTimeLeft(UM_SNOW_STORM_TIMERNAME) == nil then
+		if _worldsettingstimer:GetTimeLeft(UM_SNOW_STORM_TIMERNAME) == nil or not _worldsettingstimer:ActiveTimerExists(UM_SNOW_STORM_TIMERNAME) then
 			if not _storming then
 				_worldsettingstimer:StartTimer(UM_SNOW_STORM_TIMERNAME, _spawninterval + math.random(0, 120))
 			end

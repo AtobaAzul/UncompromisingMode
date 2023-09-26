@@ -1122,7 +1122,9 @@ local function OnTimerDone(inst, data)
     if data.name == "scoutingparty" then
         local x, y, z = inst.Transform:GetWorldPosition()
 
-        if #TheSim:FindEntities(x, 0, z, 1000, {"ratburrow"}) >= 10 then
+		print(TheWorld.components.ratcheck ~= nil and TheWorld.components.ratcheck:GetBurrows())
+
+        if TheWorld.components.ratcheck ~= nil and TheWorld.components.ratcheck:GetBurrows() >= 10 then
             inst.components.timer:StartTimer("scoutingparty", 1920 + math.random(480))
             return
         end

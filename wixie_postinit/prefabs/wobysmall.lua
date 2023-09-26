@@ -195,10 +195,12 @@ env.AddPrefabPostInit("wobysmall", function(inst)
 		inst.components.health.canheal = false
 	end
 
-	inst:ListenForEvent("woby_dropped_item", function()
-		print("dropitem")
+	inst:ListenForEvent("woby_dropped_item", function(inst, data)
 		if inst._playerlink ~= nil and inst._playerlink.components.health ~= nil and not inst._playerlink.components.health:IsDead() then
-			inst._playerlink.components.talker:Say(GetString(inst._playerlink, "ANNOUNCE_WOBY_TOOFULL"))
+			if data.dropped_item == nil or data.dropped_item ~= nil and not data.dropped_item:HasTag("heavy") then
+				inst._playerlink.components.talker:Say(GetString(inst._playerlink, "ANNOUNCE_WOBY_TOOFULL"))
+			end
+			
 			inst.wobytarget = nil
 			inst.oldwobytarget = nil
 		end

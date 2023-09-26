@@ -231,3 +231,33 @@ function c_um_givefoods()
 		end
     end
 end
+
+
+local function UM_ConsoleCommandPlayer()
+    return (c_sel() ~= nil and c_sel():HasTag("player") and c_sel()) or ThePlayer or AllPlayers[1]
+end
+
+local function ListingOrConsolePlayer(input)
+    if type(input) == "string" or type(input) == "number" then
+        return UserToPlayer(input)
+    end
+    return input or UM_ConsoleCommandPlayer()
+end
+
+function c_um_wobygodmode(player)
+
+    if TheWorld ~= nil and not TheWorld.ismastersim then
+        c_remote("c_um_wobygodmode()")
+        return
+    end
+
+    player = ListingOrConsolePlayer(player)
+    if player ~= nil and player.woby ~= nil then
+        SuUsed("c_um_wobygodmode", true)
+		if  player.woby.components.health ~= nil then
+            local godmode = player.woby.components.health.invincible
+            player.woby.components.health:SetInvincible(not godmode)
+            print("God mode: "..tostring(not godmode))
+        end
+    end
+end

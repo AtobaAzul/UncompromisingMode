@@ -240,7 +240,8 @@ if GetModConfigData("wixie_walter") then
         "wobybig",
         "wormhole",      -- wixie loses more sanity from wormholes
         "slingshotammo", -- removes hunger value from slingshot ammo, preventing slurtle feeding strats
-        "coconut"        -- shoot a coconut
+        "coconut",       -- shoot a coconut
+		"sculptingtable" -- Sculpting table crashes if picker inventory is nil
     }
     local wixie_components = {
         "healer",         -- Walter gets a 50% bonus from healing items, over time. works on companions too.

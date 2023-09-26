@@ -125,8 +125,10 @@ local states = {
 							end
 						end
 						
-						for i = 1, 3 do
-							inst.components.thief:StealItem(v)
+						if inst.components.thief ~= nil then
+							for i = 1, 3 do
+								inst.components.thief:StealItem(v)
+							end
 						end
 					
 						if not v:HasTag("fat_gang") and not v:HasTag("foodknockbackimmune") and not (v.components.rider ~= nil and v.components.rider:IsRiding()) and 

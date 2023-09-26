@@ -98,7 +98,7 @@ env.AddComponentPostInit("container", function(self)
 				item.components.inventoryitem:OnDropped(true)
 			end
 			
-			self.inst:PushEvent("woby_dropped_item")
+			self.inst:PushEvent("woby_dropped_item", { dropped_item = item })
 		end
 		return false
 	end

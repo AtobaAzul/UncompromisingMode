@@ -59,6 +59,7 @@ local GIANTS =
     {
         radius = 150,
 		power = 1.5,
+		nomultiknockback = true,
     },
 	--[[["moose"] =
     {
@@ -87,7 +88,10 @@ for k, v in pairs(GIANTS) do
 					other.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY) == nil or
 						not other.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY):HasTag("marble") and
 						not other.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY):HasTag("knockback_protection")) then
-					other:PushEvent("knockback", { knocker = inst, radius = v.radius, strengthmult = v.power })
+					
+					if not v.nomultiknockback or v.nomultiknockback and other.sg ~= nil and not other.sg:HasStateTag("knockback") then
+						other:PushEvent("knockback", { knocker = inst, radius = v.radius, strengthmult = v.power })
+					end
 				end
 			end
 		end
