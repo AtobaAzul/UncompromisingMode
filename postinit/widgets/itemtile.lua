@@ -31,31 +31,19 @@ env.AddClassPostConstruct("widgets/itemtile", function(self, invitem)
 			return _OldUpdateToolTip(self)
 		end
 	end
+end)
 
-	self.inst:ListenForEvent("overcharged", function(inst, toggle)
-		self:SetPercent(inst.components.fueled:GetPercent())
-	end)
+local ItemTile = require('widgets/itemtile')
+local _SetPercent = ItemTile.SetPercent
 
-	local _SetPercent = self.SetPercent
+function ItemTile:SetPercent(percent, ...)
+	_SetPercent(self, percent, ...)
 
-	function self:SetPercent(percent, doyellow)
-		_SetPercent(self, percent)
-		if percent ~= nil and percent > 1 then
-			self.item.yellowtask = self.item:DoPeriodicTask(FRAMES * 2, function()
-				if self.percent ~= nil then
-					self.percent:SetColour({ 1, 1, 0, 1 })
-				end
-			end)
-		else
-			if self.item.yellowtask ~= nil then --this fucker won't due and I give up. 
-				self.item.yellowtask:Cancel()
-				self.item.yellowtask = nil
-			end
-			self.item:DoTaskInTime(FRAMES, function()
-				if self.percent ~= nil then
-					self.percent:SetColour({ 1, 1, 1, 1 })
-				end
-			end)
+	if percent ~= nil and self.percent ~= nil then
+		if percent > 1 then
+			self.percent:SetColour({ 1, 1, 0, 1 })
+		elseif percent > 0.95 and percent < 1 then --exactly at 1 just to reset it but not to break the coloured percent mod
+			self.percent:SetColour({ 1, 1, 1, 1 })
 		end
 	end
-end)
+end
