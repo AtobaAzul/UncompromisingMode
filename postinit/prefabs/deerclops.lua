@@ -214,6 +214,19 @@ local function oncollide(inst, other)
 end
 
 env.AddPrefabPostInit("deerclops", function(inst)
+    if not IsSpecialEventActive(SPECIAL_EVENTS.WINTERS_FEAST) then
+        inst.entity:AddLight()
+        inst.Light:SetIntensity(.6)
+        inst.Light:SetRadius(8)
+        inst.Light:SetFalloff(3)
+        inst.Light:SetColour(0, 0, 1)
+
+        inst.Light:Enable(false)
+    end
+
+    if not TheWorld.ismastersim then
+        return
+    end
 
     local _OnHitOther = UpvalueHacker.GetUpvalue(Prefabs.deerclops.fn, "OnHitOther")
 
@@ -236,24 +249,11 @@ env.AddPrefabPostInit("deerclops", function(inst)
         end
     end
 
-    inst:RemoveEventCallback("onhitother", _OnHitOther)
-    inst:ListenForEvent("onhitother", OnHitOther)
-
-    if not IsSpecialEventActive(SPECIAL_EVENTS.WINTERS_FEAST) then
-        inst.entity:AddLight()
-        inst.Light:SetIntensity(.6)
-        inst.Light:SetRadius(8)
-        inst.Light:SetFalloff(3)
-        inst.Light:SetColour(0, 0, 1)
-
-        inst.Light:Enable(false)
-    end
-
-
-    if not TheWorld.ismastersim then
-        return
-    end
-
+	if _OnHitOther ~= nil then
+		inst:RemoveEventCallback("onhitother", _OnHitOther)
+		inst:ListenForEvent("onhitother", OnHitOther)
+	end
+	
     inst.Physics:SetCollisionCallback(oncollide)
 	
 	local _OnSave = inst.OnSave

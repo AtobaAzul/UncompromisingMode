@@ -375,32 +375,30 @@ env.AddStategraphPostInit("deerclops", function(inst)
         end
     end
 
-    local events =
-    {
-        EventHandler("doattack", function(inst, data)
-            if inst.upgrade == "enrage_mutation" then
-                EnrageAttackBank(inst, data)
-            end
-            if inst.upgrade == "strength_mutation" then
-                StrongAttackBank(inst, data)
-            end
-            if inst.upgrade == "ice_mutation" then
-                IceAttackBank(inst, data)
-            end
-        end),
-        EventHandler("attacked", function(inst, data)
-            if inst.components.health ~= nil and
-                not inst.components.health:IsDead() and
-                ((not inst.sg:HasStateTag("busy") or inst.sg:HasStateTag("frozen")) or inst.sg:HasStateTag("aurafreeze")) then
-                if inst.sg:HasStateTag("aurafreeze") then
-                    inst.SoundEmitter:PlaySound("dontstarve/creatures/deerclops/taunt_grrr")
-                    inst.sg:GoToState("aurafreeze_hit")
-                else
-                    inst.sg:GoToState("hit")
-                end
-            end
-        end),
-    }
+	local _OldAttackEvent = inst.events["doattack"].fn --Event handler to force the leap if we haven't done the leap for long enough (brainside leap still independent
+	inst.events["doattack"].fn = function(inst, data)
+		if inst.upgrade == "enrage_mutation" then
+			EnrageAttackBank(inst, data)
+		elseif inst.upgrade == "strength_mutation" then
+			StrongAttackBank(inst, data)
+		elseif inst.upgrade == "ice_mutation" then
+			IceAttackBank(inst, data)
+		else
+			_OldAttackEvent(inst, data)
+		end
+	end
+
+	local _OldAttacked = inst.events["attacked"].fn --Event handler to force the leap if we haven't done the leap for long enough (brainside leap still independent
+	inst.events["attacked"].fn = function(inst, data)
+		if inst.components.health ~= nil and not inst.components.health:IsDead() and
+			((not inst.sg:HasStateTag("busy") or inst.sg:HasStateTag("frozen")) or inst.sg:HasStateTag("aurafreeze")) and 
+			inst.sg:HasStateTag("aurafreeze") then
+			inst.SoundEmitter:PlaySound("dontstarve/creatures/deerclops/taunt_grrr")
+			inst.sg:GoToState("aurafreeze_hit")
+		else
+			_OldAttacked(inst, data)
+		end
+	end
 
     local states = {
 
@@ -1079,11 +1077,6 @@ env.AddStategraphPostInit("deerclops", function(inst)
 
         },
     }
-
-    for k, v in pairs(events) do
-        assert(v:is_a(EventHandler), "Non-event added in mod events table!")
-        inst.events[v.name] = v
-    end
 
     for k, v in pairs(states) do
         assert(v:is_a(State), "Non-state added in mod state table!")
