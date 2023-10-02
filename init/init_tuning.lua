@@ -561,3 +561,12 @@ if GetModConfigData("changed_shadowpieces") then
 	TUNING.SHADOW_KNIGHT.HEALTH = {600, 1800, 5400}
 	TUNING.SHADOW_KNIGHT.ATTACK_PERIOD = {3.5, 2.5, 1.5} --evilishly low
 end
+
+
+--flingo emergency buff
+
+TUNING.EMERGENCY_BURNT_NUMBER = 1
+TUNING.EMERGENCY_BURNING_NUMBER = 1 -- number of fires to maintain warning level one automatically
+TUNING.EMERGENCY_WARNING_TIME = 3   -- minimum length of warning period
+TUNING.EMERGENCY_RESPONSE_TIME = 30 -- BURNT_NUMBER structures must burn within this time period to trigger flingomatic emergency response
+TUNING.EMERGENCY_SHUT_OFF_TIME = 10 -- stay on for this length of time

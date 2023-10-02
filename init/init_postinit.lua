@@ -46,6 +46,7 @@ local component_post = {
     "worldwind",
 	"planarentity",
     "geyserfx",
+    "firedetector",
 }
 
 local prefab_post = {
