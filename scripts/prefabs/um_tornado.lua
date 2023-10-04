@@ -199,7 +199,7 @@ end
 
 
 local function PickItem(item, inst)
-    if item.components.inventoryitem ~= nil and item.prefab ~= "bullkelp_beachedroot" and item:IsValid() then
+    if item.components.inventoryitem ~= nil and item.prefab ~= "bullkelp_beachedroot" and item:IsValid() and not item:HasTag("heavy") then
         inst.components.inventory:GiveItem(item)
         local stacksize = item.components.stackable ~= nil and item.components.stackable:StackSize() or 1
 
@@ -307,7 +307,7 @@ local function TornadoEnviromentTask(inst)
 
         -- ITEM PICKING
         local items_pick = TheSim:FindEntities(x, y, z, 4, { "_inventoryitem" },
-            { "irreplaceable", "tornado_nosucky", "trap", "INLIMBO" })
+            { "irreplaceable", "tornado_nosucky", "trap", "INLIMBO", "heavy"})
         for k, v in ipairs(items_pick) do
             if v.components.inventoryitem ~= nil and v.prefab ~= "bullkelp_beachedroot" then
                 if config == "reduced" and v:IsAsleep() then
