@@ -277,9 +277,10 @@ local function TornadoEnviromentTask(inst)
         -- ITEM SUCKING - Especifically *after* pickables/workables because it then will capture the items produced.
         local items_suck = config == "reduced" and
             TheSim:FindEntities(x, y, z, 12, { "_inventoryitem" },
-                { "irreplaceable", "tornado_nosucky", "trap", "INLIMBO" }) or
+                { "irreplaceable", "tornado_nosucky", "trap", "INLIMBO", "heavy"}) or
             TheSim:FindEntities(x, y, z, 40, { "_inventoryitem" },
-                { "irreplaceable", "tornado_nosucky", "trap", "INLIMBO" })
+                { "irreplaceable", "tornado_nosucky", "trap", "INLIMBO", "heavy"})
+
         local ground = TheWorld.Map:IsOceanAtPoint(x, y, z)
         local angle_deviation = config == "reduced" and (66 * RADIANS) or 0
         for k, v in pairs(items_suck) do
