@@ -22,7 +22,7 @@ if TUNING.DSTU.WARLY_BUTCHER then
 
 	local function inventorystuff(item, data)
 		local item = data.item
-		if item ~= nil and (item.components.health and item.components.inventoryitem.canbepickedupalive == true) and not item:HasTag("butchermark") then
+		if item ~= nil and ((item.components.health and item.components.inventoryitem.canbepickedupalive == true) or item.components.weighable ~= nil) and not item:HasTag("butchermark") then
 			item:AddTag("butchermark")
 		end
 		if item ~= nil and item.butcher_cancel_task ~= nil then
