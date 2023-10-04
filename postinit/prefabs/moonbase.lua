@@ -17,10 +17,6 @@ local function StopLight(inst)
     end
 end
 
-local function HasStaff(inst, staffname)
-    return (inst._staffinst ~= nil and inst._staffinst.prefab or inst.components.pickable.product) == staffname or
-        inst.mooning
-end
 
 local function StopFX(inst)
     if inst._fxpulse ~= nil then
@@ -47,38 +43,6 @@ local function StopFX(inst)
     end
 end
 
-local function StartFX(inst)
-    if inst._fxfront == nil or inst._fxback == nil then
-        local x, y, z = inst.Transform:GetWorldPosition()
-
-        if inst._fxpulse ~= nil then
-            inst._fxpulse:Remove()
-        end
-        inst._fxpulse = SpawnPrefab("positronpulse")
-        inst._fxpulse.Transform:SetPosition(x, y, z)
-
-        if inst._fxfront ~= nil then
-            inst._fxfront:Remove()
-        end
-        inst._fxfront = SpawnPrefab("positronbeam_front")
-        inst._fxfront.Transform:SetPosition(x, y, z)
-
-        if inst._fxback ~= nil then
-            inst._fxback:Remove()
-        end
-        inst._fxback = SpawnPrefab("positronbeam_back")
-        inst._fxback.Transform:SetPosition(x, y, z)
-
-        if inst._startlighttask ~= nil then
-            inst._startlighttask:Cancel()
-        end
-        inst._startlighttask = inst:DoTaskInTime(3 * FRAMES, StartLight)
-    end
-    if inst._stoplighttask ~= nil then
-        inst._stoplighttask:Cancel()
-        inst._stoplighttask = nil
-    end
-end
 
 local function launchitem(item, angle)
     local speed = math.random() * 4 + 2
@@ -87,7 +51,6 @@ local function launchitem(item, angle)
 end
 
 local function giveopal(inst, item, giver)
-
     local x, y, z = inst.Transform:GetWorldPosition()
     y = 2.5
 
@@ -107,8 +70,28 @@ local function giveopal(inst, item, giver)
     end
 end
 
-local function givetear(inst, item, giver)
+local function givestaff(inst, item, giver)
+    local x, y, z = inst.Transform:GetWorldPosition()
+    y = 2.5
 
+    local angle
+    if giver ~= nil and giver:IsValid() then
+        angle = 180 - giver:GetAngleToPoint(x, 0, z)
+    else
+        local down = TheCamera:GetDownVec()
+        angle = math.atan2(down.z, down.x) / DEGREES
+        giver = nil
+    end
+
+    local item = SpawnPrefab("staff_moonfall")
+    if item ~= nil then
+        item.Transform:SetPosition(x, y, z)
+        launchitem(item, angle)
+    end
+end
+
+
+local function givetear(inst, item, giver)
     local x, y, z = inst.Transform:GetWorldPosition()
     y = 2.5
 
@@ -128,8 +111,25 @@ local function givetear(inst, item, giver)
     end
 end
 
-local KEY_STAFF = "yellowstaff"
+local function givestaffback(inst, item, giver)
+    local x, y, z = inst.Transform:GetWorldPosition()
+    y = 2.5
 
+    local angle
+    if giver ~= nil and giver:IsValid() then
+        angle = 180 - giver:GetAngleToPoint(x, 0, z)
+    else
+        local down = TheCamera:GetDownVec()
+        angle = math.atan2(down.z, down.x) / DEGREES
+        giver = nil
+    end
+
+    local item = SpawnPrefab("staff_starfall")
+    if item ~= nil then
+        item.Transform:SetPosition(x, y, z)
+        launchitem(item, angle)
+    end
+end
 
 local function StartFX(inst)
     if inst._fxfront == nil or inst._fxback == nil then
@@ -207,7 +207,7 @@ local function SpawnReinforcements(inst, giver)
 end
 
 local function ItemTradeTest(inst, item, giver)
-    if item.prefab == "moon_tear" and not inst.mooning then
+    if (item.prefab == "moon_tear" or item.prefab == "staff_starfall") and not inst.mooning then
         if TheWorld.state.isfullmoon then
             inst.mooning = true
             StartFX(inst)
@@ -221,10 +221,17 @@ local function ItemTradeTest(inst, item, giver)
                 end)
             end
 
-            TheWorld:PushEvent("ms_forceprecipitation")
-
+            if item.prefab == "moon_tear" then
+                TheWorld:PushEvent("ms_forceprecipitation")
+            end
+            inst.givenitem = item.prefab
             inst.moonteartransformtask = inst:DoTaskInTime(30, function(inst, item, giver)
-                giveopal(inst, item, giver)
+                if inst.givenitem == "moon_tear" then
+                    giveopal(inst, item, giver)
+                else
+                    givestaff(inst, item, giver)
+                end
+
                 StopFX(inst)
                 inst.mooning = false
 
@@ -240,7 +247,11 @@ local function ItemTradeTest(inst, item, giver)
             inst:WatchWorldState("isday", function(inst, item, giver)
                 if inst.moonteartransformtask ~= nil then
                     inst.moonteartransformtask:Cancel()
-                    givetear(inst, item, giver)
+                    if inst.givenitem == "moon_tear" then
+                        givetear(inst, item, giver)
+                    else
+                        givestaffback(inst, item, giver)
+                    end
                 end
 
                 inst.moonteartransformtask = nil
@@ -303,7 +314,6 @@ env.AddPrefabPostInit("moonbase", function(inst)
 
     inst.components.trader:SetAbleToAcceptTest(ItemTradeTest)
     inst.components.trader.onaccept = function(inst, giver, item)
-
         if item.prefab == "moon_tear" then
             OnTearGiven(inst, giver, item)
         else
@@ -311,7 +321,5 @@ env.AddPrefabPostInit("moonbase", function(inst)
                 _OnStaffGiven(inst, giver, item)
             end
         end
-
     end
-
 end)

@@ -405,6 +405,7 @@ local prefabs = {
 	"boiling_water",
 	"crabking_geyser_single",
 	"staff_starfall",
+	"staff_moonfall",
 	"armor_crab",
 	"hat_crab",
 	"trident_ground_fx",

@@ -131,10 +131,10 @@ AllRecipes["walterhat"].ingredients = {
 
 if GetModConfigData("wicker_inv_regen") then
     AllRecipes["bookstation"].ingredients = {
-		Ingredient("boards", 4),
-		Ingredient("papyrus", 4),
-		Ingredient("featherpencil", 1)
-	}
+        Ingredient("boards", 4),
+        Ingredient("papyrus", 4),
+        Ingredient("featherpencil", 1)
+    }
 end
 
 if GetModConfigData("applied horticulture") then
@@ -146,8 +146,8 @@ if GetModConfigData("applied horticulture") then
 end
 
 if GetModConfigData("horticulture, expanded") then
-	AllRecipes["book_horticulture_upgraded"].ingredients = {
-		Ingredient("book_horticulture", 1),
+    AllRecipes["book_horticulture_upgraded"].ingredients = {
+        Ingredient("book_horticulture", 1),
         Ingredient("treegrowthsolution", 1),
         Ingredient("papyrus", 2)
     }
@@ -162,9 +162,9 @@ end
 
 if GetModConfigData("lux aeterna") then
     AllRecipes["book_light_upgraded"].ingredients = {
-		Ingredient("book_light", 1),
+        Ingredient("book_light", 1),
         Ingredient("wormlight", 1),
-		Ingredient("papyrus", 2)
+        Ingredient("papyrus", 2)
     }
 end
 
@@ -248,13 +248,13 @@ if GetModConfigData("telestaff_rework") then
 end
 
 if GetModConfigData("longpig") then
-	AddRecipe2(
-		"ghostlyelixir_fastregen",
-		{ Ingredient(GLOBAL.CHARACTER_INGREDIENT.HEALTH, 50), Ingredient("ghostflower", 4) },
-		TECH.NONE,
-		{ builder_tag = "elixirbrewer" },
-		{ "CHARACTER" }
-	)
+    AddRecipe2(
+        "ghostlyelixir_fastregen",
+        { Ingredient(GLOBAL.CHARACTER_INGREDIENT.HEALTH, 50), Ingredient("ghostflower", 4) },
+        TECH.NONE,
+        { builder_tag = "elixirbrewer" },
+        { "CHARACTER" }
+    )
 end
 
 local winona_portables = { "battery_high", "battery_low", "spotlight", "catapult" }
@@ -788,6 +788,7 @@ AddDeconstructRecipe(
     { Ingredient("slurtle_shellpieces", 4), Ingredient("rocks", 2), Ingredient("oceanfish_small_9_inv", 3) }
 )
 AddDeconstructRecipe("dormant_rain_horn", { Ingredient("cookiecuttershell", 4), Ingredient("rocks", 2) })
+AddDeconstructRecipe("staff_moonfall", { Ingredient("opalpreciousgem", 3), Ingredient("slurtle_shellpieces", 5), Ingredient("livinglog", 3) })
 
 ----deconstruct recipes for craftable items
 --AddDeconstructRecipe("steeringwheel_copper", { Ingredient("um_copper_pipe", 3), Ingredient("gears", 1) })
@@ -1302,82 +1303,82 @@ end
 
 --recipe postinits
 AddPrefabPostInit("forest", function(inst)
-	AddRecipePostInitAny(function(recipe)
-		if recipe.FindAndConvertIngredient ~= nil then
-			local tar = recipe:FindAndConvertIngredient("tar") -- tar/sludge can replace eachother!
-			local sludge = recipe:FindAndConvertIngredient("sludge")
-			local shark_fin = recipe:FindAndConvertIngredient("shark_fin") -- shark fins/rockjaw leather can replace eachother!
-			local rockjawleather = recipe:FindAndConvertIngredient("rockjawleather")
-			local mosquitosack = recipe:FindAndConvertIngredient("mosquitosack")
+    AddRecipePostInitAny(function(recipe)
+        if recipe.FindAndConvertIngredient ~= nil then
+            local tar = recipe:FindAndConvertIngredient("tar")    -- tar/sludge can replace eachother!
+            local sludge = recipe:FindAndConvertIngredient("sludge")
+            local shark_fin = recipe:FindAndConvertIngredient("shark_fin") -- shark fins/rockjaw leather can replace eachother!
+            local rockjawleather = recipe:FindAndConvertIngredient("rockjawleather")
+            local mosquitosack = recipe:FindAndConvertIngredient("mosquitosack")
 
-			if tar and tar.AddDictionaryPrefab ~= nil then
-				tar:AddDictionaryPrefab("sludge")
-			end
+            if tar and tar.AddDictionaryPrefab ~= nil then
+                tar:AddDictionaryPrefab("sludge")
+            end
 
-			if sludge and sludge.AddDictionaryPrefab ~= nil then
-				if GLOBAL.Prefabs["tar"] ~= nil then
-					sludge:AddDictionaryPrefab("tar")
-				end
-			end
+            if sludge and sludge.AddDictionaryPrefab ~= nil then
+                if GLOBAL.Prefabs["tar"] ~= nil then
+                    sludge:AddDictionaryPrefab("tar")
+                end
+            end
 
-			if sludge and sludge.AddDictionaryPrefab ~= nil and GLOBAL.Prefabs["tar"] ~= nil then
-				sludge:AddDictionaryPrefab("tar")
-			end
+            if sludge and sludge.AddDictionaryPrefab ~= nil and GLOBAL.Prefabs["tar"] ~= nil then
+                sludge:AddDictionaryPrefab("tar")
+            end
 
-			if shark_fin and shark_fin.AddDictionaryPrefab ~= nil then
-				shark_fin:AddDictionaryPrefab("rockjawleather")
-			end
+            if shark_fin and shark_fin.AddDictionaryPrefab ~= nil then
+                shark_fin:AddDictionaryPrefab("rockjawleather")
+            end
 
-			if rockjawleather and rockjawleather.AddDictionaryPrefab ~= nil and GLOBAL.Prefabs["shark_fin"] ~= nil then
-				rockjawleather:AddDictionaryPrefab("shark_fin")
-			end
+            if rockjawleather and rockjawleather.AddDictionaryPrefab ~= nil and GLOBAL.Prefabs["shark_fin"] ~= nil then
+                rockjawleather:AddDictionaryPrefab("shark_fin")
+            end
 
-			if mosquitosack and mosquitosack.AddDictionaryPrefab ~= nil and GLOBAL.Prefabs["mosquitosack_yellow"] then
-				mosquitosack:AddDictionaryPrefab("mosquitosack_yellow")
-			end
-		end
-	end)
+            if mosquitosack and mosquitosack.AddDictionaryPrefab ~= nil and GLOBAL.Prefabs["mosquitosack_yellow"] then
+                mosquitosack:AddDictionaryPrefab("mosquitosack_yellow")
+            end
+        end
+    end)
 
-	AddRecipePostInit("slingshot_matilda", function(recipe)
-		if recipe.FindAndConvertIngredient ~= nil then
-			local coontail = recipe:FindAndConvertIngredient("coontail")
-			if coontail and coontail.AddDictionaryPrefab ~= nil and GLOBAL.Prefabs["vine"] ~= nil then
-				coontail:AddDictionaryPrefab("vine")
-			end
+    AddRecipePostInit("slingshot_matilda", function(recipe)
+        if recipe.FindAndConvertIngredient ~= nil then
+            local coontail = recipe:FindAndConvertIngredient("coontail")
+            if coontail and coontail.AddDictionaryPrefab ~= nil and GLOBAL.Prefabs["vine"] ~= nil then
+                coontail:AddDictionaryPrefab("vine")
+            end
 
-			local driftwood_log = recipe:FindAndConvertIngredient("driftwood_log")
-			if driftwood_log and driftwood_log.AddDictionaryPrefab ~= nil and GLOBAL.Prefabs["ox_horn"] ~= nil then
-				driftwood_log:AddDictionaryPrefab("ox_horn")
-			end
-		end
-	end)
+            local driftwood_log = recipe:FindAndConvertIngredient("driftwood_log")
+            if driftwood_log and driftwood_log.AddDictionaryPrefab ~= nil and GLOBAL.Prefabs["ox_horn"] ~= nil then
+                driftwood_log:AddDictionaryPrefab("ox_horn")
+            end
+        end
+    end)
 
     AddRecipePostInit("brine_balm", function(recipe)
-		if recipe.FindAndConvertIngredient ~= nil then
-			local kelp = recipe:FindAndConvertIngredient("kelp")
-			if kelp and kelp.AddDictionaryPrefab ~= nil and GLOBAL.Prefabs["seaweed"] ~= nil then
-				kelp:AddDictionaryPrefab("seaweed")
-			end
-		end
-	end)
+        if recipe.FindAndConvertIngredient ~= nil then
+            local kelp = recipe:FindAndConvertIngredient("kelp")
+            if kelp and kelp.AddDictionaryPrefab ~= nil and GLOBAL.Prefabs["seaweed"] ~= nil then
+                kelp:AddDictionaryPrefab("seaweed")
+            end
+        end
+    end)
 
     AddRecipePostInit("sludge_oil", function(recipe)
-		if recipe.FindAndConvertIngredient ~= nil then
-			local bottle = recipe:FindAndConvertIngredient("messagebottleempty")
-			if bottle and bottle.AddDictionaryPrefab ~= nil and GLOBAL.Prefabs["ia_messagebottleempty"] ~= nil then
-				bottle:AddDictionaryPrefab("ia_messagebottleempty")
-			end
-		end
-	end)
+        if recipe.FindAndConvertIngredient ~= nil then
+            local bottle = recipe:FindAndConvertIngredient("messagebottleempty")
+            if bottle and bottle.AddDictionaryPrefab ~= nil and GLOBAL.Prefabs["ia_messagebottleempty"] ~= nil then
+                bottle:AddDictionaryPrefab("ia_messagebottleempty")
+            end
+        end
+    end)
 
     AddRecipePostInit("gasmask", function(recipe)
-		if recipe.FindAndConvertIngredient ~= nil then
-			local feather = recipe:FindAndConvertIngredient("goose_feather")
-			if feather and feather.AddDictionaryPrefab ~= nil and GLOBAL.Prefabs["doydoyfeather"] ~= nil then
-				feather:AddDictionaryPrefab("doydoyfeather")
-			end
-		end
-	end)
+        if recipe.FindAndConvertIngredient ~= nil then
+            local feather = recipe:FindAndConvertIngredient("goose_feather")
+            if feather and feather.AddDictionaryPrefab ~= nil and GLOBAL.Prefabs["doydoyfeather"] ~= nil then
+                feather:AddDictionaryPrefab("doydoyfeather")
+            end
+        end
+    end)
 end)
 
 

@@ -253,8 +253,8 @@ local function TornadoEnviromentTask(inst)
         end
 
         -- WORKING
-        local workables = TheSim:FindEntities(x, y, z, 6, nil, { "irreplaceable", "INLIMBO", "trap", "winter_tree", "farm_plant", "_inventory"},
-            { "DIG_workable", "CHOP_workable"})
+        local workables = TheSim:FindEntities(x, y, z, 6, nil, { "irreplaceable", "INLIMBO", "trap", "winter_tree", "farm_plant", "_inventory" },
+            { "DIG_workable", "CHOP_workable" })
 
         for k, v in ipairs(workables) do
             if v.components.workable ~= nil and v.components.pickable == nil then
@@ -277,9 +277,9 @@ local function TornadoEnviromentTask(inst)
         -- ITEM SUCKING - Especifically *after* pickables/workables because it then will capture the items produced.
         local items_suck = config == "reduced" and
             TheSim:FindEntities(x, y, z, 12, { "_inventoryitem" },
-                { "irreplaceable", "tornado_nosucky", "trap", "INLIMBO", "heavy"}) or
+                { "irreplaceable", "tornado_nosucky", "trap", "INLIMBO", "heavy" }) or
             TheSim:FindEntities(x, y, z, 40, { "_inventoryitem" },
-                { "irreplaceable", "tornado_nosucky", "trap", "INLIMBO", "heavy"})
+                { "irreplaceable", "tornado_nosucky", "trap", "INLIMBO", "heavy" })
 
         local ground = TheWorld.Map:IsOceanAtPoint(x, y, z)
         local angle_deviation = config == "reduced" and (66 * RADIANS) or 0
@@ -307,7 +307,7 @@ local function TornadoEnviromentTask(inst)
 
         -- ITEM PICKING
         local items_pick = TheSim:FindEntities(x, y, z, 4, { "_inventoryitem" },
-            { "irreplaceable", "tornado_nosucky", "trap", "INLIMBO", "heavy"})
+            { "irreplaceable", "tornado_nosucky", "trap", "INLIMBO", "heavy" })
         for k, v in ipairs(items_pick) do
             if v.components.inventoryitem ~= nil and v.prefab ~= "bullkelp_beachedroot" then
                 if config == "reduced" and v:IsAsleep() then
@@ -466,7 +466,7 @@ local function TornadoTask(inst)
 
         for k, v in pairs(players) do
             local px, py, pz = v.Transform:GetWorldPosition()
-			print("player loc"..px, py, pz)
+            print("player loc" .. px, py, pz)
 
             if v:HasTag("player") or v:HasTag("um_windturbine") then
                 v:AddTag("under_the_weather")
@@ -693,7 +693,7 @@ local function fn()
     inst.components.inventory.maxslots = 100
     inst:DoTaskInTime(0, Init)
 
-	--[[inst:DoPeriodicTask(30, function(inst)
+    --[[inst:DoPeriodicTask(30, function(inst)
         local x, y, z = inst.Transform:GetWorldPosition()
         SpawnPrefab("um_tornado_destination_marker2").Transform:SetPosition(x, 0, z)
     end)]]
