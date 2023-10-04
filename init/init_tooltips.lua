@@ -41,6 +41,7 @@ STRINGS.UNCOMP_TOOLTIP = {
 	BOAT_ROTATOR_KIT = "- Increases boat steering speed.\n- Helps doing sharp turns.",
 	STAFF_TORNADO = "- Can redirect Giant Tornadoes.",
 	BLOWDART_FIRE = "- Now with EXTRA fire.\n- If already flaming when shot, the target explodes!",
+	WALL_DREADSTONE_ITEM = "- Slowly repairs itself at the cost of sanity.",
 	
 	--uncomp content
 	RAT_WHIP = "- Stronger when well fed.",

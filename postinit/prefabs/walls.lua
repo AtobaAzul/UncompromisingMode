@@ -83,3 +83,75 @@ for k, v in ipairs(all_walls) do
         inst:AddTag("snowpileblocker") --so snowpiles don't spread through walls
     end)
 end
+
+local thresholds = {
+    0.3,
+    0.5,
+    0.9,
+    1,
+}
+
+function NearestValue(table, number)
+    local smallestSoFar, smallestIndex
+    for i, y in ipairs(table) do
+        if not smallestSoFar or (math.abs(number-y) < smallestSoFar) then
+            smallestSoFar = math.abs(number-y)
+            smallestIndex = i
+        end
+    end
+    
+    return table[smallestIndex]
+end
+
+local function DoRegen(inst)
+    print("doregen")
+    inst.components.workable:SetWorkLeft(5)
+    inst.components.health:DoDelta(25)
+    SpawnPrefab("shadow_teleport_in").Transform:SetPosition(inst.Transform:GetWorldPosition())
+    --Remove sanity aura once we reach the reinforced portion
+    print(inst.components.health:GetPercent())
+    print(NearestValue(thresholds, inst.components.health:GetPercent()))
+    print(inst.components.health:GetPercent() < NearestValue(thresholds, inst.components.health:GetPercent()))
+    if inst.components.health ~= nil and inst.components.health:GetPercent() > NearestValue(thresholds, inst.components.health:GetPercent()) and inst.components.sanityaura ~= nil then
+        inst:RemoveComponent("sanityaura")
+        if inst._regentask ~= nil then
+        inst._regentask:Cancel()
+        inst._regentask = nil
+        end
+    end
+end
+
+local function ToggleOrRestartRegen(inst, delay)
+    print("toggle")
+    --This will also reset the timer
+    if inst._regentask ~= nil then
+        inst._regentask:Cancel()
+        inst._regentask = nil
+        inst.OnLongUpdate = nil
+    end
+
+    if inst.components.health ~= nil and inst.components.health:GetPercent() < NearestValue(thresholds, inst.components.health:GetPercent()) then
+        inst._regentask = inst:DoPeriodicTask(TUNING.SUPPORT_PILLAR_DREADSTONE_REGEN_PERIOD * 0.0125, DoRegen, delay or TUNING.SUPPORT_PILLAR_DREADSTONE_REGEN_PERIOD * 0.0125 + math.random())
+    end
+    --Sanity aura only when repairing the non-reinforced portion
+    if inst._regentask ~= nil and inst.components.health ~= nil and inst.components.health:GetPercent() < NearestValue(thresholds, inst.components.health:GetPercent()) then
+        if inst.components.sanityaura == nil then
+            inst:AddComponent("sanityaura")
+            inst.components.sanityaura.max_distsq = TUNING.SUPPORT_PILLAR_DREADSTONE_AURA_RADIUS * TUNING.SUPPORT_PILLAR_DREADSTONE_AURA_RADIUS
+            inst.components.sanityaura.aura = -TUNING.SANITYAURA_MED
+        end
+    elseif inst.components.sanityaura ~= nil then
+        inst:RemoveComponent("sanityaura")
+    end
+end
+
+
+env.AddPrefabPostInit("wall_dreadstone", function(inst)
+    if not TheWorld.ismastersim then
+        return
+    end
+
+    ToggleOrRestartRegen(inst)
+    inst:AddComponent("planarentity")
+    inst:ListenForEvent("healthdelta", function(inst) ToggleOrRestartRegen(inst) end)
+end)
