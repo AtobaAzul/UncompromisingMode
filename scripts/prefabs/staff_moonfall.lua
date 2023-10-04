@@ -103,15 +103,31 @@ local function OnAttack(inst, attacker, target, skipsanity)
     target.SoundEmitter:PlaySound("dontstarve/wilson/fireball_explo")
 end
 
+local function OnAttacked(inst)
+    local staff = inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
+    if staff.beam ~= nil then
+        if staff.beam ~= nil and staff.beam.KillFX ~= nil then
+            staff.beam:KillFX()
+        end
+        if staff.beam.back ~= nil and staff.beam.back.KillFX ~= nil then
+            staff.beam.back:KillFX()
+        end
+    end
+
+end
+
 local function OnEquip(inst, owner)
     owner.AnimState:OverrideSymbol("swap_object", "swap_staff_starfall", "staff_starfall")
     owner.AnimState:Show("ARM_carry")
     owner.AnimState:Hide("ARM_normal")
     owner.AnimState:SetSymbolHue("swap_object", 0.5)
     owner.AnimState:SetSymbolSaturation("swap_object", 5)
+
+    owner:ListenForEvent("attacked", OnAttacked)
 end
 
 local function OnUnequip(inst, owner)
+    owner:RemoveEventCallback("attacked", OnAttacked)
     owner.AnimState:Hide("ARM_carry")
     owner.AnimState:SetSymbolHue("swap_object", 1)
     owner.AnimState:SetSymbolSaturation("swap_object", 1)
