@@ -15,8 +15,8 @@ local function dogeyserburbletask(inst)
         inst.burbletask:Cancel()
         inst.burbletask = nil
     end
-    local totalcasttime = TUNING.CRABKING_CAST_TIME -
-        (inst.crab and inst.crab:IsValid() and math.floor(inst.crab.countgems(inst.crab).yellow / 2 or 0))
+    local totalcasttime = (TUNING.CRABKING_CAST_TIME -
+        (inst.crab and inst.crab:IsValid() and math.floor(inst.crab.countgems(inst.crab).yellow / 2 or 0)))
     local time = Remap(inst.components.age:GetAge(), 0, totalcasttime, 0.2, 0.01)
     inst.burbletask = inst:DoTaskInTime(time + 1, function() inst.burble(inst) end) -- 0.01+ math.random()*0.1
 end
