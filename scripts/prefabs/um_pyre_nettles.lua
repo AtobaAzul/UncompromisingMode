@@ -7,7 +7,8 @@ local prefabs = {
 	"firenettles",
 	"um_smolder_spore",
 	"umdebuff_pyre_toxin",
-	"character_fire"
+	"character_fire",
+	"um_pyre_nettles_blocker"
 }
 
 local plant_maxhealth = 300
@@ -40,7 +41,8 @@ end
 
 SetSharedLootTable('um_pyre_nettles_1',
 	{
-		{ 'firenettles', 1.0 }
+		{ 'firenettles', 1.0 },
+		{ 'um_pyre_nettles_blocker', 1.0 }
 	})
 SetSharedLootTable('um_pyre_nettles_2',
 	{
@@ -530,10 +532,48 @@ local function StageSpawner(name, SpawnAtStage)
 end
 
 
+-- Deletes nettle-spawning-blocker when its time is up.
+local function OnBlockerTimerDone(inst, data)
+	if data.name == "NettleBlockerTimer" then
+		inst:Remove()
+	end
+end
+
+-- Nettle-spawning-blocker. Makes Nettles avoid regrowing in places they've recently been removed from.
+local function nettleblocker_fn()
+	local inst = CreateEntity()
+	
+	inst.entity:AddTransform()
+	inst.entity:AddNetwork()
+	
+	inst:AddTag("PyreNettle")
+	
+	inst.entity:SetPristine()
+	
+	if not TheWorld.ismastersim then
+		return inst
+	end
+	
+	inst:AddComponent("timer")
+	inst:ListenForEvent("timerdone", OnBlockerTimerDone)
+	
+	local time_remaining = inst.components.timer:GetTimeLeft("NettleBlockerTimer")
+	local timer_duration = (math.random((TUNING.TOTAL_DAY_TIME * 3)) + (TUNING.TOTAL_DAY_TIME * 8)) -- Amount of time regrowth will be surpressed.
+	if time_remaining ~= nil then
+		inst.components.timer:SetTimeLeft("NettleBlockerTimer", timer_duration)
+	else
+		inst.components.timer:StartTimer("NettleBlockerTimer", timer_duration)
+	end
+	
+	return inst
+end
+
+
 local pyre_nettle_prefabs = {}
 for i = 1, 5 do
 	table.insert(pyre_nettle_prefabs, StageSpawner("um_pyre_nettles_stage_" .. i, i))
 end
 table.insert(pyre_nettle_prefabs, StageSpawner("um_pyre_nettles", 1))
+table.insert(pyre_nettle_prefabs, Prefab("um_pyre_nettles_blocker", nettleblocker_fn))
 
 return unpack(pyre_nettle_prefabs)
