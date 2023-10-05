@@ -4,7 +4,7 @@ local assets =
 }
 
 local SLEEPREPEL_MUST_TAGS = { "_combat" }
-local SLEEPREPEL_CANT_TAGS = { "player", "companion", "shadow", "playerghost", "INLIMBO", "toadstool" }
+local SLEEPREPEL_CANT_TAGS = { "player", "companion", "shadow", "playerghost", "INLIMBO", "toadstool", "notarget" }
 
 local function StartRepel(inst)
 	if inst.host ~= nil then
