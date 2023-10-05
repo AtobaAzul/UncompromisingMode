@@ -75,7 +75,7 @@ local function pyrenettle_bumped(inst)
 	end
 
 	local nextvictim = FindClosestEntity(inst, bumpradius, true, nil,
-		{ "PyreToxinImmune", "plantkin", "flying", "FX", "INLIMBO", "invisible", "notarget", "noattack", "playerghost", "smog", "wall" }
+		{ "PyreToxinImmune", "plantkin", "shadowcreature", "flying", "FX", "INLIMBO", "invisible", "notarget", "noattack", "playerghost", "smog", "wall" }
 	)
 
 	if nextvictim ~= nil

@@ -40,7 +40,8 @@ STRINGS.UNCOMP_TOOLTIP = {
 	FEATHERPENCIL = "- Can rename Telelocator Focus' location name and Backtrek Watches.",
 	BOAT_ROTATOR_KIT = "- Increases boat steering speed.\n- Helps doing sharp turns.",
 	STAFF_TORNADO = "- Can redirect Giant Tornadoes.",
-
+	BLOWDART_FIRE = "- Now with EXTRA fire.\n- If already flaming when shot, the target explodes!",
+	
 	--uncomp content
 	RAT_WHIP = "- Stronger when well fed.",
 	AIR_CONDITIONER = "- Can crush up Mushrooms for helpful stat clouds.",
@@ -69,6 +70,8 @@ STRINGS.UNCOMP_TOOLTIP = {
 	HAT_CRAB_ICE = "- Resistance scales with wetness.\n- Prevents the wearer from drying up.",
 	ARMOR_CRAB_MAXHP = "- Increases maximum health when worn.",
 	ARMOR_CRAB_REGEN = "- Self-healing.",
+	UM_ARMOR_PYRE_NETTLES = "- Panics and damages nearby miscreants.\n- Ignores tiny, shadow, or fire-aligned creatures.",
+	
 	BEEMINE = "- Now has 5 uses.\n- Spawns faster, more fragile bees."
 }
 

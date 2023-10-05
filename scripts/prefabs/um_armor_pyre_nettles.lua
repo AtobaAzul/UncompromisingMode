@@ -49,6 +49,24 @@ local function OnBlocked(owner, data, inst)
 	end
 end
 
+-- For Wormwood's Bramble Husk skill.
+-- Every few attacks, Wormwood applies a special stack of Pyre Toxin, able to continuously stack.
+local function OnAttackOther(owner, data, inst)
+	if checknumber(inst._hitcount) then
+		inst._hitcount = inst._hitcount + 1
+
+		if inst._hitcount >= TUNING.WORMWOOD_ARMOR_BRAMBLE_RELEASE_SPIKES_HITCOUNT then
+			if data ~= nil and data.target ~= nil
+			and data.target:IsValid()
+			and not data.target:HasTag("INLIMBO")
+			and not data.target:HasTag("noattack")
+			then
+				data.target:AddDebuff("umdebuff_pyre_toxin_armor_bonus_"..math.random(100), "umdebuff_pyre_toxin", DebuffDuration)
+			end
+		end
+	end
+end
+
 
 local function bumpcheck(owner, inst)
 	local bumpradius = 2
@@ -120,6 +138,12 @@ local function OnEquip(inst, owner)
 		owner:AddDebuff("umdebuff_pyre_toxin_armor_wearer", "umdebuff_pyre_toxin", DebuffDurationWearer)
 		inst.components.perishable:ReducePercent(0.05)
 	end
+	
+	-- Wormwood's Bramble Husk skill also works on this armor.
+	inst._hitcount = 0
+	if owner.components.skilltreeupdater ~= nil and owner.components.skilltreeupdater:IsActivated("wormwood_armor_bramble") then
+		inst:ListenForEvent("onattackother", inst._onattackother, owner)
+	end
 end
 
 local function OnUnequip(inst, owner)
@@ -145,6 +169,10 @@ local function OnUnequip(inst, owner)
 	if inst.bump_task ~= nil then
 		inst.bump_task:Cancel()
 	end
+	
+	-- Remove the interraction with Wormwood's Bramble Husk skill.
+	inst:RemoveEventCallback("onattackother", inst._onattackother, owner)
+	inst._hitcount = nil
 end
 
 
@@ -194,6 +222,8 @@ local function fn()
 		return inst
 	end
 	
+	inst._hitcount = nil
+	
 	inst:AddComponent("inspectable")
 	
 	inst:AddComponent("inventoryitem")
@@ -232,6 +262,7 @@ local function fn()
 	
 	inst._onblocked = function(owner, data) OnBlocked(owner, data, inst) end
 	inst._bumpcheck = function(owner, data) bumpcheck(owner, inst) end
+	inst._onattackother = function(owner, data) OnAttackOther(owner, data, inst) end
 	
 	return inst
 end
