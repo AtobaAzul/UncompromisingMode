@@ -27,7 +27,7 @@ if TUNING.DSTU.WICKERNERF_TENTACLES then
                         local pos = pt + offset
                         -- NOTE: The first search includes invisible entities
                         return #TheSim:FindEntities(pos.x, 0, pos.z, 1, nil, { "INLIMBO", "FX" }) <= 0 and
-                        TheWorld.Map:IsPassableAtPoint(pos:Get()) and TheWorld.Map:IsDeployPointClear(pos, nil, 1)
+                            TheWorld.Map:IsPassableAtPoint(pos:Get()) and TheWorld.Map:IsDeployPointClear(pos, nil, 1)
                     end)
 
                     if result_offset ~= nil then
@@ -54,8 +54,8 @@ if TUNING.DSTU.WICKERNERF_TENTACLES then
         if not TheWorld.ismastersim then
             return
         end
-			
-		inst.components.book:SetReadSanity(-TUNING.SANITY_LARGE)
+
+        inst.components.book:SetReadSanity(-TUNING.SANITY_LARGE)
 
         if inst.components.book ~= nil then
             inst.components.book.onread = newtentacles
@@ -331,9 +331,9 @@ if TUNING.DSTU.WICKERNERF_MOONBOOK then
         if not TheWorld.ismastersim then
             return
         end
-		
-		inst.components.book:SetReadSanity(-TUNING.SANITY_HUGE)
-		
+
+        inst.components.book:SetReadSanity(-TUNING.SANITY_HUGE)
+
         if inst.components.book ~= nil then
             inst.components.book:SetOnRead(OnRead_moon)
             inst.components.book:SetOnPeruse(OnPerUse_moon)
@@ -376,10 +376,8 @@ if TUNING.DSTU.WICKERNERF_BEEBOOK then
             return
         end
 
-local book_defs =
+        inst.components.book:SetReadSanity(-TUNING.SANITY_HUGE)
 
-		inst.components.book:SetReadSanity(-TUNING.SANITY_HUGE)
-		
         if inst.components.book ~= nil then
             inst.components.book:SetOnRead(OnRead_bees)
         end
@@ -408,6 +406,7 @@ if TUNING.DSTU.WICKER_INV_REGEN then
         if not TheWorld.ismastersim then
             return
         end
+
         inst:DoPeriodicTask(TUNING.BOOKSTATION_RESTORE_TIME, WickerCaresForHerBooks)
     end)
 
@@ -424,3 +423,48 @@ if TUNING.DSTU.WICKER_INV_REGEN then
         end)
     end)
 end
+
+env.AddPrefabPostInit("book_rain", function(inst)
+    if not TheWorld.ismastersim then
+        return
+    end
+
+    local _OnRead = inst.components.book.onread
+
+    inst.components.book.onread = function(inst, reader)
+        if reader:HasTag("under_the_weather") then
+            local destination = TheSim:FindFirstEntityWithTag("um_tornado_destination")
+            local tornado = TheSim:FindFirstEntityWithTag("um_tornado")
+
+            if destination ~= nil then
+                if destination.danumber ~= nil then
+                    tornado.danumber = destination.danumber
+
+                    if tornado.resetdanumber_task ~= nil then
+                        tornado.resetdanumber_task:Cancel()
+                    end
+
+                    tornado.resetdanumber_task = nil
+
+                    tornado.resetdanumber_task = tornado:DoTaskInTime(30, function()
+                        if tornado.resetdanumber_task ~= nil then
+                            tornado.resetdanumber_task:Cancel()
+                        end
+
+                        tornado.resetdanumber_task = nil
+                        tornado.danumber = 0
+                    end)
+                end
+            end
+
+            reader:DoTaskInTime(1, function(inst)
+                inst.components.talker:Say("This should steer the extreme weather away from here.")
+            end)
+
+            return true
+        end
+        if _OnRead ~= nil then
+            return _OnRead(inst, reader)
+        end
+    end
+end)
