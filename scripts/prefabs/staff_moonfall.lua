@@ -57,6 +57,7 @@ local function OnAttack(inst, attacker, target, skipsanity)
             if inst.back ~= nil then
                 inst.back:KillFX()
             end
+            return
         end
 
         inst.AnimState:SetAddColour(0, 0, inst.intensity, 1)
@@ -73,6 +74,7 @@ local function OnAttack(inst, attacker, target, skipsanity)
             if inst.back ~= nil then
                 inst.back:KillFX()
             end
+            return
         end
 
         for k, v in pairs(ents) do
