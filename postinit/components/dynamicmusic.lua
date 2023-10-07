@@ -35,6 +35,11 @@ AddComponentPostInit("dynamicmusic", function(self)
         end
     end
 
+    if _OnPlayerActivated == nil then
+        print("WARNING: Unable to find _OnPLayerActivated. Client-side music mods likely enabled. Uncompromising Mode official soundtrack DISABLED!")
+        return
+    end
+
     -- Note: I would recommend trying to avoid getting upvalues from start/stop danger/busy 
     -- as those are the most commonly wrapped functions
     local _StartPlayerListeners = UpvalueHacker.GetUpvalue(_OnPlayerActivated, "StartPlayerListeners")
