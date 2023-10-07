@@ -51,6 +51,7 @@ priority = -10
 ------------------------------
 -- local functions to makes things prettier
 
+---@param title string
 local function Header(title)
     return {
         name = "",
@@ -71,6 +72,10 @@ local function SkipSpace()
     }
 end
 
+---@param name string
+---@param label string
+---@param hover string
+---@param default boolean
 local function BinaryConfig(name, label, hover, default)
     return {
         name = name,
