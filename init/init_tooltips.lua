@@ -177,6 +177,23 @@ end
 if TUNING.DSTU.SMOG then
 	TOOLTIPS.GASMASK = TOOLTIPS.GASMASK .. "\n- Protects against smog while worn."
 	TOOLTIPS.PLAGUEMASK = TOOLTIPS.PLAGUEMASK .. "\n- Protects against smog while worn"
+	if TOOLTIPS.MINIFAN ~= nil then
+		TOOLTIPS.MINIFAN = string.gsub(TOOLTIPS.MINIFAN, ".", "").." and helps against smog."
+	else
+		TOOLTIPS.MINIFAN = "- Helps against smog."
+	end
+
+	if TOOLTIPS.FEATHERFAN ~= nil then
+		TOOLTIPS.FEATHERFAN = TOOLTIPS.FEATHERFAN.."\n- Blows away smog."
+	else
+		TOOLTIPS.FEATHERFAN = "- Blows away smog."
+	end
+
+	if TOOLTIPS.PERDFAN ~= nil then
+		TOOLTIPS.PERDFAN = TOOLTIPS.PERDFAN.."\n- Blows away smog."
+	else
+		TOOLTIPS.PERDFAN = "- Blows away smog."
+	end
 end
 
 if TUNING.DSTU.HEATWAVES then

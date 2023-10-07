@@ -1,3 +1,4 @@
+--TODO: Hook!
 local env = env
 GLOBAL.setfenv(1, GLOBAL)
 -----------------------------------------------------------------
@@ -22,31 +23,29 @@ local function onunequip(inst, owner)
 end
 
 env.AddPrefabPostInit("minifan", function(inst)
+    if not TheWorld.ismastersim then
+        return
+    end
 
-	if not TheWorld.ismastersim then
-		return
-	end
+    if inst.components.equippable ~= nil then
+        inst.components.equippable:SetOnUnequip(onunequip)
+    end
 
-	if inst.components.equippable ~= nil then
-    	inst.components.equippable:SetOnUnequip(onunequip)
-	end
-	
-	inst._onlocomote = function(owner)
+    inst._onlocomote = function(owner)
         if owner.components.locomotor.wantstomoveforward then
             if not inst.components.fueled.consuming then
                 inst.components.fueled:StartConsuming()
                 inst.components.insulator:SetInsulation(TUNING.INSULATION_SMALL)
                 inst.components.heater:SetThermics(false, true)
                 inst._wheel:SetSpinning(true)
-		owner:AddTag("minifansuppressor")
+                owner:AddTag("minifansuppressor")
             end
         elseif inst.components.fueled.consuming then
             inst.components.fueled:StopConsuming()
             inst.components.insulator:SetInsulation(0)
             inst.components.heater:SetThermics(false, false)
             inst._wheel:SetSpinning(false)
-	    owner:RemoveTag("minifansuppressor")
+            owner:RemoveTag("minifansuppressor")
         end
     end
-
 end)

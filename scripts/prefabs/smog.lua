@@ -71,10 +71,10 @@ local function fn()
     end
 
     inst:DoPeriodicTask(5 + math.random(5), function(inst)
-        local x, y, z = inst.Transform:GetWorldPosition()
-        local players = TheSim:FindEntities(x, y, z, 12, nil, { "playerghost" }, { "player", "insect" })
-        for k, v in ipairs(players) do
-            if v.components.health ~= nil and v.prefab ~= "willow" and not v:HasTag("has_gasmask") and inst.mult >= 0.4 and math.random() > 0.5 then
+        local x, y, z = inst.Transform:GetWorldPosition() 
+        local ents = TheSim:FindEntities(x, y, z, 12, nil, { "playerghost", "has_gasmask", "pyromaniac", "smogimmune", "minifansuppressor"}, { "player", "insect" })
+        for k, v in ipairs(ents) do
+            if v.components.health ~= nil and inst.mult >= 0.4 and math.random() > 0.5 then
                 if v.components.oldager ~= nil then
                     v.components.health:DoDelta(-1)
                 elseif v:HasTag("player") then
