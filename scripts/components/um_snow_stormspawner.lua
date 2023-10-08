@@ -101,7 +101,7 @@ return Class(function(self, inst)
 		_worldsettingstimer:StopTimer(UM_SNOW_STORM_TIMERNAME)
 		_worldsettingstimer:StopTimer(UM_STOP_SNOW_STORM_TIMERNAME)
 		
-		PauseStorms()
+		--PauseStorms()
 	end
 
 	--------------------------------------------------------------------------
