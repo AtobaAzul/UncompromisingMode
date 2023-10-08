@@ -129,7 +129,7 @@ AllRecipes["walterhat"].ingredients = {
     Ingredient("pinecone", 1)
 }
 
-if GetModConfigData("wicker_inv_regen") then
+if GetModConfigData("wicker_inv_regen") ~= "vanilla" then
     AllRecipes["bookstation"].ingredients = {
         Ingredient("boards", 4),
         Ingredient("papyrus", 4),

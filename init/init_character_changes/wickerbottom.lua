@@ -409,7 +409,9 @@ if TUNING.DSTU.WICKER_INV_REGEN == "inv" then
 
         inst:DoPeriodicTask(TUNING.BOOKSTATION_RESTORE_TIME, WickerCaresForHerBooks)
     end)
+end
 
+if TUNING.DSTU.WICKER_INV_REGEN ~= "vanilla" then
     env.AddPrefabPostInit("bookstation", function(inst)
         if not TheWorld.ismastersim then return end
 
