@@ -113,7 +113,7 @@ function TrySpawning(v)
 
 	if TheWorld.state.iswinter and
 		((TheWorld.net ~= nil and TheWorld.net:HasTag("snowstormstartnet")) or TheWorld:HasTag("snowstormstart")) and
-		TheWorld.Map:IsPassableAtPoint(x1,y1,z1) then --and self.snowstormstart then
+		TheWorld.Map:IsPassableAtPoint(x1,y1,z1, false, true) then --and self.snowstormstart then
 		if math.random() <= 0.25 - playervalue2 then
 			--local spawn_pt = GetSpawnPoint(origin_pt, PLAYER_CHECK_DISTANCE + 5)
 
