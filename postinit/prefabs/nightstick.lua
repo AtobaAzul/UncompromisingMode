@@ -127,12 +127,12 @@ local function onequip(inst, owner)
 
 	--inst.SoundEmitter:SetParameter("torch", "intensity", 1)
 
-	if inst.components.fueled:IsEmpty() then
+	if inst.components.fueled:IsEmpty() or owner:HasTag("equipmentmodel") then
 		owner.AnimState:OverrideSymbol("swap_object", "swap_nightstick_off", "swap_nightstick_off")
 	else
 		inst.SoundEmitter:PlaySound("dontstarve_DLC001/common/morningstar", "torch")
+
 		owner.AnimState:OverrideSymbol("swap_object", "swap_nightstick", "swap_nightstick")
-		turnon(inst)
 	end
 
 	owner:AddTag("lightningrod")
@@ -215,7 +215,7 @@ local function onattack(inst, attacker, target)
 		target.components.debuffable:AddDebuff("shockstundebuff", "shockstundebuff")
 
 		if (target:HasTag("chess") or target:HasTag("uncompromising_pawn") or target:HasTag("twinofterror") and not target:HasTag("fleshyeye")) and (target.components.health ~= nil and not target.components.health:IsDead()) and not target.sg:HasStateTag("noattack") then
-			target.components.health:DoDelta( -34, false, attacker, false, attacker)
+			target.components.health:DoDelta(-34, false, attacker, false, attacker)
 		end
 	end
 end
@@ -279,7 +279,7 @@ env.AddPrefabPostInit("nightstick", function(inst)
 		if data ~= nil then
 			data.actual_fuel = inst.components.fueled:GetPercent()
 		end
-		
+
 		if _OnSave ~= nil then
 			return _OnSave(inst, data)
 		end
@@ -289,7 +289,7 @@ env.AddPrefabPostInit("nightstick", function(inst)
 		if data ~= nil and data.actual_fuel ~= nil then
 			inst:DoTaskInTime(0, function() inst.components.fueled:SetPercent(data.actual_fuel) end)
 		end
-		
+
 		if _OnLoad ~= nil then
 			return _OnLoad(inst, data)
 		end
