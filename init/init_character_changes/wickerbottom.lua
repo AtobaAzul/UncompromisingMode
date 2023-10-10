@@ -401,7 +401,7 @@ local function WickerCaresForHerBooks(inst)
 end
 
 
-if TUNING.DSTU.WICKER_INV_REGEN then
+if TUNING.DSTU.WICKER_INV_REGEN == "inv" then
     env.AddPrefabPostInit("wickerbottom", function(inst)
         if not TheWorld.ismastersim then
             return
