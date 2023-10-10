@@ -432,4 +432,4 @@ GLOBAL.TUNING.DECIDUOUS_GROW_TIME = {
     { base = 5 * day_time * xc,   random = 2 * day_time }, -- normal
     { base = 5 * day_time * xc,   random = 2 * day_time }, -- tall
     { base = 1 * day_time * xc,   random = 0.5 * day_time } -- old
-}
+}   

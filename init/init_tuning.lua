@@ -40,7 +40,7 @@ TUNING.DSTU = {
     FOOD_MUSHROOM_RED_APPEARANCE_PERCENT = 0.7,
     -- Growth time increases
     STONE_FRUIT_GROWTH_INCREASE = 3,
-    TREE_GROWTH_TIME_INCREASE = 1.05,
+    TREE_GROWTH_TIME_INCREASE = 1.00,
     BERRYBUSH_JUICY_CYCLES = 2,
     -- Food stats
     FOOD_BUTTERFLY_WING_HEALTH = 1,
@@ -53,7 +53,7 @@ TUNING.DSTU = {
     FOOD_HONEY_PRODUCTION_PER_STAGE = { 0, 1, 2, 4 },
     -- Respawn time increases
     BUNNYMAN_RESPAWN_TIME_DAYS = 3,
-    ----------------------------------------------------------------------------
+    ----------------------------------------------------------------------------""""
     -- Winter Fire spreading
     ----------------------------------------------------------------------------
     WINTER_FIRE_MOD = 0.65,
