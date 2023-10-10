@@ -14,7 +14,7 @@ end
 
 env.AddPrefabPostInitAny(function(inst)
     if not TheWorld.ismastersim then return end
-    if inst:HasTag("plant") and inst.components.burnable ~= nil then
+    if (inst:HasTag("plant") or inst:HasTag("tree")) and inst.components.burnable ~= nil then
         local _OnIgnite = inst.components.burnable.onignite
 
         inst.components.burnable.onignite = function(inst, source, doer, ...)
