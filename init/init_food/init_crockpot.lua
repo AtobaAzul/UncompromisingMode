@@ -583,3 +583,13 @@ if GetModConfigData("sr_foodrebalance") then
 	-- Original:	test = function(cooker, names, tags) return tags.fish and tags.fish > 2 end,
     recipes.seafoodgumbo.priority = 31
 end
+
+
+AddPrefabPostInitAny(function(inst)
+    if not GLOBAL.TheWorld.ismastersim then return end
+
+    if inst:HasTag("preparedfood") and inst.components ~= nil and inst.components.edible ~= nil then
+        inst.components.edible.temperaturedelta = inst.components.edible.temperaturedelta*2--i stg if some mod sets these to nil
+        inst.components.edible.temperatureduration = inst.components.edible.temperatureduration*2
+    end
+end)
