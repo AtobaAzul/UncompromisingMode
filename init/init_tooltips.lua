@@ -68,7 +68,7 @@ STRINGS.UNCOMP_TOOLTIP = {
 	ARMOR_SHARKSUIT_UM =
 	"- High wetness protection. \n- Works as electrical insulation.\n- Wearer will wash ashore with no penalties.",
 	HAT_CRAB = "- Repairs & sewing are twice as effective when worn.",
-	HAT_CRAB_ICE = "- Resistance scales with wetness.\n- Prevents the wearer from drying up.",
+	HAT_CRAB_ICE = "- Absorbs wetness to increase resistance.\n- Prevents the wearer from drying up.",
 	ARMOR_CRAB_MAXHP = "- Increases maximum health when worn.",
 	ARMOR_CRAB_REGEN = "- Self-healing.",
 	UM_ARMOR_PYRE_NETTLES = "- Panics and damages nearby miscreants.\n- Ignores tiny, shadow, or fire-aligned creatures.",
