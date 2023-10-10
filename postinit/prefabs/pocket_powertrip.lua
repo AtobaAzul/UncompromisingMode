@@ -7,6 +7,15 @@ local function ExplodeInventory(inst)
     end
 end
 
+local function ExplodeInventoryPerish(inst)
+    if inst.components.container ~= nil then
+        inst.components.container:DropEverything()
+    end
+
+    inst:Remove()
+end
+
+
 local function Folded(inst)
     if inst.components.container ~= nil then
         inst:DoTaskInTime(0, function(inst)
@@ -126,7 +135,7 @@ env.AddPrefabPostInit("hawaiianshirt", function(inst)
     DoPockets(inst, "puffvest")
 
     if inst.components.perishable ~= nil then
-        inst.components.perishable:SetOnPerishFn(ExplodeInventory)
+        inst.components.perishable:SetOnPerishFn(ExplodeInventoryPerish)
     end
 end)
 
