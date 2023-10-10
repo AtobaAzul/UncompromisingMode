@@ -80,7 +80,7 @@ local function common_fn(type)
 
     inst:AddComponent("armor")
     local absorption = type == "armor_crab_regen" and 0.2 or 0
-    inst.components.armor:InitCondition(TUNING.DSTU.ARMORREED_UM * 2, TUNING.ARMORGRASS_ABSORPTION + absorption)
+    inst.components.armor:InitCondition(TUNING.DSTU.ARMORREED_UM * 6, TUNING.ARMORGRASS_ABSORPTION + absorption)
 
     if type == "armor_crab_regen" then
         inst:DoPeriodicTask(1, function()
