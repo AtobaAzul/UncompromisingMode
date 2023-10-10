@@ -105,7 +105,7 @@ local function _GroundDetectionUpdate(debris, override_density)
         debris.Transform:SetPosition(x, 0, z)
         debris.Physics:ClearMotorVelOverride()
 
-        if not debris:IsOnValidGround() then
+        if not debris:IsOnPassablePoint() then
             debris:PushEvent("detachchild")
             debris:Remove()
         else
