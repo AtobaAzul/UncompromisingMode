@@ -7,7 +7,7 @@ GLOBAL.setfenv(1, GLOBAL)
 
 local PLANT_TAGS = { "tendable_farmplant" }
 local MUST_HAVE_SPELL_TAGS = nil
-local CANT_HAVE_SPELL_TAGS = { "INLIMBO", "outofreach", "DECOR", "player", "playerghost", "companion", "abigail" }
+local CANT_HAVE_SPELL_TAGS = { "INLIMBO", "outofreach", "DECOR", "player", "playerghost", "companion", "abigail", "spelled"}
 local MUST_HAVE_ONE_OF_SPELL_TAGS = nil
 local FX_RADIUS = TUNING.TRIDENT.SPELL.RADIUS * 0.65
 local COST_PER_EXPLOSION = TUNING.TRIDENT.USES / TUNING.TRIDENT.SPELL.USE_COUNT
@@ -140,6 +140,8 @@ env.AddPrefabPostInit("trident", function(inst)
         if affected_entity.components.complexprojectile ~= nil then
             return
         else
+            affected_entity:AddTag("spelled")
+            affected_entity:DoTaskInTime(1, function(inst) inst:RemoveTag("spelled") end)
             _DoWaterExplosionEffect(inst, affected_entity, owner, position)
         end
     end
