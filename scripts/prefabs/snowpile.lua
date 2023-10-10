@@ -295,12 +295,12 @@ local function DoAreaColdness(inst)
 			if inst.components.workable.workleft and inst.components.workable.workleft > 1 then
 				inst:AddTag("snowpile")
 
-				v:AddTag("INLIMBO")
+				v:AddTag("NOCLICK")
 			else
 				inst:RemoveTag("snowpile")
 
-				if v:HasTag("INLIMBO") then
-					v:RemoveTag("INLIMBO")
+				if v:HasTag("NOCLICK") then
+					v:RemoveTag("NOCLICK")
 				end
 			end
 		end
