@@ -15,17 +15,18 @@ end
 env.AddPrefabPostInitAny(function(inst)
     if not TheWorld.ismastersim then return end
     inst:DoTaskInTime(0, function(inst) --maybe delaying this by a frame does soemthing.
-    if (inst:HasTag("plant") or inst:HasTag("tree")) and inst.components.burnable ~= nil then
-        local _OnIgnite = inst.components.burnable.onignite
+        if (inst:HasTag("plant") or inst:HasTag("tree")) and inst.components.burnable ~= nil then
+            local _OnIgnite = inst.components.burnable.onignite
 
-        inst.components.burnable.onignite = function(inst, source, doer, ...)
-            if TheWorld.state.issummer then
-                inst.smog_task = inst:DoTaskInTime(math.random(5, 15) / 10, DoSmog)
-            end
+            inst.components.burnable.onignite = function(inst, source, doer, ...)
+                if TheWorld.state.issummer then
+                    inst.smog_task = inst:DoTaskInTime(math.random(5, 15) / 10, DoSmog)
+                end
 
-            if _OnIgnite ~= nil then
-                _OnIgnite(inst, source, doer, ...)
+                if _OnIgnite ~= nil then
+                    _OnIgnite(inst, source, doer, ...)
+                end
             end
         end
-    end end)
+    end)
 end)

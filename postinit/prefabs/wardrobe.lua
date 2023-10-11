@@ -29,6 +29,8 @@ local function GetActivateVerb(inst)
 end
 
 env.AddPrefabPostInit("wardrobe", function(inst)
+    inst:AddTag("dressable")--tag needed for m2 dress action.
+
     if not TheWorld.ismastersim then
         return
     end
@@ -41,14 +43,14 @@ env.AddPrefabPostInit("wardrobe", function(inst)
     inst.components.container.onopenfn = onopen
     inst.components.container.onclosefn = onclose
 
-    inst:AddComponent("channelable")
+    --[[inst:AddComponent("channelable")
     inst.components.channelable:SetChannelingFn(ChangeIn, OnStopChanneling)
     inst.components.channelable.use_channel_longaction_noloop = true
     --inst.components.channelable.skip_state_stopchanneling = true
     inst.components.channelable.skip_state_channeling = true
     --inst.components.channelable.ignore_prechannel = true
 
-    inst.GetActivateVerb = GetActivateVerb
+    inst.GetActivateVerb = GetActivateVerb]]
 
     local _OnHit = inst.components.workable.onwork
     local _OnFinish = inst.components.workable.onfinish

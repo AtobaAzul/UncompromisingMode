@@ -207,4 +207,7 @@ SET_CUSTOM_NAME.fn = function(act)
     end
 end
 
-AddComponentAction("USEITEM", "drawingtool", function(inst, doer, target, actions, right) if target:HasTag("telebase") or target.prefab == "pocketwatch_recall" or target.prefab == "pocketwatch_portal" or target:HasTag("_equippable") then table.insert(actions, GLOBAL.ACTIONS.SET_CUSTOM_NAME) end end)
+GLOBAL.ACTIONS.CHANGEIN.rmb = true
+GLOBAL.ACTIONS.CHANGEIN.priority = 10
+
+AddComponentAction("USEITEM", "drawingtool", function(inst, doer, target, actions, right) if target:HasTag("telebase") or target.prefab == "pocketwatch_recall" or target.prefab == "pocketwatch_portal" then table.insert(actions, GLOBAL.ACTIONS.SET_CUSTOM_NAME) end end)
