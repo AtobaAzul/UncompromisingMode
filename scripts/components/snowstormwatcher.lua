@@ -1,16 +1,15 @@
 local SnowStormWatcher = Class(function(self, inst)
-	self.inst = inst
+		self.inst = inst
 
-	self.snowstormspeedmult = .75
-	self.delay = nil
-	self.task = nil
-	self.storming = false
-	--inst:ListenForEvent("weathertick", function(src, data) self:ToggleSnowstorms() end, TheWorld)
-	--inst:ListenForEvent("forcestopsnowstorm", function(src, data) self:ToggleSnowstorms() end, TheWorld)
-	inst:ListenForEvent("seasontick", function(src, data) self:ToggleSnowstorms() end, TheWorld)
-	self.inst:StartUpdatingComponent(self)
-
-end,
+		self.snowstormspeedmult = .75
+		self.delay = nil
+		self.task = nil
+		self.storming = false
+		--inst:ListenForEvent("weathertick", function(src, data) self:ToggleSnowstorms() end, TheWorld)
+		--inst:ListenForEvent("forcestopsnowstorm", function(src, data) self:ToggleSnowstorms() end, TheWorld)
+		inst:ListenForEvent("seasontick", function(src, data) self:ToggleSnowstorms() end, TheWorld)
+		self.inst:StartUpdatingComponent(self)
+	end,
 	nil,
 	{
 		--snowstormlevel = onsnowstormlevel,
@@ -60,7 +59,6 @@ function SnowStormWatcher:ToggleSnowstorms(active, src, data)
 end
 
 function SnowStormWatcher:UpdateSnowstormLevel()
-
 	self:UpdateSnowstormWalkSpeed()
 	--end
 end
@@ -90,7 +88,7 @@ function SnowStormWatcher:UpdateSnowstormWalkSpeed(src, data)
 			self.inst.components.rider:IsRiding() or
 			suppressorNearby1 or suppressorNearby2 or suppressorNearby3 or suppressorNearby4 or
 			(
-			self.inst.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY) ~= nil and
+				self.inst.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY) ~= nil and
 				self.inst.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY).prefab == "beargervest") then
 			self.inst.components.locomotor:RemoveExternalSpeedMultiplier(self.inst, "snowstorm")
 			self.inst:PushEvent("checksnowvision")
@@ -105,7 +103,6 @@ function SnowStormWatcher:UpdateSnowstormWalkSpeed(src, data)
 end
 
 function TrySpawning(v)
-
 	local x1, y1, z1 = v.Transform:GetWorldPosition()
 	local nearbyplayers2 = TheSim:FindEntities(x1, y1, z1, 50, nil, nil, { "player" })
 
@@ -113,7 +110,7 @@ function TrySpawning(v)
 
 	if TheWorld.state.iswinter and
 		((TheWorld.net ~= nil and TheWorld.net:HasTag("snowstormstartnet")) or TheWorld:HasTag("snowstormstart")) and
-		TheWorld.Map:IsPassableAtPoint(x1,y1,z1, false, true) then --and self.snowstormstart then
+		TheWorld.Map:IsPassableAtPoint(x1, y1, z1, false, true) then --and self.snowstormstart then
 		if math.random() <= 0.25 - playervalue2 then
 			--local spawn_pt = GetSpawnPoint(origin_pt, PLAYER_CHECK_DISTANCE + 5)
 
@@ -149,7 +146,7 @@ local function SnowpileChance(inst, self)
 			local ents7 = TheSim:FindEntities(x + xrandom, y, z + zrandom, 6, nil, nil, { "snowpileradius" })
 			local ents8 = TheSim:FindEntities(x + xrandom, y, z + zrandom, 8, nil, nil, { "fire" })
 
-			if TheWorld.Map:IsPassableAtPoint(x + xrandom, 0, z + zrandom) and #ents7 < 1 and #ents8 < 1 and
+			if TheWorld.Map:IsPassableAtPoint(x + xrandom, 0, z + zrandom, false, true) and #ents7 < 1 and #ents8 < 1 and
 				not INVALID_TILES[TheWorld.Map:GetTileAtPoint(x + xrandom, 0, z + zrandom)] then
 				if #TheSim:FindEntities(x + xrandom, 0, z + zrandom, 5, { "snowpileblocker" }) == 0 then
 					local snowpilespawn = SpawnPrefab("snowpile")
@@ -167,7 +164,6 @@ local function SnowpileChance(inst, self)
 		self.task:Cancel()
 		self.task = nil
 	end
-
 end
 
 TUNING.SNOW_CHANCE_TIME = 15
@@ -175,7 +171,6 @@ TUNING.SNOW_CHANCE_VARIANCE = 15
 
 
 function SnowStormWatcher:StartSnowPileTask()
-
 	if self.task == nil then
 		self.task = self.inst:DoTaskInTime(TUNING.SNOW_CHANCE_TIME + math.random() * TUNING.SNOW_CHANCE_VARIANCE,
 			SnowpileChance, self) --, self)
@@ -183,13 +178,11 @@ function SnowStormWatcher:StartSnowPileTask()
 end
 
 function SnowStormWatcher:OnUpdate(dt)
-
 	self:UpdateSnowstormLevel()
 
 	self:UpdateSnowstormWalkSpeed()
 
 	self:StartSnowPileTask()
-
 end
 
 return SnowStormWatcher
