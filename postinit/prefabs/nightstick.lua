@@ -120,7 +120,6 @@ end
 
 
 local function onequip(inst, owner)
-	inst.components.burnable:Ignite()
 	owner.AnimState:OverrideSymbol("swap_object", "swap_nightstick", "swap_nightstick")
 	owner.AnimState:Show("ARM_carry")
 	owner.AnimState:Hide("ARM_normal")
@@ -131,7 +130,7 @@ local function onequip(inst, owner)
 		owner.AnimState:OverrideSymbol("swap_object", "swap_nightstick_off", "swap_nightstick_off")
 	else
 		inst.SoundEmitter:PlaySound("dontstarve_DLC001/common/morningstar", "torch")
-
+		inst.components.burnable:Ignite()
 		owner.AnimState:OverrideSymbol("swap_object", "swap_nightstick", "swap_nightstick")
 	end
 
