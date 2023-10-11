@@ -14,6 +14,7 @@ end
 
 env.AddPrefabPostInitAny(function(inst)
     if not TheWorld.ismastersim then return end
+    inst:DoTaskInTime(0, function(inst) --maybe delaying this by a frame does soemthing.
     if (inst:HasTag("plant") or inst:HasTag("tree")) and inst.components.burnable ~= nil then
         local _OnIgnite = inst.components.burnable.onignite
 
@@ -26,5 +27,5 @@ env.AddPrefabPostInitAny(function(inst)
                 _OnIgnite(inst, source, doer, ...)
             end
         end
-    end
+    end end)
 end)
