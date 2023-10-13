@@ -437,7 +437,7 @@ configuration_options = {
     BinaryConfig("heatwaves", "Heat Waves",
         "Heat waves act as a summer counterpart to snowstorms.\nWhile they don't do much on their own, aside from the temperature increase, they interact with Smog and Pyre Nettles.",
         true),
-    BinaryConfig("pyrenettles", "Pyre Nettles", "Pyre Nettles are a new invasive plant that grows with heat.", true),
+    BinaryConfig("pyrenettles", "Pyre Nettles", "Pyre Nettles are a new invasive cave plant that grows with heat.", true),
     BinaryConfig("smog", "Smog",
         "Burning plants in summer releases large quantities of smoke. Meant to interact with heatwaves.", true),
     BinaryConfig("maxtempdamage", "Max Health Temperature Damage", "Freezing and Overheating will deal max health damage after a brief delay.", true),
@@ -962,6 +962,7 @@ configuration_options = {
     BinaryConfig("the_cooler_sacred_chest", "Ancient Chest Crafting Recipes",
         "Disable this if the Metheus puzzle in-game portion breaks. \nIt shouldn't, so please also file a bug report!",
         false),
+    --	BinaryConfig("MutExt_beta", "Mutation Extrapolation", "Eyes to lie, mouthes to blind, skin to shed.", false),
     --	BinaryConfig("shiversprites_enabled", "Shiversprites", "Something new waits out in the frozen tundra.", false),
     SkipSpace(),
 
@@ -1025,6 +1026,5 @@ configuration_options = {
     -----------------------------
     --	Header("Secret Secret"),
     --	BinaryConfig("its_getting_hot_in_here", "The Hot Wind Blowing", " https://www.youtube.com/watch?v=fq3abPnEEGE ", false),
-    --	BinaryConfig("MutExt", "Mutation Extrapolation", "Hi there! I'm adding bits of this to get some more testing done and make sure nothing breaks. Sssshhhhhh.", false),
     --	SkipSpace(),
 }
