@@ -126,7 +126,7 @@ local function debuff_OnAttached(inst, target, followsymbol, followoffset, data)
 			inst.fx = SpawnPrefab("umdebuff_moonburn_fx")
 		end
 		if target.components.combat ~= nil then
-			inst.fx.entity:AddFollower():FollowSymbol(target.GUID, target.components.combat.hiteffectsymbol, 0, -4, 0) -- TODO: positioning is wrong aaaAAAA
+			inst.fx.entity:AddFollower():FollowSymbol(target.GUID, target.components.combat.hiteffectsymbol, 0, 0, 0)
 		else
 			inst.fx.entity:SetParent(target.entity)
 		end
