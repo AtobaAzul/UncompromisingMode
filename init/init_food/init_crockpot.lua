@@ -237,7 +237,7 @@ end
 
 recipes.fishsticks.test = function(cooker, names, tags)
     return tags.fish and names.twigs and
-		UncompromisingFillers(tags) and not (tags.insectoid and tags.insectoid >= 1)
+		UncompromisingFillers(tags) and not (tags.insectoid and tags.insectoid >= 1) and not tags.monster
 end
 -- Original:	test = function(cooker, names, tags) return tags.fish and names.twigs and (tags.inedible and tags.inedible <= 1) end,
 
