@@ -44,10 +44,16 @@ for k1, v1 in pairs(SGWilson.actionhandlers) do
 	end
 end
 
+local special_staff = {
+	"staff_lunarplant",
+	"icestaff",
+	"firestaff"
+}
+
 local function Attack_New(inst, action)
 	inst.sg.mem.localchainattack = not action.forced or nil
 	local weapon = inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS) or nil
-	if weapon and not ((weapon:HasTag("blowdart") or weapon:HasTag("thrown"))) and inst:HasTag("wathom") and
+	if weapon and not ((weapon:HasTag("blowdart") or weapon:HasTag("thrown") or (weapon:HasTag("rangedweapon") and not table.contains(special_staff, weapon.prefab)))) and inst:HasTag("wathom") and
 		not inst.sg:HasStateTag("attack") and (inst.components.rider ~= nil and not inst.components.rider:IsRiding()) then
 		return ("wathomleap")
 	else
