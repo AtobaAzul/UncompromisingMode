@@ -161,6 +161,12 @@ return Class(function(self, inst)
     function self:LongUpdate(dt) self:OnUpdate(dt) end
 
     self:WatchWorldState("season", OnSeasonChange)
+    self:WatchWorldState("cycles", function(inst)
+        if not TheWorld.state.season == "summer" then
+            OnSeasonChange()
+        end
+    end)
+
     -- self.inst:ListenForEvent("forcetornado", PickAttackTarget)
 
     self.inst:StartUpdatingComponent(self)
