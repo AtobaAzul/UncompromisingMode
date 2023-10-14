@@ -18,6 +18,7 @@ local night_time = seg_time * night_segs
 -- Reduce seed spawn chance
 -----------------------------------------------------------------
 -- TODO: this is not working
+--[[
 local RAND_TIME_MIN = FOOD_BIRD_SEED_SPAWN_MIN_RANDOM_TIME
 local RAND_TIME_MAX = FOOD_BIRD_SEED_SPAWN_MAX_RANDOM_TIME
 AddPrefabPostInit("crow", function(inst)
@@ -36,7 +37,7 @@ AddPrefabPostInit("robin", function(inst)
     if inst ~= nil and inst.components.periodicspawner ~= nil then
         inst.components.periodicspawner:SetRandomTimes(RAND_TIME_MIN, RAND_TIME_MAX)
     end
-end)
+end)]]
 
 -----------------------------------------------------------------
 -- Butterflies appearance rate depends on nr of players
