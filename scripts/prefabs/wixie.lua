@@ -173,10 +173,12 @@ end
 
 local function EquipedCount(inst, data)
 	if data ~= nil and data.item ~= nil and data.item.components.equippable ~= nil and data.item.components.equippable.equipslot ~= nil then
-		if data.item.components.equippable.equipslot == EQUIPSLOTS.BODY then
-			inst.components.talker:Say(GetString(inst, "UNCOMFORTABLE_ARMOR"))
-		elseif data.item.components.equippable.equipslot == EQUIPSLOTS.HEAD then
-			inst.components.talker:Say(GetString(inst, "UNCOMFORTABLE_HAT"))
+		if data.item.components.armor and not data.item:HasTag("grass") and not data.item:HasTag("shadow_item") then
+			if data.item.components.equippable.equipslot == EQUIPSLOTS.BODY then
+				inst.components.talker:Say(GetString(inst, "UNCOMFORTABLE_ARMOR"))
+			elseif data.item.components.equippable.equipslot == EQUIPSLOTS.HEAD then
+				inst.components.talker:Say(GetString(inst, "UNCOMFORTABLE_HAT"))
+			end
 		end
 	end
 	
