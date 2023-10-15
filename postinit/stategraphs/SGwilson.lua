@@ -93,8 +93,10 @@ env.AddStategraphPostInit("wilson", function(inst)
 
         if equip ~= nil and target ~= nil and target.components.health ~= nil and not target.components.health:IsDead() then
             inst.components.combat:DoNaughtAttack(target)
-
-            equip.components.weapon:OnAttack_NoDurabilityLoss(inst, target)
+			
+			if not equip:HasTag("pocketwatch") then
+				equip.components.weapon:OnAttack_NoDurabilityLoss(inst, target)
+			end
         end
         --[[
         local equip = inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
@@ -1660,9 +1662,14 @@ env.AddStategraphPostInit("wilson", function(inst)
                 inst.components.locomotor:Clear()
 
                 inst.components.health:SetInvincible(true)
+
                 inst.DynamicShadow:Enable(false)
 
-                inst.AnimState:PlayAnimation("grabbedbytheghoulie")
+				if inst:HasTag("wereplayer") then
+					inst.AnimState:PlayAnimation("dozy")
+				else
+					inst.AnimState:PlayAnimation("grabbedbytheghoulie")
+				end
 
                 if inst.deathsoundoverride ~= nil then
                     inst.SoundEmitter:PlaySound(inst.deathsoundoverride)
@@ -1717,9 +1724,50 @@ env.AddStategraphPostInit("wilson", function(inst)
                     inst.components.playercontroller:Enable(true)
                 end
 
-                inst.AnimState:PlayAnimation("enter")
+				if inst:HasTag("wereplayer") then
+					inst.AnimState:PlayAnimation("wakeup")
+				else
+					inst.AnimState:PlayAnimation("enter")
+				end
+				
                 if inst.components.drownable ~= nil then
-                    inst.components.drownable:TakeDrowningDamage()
+					--inst.components.drownable:TakeDrowningDamage()
+					
+					local tunings = inst.components.drownable and inst.components.drownable.customtuningsfn ~= nil and inst.components.drownable.customtuningsfn or
+										inst.prefab == "wx78" and TUNING.DROWNING_DAMAGE[string.upper(inst.prefab)] or
+										TUNING.DROWNING_DAMAGE["DEFAULT"]
+					
+					if inst.components.moisture ~= nil and tunings.WETNESS ~= nil then
+						inst.components.moisture:DoDelta(tunings.WETNESS, true)
+					end
+					
+					if inst.components.hunger ~= nil and tunings.HUNGER ~= nil then
+						local delta = -math.min(tunings.HUNGER, inst.components.hunger.current - 30)
+						if delta < 0 then
+							inst.components.hunger:DoDelta(delta)
+						end
+					end
+					
+					if inst.components.health ~= nil then
+						if tunings.HEALTH_PENALTY ~= nil then
+							inst.components.health:DeltaPenalty(tunings.HEALTH_PENALTY)
+						end
+
+						if tunings.HEALTH ~= nil then
+							local delta = -math.min(tunings.HEALTH, inst.components.health.currenthealth - 30)
+							if delta < 0 then
+								inst.components.health:DoDelta(delta, false, "Tornado", true, nil, true)
+							end
+						end
+					end
+
+					if inst.components.sanity ~= nil and tunings.SANITY ~= nil then
+						local delta = -math.min(tunings.SANITY, inst.components.sanity.current - 30)
+						if delta < 0 then
+							inst.components.sanity:DoDelta(delta)
+						end
+					end
+					
                 end
             end,
 

@@ -284,7 +284,7 @@ local function TornadoEnviromentTask(inst)
         local ground = TheWorld.Map:IsOceanAtPoint(x, y, z)
         local angle_deviation = config == "reduced" and (66 * RADIANS) or 0
         for k, v in pairs(items_suck) do
-            if v and v.Physics ~= nil and v.components.inventoryitem and not v.components.inventoryitem:IsHeld() and v.replica.inventoryitem ~= nil and v.replica.inventoryitem:CanBePickedUp() and v.prefab ~= "bullkelp_beachedroot" then
+            if v and v.Physics and v.components.inventoryitem and not v.components.inventoryitem:IsHeld() and v.replica.inventoryitem ~= nil and v.replica.inventoryitem:CanBePickedUp() and v.prefab ~= "bullkelp_beachedroot" then
                 local _x, _y, _z = v:GetPosition():Get()
                 local item_ground = TheWorld.Map:IsOceanAtPoint(_x, _y, _z)
                 if ground == item_ground then
@@ -309,7 +309,7 @@ local function TornadoEnviromentTask(inst)
         local items_pick = TheSim:FindEntities(x, y, z, 4, { "_inventoryitem" },
             { "irreplaceable", "tornado_nosucky", "trap", "INLIMBO", "heavy", "backpack"})
         for k, v in ipairs(items_pick) do
-            if v.components.inventoryitem ~= nil and v.prefab ~= "bullkelp_beachedroot" and v.Physics ~= nil then
+            if v.components.inventoryitem ~= nil and v.prefab ~= "bullkelp_beachedroot" then
                 if config == "reduced" and v:IsAsleep() then
                     return
                 end
@@ -403,8 +403,14 @@ local function TornadoItemTossTask(inst)
                 end
 
                 random_item:DoTaskInTime(8, function(inst) inst:RemoveTag("tornado_nosucky") end)
-                random_item.Physics:Teleport(x, 35, z)
-                random_item.Physics:SetMotorVel(0, math.random(-50, -33), 0)
+				
+				if random_item.Physics ~= nil then
+					random_item.Physics:Teleport(x, 35, z)
+					random_item.Physics:SetMotorVel(0, math.random(-50, -33), 0)
+				elseif random_item.Transform ~= nil then
+					random_item.Transform:SetPosition(x, 0, z)
+				end
+				
                 random_item.shadow = SpawnPrefab("warningshadow")
                 random_item.shadow:ListenForEvent("onremove", function(debris) debris.shadow:Remove() end, random_item)
                 random_item.shadow.Transform:SetPosition(x, 0, z)
@@ -414,7 +420,9 @@ local function TornadoItemTossTask(inst)
                 random_item.updatetask = random_item:DoPeriodicTask(FRAMES, _GroundDetectionUpdate, nil, 5)
 
                 random_item.updatetask_timeout = random_item:DoTaskInTime(30, function(inst)
-                    inst.Physics:ClearMotorVelOverride()
+					if random_item.Physics ~= nil then
+						inst.Physics:ClearMotorVelOverride()
+					end
 
                     if inst.updatetask ~= nil or inst.shadow ~= nil then
                         print("PANIC? FALLING ITEM TIMED OUT!")
