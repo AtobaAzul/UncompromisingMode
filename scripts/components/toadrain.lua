@@ -94,7 +94,7 @@ end
 
 local function ToggleUpdate(force)
 
-	local mushroomcheck = TheSim:FindFirstEntityWithTag("acidrain_mushroom")
+	local mushroomcheck = nil--TheSim:FindFirstEntityWithTag("acidrain_mushroom")
 
 	if _worldstate.isautumn and
 		_worldstate.israining and

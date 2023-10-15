@@ -10,7 +10,7 @@ env.AddPrefabPostInit("raindrop", function(inst)
 		return
 	end
 
-	local mushroomcheck = TheSim:FindFirstEntityWithTag("acidrain_mushroom")
+	local mushroomcheck = nil--TheSim:FindFirstEntityWithTag("acidrain_mushroom")
 	
 	if mushroomcheck ~= nil and TheWorld.state.isautumn then
 		--inst.AnimState:SetMultColour(0.5, 1, 0, 1)

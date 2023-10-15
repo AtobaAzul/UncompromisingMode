@@ -14,7 +14,7 @@ env.AddClassPostConstruct("widgets/hoverer", function(self)
 		_OldOnUpdate(self)
 		local str = nil
 		
-		local mushroomcheck = TheSim:FindFirstEntityWithTag("acidrain_mushroom")
+		local mushroomcheck = nil--TheSim:FindFirstEntityWithTag("acidrain_mushroom")
 		
 		if not self.isFE then
 			str = self.owner.hud and self.owner.HUD.controls:GetTooltip() or self.owner.components and self.owner.components.playercontroller:GetHoverTextOverride()

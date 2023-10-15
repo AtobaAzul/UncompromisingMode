@@ -85,15 +85,15 @@ env.AddPrefabPostInit("forest", function(inst)
 
 	inst:AddComponent("uncompromising_deerclopsspawner")
 
-	inst:AddComponent("toadrain")
+	--inst:AddComponent("toadrain")
 	--inst:AddComponent("hayfever_tracker")
 	inst:AddComponent("firefallwarning")
 	inst:AddComponent("pollenmitedenspawner")
 	inst:AddComponent("randomnightevents")
 	inst:AddComponent("um_areahandler")
 	--inst:AddComponent("horriblenightmanager")
-	--inst:AddComponent("um_oceantilelogger")
-	--inst:AddComponent("um_ocupusappearinator")
+	inst:AddComponent("um_oceantilelogger")
+	inst:AddComponent("um_ocupusappearinator")
 	inst:AddComponent("um_pestilencecontroller")
 	if TUNING.DSTU.SPAWNMOTHERGOOSE then
 		inst:AddComponent("gmoosespawner")
