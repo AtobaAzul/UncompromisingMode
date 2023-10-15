@@ -524,7 +524,7 @@ DESCRIBE.UM_PYRE_NETTLES = "Scary child say they make nice pillow!"
 DESCRIBE.UM_SMOLDER_SPORE = "Look shakey. Maybe should be careful..."
 ANNOUNCE.ANNOUNCE_SMOLDER_SPORE_EATEN = "Mouth not feeling mighty!!"
 ANNOUNCE.ANNOUNCE_SMOLDER_SPORE_INVENTORY_POP = "Pockets not feeling mighty!!"
-DESCRIBE.UM_ARMOR_PYRE_NETTLES = "Poke sometimes, but keep badies away."
+DESCRIBE.UM_ARMOR_PYRE_NETTLES = "Poke sometimes, but keep baddies away."
 DESCRIBE.UM_BLOWDART_PYRE = "Not like. Give flashbacks of fire girl."
 
 -- Under the Weather Part 1
