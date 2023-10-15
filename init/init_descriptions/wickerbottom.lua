@@ -583,11 +583,11 @@ DESCRIBE.MARA_BOSS1 = "WHAT in the..."
 ANNOUNCE.GAS_DAMAGE = "Ahem. Cough. Ahem. Ahem."
 
 -- Pyre Nettle stuff
-DESCRIBE.UM_PYRE_NETTLES = "The increased virulancy of the wild strain seems to reduce the toxin's potency."
+DESCRIBE.UM_PYRE_NETTLES = "The increased virulence of the wild strain seems to reduce the toxin's potency."
 DESCRIBE.UM_SMOLDER_SPORE = "The nettles appear to spread via a symbiotic fungal infection... Fascinating!"
 ANNOUNCE.ANNOUNCE_SMOLDER_SPORE_EATEN = "I suppose I was feeling nostalgic."
 ANNOUNCE.ANNOUNCE_SMOLDER_SPORE_INVENTORY_POP = "Oh, that little specimen slipped my mind!!"
-DESCRIBE.UM_ARMOR_PYRE_NETTLES = "A basic natural camoflage and deterant."
+DESCRIBE.UM_ARMOR_PYRE_NETTLES = "A basic natural camouflage and deterrent."
 DESCRIBE.UM_BLOWDART_PYRE = "Equal parts conventional and psychological warfare! Er... Ahem."
 
 -- Under the Weather Part 1
