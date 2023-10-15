@@ -284,7 +284,7 @@ local function TornadoEnviromentTask(inst)
         local ground = TheWorld.Map:IsOceanAtPoint(x, y, z)
         local angle_deviation = config == "reduced" and (66 * RADIANS) or 0
         for k, v in pairs(items_suck) do
-            if v and v.Physics and v.components.inventoryitem and not v.components.inventoryitem:IsHeld() and v.replica.inventoryitem ~= nil and v.replica.inventoryitem:CanBePickedUp() and v.prefab ~= "bullkelp_beachedroot" then
+            if v and v.Physics ~= nil and v.components.inventoryitem and not v.components.inventoryitem:IsHeld() and v.replica.inventoryitem ~= nil and v.replica.inventoryitem:CanBePickedUp() and v.prefab ~= "bullkelp_beachedroot" then
                 local _x, _y, _z = v:GetPosition():Get()
                 local item_ground = TheWorld.Map:IsOceanAtPoint(_x, _y, _z)
                 if ground == item_ground then
@@ -309,7 +309,7 @@ local function TornadoEnviromentTask(inst)
         local items_pick = TheSim:FindEntities(x, y, z, 4, { "_inventoryitem" },
             { "irreplaceable", "tornado_nosucky", "trap", "INLIMBO", "heavy", "backpack"})
         for k, v in ipairs(items_pick) do
-            if v.components.inventoryitem ~= nil and v.prefab ~= "bullkelp_beachedroot" then
+            if v.components.inventoryitem ~= nil and v.prefab ~= "bullkelp_beachedroot" and v.Physics ~= nil then
                 if config == "reduced" and v:IsAsleep() then
                     return
                 end
