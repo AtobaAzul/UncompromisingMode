@@ -271,7 +271,7 @@ local states =
 
         ontimeout = function(inst)
             inst.sg:GoToState("glide")
-            if math.random() > 0.33 then
+            if math.random() > 0.66 then
                 local pitcherplant = FindClosestEntity(inst, 80, true, { "pitcherplant" }) --probably overkill radius.
                 if pitcherplant ~= nil and pitcherplant.components.lootdropper ~= nil then
                     pitcherplant.components.lootdropper:DropLoot()
