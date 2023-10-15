@@ -547,7 +547,7 @@ local function SpikeWaves(inst, target, attacker, angle)
             local fx = SpawnPrefab("warg_mutated_ember_fx")
             fx.Transform:SetPosition(dx + math.random(), dy, dz + math.random())
             fx:RestartFX(0.25 + math.random())
-            fx:DoTaskInTime(math.random() + 0.5 , fx.KillFX)
+            fx:DoTaskInTime(math.random() + 0.5, fx.KillFX)
 
             if math.random() > 0.5 then
                 local fx2 = SpawnPrefab("warg_mutated_breath_fx")
@@ -570,30 +570,30 @@ local function SpikeWaves(inst, target, attacker, angle)
 end
 
 if TUNING.DSTU.UPDATE_CHECK then
-env.AddPrefabPostInit("staff_lunarplant", function(inst)
-    if not TheWorld.ismastersim then
-        return
-    end
-    local _onattack = inst.components.weapon.onattack
-
-    local function OnAttack(inst, attacker, target, skipsanity)
-        if attacker:HasTag("wathom") then
-            inst.components.weapon:SetProjectile(nil)
-            local ret = _onattack(inst, attacker, target, skipsanity)
-
-            for angle = -20, 20, 4 do
-                SpikeWaves(inst, target, attacker, angle + attacker.Transform:GetRotation())
-                target.components.combat:GetAttacked(attacker, 0, nil, nil, { planar = 34 })
-            end
-            inst.SoundEmitter:PlaySound("rifts/lunarthrall_bomb/explode")
-
-            return ret
-        else
-            inst.components.weapon:SetProjectile("brilliance_projectile_fx")
-            return _onattack(inst, attacker, target, skipsanity)
+    env.AddPrefabPostInit("staff_lunarplant", function(inst)
+        if not TheWorld.ismastersim then
+            return
         end
-    end
+        local _onattack = inst.components.weapon.onattack
 
-    inst.components.weapon:SetOnAttack(OnAttack)
-end)
+        local function OnAttack(inst, attacker, target, skipsanity)
+            if attacker:HasTag("wathom") then
+                inst.components.weapon:SetProjectile(nil)
+                local ret = _onattack(inst, attacker, target, skipsanity)
+
+                for angle = -20, 20, 4 do
+                    SpikeWaves(inst, target, attacker, angle + attacker.Transform:GetRotation())
+                    target.components.combat:GetAttacked(attacker, 0, nil, nil, { planar = 34 })
+                end
+                inst.SoundEmitter:PlaySound("rifts/lunarthrall_bomb/explode")
+
+                return ret
+            else
+                inst.components.weapon:SetProjectile("brilliance_projectile_fx")
+                return _onattack(inst, attacker, target, skipsanity)
+            end
+        end
+
+        inst.components.weapon:SetOnAttack(OnAttack)
+    end)
 end
