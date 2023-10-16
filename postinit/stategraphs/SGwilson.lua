@@ -93,10 +93,6 @@ env.AddStategraphPostInit("wilson", function(inst)
 
         if equip ~= nil and target ~= nil and target.components.health ~= nil and not target.components.health:IsDead() then
             inst.components.combat:DoNaughtAttack(target)
-			
-			if not equip:HasTag("pocketwatch") then
-				equip.components.weapon:OnAttack_NoDurabilityLoss(inst, target)
-			end
         end
         --[[
         local equip = inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)

@@ -492,9 +492,9 @@ local function snowpilefn(Sim)
 
     inst:ListenForEvent("onremove", function()
         local x, y, z = inst.Transform:GetWorldPosition()
-        local inlimbostructures = TheSim:FindEntities(x, y, z, inst.components.aura.radius, {"structure", "INLIMBO"}, {"wall"})
+        local inlimbostructures = TheSim:FindEntities(x, y, z, inst.components.aura.radius, {"structure", "NOCLICK"}, {"wall"})
         for i, v in ipairs(inlimbostructures) do
-            v:RemoveTag("INLIMBO")
+            v:RemoveTag("NOCLICK")
         end
     end)
 

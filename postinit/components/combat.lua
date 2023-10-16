@@ -101,7 +101,7 @@ env.AddComponentPostInit("combat", function(self)
 			reflected_dmg, reflected_spdmg = self:CalcReflectedDamage(targ, 0, weapon, stimuli, reflect_list)
 		end
 
-		if weapon ~= nil then
+		if weapon ~= nil and not weapon:HasTag("pocketwatch") then
 			weapon.components.weapon:OnAttack_NoDurabilityLoss(self.inst, targ, projectile)
 		end
 
