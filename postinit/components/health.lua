@@ -104,28 +104,32 @@ env.AddComponentPostInit("health", function(self)
 			if MayKill(self, amount) and cause == "shadowvortex" and TUNING.DSTU.COMPROMISING_SHADOWVORTEX and not self.inst.sg:HasStateTag("blackpuddle_death") then
 				self.inst.components.rider:ActualDismount()
 				self.inst.sg:GoToState("blackpuddle_death")
+				return 1
 			elseif MayKill(self, amount) and HasLLA(self) and not self.inst:HasTag("deathamp") then --and not (self.inst:HasTag("deathamp")) then
 				TriggerLLA(self)
+				return 49
 			elseif MayKill(self, amount) and HasLLA(self) and self.inst:HasTag("deathamp") and cause == "deathamp" and self.inst.components.timer ~= nil and not self.inst.components.timer:TimerExists("shadowwathomcooldown") then
 				if not self.inst:HasTag("playerghost") and self.inst.ToggleUndeathState ~= nil then
 					self.inst:ToggleUndeathState(self.inst, false)
 				end
 				TriggerLLA(self) --Don't trigger the LLA here, let it happen in our own component, so this doesn't break whenever canis moves it to his own mod.
+				return 49
 			elseif self.inst:HasTag("deathamp") and cause ~= "deathamp" then
 				self.inst.components.adrenaline:DoDelta(amount * 1)
 			elseif MayKill(self, amount) and (self.inst:HasTag("wathom") and self.inst:HasTag("amped")) and cause ~= "deathamp" then --suggest that we add a trigger here to show that wathom is still being hit, despite his lack of flinching or anything.
 				if not self.inst:HasTag("deathamp") then
 					self.inst:AddTag("deathamp")
 					self.inst:ToggleUndeathState(self.inst, true)
-					_DoDelta(self, -self.currenthealth + 1, false, cause, true, afflicter, ignore_absorb, ...) --needed to do this for ignore_invincible...
+					return _DoDelta(self, -self.currenthealth + 1, false, cause, true, afflicter, ignore_absorb, ...) --needed to do this for ignore_invincible...
 				end
 			elseif not self.inst:HasTag("deathamp") then                                        -- No positive healing if you're on your last breath
-				_DoDelta(self, amount, overtime, cause, ignore_invincible, afflicter, ignore_absorb, ...)
+				return _DoDelta(self, amount, overtime, cause, ignore_invincible, afflicter, ignore_absorb, ...)
 			end
 		elseif MayKill(self, amount) and HasLLA(self) then
 			TriggerLLA(self)
+			return 49
 		else
-			_DoDelta(self, amount, overtime, cause, ignore_invincible, afflicter, ignore_absorb, ...)
+			return _DoDelta(self, amount, overtime, cause, ignore_invincible, afflicter, ignore_absorb, ...)
 		end
 	end
 end)
