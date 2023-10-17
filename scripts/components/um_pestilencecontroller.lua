@@ -12,16 +12,41 @@ return Class(function(self, inst)
 			return FindSmallOffset(x, z)
 		end
 	end
-	local function SpawnPosse(nymph, x, z)
-		nymph.aphidposse = {}
-		for i = 1, math.random(5, 8) do
+	local function SpawnPosse(nymph)--, x, z)
+		if not nymph.aphidposse then
+			nymph.aphidposse = 0
+		end
+		local modifier = 1
+		if TheWorld.state.isspring or TheWorld.state.iswinter then
+			modifier = 0.5
+		end
+		
+		for i = 1,math.random(5,8)*modifier do
+			local x,y,z = nymph.Transform:GetWorldPosition()
 			local x_off, z_off = FindSmallOffset(x, z)
 			local aphid = SpawnPrefab("aphid")
-			table.insert(nymph.aphidposse, aphid)
 			aphid.Transform:SetPosition(x_off, 0, z_off)
 			aphid.nymph = nymph
 			aphid.components.follower:SetLeader(nymph)
 			aphid.sg:GoToState("enter_loop")
+			nymph.aphidposse = nymph.aphidposse + 1	
+			aphid.persists = false
+			--[[nymph.aphidposse = {}
+			for i = 1, math.random(5, 8) do
+				local x_off, z_off = FindSmallOffset(x, z)
+				local aphid = SpawnPrefab("aphid")
+				table.insert(nymph.aphidposse, aphid)
+				aphid.Transform:SetPosition(x_off, 0, z_off)
+				aphid.nymph = nymph
+				aphid.components.follower:SetLeader(nymph)
+				aphid.sg:GoToState("enter_loop")
+			end]]
+			aphid:ListenForEvent("ondeath",function(inst) 
+				if nymph and nymph.aphidposse > 1 then 
+					nymph.aphidposse = nymph.aphidposse - 1 
+				end 
+			end)
+			aphid:DoPeriodicTask(4,function(aphid) aphid.NymphGroundCheck(aphid) end)
 		end
 	end
 
@@ -48,7 +73,7 @@ return Class(function(self, inst)
 			nymph.Transform:SetPosition(x, 0, z)
 			nymph.treetarget = cleanredwoods[math.random(#cleanredwoods)]:GetPosition()
 			nymph.sg:GoToState("land")
-			SpawnPosse(nymph, x, z)
+			SpawnPosse(nymph)--, x, z)
 		end
 	end
 
@@ -80,15 +105,21 @@ return Class(function(self, inst)
 	end
 
 	function self:InitializeTimer()
-		local time = 10 * 60 * 8                   -- Max Time to spread at 10 days
-		if self:GetInfestedTreePercent() > 0.5 then -- Half the forest is taken... need no reduction
+		if not self.inst.components.timer:TimerExists("spreadaphids") then
+			local time = 10 * 60 * 8                   -- Max Time to spread at 10 days
+			if self:GetInfestedTreePercent() > 0.5 then -- Half the forest is taken... need no reduction
 
-		elseif self:GetInfestedTreePercent() > 0.25 then -- Good bit of the forest is taken.
-			time = time / 10
-		else                                       -- The Aphids are in danger of going extinct, spread faster (0.5 days)
-			time = time / 20
+			elseif self:GetInfestedTreePercent() > 0.25 then -- Good bit of the forest is taken.
+				time = time / 5
+			else                                       -- The Aphids are in danger of going extinct, spread faster (0.5 days)
+				time = time / 10
+			end
+			if TheWorld.state.iswinter then
+				self.inst.components.timer:StartTimer("spreadaphids", 5*time) -- Winter means we'll wait a lot longer before starting up aphids again...
+			else
+				self.inst.components.timer:StartTimer("spreadaphids", time)
+			end
 		end
-		self.inst.components.timer:StartTimer("spreadaphids", time)
 	end
 
 	function self:OnSave()
@@ -118,7 +149,9 @@ return Class(function(self, inst)
 	inst:ListenForEvent("timerdone", function(inst, data)
 		if data then
 			if data.name == "spreadaphids" then
-				self:SpawnNymph()
+				if not TheWorld.state.iswinter then
+					self:SpawnNymph()
+				end
 				self:InitializeTimer()
 			end
 		end

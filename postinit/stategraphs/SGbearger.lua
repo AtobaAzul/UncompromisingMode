@@ -33,6 +33,7 @@ local states = {
 
 		onenter = function(inst, target)
 			inst.Physics:Stop()
+			--inst.AnimState:SetBuild("bearger_build_old")
 			inst.AnimState:PlayAnimation("taunt")
 			if target ~= nil then
 				inst:FacePoint(target.Transform:GetWorldPosition())
@@ -50,6 +51,9 @@ local states = {
 		{
 			EventHandler("animover", function(inst) inst:ClearBufferedAction() inst.sg:GoToState("shoot") end),
 		},
+		onexit = function(inst)
+			--inst.AnimState:SetBuild("bearger_build")
+		end,
 	},
 	
     State{
@@ -57,7 +61,7 @@ local states = {
         tags = { "attack", "canrotate", "busy" },
 
         onenter = function(inst)
-		
+			inst.AnimState:SetBuild("bearger_build_old")
             local target = inst.components.combat.target ~= nil and inst.components.combat.target or nil
 			
 			if target ~= nil and target.Transform ~= nil then
@@ -111,6 +115,9 @@ local states = {
         {
 			EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
         },
+		onexit = function(inst)
+			inst.AnimState:SetBuild("bearger_build")
+		end,
 	},
 }
 

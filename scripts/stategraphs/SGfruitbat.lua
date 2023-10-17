@@ -250,9 +250,11 @@ local states =
             inst.Physics:SetMotorVelOverride(0, 25, 0)
             local x, y, z = inst.Transform:GetWorldPosition()
             if y > 50 then
-                inst.food_baby:Remove()
-                inst.food_baby = nil
-                inst.sg:GoToState("digest")
+				if inst.food_baby then
+					inst.food_baby:Remove()
+					inst.food_baby = nil
+					inst.sg:GoToState("digest")
+				end
             end
         end,
         events =

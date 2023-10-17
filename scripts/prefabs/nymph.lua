@@ -83,6 +83,13 @@ local function OnAttacked(inst, data)
     if attacker == nil then
         return
     end
+	local x,y,z = inst.Transform:GetWorldPosition()
+	local aphids = TheSim:FindEntities(x,y,z,20,{"aphid"})
+	for i,v in ipairs(aphids) do
+		if v.components.combat then
+			v.components.combat:SuggestTarget(attacker)
+		end
+	end
     --inst.components.combat:SetTarget(attacker)
 end
 
@@ -106,20 +113,6 @@ local function FadeOut(inst,fade)
 	--TheNet:Announce("Fadout")
 	if tree then
 		tree.InfestMe(tree)
-	end
-	if inst.aphidposse then
-		for i,v in ipairs(inst.aphidposse) do
-			--TheNet:Announce("here's an aphid")
-			if v and v:IsValid() and v.components.health and not v.components.health:IsDead() then
-				if v:IsAsleep() then
-					--TheNet:Announce("Told To remove...")
-					v:Remove()
-				else
-					--TheNet:Announce("Told to burrow")
-					v.sg:GoToState("burrow")
-				end
-			end
-		end
 	end
 	inst:Remove()
 end
@@ -179,6 +172,39 @@ local function MakeAphidsNearbyFollow(inst)
 	end
 end
 
+local function SpawnAphid(nymph)
+	if not nymph.aphidposse then
+		nymph.aphidposse = 0
+	end
+	local x,y,z = nymph.Transform:GetWorldPosition()
+	local x_off, z_off = FindSmallOffset(x, z)
+	local aphid = SpawnPrefab("aphid")
+	aphid.Transform:SetPosition(x_off, 0, z_off)
+	aphid.nymph = nymph
+	aphid.components.follower:SetLeader(nymph)
+	aphid.sg:GoToState("enter_loop")
+	aphid.persists = false
+	nymph.aphidposse = nymph.aphidposse + 1
+	aphid:ListenForEvent("ondeath",function(inst) 
+		if nymph and nymph.aphidposse > 1 then 
+			nymph.aphidposse = nymph.aphidposse - 1 
+		end 
+	end)
+	aphid:DoPeriodicTask(4,function(aphid) aphid.NymphGroundCheck(aphid) end)
+end
+	
+local function GroundCheck(inst)
+	local x,y,z = inst.Transform:GetWorldPosition()
+	if TheWorld.Map:IsAboveGroundAtPoint(x,y,z) and inst.aphidpossedigging then
+		local temp = inst.aphidposse
+		inst.aphidpossedigging = nil
+		inst.aphidposse = 0
+		for i = 1,temp do
+			SpawnAphid(inst)
+		end
+	end
+end
+
 local function minifn()
     local inst = common()
 
@@ -235,6 +261,7 @@ local function minifn()
 					FindSpotToMoveTowardsTree(inst)
 				end
 			end
+			GroundCheck(inst)
 		else
 			inst:Remove()
 		end
@@ -246,19 +273,11 @@ local function minifn()
 				--TheNet:Announce("wehadthetree")
 				inst.treetarget = {}
 				inst.treetarget = Vector3(data.treetargetx,data.treetargety,data.treetargetz)
-				MakeAphidsNearbyFollow(inst)
+				--MakeAphidsNearbyFollow(inst)
 			end
-			if data.aphidposse then --Saving Doesn't work for now
-				inst.aphidposs = {}
-				for i = 1,data.aphidposse do
-					local x_off,z_off = FindSmallOffset(x,z)
-					local aphid = SpawnPrefab("aphid")
-					table.insert(inst.aphidposse,aphid)
-					aphid.Transform:SetPosition(x_off,0,z_off)
-					aphid.nymph = inst
-					aphid.components.follower:SetLeader(inst)
-					aphid.sg:GoToState("enter_loop")
-					aphid.persists = false
+			if data.aphidposse then
+				for i = 1,data.aphidposse-1 do
+					SpawnAphid(inst)
 				end		
 			end
 		end
@@ -269,6 +288,9 @@ local function minifn()
 				data.treetargetx = inst.treetarget.x
 				data.treetargetz = inst.treetarget.z
 				data.treetargety = inst.treetarget.y
+			end
+			if inst.aphidposse then
+				data.aphidposse = inst.aphidposse
 			end
 		end
 	end

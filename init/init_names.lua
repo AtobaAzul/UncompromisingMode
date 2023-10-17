@@ -3,6 +3,14 @@ SKINSDESC = GLOBAL.STRINGS.SKIN_DESCRIPTIONS
 STRINGS = GLOBAL.STRINGS.NAMES
 UI = GLOBAL.STRINGS.UI
 
+
+--Re-names to existing items
+STRINGS.AMULET = "Lesser Life Amulet"
+STRINGS.BEESWAX = "Wax"
+
+
+
+
 STRINGS.UNCOMPROMISING_RAT = "Rat"          -- Maybe change the name with a pun with Robber or Raider, any idea ?
 STRINGS.UNCOMPROMISING_CAVERAT = "Cave Rat" -- The aggressive cousin
 STRINGS.UNCOMPROMISING_PACKRAT = "Pack Rat" -- The hoarding cousin
@@ -212,7 +220,6 @@ STRINGS.CRABCLAW = "Crab Claw"
 STRINGS.BIGHT = "Comingled Clockwork"
 STRINGS.KNOOK = "Automaton Abomination"
 STRINGS.ROSHIP = "Mechanical Monstrosity"
-STRINGS.AMULET = "Lesser Life Amulet"
 STRINGS.SNOTROAST = "Snot Roast"
 STRINGS.LICELOAF = "Liceloaf" --For the cookbook
 STRINGS.TURF_HOODEDMOSS = "Mossy Forest Turf"

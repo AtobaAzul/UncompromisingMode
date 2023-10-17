@@ -676,6 +676,7 @@ env.AddStategraphPostInit("deerclops", function(inst)
 
             onenter = function(inst)
                 --inst.components.sleeper:SetResistance(400)
+				inst.AnimState:SetBuild("deerclops_build_old")
                 inst.Physics:Stop()
                 inst.AnimState:PlayAnimation("fortresscast_pre")
                 SpawnBlocks(inst, inst:GetPosition(), 19)
@@ -700,14 +701,16 @@ env.AddStategraphPostInit("deerclops", function(inst)
                     inst.sg:GoToState("aurafreeze")
                 end),
             },
-
-
+            onexit = function(inst)
+				inst.AnimState:SetBuild("deerclops_build")
+            end,
         },
         State {
             name = "aurafreeze_pst",
             tags = { "busy", "nosleep", "noshove" },
 
             onenter = function(inst)
+				inst.AnimState:SetBuild("deerclops_build_old")
                 inst.Physics:Stop()
                 inst.AnimState:PlayAnimation("fortresscast_pst")
                 inst.components.timer:StartTimer("auratime", 24 + math.random(1, 11))
@@ -731,7 +734,9 @@ env.AddStategraphPostInit("deerclops", function(inst)
                     inst.sg:GoToState("idle")
                 end),
             },
-
+            onexit = function(inst)
+				inst.AnimState:SetBuild("deerclops_build")
+            end,
 
         },
         State {
@@ -739,6 +744,7 @@ env.AddStategraphPostInit("deerclops", function(inst)
             tags = { "busy", "aurafreeze", "nosleep", "noshove"},
 
             onenter = function(inst)
+				inst.AnimState:SetBuild("deerclops_build_old")
                 inst.Physics:Stop()
                 inst.AnimState:PushAnimation("fortresscast_loop")
             end,
@@ -757,7 +763,9 @@ env.AddStategraphPostInit("deerclops", function(inst)
             {
                 EventHandler("animover", function(inst) inst.sg:GoToState("aurafreeze") end),
             },
-
+            onexit = function(inst)
+				inst.AnimState:SetBuild("deerclops_build")
+            end,
 
         },
         State {
@@ -765,6 +773,7 @@ env.AddStategraphPostInit("deerclops", function(inst)
             tags = { "busy", },
 
             onenter = function(inst)
+				inst.AnimState:SetBuild("deerclops_build_old")
                 inst.Physics:Stop()
                 inst.AnimState:PushAnimation("fortresscast_hit")
             end,
@@ -783,7 +792,9 @@ env.AddStategraphPostInit("deerclops", function(inst)
             {
                 EventHandler("animover", function(inst) inst.sg:GoToState("aurafreeze") end),
             },
-
+            onexit = function(inst)
+				inst.AnimState:SetBuild("deerclops_build")
+            end,
 
         },
         State {
@@ -851,6 +862,7 @@ env.AddStategraphPostInit("deerclops", function(inst)
             tags = { "attack", "busy", "heavyhit" },
 
             onenter = function(inst)
+				inst.AnimState:SetBuild("deerclops_build_old")
                 inst.Physics:Stop()
                 inst.AnimState:PlayAnimation("uppercut")
                 inst.components.combat:StartAttack()
@@ -919,13 +931,16 @@ env.AddStategraphPostInit("deerclops", function(inst)
             {
                 EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
             },
-
+            onexit = function(inst)
+				inst.AnimState:SetBuild("deerclops_build")
+            end,
         },
         State {
             name = "uppercutcombo",
             tags = { "attack", "busy", "heavyhit", "noice" },
 
             onenter = function(inst)
+				inst.AnimState:SetBuild("deerclops_build_old")
                 inst.Physics:Stop()
                 inst.AnimState:PlayAnimation("uppercutcombo")
                 inst.components.combat:StartAttack()
@@ -1019,6 +1034,7 @@ env.AddStategraphPostInit("deerclops", function(inst)
 
             onexit = function(inst)
 				inst.components.locomotor.walkspeed = 3
+				inst.AnimState:SetBuild("deerclops_build")
             end,
 
             events =
@@ -1033,6 +1049,7 @@ env.AddStategraphPostInit("deerclops", function(inst)
             tags = { "attack", "busy", },
 
             onenter = function(inst)
+				inst.AnimState:SetBuild("deerclops_build_old")
                 inst.Physics:Stop()
                 inst.AnimState:PlayAnimation("atk")
                 inst.components.combat:StartAttack()
@@ -1074,7 +1091,9 @@ env.AddStategraphPostInit("deerclops", function(inst)
             {
                 EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
             },
-
+            onexit = function(inst)
+				inst.AnimState:SetBuild("deerclops_build")
+            end,
         },
     }
 
