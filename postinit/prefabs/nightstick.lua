@@ -131,18 +131,18 @@ local function onequip(inst, owner)
 	else
 		inst.SoundEmitter:PlaySound("dontstarve_DLC001/common/morningstar", "torch")
 		inst.components.burnable:Ignite()
+		turnon(inst)
 		owner.AnimState:OverrideSymbol("swap_object", "swap_nightstick", "swap_nightstick")
+		owner:AddTag("batteryuser") -- from batteryuser component
+
+		if inst.overcharged then
+			inst.sparktask = inst:DoTaskInTime(math.random(), spark)
+		end	
 	end
 
 	owner:AddTag("lightningrod")
-
 	owner.lightningpriority = 0
 	owner:ListenForEvent("lightningstrike", Strike, owner)
-	owner:AddTag("batteryuser") -- from batteryuser component
-
-	if inst.overcharged then
-		inst.sparktask = inst:DoTaskInTime(math.random(), spark)
-	end
 end
 
 local function onunequip(inst, owner)
