@@ -68,9 +68,9 @@ modparams.air_conditioner =
     {
         slotpos =
         {
-            Vector3( -37.5, 32 + 4, 0),
+            Vector3(-37.5, 32 + 4, 0),
             Vector3(37.5, 32 + 4, 0),
-            Vector3( -37.5, -(32 + 4), 0),
+            Vector3(-37.5, -(32 + 4), 0),
             Vector3(37.5, -(32 + 4), 0),
         },
         slotbg =
@@ -96,9 +96,9 @@ modparams.itemscrapper =
     {
         slotpos =
         {
-            Vector3( -37.5, 32 + 4, 0),
+            Vector3(-37.5, 32 + 4, 0),
             Vector3(37.5, 32 + 4, 0),
-            Vector3( -37.5, -(32 + 4), 0),
+            Vector3(-37.5, -(32 + 4), 0),
             Vector3(37.5, -(32 + 4), 0),
         },
         slotbg =
@@ -125,7 +125,7 @@ modparams.puffvest =
         slotpos = {},
         animbank = "ui_lamp_1x4",
         animbuild = "ui_lamp_1x4",
-        pos = Vector3( -70, -70, 0),
+        pos = Vector3(-70, -70, 0),
     },
     issidewidget = true,
     type = "pack",
@@ -137,7 +137,7 @@ modparams.reflvest =
         slotpos = {},
         animbank = "ui_lamp_1x4",
         animbuild = "ui_lamp_1x4",
-        pos = Vector3( -70, -70, 0),
+        pos = Vector3(-70, -70, 0),
     },
     issidewidget = true,
     type = "pack",
@@ -150,15 +150,15 @@ modparams.puffvest_big =
         slotpos = {},
         animbank = "ui_icepack_2x3",
         animbuild = "ui_icepack_2x3",
-        pos = Vector3( -5, -70, 0),
+        pos = Vector3(-5, -70, 0),
     },
     issidewidget = true,
     type = "pack",
 }
 
 for y = 0, 2 do
-    table.insert(modparams.puffvest_big.widget.slotpos, Vector3( -162, -75 * y + 75, 0))
-    table.insert(modparams.puffvest_big.widget.slotpos, Vector3( -162 + 75, -75 * y + 75, 0))
+    table.insert(modparams.puffvest_big.widget.slotpos, Vector3(-162, -75 * y + 75, 0))
+    table.insert(modparams.puffvest_big.widget.slotpos, Vector3(-162 + 75, -75 * y + 75, 0))
 end
 
 modparams.crabclaw =
@@ -318,16 +318,16 @@ modparams.skullchest_child =
 }
 
 for y = 0, 3 do
-    table.insert(modparams.puffvest.widget.slotpos, Vector3( -1, -75 * y + 110, 0))
+    table.insert(modparams.puffvest.widget.slotpos, Vector3(-1, -75 * y + 110, 0))
 end
 for y = 0, 3 do
-    table.insert(modparams.reflvest.widget.slotpos, Vector3( -1, -75 * y + 110, 0))
+    table.insert(modparams.reflvest.widget.slotpos, Vector3(-1, -75 * y + 110, 0))
 end
 for y = 0, 3 do
-    table.insert(modparams.crabclaw.widget.slotpos, Vector3( -1, -75 * y + 110, 0))
+    table.insert(modparams.crabclaw.widget.slotpos, Vector3(-1, -75 * y + 110, 0))
 end
 for y = 0, 3 do
-    table.insert(modparams.frigginbirdpail.widget.slotpos, Vector3( -1, -75 * y + 110, 0))
+    table.insert(modparams.frigginbirdpail.widget.slotpos, Vector3(-1, -75 * y + 110, 0))
 end
 
 local function NoIreplaceables(container, item, slot)
@@ -387,14 +387,16 @@ if GetModConfigData("scaledchestbuff") then
     for y = 2.5, -1.5, -1 do
         for x = 0, 4 do
             table.insert(containers.params.dragonflychest.widget.slotpos, Vector3(80 * x - 80 * 2, 80 * y - 80 * 2 + 120
-                , 0))
+            , 0))
         end
     end
 end
 
-local _itemtestfn = containers.params.cookpot.itemtestfn
-containers.params.cookpot.itemtestfn = function (container, item, slot)
-    return _itemtestfn(container,item, slot) and item ~= nil and not item:HasTag("oceanfish")
+if GetModConfigData("nofishyincrockpot") then
+    local _itemtestfn = containers.params.cookpot.itemtestfn
+    containers.params.cookpot.itemtestfn = function(container, item, slot)
+        return _itemtestfn(container, item, slot) and item ~= nil and not item:HasTag("oceanfish")
+    end
 end
 
 containers.params.wardrobe =

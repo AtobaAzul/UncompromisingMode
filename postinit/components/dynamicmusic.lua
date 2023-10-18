@@ -8,7 +8,7 @@ local select = GLOBAL.select
 -- It's basically lua debug hacker dark magic --KoreanWaffles
 
 --ok, turning this off from the modimport side didn't really work.
-if not GetModConfigData("um_music") or TUNING.DSTU.ISLAND_ADVENTURES then return end
+if not GetModConfigData("um_music", true) or TUNING.DSTU.ISLAND_ADVENTURES then return end
 
 
 AddComponentPostInit("dynamicmusic", function(self)

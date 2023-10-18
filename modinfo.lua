@@ -103,13 +103,14 @@ configuration_options = {
 
     Header("Client-Side"),
     BinaryConfig("um_storms_over", "Tornadoes: Reduced VFX", "Reduces the overall intensity of the visual effects on both the overlay and rain near tornadoes.", false),
+    BinaryConfig("um_music", "Official Soundtrack", "Disable this if you are crashing when using client music mods or some other incompatibility.",
+        true),
 
     Header("Mod Compatibility"),
     BinaryConfig("worldgenmastertoggle", "Worldgen Master Toggle", "Toggles ALL worldgen.", true),
-    BinaryConfig("um_music", "Official Soundtrack", "Disable this if you are crashing when using client music mods.",
-        true),
     BinaryConfig("hungry_void", "Anti-Voidwalk",
         "Disable this if you are using any mods that allow flight or traversal over the cave void.", true),
+        BinaryConfig("nofishyincrockpot", "No Fish in Crockpot", "Disable this if a mod requires live fish for some recipes.", true),
     SkipSpace(),
 
     Header("In Development"),
