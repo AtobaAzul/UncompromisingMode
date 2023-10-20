@@ -92,7 +92,10 @@ env.AddStategraphPostInit("minotaur", function(inst)
 		if inst.forcebelch and inst.components.health and not inst.components.health:IsDead() then
 			inst:DoTaskInTime(0,function(inst) inst.sg:GoToState("belch") end)
 		end
-		_OldOnExit(inst)
+		
+		if _OldOnExit ~= nil then
+			_OldOnExit(inst)
+		end
 	end
 	------------------------------------------------------------
 	

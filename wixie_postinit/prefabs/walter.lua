@@ -73,7 +73,7 @@ local function RightClickPicker(inst, target, pos)
 end
 
 local function GetPointSpecialActions(inst, pos, useitem, right)
-    if right and useitem == nil then
+    if right and useitem == nil and not TheWorld.Map:IsGroundTargetBlocked(pos) then
         local rider = inst.replica.rider
 		--[[
 		local walter = TheSim:FindEntities(pos.x, 0, pos.z, 3, {"pinetreepioneer"})
