@@ -238,16 +238,29 @@ local function TornadoEnviromentTask(inst)
     if config ~= "minimal" then
         -- if GetClosestInstWithTag("player", inst, PLAYER_CAMERA_SEE_DISTANCE * 1.125) ~= nil then -- tornado doesn't sleep. Using alt distance-based check.
         -- PICKABLES
-        local pickables = TheSim:FindEntities(x, y, z, 12, { "pickable" }, { "INLIMBO", "trap", "flower" })
+        local pickables = TheSim:FindEntities(x, y, z, 12, nil, { "INLIMBO", "trap", "flower" }, { "pickable", "HACK_workable" })
         for k, v in ipairs(pickables) do
-            if v.components.pickable:CanBePicked() then
+			print(v.prefab)
+		
+            if v.components.pickable ~= nil and v.components.pickable:CanBePicked() then
                 if not v:IsAsleep() and not config == "reduced" then
                     v.components.pickable:Pick(TheWorld)
                 else
                     if v:IsAsleep() and config == "reduced" then
                         return
                     end
+					
                     v.components.pickable:Pick(inst)
+                end
+			elseif v.components.hackable and v.components.hackable:CanBeHacked() then
+                if not v:IsAsleep() and not config == "reduced" then
+                    v.components.hackable:Hack(TheWorld, 1)
+                else
+                    if v:IsAsleep() and config == "reduced" then
+                        return
+                    end
+					
+                    v.components.hackable:Hack(inst, 1)
                 end
             end
         end
@@ -257,7 +270,7 @@ local function TornadoEnviromentTask(inst)
             { "DIG_workable", "CHOP_workable" })
 
         for k, v in ipairs(workables) do
-            if v.components.workable ~= nil and v.components.pickable == nil then
+            if v.components.workable ~= nil and not v.components.pickable and not v.components.hackable then
                 if not v:IsAsleep() then
                     if v.components.workable.action == ACTIONS.DIG then
                         local fx = SpawnPrefab("shovel_dirt")
@@ -284,7 +297,7 @@ local function TornadoEnviromentTask(inst)
         local ground = TheWorld.Map:IsOceanAtPoint(x, y, z)
         local angle_deviation = config == "reduced" and (66 * RADIANS) or 0
         for k, v in pairs(items_suck) do
-            if v and v.Physics and v.components.inventoryitem and not v.components.inventoryitem:IsHeld() and v.replica.inventoryitem ~= nil and v.replica.inventoryitem:CanBePickedUp() and v.prefab ~= "bullkelp_beachedroot" then
+            if v and v.Physics ~= nil and v.components.inventoryitem and not v.components.inventoryitem:IsHeld() and v.replica.inventoryitem ~= nil and v.replica.inventoryitem:CanBePickedUp() and v.prefab ~= "bullkelp_beachedroot" then
                 local _x, _y, _z = v:GetPosition():Get()
                 local item_ground = TheWorld.Map:IsOceanAtPoint(_x, _y, _z)
                 if ground == item_ground then
@@ -309,7 +322,7 @@ local function TornadoEnviromentTask(inst)
         local items_pick = TheSim:FindEntities(x, y, z, 4, { "_inventoryitem" },
             { "irreplaceable", "tornado_nosucky", "trap", "INLIMBO", "heavy", "backpack"})
         for k, v in ipairs(items_pick) do
-            if v.components.inventoryitem ~= nil and v.prefab ~= "bullkelp_beachedroot" then
+            if v.components.inventoryitem ~= nil and v.prefab ~= "bullkelp_beachedroot" and v.Physics ~= nil then
                 if config == "reduced" and v:IsAsleep() then
                     return
                 end
