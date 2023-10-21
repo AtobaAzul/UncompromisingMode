@@ -147,6 +147,7 @@ local prefab_post = {
     "darts",
     "terrarium",
     "bandage",
+	"lifeinjector",
     "grassgekko",
     "minotaur_drops",
     "frog",

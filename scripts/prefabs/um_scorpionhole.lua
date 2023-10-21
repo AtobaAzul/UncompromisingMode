@@ -43,7 +43,7 @@ end
 local function SpawnInvestigators(inst, worker)
     if inst.components.childspawner ~= nil then
         local targetpos = worker ~= nil and worker and worker:GetPosition() or nil
-        for k = 1, math.random(1,2) do
+        for k = 1, 1 do
             local scorpion = inst.components.childspawner:SpawnChild()
             if scorpion ~= nil and targetpos ~= nil then
                 scorpion.components.knownlocations:RememberLocation("investigate", targetpos)
@@ -89,7 +89,7 @@ local function spawner_onworked(inst, worker, workleft)
 
     if inst.components.childspawner ~= nil then
 		SpawnInvestigators(inst, worker)
-        inst.components.childspawner:ReleaseAllChildren(worker)
+        --inst.components.childspawner:ReleaseAllChildren(worker)
     end
 end
 
