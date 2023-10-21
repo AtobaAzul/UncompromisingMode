@@ -67,6 +67,25 @@ if GetModConfigData("longpig") then
     }
 end
 
+
+-- Rot Related Recipe Changes [AXE]
+    AllRecipes["lifeinjector"].ingredients = {
+        Ingredient("nitre", 2),
+        Ingredient("red_cap", 6),
+		Ingredient("stinger", 1),
+    }
+    AllRecipes["mushroom_farm"].ingredients = {
+        Ingredient("compost", 8),
+        Ingredient("poop", 5),
+		Ingredient("livinglog", 2),
+    }
+    AllRecipes["compostwrap"].ingredients = {
+        Ingredient("poop", 5),
+        Ingredient("compost", 1),
+		Ingredient("nitre", 1),
+    }
+	
+
 if GetModConfigData("wanda_nerf") then
     AllRecipes["pocketwatch_revive"].ingredients = {
         Ingredient("pocketwatch_parts", 3),
