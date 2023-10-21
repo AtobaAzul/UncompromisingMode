@@ -16,7 +16,7 @@ Latest update features:
 - Krampii will more effectively steal things and do their job.
 - A ton of misc. changes, ranging from Wickerbottom's books to hounds.
 
-󰀏 NEXT UPDATE: Under the Weather, Part 2 "Singing in the Rain" ]]
+󰀏 NEXT UPDATE: ??? ]]
 
 author = "󰀈 The Uncomp Dev Team 󰀈"
 
