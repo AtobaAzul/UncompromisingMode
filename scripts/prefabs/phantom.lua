@@ -1,6 +1,6 @@
 local assets =
 {
-    Asset("ANIM", "anim/ghoast.zip"),
+    Asset("ANIM", "anim/phantom.zip"),
 }
 
 local prefabs =
@@ -49,63 +49,13 @@ local function KeepTargetFn(inst, target)
     return false
 end
 
-local function BecomeTired(inst)
-	inst:AddTag("tired")
-	inst.sg:GoToState("tired")
-end
-
-
-local function FindChargePoint(inst)
-	if inst.neednewpoint then
-		inst.neednewpoint = nil
-		inst.GoToChargePoint(inst)
-	elseif inst.components.combat and inst.components.combat.target then
-		inst.neednewpoint = true
-		local target = inst.components.combat.target
-		local a, b, c = target.Transform:GetWorldPosition()
-		local targetpos = target:GetPosition()
-		
-		local theta = inst:GetAngleToPoint(a, 0, c)
-		targetpos.x = targetpos.x + 15*math.cos(theta)
-		targetpos.z = targetpos.z - 15*math.sin(theta)		
-		
-		inst.point = targetpos
-		SpawnPrefab("researchlab").Transform:SetPosition(inst.point.x,inst.point.y,inst.point.z)
-		inst.pointtask = inst:DoPeriodicTask(FRAMES, function(inst)
-			if inst:GetDistanceSqToPoint(inst.point)^0.5 < 1 then
-				inst.point = nil
-				TheNet:Announce("Done Charging")
-				inst.pointtask:Cancel()
-				inst.pointtask = nil
-				inst.sg:GoToState("idle")
-			end
-		end)
-	end
-end
-
-local function GoToChargePoint(inst)
-	if inst.components.combat and inst.components.combat.target then
-		inst.selfpoint = inst:GetPosition()
-		inst.point = FindSwimmableOffset(inst.components.combat.target:GetPosition(), math.random() * PI * 2, 5)
-		inst.point.x = inst.point.x + inst.selfpoint.x
-		inst.point.y = inst.point.y + inst.selfpoint.y
-		inst.point.z = inst.point.z + inst.selfpoint.z
-		SpawnPrefab("researchlab").Transform:SetPosition(inst.point.x,inst.point.y,inst.point.z)
-		inst.pointtask = inst:DoPeriodicTask(FRAMES, function(inst)
-			if inst:GetDistanceSqToPoint(inst.point)^0.5 < 1 then
-				inst.point = nil
-				TheNet:Announce("Ready to Charge")
-				inst.pointtask:Cancel()
-				inst.pointtask = nil
-				FindChargePoint(inst)
-			end
-		end)
-	end
-end
-
 local function OnNewTarget(inst,data)
-	if not inst:HasTag("tired") then
-		GoToChargePoint(inst)
+TheNet:SystemMessage("Got a new target")
+	if data and data.target and not inst.circling == true then
+		TheNet:SystemMessage("I just set inst.circling to true.")
+		inst.circling = true
+		inst.components.circler:SetCircleTarget(data.target)
+		inst.components.circler:Start()
 	end
 end
 
@@ -125,6 +75,15 @@ local function RealMode(inst)
 	inst:RemoveTag("notarget")
 end
 
+local function RedoPoint(inst)
+	if inst.point then
+		TheNet:Announce("point was not nill")
+		inst.point = nil
+	else
+		TheNet:Announce("point was nil")
+		inst.point = FindSwimmableOffset(inst:GetPosition(), math.random() * PI * 2, 5)
+	end
+end
 
 local function fn()
     local inst = CreateEntity()
@@ -146,15 +105,14 @@ local function fn()
     inst.Light:Enable(true)
     inst.Light:SetColour(180/255, 195/255, 225/255)
 	inst.Transform:SetFourFaced()
-    inst.AnimState:SetBank("ghoast")
-    inst.AnimState:SetBuild("ghoast")
+    inst.AnimState:SetBank("phantom")
+    inst.AnimState:SetBuild("phantom")
     inst.AnimState:PlayAnimation("idle", true)
     --inst.AnimState:SetMultColour(1,1,1,.6)
 
     inst:AddTag("monster")
     inst:AddTag("hostile")
     inst:AddTag("ghost")
-	inst:AddTag("ghoast")
     inst:AddTag("flying")
     inst:AddTag("noauradamage")
 
@@ -173,14 +131,14 @@ local function fn()
 
     inst:AddComponent("locomotor")
     inst.components.locomotor.walkspeed = 3
-    inst.components.locomotor.runspeed = 6
+    inst.components.locomotor.runspeed = 3
 	    
 	inst:AddComponent("circler")
 	
 	inst:AddComponent("knownlocations")
 	
 	inst:AddComponent("teamattacker") --Doesn't work without a home!
-	inst.components.teamattacker.team_type = "ghoasts"
+	inst.components.teamattacker.team_type = "phantom"
 	
     inst:SetStateGraph("SGphantom")
 
@@ -208,15 +166,16 @@ local function fn()
     ------------------
 	inst.ReflectionMode = ReflectionMode
 	inst.RealMode = RealMode
-	inst.GoToChargePoint = GoToChargePoint
+	inst:DoPeriodicTask(10,RedoPoint)
 	
-	--[[inst:DoPeriodicTask(4,function(inst)
+	
+	inst:DoPeriodicTask(4,function(inst)
 		if inst:HasTag("notarget") then
 			inst.sg:GoToState("surface")
 		else
 			inst.sg:GoToState("dive")
 		end
-	end)]]
+	end)
 	
     return inst
 end

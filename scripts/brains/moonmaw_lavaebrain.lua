@@ -12,8 +12,8 @@ local BrainCommon = require "brains/braincommon"
 
 local MAX_CHASE_TIME = 99
 local MAX_WANDER_DIST = 32
-local MIN_FOLLOW_LEADER = 5
-local MAX_FOLLOW_LEADER = 12
+local MIN_FOLLOW_LEADER = 2
+local MAX_FOLLOW_LEADER = 6
 local TARGET_FOLLOW_LEADER = (MAX_FOLLOW_LEADER + MIN_FOLLOW_LEADER) / 2
 
 local Moonmaw_lavaeBrain = Class(Brain, function(self, inst)

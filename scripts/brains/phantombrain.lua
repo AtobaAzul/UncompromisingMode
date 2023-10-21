@@ -1,45 +1,68 @@
 require "behaviours/follow"
 require "behaviours/wander"
-require "behaviours/leash"
 
 local PhantomBrain = Class(Brain, function(self, inst)
     Brain._ctor(self, inst)
 end)
 
-local MAX_WANDER_DIST = 12
-
-local function HasTarget(inst)
-	return inst.components.combat and inst.components.combat.target
+local function IsAlive(target)
+    return target.entity:IsVisible() and
+        target.components.health ~= nil and
+        not target.components.health:IsDead()
 end
 
-local function GetHome(inst)
-    return inst.components.homeseeker and inst.components.homeseeker.home
-end
+local TARGET_MUST_TAGS = { "_combat" }
+local TARGET_CANT_TAGS = { "INLIMBO", "noauradamage","smallcreature" }
 
-local function GetHomePos(inst)
-    local home = GetHome(inst)
-    return home and home:GetPosition()
-end
+local function GetFollowTarget(ghost)
+    if ghost.brain.followtarget ~= nil
+        and (not ghost.brain.followtarget:IsValid() or
+            not ghost.brain.followtarget.entity:IsVisible() or
+            ghost.brain.followtarget:IsInLimbo() or
+            ghost.brain.followtarget.components.health == nil or
+            ghost.brain.followtarget.components.health:IsDead() or
+            ghost:GetDistanceSqToInst(ghost.brain.followtarget) > TUNING.GHOST_FOLLOW_DSQ) then
 
-local function GetWanderPoint(inst)
-    local target = GetHome(inst)
-
-    if target then
-        return target:GetPosition()
+        ghost.brain.followtarget = nil
     end
-end
 
+    if ghost.brain.followtarget == nil then
+
+        local gx, gy, gz = ghost.Transform:GetWorldPosition()
+        local potential_followtargets = TheSim:FindEntities(gx, gy, gz, 10, TARGET_MUST_TAGS, TARGET_CANT_TAGS)
+        for _, pft in ipairs(potential_followtargets) do
+            -- We should only follow living characters.
+            if IsAlive(pft) then
+                -- If a character is ghost-friendly, don't immediately target them, unless they're targeting us.
+                -- Actively target anybody else.
+                local ghost_friendly = pft:HasTag("ghostlyfriend") or pft:HasTag("abigail")
+                if ghost_friendly then
+                    if ghost.components.combat:TargetIs(pft) or (pft.components.combat ~= nil and pft.components.combat:TargetIs(ghost)) then
+                        ghost.brain.followtarget = pft
+                        break
+                    end
+                else
+                    ghost.brain.followtarget = pft
+                    break
+                end
+            end
+        end
+    end
+    return ghost.brain.followtarget
+end
 
 function PhantomBrain:OnStart()
     local root = PriorityNode(
     {
-        WhileNode(function() return HasTarget(self.inst) end, "Followpoint",
-			Leash(self.inst, function() return self.inst.point end, 1, 1)
+        WhileNode(function() return self.inst.point end, "Followpoint",
+			Wander(self.inst, function() return self.inst.point end, 1)
         ),
-		WhileNode(function() return GetHome(self.inst) end, "HasHome", Wander(self.inst, GetHomePos, 8)),
-		--    Wander(self.inst, GetWanderPoint, 20),
-		Wander(self.inst, GetWanderPoint, MAX_WANDER_DIST, { minwalktime = .5, randwalktime = math.random() < 0.5 and .5 or 1, minwaittime = 6, randwaittime = .2, }),
-        
+        SequenceNode{
+			ParallelNodeAny{
+				Wander(self.inst),
+			},
+            --ActionNode(function() self.inst.sg:GoToState("dissipate") end),
+        }
     }, 1)
 
     self.bt = BT(self.inst, root)

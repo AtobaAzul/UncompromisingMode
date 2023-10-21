@@ -55,38 +55,20 @@ local states =
         tags = { "idle", "canrotate", "canslide" },
 
         onenter = function(inst)
-			if inst.components.combat and inst.components.combat.target then
-				inst.AnimState:PushAnimation("idle_angry")
-			else
-				inst.AnimState:PushAnimation("idle")
-			end
+            if inst.sg.mem.queuelevelchange then
+                inst.sg:GoToState("idle")
+            else
+                inst.AnimState:PlayAnimation("idle", true)
+            end
         end,
     },
 
-    State{
-        name = "tired",
-        tags = { "idle", "canrotate", "busy" },
-
-        onenter = function(inst)
-			inst.AnimState:PushAnimation("idle")
-			inst.AnimState:PushAnimation("idle")
-			inst.AnimState:PushAnimation("idle")
-        end,
-
-		EventHandler("animqueueover", function(inst)
-			inst:RemoveTag("tired")
-			if inst.components.combat and inst.components.combat.target then
-				inst.GoToChargePoint(inst)
-			end
-			inst.sg:GoToState("idle")
-		end),
-    },
-	
     State{
         name = "appear",
 
         onenter = function(inst)
-            inst.AnimState:PlayAnimation("appear")
+            inst.AnimState:PlayAnimation("idle")
+            inst.SoundEmitter:PlaySound(inst:HasTag("girl") and "dontstarve/ghost/ghost_girl_howl" or "dontstarve/ghost/ghost_howl")
         end,
 
         events =
@@ -99,7 +81,7 @@ local states =
         },
 
         onexit = function(inst)
-            inst.components.aura:Enable(false)
+            inst.components.aura:Enable(true)
         end,
     },
 
@@ -230,13 +212,8 @@ local states =
         tags = {"moving", "canrotate"},
 
         onenter = function(inst)
-			if inst.components.combat and inst.components.combat.target then
-				inst.components.locomotor:RunForward()
-				inst.AnimState:PushAnimation("idle_angry")
-			else
-				inst.components.locomotor:WalkForward()
-				inst.AnimState:PushAnimation("idle")
-			end
+            inst.components.locomotor:WalkForward()
+            inst.AnimState:PushAnimation("idle")
         end,
 
         timeline=

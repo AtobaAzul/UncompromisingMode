@@ -61,9 +61,9 @@ local function common(bank, build, anim, tags, cookable)
     inst.components.tradable.goldvalue = TUNING.GOLD_VALUES.MEAT
 
     inst:AddComponent("perishable")
-    inst.components.perishable:SetPerishTime(TUNING.PERISH_FAST*1.5)
+    inst.components.perishable:SetPerishTime(TUNING.PERISH_FAST)
     inst.components.perishable:StartPerishing()
-    inst.components.perishable.onperishreplacement = "spoiled_fish"
+    inst.components.perishable.onperishreplacement = "spoiled_food"
 
     if cookable ~= nil then
         inst:AddComponent("cookable")
@@ -79,10 +79,10 @@ local function ocupus_tentacle()
         return inst
     end
 
-    inst.components.edible.healthvalue = -20
-    inst.components.edible.hungervalue = 37.5
-    inst.components.edible.sanityvalue = -15
-    inst.components.perishable:SetPerishTime(TUNING.PERISH_FAST*1.5)
+    inst.components.edible.healthvalue = -TUNING.HEALING_MED
+    inst.components.edible.hungervalue = TUNING.CALORIES_SMALL
+    inst.components.edible.sanityvalue = -TUNING.SANITY_LARGE
+    inst.components.perishable:SetPerishTime(TUNING.PERISH_FAST)
 
     inst.components.tradable.goldvalue = 1
 
@@ -98,10 +98,10 @@ local function ocupus_tentacle_eye()
         return inst
     end
 
-    inst.components.edible.healthvalue = 20
-    inst.components.edible.hungervalue = 37.5
-    inst.components.edible.sanityvalue = -33
-    inst.components.perishable:SetPerishTime(TUNING.PERISH_FAST*1.5)
+    inst.components.edible.healthvalue = -TUNING.HEALING_MED
+    inst.components.edible.hungervalue = TUNING.CALORIES_SMALL
+    inst.components.edible.sanityvalue = -TUNING.SANITY_LARGE
+    inst.components.perishable:SetPerishTime(TUNING.PERISH_FAST)
 
     inst.components.tradable.goldvalue = 1
 
@@ -117,10 +117,10 @@ local function ocupus_tentacle_cooked()
         return inst
     end
 
-    inst.components.edible.healthvalue = -3
-    inst.components.edible.hungervalue = 37.5
-    inst.components.edible.sanityvalue = -10
-    inst.components.perishable:SetPerishTime(3*TUNING.PERISH_FAST)
+    inst.components.edible.healthvalue = -TUNING.HEALING_MED
+    inst.components.edible.hungervalue = TUNING.CALORIES_SMALL
+    inst.components.edible.sanityvalue = -TUNING.SANITY_LARGE
+    inst.components.perishable:SetPerishTime(TUNING.PERISH_FAST)
 
     inst.components.tradable.goldvalue = 1
 

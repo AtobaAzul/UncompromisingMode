@@ -350,7 +350,6 @@ local prefabs = {
 	"um_specter_amulet",
 	"um_walls",
 	"ocupus_items",
-	"houndious_observious",
 	"ums_biometable",
 	"umss_general",
 
@@ -427,8 +426,6 @@ local prefabs = {
 	
 	"um_preparedfoods",
 	"um_foliage",
-	"lifeinjector_redcap_buff",
-	
 }
 
 if TUNING.DSTU ~= nil and TUNING.DSTU.WIXIE ~= nil and TUNING.DSTU.WIXIE then

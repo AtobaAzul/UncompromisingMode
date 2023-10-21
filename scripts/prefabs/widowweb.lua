@@ -71,14 +71,20 @@ local function ontimerdone(inst, data)
 end
 
 local function SpawnInvestigators(inst, target)
+	local test = nil
 	local x, y, z = inst.Transform:GetWorldPosition()
-    if inst.components.childspawner and target then
-        local spider = inst.components.childspawner:SpawnChild()
-        if spider then
+    local ents = TheSim:FindEntities(x, y, z, 20, { "epic" }, {"hoodedwidow","leif"})
+	if #ents >= 1 then
+	test = true
+	else
+	test = false
+	end
+    if inst.components.childspawner ~= nil and not test and target ~= nil then
+        local spider = inst.components.childspawner:SpawnChild(target, nil, 3)
+        if spider ~= nil then
 			local x,y,z = inst.Transform:GetWorldPosition()
             spider.sg:GoToState("fall")
-			spider.suggesttarget = target
-			spider:DoTaskInTime(0.5,function(spider) spider.components.combat:SuggestTarget(spider.suggesttarget) end)
+			spider:DoTaskInTime(0.5,function(spider) spider.components.combat:SuggestTarget(target) end)
         end
     end
 end

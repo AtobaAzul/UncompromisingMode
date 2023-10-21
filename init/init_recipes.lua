@@ -401,17 +401,6 @@ AddRecipe2(
 ChangeSortKey("air_conditioner", "firesuppressor", "STRUCTURES", true)
 
 AddRecipe2(
-    "houndious_observious",
-    { Ingredient("livinglog", 12), Ingredient("mandrake", 1), Ingredient("ocupus_tentacle_eye", 5) },
-    TECH.MAGIC_TWO,
-    { placer = "houndious_observious_placer" },
-    { "STRUCTURES","MAGIC" }
-)
-ChangeSortKey("houndious_observious", "firesuppressor", "STRUCTURES", true)
-ChangeSortKey("houndious_observious", "magician_chest", "MAGIC", true)
-GLOBAL.STRINGS.RECIPE_DESC.HOUNDIOUS_OBSERVIOUS = "Tree with eyes."
-
-AddRecipe2(
     "skullchest_child",
     { Ingredient("fossil_piece", 2), Ingredient("nightmarefuel", 4), Ingredient("boards", 3) },
     TECH.LOST,
@@ -1301,18 +1290,8 @@ if GetModConfigData("wixie_walter") then
     ChangeSortKey("meatrack_hat", "walterhat", "CLOTHING", true)
     ChangeSortKey("meatrack_hat", "walterhat", "CHARACTER", true)
 
-    AddRecipe2(
-        "beakbasher",
-        { Ingredient("boards", 1), Ingredient("rope", 2), Ingredient("ocupus_beak", 1) },
-        TECH.SCIENCE_TWO,
-        nil,
-        { "TOOLS" }
-    )
-    ChangeSortKey("beakbasher", "hammer", "TOOLS", true)
-	GLOBAL.STRINGS.RECIPE_DESC.BEAKBASHER = "Smash things with a beak on a stick. Yo betatesters, I'm thinking about replacing the other items in this recipe with sea-based stuff to keep the trend, probably driftwood. What say you? What about a sea-based binding in place of rope."
-	
     STRINGS.CHARACTERS.GENERIC.DESCRIBE.WIXIEGUN = "Shhh, don't spoil it! ;)"
-	
+
     AddPrefabPostInit("forest", function(inst)
         inst:DoTaskInTime(0, function(inst)
             if Prefabs["obsidian"] then

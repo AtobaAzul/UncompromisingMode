@@ -128,10 +128,7 @@ local function NormalRetarget(inst)
 	return FindEntity(inst, targetDist,
 		function(guy)
 			if inst.components.combat:CanTarget(guy) then
-				return not guy:HasTag("moonglasscreature") and guy
-		and guy.components.combat
-		and guy.components.health
-		and not guy.components.health:IsDead()
+				return not guy:HasTag("moonglasscreature")
 			end
 		end)
 end
@@ -234,7 +231,7 @@ local function lavae_fn()
 	inst.components.combat.playerdamagepercent = .5
 	inst.components.combat:SetRange(2)
 	inst.components.combat:SetAttackPeriod(1)
-	inst.components.combat:SetRetargetFunction(3, NormalRetarget)
+	--inst.components.combat:SetRetargetFunction(3, NormalRetarget)
 	inst.components.combat:SetKeepTargetFunction(KeepTargetFn)
 	inst.components.combat.battlecryenabled = false
 	inst.components.combat:SetHurtSound("turnoftides/common/together/moon_glass/mine", nil, 0.5)
