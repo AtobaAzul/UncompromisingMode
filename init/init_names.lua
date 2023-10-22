@@ -211,7 +211,7 @@ SKINSDESC.ms_ancient_amulet_red = "" --TODO
 
 STRINGS.RAT_WHIP = "Tail o' Twined Rats"
 STRINGS.KLAUS_AMULET = "Naught Lock"
-STRINGS.HOUND_LIGHTNING = "Magic Lightning"
+STRINGS.HOUND_LIGHTNING = "Supercharged Lightning"
 STRINGS.LIGHTNINGHOUND = "Lightning Hound"
 STRINGS.MAGMAHOUND = "Magma Hound"
 STRINGS.SPOREHOUND = "Spore Hound"
