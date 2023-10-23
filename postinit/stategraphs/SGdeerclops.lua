@@ -409,7 +409,7 @@ env.AddStategraphPostInit("deerclops", function(inst)
             onenter = function(inst, target)
                 inst.Physics:Stop()
                 inst.AnimState:PlayAnimation("atk2")
-                EnableEightFaced(inst)
+				inst:SwitchToEightFaced()
                 if target ~= nil and target:IsValid() then
                     if inst.components.combat:TargetIs(target) then
                         inst.components.combat:StartAttack()
@@ -444,8 +444,7 @@ env.AddStategraphPostInit("deerclops", function(inst)
             timeline =
             {
                 TimeEvent(FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/deerclops/attack", nil) end),
-                TimeEvent(4 * FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/deerclops/step",
-                        nil, .7) end),
+                TimeEvent(4 * FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/deerclops/step", nil, .7) end),
                 TimeEvent(6 * FRAMES, function(inst)
                     ShakeAllCameras(CAMERASHAKE.VERTICAL, .2, .02, .5, inst, SHAKE_DIST)
                     SetLightValue(inst, .97)
@@ -521,7 +520,7 @@ env.AddStategraphPostInit("deerclops", function(inst)
                 SetLightValueAndOverride(inst, 1, 0)
                 SetLightColour(inst, 1)
                 if not inst.sg.statemem.keepfacing then
-                    DisableEightFaced(inst)
+					inst:SwitchToFourFaced()
                 end
             end,
         },
@@ -1139,7 +1138,7 @@ env.AddStategraphPostInit("deerclops", function(inst)
                 end),
                 TimeEvent(36 * FRAMES, function(inst) inst.sg:RemoveStateTag("attack") end),
             },
-            deathtimeline =
+			--[[deathtimeline =
             {
                 TimeEvent(0 * FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/deerclops/death") end),
                 TimeEvent(3 * FRAMES, function(inst) SetLightValue(inst, 1.01) end),
@@ -1148,7 +1147,7 @@ env.AddStategraphPostInit("deerclops", function(inst)
                 TimeEvent(6 * FRAMES, function(inst) SetLightValue(inst, 1.07) end),
                 TimeEvent(32 * FRAMES, function(inst)
                     if IsSpecialEventActive(SPECIAL_EVENTS.WINTERS_FEAST) then
-                        local player --[[, rangesq]] = inst:GetNearestPlayer()
+                        local player = inst:GetNearestPlayer()
                         LaunchAt(SpawnPrefab("winter_ornament_light1"), inst, player, 1, 6, .5)
                         inst.SoundEmitter:PlaySound("dontstarve/wilson/equip_item_gold")
                     end
@@ -1191,7 +1190,7 @@ env.AddStategraphPostInit("deerclops", function(inst)
                     end
                     ShakeAllCameras(CAMERASHAKE.FULL, .7, .02, 2, inst, SHAKE_DIST)
                 end),
-            },
+            },]]
         })
 
     CommonStates.AddSleepStates(states,
