@@ -282,7 +282,7 @@ configuration_options = {
     BinaryConfig("apicultural notes", "Wickerbottom: Apicultural Notes",
         "\"Apicultural Notes\" now adds 1 Honey to up to 20 Bee Boxes around. Doesn't work on Dusk, Night and/or Winter. Now takes a Honeycomb.", true),
     {
-        name = "wicker_inv_regen",
+        name = "wicker_inv_regen_",
         label = "Wickerbottom: Book Regen.",
         hover = "Configure how Wickerbottom's books regen.",
         options = {
