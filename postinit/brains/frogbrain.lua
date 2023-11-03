@@ -10,7 +10,7 @@ local AVOID_PLAYER_STOP = 12
 local AVOID_DIST = 10
 local AVOID_STOP = 12
 
-local FINDFOOD_CANT_TAGS = { "outofreach", "INLIMBO", "burning" }
+local FINDFOOD_CANT_TAGS = { "outofreach", "INLIMBO" }
 local function EatFoodAction(inst)
 	if inst.sg.currentstate.name == "fall" then
 		return nil
@@ -23,6 +23,7 @@ local function EatFoodAction(inst)
         function(item)
             return item.prefab ~= "mandrake"
                 and item.components.edible ~= nil
+				and not (item.components.burnable ~= nil and item.components.burnable:IsBurning())
                 and item:IsOnPassablePoint()
 				and item:IsOnValidGround()
 				and not (item:HasTag("bee") or item:HasTag("mosquito"))

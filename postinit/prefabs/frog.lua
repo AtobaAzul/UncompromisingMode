@@ -22,15 +22,22 @@ local function OnIsAutumn(inst, isautumn)
     end
 end
 
+local RETARGET_MUST_TAGS = { "_combat", "_health" }
+local RETARGET_CANT_TAGS = { "frog","toadstool","toad", "merm", "bird", "invisible", "wall", "structure" }
+local LUNAR_RETARGET_CANT_TAGS = { "merm", "lunar_aligned", "frog","toadstool", "toad", "bird", "invisible", "wall", "structure" }
+
 local function NewRetargetfn(inst)
-    if not inst.components.health:IsDead() and not inst.components.sleeper:IsAsleep() then
-        return FindEntity(inst, TUNING.FROG_TARGET_DIST, function(guy) 
+    if not inst.components.health:IsDead() and (inst.components.sleeper == nil or inst.components.sleeper ~= nil and not inst.components.sleeper:IsAsleep()) then
+        local target_dist = inst.islunar and TUNING.LUNARFROG_TARGET_DIST or TUNING.FROG_TARGET_DIST
+        local cant_tags   = inst.islunar and LUNAR_RETARGET_CANT_TAGS or RETARGET_CANT_TAGS
+		
+        return FindEntity(inst, target_dist, function(guy) 
             if not guy.components.health:IsDead() then
                 return guy.components.inventory ~= nil and inst._um_oldretarget
             end
         end,
-        {"_combat","_health"}, -- see entityreplica.lua
-        {"frog","toadstool","toad", "merm", "bird", "invisible", "wall", "structure"} -- see entityreplica.lua
+        RETARGET_MUST_TAGS, -- see entityreplica.lua
+        cant_tags -- see entityreplica.lua
         )
     end
 end

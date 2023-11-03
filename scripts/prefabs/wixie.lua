@@ -193,6 +193,18 @@ local function EquipedCount(inst, data)
 	SendModRPCToClient(GetClientModRPC("WixieTheDelinquent", "ClaustrophobiaEquipMult"), inst.userid, inst.claustrophobiamodifier)
 end
 
+local function UnEquipedCount(inst, data)
+	local headequipped = inst.components.inventory ~= nil and inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HEAD) or nil
+	local bodyequipped = inst.components.inventory ~= nil and inst.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY) or nil
+
+	inst.headmodifier = headequipped ~= nil and headequipped.components.armor ~= nil and not headequipped:HasTag("grass") and not headequipped:HasTag("shadow_item") and 0.2 or 0
+	inst.bodymodifier = bodyequipped ~= nil and bodyequipped.components.armor ~= nil and not bodyequipped:HasTag("grass") and not bodyequipped:HasTag("shadow_item") and 0.2 or 0
+
+	inst.claustrophobiamodifier = inst.headmodifier + inst.bodymodifier
+	
+	SendModRPCToClient(GetClientModRPC("WixieTheDelinquent", "ClaustrophobiaEquipMult"), inst.userid, inst.claustrophobiamodifier)
+end
+
 local function OnNewState(inst, data)
 	if inst.sg:HasStateTag("hiding") then
 		inst.claustrophobiahidden = true
@@ -286,7 +298,7 @@ local function common_postinit(inst)
 	
 	if TheWorld.ismastersim	then
 		inst:ListenForEvent("equip", EquipedCount)
-		inst:ListenForEvent("unequip", EquipedCount)
+		inst:ListenForEvent("unequip", UnEquipedCount)
 		inst:ListenForEvent("newstate", OnNewState)
 	end
 end
