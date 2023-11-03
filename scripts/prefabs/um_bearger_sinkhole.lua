@@ -304,5 +304,5 @@ local function clawfn()
 
     return inst
 end
-return Prefab("bearger_sinkhole", fn, assets, prefabs),
+return Prefab("um_bearger_sinkhole", fn, assets, prefabs),
 		Prefab("beargerclaw_sinkhole", clawfn, assets, prefabs)

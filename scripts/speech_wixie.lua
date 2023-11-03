@@ -497,6 +497,10 @@ return{
 	ANNOUNCE_HUNT_BEAST_NEARBY = "I can smell it from here. Gross.",
 	ANNOUNCE_HUNT_LOST_TRAIL = "The trail has vanished into thin air!",
 	ANNOUNCE_HUNT_LOST_TRAIL_SPRING = "Maybe it got washed away in a storm?",
+    ANNOUNCE_HUNT_START_FORK = "Tryin' to give me the slip, huh?",
+    ANNOUNCE_HUNT_SUCCESSFUL_FORK = "I'm comin for ya!",
+    ANNOUNCE_HUNT_WRONG_FORK = "I'm not afraid of some dumb stinkin' beast!",
+    ANNOUNCE_HUNT_AVOID_FORK = "I ain't afraid, I'm just being smart!",
 	ANNOUNCE_INV_FULL = "Sorry, I'm all out of hidden pockets.",
 	ANNOUNCE_KNOCKEDOUT = "Huh? Did I get hit on the head or something?",
 	ANNOUNCE_LOWRESEARCH = "Yeah, I know that already.",
@@ -854,6 +858,8 @@ return{
     ANNOUNCE_SHADOW_RIFT_MAX = "A dark, scary, cramped hole in the ground. What's not to love...?",
 
     ANNOUNCE_SCRAPBOOK_FULL = "I already know everything, stop trying to teach me!",
+
+    ANNOUNCE_CHAIR_ON_FIRE = "Hot seat! HOT SEAT!",
 
     ANNOUNCE_COACH = 
     {
@@ -1801,6 +1807,10 @@ return{
         CHESSPIECE_GUARDIANPHASE3 = "A reminder of the time we killed an alien. That was fun.",
         CHESSPIECE_EYEOFTERROR = "It looks shocked. How can an EYEBALL look shocked?",
         CHESSPIECE_TWINSOFTERROR = "Boy, am I sure glad I don't have a whiney sibling!",
+        CHESSPIECE_DAYWALKER = "I hate that guy!",
+        CHESSPIECE_DEERCLOPS_MUTATED = "We killed that jerk. Twice!",
+        CHESSPIECE_WARG_MUTATED = "Still has that 'dog' smell.",
+        CHESSPIECE_BEARGER_MUTATED = "You're even MORE armored now, and it still did you no good!",
 
         CHESSJUNK1 = "I don't trust it, maybe I should keep my distance...",
         CHESSJUNK2 = "I don't trust it, maybe I should keep my distance...",
@@ -2177,6 +2187,7 @@ return{
 		KNIGHT = "Oh come on, just one piggyback ride!",
 		KOALEFANT_SUMMER = "A big snotty baby.",
 		KOALEFANT_WINTER = "Looks like someone's packed on the blubber!",
+		KOALEFANT_CARCASS = "That's called the 'food chain', learn it!",
 		KRAMPUS = "I don't believe in Karma!",
 		KRAMPUS_SACK = "If Karma exists, then how did I get so lucky?",
 		LEIF = "I'll chop you like the rest, pines for brains!",
@@ -4571,6 +4582,26 @@ return{
         SHIELDOFTERROR ="Why shield when I could shove?",
         TWINOFTERROR1 = "Double the trouble!",
         TWINOFTERROR2 = "Double the trouble!",
+
+		-- Cult of the Lamb
+		COTL_TRINKET = "This is mine now.",
+		TURF_COTL_GOLD = "Can't wait to splash some mud on it!",
+		TURF_COTL_BRICK = "Don't call me a brick-layer.",
+		COTL_TABERNACLE_LEVEL1 =
+		{
+			LIT = "Where's MY cult like idol, huh?!",
+			GENERIC = "I COULD light it, if I felt like it...",
+		},
+		COTL_TABERNACLE_LEVEL2 =
+		{
+			LIT = "If only it were for me...",
+			GENERIC = "I COULD light it, if I felt like it...",
+		},
+		COTL_TABERNACLE_LEVEL3 =
+		{
+			LIT = "Someone better than me? Impossible...",
+			GENERIC = "I COULD light it, if I felt like it...",
+		},
 		
 		-- Year of the Catcoon
         CATTOY_MOUSE = "Huh, nice woodwork.",
@@ -4869,7 +4900,112 @@ return{
         SUPPORT_PILLAR_COMPLETE = "Oh, it's some rocks.",
         SUPPORT_PILLAR_BROKEN = "Not much of a pillar anymore.",
 
+		SUPPORT_PILLAR_DREADSTONE_SCAFFOLD = "What are you hiding?",
+		SUPPORT_PILLAR_DREADSTONE = "I think someone broke it. Someone who isn't me.",
+		SUPPORT_PILLAR_DREADSTONE_COMPLETE = "That was awfully expensive, it better not break now...",
+		SUPPORT_PILLAR_DREADSTONE_BROKEN = "What a rip off!",
+
         WOLFGANG_WHISTLE = "Quit it with that awful noise!",
+
+        -- Rifts 3
+
+        MUTATEDDEERCLOPS = "Atleast he isn't staring at me anymore!",
+        MUTATEDWARG = "Ew, mutated dog smell...",
+        MUTATEDBEARGER = "I'll knock you onto your butt!",
+
+        LUNARFROG = "I think I hate frogs.",
+
+        DEERCLOPSCORPSE =
+        {
+            GENERIC  = "He's dead... Finally!",
+            BURNING  = "Bye!",
+            REVIVING = "Uh oh, this ain't good!",
+        },
+
+        WARGCORPSE =
+        {
+            GENERIC  = "Gross, decomposition.",
+            BURNING  = "Hopefully this gets rid of the smell.",
+            REVIVING = "Not again!",
+        },
+
+        BEARGERCORPSE =
+        {
+            GENERIC  = "Silly bear! You shoulda known what would happen!",
+            BURNING  = "Lots of fur to burn.",
+            REVIVING = "Oh bother!",
+        },
+
+        BEARGERFUR_SACK = "Looks more like a trash bin to me!",
+        HOUNDSTOOTH_BLOWPIPE = "It's a neat backup for my slingshot.",
+        DEERCLOPSEYEBALL_SENTRYWARD =
+        {
+            GENERIC = "Stop staring or I'll take your eyeball out!",    -- Enabled.
+            NOEYEBALL = "Eye don't see what the problem is.",  -- Disabled.
+        },
+        DEERCLOPSEYEBALL_SENTRYWARD_KIT = "Can't someone else put it together?",
+
+        SECURITY_PULSE_CAGE = "Could trap something in it, I suppose.",
+        SECURITY_PULSE_CAGE_FULL = "You're mine now, you... glowball!",
+
+		CARPENTRY_STATION =
+        {
+            GENERIC = "Oh, it's... it's kinda like what my Mom used...",
+            BURNT = "Sorry Mom...",
+        },
+
+        WOOD_TABLE = -- Shared between the round and square tables.
+        {
+            GENERIC = "Mom would be proud, I think...",
+            HAS_ITEM = "Mom would be proud, I think...",
+            BURNT = "I... I meant to do that...",
+        },
+
+        WOOD_CHAIR =
+        {
+            GENERIC = "I... I don't need to rest!",
+            OCCUPIED = "Lazy.",
+            BURNT = "That's fine, I didn't want to rest anyways...",
+        },
+
+        DECOR_CENTERPIECE = "...It just looks stupid! Ugh!",
+        DECOR_LAMP = "I'm just happy that it doesn't catch fire.",
+        DECOR_FLOWERVASE =
+        {
+            GENERIC = "I stuck some plants in it.",
+            EMPTY = "It's an empty vase. You can put stuff in it.",
+            WILTED = "Dead as a doornail.",
+            FRESHLIGHT = "I stuck a plant in it.",
+            OLDLIGHT = "It's running a bit low.",
+        },
+        DECOR_PICTUREFRAME =
+        {
+            GENERIC = "It's a true to life painting!",
+            UNDRAWN = "It can hold all my amazing art!",
+        },
+        DECOR_PORTRAITFRAME = "A couple of idiots, immortalized.",
+
+        PHONOGRAPH = "As nice as it is, this doesn't beat a live preformance.",
+        RECORD = "There's something aluring about it... but also maddening.",
+        RECORD_CREEPYFOREST = "Reminds me of that weird forest with the giant trees...",
+        RECORD_DANGER = "What kind of music is this, anyways?",
+        RECORD_DAWN = "It gives a warm feeling.",
+        RECORD_DRSTYLE = "A little too 'bouncy' for my tastes",
+        RECORD_DUSK = "Spooky.",
+        RECORD_EFS = "I bet this is what others hear when they fight me!",
+        RECORD_END = "Oh, that's a good one!",
+        RECORD_MAIN = "I feel like I'm late to the party.",
+        RECORD_WORKTOBEDONE = "I wonder how many times its been played?",
+
+        ARCHIVE_ORCHESTRINA_MAIN = "Looks like a puzzle...",
+
+        WAGPUNKHAT = "It looks stupid! Whoever invented this is an idiot!",
+        ARMORWAGPUNK = "It's a clunk of junk!",
+        WAGSTAFF_MACHINERY = "Someone left their junk lying around!",
+        WAGPUNK_BITS = "It's some dumb junk.",
+        WAGPUNKBITS_KIT = "It's just a wrench for the lazy.",
+
+        WAGSTAFF_MUTATIONS_NOTE = "Blah blah blah, someone give me the short version!",
     },
 
     DESCRIBE_GENERIC = "That sure is... something!",

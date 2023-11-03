@@ -5,7 +5,7 @@ env.AddComponentPostInit("propagator", function(self)
 	local _OldOnUpdate = self.OnUpdate
 	
 	function self:OnUpdate(dt)
-		if TheWorld.state.season == "winter" then
+		if TheWorld.state.season == "winter" and not self.inst.sg then
 			self.currentheat = math.max(0, self.currentheat - dt * self.decayrate )
 
 			local x, y, z = self.inst.Transform:GetWorldPosition()

@@ -253,7 +253,7 @@ local function DoAreaBurn(inst)
 
                 -- v:PushEvent("onignite")
 					
-				if v.components.health ~= nil and v.components.health:IsDead() then
+				if v.components.health ~= nil and v.components.health:IsDead() and inst.attacker ~= nil then
 					inst.attacker:PushEvent("killed", { victim = v, attacker = inst.attacker })
 				end
             end

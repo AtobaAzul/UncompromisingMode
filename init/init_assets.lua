@@ -921,8 +921,6 @@ Assets = {
 
 	Asset("ANIM", "anim/walrus_house_summer.zip"),
 
-	Asset("ANIM", "anim/phonograph.zip"),
-
 	Asset("ANIM", "anim/critterlab_broken.zip"),
 
 	Asset("ANIM", "anim/whisperpod_normal_ground.zip"),

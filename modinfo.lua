@@ -6,7 +6,7 @@ if not folder_name:find("workshop-") then
 end
 
 description = [[
-󰀔 [ Version 1.4.4.3: "Under the Weather Pt.1" ]
+󰀔 [ Version 1.4.5.0: "Under the Weather Pt.1" ]
 
 Uncompromising Mode increases the risk and reward for those who have mastered Don't Starve Together.
 
@@ -20,7 +20,7 @@ Latest update features:
 
 author = "󰀈 The Uncomp Dev Team 󰀈"
 
-version = "Under the Weather Pt.1 v1.4.4.3"
+version = "Under the Weather Pt.1 v1.4.5.0"
 -- VERSION SCHEME
 -- first num is major release (e.g. "Under the weather", so, 2, UTW2 will be 3, and so on.) DO NOT BRING THIS NUMBER *DOWN* AGAIN PLEASE
 -- second is new content (something like a new large addition)
@@ -207,7 +207,7 @@ configuration_options = {
         default =
         "default"
     },
-    BinaryConfig("moon_transformations", "Moon Transformations",
+    BinaryConfig("moon_transformations", "[BROKEN] Moon Transformations",
         "Certain things transform under the dim light of the full \"Moon\".", false),
 
     SkipSpace(),
@@ -255,6 +255,8 @@ configuration_options = {
             } },
         default = true
     },
+    BinaryConfig("wathom_undeath", "Wathom Undeath", "Enables Wathom undeath mechanic when he dies while his adrenaline is high.",
+        true),
     BinaryConfig("willow", "Willow",
         "Willow's Lighter now lasts forever when she holds it, and she will retaliate when attacked by shadows.", true),
     BinaryConfig("willow insulation", "Willow's Experimental Insulation",
@@ -612,6 +614,7 @@ configuration_options = {
         default = 1
     },
     BinaryConfig("hambatnerf", "Ham Bat Nerf", "Spoils faster and minimum damage is lower.", true),
+    BinaryConfig("lifeinjector_rework", "Booster Shot Rework", "The Booster Shot regenerates 50% of your max health loss overtime.", true),
     BinaryConfig("cookiecutterhat", "Cookie Cutter Hat",
         "Cookie Cutter Caps now reflects some damage back at the attacker.", true),
     BinaryConfig("beefalo_nerf", "Beefalo Nerf", "Beefalo take half of the damage taken, instead of all.", true),

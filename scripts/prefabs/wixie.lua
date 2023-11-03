@@ -286,6 +286,7 @@ local function common_postinit(inst)
 	
 	if TheWorld.ismastersim	then
 		inst:ListenForEvent("equip", EquipedCount)
+		inst:ListenForEvent("unequip", EquipedCount)
 		inst:ListenForEvent("newstate", OnNewState)
 	end
 end

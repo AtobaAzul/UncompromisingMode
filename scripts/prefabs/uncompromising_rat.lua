@@ -739,6 +739,7 @@ local function packfn()
     inst.components.combat:SetRange(TUNING.DSTU.RAIDRAT_ATTACK_RANGE)
     inst.components.combat.hiteffectsymbol = "carrat_body"
     inst.components.combat:SetPlayerStunlock(PLAYERSTUNLOCK.RARELY)
+	inst.components.combat.canattack = false
 
     inst:AddComponent("health")
     inst.components.health:SetMaxHealth(TUNING.DSTU.RAIDRAT_HEALTH * 1.5)

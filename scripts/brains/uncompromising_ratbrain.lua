@@ -357,7 +357,7 @@ function Uncompromising_RatBrain:OnStart()
 			return self.inst.components.health.takingfiredamage or self.inst.components.burnable:IsBurning()
 		end, "OnFire", Panic(self.inst)),
 		
-		WhileNode( function() return self.inst.components.combat.target == nil or not self.inst.components.combat:InCooldown() end, "AttackMomentarily",
+		WhileNode( function() return not self.inst:HasTag("packrat") and (self.inst.components.combat.target == nil or not self.inst.components.combat:InCooldown()) end, "AttackMomentarily",
 			ChaseAndAttack(self.inst, MAX_CHASE_TIME, MAX_CHASE_DIST)),
 			
 		RunAway(self.inst, "ghost", 8, 12),

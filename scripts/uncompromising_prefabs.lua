@@ -49,7 +49,7 @@ local prefabs = {
 	"zaspberry",
 	"snowmong",
 	"firedrop",
-	"bearger_sinkhole",
+	"um_bearger_sinkhole",
 	"minimoonspider_spike",
 	"minotaur_boulder",
 	"minotaur_boulder_big",
