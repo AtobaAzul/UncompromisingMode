@@ -323,6 +323,8 @@ env.AddPrefabPostInit("spider", function(inst)
     --inst.task = inst:DoTaskInTime(3, CheckTargetPiece)
 
 	inst.DoSpikeAttack = DoSpikeAttack
+	
+	inst:AddComponent("tradable") -- For Moondial Mutation.
 end)
 
 SetSharedLootTable( 'spider_warrior',
@@ -352,6 +354,7 @@ env.AddPrefabPostInit("spider_warrior", function(inst)
 		inst.components.health:SetMaxHealth(300)
 	end
 	
+	inst:AddComponent("tradable") -- For Moondial Mutation.
 end)
 
 env.AddPrefabPostInit("spider_dropper", function(inst)
