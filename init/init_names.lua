@@ -514,6 +514,10 @@ STRINGS.UM_SMOLDER_SPORE = "Smolder Spore"
 STRINGS.UM_ARMOR_PYRE_NETTLES = "Pyre Mantle"
 STRINGS.UM_BLOWDART_PYRE = "Pyre Dart"
 
+-- Mutation Extrapolation
+STRINGS.UMDEBUFF_MOONBURN = "a moonburn"
+STRINGS.UMDEBUFF_MOONBURN_TESTINGSTICK = "Magic Pain Stick"
+
 -- Under the Weather Part 1
 STRINGS.ALPHA_LIGHTNINGGOAT = "Alpha Volt Goat"
 STRINGS.UM_TORNADO = "Giant Tornado"

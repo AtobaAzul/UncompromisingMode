@@ -424,6 +424,9 @@ local prefabs = {
 	"um_armor_pyre_nettles",
 	"um_blowdart_pyre",
 	
+	-- Mutation Extrapolation
+	"umdebuff_moonburn",
+	
 	"um_preparedfoods",
 	"um_foliage",
 	"lifeinjector_redcap_buff",
