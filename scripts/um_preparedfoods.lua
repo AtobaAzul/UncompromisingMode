@@ -260,7 +260,7 @@ local um_preparedfoods =
 
 	snowcone =
 	{
-		test = function(cooker, names, tags) return (names.ice and names.ice > 1) or (names.ice and names.twigs) end,
+		test = function(cooker, names, tags) return TUNING.DSTU.ICECROCKBLOCKER and ((names.ice and names.ice > 1) or (names.ice and names.twigs)) end,
 		hunger = 9.375,
 		health = 3,
 		sanity = 5,

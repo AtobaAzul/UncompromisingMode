@@ -62,7 +62,7 @@ local function firecannon(inst)
                         local cannonpos = Vector3(cannon.Transform:GetWorldPosition())
                         local offset = FindWalkableOffset(cannonpos, angle, 2.5, 12, true, false, nil, false)
 
-                        if inst:GetDistanceSqToPoint(cannonpos + offset) <= (0.3 * 0.3) then
+                        if cannonpos ~= nil and offset ~= nil and inst:GetDistanceSqToPoint(cannonpos + offset) <= (0.3 * 0.3) then
                             cannon.Transform:SetRotation(cannon.Transform:GetRotation() + math.random(-15, 15))
                             return BufferedAction(inst, cannon, ACTIONS.BOAT_CANNON_SHOOT)
                         end

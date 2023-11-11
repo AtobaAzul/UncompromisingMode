@@ -758,8 +758,10 @@ local function BeeQueenPost(inst)
 		local x, y, z = inst.Transform:GetWorldPosition()
 		local ents = TheSim:FindEntities(x, y, z, 20, { "epic" }, { "beequeen", "cherrybeequeen", "lordfruitfly" } )
 		
-		if #ents > 0 then
-			inst:PushEvent("flee")
+		for i, v in pairs(ents) do
+			if v ~= nil and v.components.combat ~= nil and v.components.combat.target ~= nil and v.components.combat.target == inst then
+				inst:PushEvent("flee")
+			end
 		end
 
 		if inst.components.health and not inst.components.health:IsDead() and not inst.sg:HasStateTag("busy") and
@@ -767,6 +769,7 @@ local function BeeQueenPost(inst)
 			inst.sg:GoToState("lob")
 		end
 	end)
+	
 	inst:DoTaskInTime(0, function(inst) inst.StopHoney(inst) end)
 end
 

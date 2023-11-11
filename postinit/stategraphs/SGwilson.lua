@@ -1729,7 +1729,7 @@ env.AddStategraphPostInit("wilson", function(inst)
                 if inst.components.drownable ~= nil then
 					--inst.components.drownable:TakeDrowningDamage()
 					
-					local tunings = inst.components.drownable and inst.components.drownable.customtuningsfn ~= nil and inst.components.drownable.customtuningsfn or
+					local tunings = inst.components.drownable and inst.components.drownable.customtuningsfn ~= nil and inst.components.drownable.customtuningsfn(inst) or
 										inst.prefab == "wx78" and TUNING.DROWNING_DAMAGE[string.upper(inst.prefab)] or
 										TUNING.DROWNING_DAMAGE["DEFAULT"]
 					
