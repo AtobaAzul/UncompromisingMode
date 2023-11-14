@@ -194,7 +194,7 @@ configuration_options = {
             },
             { description = "Disabled", data = 3 },
         },
-        default = 1,
+        default = 3,
     },
     {
         name = "vetcurse",
@@ -617,7 +617,7 @@ configuration_options = {
     BinaryConfig("lifeinjector_rework", "Booster Shot Rework", "The Booster Shot regenerates 50% of your max health loss overtime.", true),
     BinaryConfig("cookiecutterhat", "Cookie Cutter Hat",
         "Cookie Cutter Caps now reflects some damage back at the attacker.", true),
-    BinaryConfig("beefalo_nerf", "Beefalo Nerf", "Beefalo take half of the damage taken, instead of all.", true),
+    BinaryConfig("beefalo_nerf", "Beefalo Nerf", "Players will take half of the damage that the Beefalo takes.", true),
     SkipSpace(),
 
     -----------------------------
