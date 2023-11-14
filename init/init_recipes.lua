@@ -75,7 +75,7 @@ end
 		Ingredient("stinger", 1),
     }
     AllRecipes["mushroom_farm"].ingredients = {
-        Ingredient("compost", 8),
+        Ingredient("compost", 4),
         Ingredient("poop", 5),
 		Ingredient("livinglog", 2),
     }
