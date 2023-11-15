@@ -50,9 +50,9 @@ env.AddComponentPostInit("combat", function(self)
 
                 return vanillaGetAttacked(self, attacker, damage, weapon, stimuli, ...)
             end
-        else
-            return vanillaGetAttacked(self, attacker, damage, weapon, stimuli, ...)
-        end
+        --else
+            --return vanillaGetAttacked(self, attacker, damage, weapon, stimuli, ...)
+       --end
     end
 end)
 
