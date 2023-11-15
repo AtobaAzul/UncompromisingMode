@@ -312,20 +312,20 @@ TUNING.DSTU = {
     -- Dynamic Boss Resistance
     ----------------------------------------------------------------------------
 
-    --DYNRES_BOSSES = {
-        --"antlion",
-        --"deerclops",
-        --"eyeofterror",
-        --"twinofterror1",
-        --"twinofterror2",
-        --"minotaur",
-        --"hoodedwidow",
-        --"stalker_atrium",
-        --"alterguardian_phase1",
-        --"alterguardian_phase2",
-        --"alterguardian_phase3",
-        --"crabking"
-    --},
+    DYNRES_BOSSES = {
+        "antlion",
+        "deerclops",
+        "eyeofterror",
+        "twinofterror1",
+        "twinofterror2",
+        "minotaur",
+        "hoodedwidow",
+        "stalker_atrium",
+        "alterguardian_phase1",
+        "alterguardian_phase2",
+        "alterguardian_phase3",
+        "crabking"
+    },
 
     ----------------------------------------------------------------------------
     -- Experimental and DEV

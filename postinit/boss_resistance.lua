@@ -18,7 +18,7 @@ env.AddComponentPostInit("combat", function(self)
     function self:GetAttacked(attacker, damage, weapon, stimuli, ...)
         local bossmonster = self.inst
         local NearbyPlayers = BossPlayerScan(bossmonster)
-        --if table.contains(TUNING.DSTU.DYNRES_BOSSES, bossmonster.prefab) then
+        if table.contains(TUNING.DSTU.DYNRES_BOSSES, bossmonster.prefab) then
             if NearbyPlayers <= 1 then
                 return vanillaGetAttacked(self, attacker, damage, weapon, stimuli, ...)
             else
