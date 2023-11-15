@@ -179,8 +179,7 @@ configuration_options = {
     {
         name = "bossresistance",
         label = "Dynamic Boss Resistance",
-        hover =
-        "Some bosses have increasing resistance against multiple players",
+        hover = "Bosses have increasing resistance against multiple players",
         options = {
             {
                 description = "Dynamic",
