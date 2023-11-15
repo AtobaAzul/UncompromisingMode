@@ -98,7 +98,7 @@ if GetModConfigData("beebox_nerf") then
     AllRecipes["beebox"].ingredients = {
         Ingredient("boards", 2),
         Ingredient("honeycomb", 1),
-        Ingredient("bee", 1)
+        Ingredient("bee", 2)
     }
 end
 
