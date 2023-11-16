@@ -104,14 +104,10 @@ function NearestValue(table, number)
 end
 
 local function DoRegen(inst)
-    print("doregen")
     inst.components.workable:SetWorkLeft(5)
     inst.components.health:DoDelta(25)
     SpawnPrefab("shadow_teleport_in").Transform:SetPosition(inst.Transform:GetWorldPosition())
     --Remove sanity aura once we reach the reinforced portion
-    print(inst.components.health:GetPercent())
-    print(NearestValue(thresholds, inst.components.health:GetPercent()))
-    print(inst.components.health:GetPercent() < NearestValue(thresholds, inst.components.health:GetPercent()))
     if inst.components.health ~= nil and inst.components.health:GetPercent() > NearestValue(thresholds, inst.components.health:GetPercent()) and inst.components.sanityaura ~= nil then
         inst:RemoveComponent("sanityaura")
         if inst._regentask ~= nil then
@@ -152,6 +148,7 @@ env.AddPrefabPostInit("wall_dreadstone", function(inst)
     end
 
     ToggleOrRestartRegen(inst)
+    inst.components.health:SetAbsorptionAmountFromPlayer(0)
     inst:AddComponent("planarentity")
     inst:ListenForEvent("healthdelta", function(inst) ToggleOrRestartRegen(inst) end)
 end)
