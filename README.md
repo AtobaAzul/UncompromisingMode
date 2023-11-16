@@ -1,4 +1,4 @@
-![logo](https://user-images.githubusercontent.com/94794129/215330839-29a554ed-4965-4a85-9295-b39883f991cc.png)
+![Uncompromising Logo](~Tertiary/Logo%20Boxes/Uncomp%20Text.png)
 
 # Uncompromising Mode
 
