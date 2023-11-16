@@ -177,7 +177,7 @@ configuration_options = {
         default = 3
     },
     {
-        name = "bossresistance",
+        name = "boss_resistance_",
         label = "[BROKEN] Dynamic Boss Resistance",
         hover =
         "Some bosses have increasing resistance against multiple players",

@@ -467,7 +467,7 @@ if GetModConfigData("cookiecutterhat") then
     table.insert(prefab_post, "cookiecutterhat")
 end
 
-if GetModConfigData("bossresistance") ~= false then
+if GetModConfigData("boss_resistance_") ~= false then
     modimport("postinit/boss_resistance")
 end
 
