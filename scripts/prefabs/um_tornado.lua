@@ -270,7 +270,7 @@ local function TornadoEnviromentTask(inst)
             { "DIG_workable", "CHOP_workable" })
 
         for k, v in ipairs(workables) do
-            if v.components.workable ~= nil and not v.components.pickable and not v.components.hackable and not string.match(v.prefab, "oceantree") then
+            if v.components.workable ~= nil and not v.components.pickable and not v.components.hackable and not string.match(v.prefab, "oceantree") and not v.components.spawner then
                 if not v:IsAsleep() then
                     if v.components.workable.action == ACTIONS.DIG then
                         local fx = SpawnPrefab("shovel_dirt")
