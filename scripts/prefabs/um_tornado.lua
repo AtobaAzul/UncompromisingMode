@@ -295,13 +295,16 @@ local function TornadoEnviromentTask(inst)
                 { "irreplaceable", "tornado_nosucky", "trap", "INLIMBO", "heavy", "backpack"})
 
         local ground = TheWorld.Map:IsOceanAtPoint(x, y, z)
-        local angle_deviation = config == "reduced" and (66 * RADIANS) or 0
+        local angle_deviation = config == "reduced" and 0 or (66 * RADIANS)
         for k, v in pairs(items_suck) do
             if v and v.Physics ~= nil and v.components.inventoryitem and not v.components.inventoryitem:IsHeld() and v.replica.inventoryitem ~= nil and v.replica.inventoryitem:CanBePickedUp() and v.prefab ~= "bullkelp_beachedroot" then
                 local _x, _y, _z = v:GetPosition():Get()
                 local item_ground = TheWorld.Map:IsOceanAtPoint(_x, _y, _z)
                 if ground == item_ground then
-                    if not v:IsAsleep() and not config == "reduced" then
+                    if not v:IsAsleep() then
+                        if config == "reduced" then
+                            return
+                        end
                         _y = .1
                         v.Physics:Teleport(_x, _y, _z)
                         local dir = v:GetPosition() - inst:GetPosition()
