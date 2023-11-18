@@ -102,7 +102,7 @@ configuration_options = {
     ------------------------------
 
     Header("Client-Side"),
-    BinaryConfig("um_storms_over", "Tornadoes: Reduced VFX", "Reduces the overall intensity of the visual effects on both the overlay and rain near tornadoes.", false),
+    BinaryConfig("um_storms_over", "Tornadoes - Reduced VFX", "Reduces the overall intensity of the visual effects on both the overlay and rain near tornadoes.", false),
     BinaryConfig("um_music", "Official Soundtrack", "Disable this if you are crashing when using client music mods or some other incompatibility.",
         true),
 
@@ -178,7 +178,7 @@ configuration_options = {
     },
     {
         name = "boss_resistance_",
-        label = "[BROKEN] Dynamic Boss Resistance",
+        label = "[BROKEN] Dynamic Boss Res.",
         hover =
         "Some bosses have increasing resistance against multiple players",
         options = {
@@ -207,7 +207,7 @@ configuration_options = {
         default =
         "default"
     },
-    BinaryConfig("moon_transformations", "[BROKEN] Moon Transformations",
+    BinaryConfig("moon_transformations", "[BROKEN] Moon Transfor.",
         "Certain things transform under the dim light of the full \"Moon\".", false),
 
     SkipSpace(),
@@ -224,11 +224,11 @@ configuration_options = {
     --BinaryConfig("wixie_birds", "Wixie: Slingshot Nerfs", "Slingshots can't hit birds & rabbits.", true),
     BinaryConfig("holy fucking shit it's wathom", "Wathom", "Enable Uncompromising Mode's Wathom, the Forgotten Parody.",
         true),
-    BinaryConfig("wathom_maxdmg", "Wathom: Damage Cap",
+    BinaryConfig("wathom_maxdmg", "Wathom - Damage Cap",
         "Wathom's damage is capped at 600 to limit his absurd burst damage potential.", true),
     {
         name = "wathom_ampvulnerability",
-        label = "Wathom: Amped Vulnerability",
+        label = "Wathom - Amped Vulnerability",
         hover =
         "Wathom takes more damage when amped.",
         options = {
@@ -239,7 +239,7 @@ configuration_options = {
     },
     {
         name = "wathom_armordamage",
-        label = "Wathom: Armor Damage Priority",
+        label = "Wathom - Armor Damage Prior.",
         hover =
         "Wathom can take increased damage, choose if armor damage is ignored.",
         options = {
@@ -261,31 +261,31 @@ configuration_options = {
         "Willow's Lighter now lasts forever when she holds it, and she will retaliate when attacked by shadows.", true),
     BinaryConfig("willow insulation", "Willow's Experimental Insulation",
         "Willow's insulation is tweaked to be 120 on Summer and -120 on Winter.", false),
-    BinaryConfig("bernie_buffs", "Willow: Bernie Buffs",
+    BinaryConfig("bernie_buffs", "Willow - Bernie Buffs",
         "Bernie has 80% resistance against shadows\nHolding Bernie prevents shadows from aggro'ing.", true),
     BinaryConfig("wolfgang", "Experimental Wolfgang",
         "Wolfgang gains mightiness based on hunger level. Hunger drain increases the longer mighty is maintained.", false),
     BinaryConfig("wendy", "Wendy", "Abigail is nerfed to not increase Wendy's maximum damage above average.", true),
     BinaryConfig("wx78", "WX-78", "No longer heals from lightning.", true),
-    BinaryConfig("wickerbottom", "Wickerbottom: Sane Reading",
+    BinaryConfig("wickerbottom", "Wickerbottom - Sane Reading",
         "Wickerbottom/Maxwell can no longer read books while insane.", true),
-    BinaryConfig("on tentacles", "Wickerbottom: On Tentacles",
+    BinaryConfig("on tentacles", "Wickerbottom - On Tentacles",
         "On Tentacles now spawns friendly tentacles that die over time, and do not drop tentacle spots.", true),
-    BinaryConfig("applied horticulture", "Wickerbottom: Horticulture, Abr.",
+    BinaryConfig("applied horticulture", "Wickerbottom - Horti., Abridged",
         "\"Horticulture, Abridged\" now takes 1 Leafy Meat, instead of 5 seeds.", true),
-    BinaryConfig("horticulture, expanded", "Wickerbottom: Horticulture, Exp.",
+    BinaryConfig("horticulture, expanded", "Wickerbottom - Horti., Expanded",
         "\"Horticulture, Expanded\" now grows 20 plants, instead of 15. Now takes a Tree Jam, instead of a Feather Pencil.", true),
-    BinaryConfig("the angler", "Wickerbottom: The Angler's",
+    BinaryConfig("the angler", "Wickerbottom - The Angler's",
         "\"The Angler's Survival Guide\" now takes 2 Hardened Slip Bobbers, instead of 2 Wooden Ball Bobbers.", true),
-    BinaryConfig("lux aeterna", "Wickerbottom: Lux and Redux",
+    BinaryConfig("lux aeterna", "Wickerbottom - Lux and Redux",
         "\"Lux Aeterna\" and \"Lux Aeterna Redux\" now both last longer. \"Lux Aeterna Redux\" now takes a Glow Berry, instead of a Feather Pencil. ", true),
-    BinaryConfig("lunar grimoire", "Wickerbottom: Lunar Grimoire",
+    BinaryConfig("lunar grimoire", "Wickerbottom - Lunar Grimoire",
         "\"Lunar Grimoire\" now has 4 uses and mutates things around you. Now takes 2 Moon Rocks and 2 Moon Shrooms.", true),
-    BinaryConfig("apicultural notes", "Wickerbottom: Apicultural Notes",
-        "\"Apicultural Notes\" now adds 1 Honey to up to 20 Bee Boxes around. Doesn't work on Dusk, Night and/or Winter. Now takes a Honeycomb.", true),
+    BinaryConfig("apicultural notes", "Wickerbottom - Apicultural Notes",
+        "\"Apicultural Notes\" now adds 1 Honey to up to 10 Bee Boxes around. Doesn't work on Dusk, Night and/or Winter. Now takes a Honeycomb.", true),
     {
         name = "wicker_inv_regen_",
-        label = "Wickerbottom: Book Regen.",
+        label = "Wickerbottom - Book Regen.",
         hover = "Configure how Wickerbottom's books regen.",
         options = {
             {
@@ -313,12 +313,12 @@ configuration_options = {
         true),
     --	BinaryConfig("wolfgang", "Improved/Balanced Wolfgang", "Wolfgang gains new perks and downsides. Read the patch notes included in the mod folder or workshop for details.", false),
     BinaryConfig("wigfrid", "Wigfrid", "Reduced Wigfrids combat leeching effect to more balanced levels.", true),
-    BinaryConfig("winonaworker", "Winona: Faster Working",
+    BinaryConfig("winonaworker", "Winona - Faster Working",
         "Winona now scales her work/picking efficiency, and tool/weapon durability, off of her hunger level. Drains hunger when taking actions.",
         true),
-    BinaryConfig("winona_portables_", "Winona: Portable Structures",
+    BinaryConfig("winona_portables_", "Winona - Portable Structures",
         "Makes Winona's structures portable and changes what can be stored into Winona's Toolbox depending if it's enabled or not.", true),
-    BinaryConfig("winona_gen_", "Winona: Generators",
+    BinaryConfig("winona_gen_", "Winona - Generators",
         "Limits access to Winona's Generators to only allow her to use them.", false),
     BinaryConfig("winonawackycats", "Experimental Winona Catapults",
         "Catapults no longer regenerate, have reduced health, and deal 34 AOE damage.", false),
@@ -346,12 +346,12 @@ configuration_options = {
         default =
         "UMNERF"
     },
-    BinaryConfig("wormwood_extrafiredmg", "Wormwood: Extra Fire Damage",
+    BinaryConfig("wormwood_extrafiredmg", "Wormwood - Extra Fire Damage",
         "Increases Wormwood's fire damage multiplier to 1.75x, from 1.25x.", true),
-    BinaryConfig("wormwood_trapbuffs", "Wormwood: Trap Buffs",
+    BinaryConfig("wormwood_trapbuffs", "Wormwood - Trap Buffs",
         "Bramble traps do no player damage, reset when you are bloomed near them, and create multiple when crafted.",
         true),
-    BinaryConfig("wormwood_plants", "Wormwood: Planting Sanity", "Increases the sanity loss from digging plants by 5.",
+    BinaryConfig("wormwood_plants", "Wormwood - Planting Sanity", "Increases the sanity loss from digging plants by 5.",
         true),
     BinaryConfig("wanda_nerf", "Wanda",
         "A bunch of changes to some of Wanda's more overpowered items to make them more balanced.", true),
@@ -408,7 +408,7 @@ configuration_options = {
     BinaryConfig("um_storms", "Tornadoes", "Tornadoes sweep across the land, bringing heavy rain and lightning!", true),
     {
         name = "um_storms_performance",
-        label = "Tornadoes: Less Lag",
+        label = "Tornadoes - Less Lag",
         hover =
         "Simplifies some of tornadoes' interactions with the world to help with performance for lower-end systems.",
         options = {
@@ -443,7 +443,7 @@ configuration_options = {
     BinaryConfig("pyrenettles", "Pyre Nettles", "Pyre Nettles are a new invasive cave plant that grows with heat.", true),
     BinaryConfig("smog", "Smog",
         "Burning plants in summer releases large quantities of smoke. Meant to interact with heatwaves.", true),
-    BinaryConfig("maxtempdamage", "Max Health Temperature Damage", "Freezing and Overheating will deal max health damage after a brief delay.", true),
+    BinaryConfig("maxtempdamage", "Max Health Temperature Dam.", "Freezing and Overheating will deal max health damage after a brief delay.", true),
     SkipSpace(),
 
     --[[ This section disabled until we actually use it.
@@ -592,7 +592,7 @@ configuration_options = {
     },
     BinaryConfig("insul_thermalstone", "Tweaked Thermal Stone",
         "Thermal Stones now have less insulation, but inherit some insulation from clothing.", true),
-    BinaryConfig("uncool_chester", "Thermal Stone Snow Chester Nerf",
+    BinaryConfig("uncool_chester", "Ther. Stone Snow Chester Nerf",
         "Snow Chester will no longer freeze Thermal Stones.", true),
     {
         name = "electricalmishap",
