@@ -413,7 +413,7 @@ TUNING.DSTU = {
 -- [              DST Related Overrides                  ]
 
 if GetModConfigData("beebox_nerf") then
-    TUNING.BEEBOX_BEES = 1
+    TUNING.BEEBOX_BEES = 1.5
     TUNING.BEEBOX_RELEASE_TIME = day_time * 1.5
 end
 
