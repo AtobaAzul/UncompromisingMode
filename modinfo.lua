@@ -224,8 +224,8 @@ configuration_options = {
     --BinaryConfig("wixie_birds", "Wixie: Slingshot Nerfs", "Slingshots can't hit birds & rabbits.", true),
     BinaryConfig("holy fucking shit it's wathom", "Wathom", "Enable Uncompromising Mode's Wathom, the Forgotten Parody.",
         true),
-    BinaryConfig("wathom_maxdmg", "Wathom - Damage Cap",
-        "Wathom's damage is capped at 600 to limit his absurd burst damage potential.", true),
+    BinaryConfig("wathom_max_dmg", "Wathom - Damage Cap",
+        "Wathom's damage is capped at 600 to limit his absurd burst damage potential.", false),
     {
         name = "wathom_ampvulnerability",
         label = "Wathom - Amped Vulnerability",
