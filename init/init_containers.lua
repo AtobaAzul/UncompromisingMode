@@ -25,7 +25,7 @@ function CheckWardrobeItem(container, item, slot)
         or (item.prefab == "razor" or item.prefab == "beef_bell") or item:HasTag("heatrock") or
         (item:HasTag("pocketwatch") or item.prefab == "pocketwatch_dismantler") or
         item.prefab == "sewing_tape" or item.prefab == "sewing_kit" or item:HasTag("fan") or
-        string.match(item.prefab, "wx78module_") ~= nil
+        string.match(item.prefab, "wx78module_") ~= nil or item:HasTag("mine") or item:HasTag("trap")
 end
 
 function CheckToolboxItem(container, item, slot)

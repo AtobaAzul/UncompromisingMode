@@ -571,3 +571,15 @@ TUNING.EMERGENCY_BURNING_NUMBER = 1 -- number of fires to maintain warning level
 TUNING.EMERGENCY_WARNING_TIME = 3   -- minimum length of warning period
 TUNING.EMERGENCY_RESPONSE_TIME = 30 -- BURNT_NUMBER structures must burn within this time period to trigger flingomatic emergency response
 TUNING.EMERGENCY_SHUT_OFF_TIME = 10 -- stay on for this length of time
+
+local extraitems = {
+    "cutgrass",
+    "cutgrass",
+    "cutgrass",
+    "log",
+    "log",
+}
+
+for k, v in ipairs(extraitems) do
+    table.insert(TUNING.EXTRA_STARTING_ITEMS.winter, v)
+end
