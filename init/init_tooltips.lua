@@ -32,6 +32,7 @@ STRINGS.UNCOMP_TOOLTIP = {
 	WARDROBE = "- Can store a lot of equipment.",
 	WINONA_BATTERY_LOW = "- Can charge electrical equipment.",
 	WINONA_BATTERY_HIGH = "- Can charge electrical equipment.",
+    WINONA_SPOTLIGHT = "Significantly increased range.\nDoubled radius.",
 	LIGHTNING_ROD = "- Can charge electrical equipment.",
 	LIGHTER = "- Lasts forever in the hands of a pyromaniac.",
 	BANDAGE = "- Restores a bit of extra health over time.",
