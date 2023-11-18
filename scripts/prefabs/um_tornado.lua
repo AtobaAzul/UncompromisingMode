@@ -735,7 +735,7 @@ local function fn()
     end)]]
 
     if config ~= "minimal" then
-        inst:DoPeriodicTask(5, TornadoItemTossTask)
+        inst:DoPeriodicTask(2.5, TornadoItemTossTask)
     end
     inst:DoPeriodicTask(0.25, TornadoEnviromentTask)
 
@@ -789,7 +789,7 @@ local function CaveTornadoTask(inst)
         SpawnPrefab("cavein_debris").Transform:SetPosition(x, 0, z)
     end
 
-    if destination ~= nil then
+    if destination ~= nil and TheWorld.state.isspring then
         local x_dest, y_dest, z_dest = destination.Transform:GetWorldPosition()
         local dest_rad = math.rad(inst:GetAngleToPoint(x_dest, y_dest, z_dest))
         local dest_velx = math.cos(dest_rad)
@@ -813,8 +813,8 @@ end
 local function CanSpawnWaterfall(inst, x, y, z)
     local is_valid_tile = true
 
-    if x ~= nil then
-        local ents = TheSim:FindEntities(x, y, z, 40, { "um_waterfall" })
+    if TheWorld.state.isspring and x ~= nil then
+        local ents = TheSim:FindEntities(x, y, z, 50, { "um_waterfall" })
 
         if ents ~= nil and #ents > 0 then
             is_valid_tile = false
@@ -904,6 +904,12 @@ local function MoveDestination(inst)
         inst.components.timer:StartTimer("delete_destination", (TheWorld.state.springlength / 4.5) * 480)
         --inst.components.timer:StartTimer("delete_destination", 30)
     end
+	
+	
+    if not TheWorld.state.isspring then
+        inst.persists = false
+        inst:Remove()
+	end
 end
 
 local function OnSave_Dest(inst, data) data.danumber = inst.danumber end

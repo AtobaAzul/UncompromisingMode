@@ -97,9 +97,9 @@ local function ToggleCursee(inst)
 			local function acceptance()
 				TheFrontEnd:PopScreen()
 			end
-			local title = "You Made Your Choice."
-			local bodytext = "Now you must live with the consequences..."
-			local yes_box = { text = "Ok", cb = acceptance }
+			local title = STRINGS.VETS_CONFIRMED_TITLE
+			local bodytext = STRINGS.VETS_CONFIRMED
+			local yes_box = { text = STRINGS.VETS_OK, cb = acceptance }
 
 			local bpds = BigPopupDialogScreen(title, bodytext, { yes_box })
 			bpds.title:SetPosition(0, 90, 0)
@@ -111,9 +111,9 @@ local function ToggleCursee(inst)
 				TheFrontEnd:PopScreen()
 			end
 
-			local title = "The Veterans Curse."
-			local bodytext = "You're about to be afflicted with a crippling curse.\nYour body will treat you more harshly,\nhowever fortune favors the bold (or foolish)! \n \nTouch the skull again to seal your fate."
-			local yes_box = { text = "Ok", cb = start_curse }
+			local title = STRINGS.VETS_TITLE
+			local bodytext = STRINGS.VETS
+			local yes_box = { text = STRINGS.VETS_OK, cb = start_curse }
 
 			local bpds = BigPopupDialogScreen(title, bodytext, { yes_box })
 			bpds.title:SetPosition(0, 90, 0)

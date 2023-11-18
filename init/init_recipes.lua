@@ -84,6 +84,11 @@ end
         Ingredient("compost", 1),
 		Ingredient("nitre", 1),
     }
+    AllRecipes["compostingbin"].ingredients = {
+        Ingredient("boards", 3),
+        Ingredient("twigs", 2),
+		Ingredient("cutgrass", 1),
+    }
 	
 
 if GetModConfigData("wanda_nerf") then

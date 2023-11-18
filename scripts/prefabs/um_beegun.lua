@@ -678,6 +678,7 @@ local function bulletfn(ischerry)
     inst:AddTag("flying")
     inst:AddTag("ignorewalkableplatformdrowning")
     inst:AddTag("scarytoprey")
+    inst:AddTag("noauradamage")
 
     inst.AnimState:SetBank("bee")
 	
