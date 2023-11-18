@@ -298,7 +298,7 @@ AllRecipes["mast_malbatross"].ingredients = {
     Ingredient("malbatross_feathered_weave", 3)
 }
 
-AllRecipes["winona_spotlight_item"].ingredients = {Ingredient("sewing_tape", 1), Ingredient("goldnugget", 2), Ingredient("lightbulb", 1)}
+AllRecipes["winona_spotlight"].ingredients = {Ingredient("sewing_tape", 1), Ingredient("goldnugget", 2), Ingredient("lightbulb", 1)}
 
 -- new recipes
 
