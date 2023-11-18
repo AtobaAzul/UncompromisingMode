@@ -520,7 +520,18 @@ local function TornadoTask(inst)
                     if v ~= nil and v:IsValid() and v:HasTag("player") and v.sg ~= nil and not v.sg:HasStateTag("gotgrabbed") and v:GetDistanceSqToInst(inst) < 300 or v.prefab ~= "bullkelp_beachedroot" and v.components.inventoryitem ~= nil and v:GetDistanceSqToInst(inst) < 600 and not v:HasTag("tornado_nosucky") or v.components.oceanfishable ~= nil and not v:HasTag("INLIMBO") then
                         local hat = v.components.inventory:GetEquippedItem(EQUIPSLOTS.HEAD)
 
-                        if hat ~= nil then
+                        if hat ~= nil and not hat:HasTag("gotgrabbed") then
+                            hat:AddTag("tornado_nosucky")
+                            hat:AddTag("gotgrabbed")
+
+                            hat:DoTaskInTime(0.5, function(inst)
+                                hat:RemoveTag("tornado_nosucky")
+                            end)
+
+                            hat:DoTaskInTime(2.5, function(inst)
+                                hat:RemoveTag("gotgrabbed")
+                            end)
+
                             v.SoundEmitter:PlaySound("dontstarve/common/tool_slip")
                             v.components.inventory:DropItem(hat, true, true)
                             if hat.Physics ~= nil then
@@ -542,6 +553,7 @@ local function TornadoTask(inst)
                                 hat.Physics:SetVel(math.cos(angle) * speed, 10, math.sin(angle) * speed)
                             end
                         end
+
 
                         local rad = math.rad(v:GetAngleToPoint(x, y, z))
                         local velx = math.cos(rad)
