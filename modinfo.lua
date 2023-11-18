@@ -110,7 +110,7 @@ configuration_options = {
     BinaryConfig("worldgenmastertoggle", "Worldgen Master Toggle", "Toggles ALL worldgen.", true),
     BinaryConfig("hungry_void", "Anti-Voidwalk",
         "Disable this if you are using any mods that allow flight or traversal over the cave void.", true),
-        BinaryConfig("nofishyincrockpot", "No Fish in Crockpot", "Disable this if a mod requires live fish for some recipes.", true),
+    BinaryConfig("nofishyincrockpot", "No Fish in Crockpot", "Disable this if a mod requires live fish for some recipes.", true),
     SkipSpace(),
 
     Header("In Development"),
@@ -816,8 +816,8 @@ configuration_options = {
     BinaryConfig("harder_koalefants", "Harder Koalefants", "Koalefants have brand new attacks and doubled health.", true),
     BinaryConfig("hungryfrogs", "Hungry Frogs", "Frogs eat anything left on the floor.", true),
     BinaryConfig("cowardfrogs", "Frog Anti-cheese", "Frogs flee from bosses to prevent cheesing.", true),
-    BinaryConfig("fiendforcedmetodothis", "Slurtle Tweaks",
-        "Slurtles attack faster, have less health and drop Shellmets more often.", true),
+    BinaryConfig("fiendforcedmetodothis", "Slurtle Tweaks", "Slurtles attack faster, have less health and drop Shellmets more often.", true),
+    BinaryConfig("sharpshooter_monkeys", "Sharpshooter Powder Monkeys", "Powder monkeys actually aim their cannons and fire at anything they may consider 'fun' shooting at.", true),
     SkipSpace(),
 
     -----------------------------
@@ -834,8 +834,8 @@ configuration_options = {
         hover = "The year that Mother Goose can spawn.",
         options = {
             { description = "Year 1 (Default)", data = 26 },
-            { description = "Year 2",           data = 26 * 1.5 }, -- maybe???
-            { description = "Year 3",           data = 26 * 2.5 }  -- ???
+            { description = "Year 2",           data = 50 },    -- maybe???
+            { description = "Year 3",           data = 50 * 2 } -- ???
         },
         default = 26
     },

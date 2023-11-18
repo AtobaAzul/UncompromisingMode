@@ -44,7 +44,7 @@ local component_post = {
     "weather",
     "worldtemperature",
     "worldwind",
-	"planarentity",
+    "planarentity",
     "geyserfx",
     "firedetector",
 }
@@ -141,7 +141,7 @@ local prefab_post = {
     "siestahut",
     "bedroll_furry",
     "bees",
-	"beemine",
+    "beemine",
     "farmplants",
     "rainhat",
     "darts",
@@ -186,13 +186,14 @@ local prefab_post = {
     "lightninggoatherd",
     "archive_centipede",
     "firenettles",
-	"staff_tornado",
-	"rainometer",
+    "staff_tornado",
+    "rainometer",
     "winterometer",
-	"mooneye",
+    "mooneye",
     "dragoonegg",
-	"compostingbin",
-	"plantables",
+    "bomb_lunarplant",
+    "compostingbin",
+    "plantables",
 }
 
 local stategraph_post = {
@@ -231,7 +232,6 @@ local brain_post = {
     "deer",
     "shadowwaxwell",
     "terrorguisestuff",
-    "powdermonkey",
 }
 
 if GetModConfigData("wixie_walter") then
@@ -442,9 +442,9 @@ if GetModConfigData("reworked_ck") then
 end
 
 if GetModConfigData("changed_shadowpieces") then
-	table.insert(prefab_post, "shadow_knight")
-	table.insert(stategraph_post, "shadow_bishop")
-	table.insert(stategraph_post, "shadow_knight")
+    table.insert(prefab_post, "shadow_knight")
+    table.insert(stategraph_post, "shadow_bishop")
+    table.insert(stategraph_post, "shadow_knight")
 end
 
 if GetModConfigData("hambatnerf") then
@@ -477,6 +477,10 @@ end
 
 if GetModConfigData("lifeinjector_rework") then
     table.insert(prefab_post, "lifeinjector")
+end
+
+if GetModConfigData("sharpshooter_monkeys") then
+    table.insert(brain_post, "powdermonkey")
 end
 
 modimport("postinit/sim")
