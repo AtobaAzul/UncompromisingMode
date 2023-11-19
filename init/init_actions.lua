@@ -6,7 +6,7 @@ AddAction("LAVASPIT", "LAVASPIT", function(act)
         local offsetangle = math.atan2(downvec.z, downvec.x) * (180 / math.pi)
         if act.doer.AnimState:GetCurrentFacing() == 0 then -- Facing right
             offsetangle = offsetangle + 70
-        else -- Facing left
+        else                                               -- Facing left
             offsetangle = offsetangle - 70
         end
         while offsetangle > 180 do offsetangle = offsetangle - 360 end
@@ -65,7 +65,7 @@ end)
 local createburrow = AddAction("CREATE_BURROW", GLOBAL.STRINGS.ACTIONS.CREATE_BURROW, function(act)
     local act_pos = act:GetActionPoint()
     if act.doer.components.hunger.current > 15 and not GLOBAL.TheWorld.Map:GetPlatformAtPoint(act_pos.x, act_pos.z) then
-        local burrows = GLOBAL.TheSim:FindEntities(act_pos.x, 0, act_pos.z, 10000, {"winkyburrow"})
+        local burrows = GLOBAL.TheSim:FindEntities(act_pos.x, 0, act_pos.z, 10000, { "winkyburrow" })
         local home = false
 
         for i, v in pairs(burrows) do if v.myowner == act.doer.userid then home = true end end
@@ -182,7 +182,7 @@ GLOBAL.ACTIONS.USESPELLBOOK.strfn = function(act)
     return target:HasTag("telestaff") and "TELESTAFF" or _UseSpellBookStrFn ~= nil and _UseSpellBookStrFn(act) or "BOOK"
 end
 
-local SET_CUSTOM_NAME = GLOBAL.Action({distance = 2, mount_valid = true})
+local SET_CUSTOM_NAME = GLOBAL.Action({ distance = 2, mount_valid = true })
 SET_CUSTOM_NAME.id = "SET_CUSTOM_NAME"
 SET_CUSTOM_NAME.str = STRINGS.ACTIONS.SET_CUSTOM_NAME
 AddAction(SET_CUSTOM_NAME)
@@ -210,4 +210,35 @@ end
 GLOBAL.ACTIONS.CHANGEIN.rmb = true
 GLOBAL.ACTIONS.CHANGEIN.priority = 10
 
+GLOBAL.ACTIONS.REPAIR.distance = 2.5
+
 AddComponentAction("USEITEM", "drawingtool", function(inst, doer, target, actions, right) if target:HasTag("telebase") or target.prefab == "pocketwatch_recall" or target.prefab == "pocketwatch_portal" then table.insert(actions, GLOBAL.ACTIONS.SET_CUSTOM_NAME) end end)
+if TUNING.DSTU.WARLY_BUTCHER then
+    local _murderfn = GLOBAL.ACTIONS.MURDER.fn
+    GLOBAL.ACTIONS.MURDER.fn = function(act)
+        local murdered = act.invobject or act.target
+        if murdered ~= nil and (murdered.components.health ~= nil or murdered.components.murderable ~= nil) and act.doer ~= nil and act.doer:HasTag("masterchef") then
+            local murdered = act.invobject or act.target
+            local stacksize = murdered.components.stackable ~= nil and murdered.components.stackable:StackSize() or 1
+
+            if murdered.components.lootdropper ~= nil then
+                murdered.causeofdeath = act.doer
+                local pos = GLOBAL.Vector3(x, y, z)
+                for i = 1, stacksize do
+                    local loots = murdered.components.lootdropper:GenerateLoot()
+                    for k, v in pairs(loots) do
+                        local loot = GLOBAL.SpawnPrefab(v)
+                        if loot ~= nil then
+                            act.doer.components.inventory:GiveItem(loot, nil, pos)
+                        end
+                    end
+                end
+            end
+
+            if murdered.components.inventory and murdered:HasTag("drop_inventory_onmurder") then
+                murdered.components.inventory:TransferInventory(act.doer)
+            end
+        end
+        return _murderfn(act)
+    end
+end
