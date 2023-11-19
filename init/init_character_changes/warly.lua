@@ -85,3 +85,15 @@ if TUNING.DSTU.WARLY_FOOD_TASTE then
 end
 
 end)
+
+
+env.AddPrefabPostInit("portablecookpot_item", function(inst)
+    if not TheWorld.ismastersim then return end
+
+    inst.components.deployable.restrictedtag = nil
+end)
+
+env.AddPrefabPostInit("portablecookpot", function(inst)
+    --hacky but it wokrs
+    inst:RemoveTag("mastercookware")
+end)

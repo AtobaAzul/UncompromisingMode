@@ -120,7 +120,8 @@ GLOBAL.ACTIONS.RUMMAGE.fn = function(act)
 			return false, "INUSE"
 		end
 	else]]
-    if targ ~= nil and targ:HasTag("winona_notouchy") and not act.doer:HasTag("handyperson") then return false, "WINONATOOLBOX" end
+    if targ ~= nil and targ:HasTag("winona_notouchy") and not act.doer:HasTag("handyperson") then return false, "WINONATOOLBOX"  end
+
     return _RummageFn(act)
 end
 
@@ -242,3 +243,4 @@ if TUNING.DSTU.WARLY_BUTCHER then
         return _murderfn(act)
     end
 end
+
