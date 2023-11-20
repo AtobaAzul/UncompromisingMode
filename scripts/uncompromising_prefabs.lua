@@ -426,6 +426,7 @@ local prefabs = {
 	
 	-- Mutation Extrapolation
 	"umdebuff_moonburn",
+	"um_pathfinderpulse",
 	
 	"um_preparedfoods",
 	"um_foliage",
