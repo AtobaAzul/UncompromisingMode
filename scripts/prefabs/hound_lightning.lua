@@ -56,9 +56,9 @@ local function Zap(inst)
 					v.components.playerlightningtarget:DoStrike()
 				end
 
-				if v.sg ~= nil and not v.sg:HasStateTag("nointerrupt") and v.components.health ~= nil and not v.components.health:IsDead() then
-					v.sg:GoToState("hit")
-				end
+				--if v.sg ~= nil and not v.sg:HasStateTag("nointerrupt") and v.components.health ~= nil and not v.components.health:IsDead() then
+					--v.sg:GoToState("hit")
+				--end
 			end
 		end
 	end
