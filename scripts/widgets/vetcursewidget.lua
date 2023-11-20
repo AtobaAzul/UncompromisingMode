@@ -73,9 +73,9 @@ function Vetcursewidget:RefreshTooltips()
 	local vet_text = ""
 
     if self.owner:HasTag("clockmaker") then
-        vet_text = STRINGS.DSTU.VETS_WIDGET_WANDA
+        vet_text = STRINGS.VETS_WIDGET_WANDA
     else
-        vet_text = STRINGS.DSTU.VETS_WIDGET
+        vet_text = STRINGS.VETS_WIDGET
     end
 	
 	for i, v in pairs(skulls) do
