@@ -1015,6 +1015,7 @@ Assets = {
 	-- Mutation Extrapolation
 	Asset("ANIM", "anim/umdebuff_moonburn_fx.zip"),
 	Asset("ANIM", "anim/um_staff_meteor.zip"),
+	Asset("ANIM", "anim/um_pathfinderpulse.zip"),
 
 
 
