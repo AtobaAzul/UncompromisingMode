@@ -6,7 +6,7 @@ env.AddPrefabPostInit("warly", function(inst)
 	if not TheWorld.ismastersim then
 		return
 	end
-
+--[[
 if TUNING.DSTU.WARLY_BUTCHER then
 	--local function onbutchered(target, data)
 		--local target = data.target
@@ -46,7 +46,7 @@ if TUNING.DSTU.WARLY_BUTCHER then
 		inst:ListenForEvent("dropitem", ondropitem)
 		inst:ListenForEvent("itemlose", ondropitem)
 	end
-end
+end]]
 
 if TUNING.DSTU.WARLY_FOOD_TASTE then
 	local function oneat(inst, data)
@@ -84,4 +84,16 @@ if TUNING.DSTU.WARLY_FOOD_TASTE then
 	end
 end
 
+end)
+
+
+env.AddPrefabPostInit("portablecookpot_item", function(inst)
+    if not TheWorld.ismastersim then return end
+
+    inst.components.deployable.restrictedtag = nil
+end)
+
+env.AddPrefabPostInit("portablecookpot", function(inst)
+    --hacky but it wokrs
+    inst:RemoveTag("mastercookware")
 end)

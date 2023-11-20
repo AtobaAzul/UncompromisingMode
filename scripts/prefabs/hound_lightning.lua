@@ -77,7 +77,8 @@ local function fn()
 
 	inst:AddTag("hound_lightning")
 	inst:AddTag("sharp")
-
+    inst:AddTag("ignorewalkableplatforms")
+    
 	inst.entity:SetPristine()
 
 	if not TheWorld.ismastersim then

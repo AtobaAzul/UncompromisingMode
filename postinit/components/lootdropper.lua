@@ -7,7 +7,7 @@ env.AddComponentPostInit("lootdropper", function(self)
 	local _DropLoot = self.DropLoot
 	local _GenerateLoot = self.GenerateLoot
 
-	if TUNING.DSTU.WARLY_BUTCHER then
+	--[[if TUNING.DSTU.WARLY_BUTCHER then
 		function self:GenerateLoot()
 			if self.inst:HasTag("butchermark") then
 				local loots = {}
@@ -112,7 +112,7 @@ env.AddComponentPostInit("lootdropper", function(self)
 				return _GenerateLoot(self)
 			end
 		end
-	end
+	end]]
 
 	if TUNING.DSTU.FIRELOOT ~= nil and TUNING.DSTU.FIRELOOT > 1 then
 		function self:DropLoot(pt, ...)
