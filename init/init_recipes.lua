@@ -91,9 +91,9 @@ end
     }
     --wormwood stuffs
     AllRecipes["ipecacsyrup"].ingredients = {Ingredient("red_cap", 1), Ingredient("honey", 1), Ingredient("compost", 1)}
-    AllRecipes["wormwood_berrybush"].ingredients = {Ingredient(GLOBAL.CHARACTER_INGREDIENT.HEALTH, 10), Ingredient("compost", 2), Ingredient("berries_juicy", 8)}
-    AllRecipes["wormwood_berrybush2"].ingredients = {Ingredient(GLOBAL.CHARACTER_INGREDIENT.HEALTH, 10), Ingredient("compost", 2), Ingredient("berries_juicy", 8)}
-    AllRecipes["wormwood_juicyberrybush"].ingredients = {Ingredient(GLOBAL.CHARACTER_INGREDIENT.HEALTH, 10), Ingredient("compost", 2), Ingredient("berries", 8)}
+    AllRecipes["wormwood_berrybush"].ingredients = {Ingredient("compost", 2), Ingredient("berries_juicy", 8)}
+    AllRecipes["wormwood_berrybush2"].ingredients = {Ingredient("compost", 2), Ingredient("berries_juicy", 8)}
+    AllRecipes["wormwood_juicyberrybush"].ingredients = {Ingredient("compost", 2), Ingredient("berries", 8)}
 
     --turf
     AllRecipes["turf_marsh"].ingredients = {Ingredient("cutreeds", 1), Ingredient("compost", 1)}
