@@ -20,6 +20,7 @@ local REMOVE_SOULS =
     "killerbee",
     "butterfly",
     "birchnutdrake",
+    "lightflier",
     --"mole",
     --"beeguard",
     --"bat",

@@ -414,8 +414,8 @@ local function SetTarget(inst, target)
             target.AnimState:SetBloomEffectHandle("shaders/anim.ksh")
         end
         inst.flash = .8 + math.random() * .4
-        --inst:DoPeriodicTask(0, UpdateHit, nil, target)
-        --UpdateHit(inst, target)
+        inst:DoPeriodicTask(0, UpdateHit, nil, target)
+        UpdateHit(inst, target)
     end
 end
 

@@ -1015,6 +1015,7 @@ Assets = {
 	-- Mutation Extrapolation
 	Asset("ANIM", "anim/umdebuff_moonburn_fx.zip"),
 	Asset("ANIM", "anim/um_staff_meteor.zip"),
+	Asset("ANIM", "anim/um_pathfinderpulse.zip"),
 
 
 
@@ -1968,6 +1969,8 @@ Assets = {
 	Asset("ANIM", "anim/swap_um_harpoon.zip"),
 
 	Asset("ANIM", "anim/swap_magnerang.zip"),
+	
+	Asset("ANIM", "anim/swap_um_staff_meteor.zip"),
 
 	Asset("ANIM", "anim/winona_toolbox.zip"),
 	Asset("ANIM", "anim/winona_upgradekit_electrical.zip"),
