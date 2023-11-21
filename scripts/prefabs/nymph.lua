@@ -275,10 +275,10 @@ local function minifn()
 				inst.treetarget = Vector3(data.treetargetx,data.treetargety,data.treetargetz)
 				--MakeAphidsNearbyFollow(inst)
 			end
-			if data.aphidposse then
-				for i = 1,data.aphidposse-1 do
-					SpawnAphid(inst)
-				end		
+			if data.aphidposse then 
+				--for i = 1,data.aphidposse-1 do --Temporarily commented to prevent crash (nymphs that spawn after reloading will now be defenseless)
+					--SpawnAphid(inst)
+				--end		
 			end
 		end
 	end
