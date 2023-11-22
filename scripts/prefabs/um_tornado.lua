@@ -509,7 +509,8 @@ local function TornadoTask(inst)
 
             if not v:HasTag("um_windturbine") then
                 if not v:HasTag("um_windturbine") then
-                    if math.random() > 0.99 then
+                    local rand = math.random()
+                    if (v.prefab == "wes" and rand > 0.95 or rand > 0.99) then
                         local lightning_targeted = SpawnPrefab("hound_lightning")
                         lightning_targeted.Transform:SetPosition(px + math.random(-5, 5), 0, pz + math.random(-5, 5))
                         lightning_targeted.NoTags = { "INLIMBO", "shadow", "structure", "wall", "companion", "abigail", "bird",

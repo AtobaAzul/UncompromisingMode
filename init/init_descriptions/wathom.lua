@@ -11,7 +11,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WATHOM.ACTIONFAIL
 ANNOUNCE.DREADEYE_SPOOKED = "It's... awake. Watching us."
 ANNOUNCE.ANNOUNCE_HARDCORE_RES = "Never dead, truly."
 ANNOUNCE.ANNOUNCE_WINONAGEN =
-    "Ancient designs, incompatible. Myself, willing student."
+"Ancient designs, incompatible. Myself, willing student."
 ANNOUNCE.ANNOUNCE_RATRAID = "Vocalizations, rats."
 ANNOUNCE.ANNOUNCE_RATRAID_SPAWN = "Rats, engaging!"
 ANNOUNCE.ANNOUNCE_RATRAID_OVER = "Provisions, ransacked!"
@@ -21,14 +21,11 @@ ANNOUNCE.ANNOUNCE_ACIDRAIN = {
 }
 ANNOUNCE.ANNOUNCE_TOADSTOOLED = "Infestation, proxied!"
 -- FoodBuffs
-ANNOUNCE.ANNOUNCE_ATTACH_BUFF_LESSERELECTRICATTACK =
-    ANNOUNCE.ANNOUNCE_ATTACH_BUFF_ELECTRICATTACK
-ANNOUNCE.ANNOUNCE_ATTACH_BUFF_ELECTRICRETALIATION =
-    ANNOUNCE.ANNOUNCE_ATTACH_BUFF_ELECTRICATTACK
+ANNOUNCE.ANNOUNCE_ATTACH_BUFF_LESSERELECTRICATTACK = ANNOUNCE.ANNOUNCE_ATTACH_BUFF_ELECTRICATTACK
+ANNOUNCE.ANNOUNCE_ATTACH_BUFF_ELECTRICRETALIATION = ANNOUNCE.ANNOUNCE_ATTACH_BUFF_ELECTRICATTACK
 ANNOUNCE.ANNOUNCE_ATTACH_BUFF_FROZENFURY = "ssSsooo cCccold."
 ANNOUNCE.ANNOUNCE_ATTACH_BUFF_VETCURSE = "Mettle tested, nothing new!"
-ANNOUNCE.ANNOUNCE_DETACH_BUFF_LESSERELECTRICATTACK =
-    ANNOUNCE.ANNOUNCE_DETACH_BUFF_ELECTRICATTACK
+ANNOUNCE.ANNOUNCE_DETACH_BUFF_LESSERELECTRICATTACK = ANNOUNCE.ANNOUNCE_DETACH_BUFF_ELECTRICATTACK
 ANNOUNCE.ANNOUNCE_DETACH_BUFF_ELECTRICRETALIATION =
     ANNOUNCE.ANNOUNCE_DETACH_BUFF_ELECTRICATTACK
 ANNOUNCE.ANNOUNCE_DETACH_BUFF_FROZENFURY = "Feeling better now"
@@ -38,7 +35,7 @@ ANNOUNCE.ANNOUNCE_RNEFOG = "Whispers, conspiracy. Hidden beneath, warnings."
 
 -- CaliforniaKing
 ANNOUNCE.ANNOUNCE_ATTACH_BUFF_CALIFORNIAKING =
-    "Yes, good drink, drinkgoodyes, drgrnn...rgg.."
+"Yes, good drink, drinkgoodyes, drgrnn...rgg.."
 ANNOUNCE.ANNOUNCE_DETACH_BUFF_CALIFORNIAKING = "Am I dead?"
 DESCRIBE.CALIFORNIAKING = "Entire being, begging not."
 -- CaliforniaKing
@@ -100,7 +97,7 @@ DESCRIBE.SPIDERQUEENCORPSE = "Decompositon halted. Why?"
 ANNOUNCE.ANNOUNCE_SNEEZE = "GrrRRAAH-CHOO! "
 ANNOUNCE.ANNOUNCE_HAYFEVER = "Rampant, Spring's pollen. Fantastic."
 ANNOUNCE.ANNOUNCE_HAYFEVER_OFF = "Sense hinderence, passing. "
-ANNOUNCE.ANNOUNCE_FIREFALL = {"Flames, above!", "Alert! Above, watch!"}
+ANNOUNCE.ANNOUNCE_FIREFALL = { "Flames, above!", "Alert! Above, watch!" }
 ANNOUNCE.ANNOUNCE_ROOTING = "No!"
 ANNOUNCE.ANNOUNCE_SNOWSTORM = "Wind, cold-bringing."
 
@@ -130,7 +127,7 @@ DESCRIBE.ICEBOOMERANG = "Winter itself, conductive."
 
 DESCRIBE.MINOTAUR_BOULDER = "Alert, above!"
 DESCRIBE.MINOTAUR_BOULDER_BIG =
-    "Guardian, momentum uncontrollable. Strategy recognized!"
+"Guardian, momentum uncontrollable. Strategy recognized!"
 DESCRIBE.BUSHCRAB = "Excellent mimics, ignorant fooled."
 DESCRIBE.LAVAE2 = DESCRIBE.LAVAE
 DESCRIBE.DISEASECUREBOMB = "Curious. Additionally Alter, rejuvenation magic?"
@@ -141,7 +138,7 @@ DESCRIBE.WICKER_TENTACLE = "Poor mutation."
 DESCRIBE.HONEY_LOG = "Weather, unpleasant."
 
 DESCRIBE.RAT_TAIL =
-    "Only skin, bones. Quelled, ally concerns - disease unlikely."
+"Only skin, bones. Quelled, ally concerns - disease unlikely."
 DESCRIBE.PLAGUEMASK = "Status, luxury."
 DESCRIBE.SALTPACK = "Frost, industrial counter."
 DESCRIBE.SPOREPACK = "Scent ignoring, practicalities beneficial."
@@ -214,7 +211,7 @@ DESCRIBE.GIANT_BLUEBERRY = "Root severed. Safety assured."
 DESCRIBE.PURPLESTEAMEDHAMS = "\"Steamed hams\", never heard of."
 DESCRIBE.GREENSTEAMEDHAMS = "\"Steamed hams\", never heard of."
 DESCRIBE.BLUEBERRYPANCAKES = "Odd combination, survival-oriented."
-DESCRIBE.DEVILSFRUITCAKE = "Liquid nourishment, preserved in sugar."
+DESCRIBE.DEVILSFRUITCAKE = "Nourishment, preserved in sugar."
 DESCRIBE.SIMPSALAD = "Just foliage?"
 DESCRIBE.BEEFALOWINGS = "Spirit-lifting, beefalo defeated!"
 ANNOUNCE.ANNOUNCE_ATTACH_BUFF_KNOCKBACKIMMUNE = "Stopping, nothing!"
@@ -247,7 +244,7 @@ DESCRIBE.BERNIE_ACTIVE = {
     BERNIE_ACTIVE = "Staring, unwavering. Distrustful.",
     ASHLEY = "Staring, unwavering. Distrustful."
 }
-DESCRIBE.BERNIE_BIG = {GENERIC = "Not me! Not me!", ASHLEY = "Not me! Not me!"}
+DESCRIBE.BERNIE_BIG = { GENERIC = "Not me! Not me!", ASHLEY = "Not me! Not me!" }
 DESCRIBE.ANTIHISTAMINE = "Properties, illness-alleviating."
 
 DESCRIBE.HEATROCK_LEVEL = {
@@ -265,8 +262,8 @@ DESCRIBE.DURABILITY_LEVEL = {
     FULL = "Condition, perfect."
 }
 
-ACTIONFAIL.READ = {GENERIC = "Magic, inert."}
-ACTIONFAIL.GIVE = {NOTNIGHT = "Presence required, Alter's gaze."}
+ACTIONFAIL.READ = { GENERIC = "Magic, inert." }
+ACTIONFAIL.GIVE = { NOTNIGHT = "Presence required, Alter's gaze." }
 
 RECIPE_DESC = GLOBAL.STRINGS.RECIPE_DESC
 
@@ -388,7 +385,7 @@ ANNOUNCE.ANNOUNCE_NORATBURROWS = "Rodents nearby, eradicated."
 ANNOUNCE.ANNOUNCE_RATSNIFFER_ITEMS = {
     LEVEL_1 = "Cacophany, nearby stimuli. Provisions, sort away."
 }
-ANNOUNCE.ANNOUNCE_RATSNIFFER_FOOD = {LEVEL_1 = "Food, scent attracting."}
+ANNOUNCE.ANNOUNCE_RATSNIFFER_FOOD = { LEVEL_1 = "Food, scent attracting." }
 ANNOUNCE.ANNOUNCE_RATSNIFFER_BURROWS = {
     LEVEL_1 = "Rodents nearby, reproducing. Nearby den?"
 }
@@ -492,7 +489,7 @@ DESCRIBE.UM_BEEGUARD_SEEKER = DESCRIBE.BEEGUARD
 DESCRIBE.UM_BEEGUARD_BLOCKER = "Priority, zero."
 
 DESCRIBE.PORTABLEBOAT_ITEM =
-    "Inadequate, weight capacity. Abatement, temporary."
+"Inadequate, weight capacity. Abatement, temporary."
 DESCRIBE.MASTUPGRADE_WINDTURBINE_ITEM = "Power generation, kinetic energy."
 
 DESCRIBE.UM_ORNAMENT_OPOSSUM = "Rat-like."
