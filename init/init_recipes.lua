@@ -94,6 +94,9 @@ end
     AllRecipes["wormwood_berrybush"].ingredients = {Ingredient("compost", 2), Ingredient("berries_juicy", 8)}
     AllRecipes["wormwood_berrybush2"].ingredients = {Ingredient("compost", 2), Ingredient("berries_juicy", 8)}
     AllRecipes["wormwood_juicyberrybush"].ingredients = {Ingredient("compost", 2), Ingredient("berries", 8)}
+	
+	--woodie stuff
+	AllRecipes["walking_stick"].ingredients = {Ingredient("lucy", 0), Ingredient("log", 3), Ingredient("wereitem_goose", 1)}
 
     --turf
     AllRecipes["turf_marsh"].ingredients = {Ingredient("cutreeds", 1), Ingredient("compost", 1)}
