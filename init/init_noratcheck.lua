@@ -14,6 +14,9 @@ TUNING.DSTU.NORATCHECK =--defining it here for simplicity's sake.
     "soil_amender_fermented",
     "soil_amender",
     "lantern",
+	"pumpkin_lantern",
+	"watermelon_lantern",
+	"moonglass_charged",
 }
 
 for k, v in ipairs(TUNING.DSTU.NORATCHECK) do
