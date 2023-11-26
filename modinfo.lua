@@ -856,8 +856,8 @@ configuration_options = {
     SkipSpace(),
 
     Header("Giants & Bosses"),
-    BinaryConfig("harder_spiderqueen", "Harder Spider Queen",
-        "Spider Queens ocasionally spit web balls that trap players.", true),
+    BinaryConfig("harder_spider_queen", "Harder Spider Queen",
+        "Spider Queens ocasionally spit web balls that trap players.", false),
     BinaryConfig("harder_deerclops", "Deerclops Mutations",
         "Three different, harder variants of Deerclops can spawn, replacing the vanilla version.", true),
     BinaryConfig("caveclops", "Cave Deerclops",

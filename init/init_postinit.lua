@@ -357,7 +357,7 @@ if GetModConfigData("harder_beefalo") then
     table.insert(stategraph_post, "Beefalo")
 end
 
-if GetModConfigData("harder_spiderqueen") then
+if GetModConfigData("harder_spider_queen") then
     table.insert(prefab_post, "spiderqueen")
     table.insert(stategraph_post, "spiderqueen")
 end
