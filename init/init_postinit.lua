@@ -193,7 +193,6 @@ local prefab_post = {
     "dragoonegg",
     "bomb_lunarplant",
     "compostingbin",
-    "plantables",
 }
 
 local stategraph_post = {
