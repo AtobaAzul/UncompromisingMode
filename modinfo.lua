@@ -883,8 +883,8 @@ configuration_options = {
         "Eye of Terror and the Twins have new attacks, inspired by their Terraria counterparts.", true),
     BinaryConfig("reworked_ck", "Reworked Crab King",
         "Crab King has his main attack altered, freeze removed, and some new mechanics.", true),
-    BinaryConfig("changed_shadowpieces", "Shadow Pieces tweaks",
-        "Shadow Bishop has a different attack and Shadow Knight had his values changed.", true),
+    BinaryConfig("changed_shadow_pieces", "Shadow Pieces tweaks",
+        "Shadow Bishop has a different attack and Shadow Knight had his values changed.", false),
     SkipSpace(),
 
     Header("Boss Quality of Life"),
