@@ -20,6 +20,8 @@ local function checkforcanopyshade(obj)
     end    
 end
 
+local notags =  { "wildfireprotected", "fire", "burnt", "player", "companion", "NOCLICK", "INLIMBO" }
+
 env.AddComponentPostInit("wildfires", function(self)
     local _ShouldActivateWildfires
     local _CheckValidWildfireStarter
@@ -41,7 +43,7 @@ env.AddComponentPostInit("wildfires", function(self)
     end
 
     local CheckValidWildfireStarter = function(obj)
-        return not checkforcanopyshade(obj) and (obj:HasTag("plant") or obj:HasTag("wildfirepriority"))
+        return not checkforcanopyshade(obj) and (obj:HasTag("plant") or obj:HasTag("wildfirepriority")) and not obj:HasOneOfTags(notags)
     end
 
     UpvalueHacker.SetUpvalue(_ms_startwildfireforplayerfn, ShouldActivateWildfires, "ShouldActivateWildfires")
