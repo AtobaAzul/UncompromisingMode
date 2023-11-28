@@ -193,6 +193,10 @@ local function MakeAnyBlueprint()
     (#knownrecipes > 0 and knownrecipes[math.random(#knownrecipes)].product) or
     "unknown"
 
+    --hacky failsafe. We're getting a crash below where it tries to concatenate a nil value, but shouldn't the code above prevent that?!
+    if type(inst.recipetouse) ~= "string" then
+        inst.recipetouse = "unknown"
+    end
     inst.components.teacher:SetRecipe(inst.recipetouse)
     inst.components.named:SetName(STRINGS.NAMES[string.upper(inst.recipetouse)].." "..STRINGS.NAMES.BLUEPRINT)
     return inst
