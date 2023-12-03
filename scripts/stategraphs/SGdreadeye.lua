@@ -200,9 +200,12 @@ local states =
 						
 						if inst.disguisetarget ~= nil then
 							local x1, y1, z1 = inst.disguisetarget.Transform:GetWorldPosition()
-							x = x1
-							y = y1
-							z = z1
+							
+							if x1 ~= nil then
+								x = x1
+								y = y1
+								z = z1
+							end
 						end
 						
 						local offset = 25

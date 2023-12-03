@@ -29,7 +29,7 @@ end
 
 local function OnAttackedExplo(inst, data)
 	inst.components.explosiveresist:SetResistance(0.9)
-	if data.attacker:HasTag("explosive") then
+	if data.attacker ~= nil and data.attacker:HasTag("explosive") then
 		inst.AnimState:PlayAnimation("block_loop", true)
 	end
 end
