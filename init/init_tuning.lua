@@ -202,7 +202,7 @@ TUNING.DSTU = {
     ----------------------------------------------------------------------------
     -- Woodie
     GOOSE_WATER_WETNESS_RATE = 3,
-    WOODIE = GetModConfigData("woodie"),
+    WOODIE_WET_GOOSE = GetModConfigData("woodie_wet_goose"),
     -- Wolfgang
     WOLFGANG_SANITY_MULTIPLIER = 1.3, -- prev was 1.1
     WOLFGANG_HUNGERMIGHTY = GetModConfigData("wolfgang"),

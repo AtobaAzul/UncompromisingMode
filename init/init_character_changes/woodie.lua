@@ -51,9 +51,28 @@ local function OnGooseOverWater(inst)
     end
     inst:DoTaskInTime(GLOBAL.TUNING.WEREGOOSE_RUN_DRAIN_TIME_DURATION, OnGooseOverWater)
 end
+
+local function MooseResistance(inst)
+	if not inst:HasTag("beaver") and not inst:HasTag("weregoose") then	
+		if inst.components.skilltreeupdater:IsActivated("woodie_curse_epic_moose") then
+			TUNING.WEREMOOSE_ABSORPTION = .8
+		elseif inst.components.skilltreeupdater:IsActivated("woodie_curse_moose_3") then
+			TUNING.WEREMOOSE_ABSORPTION = .825
+		elseif inst.components.skilltreeupdater:IsActivated("woodie_curse_moose_2") then
+			TUNING.WEREMOOSE_ABSORPTION = .85
+		elseif inst.components.skilltreeupdater:IsActivated("woodie_curse_moose_1") then
+			TUNING.WEREMOOSE_ABSORPTION = .875
+		end
+	end
+end
+
 AddPrefabPostInit("woodie", function (inst)
-    if TUNING.DSTU.WOODIE then
+    if not GLOBAL.TheWorld.ismastersim then 
+		return
+	end
+	if TUNING.DSTU.WOODIE_WET_GOOSE then
         inst:DoTaskInTime(GLOBAL.TUNING.WEREGOOSE_RUN_DRAIN_TIME_DURATION, OnGooseOverWater)
     end
 	inst:ListenForEvent("working", onworked)
+    inst:ListenForEvent("transform_wereplayer", MooseResistance)
 end)

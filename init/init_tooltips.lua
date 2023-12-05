@@ -273,7 +273,7 @@ if TUNING.DSTU.WICKERNERF_TENTACLES then
 	"- Summons Sickly Tentacles\n- Sickly Tentacles die over time, drop no loot but don't attack players."
 end
 
-if TUNING.DSTU.WOODIE then
+if TUNING.DSTU.WOODIE_WET_GOOSE then
 	TOOLTIPS.WEREITEM_GOOSE = "- Walking on water makes you wet."
 end
 
