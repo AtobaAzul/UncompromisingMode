@@ -53,17 +53,19 @@ local function OnGooseOverWater(inst)
 end
 
 local function MooseResistance(inst)
-    if not inst:HasTag("beaver") and not inst:HasTag("weregoose") and inst.components.health ~= nil then
-        if inst.components.skilltreeupdater:IsActivated("woodie_curse_epic_moose") then
-            inst.components.health:SetAbsorptionAmount(.8)
-        elseif inst.components.skilltreeupdater:IsActivated("woodie_curse_moose_3") then
-            inst.components.health:SetAbsorptionAmount(.825)
-        elseif inst.components.skilltreeupdater:IsActivated("woodie_curse_moose_2") then
-            inst.components.health:SetAbsorptionAmount(.85)
-        elseif inst.components.skilltreeupdater:IsActivated("woodie_curse_moose_1") then
-            inst.components.health:SetAbsorptionAmount(.875)
+    inst:DoTaskInTime(GLOBAL.FRAMES, function(inst)
+        if not inst:HasTag("beaver") and not inst:HasTag("weregoose") and inst.components.health ~= nil then
+            if inst.components.skilltreeupdater:IsActivated("woodie_curse_epic_moose") then
+                inst.components.health:SetAbsorptionAmount(.8)
+            elseif inst.components.skilltreeupdater:IsActivated("woodie_curse_moose_3") then
+                inst.components.health:SetAbsorptionAmount(.825)
+            elseif inst.components.skilltreeupdater:IsActivated("woodie_curse_moose_2") then
+                inst.components.health:SetAbsorptionAmount(.85)
+            elseif inst.components.skilltreeupdater:IsActivated("woodie_curse_moose_1") then
+                inst.components.health:SetAbsorptionAmount(.875)
+            end
         end
-    end
+    end)
 end
 
 AddPrefabPostInit("woodie", function(inst)
