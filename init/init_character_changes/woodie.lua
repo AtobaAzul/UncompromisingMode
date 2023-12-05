@@ -37,7 +37,7 @@ local function onworked(inst, data)
     if not inst.components.wereeater and data.target ~= nil and data.target.components.workable ~= nil then
         if IsWereMode(inst.weremode:value()) then
             inst.components.wereness:DoDelta(-3, true)
-		elseif data.target.components.workable.action~= nil and data.target.components.workable.action == GLOBAL.ACTIONS.CHOP then
+        elseif data.target.components.workable.action ~= nil and data.target.components.workable.action == GLOBAL.ACTIONS.CHOP then
             inst.components.wereness:DoDelta(1.5, true)
         end
     end
@@ -45,7 +45,7 @@ end
 
 local function OnGooseOverWater(inst)
     if inst.weremode:value() == 3 then
-        if inst~=nil and inst.components.drownable ~= nil and inst.components.drownable:IsOverWater() and inst.components.moisture ~= nil then
+        if inst ~= nil and inst.components.drownable ~= nil and inst.components.drownable:IsOverWater() and inst.components.moisture ~= nil then
             inst.components.moisture:DoDelta(GLOBAL.TUNING.DSTU.GOOSE_WATER_WETNESS_RATE, true)
         end
     end
@@ -53,26 +53,26 @@ local function OnGooseOverWater(inst)
 end
 
 local function MooseResistance(inst)
-	if not inst:HasTag("beaver") and not inst:HasTag("weregoose") then	
-		if inst.components.skilltreeupdater:IsActivated("woodie_curse_epic_moose") then
-			TUNING.WEREMOOSE_ABSORPTION = .8
-		elseif inst.components.skilltreeupdater:IsActivated("woodie_curse_moose_3") then
-			TUNING.WEREMOOSE_ABSORPTION = .825
-		elseif inst.components.skilltreeupdater:IsActivated("woodie_curse_moose_2") then
-			TUNING.WEREMOOSE_ABSORPTION = .85
-		elseif inst.components.skilltreeupdater:IsActivated("woodie_curse_moose_1") then
-			TUNING.WEREMOOSE_ABSORPTION = .875
-		end
-	end
+    if not inst:HasTag("beaver") and not inst:HasTag("weregoose") and inst.components.health ~= nil then
+        if inst.components.skilltreeupdater:IsActivated("woodie_curse_epic_moose") then
+            inst.components.health:SetAbsorptionAmount(.8)
+        elseif inst.components.skilltreeupdater:IsActivated("woodie_curse_moose_3") then
+            inst.components.health:SetAbsorptionAmount(.825)
+        elseif inst.components.skilltreeupdater:IsActivated("woodie_curse_moose_2") then
+            inst.components.health:SetAbsorptionAmount(.85)
+        elseif inst.components.skilltreeupdater:IsActivated("woodie_curse_moose_1") then
+            inst.components.health:SetAbsorptionAmount(.875)
+        end
+    end
 end
 
-AddPrefabPostInit("woodie", function (inst)
-    if not GLOBAL.TheWorld.ismastersim then 
-		return
-	end
-	if TUNING.DSTU.WOODIE_WET_GOOSE then
+AddPrefabPostInit("woodie", function(inst)
+    if not GLOBAL.TheWorld.ismastersim then
+        return
+    end
+    if TUNING.DSTU.WOODIE_WET_GOOSE then
         inst:DoTaskInTime(GLOBAL.TUNING.WEREGOOSE_RUN_DRAIN_TIME_DURATION, OnGooseOverWater)
     end
-	inst:ListenForEvent("working", onworked)
+    inst:ListenForEvent("working", onworked)
     inst:ListenForEvent("transform_wereplayer", MooseResistance)
 end)
