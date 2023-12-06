@@ -52,21 +52,21 @@ local function OnGooseOverWater(inst)
     inst:DoTaskInTime(GLOBAL.TUNING.WEREGOOSE_RUN_DRAIN_TIME_DURATION, OnGooseOverWater)
 end
 	
-local function MooseResistance(inst)
-    inst:DoTaskInTime(1, function(inst)
-        if not inst:HasTag("beaver") and not inst:HasTag("weregoose") and inst.components.health ~= nil then
-            if inst.components.skilltreeupdater:IsActivated("woodie_curse_epic_moose") then
-                inst.components.health:SetAbsorptionAmount(.8)
-            elseif inst.components.skilltreeupdater:IsActivated("woodie_curse_moose_3") then
-                inst.components.health:SetAbsorptionAmount(.825)
-            elseif inst.components.skilltreeupdater:IsActivated("woodie_curse_moose_2") then
-                inst.components.health:SetAbsorptionAmount(.85)
-            elseif inst.components.skilltreeupdater:IsActivated("woodie_curse_moose_1") then
-                inst.components.health:SetAbsorptionAmount(.875)
-            end
-        end
-    end)
-end
+--local function MooseResistance(inst)
+    --inst:DoTaskInTime(1, function(inst)
+        --if not inst:HasTag("beaver") and not inst:HasTag("weregoose") and inst.components.health ~= nil then
+            --if inst.components.skilltreeupdater:IsActivated("woodie_curse_epic_moose") then
+                --inst.components.health:SetAbsorptionAmount(.8)
+            --elseif inst.components.skilltreeupdater:IsActivated("woodie_curse_moose_3") then
+                --inst.components.health:SetAbsorptionAmount(.825)
+            --elseif inst.components.skilltreeupdater:IsActivated("woodie_curse_moose_2") then
+                --inst.components.health:SetAbsorptionAmount(.85)
+            --elseif inst.components.skilltreeupdater:IsActivated("woodie_curse_moose_1") then
+                --inst.components.health:SetAbsorptionAmount(.875)
+            --end
+        --end
+    --end)
+--end
 
 AddPrefabPostInit("woodie", function(inst)
     if not GLOBAL.TheWorld.ismastersim then
@@ -76,7 +76,7 @@ AddPrefabPostInit("woodie", function(inst)
         inst:DoTaskInTime(GLOBAL.TUNING.WEREGOOSE_RUN_DRAIN_TIME_DURATION, OnGooseOverWater)
     end
     inst:ListenForEvent("working", onworked)
-	inst:ListenForEvent("transform_wereplayer", MooseResistance)
+	--inst:ListenForEvent("transform_wereplayer", MooseResistance)
 	
 	--local _RecalculateWereformSpeed = inst.RecalculateWereformSpeed
 

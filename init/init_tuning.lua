@@ -203,6 +203,7 @@ TUNING.DSTU = {
     -- Woodie
     GOOSE_WATER_WETNESS_RATE = 3,
     WOODIE_WET_GOOSE = GetModConfigData("woodie_wet_goose"),
+
     -- Wolfgang
     WOLFGANG_SANITY_MULTIPLIER = 1.3, -- prev was 1.1
     WOLFGANG_HUNGERMIGHTY = GetModConfigData("wolfgang"),
@@ -415,6 +416,12 @@ TUNING.DSTU = {
 if GetModConfigData("beebox_nerf") then
     TUNING.BEEBOX_BEES = 1.5
     TUNING.BEEBOX_RELEASE_TIME = day_time * 1.5
+end
+
+
+if GetModConfigData("woodie_skilltree") then
+	TUNING.WEREMOOSE_DAMAGE = wilson_attack * 1.5
+	TUNING.SKILLS.WOODIE.MOOSE_SMASH_DAMAGE = wilson_attack * 3
 end
 
 if GetModConfigData("wixie_walter") then
