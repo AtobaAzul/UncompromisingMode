@@ -185,11 +185,13 @@ local function OnUpdateProjectile(inst)
             end
         end
     end
+    local boat = inst.components.complexprojectile.attacker:GetCurrentPlatform()
 
     for i, target in ipairs(targets) do
+        local tar_boat = target:GetCurrentPlatform()
 
         -- Ignore hitting bumpers while flying through the air
-        if target ~= nil and target ~= inst.components.complexprojectile.attacker and not target:HasTag("boatbumper") then
+        if target ~= nil and target ~= inst.components.complexprojectile.attacker and not target:HasTag("boatbumper") and (boat ~= tar_boat or boat == nil or target:HasTag("hostile")) then
             -- Playful bit of arson
             if target ~= nil and target:IsValid() and target.components.burnable ~= nil and inst:HasTag("sludge_cannonball") then
                 target.components.burnable:Ignite()
