@@ -162,7 +162,6 @@ local prefab_post = {
     "lantern",
     "minerhat",
     "shark",
-    --	"shadowchesspieces", Only bring this back when we make the fight cool
     "fertilizer",
     "stinger",
     "boat_pirate",
@@ -441,9 +440,11 @@ if GetModConfigData("reworked_ck") then
 end
 
 if GetModConfigData("changed_shadow_pieces") then
+    table.insert(prefab_post, "shadowchesspieces")--changes to  all 3 pieces. (no collision and shadowcrown loot)
     table.insert(prefab_post, "shadow_knight")
     table.insert(stategraph_post, "shadow_bishop")
     table.insert(stategraph_post, "shadow_knight")
+
 end
 
 if GetModConfigData("hambatnerf") then

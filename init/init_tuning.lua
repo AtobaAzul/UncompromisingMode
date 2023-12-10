@@ -203,7 +203,6 @@ TUNING.DSTU = {
     -- Woodie
     GOOSE_WATER_WETNESS_RATE = 3,
     WOODIE_WET_GOOSE = GetModConfigData("woodie_wet_goose"),
-
     -- Wolfgang
     WOLFGANG_SANITY_MULTIPLIER = 1.3, -- prev was 1.1
     WOLFGANG_HUNGERMIGHTY = GetModConfigData("wolfgang"),
@@ -559,7 +558,7 @@ if GetModConfigData("heatwaves") then
     TUNING.WILDFIRE_RETRY_TIME = TUNING.WILDFIRE_RETRY_TIME * 0.5
 end
 
-if GetModConfigData("changed_shadowpieces") then
+if GetModConfigData("changed_shadow_pieces") then
 	TUNING.SHADOW_BISHOP.ATTACK_RANGE = {8, 10, 12}
 	TUNING.SHADOW_BISHOP.ATTACK_PERIOD = {14, 15, 16}
 	--TUNING.SHADOW_BISHOP.HIT_RANGE = 2.5 --NUH UH
