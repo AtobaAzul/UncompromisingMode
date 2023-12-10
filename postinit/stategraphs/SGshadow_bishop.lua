@@ -89,39 +89,53 @@ env.AddStategraphPostInit("shadow_bishop", function(inst) --First time properly 
                 local minplayerdistsq = math.huge
                 local dist_off = { 0.8, 1.2, 1.35 } -- scaling with the actual scale of bishop is too high
 
-                local angles = { 1, 60, 120, 180, 240, 300, 360 }
-                local random_choose = math.floor(math.random(1, 7))
-                local choose_angle = angles[random_choose]
-                if inst._angle ~= nil and math.abs(choose_angle - inst._angle) <= 60 then
-                    if random_choose + 4 <= 7 then
-                        random_choose = random_choose + 4
-                    elseif random_choose - 4 > 0 then
-                        random_choose = random_choose - 4
+                for i = 1, 8 do --so now Bishop would attempt to find a place 8 times, this was done due to him having a tendency spawning on top of players
+                    local angles = { 1, 60, 120, 180, 240, 300, 360 }
+                    local random_choose = math.floor(math.random(1, 7))
+                    local choose_angle = angles[random_choose]
+                    if inst._angle ~= nil and math.abs(choose_angle - inst._angle) <= 60 then
+				    	if i == 1 then
+						    if random_choose + 4 <= 7 then
+					    		random_choose = random_choose + 4
+					    	elseif random_choose - 4 > 0 then
+					    		random_choose = random_choose - 4
+					    	end
+				    	else
+					    	local correcting_angle = math.floor(math.random(1, 3)) --try a different angle but don't try to change it to much Maybe it should've been just 1? idk
+					    	if random_choose + correcting_angle <= 7 then
+					    		random_choose = random_choose + correcting_angle
+					    	elseif random_choose - 4 > 0 then
+						    	random_choose = random_choose - 4
+					    	end
+				    	end
+                        inst._angle = angles[random_choose]
+                    else
+                        inst._angle = choose_angle
                     end
-                    inst._angle = angles[random_choose]
-                else
-                    inst._angle = choose_angle
-                end
-
-                for i = 1, 4 do
-                    local offset = FindWalkableOffset(pos, inst._angle, 12 * dist_off[inst.level], 4, false, true)
+				    --print("try number:")
+				    --print(i)
+				    --print("angle:" )
+				    --print(inst._angle)
+                    
+                    local offset = FindWalkableOffset(pos, inst._angle, 12 * dist_off[inst.level], 8, false, true)
                     if offset ~= nil then
-                        local player, distsq = FindClosestPlayerInRange(pos.x + offset.x, 0, pos.z + offset.z, 6, true)
-                        if player == nil then
+                        local player, distsq = FindClosestPlayerInRange(pos.x + offset.x, 0, pos.z + offset.z, 8, true) -- check for any players in 8 unit radius near the position you want to teleport to
+                        if player == nil then -- No players? Good, teleport
+				    	    --print("NO PLAYER FOUND")
                             bestoffset = offset
                             break
-                        elseif distsq < minplayerdistsq then
-                            bestoffset = offset
-                            minplayerdistsq = distsq
-                            inst.sg.statemem.target, target = player
-                        end
-                    end
+                         elseif i == 8 then --Ran out of tries and the target is surrounded by other players
+					    	--print("SURROUNDED BY PLAYERS")
+					    	inst.sg.statemem.surrounded = true
+					    	end
+				    	end
+                        --print("---------")
                 end
                 if bestoffset ~= nil then
                     inst.Physics:Teleport(pos.x + bestoffset.x, 0, pos.z + bestoffset.z)
                 end
-
-
+			
+			
                 if target ~= nil and target:IsValid() and target.components.health and not target.components.health:IsDead() then
                     --local scale = inst.Transform:GetScale()
                     --if inst.level == 3 then scale = 1.7 end -- size scaling too big
@@ -132,7 +146,9 @@ env.AddStategraphPostInit("shadow_bishop", function(inst) --First time properly 
                     elseif inst.sg.statemem.target and inst.sg.statemem.target:IsValid() then
                         inst.sg.statemem.charge_delay = true
                         inst:ForceFacePoint(inst.sg.statemem.target.Transform:GetWorldPosition())
-                        inst:DoTaskInTime(0.5, function(inst)
+						local delay_time = 0.5
+						if inst.sg.statemem.surrounded == true then delay_time = 0.95 end -- if the Bishop is surrounded it'll not teleport so give it increased delay so players have more time to react
+                        inst:DoTaskInTime(delay_time, function(inst)
                             inst.sg.statemem.charge_delay = nil
                             if inst.sg.statemem.target and inst.sg.statemem.target:IsValid() then
                                 inst:ForceFacePoint(inst.sg.statemem.target.Transform:GetWorldPosition())
@@ -218,7 +234,7 @@ env.AddStategraphPostInit("shadow_bishop", function(inst) --First time properly 
                                 end
                             end
                         end
-                        if bestoffset ~= nil then
+                        if bestoffset ~= nil and (inst.sg.mem.charge_count == nil or inst.sg.mem.charge_count == 1) then --check if it's your last charge before deciding to appear near your target
                             inst.Physics:Teleport(pos.x + bestoffset.x, 0, pos.z + bestoffset.z)
                         end
                         inst.sg.statemem.attack = true
