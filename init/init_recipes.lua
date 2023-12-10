@@ -1433,10 +1433,6 @@ STRINGS.ACTIONS.OPEN_CRAFTING.BOMBMIXER = "Mix at"
 STRINGS.RECIPE_DESC.TRANSMUTE_MONSTERMEAT = "Transmute Monster Morsels into Monster Meat"
 STRINGS.RECIPE_DESC.TRANSMUTE_MONSTERSMALLMEAT = "Transmute Monster Morsels into Monster Meat"
 
-STRINGS.SKILLTREE.WILSON.WILSON_ALCHEMY_4_DESC =
-    STRINGS.SKILLTREE.WILSON.WILSON_ALCHEMY_4_DESC ..
-    "\nTransform 3 Monster Morsels into a Monster Meat.\nTransform a Monster Meat into 2 Monster Morsels."
-
 STRINGS.RECIPE_DESC.WATERMELON_LANTERN = "Juicy illumination."
 STRINGS.RECIPE_DESC.CRITTERLAB_REAL = "Cute pals to ruin the mood."
 STRINGS.RECIPE_DESC.UM_SAND = "Turn a big rock into smaller rocks."
