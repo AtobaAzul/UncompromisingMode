@@ -67,40 +67,42 @@ if GetModConfigData("longpig") then
     }
 end
 
-
--- Rot Related Recipe Changes [AXE]
+if GetModConfigData("compostoverrot") then
+    -- Rot Related Recipe Changes [AXE]
     AllRecipes["lifeinjector"].ingredients = {
         Ingredient("nitre", 2),
         Ingredient("red_cap", 6),
-		Ingredient("stinger", 1),
+        Ingredient("stinger", 1),
     }
     AllRecipes["mushroom_farm"].ingredients = {
         Ingredient("compost", 4),
         Ingredient("poop", 5),
-		Ingredient("livinglog", 2),
+        Ingredient("livinglog", 2),
     }
     AllRecipes["compostwrap"].ingredients = {
         Ingredient("poop", 5),
         Ingredient("compost", 1),
-		Ingredient("nitre", 1),
+        Ingredient("nitre", 1),
     }
     AllRecipes["compostingbin"].ingredients = {
         Ingredient("boards", 3),
         Ingredient("twigs", 2),
-		Ingredient("cutgrass", 1),
+        Ingredient("cutgrass", 1),
     }
+
     --wormwood stuffs
-    AllRecipes["ipecacsyrup"].ingredients = {Ingredient("red_cap", 1), Ingredient("honey", 1), Ingredient("compost", 1)}
-    AllRecipes["wormwood_berrybush"].ingredients = {Ingredient("compost", 2), Ingredient("berries_juicy", 8)}
-    AllRecipes["wormwood_berrybush2"].ingredients = {Ingredient("compost", 2), Ingredient("berries_juicy", 8)}
-    AllRecipes["wormwood_juicyberrybush"].ingredients = {Ingredient("compost", 2), Ingredient("berries", 8)}
-	
-	--woodie stuff
-	AllRecipes["walking_stick"].ingredients = {Ingredient("lucy", 0), Ingredient("log", 3), Ingredient("wereitem_goose", 1)}
+    AllRecipes["ipecacsyrup"].ingredients = { Ingredient("red_cap", 1), Ingredient("honey", 1), Ingredient("compost", 1) }
+    AllRecipes["wormwood_berrybush"].ingredients = { Ingredient("compost", 2), Ingredient("berries_juicy", 8) }
+    AllRecipes["wormwood_berrybush2"].ingredients = { Ingredient("compost", 2), Ingredient("berries_juicy", 8) }
+    AllRecipes["wormwood_juicyberrybush"].ingredients = { Ingredient("compost", 2), Ingredient("berries", 8) }
 
     --turf
-    AllRecipes["turf_marsh"].ingredients = {Ingredient("cutreeds", 1), Ingredient("compost", 1)}
-    AllRecipes["wurt_turf_marsh"].ingredients = {Ingredient("cutreeds", 1), Ingredient("compost", 1)}
+    AllRecipes["turf_marsh"].ingredients = { Ingredient("cutreeds", 1), Ingredient("compost", 1) }
+    AllRecipes["wurt_turf_marsh"].ingredients = { Ingredient("cutreeds", 1), Ingredient("compost", 1) }
+end
+
+--woodie stuff
+AllRecipes["walking_stick"].ingredients = { Ingredient("lucy", 0), Ingredient("log", 3), Ingredient("wereitem_goose", 1) }
 
 
 if GetModConfigData("wanda_nerf") then
@@ -315,7 +317,7 @@ AllRecipes["mast_malbatross"].ingredients = {
     Ingredient("malbatross_feathered_weave", 3)
 }
 
-AllRecipes["winona_spotlight"].ingredients = {Ingredient("sewing_tape", 1), Ingredient("goldnugget", 2), Ingredient("lightbulb", 1)}
+AllRecipes["winona_spotlight"].ingredients = { Ingredient("sewing_tape", 1), Ingredient("goldnugget", 2), Ingredient("lightbulb", 1) }
 
 AllRecipes["featherpencil"].numtogive = 4 -- 8
 
@@ -1347,7 +1349,7 @@ end
 AddPrefabPostInit("forest", function(inst)
     AddRecipePostInitAny(function(recipe)
         if recipe.FindAndConvertIngredient ~= nil then
-            local tar = recipe:FindAndConvertIngredient("tar")    -- tar/sludge can replace eachother!
+            local tar = recipe:FindAndConvertIngredient("tar")             -- tar/sludge can replace eachother!
             local sludge = recipe:FindAndConvertIngredient("sludge")
             local shark_fin = recipe:FindAndConvertIngredient("shark_fin") -- shark fins/rockjaw leather can replace eachother!
             local rockjawleather = recipe:FindAndConvertIngredient("rockjawleather")
