@@ -18,9 +18,8 @@ local function oneat(inst, data)
 		inst.components.eater:SetAbsorptionModifiers(0, inst.modded_hungerabsorption or 1, 0)
 			
 		local stack_mult = inst.components.eater.eatwholestack and data.food.components.stackable ~= nil and data.food.components.stackable:StackSize() or 1
-			
+		local maxhp_heal = string.find(data.food.prefab, "spice_salt") ~= nil
 		local base_mult = inst.components.foodmemory ~= nil and inst.components.foodmemory:GetFoodMultiplier(data.food.prefab) or 1
-
 		local warlybuff = inst:HasTag("warlybuffed") and 1.2 or 1
 
 		local health_delta = 0
@@ -49,7 +48,7 @@ local function oneat(inst, data)
 		end
 
 		if health_delta > 3 then
-			inst.components.debuffable:AddDebuff("healthregenbuff_vetcurse_"..data.food.prefab, "healthregenbuff_vetcurse", {duration = (health_delta * 0.1)})
+			inst.components.debuffable:AddDebuff("healthregenbuff_vetcurse_"..data.food.prefab, "healthregenbuff_vetcurse", {duration = (health_delta * 0.1), max_hp = maxhp_heal})
 		else
 			inst.components.health:DoDelta(health_delta)
 		end
