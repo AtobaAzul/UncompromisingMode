@@ -319,13 +319,7 @@ local function fn()
         local x, y, z = inst.Transform:GetWorldPosition()
         local smog = TheSim:FindEntities(x, y, z, 20, { "smog" }, { "INLIMBO" })
         for k, v in pairs(smog) do
-            v:DoPeriodicTask(0.125, function(inst)
-                inst.AnimState:SetMultColour(0.05, 0.05, 0.05, inst.mult)
-                inst.mult = inst.mult - 0.025
-                if inst.mult <= 0 then
-                    inst:Remove()
-                end
-            end)
+                    v:Remove()
         end
     end)
 

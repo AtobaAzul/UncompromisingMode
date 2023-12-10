@@ -416,7 +416,7 @@ local prefabs = {
 	"mara_boss1_bullets",
 	"um_sacred_chest",
 	"smog",
-	
+    
 	-- Pyre Nettle stuff
 	"um_pyre_nettles",
 	"um_smolder_spore",

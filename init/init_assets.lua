@@ -2111,4 +2111,12 @@ Assets = {
 	Asset("IMAGE", "bigportraits/willow_none.tex"),
 	Asset("ATLAS", "bigportraits/willow_none.xml"),
 
+
+    --FX
+
+    Asset("IMAGE", "fx/smog1.tex"),
+    Asset("IMAGE", "fx/smog2.tex"),
+    Asset("IMAGE", "fx/smog3.tex"),
+    Asset("IMAGE", "fx/smog4.tex"),
+
 }

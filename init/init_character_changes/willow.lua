@@ -232,13 +232,7 @@ AllRecipes["bernie_inactive"].sortkey = AllRecipes["healingsalve"].sortkey - .1
                         local x, y, z = inst.Transform:GetWorldPosition()
                         local smog = TheSim:FindEntities(x, y, z, 8, { "smog" })
                         for k, v in pairs(smog) do
-                            v:DoPeriodicTask(0.125, function(_smog)
-                                _smog.AnimState:SetMultColour(0.05, 0.05, 0.05, _smog.mult)
-                                _smog.mult = _smog.mult - 0.025
-                                if _smog.mult <= 0 then
-                                    _smog:Remove()
-                                end
-                            end)
+                            v:Remove()
                         end
                     end)
                 end
