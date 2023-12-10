@@ -307,7 +307,6 @@ configuration_options = {
         default = "inv",
 
     },
-	BinaryConfig("woodie_skilltree", "Woodie's Skilltree", "Moose's non-planar damage reduced.", true),
     BinaryConfig("waxwell", "Maxwell",
         "Maxwell gets buffed versions of his classic shadows by reading the Codex Umbra. Disable for Maxwell mod compatibility!",
         true),
@@ -355,6 +354,8 @@ configuration_options = {
         true),
     BinaryConfig("wanda_nerf", "Wanda",
         "A bunch of changes to some of Wanda's more overpowered items to make them more balanced.", true),
+    BinaryConfig("woodie_skilltree", "Woodie: Skilltree", "Some changes to Woodie's skilltrees to add trade-offs and buff underutilized skills.", true),
+
     SkipSpace(),
 
     ------------------------------
