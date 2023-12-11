@@ -440,12 +440,11 @@ if GetModConfigData("reworked_ck") then
     table.insert(stategraph_post, "crabking")
 end
 
-if GetModConfigData("changed_shadow_pieces") then
+if GetModConfigData("changed_shadowpieces") then
     table.insert(prefab_post, "shadowchesspieces")--changes to  all 3 pieces. (no collision and shadowcrown loot)
-    table.insert(prefab_post, "shadow_knight")
+    --table.insert(prefab_post, "shadow_knight")
     table.insert(stategraph_post, "shadow_bishop")
-    table.insert(stategraph_post, "shadow_knight")
-
+    --table.insert(stategraph_post, "shadow_knight")
 end
 
 if GetModConfigData("hambatnerf") then

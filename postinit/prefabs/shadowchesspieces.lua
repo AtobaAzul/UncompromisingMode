@@ -25,7 +25,7 @@ local function lootsetfn(lootdropper)
             --TODO: replace with shadow equipment drops --fun fact this comment is from klei lmao
             --table.insert(loot, "armor_sanity")
             --table.insert(loot, "nightsword")
-            talbe.insert(loot, "shadow_crown")
+            table.insert(loot, "shadow_crown")
             if IsSpecialEventActive(SPECIAL_EVENTS.WINTERS_FEAST) then
                 table.insert(loot, GetRandomBasicWinterOrnament())
             end
