@@ -91,11 +91,9 @@ local function onattack(inst, attacker, target)
         for i, v in pairs(TheSim:FindEntities(x1, y1, z1, 8, { "cursedantler" })) do
             if v ~= inst then
                 local vowner = v.components.inventoryitem.owner
-                if vowner ~= nil then
-                    if vowner == owner or not vowner:HasTag("player") or vowner == nil then
-                        v.components.rechargeable:Discharge(5)
+                if vowner ~= nil and (vowner == owner or not vowner:HasTag("player")) or vowner == nil then
+                    v.components.rechargeable:Discharge(5)
                     end
-                end
             end
         end
 
