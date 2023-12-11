@@ -418,10 +418,10 @@ if GetModConfigData("beebox_nerf") then
 end
 
 
-if GetModConfigData("woodie_skilltree") then
-	TUNING.WEREMOOSE_DAMAGE = wilson_attack * 1.5
-	TUNING.SKILLS.WOODIE.MOOSE_SMASH_DAMAGE = wilson_attack * 3
-end
+--if GetModConfigData("woodie_skilltree") then
+	--TUNING.WEREMOOSE_DAMAGE = wilson_attack * 1.5
+	--TUNING.SKILLS.WOODIE.MOOSE_SMASH_DAMAGE = wilson_attack * 3
+--end
 
 if GetModConfigData("wixie_walter") then
     TUNING.WOBY_BIG_HUNGER = GLOBAL.TUNING.WALTER_HUNGER

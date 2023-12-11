@@ -1,41 +1,4 @@
------------------------------------------------------------------
--- Change woodie idol recipe to require presthatilator
------------------------------------------------------------------
 local config_skilltrees = GetModConfigData("woodie_skilltree")
-
---[[
-Recipe("wereitem_goose", {Ingredient("monstermeat", 3), Ingredient("seeds", 3)}, RECIPETABS.MAGIC, TECH.MAGIC_TWO, nil, nil, nil, nil, "werehuman")
-Recipe("wereitem_beaver", {Ingredient("monstermeat", 3), Ingredient("log", 2)}, RECIPETABS.MAGIC, TECH.MAGIC_TWO, nil, nil, nil, nil, "werehuman")
-Recipe("wereitem_moose", {Ingredient("monstermeat", 3), Ingredient("cutgrass", 2)}, RECIPETABS.MAGIC, TECH.MAGIC_TWO, nil, nil, nil, nil, "werehuman")
---]]
------------------------------------------------------------------
--- If goose is over water, increase wetness
------------------------------------------------------------------
---TODO: increase wetness properly, and make sure he gets freezing damage
-
---local WEREMODE_NAMES =
---{
---"beaver",
---}
-
---local WEREMODES = { NONE = 0 }
---for i, v in ipairs(WEREMODE_NAMES) do
---WEREMODES[string.upper(v)] = i
---end
-
---local function IsWereMode(mode)
---return WEREMODE_NAMES[mode] ~= nil
---end
-
---local function onworked(inst, data)
---if not inst.components.wereeater and data.target ~= nil and data.target.components.workable ~= nil then
---if IsWereMode(inst.weremode:value()) then
---inst.components.wereness:DoDelta(-3, true)
---elseif data.target.components.workable.action ~= nil and data.target.components.workable.action == GLOBAL.ACTIONS.CHOP then
---inst.components.wereness:DoDelta(1.5, true)
---end
---end
---end
 
 local function OnGooseOverWater(inst)
     if inst.weremode:value() == 3 then
@@ -75,21 +38,41 @@ local function pickup_UM_Beaver(inst)
     end
 end
 
---local function MooseResistance(inst)
---inst:DoTaskInTime(1, function(inst)
---if not inst:HasTag("beaver") and not inst:HasTag("weregoose") and inst.components.health ~= nil then
---if inst.components.skilltreeupdater:IsActivated("woodie_curse_epic_moose") then
---inst.components.health:SetAbsorptionAmount(.8)
---elseif inst.components.skilltreeupdater:IsActivated("woodie_curse_moose_3") then
---inst.components.health:SetAbsorptionAmount(.825)
---elseif inst.components.skilltreeupdater:IsActivated("woodie_curse_moose_2") then
---inst.components.health:SetAbsorptionAmount(.85)
---elseif inst.components.skilltreeupdater:IsActivated("woodie_curse_moose_1") then
---inst.components.health:SetAbsorptionAmount(.875)
---end
---end
---end)
---end
+local function WoodieMaxHealth(inst)
+    --inst:DoTaskInTime(1, function(inst)
+	local percent = inst.components.health:GetPercent()
+	if inst:HasTag("beaver") or inst:HasTag("weregoose") or inst:HasTag("weremoose") then
+		if inst.components.health.maxhealth ~= 150 then
+			inst.components.health:SetMaxHealth(150)
+			inst.components.health:SetPercent(percent)
+		end
+	elseif inst.components.skilltreeupdater:IsActivated("woodie_curse_epic_moose") then
+		if inst.components.health.maxhealth ~= 50 then		
+			inst.components.health:SetMaxHealth(50)
+			inst.components.health:SetPercent(percent)
+		end
+	elseif inst.components.skilltreeupdater:IsActivated("woodie_curse_moose_3") then
+		if inst.components.health.maxhealth ~= 75 then		
+			inst.components.health:SetMaxHealth(75)
+			inst.components.health:SetPercent(percent)
+		end
+	elseif inst.components.skilltreeupdater:IsActivated("woodie_curse_moose_2") then
+		if inst.components.health.maxhealth ~= 100 then		
+			inst.components.health:SetMaxHealth(100)
+			inst.components.health:SetPercent(percent)
+		end	
+	elseif inst.components.skilltreeupdater:IsActivated("woodie_curse_moose_1") then
+		if inst.components.health.maxhealth ~= 125 then		
+			inst.components.health:SetMaxHealth(125)
+			inst.components.health:SetPercent(percent)	
+		end
+	elseif inst.components.health.maxhealth ~= 150 then
+		inst.components.health:SetMaxHealth(150)
+		inst.components.health:SetPercent(percent)
+	end		
+	--end)
+end
+
 AddPrefabPostInit("woodie", function(inst)
     if not GLOBAL.TheWorld.ismastersim then
         return
@@ -99,30 +82,6 @@ AddPrefabPostInit("woodie", function(inst)
     end
     if config_skilltrees then
         inst:DoPeriodicTask(TUNING.ORANGEAMULET_ICD, pickup_UM_Beaver) --, nil, inst)
+		inst:DoPeriodicTask(0, WoodieMaxHealth)
     end
-    --inst:ListenForEvent("working", onworked)
-    --inst:ListenForEvent("transform_wereplayer", MooseResistance)
-
-    --local _RecalculateWereformSpeed = inst.RecalculateWereformSpeed
-
-    --local function MooseResistance(inst)
-    --if not inst:HasTag("beaver") and not inst:HasTag("weregoose") and inst.components.health ~= nil then
-    --if inst.components.skilltreeupdater:IsActivated("woodie_curse_epic_moose") then
-    --inst.components.health:SetAbsorptionAmount(.8)
-    --elseif inst.components.skilltreeupdater:IsActivated("woodie_curse_moose_3") then
-    --inst.components.health:SetAbsorptionAmount(.825)
-    --elseif inst.components.skilltreeupdater:IsActivated("woodie_curse_moose_2") then
-    --inst.components.health:SetAbsorptionAmount(.85)
-    --elseif inst.components.skilltreeupdater:IsActivated("woodie_curse_moose_1") then
-    --inst.components.health:SetAbsorptionAmount(.875)
-    --end
-    --end
-    --end
-
-    --local function ReroutingFunction(inst)
-    --_RecalculateWereformSpeed(inst)
-    --MooseResistance(inst)
-    --end
-
-    --inst.RecalculateWereformSpeed = ReroutingFunction
 end)
