@@ -314,8 +314,9 @@ local function fn()
 
     inst:AddComponent("heater")
     inst.components.heater.heat = -115
+    inst.components.heater:SetThermics(false, true)
 
-    inst:DoTaskInTime(1, function(inst)
+    inst:DoPeriodicTask(1, function(inst)
         local x, y, z = inst.Transform:GetWorldPosition()
         local smog = TheSim:FindEntities(x, y, z, 20, { "smog" }, { "INLIMBO" })
         for k, v in pairs(smog) do
