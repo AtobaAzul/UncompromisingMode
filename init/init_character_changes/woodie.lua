@@ -80,8 +80,8 @@ AddPrefabPostInit("woodie", function(inst)
     if TUNING.DSTU.WOODIE_WET_GOOSE then
         inst:DoTaskInTime(GLOBAL.TUNING.WEREGOOSE_RUN_DRAIN_TIME_DURATION, OnGooseOverWater)
     end
-    if config_skilltrees then
-        inst:DoPeriodicTask(TUNING.ORANGEAMULET_ICD, pickup_UM_Beaver) --, nil, inst)
-		inst:DoPeriodicTask(0, WoodieMaxHealth)
-    end
+    --if config_skilltrees then
+        --inst:DoPeriodicTask(TUNING.ORANGEAMULET_ICD, pickup_UM_Beaver) --, nil, inst)
+		--inst:DoPeriodicTask(0, WoodieMaxHealth)
+    --end
 end)

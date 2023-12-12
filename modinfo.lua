@@ -886,7 +886,7 @@ configuration_options = {
     BinaryConfig("reworked_ck", "Reworked Crab King",
         "Crab King has his main attack altered, freeze removed, and some new mechanics.", true),
     BinaryConfig("changed_shadowpieces", "Shadow Pieces tweaks",
-        "Shadow Bishop has a different attack.", true),
+        "Shadow Bishop has a different attack.", false),
     SkipSpace(),
 
     Header("Boss Quality of Life"),

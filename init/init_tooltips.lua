@@ -48,7 +48,7 @@ STRINGS.UNCOMP_TOOLTIP = {
 	
 	--uncomp content
 	RAT_WHIP = "- Stronger when well fed.",
-	AIR_CONDITIONER = "- Can crush up Mushrooms for helpful stat clouds.",
+	AIR_CONDITIONER = "- Can crush up Mushrooms for helpful stat clouds.\n- Provides cold in a small radius.\n- Removes smog in a large area.",
 	ANCIENT_AMULET_RED =
 	"- Drops soul orbs when attacked, which will replenish lost health when picked up.\n- Revives players when haunted.",
 	ARMOR_GLASSMAIL = "- Summons spinning Glass Shards when attacking enemies.\n- Loses shards when damage is taken.",
