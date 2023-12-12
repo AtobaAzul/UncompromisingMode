@@ -381,6 +381,17 @@ return{
         {
             DOER_ISNT_MODULE_OWNER = "Hey, are you ignoring me?!",
         },
+
+		CAST_SPELLBOOK =
+		{
+--fallback to speech_wilson.lua 			NO_TOPHAT = "only_used_by_waxwell",
+		},
+
+		CASTAOE =
+		{
+--fallback to speech_wilson.lua 			NO_MAX_SANITY = "only_used_by_waxwell",
+            NOT_ENOUGH_EMBERS = "only_used_by_willow",
+		},
     },
 
 	ANNOUNCE_CANNOT_BUILD =
@@ -4444,6 +4455,10 @@ return{
         BIRD_MUTANT_SPITTER = "This guy knows how to hock a loogie!",
 
         WAGSTAFF_NPC = "Hey! Bug eyes! Are you listening to me?!",
+
+        WAGSTAFF_NPC_MUTATIONS = "Hey, Bug Eyes! You gonna tell me how you got all see through?",
+        WAGSTAFF_NPC_WAGPUNK = "Hey Bug Eyes! What's the hurry?",
+		
         ALTERGUARDIAN_CONTAINED = "Yeah, just in time...",
 
         WAGSTAFF_TOOL_1 = "Is it some kind of instrument?",
@@ -5006,6 +5021,28 @@ return{
         WAGPUNKBITS_KIT = "It's just a wrench for the lazy.",
 
         WAGSTAFF_MUTATIONS_NOTE = "Blah blah blah, someone give me the short version!",
+
+        -- Meta 3
+
+        BATTLESONG_INSTANT_REVIVE = "This is ametuer stuff!",
+
+        WATHGRITHR_IMPROVEDHAT = "Are you planning to FLY with this thing?",
+        SPEAR_WATHGRITHR_LIGHTNING = "Puts the 'charge' in 'charge head first like an idiot'.",
+
+        BATTLESONG_CONTAINER = "A collection of pages all in one place? Yeah it's called a book.", -- I DONT KNOW WHAT IT LOOKS LIKE I ASSUME ITS A BAG??
+
+        SADDLE_WATHGRITHR = "It would make those oafs even more unhappy, I bet.",
+
+        WATHGRITHR_SHIELD = "This won't protect you from my verbal assault!",
+
+        BATTLESONG_SHADOWALIGNED = "This is ametuer stuff!",
+        BATTLESONG_LUNARALIGNED = "This is ametuer stuff!",
+
+		SHARKBOI = "Nothing better than a glass jaw!",
+        BOOTLEG = "All I got was a boot?!",
+        OCEANWHIRLPORTAL = "Whats the worst that could happen? Death by drowning?",
+
+        WILLOW_EMBER = "only_used_by_willow",
     },
 
     DESCRIBE_GENERIC = "That sure is... something!",
