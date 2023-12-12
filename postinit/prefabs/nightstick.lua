@@ -212,7 +212,7 @@ local function onattack(inst, attacker, target)
             target:AddComponent("debuffable")
         end
 
-        if not target:HasTag("epic") or not target:HasTag("shadow") then
+        if not target:HasTag("epic") and not target:HasTag("shadow") or (target:HasTag("chess") or target:HasTag("uncompromising_pawn") or target:HasTag("twinofterror") and not target:HasTag("fleshyeye")) then
             target.components.debuffable:AddDebuff("shockstundebuff", "shockstundebuff")
         end
 
