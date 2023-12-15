@@ -158,9 +158,10 @@ local function onattack(inst, attacker, target)
 				if v ~= inst and v ~= target and v:IsValid() and not v:IsInLimbo() then
 					if (v.components.health ~= nil and not v.components.health:IsDead()) and not v.sg:HasStateTag("noattack") then
 						if not inst.overcharged then
-							v.components.health:DoDelta( -10, false, attacker, false, attacker)
+							--v.components.health:DoDelta( -10, false, attacker, false, attacker)
+							v.components.combat:GetAttacked(attacker, 5, nil)
 						else
-							v.components.combat:GetAttacked(attacker, 10, nil) --overcharge gets hitstun
+							v.components.combat:GetAttacked(attacker, 25, nil)
 						end
 						SpawnPrefab("electrichitsparks"):AlignToTarget(v, attacker, true)
 					end
@@ -185,9 +186,10 @@ local function onattack(inst, attacker, target)
 				if v ~= inst and v ~= target and v:IsValid() and not v:IsInLimbo() then
 					if (v.components.health ~= nil and not v.components.health:IsDead()) and v.components.combat ~= nil and not v.sg:HasStateTag("noattack") then
 						if not inst.overcharged then
-							v.components.health:DoDelta( -10, false, attacker, false, attacker)
+							--v.components.health:DoDelta( -10, false, attacker, false, attacker)
+							v.components.combat:GetAttacked(attacker, 5, nil)
 						else
-							v.components.combat:GetAttacked(attacker, 10, nil) --overcharge gets hitstun
+							v.components.combat:GetAttacked(attacker, 25, nil)
 						end
 						SpawnPrefab("electrichitsparks"):AlignToTarget(v, attacker, true)
 					end
