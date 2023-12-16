@@ -52,7 +52,8 @@ local function TrySlowdown(inst, target)
     end
 
     if (not target:HasTag("player") or target == inst.lobber) and (inst.prefab ~= "lavaspit_slobber" and inst.components.propagator ~= nil or inst.prefab == "lavaspit_slobber") and target.components.combat ~= nil and target.components.health ~= nil and
-        not target:HasTag("dragonfly") and not target:HasTag("lavae") then
+        not target:HasTag("dragonfly") and not target:HasTag("lavae") and target.components.burnable ~= nil then
+
         target.components.health:DoFireDamage(inst.prefab == "lavaspit_slobber" and 6 or 4, inst.lobber, true)
 
         target:PushEvent("onignite")
