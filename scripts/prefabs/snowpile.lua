@@ -236,7 +236,6 @@ local function workcallback(inst, worker, workleft)
 		for i = 1, more_balls do
 			local ball = inst.components.lootdropper:SpawnLootPrefab("snowball_throwable")
 			local strength = math.random(1, 2.25)
-			local time_dif = math.random(0.5, 2)
 			Launch(ball, inst, strength)
 		end
 	end
