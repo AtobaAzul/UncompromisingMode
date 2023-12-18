@@ -56,7 +56,7 @@ local function DoBubbleFX(inst)
             break
         end
         local fx = SpawnPrefab("crab_king_bubble" .. math.random(3))
-        local x1, y1, z1 = x + math.random( -5, 5), 0, z + math.random( -5, 5)
+        local x1, y1, z1 = x + math.random(-5, 5), 0, z + math.random(-5, 5)
         if TheWorld.Map:IsOceanAtPoint(x1, y1, z1) and TheWorld.Map:GetPlatformAtPoint(x1, z1) == nil then
             fx.Transform:SetPosition(x1, y1, z1)
         end
@@ -75,7 +75,7 @@ local function OnHit(inst, attacker, target)
 
     -- Hit a boat? Cause a leak!
     if target ~= nil and target:HasTag("boat") then
-        target.components.health:DoDelta( -TUNING.CANNONBALL_DAMAGE * 0.75)
+        target.components.health:DoDelta(-TUNING.CANNONBALL_DAMAGE * 0.75)
     end
 
     -- Look for stuff on the ocean/ground and launch them
@@ -169,11 +169,10 @@ local function OnUpdateProjectile(inst)
 
     -- Look to hit targets while the cannonball is flying through the air
     local x, y, z = inst.Transform:GetWorldPosition()
-    local targets = TheSim:FindEntities(x, 0, z, CANNONBALL_RADIUS, nil, nil, MUST_ONE_OF_TAGS) -- Set y to zero to look for objects on the ground
+    local targets = TheSim:FindEntities(x, 0, z, CANNONBALL_RADIUS, nil, nil, MUST_ONE_OF_TAGS)               -- Set y to zero to look for objects on the ground
 
-    local crabking = TheSim:FindEntities(x, 0, z, CANNONBALL_RADIUS*1.5, {"crab"}, nil, MUST_ONE_OF_TAGS)--slightly more forgiving radius for CK
+    local crabking = TheSim:FindEntities(x, 0, z, CANNONBALL_RADIUS * 1.5, { "crab" }, nil, MUST_ONE_OF_TAGS) --slightly more forgiving radius for CK
     for i, target in ipairs(crabking) do
-
         if target ~= nil and target ~= inst.components.complexprojectile.attacker and not target:HasTag("boatbumper") then
             if target ~= nil and target:IsValid() and target.components.burnable ~= nil and inst:HasTag("sludge_cannonball") then
                 target.components.burnable:Ignite()
@@ -292,6 +291,19 @@ local function cannonball_fn()
 
     inst:AddTag("sludge_cannonball")
 
+    if not TheNet:IsDedicated() then
+        inst.fx = SpawnPrefab("torchfire_spooky")
+        inst.fx.entity:SetParent(inst.entity)
+        inst.fx.entity:AddFollower()
+    end
+
+    inst:ListenForEvent("onremove", function(inst)
+        if inst.fx ~= nil then
+            inst.fx:Remove()
+        end
+    end)
+
+
     if not TheWorld.ismastersim then return inst end
 
     inst.persists = false
@@ -300,6 +312,7 @@ local function cannonball_fn()
     inst.components.complexprojectile:SetGravity(TUNING.CANNONBALLS.ROCK.GRAVITY)
     inst.components.complexprojectile:SetOnHit(OnHit)
     inst.components.complexprojectile:SetOnUpdate(OnUpdateProjectile)
+
 
     return inst
 end
