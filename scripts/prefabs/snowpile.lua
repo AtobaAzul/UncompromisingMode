@@ -230,7 +230,15 @@ local function workcallback(inst, worker, workleft)
         inst:Remove()
     end
     if inst.components.workable.workleft <= 0 then
-		inst.components.lootdropper:SpawnLootPrefab("snowball_throwable")
+	inst.components.lootdropper:SpawnLootPrefab("snowball_throwable")
+	if IsSpecialEventActive(SPECIAL_EVENTS.WINTERS_FEAST) then --IT'S INSANE HOW JOLLY AND FESTIVE I AM BRAGHHGGH
+		local more_balls = math.floor(math.random(1.5,4))
+		for i = 1, more_balls do
+			local ball = inst.components.lootdropper:SpawnLootPrefab("snowball_throwable")
+			local strength = math.random(1, 2.25)
+			Launch(ball, inst, strength)
+		end
+	end
         inst:Remove()
     else
         startregen(inst)
@@ -473,6 +481,9 @@ local function snowpilefn(Sim)
     inst.components.workable:SetWorkLeft(1)
     inst.components.workable:SetOnWorkCallback(workcallback)
 
+
+    local balls_count = 1
+    if IsSpecialEventActive(SPECIAL_EVENTS.WINTERS_FEAST) then balls_count = math.floor(math.random(2, 4.5)) end --THIS IS SO JOLLY GRAAAH
     inst:AddComponent("pickable")
     inst.components.pickable.picksound = "dontstarve/wilson/harvest_berries"
 
@@ -482,7 +493,7 @@ local function snowpilefn(Sim)
     inst.components.pickable.makefullfn = makefullfn
     inst.components.pickable.max_cycles = 3
     inst.components.pickable.cycles_left = 1
-    inst.components.pickable:SetUp("snowball_throwable", 0)
+    inst.components.pickable:SetUp("snowball_throwable", 0, balls_count)
     inst.components.pickable.transplanted = true
 
     local x, y, z = inst.Transform:GetWorldPosition()
