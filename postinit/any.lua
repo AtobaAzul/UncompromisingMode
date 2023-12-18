@@ -315,32 +315,13 @@ env.AddPrefabPostInitAny(function(inst)
 end)
 
 local _AddPlatformFollower = EntityScript.AddPlatformFollower
-local _RemovePlatformFollower = EntityScript.RemovePlatformFollower
+--local _RemovePlatformFollower = EntityScript.RemovePlatformFollower
 
 function EntityScript:AddPlatformFollower(child)
     if child ~= nil then
         _AddPlatformFollower(self, child)
     end
-    if child ~= nil and child:HasTag("player") and not child:HasTag("playerghost") then
-        child.Physics:ClearCollidesWith(COLLISION.CHARACTERS)
-        child.Physics:ClearCollidesWith(COLLISION.OBSTACLES)
-        child.Physics:ClearCollidesWith(COLLISION.SMALLOBSTACLES)
-        child.Physics:ClearCollidesWith(COLLISION.GIANTS)
-    end
-end
-
-function EntityScript:RemovePlatformFollower(child)
-    if child ~= nil then
-        _RemovePlatformFollower(self, child)
-    end
-
-
-    if child ~= nil and child:HasTag("player") and not child:HasTag("playerghost") and not child.sg.mem.isobstaclepassthrough and not child.sg.mem.ischaracterpassthrough then
-        child:DoTaskInTime(1, function(inst)
-            inst.Physics:CollidesWith(COLLISION.OBSTACLES)
-            inst.Physics:CollidesWith(COLLISION.SMALLOBSTACLES)
-            inst.Physics:CollidesWith(COLLISION.CHARACTERS)
-            inst.Physics:CollidesWith(COLLISION.GIANTS)
-        end)
+    if child ~= nil and child:HasTag("structure") then --probably a bad assumption, but i'm assuming structures cant/wont leave the boat - yell at me if this messes anything.
+        RemovePhysicsColliders(child)                  --altough removing the structure collision instead of the player's seems like a more reasonable idea.
     end
 end
