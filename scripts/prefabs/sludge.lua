@@ -1,41 +1,31 @@
 local assets =
 {
     Asset("ANIM", "anim/sludge_oil.zip"),
-	Asset("ANIM", "anim/sludge_plug.zip"),
-	 Asset("ANIM", "anim/sludge.zip"),
-     Asset("ANIM", "anim/boat_repair_sludge_build.zip")
+    Asset("ANIM", "anim/sludge_plug.zip"),
+    Asset("ANIM", "anim/sludge.zip"),
+    Asset("ANIM", "anim/boat_repair_sludge_build.zip")
 }
 
 local function ontaken(inst, taker)
-    local bottle = SpawnPrefab("messagebottleempty")
-
-    local owner = taker ~= nil and 
-					taker.components.inventoryitem and 
-					taker.components.inventoryitem:GetGrandOwner() or nil
-	
-	if owner ~= nil and owner.components.inventory ~= nil then
-		local x,y,z = owner.Transform:GetWorldPosition()
-		bottle.Transform:SetPosition(x,y,z)
-        owner.components.inventory:GiveItem(bottle)
-	else
-		Launch2(bottle, taker, 1.5, 1, 3, .75)
-	end
-
-    --inst:Remove()
+    local pot1, pot2 = SpawnPrefab("halloweenpotion_embers"), SpawnPrefab("halloweenpotion_sparks")
+    if taker.components.fueled:CanAcceptFuelItem(pot1) and taker.components.fueled:CanAcceptFuelItem(pot2) then
+        taker.components.fueled:TakeFuelItem(pot1)
+        taker.components.fueled:TakeFuelItem(pot2)
+    end
 end
 
 local function onfinished(inst)
     local bottle = SpawnPrefab("messagebottleempty")
 
     local owner = inst.components.inventoryitem:GetGrandOwner()
-	
-	if owner ~= nil and owner.components.inventory ~= nil then
-		local x,y,z = owner.Transform:GetWorldPosition()
-		bottle.Transform:SetPosition(x,y,z)
+
+    if owner ~= nil and owner.components.inventory ~= nil then
+        local x, y, z = owner.Transform:GetWorldPosition()
+        bottle.Transform:SetPosition(x, y, z)
         owner.components.inventory:GiveItem(bottle)
-	else
-		Launch2(bottle, inst, 1.5, 1, 3, .75)
-	end
+    else
+        Launch2(bottle, inst, 1.5, 1, 3, .75)
+    end
 
     inst:Remove()
 end
@@ -70,8 +60,7 @@ local function sludge_fn()
     inst:AddComponent("fuel")
     inst.components.fuel.fuelvalue = TUNING.LARGE_FUEL
     inst.components.fuel.fueltype = FUELTYPE.SLUDGE
-
-    --inst.components.fuel:SetOnTakenFn(ontaken)-- :)
+    inst.components.fuel:SetOnTakenFn(ontaken) -- :)
 
     inst:AddComponent("repairer")
     inst.components.repairer.repairmaterial = MATERIALS.SLUDGE
@@ -91,7 +80,7 @@ local function sludge_fn()
     inst:AddComponent("inspectable")
 
     inst:AddComponent("inventoryitem")
-	inst.components.inventoryitem.atlasname = "images/inventoryimages/sludge.xml"
+    inst.components.inventoryitem.atlasname = "images/inventoryimages/sludge.xml"
 
     return inst
 end
@@ -124,8 +113,9 @@ local function oil_fn()
     end
 
     inst:AddComponent("fuel")
-    inst.components.fuel.fuelvalue = TUNING.LARGE_FUEL*2
+    inst.components.fuel.fuelvalue = TUNING.LARGE_FUEL * 2
     inst.components.fuel.fueltype = FUELTYPE.SLUDGE
+    inst.components.fuel:SetOnTakenFn(ontaken) -- :)
 
     inst:AddComponent("finiteuses")
     inst.components.finiteuses:SetMaxUses(25)
@@ -142,7 +132,7 @@ local function oil_fn()
     inst:AddComponent("inspectable")
 
     inst:AddComponent("inventoryitem")
-	inst.components.inventoryitem.atlasname = "images/inventoryimages/sludge_oil.xml"
+    inst.components.inventoryitem.atlasname = "images/inventoryimages/sludge_oil.xml"
     inst.components.inventoryitem.onactiveitemfn = onactiveitem
 
     return inst
@@ -187,12 +177,12 @@ local function bucket_fn()
     inst.components.stackable.maxsize = TUNING.STACK_SIZE_LARGEITEM
 
     inst:AddComponent("inventoryitem")
-	inst.components.inventoryitem.atlasname = "images/inventoryimages/sludge_cork.xml"
+    inst.components.inventoryitem.atlasname = "images/inventoryimages/sludge_cork.xml"
 
     inst:AddComponent("tradable")
     inst:AddComponent("upgrader")
     inst.components.upgrader.upgradetype = UPGRADETYPES.SLUDGE_CORK
-    inst.components.upgrader.upgradevalue = 2--hm
+    inst.components.upgrader.upgradevalue = 2 --hm
 
     return inst
 end
