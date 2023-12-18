@@ -205,7 +205,8 @@ local stategraph_post = {
     "stalker_minion",
     --	"merm",
     "carnival_host",
-    "catcoon"
+    "catcoon",
+    "powdermonkey"
 }
 
 local class_post = {
