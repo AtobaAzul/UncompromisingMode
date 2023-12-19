@@ -312,18 +312,19 @@ local function fn()
     inst.components.container.onopenfn = onopen
     inst.components.container.onclosefn = onclose
 
-    inst:AddComponent("heater")
-    inst.components.heater.heat = -115
-    inst.components.heater:SetThermics(false, true)
+    if TUNING.DSTU.AC_COOLING then
+        inst:AddComponent("heater")
+        inst.components.heater.heat = -115
+        inst.components.heater:SetThermics(false, true)
 
-    inst:DoPeriodicTask(1, function(inst)
-        local x, y, z = inst.Transform:GetWorldPosition()
-        local smog = TheSim:FindEntities(x, y, z, 20, { "smog" }, { "INLIMBO" })
-        for k, v in pairs(smog) do
-                    v:Remove()
-        end
-    end)
-
+        inst:DoPeriodicTask(1, function(inst)
+            local x, y, z = inst.Transform:GetWorldPosition()
+            local smog = TheSim:FindEntities(x, y, z, 20, { "smog" }, { "INLIMBO" })
+            for k, v in pairs(smog) do
+                v:Remove()
+            end
+        end)
+    end
     inst:AddComponent("channelable")
     inst.components.channelable:SetChannelingFn(DoPuff, OnStopChanneling)
     inst.components.channelable.use_channel_longaction_noloop = true
