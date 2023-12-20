@@ -55,6 +55,14 @@ local function TrySlowdown(inst, target)
         not target:HasTag("dragonfly") and not target:HasTag("lavae") and target.components.burnable ~= nil then
 
         target.components.health:DoFireDamage(inst.prefab == "lavaspit_slobber" and 6 or 4, inst.lobber, true)
+        if target.components.freezable ~= nil then
+            if target.components.freezable:IsFrozen() then
+                target.components.freezable:Unfreeze()
+            elseif target.components.freezable.coldness > 0 then
+                target.components.freezable:AddColdness(-2)
+            end
+        end
+
 
         target:PushEvent("onignite")
 
