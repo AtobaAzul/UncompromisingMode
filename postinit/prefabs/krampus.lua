@@ -57,5 +57,5 @@ env.AddPrefabPostInit("krampus", function(inst)
 	
     inst:ListenForEvent("onhitother", OnHitOther)
 	inst:ListenForEvent("newstate", CheckLeaving)
-	inst.components.combat:SetAttackPeriod(TUNING.KRAMPUS_ATTACK_PERIOD / 0.9)
+	inst.components.combat:SetAttackPeriod(TUNING.KRAMPUS_ATTACK_PERIOD)
 end)
