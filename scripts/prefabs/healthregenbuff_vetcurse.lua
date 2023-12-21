@@ -1,6 +1,9 @@
 local function OnTick(inst, target, data)
-    local duration = data ~= nil and data.duration or 1
-    local maxhp_percent = data ~= nil and data.maxhp_percent
+    local duration, maxhp_percent
+    if data ~= nil then
+        duration = data.duration or 1
+        maxhp_percent = type(data.maxhp_percent) == "number" and data.maxhp_percent or 0
+    end
     --[[local warlybuff = target:HasTag("warlybuffed") and 2 or 1
 	duration = duration / warlybuff]]
     if target.components.health ~= nil and
@@ -26,9 +29,9 @@ local function OnAttached(inst, target, followsymbol, followoffset, data)
     local duration = data ~= nil and data.duration and (data.duration / 2) or 1
     local dohealmaxhealth = data ~= nil and data.max_hp
     if dohealmaxhealth then
-        local health = (duration*2)*10
+        local health = (duration * 2) * 10
         local totalhealth = target.components.health.maxhealth
-        data.maxhp_percent = (health / totalhealth)*0.1
+        data.maxhp_percent = (health / totalhealth) * 0.1
     end
     local warlybuff = (target:HasTag("warlybuffed") and (target:HasTag("vetcurse") and 1.8 or 2)) or target:HasTag("vetcurse") and 0.8 or 1
 
