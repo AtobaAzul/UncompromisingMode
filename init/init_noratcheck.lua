@@ -17,6 +17,8 @@ TUNING.DSTU.NORATCHECK =--defining it here for simplicity's sake.
 	"pumpkin_lantern",
 	"watermelon_lantern",
 	"moonglass_charged",
+	"trinket_4",
+	"trinket_13",
 }
 
 for k, v in ipairs(TUNING.DSTU.NORATCHECK) do
