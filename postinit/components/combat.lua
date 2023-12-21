@@ -162,9 +162,9 @@ env.AddComponentPostInit("combat", function(self)
         elseif self.inst ~= nil and attacker ~= nil and attacker:HasTag("wathom") and TUNING.DSTU.WATHOM_MAX_DAMAGE_CAP then
             if damage > 600 then damage = 600 end
             return _GetAttacked(self, attacker, damage, weapon_check, stimuli, ...)
-        elseif self.inst ~= nil and (self.inst.prefab == "bernie_active" or self.inst.prefab == "bernie_big") and attacker ~= nil and attacker:HasTag("shadow") and TUNING.DSTU.BERNIE_BUFF then
-            damage = damage * 0.2
-            return _GetAttacked(self, attacker, damage, weapon_check, stimuli, ...)
+        --elseif self.inst ~= nil and (self.inst.prefab == "bernie_active" or self.inst.prefab == "bernie_big") and attacker ~= nil and attacker:HasTag("shadow") and TUNING.DSTU.BERNIE_BUFF then
+            --damage = damage * 0.2
+            --return _GetAttacked(self, attacker, damage, weapon_check, stimuli, ...)
         elseif self.inst:HasTag("ratwhisperer") and attacker ~= nil and attacker.prefab == "catcoon" and self.inst.components.health ~= nil then
             self.inst.components.health:DoDelta(-10, false, attacker.prefab)
             return _GetAttacked(self, attacker, damage, weapon_check, stimuli, ...)

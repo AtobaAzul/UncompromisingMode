@@ -112,7 +112,7 @@ if env.GetModConfigData("willow") then
 		inst.components.burnable:SetOnIgniteFn(OnIgniteFn)
 		inst.components.burnable:SetOnBurntFn(OnBurnt)
 	end]]
-        inst:ListenForEvent("attacked", onattacked)
+        --inst:ListenForEvent("attacked", onattacked)
         --inst:ListenForEvent("ms_respawnedfromghost", OnRespawnedFromGhost2)
         --inst:ListenForEvent("moisturedelta", OnMoistureDelta)
     end)
@@ -300,13 +300,13 @@ AllRecipes["bernie_inactive"].sortkey = AllRecipes["healingsalve"].sortkey - .1
         --inst.GoBig = gobig
     end)
 
-    if TUNING.DSTU.WILLOW_INSULATION then
-        env.AddPrefabPostInit("willow", function(inst)
-            if not TheWorld.ismastersim then
-                return
-            end
-            inst.components.temperature.inherentinsulation = -TUNING.INSULATION_MED
-            inst.components.temperature.inherentsummerinsulation = TUNING.INSULATION_MED
-        end)
-    end
+    --if TUNING.DSTU.WILLOW_INSULATION then
+        --env.AddPrefabPostInit("willow", function(inst)
+            --if not TheWorld.ismastersim then
+                --return
+            --end
+            --inst.components.temperature.inherentinsulation = -TUNING.INSULATION_MED
+            --inst.components.temperature.inherentsummerinsulation = TUNING.INSULATION_MED
+        --end)
+    --end
 end
