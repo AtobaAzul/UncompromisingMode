@@ -681,7 +681,7 @@ configuration_options = {
         "Farm crops are nerfed in their base value when raw/cooked to incentivize using Crockpot recipes.", true),
     BinaryConfig("seeds", "Lowered Seeds Hunger", "Seeds have had their hunger lowered.", true),
     {
-        name = "monstereggs",
+        name = "monster_eggs",
         label = "Monster Eggs",
         hover =
         "Birds now give Monster Eggs when fed Monster Meat.\nMonster Eggs are like Eggs, but have configurable monster value.",
@@ -689,7 +689,7 @@ configuration_options = {
             { description = "Off",         data = 0 }, { description = "0.25 Monster", data = 0.25 },
             { description = "0.5 Monster", data = 0.5 }, { description = "1 Monster", data = 1 },
             { description = "1.5 Monster", data = 1.5 } },
-        default = 1
+        default = 1.5
     },
     SkipSpace(),
 
