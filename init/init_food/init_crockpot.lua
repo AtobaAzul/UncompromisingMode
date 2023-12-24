@@ -593,3 +593,143 @@ AddPrefabPostInitAny(function(inst)
         inst.components.edible.temperatureduration = inst.components.edible.temperatureduration*2
     end
 end)
+
+AddPrefabPostInit("shroomcake", function(inst)
+    if not GLOBAL.TheWorld.ismastersim then
+        return
+    end
+	inst.components.edible.foodtype = GLOBAL.FOODTYPE.VEGGIE
+end)
+
+AddPrefabPostInit("shroomcake_spice_salt", function(inst)
+    if not GLOBAL.TheWorld.ismastersim then
+        return
+    end
+	inst.components.edible.foodtype = GLOBAL.FOODTYPE.VEGGIE
+end)
+
+AddPrefabPostInit("shroomcake_spice_chili", function(inst)
+    if not GLOBAL.TheWorld.ismastersim then
+        return
+    end
+	inst.components.edible.foodtype = GLOBAL.FOODTYPE.VEGGIE
+end)
+
+AddPrefabPostInit("shroomcake_spice_sugar", function(inst)
+    if not GLOBAL.TheWorld.ismastersim then
+        return
+    end
+	inst.components.edible.foodtype = GLOBAL.FOODTYPE.VEGGIE
+end)
+
+AddPrefabPostInit("shroomcake_spice_garlic", function(inst)
+    if not GLOBAL.TheWorld.ismastersim then
+        return
+    end
+	inst.components.edible.foodtype = GLOBAL.FOODTYPE.VEGGIE
+end)
+
+AddPrefabPostInit("icecream", function(inst)
+    if not GLOBAL.TheWorld.ismastersim then
+        return
+    end
+	inst.components.edible.foodtype = GLOBAL.FOODTYPE.GENERIC
+end)
+
+AddPrefabPostInit("icecream_spice_chili", function(inst)
+    if not GLOBAL.TheWorld.ismastersim then
+        return
+    end
+	inst.components.edible.foodtype = GLOBAL.FOODTYPE.GENERIC
+end)
+
+AddPrefabPostInit("icecream_spice_salt", function(inst)
+    if not GLOBAL.TheWorld.ismastersim then
+        return
+    end
+	inst.components.edible.foodtype = GLOBAL.FOODTYPE.GENERIC
+end)
+
+AddPrefabPostInit("icecream_spice_sugar", function(inst)
+    if not GLOBAL.TheWorld.ismastersim then
+        return
+    end
+	inst.components.edible.foodtype = GLOBAL.FOODTYPE.GENERIC
+end)
+
+AddPrefabPostInit("icecream_spice_garlic", function(inst)
+    if not GLOBAL.TheWorld.ismastersim then
+        return
+    end
+	inst.components.edible.foodtype = GLOBAL.FOODTYPE.GENERIC
+end)
+
+AddPrefabPostInit("taffy", function(inst)
+    if not GLOBAL.TheWorld.ismastersim then
+        return
+    end
+	inst.components.edible.foodtype = GLOBAL.FOODTYPE.GENERIC
+end)
+
+AddPrefabPostInit("taffy_spice_chili", function(inst)
+    if not GLOBAL.TheWorld.ismastersim then
+        return
+    end
+	inst.components.edible.foodtype = GLOBAL.FOODTYPE.GENERIC
+end)
+
+AddPrefabPostInit("taffy_spice_salt", function(inst)
+    if not GLOBAL.TheWorld.ismastersim then
+        return
+    end
+	inst.components.edible.foodtype = GLOBAL.FOODTYPE.GENERIC
+end)
+
+AddPrefabPostInit("taffy_spice_sugar", function(inst)
+    if not GLOBAL.TheWorld.ismastersim then
+        return
+    end
+	inst.components.edible.foodtype = GLOBAL.FOODTYPE.GENERIC
+end)
+
+AddPrefabPostInit("taffy_spice_garlic", function(inst)
+    if not GLOBAL.TheWorld.ismastersim then
+        return
+    end
+	inst.components.edible.foodtype = GLOBAL.FOODTYPE.GENERIC
+end)
+
+AddPrefabPostInit("frozenbananadaiquiri", function(inst)
+    if not GLOBAL.TheWorld.ismastersim then
+        return
+    end
+	inst.components.edible.foodtype = GLOBAL.FOODTYPE.VEGGIE
+end)
+
+AddPrefabPostInit("frozenbananadaiquiri_spice_chili", function(inst)
+    if not GLOBAL.TheWorld.ismastersim then
+        return
+    end
+	inst.components.edible.foodtype = GLOBAL.FOODTYPE.VEGGIE
+end)
+
+AddPrefabPostInit("frozenbananadaiquiri_spice_salt", function(inst)
+    if not GLOBAL.TheWorld.ismastersim then
+        return
+    end
+	inst.components.edible.foodtype = GLOBAL.FOODTYPE.VEGGIE
+end)
+
+AddPrefabPostInit("frozenbananadaiquiri_spice_sugar", function(inst)
+    if not GLOBAL.TheWorld.ismastersim then
+        return
+    end
+	inst.components.edible.foodtype = GLOBAL.FOODTYPE.VEGGIE
+end)
+
+AddPrefabPostInit("frozenbananadaiquiri_spice_garlic", function(inst)
+    if not GLOBAL.TheWorld.ismastersim then
+        return
+    end
+	inst.components.edible.foodtype = GLOBAL.FOODTYPE.VEGGIE
+end)
