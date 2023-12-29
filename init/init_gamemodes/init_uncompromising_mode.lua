@@ -77,6 +77,9 @@ modimport("init/init_creatures/init_treebuffs")
 modimport("init/init_creatures/init_harder_monsters")
 --end
 
+if GetModConfigData("horriblefood") then
+	modimport("init/init_horriblefood")
+end
 
 modimport("init/init_food/init_food_changes")
 modimport("init/init_food/init_bird_changes")

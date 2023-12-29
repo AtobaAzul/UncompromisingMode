@@ -678,6 +678,8 @@ configuration_options = {
     },
     BinaryConfig("butterflywings_nerf", "Weaker Butterfly Wings",
         "Butterfly Wings have been nerfed to not be cheap healing.", true),
+	BinaryConfig("horriblefood", "More Horrible Foods",
+        "More items are considered as the horrible food type.", true),
     BinaryConfig("rawcropsnerf", "Raw Crops Nerf",
         "Farm crops are nerfed in their base value when raw/cooked to incentivize using Crockpot recipes.", true),
     BinaryConfig("seeds", "Lowered Seeds Hunger", "Seeds have had their hunger lowered.", true),

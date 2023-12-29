@@ -33,6 +33,12 @@ local function fn()
 	inst.components.inventoryitem.atlasname = "images/inventoryimages/shroom_skin_fragment.xml"
 
     MakeHauntableLaunchAndPerish(inst)
+	
+	inst:AddComponent("edible")
+    inst.components.edible.healthvalue = 0
+    inst.components.edible.hungervalue = 1
+    inst.components.edible.sanityvalue = 0      
+    inst.components.edible.foodtype = FOODTYPE.HORRIBLE	
 
     return inst
 end
