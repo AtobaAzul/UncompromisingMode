@@ -124,7 +124,7 @@ TUNING.DSTU = {
     MEATBALL = GetModConfigData("meatball"),
     PIEROGI = GetModConfigData("perogi"),
     FARMFOODREDUX = GetModConfigData("farmfoodredux"),
-    ICECREAMBUFF = GetModConfigData("icecreambuff"),
+    ICECREAMBUFF = GetModConfigData("icecream_buff"),
     ----------------------------------------------------------------------------
     -- Mob changes
     ----------------------------------------------------------------------------

@@ -594,6 +594,7 @@ AddPrefabPostInitAny(function(inst)
     end
 end)
 
+if TUNING.DSTU.GOODIESNERF then
 AddPrefabPostInit("shroomcake", function(inst)
     if not GLOBAL.TheWorld.ismastersim then
         return
@@ -733,3 +734,4 @@ AddPrefabPostInit("frozenbananadaiquiri_spice_garlic", function(inst)
     end
 	inst.components.edible.foodtype = GLOBAL.FOODTYPE.VEGGIE
 end)
+end

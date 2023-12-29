@@ -636,7 +636,7 @@ configuration_options = {
         "Enables the new Monster Lagsana recipe; you can only make non-monster recipes if the meat value is greater than monster value.",
         true),
     BinaryConfig("generalcrockblocker", "Trash Filler Blocker",
-        "Heavy use of certain low quality Crockpot ingredients, such as Twigs, Ice, Buttefly Wings, and other inedibles  will result in Wet Goop.",
+        "Heavy use of certain low quality Crockpot ingredients, such as Twigs, Ice, Buttefly Wings, and other inedibles will result in Wet Goop.",
         true),
     BinaryConfig("icecrockblocker", "Snowcones",
         "Snowcones prevent heavy use of Ice specifically in Crockpot dishes that don't call for it.", true),
@@ -653,7 +653,8 @@ configuration_options = {
             { description = "1 Veggie Value",   data = 1 }, { description = "Vanilla Value", data = 0.5 } },
         default = 1.5
     },
-    BinaryConfig("icecreambuff", "Ice Cream Buff", "Ice Cream now restores 100 sanity, but does it slowly.", true),
+    BinaryConfig("icecream_buff", "Ice Cream Buff", "Ice Cream now restores 100 sanity.", true),
+    BinaryConfig("goodies_nerf", "Goodies Food Type Changes", "The food type of more avaliable Goodies were changed into either Veggie or Generic.", true),	
     BinaryConfig("farmfoodredux", "Farmplot Food Redux",
         "Reallocates most dishes that involve Crock Pot foods. Typically a buff, but may exchange some stats.", true),
     BinaryConfig("sr_foodrebalance", "Fish foods rebalance", "Several fish based foods have their stats tweaked.", true),

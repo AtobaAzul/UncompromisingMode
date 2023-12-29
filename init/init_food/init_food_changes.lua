@@ -17,17 +17,17 @@ local recipes = cooking.recipes.cookpot
 local warly_recipes = cooking.recipes.portablecookpot
 --recipes.meatballs.test = function(cooker, names, tags) return tags.antihistamine and tags.antihistamine >= 3  end,
 
-local ApplyIcecreamBuff = function(inst, eater)
-	if eater.components.debuffable ~= nil and eater.components.debuffable:IsEnabled() and
-		not (eater.components.health ~= nil and eater.components.health:IsDead()) and
-		not eater:HasTag("playerghost") then
-		eater.components.debuffable:AddDebuff("icecreamsanityregenbuff", "icecreamsanityregenbuff")
-	end
+--local ApplyIcecreamBuff = function(inst, eater)
+	--if eater.components.debuffable ~= nil and eater.components.debuffable:IsEnabled() and
+		--not (eater.components.health ~= nil and eater.components.health:IsDead()) and
+		--not eater:HasTag("playerghost") then
+		--eater.components.debuffable:AddDebuff("icecreamsanityregenbuff", "icecreamsanityregenbuff")
+	--end
 
-	if inst.OldOnEat ~= nil then
-		return inst.OldOnEat(inst, eater)
-	end
-end
+	--if inst.OldOnEat ~= nil then
+		--return inst.OldOnEat(inst, eater)
+	--end
+--end
 
 
 if TUNING.DSTU.MEATBALL then
@@ -88,7 +88,7 @@ end
 
 
 if TUNING.DSTU.ICECREAMBUFF then
-	recipes.icecream.OldOnEat = recipes.icecream.oneatenfn
+	--recipes.icecream.OldOnEat = recipes.icecream.oneatenfn
 
 	local ICECREAM =
 	{
@@ -102,8 +102,8 @@ if TUNING.DSTU.ICECREAMBUFF then
 	for k, v in pairs(ICECREAM) do
 		AddPrefabPostInit(v, function(inst)
 			if inst ~= nil and inst.components.edible ~= nil then
-				inst.components.edible.sanityvalue = 0
-				inst.components.edible:SetOnEatenFn(ApplyIcecreamBuff)
+				inst.components.edible.sanityvalue = 100
+				--inst.components.edible:SetOnEatenFn(ApplyIcecreamBuff)
 			end
 		end)
 	end
