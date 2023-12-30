@@ -151,10 +151,16 @@ env.AddPlayerPostInit(function(inst)
 	
 	inst:DoTaskInTime(0, RegisterNetListeners)
 
+    if inst.components.areaaware then
+    inst.components.areaaware:StartWatchingTile(WORLD_TILES.UM_FLOODWATER)
+    end
+
 	if not TheWorld.ismastersim then
 		return inst
     end
 	
+
+
 	if TUNING.DSTU.ADVERTISEMENTS then
 		inst:DoPeriodicTask(10, function()
 			inst.Advertisee:set_local(inst)
