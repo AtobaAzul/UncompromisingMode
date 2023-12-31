@@ -1,77 +1,22 @@
-	AddPrefabPostInit("coontail", function(inst)
-		if not GLOBAL.TheWorld.ismastersim then
-			return
-		end
+local foods = { --health/hunger/sanity
+    coontail = { 9, 9, 7 },
+    shroom_skin = { 10, 10, 0 },
+    tentaclespots = { 10, 10, 0 },
+    --waterplant_bomb = {-2.5,}
+    glommerwings = { 10, 10, 0 },
+}
+
+
+for prefab, stats in pairs(foods) do
+    AddPrefabPostInit(prefab, function(inst)
+        if not GLOBAL.TheWorld.ismastersim then
+            return
+        end
 
         inst:AddComponent("edible")
-        inst.components.edible.healthvalue = 9
-        inst.components.edible.hungervalue = 9
-        inst.components.edible.sanityvalue = 7      
+        inst.components.edible.healthvalue = stats[1]
+        inst.components.edible.hungervalue = stats[2]
+        inst.components.edible.sanityvalue = stats[3]
         inst.components.edible.foodtype = GLOBAL.FOODTYPE.HORRIBLE
-
-	end)
-
-	AddPrefabPostInit("honeycomb", function(inst)
-		if not GLOBAL.TheWorld.ismastersim then
-			return
-		end
-
-        inst:AddComponent("edible")
-        inst.components.edible.healthvalue = 10
-        inst.components.edible.hungervalue = 10
-        inst.components.edible.sanityvalue = 0      
-        inst.components.edible.foodtype = GLOBAL.FOODTYPE.HORRIBLE
-
-	end)
-	
-	AddPrefabPostInit("shroom_skin", function(inst)
-		if not GLOBAL.TheWorld.ismastersim then
-			return
-		end
-
-        inst:AddComponent("edible")
-        inst.components.edible.healthvalue = 10
-        inst.components.edible.hungervalue = 10
-        inst.components.edible.sanityvalue = 0      
-        inst.components.edible.foodtype = GLOBAL.FOODTYPE.HORRIBLE
-
-	end)	
-
-	AddPrefabPostInit("tentaclespots", function(inst)
-		if not GLOBAL.TheWorld.ismastersim then
-			return
-		end
-
-        inst:AddComponent("edible")
-        inst.components.edible.healthvalue = 10
-        inst.components.edible.hungervalue = 10
-        inst.components.edible.sanityvalue = 0      
-        inst.components.edible.foodtype = GLOBAL.FOODTYPE.HORRIBLE
-
-	end)
-	
-	AddPrefabPostInit("waterplant_bomb", function(inst)
-		if not GLOBAL.TheWorld.ismastersim then
-			return
-		end
-
-        inst:AddComponent("edible")
-        inst.components.edible.healthvalue = -2.5
-        inst.components.edible.hungervalue = 5
-        inst.components.edible.sanityvalue = 0      
-        inst.components.edible.foodtype = GLOBAL.FOODTYPE.HORRIBLE
-
-	end)
-
-	AddPrefabPostInit("glommerwings", function(inst)
-		if not GLOBAL.TheWorld.ismastersim then
-			return
-		end
-
-        inst:AddComponent("edible")
-        inst.components.edible.healthvalue = 10
-        inst.components.edible.hungervalue = 10
-        inst.components.edible.sanityvalue = 0      
-        inst.components.edible.foodtype = GLOBAL.FOODTYPE.HORRIBLE
-
-	end)
+    end)
+end
