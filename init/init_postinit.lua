@@ -47,7 +47,8 @@ local component_post = {
     "planarentity",
     "geyserfx",
     "firedetector",
-    "slipperyfeet"
+    "slipperyfeet",
+    "walkableplatformplayer",
 }
 
 local prefab_post = {
