@@ -75,9 +75,9 @@ env.AddPrefabPostInit("twinofterror1", function(inst)
     inst:AddComponent("teleportedoverride")
     inst.components.teleportedoverride:SetDestPositionFn(teleport_override_fn)
 
-	if inst.components.health ~= nil then
-		inst.components.health:SetMaxHealth(TUNING.DSTU.TWIN1_HEALTH)
-	end
+	--if inst.components.health ~= nil then
+		--inst.components.health:SetMaxHealth(TUNING.DSTU.TWIN1_HEALTH)
+	--end
 
     inst:ListenForEvent("attacked", OnAttacked)
 
@@ -126,9 +126,9 @@ env.AddPrefabPostInit("twinofterror2", function(inst)
     inst:AddComponent("teleportedoverride")
     inst.components.teleportedoverride:SetDestPositionFn(teleport_override_fn)
 
-	if inst.components.health ~= nil then
-		inst.components.health:SetMaxHealth(TUNING.DSTU.TWIN2_HEALTH)
-	end
+	--if inst.components.health ~= nil then
+		--inst.components.health:SetMaxHealth(TUNING.DSTU.TWIN2_HEALTH)
+	--end
 
     inst:ListenForEvent("attacked", OnAttacked)
 

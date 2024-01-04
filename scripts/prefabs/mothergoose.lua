@@ -222,7 +222,7 @@ local function fn()
     ------------------
 
     inst:AddComponent("health")
-    inst.components.health:SetMaxHealth(TUNING.DSTU.MOTHER_GOOSE_HEALTH)
+    inst.components.health:SetMaxHealth(7000 * TUNING.DSTU.MOTHER_GOOSE_HEALTH)
     inst.components.health.destroytime = 3
 
     ------------------

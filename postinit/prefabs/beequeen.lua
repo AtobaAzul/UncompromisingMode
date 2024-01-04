@@ -644,9 +644,9 @@ end
 local function BeeQueenPost(inst)
 	inst.Physics:CollidesWith(COLLISION.FLYERS)
 
-	if inst.components.health ~= nil then
-		inst.components.health:SetMaxHealth(TUNING.DSTU.BEEQUEEN_HEALTH)
-	end
+	--if inst.components.health ~= nil then
+		--inst.components.health:SetMaxHealth(TUNING.DSTU.BEEQUEEN_HEALTH)
+	--end
 
 	inst:AddComponent("groundpounder") --Groundpounder is visual only
 	inst.components.groundpounder.destroyer = true

@@ -107,7 +107,7 @@ local function IceyCheck(inst, data)
 end
 
 local function MakeEnrageable(inst)
-    inst.components.health:SetMaxHealth(4000)
+    inst.components.health:SetMaxHealth(TUNING.DEERCLOPS_HEALTH * TUNING.DSTU.DEERCLOPS_HEALTH)
     EnterPhase2Trigger(inst) --Removing the trigger, only ice laser
     inst.upgrade = "enrage_mutation"
 	inst:AddComponent("timer")
@@ -115,7 +115,7 @@ local function MakeEnrageable(inst)
 end
 
 local function MakeStrong(inst)
-    inst.components.health:SetMaxHealth(4500)
+    inst.components.health:SetMaxHealth((TUNING.DEERCLOPS_HEALTH * 1.125) * TUNING.DSTU.DEERCLOPS_HEALTH)
     inst.upgrade = "strength_mutation"
     inst:DoTaskInTime(0.1, function(inst) inst:AddComponent("timer") end)
     if inst.components.healthtrigger ~= nil then
@@ -124,7 +124,7 @@ local function MakeStrong(inst)
 end
 
 local function MakeIcey(inst)
-    inst.components.health:SetMaxHealth(3500)
+    inst.components.health:SetMaxHealth((TUNING.DEERCLOPS_HEALTH * 0.875) * TUNING.DSTU.DEERCLOPS_HEALTH)
     inst.upgrade = "ice_mutation"
     if inst.components.freezable ~= nil then
         inst:RemoveComponent("freezable")

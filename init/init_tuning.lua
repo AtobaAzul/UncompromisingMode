@@ -141,12 +141,6 @@ TUNING.DSTU = {
     MONSTER_MCTUSK_HOUND_NUMBER = 5,
     -- Hounds
     MONSTER_HOUNDS_PER_WAVE_INCREASE = 1.5, -- Controlled by player settings
-    -- Hooded Widow
-    WIDOW_HEALTH = GetModConfigData("widow health"),
-    -- Mother Goose
-    MOTHER_GOOSE_HEALTH = GetModConfigData("mother goose health"),
-    -- Wiltfly Health
-    WILTFLY_HEALTH = GetModConfigData("wiltfly health"),
     -- Spawn New Bosses
     SPAWNMOTHERGOOSE = GetModConfigData("mother_goose"),
     SPAWNWILTINGFLY = GetModConfigData("wiltfly"),
@@ -392,11 +386,47 @@ TUNING.DSTU = {
     BEEBOX_NERF = GetModConfigData("beebox_nerf"),
     CANEDURABILITY = GetModConfigData("canedurability"),
     AC_COOLING = GetModConfigData("ac_does_ac"),
+	
     -- boss hp qol
-    BEEQUEEN_HEALTH = GetModConfigData("bee queen health"),
-    TOADSTOOL_HEALTH = GetModConfigData("toadstool health"),
-    TWIN1_HEALTH = GetModConfigData("twins health"),
-    TWIN2_HEALTH = GetModConfigData("twins health"),
+
+	MINOTAUR_HEALTH = GetModConfigData("Ancient Guardian's Health"),
+	STALKER_HEALTH = GetModConfigData("Reanimated Skeleton's Health"),
+	STALKER_ATRIUM_HEALTH = GetModConfigData("Ancient Fuelweaver's Health"),
+	BEARGER_HEALTH = GetModConfigData("Bearger's Health"),
+	MUTATED_BEARGER_HEALTH = GetModConfigData("Twins of Terror's Health"),
+	BEEQUEEN_HEALTH = GetModConfigData("Bee Queen's Health"),
+	DEERCLOPS_HEALTH = GetModConfigData("Deerclops's Health"),
+	MUTATED_DEERCLOPS_HEALTH = GetModConfigData("Deerclops's Health"),
+	DRAGONFLY_HEALTH = GetModConfigData("Dragonfly's Health"),
+	EYEOFTERROR_HEALTH = GetModConfigData("Eye of Terror's Health"),
+	SHARKBOI_HEALTH = GetModConfigData("Frostjaw's Health"),
+    WIDOW_HEALTH = GetModConfigData("Hooded Widow's Health"),	
+	LORDFRUITFLY_HEALTH = GetModConfigData("Lord of the Fruit Flies's Health"),
+	MALBATROSS_HEALTH = GetModConfigData("Malbatross's Health"),
+	MOONFLY_HEALTH = GetModConfigData("Moonmaw Dragonfly's Health"),	
+	MOOSE_HEALTH = GetModConfigData("Moose/Geese's Health"),
+    MOTHER_GOOSE_HEALTH = GetModConfigData("Mother Goose's Health"),	
+	DAYWALKER_HEALTH = GetModConfigData("Nightmare Werepig's Health"),
+	WARG_HEALTH = GetModConfigData("Varg's Health"),
+	MUTATED_WARG_HEALTH = GetModConfigData("Varg's Health"),
+	SPIDERQUEEN_HEALTH = GetModConfigData("Spider Queen's Health"),
+	TOADSTOOL_HEALTH = GetModConfigData("Toadstool's Health"),
+	TOADSTOOL_DARK_HEALTH = GetModConfigData("Misery Toadstool's Health"),
+    TWIN1_HEALTH = GetModConfigData("Twins of Terror's Health"),
+    TWIN2_HEALTH = GetModConfigData("Twins of Terror's Health"),
+    WILTFLY_HEALTH = GetModConfigData("Wilting Dragonfly's Health"),
+	
+	KLAUS_HEALTH = GetModConfigData("Klaus's Health"),
+
+	--ALTERGUARDIAN_PHASE1_HEALTH = GetModConfigData("Celestial Champion's Health"),
+	--ALTERGUARDIAN_PHASE2_HEALTH = GetModConfigData("Celestial Champion's Health"),
+	--ALTERGUARDIAN_PHASE3_HEALTH	= GetModConfigData("Celestial Champion's Health"),
+	--ANTLION_HEALTH = GetModConfigData("Antlion's Health"),	
+	--CRABKING_HEALTH = GetModConfigData("Crab King's Health"),
+	--LEIF_HEALTH = GetModConfigData("Treeguard's Health"),
+	--SHADOW_ROOK_HEALTH = GetModConfigData("Shadow Pieces's Health"),
+	--SHADOW_KNIGHT_HEALTH = GetModConfigData("Shadow Pieces's Health"),
+	--SHADOW_BISHOP_HEALTH = GetModConfigData("Shadow Pieces's Health"),
 
     --mod chekcs
     ISLAND_ADVENTURES = ia_check,
@@ -417,7 +447,6 @@ if GetModConfigData("beebox_nerf") then
     TUNING.BEEBOX_BEES = 1.5
     TUNING.BEEBOX_RELEASE_TIME = day_time * 1.5
 end
-
 
 --if GetModConfigData("woodie_skilltree") then
 	--TUNING.WEREMOOSE_DAMAGE = wilson_attack * 1.5

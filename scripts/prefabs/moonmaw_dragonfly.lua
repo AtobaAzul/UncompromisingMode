@@ -589,7 +589,7 @@ local function fn(Sim)
     inst.components.sanityaura.aurafn = CalcSanityAura
 
     inst:AddComponent("health")
-    inst.components.health:SetMaxHealth(TUNING.DSTU.WILTFLY_HEALTH * 2)
+    inst.components.health:SetMaxHealth(8000 * TUNING.DSTU.MOONFLY_HEALTH)
     inst.components.health.destroytime = 5
     inst.components.health.fire_damage_scale = 0
 

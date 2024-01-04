@@ -229,7 +229,7 @@ local function fn()
 
     ------------------
     inst:AddComponent("health")
-    inst.components.health:SetMaxHealth(TUNING.DSTU.WIDOW_HEALTH)
+    inst.components.health:SetMaxHealth(8000 * TUNING.DSTU.WIDOW_HEALTH)
     inst:AddComponent("healthtrigger")
     inst.components.healthtrigger:AddTrigger(0.5, function(inst)
 		inst.should_go_tired = true
