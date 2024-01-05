@@ -926,13 +926,13 @@ configuration_options = {
         label = "Antlion's Health",
         hover = "Tweak Antlion's Health to your liking!",
         options = {
-			{ description = "Lowest (/4)", data =  0.25},
-			{ description = "Lowered (/2)", data = 0.5 },			
-            { description = "Default", data = 1 },
-            { description = "Higher (x1.5)", data = 1.5 },
-            { description = "Highest (x2)", data = 2 },
-            { description = "Uncomp (x3)", data = 3 } },
-        default = 1
+			{ description = "Lowest (/4)", data =  2000 },
+			{ description = "Lowered (/2)", data = 3000 },			
+            { description = "Default", data = 6000 },
+            { description = "Higher (x1.5)", data = 9000 },
+            { description = "Highest (x2)", data = 12000 },
+            { description = "Uncomp (x3)", data = 18000 } },
+        default = 6000
     },
 	{	
         name = "Bearger's Health",
@@ -978,13 +978,13 @@ configuration_options = {
         label = "Crab King's Health",
         hover = "Tweak Crab King's Health to your liking!",
         options = {
-			{ description = "Lowest (/4)", data =  0.25},
-			{ description = "Lowered (/2)", data = 0.5 },			
-            { description = "Default", data = 1 },
-            { description = "Higher (x1.5)", data = 1.5 },
-            { description = "Highest (x2)", data = 2 },
-            { description = "Uncomp (x3)", data = 3 } },
-        default = 1
+			{ description = "Lowest (/4)", data =  5000},
+			{ description = "Lowered (/2)", data = 10000 },			
+            { description = "Default", data = 20000 },
+            { description = "Higher (x1.5)", data = 30000 },
+            { description = "Highest (x2)", data = 40000 },
+            { description = "Uncomp (x3)", data = 60000 } },
+        default = 20000
     },		
 	{	
         name = "Deerclops's Health",
@@ -1056,13 +1056,13 @@ configuration_options = {
         label = "Klaus's Health",
         hover = "Tweak Klaus's Health to your liking!",
         options = {
-			{ description = "Lowest (/4)", data =  0.25},
-			{ description = "Lowered (/2)", data = 0.5 },			
-            { description = "Default", data = 1 },
-            { description = "Higher (x1.5)", data = 1.5 },
-            { description = "Highest (x2)", data = 2 },
-            { description = "Uncomp (x3)", data = 3 } },
-        default = 1
+			{ description = "Lowest (/4)", data =  2500},
+			{ description = "Lowered (/2)", data = 5000 },			
+            { description = "Default", data = 10000 },
+            { description = "Higher (x1.5)", data = 15000 },
+            { description = "Highest (x2)", data = 20000 },
+            { description = "Uncomp (x3)", data = 30000 } },
+        default = 10000
     },		
 	{	
         name = "Lord of the Fruit Flies's Health",
@@ -1212,13 +1212,13 @@ configuration_options = {
         label = "Treeguard's Health",
         hover = "Tweak Treeguard's Health to your liking!",
         options = {
-			{ description = "Lowest (/4)", data =  0.25},
-			{ description = "Lowered (/2)", data = 0.5 },			
-            { description = "Default", data = 1 },
-            { description = "Higher (x1.5)", data = 1.5 },
-            { description = "Highest (x2)", data = 2 },
-            { description = "Uncomp (x3)", data = 3 } },
-        default = 1
+			{ description = "Lowest (/4)", data = 750 },
+			{ description = "Lowered (/2)", data = 1500 },			
+            { description = "Default", data = 3000 },
+            { description = "Higher (x1.5)", data = 4500 },
+            { description = "Highest (x2)", data = 6000 },
+            { description = "Uncomp (x3)", data = 9000 } },
+        default = 3000
     },	
 	{	
         name = "Twins of Terror's Health",

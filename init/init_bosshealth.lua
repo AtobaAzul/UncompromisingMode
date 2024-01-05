@@ -42,16 +42,6 @@ AddPrefabPostInit("stalker_atrium", function(inst)
 	
 end)
 
-AddPrefabPostInit("antlion", function(inst)
-    if not GLOBAL.TheWorld.ismastersim then
-        return
-    end
-
-	--if inst.components.health ~= nil then
-		--inst.components.health:SetMaxHealth(TUNING.ANTLION_HEALTH * TUNING.DSTU.ANTLION_HEALTH)
-	--end
-end)
-
 AddPrefabPostInit("bearger", function(inst)
     if not GLOBAL.TheWorld.ismastersim then
         return
@@ -87,9 +77,9 @@ AddPrefabPostInit("alterguardian_phase1", function(inst)
         return
     end
 
-	--if inst.components.health ~= nil then
-		--inst.components.health:SetMaxHealth(GLOBAL.TUNING.ALTERGUARDIAN_PHASE1_HEALTH * TUNING.DSTU.ALTERGUARDIAN_PHASE1_HEALTH)
-	--end
+	if inst.components.health ~= nil then
+		inst.components.health:SetMaxHealth(GLOBAL.TUNING.ALTERGUARDIAN_PHASE1_HEALTH * TUNING.DSTU.ALTERGUARDIAN_PHASE1_HEALTH)
+	end
 end)
 
 AddPrefabPostInit("alterguardian_phase2", function(inst)
@@ -97,9 +87,9 @@ AddPrefabPostInit("alterguardian_phase2", function(inst)
         return
     end
 
-	--if inst.components.health ~= nil then
-		--inst.components.health:SetMaxHealth(GLOBAL.TUNING.ALTERGUARDIAN_PHASE2_HEALTH * TUNING.DSTU.ALTERGUARDIAN_PHASE2_HEALTH)
-	--end
+	if inst.components.health ~= nil then
+		inst.components.health:SetMaxHealth(GLOBAL.TUNING.ALTERGUARDIAN_PHASE2_STARTHEALTH * TUNING.DSTU.ALTERGUARDIAN_PHASE2_HEALTH)
+	end
 end)
 
 AddPrefabPostInit("alterguardian_phase3", function(inst)
@@ -107,19 +97,9 @@ AddPrefabPostInit("alterguardian_phase3", function(inst)
         return
     end
 
-	--if inst.components.health ~= nil then
-		--inst.components.health:SetMaxHealth(GLOBAL.TUNING.ALTERGUARDIAN_PHASE3_HEALTH * TUNING.DSTU.ALTERGUARDIAN_PHASE3_HEALTH)
-	--end
-end)
-
-AddPrefabPostInit("crabking", function(inst)
-    if not GLOBAL.TheWorld.ismastersim then
-        return
-    end
-
-	--if inst.components.health ~= nil then
-		--inst.components.health:SetMaxHealth(TUNING.CRABKING_HEALTH * TUNING.DSTU.CRABKING_HEALTH)
-	--end
+	if inst.components.health ~= nil then
+		inst.components.health:SetMaxHealth(GLOBAL.TUNING.ALTERGUARDIAN_PHASE3_STARTHEALTH * TUNING.DSTU.ALTERGUARDIAN_PHASE3_HEALTH)
+	end
 end)
 
 AddPrefabPostInit("mutateddeerclops", function(inst)
@@ -159,16 +139,6 @@ AddPrefabPostInit("sharkboi", function(inst)
 
 	if inst.components.health ~= nil then
 		inst.components.health:SetMaxHealth(TUNING.SHARKBOI_HEALTH * TUNING.DSTU.SHARKBOI_HEALTH)
-	end
-end)
-
-AddPrefabPostInit("klaus", function(inst)
-    if not GLOBAL.TheWorld.ismastersim then
-        return
-    end
-
-	if inst.components.health ~= nil then
-		inst.components.health:SetMaxHealth(TUNING.KLAUS_HEALTH * TUNING.DSTU.KLAUS_HEALTH)
 	end
 end)
 
@@ -232,36 +202,6 @@ AddPrefabPostInit("mutatedwarg", function(inst)
 	end
 end)
 
-AddPrefabPostInit("shadow_rook", function(inst)
-    if not GLOBAL.TheWorld.ismastersim then
-        return
-    end
-
-	--if inst.components.health ~= nil then
-		--inst.components.health:SetMaxHealth(TUNING.SHADOW_ROOK.HEALTH * TUNING.DSTU.SHADOW_ROOK_HEALTH)
-	--end
-end)
-
-AddPrefabPostInit("shadow_knight", function(inst)
-    if not GLOBAL.TheWorld.ismastersim then
-        return
-    end
-
-	--if inst.components.health ~= nil then
-		--inst.components.health:SetMaxHealth(TUNING.SHADOW_KNIGHT.HEALTH * TUNING.DSTU.SHADOW_KNIGHT_HEALTH)
-	--end
-end)
-
-AddPrefabPostInit("shadow_bishop", function(inst)
-    if not GLOBAL.TheWorld.ismastersim then
-        return
-    end
-
-	--if inst.components.health ~= nil then
-		--inst.components.health:SetMaxHealth(TUNING.SHADOW_BISHOP.HEALTH * TUNING.DSTU.SHADOW_BISHOP_HEALTH)
-	--end
-end)
-
 AddPrefabPostInit("spiderqueen", function(inst)
     if not GLOBAL.TheWorld.ismastersim then
         return
@@ -290,26 +230,6 @@ AddPrefabPostInit("toadstool_dark", function(inst)
 	if inst.components.health ~= nil then
 		inst.components.health:SetMaxHealth(TUNING.TOADSTOOL_DARK_HEALTH * TUNING.DSTU.TOADSTOOL_DARK_HEALTH)
 	end
-end)
-
-AddPrefabPostInit("leif", function(inst)
-    if not GLOBAL.TheWorld.ismastersim then
-        return
-    end
-
-	--if inst.components.health ~= nil then
-		--inst.components.health:SetMaxHealth(TUNING.LEIF_HEALTH * TUNING.DSTU.LEIF_HEALTH)
-	--end
-end)
-
-AddPrefabPostInit("leif_sparse", function(inst)
-    if not GLOBAL.TheWorld.ismastersim then
-        return
-    end
-
-	--if inst.components.health ~= nil then
-		--inst.components.health:SetMaxHealth(TUNING.LEIF_HEALTH * TUNING.DSTU.LEIF_HEALTH)
-	--end
 end)
 
 AddPrefabPostInit("twinofterror1", function(inst)

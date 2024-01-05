@@ -416,17 +416,9 @@ TUNING.DSTU = {
     TWIN2_HEALTH = GetModConfigData("Twins of Terror's Health"),
     WILTFLY_HEALTH = GetModConfigData("Wilting Dragonfly's Health"),
 	
-	KLAUS_HEALTH = GetModConfigData("Klaus's Health"),
-
-	--ALTERGUARDIAN_PHASE1_HEALTH = GetModConfigData("Celestial Champion's Health"),
-	--ALTERGUARDIAN_PHASE2_HEALTH = GetModConfigData("Celestial Champion's Health"),
-	--ALTERGUARDIAN_PHASE3_HEALTH	= GetModConfigData("Celestial Champion's Health"),
-	--ANTLION_HEALTH = GetModConfigData("Antlion's Health"),	
-	--CRABKING_HEALTH = GetModConfigData("Crab King's Health"),
-	--LEIF_HEALTH = GetModConfigData("Treeguard's Health"),
-	--SHADOW_ROOK_HEALTH = GetModConfigData("Shadow Pieces's Health"),
-	--SHADOW_KNIGHT_HEALTH = GetModConfigData("Shadow Pieces's Health"),
-	--SHADOW_BISHOP_HEALTH = GetModConfigData("Shadow Pieces's Health"),
+	ALTERGUARDIAN_PHASE1_HEALTH = GetModConfigData("Celestial Champion's Health"),
+	ALTERGUARDIAN_PHASE2_HEALTH = GetModConfigData("Celestial Champion's Health"),
+	ALTERGUARDIAN_PHASE3_HEALTH	= GetModConfigData("Celestial Champion's Health"),
 
     --mod chekcs
     ISLAND_ADVENTURES = ia_check,
@@ -563,6 +555,14 @@ TUNING.BOAT.BOAT_MAGNET.MAX_DISTANCE = TUNING.BOAT.BOAT_MAGNET.MAX_DISTANCE * 2
 TUNING.BOAT.BOAT_MAGNET.MAX_VELOCITY = TUNING.BOAT.BOAT_MAGNET.MAX_VELOCITY *
     10 -- No matter the boatspeed, nautopilots should be able to keep up.
 TUNING.BOAT.BOAT_MAGNET.CATCH_UP_SPEED = TUNING.BOAT.BOAT_MAGNET.CATCH_UP_SPEED * 100
+
+TUNING.ANTLION_HEALTH = GetModConfigData("Antlion's Health")
+TUNING.CRABKING_HEALTH = GetModConfigData("Crab King's Health")
+TUNING.KLAUS_HEALTH = GetModConfigData("Klaus's Health")
+TUNING.LEIF_HEALTH = GetModConfigData("Treeguard's Health")
+TUNING.SHADOW_ROOK.HEALTH = {(1000 * GetModConfigData("Shadow Pieces's Health")), (4000 * GetModConfigData("Shadow Pieces's Health")), (10000 * GetModConfigData("Shadow Pieces's Health"))}
+TUNING.SHADOW_KNIGHT.HEALTH = {(900 * GetModConfigData("Shadow Pieces's Health")), (2700 * GetModConfigData("Shadow Pieces's Health")), (8100 * GetModConfigData("Shadow Pieces's Health"))}
+TUNING.SHADOW_BISHOP.HEALTH = {(800 * GetModConfigData("Shadow Pieces's Health")), (2500 * GetModConfigData("Shadow Pieces's Health")), (7500 * GetModConfigData("Shadow Pieces's Health"))}
 
 -- lowered CK health
 -- TUNING.CRABKING_HEALTH = TUNING.CRABKING_HEALTH * 0.66
