@@ -25,8 +25,8 @@ if TUNING.DSTU.WANDA_NERF then
             local function CustomCombatDamage(inst, target, weapon, multiplier,
                                               mount)
                 if mount == nil then
-                    if weapon ~= nil and weapon.prefab == "pocketwatch_weapon" then
-                        return inst.age_state == "old" and 127.5 / 51 or
+                    if weapon ~= nil and weapon.prefab == "pocketwatch_weapon" and not weapon.components.fueled:IsEmpty() then
+                        return inst.age_state == "old" and 102 / 51 or
                             inst.age_state == "normal" and 68 / 51 or 1
                     end
                     return _CustomCombatDamage(inst, target, weapon, multiplier,
