@@ -86,11 +86,11 @@ local function onattack(inst, attacker, target)
         inst.components.rechargeable:IsCharged() then
         local x1, y1, z1 = inst.Transform:GetWorldPosition()
 
-        local owner = inst.components.inventoryitem.owner
+        local owner = inst.components.inventoryitem:GetGrandOwner()
 
         for i, v in pairs(TheSim:FindEntities(x1, y1, z1, 8, { "cursedantler" })) do
             if v ~= inst then
-                local vowner = v.components.inventoryitem.owner
+                local vowner = v.components.inventoryitem:GetGrandOwner()
                 if vowner ~= nil and (vowner == owner or not vowner:HasTag("player")) or vowner == nil then
                     v.components.rechargeable:Discharge(5)
                     end

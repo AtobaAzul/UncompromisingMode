@@ -108,7 +108,7 @@ local function createlight(staff, target, pos)
 
         for i, v in pairs(TheSim:FindEntities(x1, y1, z1, 8, { "slobberlobber" })) do
             if v ~= staff then
-                local vowner = v.components.inventoryitem.owner
+                local vowner = v.components.inventoryitem:GetGrandOwner()
                 if vowner ~= nil and (vowner == owner or not vowner:HasTag("player")) or vowner == nil then
                     v.components.rechargeable:Discharge(45)
                 end
