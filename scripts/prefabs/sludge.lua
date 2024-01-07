@@ -7,10 +7,13 @@ local assets =
 }
 
 local function ontaken(inst, taker)
+    local pot1, pot2 = SpawnPrefab("halloweenpotion_embers"), SpawnPrefab("halloweenpotion_sparks")
     if taker.components.fueled:CanAcceptFuelItem(pot1) and taker.components.fueled:CanAcceptFuelItem(pot2) then
-        local pot1, pot2 = SpawnPrefab("halloweenpotion_embers"), SpawnPrefab("halloweenpotion_sparks")
         taker.components.fueled:TakeFuelItem(pot1)
         taker.components.fueled:TakeFuelItem(pot2)
+    else
+        pot1:Remove()
+        pot2:Remove()
     end
 end
 
