@@ -556,7 +556,7 @@ configuration_options = {
         name = "gotobed",
         label = "Sleeping Buff",
         hover =
-        "Sleeping can heal max health loss. Siesta Lean-to hunger drain is now 50% of a Tent, instead of 33%.",
+        "Sleeping can heal max health loss. Siesta Lean-to cost to craft and cost to use nerfed.",
         options = {
             { description = "Default",  data = "default", hover = "Only heal max health loss if BELOW 25%." },
             { description = "Legacy",   data = "legacy",  hover = "Heal max health lost regardless of %." },

@@ -116,6 +116,15 @@ if GetModConfigData("wanda_nerf") then
     }
 end
 
+if TUNING.DSTU.GOTOBED ~= false then
+	AllRecipes["siestahut"].ingredients = {
+        Ingredient("silk", 6),
+        Ingredient("boards", 4),
+        Ingredient("rope", 3)
+    }		
+		
+end
+
 if GetModConfigData("beebox_nerf") then
     AllRecipes["beebox"].ingredients = {
         Ingredient("boards", 2),
