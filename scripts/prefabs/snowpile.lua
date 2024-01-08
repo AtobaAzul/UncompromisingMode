@@ -36,7 +36,7 @@ end
 
 TUNING.SNOW_X_SCALE = 0 + math.random(0.3, 0.5)
 TUNING.SNOW_Y_SCALE = 0 + math.random(0.1, 0.3)
-TUNING.SNOW_REGROW_TIME = 300
+TUNING.SNOW_REGROW_TIME = 180
 TUNING.SNOW_REGROW_VARIANCE = 60
 TUNING.SNOW_DEPLETE_CHANCE = 0.25
 
@@ -76,7 +76,7 @@ local function FindSpreadSpot(inst)
         inst.redo = true
     end
 
-    if #TheSim:FindEntities(x, y, z, 64, {"snowpile"}) > 32 then -- limit all snowpiles in a big radius
+    if #TheSim:FindEntities(x, y, z, 64, {"snowpile"}) > 48 then -- limit all snowpiles in a big radius
         inst.redo = true
         inst.count = 9
     end
