@@ -371,10 +371,18 @@ end
 local function onharvest(inst, picker, produce)
     if not inst:HasTag("burnt") then
         updatelevel(inst)
-        if inst.components.childspawner ~= nil and not GLOBAL.TheWorld.state.iswinter then
-            inst.components.childspawner:ReleaseAllChildren()
-        end
-    end
+		if (picker ~= nil and picker.components.skilltreeupdater ~= nil and picker.components.skilltreeupdater:IsActivated("wormwood_bugs")) then
+			if inst.components.childspawner ~= nil and not GLOBAL.TheWorld.state.iswinter and not GLOBAL.TheWorld.state.isdusk and not GLOBAL.TheWorld.state.isnight then
+				inst.components.childspawner:ReleaseAllChildren()
+			end
+		end
+        
+		if not (picker ~= nil and picker.components.skilltreeupdater ~= nil and picker.components.skilltreeupdater:IsActivated("wormwood_bugs")) then
+			if inst.components.childspawner ~= nil and not GLOBAL.TheWorld.state.iswinter then
+				inst.components.childspawner:ReleaseAllChildren(picker)
+			end
+		end
+	end
 end
 
 if GetModConfigData("beebox_nerf") then
@@ -384,9 +392,11 @@ if GetModConfigData("beebox_nerf") then
             return
         end
 
-        -- if inst.components.harvestable ~= nil then
-        --    inst.components.harvestable:SetUp("honey", HONEY_PER_STAGE[4], nil, onharvest, updatelevel)
-        -- end
+        if inst.components.harvestable ~= nil then
+            inst.components.harvestable:SetUp("honey", HONEY_PER_STAGE[4], nil, onharvest, updatelevel)
+        end
+		
+		inst:ListenForEvent("onharvest", onharvest)
 
         updatelevel(inst)
     end)
