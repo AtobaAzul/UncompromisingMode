@@ -88,7 +88,7 @@ local function redirect_to_hunger(inst, amount, overtime, cause, ignore_invincib
 			inst.walterworrytask = inst:DoTaskInTime(10, ResetWalterWorry)
 		end
 		
-		inst._playerlink.components.sanity:DoDelta(amount / 10)
+		inst._playerlink.components.sanity:DoDelta(amount / 20)
 	end
 	
 	--[[if amount ~= nil and amount < 0 then
