@@ -3,6 +3,16 @@ local UpvalueHacker = GLOBAL.require("tools/upvaluehacker")
 --Remove souls from insects and arachnids
 --Relevant: soulless tag, wortox_soul_common.lua
 -----------------------------------------------------------------
+
+AddPrefabPostInitAny(function(inst)
+	if not GLOBAL.TheWorld.ismastersim then
+		return inst
+	end
+	if inst.components.health ~= nil and inst:HasTag("insect") and inst.components.health ~= nil and not inst.components.health:IsDead() and inst.components.health.maxhealth <= 100 then
+		inst:AddTag("soulless")
+	end
+end)
+	
 local function MakeSoulless(prefab)
     AddPrefabPostInit(prefab, function(inst)
         if inst ~= nil then
@@ -11,34 +21,11 @@ local function MakeSoulless(prefab)
     end)
 end
 
-
 local REMOVE_SOULS =
 {
-    --"spider",
-    "mosquito",
-    "bee",
-    "killerbee",
-    "butterfly",
-    "birchnutdrake",
-    "lightflier",
-    --"mole",
-    --"beeguard",
-    --"bat",
-    --"rabbit",
-    --"crow",
-    --"canary",
-    --"robin",
-    --"robin_winter",
-    --"frog",
-    --"bird_mutant",
-    --"smallbird",
-    "moonbutterfly",
-    --"puffin",
-    --"bird_mutant_spitter",
-    --"fruitbat",
-    --"stumpling",
-    --"birchling",
-    --"aphid",
+	"birchnutdrake",
+	"stumpling",
+	"birchling",
 }
 
 if GLOBAL.TUNING.DSTU.WORTOX == "UMNERF" then
@@ -159,6 +146,9 @@ AddPrefabPostInit("wortox", function(inst)
 	if inst.components.foodaffinity ~= nil then
 		inst.components.foodaffinity:AddPrefabAffinity("devilsfruitcake", 1.24)
 	end
+	
+	inst:DoPeriodicTask(0, MakeSoullessRule)
+	--inst:ListenForEvent("killed", MakeSoullessRule)
 	
 	if GLOBAL.TUNING.DSTU.WORTOX == "APOLLO" then
         if inst.components.souleater ~= nil then
