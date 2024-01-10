@@ -3,6 +3,17 @@ local UpvalueHacker = GLOBAL.require("tools/upvaluehacker")
 --Remove souls from insects and arachnids
 --Relevant: soulless tag, wortox_soul_common.lua
 -----------------------------------------------------------------
+
+    local function MakeSoullessRule(inst)
+        local x, y, z = inst.Transform:GetWorldPosition()
+        local ents = TheSim:FindEntities(x, y, z, 64, nil)
+        for k, v in ipairs(ents) do
+            if v.components.health ~= nil and v:HasTag("insect") and v.components.health ~= nil and not v.components.health:IsDead() and v.components.health.maxhealth <= 100 then
+				v:AddTag("soulless")
+            end
+        end
+    end
+
 local function MakeSoulless(prefab)
     AddPrefabPostInit(prefab, function(inst)
         if inst ~= nil then
@@ -14,31 +25,9 @@ end
 
 local REMOVE_SOULS =
 {
-    --"spider",
-    "mosquito",
-    "bee",
-    "killerbee",
-    "butterfly",
-    "birchnutdrake",
-    "lightflier",
-    --"mole",
-    --"beeguard",
-    --"bat",
-    --"rabbit",
-    --"crow",
-    --"canary",
-    --"robin",
-    --"robin_winter",
-    --"frog",
-    --"bird_mutant",
-    --"smallbird",
-    "moonbutterfly",
-    --"puffin",
-    --"bird_mutant_spitter",
-    --"fruitbat",
-    --"stumpling",
-    --"birchling",
-    --"aphid",
+	"birchnutdrake",
+	"stumpling",
+	"birchling",
 }
 
 if GLOBAL.TUNING.DSTU.WORTOX == "UMNERF" then
@@ -155,6 +144,8 @@ AddPrefabPostInit("wortox", function(inst)
 	if not GLOBAL.TheWorld.ismastersim then
 		return
 	end
+	
+	inst:DoPeriodicTask(0, MakeSoullessRule)
 	
 	if inst.components.foodaffinity ~= nil then
 		inst.components.foodaffinity:AddPrefabAffinity("devilsfruitcake", 1.24)
