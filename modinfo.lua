@@ -1261,7 +1261,6 @@ configuration_options = {
     -----------------------------
     Header("> Legacy Options <"),
     -----------------------------
-    BinaryConfig("bernie", "Big Bernie", "Enable Big BERNIE!!", true),	
     BinaryConfig("hangyperds", "Starving Gobblers",
         "Gobblers are now more agressive and will attempt to take berries out of the player's inventory.", false),
     BinaryConfig("woodie_wet_goose", "Weregoose Wetness", "Weregoose gains wetness when over water.", false),
