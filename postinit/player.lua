@@ -159,7 +159,7 @@ env.AddPlayerPostInit(function(inst)
 		return inst
     end
 	
-
+	inst.components.locomotor:SetFasterOnGroundTile(WORLD_TILES.SCALE, true)
 
 	if TUNING.DSTU.ADVERTISEMENTS then
 		inst:DoPeriodicTask(10, function()
