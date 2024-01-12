@@ -352,7 +352,7 @@ TUNING.DSTU = {
     WINONA_GEN = GetModConfigData("winona_gen_"),
     RICE = GetModConfigData("rice"),
     NEWRECIPES = GetModConfigData("newrecipes"),
-    CAVECLOPS = GetModConfigData("caveclops"),
+    CAVECLOPS = GetModConfigData("cave_clops"),
     HOTCAVES = GetModConfigData("hotcaves"),
     ITEMCHECK = GetModConfigData("itemcheck"),
     SEEDS = GetModConfigData("seeds"),
@@ -588,7 +588,7 @@ if GetModConfigData("heatwaves") then
     TUNING.WILDFIRE_RETRY_TIME = TUNING.WILDFIRE_RETRY_TIME * 0.5
 end
 
-if GetModConfigData("changed_shadowpieces") then
+if GetModConfigData("changed_shadow_pieces") then
 	TUNING.SHADOW_BISHOP.ATTACK_RANGE = {8, 10, 12}
 	TUNING.SHADOW_BISHOP.ATTACK_PERIOD = {14, 15, 16}
 	--TUNING.SHADOW_BISHOP.HIT_RANGE = 2.5 --NUH UH

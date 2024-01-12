@@ -445,7 +445,7 @@ end
 
 table.insert(prefab_post, "shadowchesspieces") --changes to  all 3 pieces. (no collision and shadowcrown loot)
 
-if GetModConfigData("changed_shadowpieces") then
+if GetModConfigData("changed_shadow_pieces") then
     --table.insert(prefab_post, "shadow_knight")
     table.insert(stategraph_post, "shadow_bishop")
     --table.insert(stategraph_post, "shadow_knight")
