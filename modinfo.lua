@@ -99,15 +99,18 @@ configuration_options = {
     ------------------------------
 
     Header("Client-Side"),
-    BinaryConfig("um_storms_over", "Tornadoes - Reduced VFX", "Reduces the overall intensity of the visual effects on both the overlay and rain near tornadoes.", false),
+
     BinaryConfig("um_music", "Official Soundtrack", "Disable this if you are crashing when using client music mods or some other incompatibility.",
         true),
+    BinaryConfig("um_storms_over", "Tornadoes - Reduced VFX", "Reduces the overall intensity of the visual effects on both the overlay and rain near tornadoes.", false),		
+    SkipSpace(),		
 
     Header("Mod Compatibility"),
-    BinaryConfig("worldgenmastertoggle", "Worldgen Master Toggle", "Toggles ALL worldgen.", true),
+	
     BinaryConfig("hungry_void", "Anti-Voidwalk",
-        "Disable this if you are using any mods that allow flight or traversal over the cave void.", true),
+        "Disable this if you are using any mods that allow flight or traversal over the cave void.", true),	
     BinaryConfig("nofishyincrockpot", "No Fish in Crockpot", "Disable this if a mod requires live fish for some recipes.", true),
+    BinaryConfig("worldgenmastertoggle", "Worldgen Master Toggle", "Toggles ALL worldgen.", true),	
     SkipSpace(),
 
     Header("In Development"),
@@ -116,14 +119,29 @@ configuration_options = {
     SkipSpace(),
 
     Header("Core Gameplay"),
-    BinaryConfig("foodregen", "Over Time Food Stats",
-        "Health and Sanity from foods is applied over time, each food acting as a seperate stackable health or sanity regen buff.",
-        true),
-    BinaryConfig("maxhungerdamage", "Max Health Starving Damage", "Starving will deal max health damage after a brief delay.", true),
+	
     BinaryConfig("caved", "[IMPORTANT] Cave Config",
         "Switches some things around so players who can't run Caves can still enjoy the game. ENABLE IF CAVES ARE ENABLED!",
         true),
+    BinaryConfig("beefalo_nerf", "Beefalo Nerf", "Players will take half of the damage that the Beefalo takes.", true),		
     {
+        name = "fireloot",
+        label = "Burning Loot Drop Rework",
+        hover =
+        "Loot no longer gets destroyed when a mob is burnt to death. Mobs will explode on death, dealing damage and lighting things on fire, based on loot dropped.",
+        options = {
+            { description = "Off",          data = 1 }, { description = "Explosion Off", data = 2 },
+            { description = "Explosion On", data = 3 } },
+        default = 3
+    },
+    BinaryConfig("durability", "Clothing Degradation",
+        "Winter and Rain protection clothing items become less effective when their durability drops.", false),			
+    BinaryConfig("longpig", "Long Pig", "Skeletons drop Long Pig to prevent Telltale Heart spam.", true),		
+    BinaryConfig("maxtempdamage", "Max Health Temperature Dam.", "Freezing and Overheating will deal max health damage after a brief delay.", true),			
+    BinaryConfig("maxhungerdamage", "Max Health Starving Damage", "Starving will deal max health damage after a brief delay.", true),
+    BinaryConfig("harder_shadows", "Nightmare Creatures Rework",	
+        "Insanity is a bigger threat now. Those who pass the brink may never return.", true),	
+	{
         name = "rne chance",
         label = "Night Terrors Chance",
         hover =
@@ -137,62 +155,13 @@ configuration_options = {
             { description = "80%", data = 0.2 },
             { description = "90%", data = 0.1 }, { description = "INSANITY", data = 0 } },
         default = 0.8
-    },
+    },	
     BinaryConfig("compromising_vortex", "Non-lethal Shadow Vortex",
         "Shadow Vortex now teleports you to some random place.", false),
-    BinaryConfig("harder_shadows", "Harder Nightmare Creatures",
-        "Insanity is a big threat now. Those who pass the brink may never return.", true),
+    BinaryConfig("foodregen", "Over Time Food Stats",
+        "Health and Sanity from foods is applied over time, each food acting as a seperate stackable health or sanity regen buff.",
+        true),
     BinaryConfig("rat_raids", "Rat Raids", "Rats will periodically be attracted to your base.", true),
-    BinaryConfig("durability", "Clothing Degradation",
-        "Winter and Rain protection clothing items become less effective when their durability drops.", false),
-    BinaryConfig("sewingkit", "Sewing Kit Tweaks",
-        "Sewing Kit has DOUBLE uses, but repairs HALF value. Pairs very well with Clothing Degredation, lets you keep clothing in top shape more easily.",
-        true),
-    BinaryConfig("lifeamulet", "Life Giving Amulet Changes",
-        "The Amulet won't revive ghosts, but it now interrupts death upon taking a fatal hit while wearing it.\nIts hunger > health conversion ticks much faster.",
-        true),
-    BinaryConfig("longpig", "Long Pig", "Skeletons drop Long Pig to prevent Telltale Heart spam.", true),
-    {
-        name = "flingo_setting",
-        label = "Flingomatic Nerf",
-        hover =
-        "Pick the Flingomatic nerf you would like to play around.",
-        options = {
-            { description = "Fuel loss in use",  data = "Fuelmuncher" },
-            { description = "No longer freezes", data = "Waterballs" }, { description = "None", data = "Newb" } },
-        default =
-        "Waterballs"
-    },
-    {
-        name = "fireloot",
-        label = "Burning Loot Drop Rework",
-        hover =
-        "Loot no longer gets destroyed when a mob is burnt to death. Mobs will explode on death, dealing damage and lighting things on fire, based on loot dropped.",
-        options = {
-            { description = "Off",          data = 1 }, { description = "Explosion Off", data = 2 },
-            { description = "Explosion On", data = 3 } },
-        default = 3
-    },
-    {
-        name = "boss_resistance_",
-        label = "[BROKEN] Dynamic Boss Res.",
-        hover =
-        "Some bosses have increasing resistance against multiple players",
-        options = {
-            {
-                description = "Dynamic",
-                hover = "Bosses change their resistance based on hits taken.",
-                data = 1
-            },
-            {
-                description = "Static",
-                hover = "Bosses change their resistance based on nearby players.",
-                data = 2
-            },
-            { description = "Disabled", data = 3 },
-        },
-        default = 3,
-    },
     {
         name = "vetcurse",
         label = "Veteran's Curse",
@@ -204,8 +173,6 @@ configuration_options = {
         default =
         "default"
     },
-    BinaryConfig("moon_transformations", "[BROKEN] Moon Transfor.",
-        "Certain things transform under the dim light of the full \"Moon\".", false),
 
     SkipSpace(),
 
@@ -214,15 +181,13 @@ configuration_options = {
     ------------------------------
     Header("Characters"),
     ------------------------------
-    BinaryConfig("funny rat", "Winky", "Enable Uncompromising Mode's Winky, the Vile Vermin.", true),
     BinaryConfig("wixie_walter", "Wixie & Walter Rework",
         "Enable Uncompromising Mode's Wixie, the Delinquent, who expands on Walter's slingshot, while Walter gets new interactions and mechanics with Woby!",
         true),
-    --BinaryConfig("wixie_birds", "Wixie: Slingshot Nerfs", "Slingshots can't hit birds & rabbits.", true),
+    --BinaryConfig("wixie_birds", "Wixie: Slingshot Nerfs", "Slingshots can't hit birds & rabbits.", true),			
+    BinaryConfig("funny rat", "Winky", "Enable Uncompromising Mode's Winky, the Vile Vermin.", true),
     BinaryConfig("holy fucking shit it's wathom", "Wathom", "Enable Uncompromising Mode's Wathom, the Forgotten Parody.",
         true),
-    BinaryConfig("wathom_max_dmg", "Wathom - Damage Cap",
-        "Wathom's damage is capped at 600 to limit his absurd burst damage potential.", false),
     {
         name = "wathom_ampvulnerability",
         label = "Wathom - Amped Vulnerability",
@@ -233,7 +198,7 @@ configuration_options = {
             { description = "3x",           data = 3 },
             { description = "2x",           data = 2 } },
         default = 5
-    },
+    },		
     {
         name = "wathom_armordamage",
         label = "Wathom - Armor Damage Prior.",
@@ -252,37 +217,21 @@ configuration_options = {
             } },
         default = true
     },
-    BinaryConfig("wathom_undeath", "Wathom Undeath", "Enables Wathom undeath mechanic when he dies while his adrenaline is high.",
+    BinaryConfig("wathom_max_dmg", "Wathom - Damage Cap",
+        "Wathom's damage is capped at 600 to limit his absurd burst damage potential.", false),    
+	BinaryConfig("wathom_undeath", "Wathom - Undeath", "Enables Wathom undeath mechanic when he dies while his adrenaline is high.",
         true),
+    BinaryConfig("bernie_buffs", "Willow - Bernie Buffs",
+        "Holding Bernie prevents shadows from aggroing.", true),		
     BinaryConfig("willow", "Willow - Lighter Buffs",
         "Willow's Lighter now lasts forever when she holds it.", true),
     --BinaryConfig("willow insulation", "Willow's Experimental Insulation",
         --"Willow's insulation is tweaked to be 120 on Summer and -120 on Winter.", false),
-    BinaryConfig("bernie_buffs", "Willow - Bernie Buffs",
-        "Holding Bernie prevents shadows from aggroing.", true),
-    BinaryConfig("wolfgang", "Experimental Wolfgang",
-        "Wolfgang gains mightiness based on hunger level. Hunger drain increases the longer mighty is maintained.", false),
     BinaryConfig("wendy", "Wendy", "Abigail is nerfed to not increase Wendy's maximum damage above average.", true),
     BinaryConfig("wx78", "WX-78", "No longer heals from lightning.", true),
-    BinaryConfig("wickerbottom", "Wickerbottom - Sane Reading",
-        "Wickerbottom/Maxwell can no longer read books while insane.", true),
-    BinaryConfig("on tentacles", "Wickerbottom - On Tentacles",
-        "On Tentacles now spawns friendly tentacles that die over time, and do not drop tentacle spots.", true),
-    BinaryConfig("applied horticulture", "Wickerbottom - Horti., Abridged",
-        "\"Horticulture, Abridged\" now takes 1 Leafy Meat, instead of 5 seeds.", true),
-    BinaryConfig("horticulture, expanded", "Wickerbottom - Horti., Expanded",
-        "\"Horticulture, Expanded\" now grows 20 plants, instead of 15. Now takes a Tree Jam, instead of a Feather Pencil.", true),
-    BinaryConfig("the angler", "Wickerbottom - The Angler's",
-        "\"The Angler's Survival Guide\" now takes 2 Hardened Slip Bobbers, instead of 2 Wooden Ball Bobbers.", true),
-    BinaryConfig("lux aeterna", "Wickerbottom - Lux and Redux",
-        "\"Lux Aeterna\" and \"Lux Aeterna Redux\" now both last longer. \"Lux Aeterna Redux\" now takes a Glow Berry, instead of a Feather Pencil. ", true),
-    BinaryConfig("lunar grimoire", "Wickerbottom - Lunar Grimoire",
-        "\"Lunar Grimoire\" now has 4 uses and mutates things around you. Now takes 2 Moon Rocks and 2 Moon Shrooms.", true),
-    BinaryConfig("apicultural notes", "Wickerbottom - Apicultural Notes",
-        "\"Apicultural Notes\" now adds 1 Honey to up to 10 Bee Boxes around. Doesn't work on Dusk, Night and/or Winter. Now takes a Honeycomb.", true),
     {
         name = "wicker_inv_regen_",
-        label = "Wickerbottom - Book Regen.",
+        label = "Wickerbottom's Regen",
         hover = "Configure how Wickerbottom's books regen.",
         options = {
             {
@@ -302,8 +251,23 @@ configuration_options = {
             }
         },
         default = "inv",
-
     },
+		
+    BinaryConfig("apicultural notes", "Wickerbottom - Apicultural Notes",
+        "\"Apicultural Notes\" now adds 1 Honey to up to 10 Bee Boxes around. Doesn't work on Dusk, Night and/or Winter. Now takes a Honeycomb.", true),		
+    BinaryConfig("applied horticulture", "Wickerbottom - Horti., Abridged",
+        "\"Horticulture, Abridged\" now takes 1 Leafy Meat, instead of 5 seeds.", true),
+    BinaryConfig("horticulture, expanded", "Wickerbottom - Horti., Expanded",
+        "\"Horticulture, Expanded\" now grows 20 plants, instead of 15. Now takes a Tree Jam, instead of a Feather Pencil.", true),
+    BinaryConfig("lunar grimoire", "Wickerbottom - Lunar Grimoire",
+        "\"Lunar Grimoire\" now has 4 uses and mutates things around you. Now takes 2 Moon Rocks and 2 Moon Shrooms.", true),		
+    BinaryConfig("lux aeterna", "Wickerbottom - Lux and Redux",
+        "\"Lux Aeterna\" and \"Lux Aeterna Redux\" now both last longer. \"Lux Aeterna Redux\" now takes a Glow Berry, instead of a Feather Pencil. ", true),		
+    BinaryConfig("on tentacles", "Wickerbottom - On Tentacles",
+        "On Tentacles now spawns friendly tentacles that die over time, and do not drop tentacle spots.", true),		
+    BinaryConfig("the angler", "Wickerbottom - The Angler's",
+        "\"The Angler's Survival Guide\" now takes 2 Hardened Slip Bobbers, instead of 2 Wooden Ball Bobbers.", true),
+    BinaryConfig("woodie_skilltree", "Woodie's Skilltree", "Some changes to Woodie's skilltrees to add trade-offs and buff underutilized skills.", true),
     BinaryConfig("waxwell", "Maxwell",
         "Maxwell gets buffed versions of his classic shadows by reading the Codex Umbra. Disable for Maxwell mod compatibility!",
         true),
@@ -312,17 +276,15 @@ configuration_options = {
     BinaryConfig("winonaworker", "Winona - Faster Working",
         "Winona now scales her work/picking efficiency, and tool/weapon durability, off of her hunger level. Drains hunger when taking actions.",
         true),
+    BinaryConfig("winona_gen_", "Winona - Generators",
+        "Limits access to Winona's Generators to only allow her to use them.", false),		
     BinaryConfig("winona_portables_", "Winona - Portable Structures",
         "Makes Winona's structures portable and changes what can be stored into Winona's Toolbox depending if it's enabled or not.", true),
-    BinaryConfig("winona_gen_", "Winona - Generators",
-        "Limits access to Winona's Generators to only allow her to use them.", false),
-    BinaryConfig("winonawackycats", "Experimental Winona Catapults",
-        "Catapults no longer regenerate, have reduced health, and deal 34 AOE damage.", false),
-    BinaryConfig("warly_food_taste_", "Warly's Food Taste",
-        "Warly gets increased stats from food, like Singleplayer. However, he remembers foods for 3 days instead of 2.",
-        true),
-    BinaryConfig("warly_butcher_", "Warly's Butchering",
+    BinaryConfig("warly_butcher_", "Warly - Butchering",
         "Warly is a certified butcher, he will get more resources from kills in his inventory.",
+        true),
+    BinaryConfig("warly_food_taste_", "Warly - Food Taste",
+        "Warly gets increased stats from food, like Singleplayer. However, he remembers foods for 3 days instead of 2.",
         true),
     {
         name = "wortox",
@@ -344,14 +306,15 @@ configuration_options = {
     },
     BinaryConfig("wormwood_extrafiredmg", "Wormwood - Extra Fire Damage",
         "Increases Wormwood's fire damage multiplier to 1.75x, from 1.25x.", true),
+    BinaryConfig("wormwood_plants", "Wormwood - Planting Sanity", "Increases the sanity loss from digging plants by 5.",
+        true),		
     BinaryConfig("wormwood_trapbuffs", "Wormwood - Trap Buffs",
         "Bramble traps do no player damage, reset when you are bloomed near them, and create multiple when crafted.",
         true),
-    BinaryConfig("wormwood_plants", "Wormwood - Planting Sanity", "Increases the sanity loss from digging plants by 5.",
-        true),
     BinaryConfig("wanda_nerf", "Wanda",
         "A bunch of changes to some of Wanda's more overpowered items to make them more balanced.", true),
-    BinaryConfig("woodie_skilltree", "Woodie Skilltree", "Some changes to Woodie's skilltrees to add trade-offs and buff underutilized skills.", true),
+	BinaryConfig("wickerbottom", "Sane Reading",
+        "Wickerbottom/Maxwell can no longer read books while insane.", true),
 
     SkipSpace(),
 
@@ -386,11 +349,12 @@ configuration_options = {
             { description = "Third Year", data = 120 } },
         default = 5
     },
-    BinaryConfig("snowstorms", "Snowstorms",
-        "Snowtorms impede on players' speed and vision if they are not wearing eye protection. Snowstorms also causes snow to build up on structures.",
-        true),
+
     BinaryConfig("winter_burning", "Harder Burning",
         "Winter makes it so setting stuff alight takes more time, and also finish burning faster.", true),
+    BinaryConfig("snowstorms", "Snowstorms",
+        "Snowtorms impede on players' speed and vision if they are not wearing eye protection. Snowstorms also causes snow to build up on structures.",
+        true),		
     SkipSpace(),
 
     {
@@ -416,9 +380,6 @@ configuration_options = {
         },
         default = "off"
     },
-    BinaryConfig("hayfever_disable", "[BROKEN] Hayfever",
-        "Hayfever makes a return from Hamlet, but tweaked so it doesn't make you want to die. Prevent sneezing with antihistamines and certain hats.",
-        false),
     SkipSpace(),
 
     {
@@ -433,15 +394,14 @@ configuration_options = {
         },
         default = 22,
     },
-    BinaryConfig("hotcaves", "Hotter Caves", "During Summer, caves are just hot enough to overheat you without any gear.",
-        true),
     BinaryConfig("heatwaves", "Heat Waves",
         "Heat waves act as a summer counterpart to snowstorms.\nWhile they don't do much on their own, aside from the temperature increase, they interact with Smog and Pyre Nettles.",
+        true),	
+    BinaryConfig("hotcaves", "Hotter Caves", "During Summer, caves are just hot enough to overheat you without any gear.",
         true),
     BinaryConfig("pyrenettles", "Pyre Nettles", "Pyre Nettles are a new invasive cave plant that grows with heat.", true),
     BinaryConfig("smog", "Smog",
         "Burning plants in summer releases large quantities of smoke. Meant to interact with heatwaves.", true),
-    BinaryConfig("maxtempdamage", "Max Health Temperature Dam.", "Freezing and Overheating will deal max health damage after a brief delay.", true),
     SkipSpace(),
 
     --[[ This section disabled until we actually use it.
@@ -494,6 +454,17 @@ configuration_options = {
     ------------------------------
     Header("Rats"),
     ------------------------------
+    BinaryConfig("itemcheck", "Item Score", "Equippable items and mole bait items increase the \'rat score\' value.",
+        true),
+    {
+        name = "rattimer",
+        label = "Rat Raid Cooldown",
+        hover = "The cooldown between Rat Raids!",
+        options = {
+            { description = "As soon as possible.", data = 10 }, { description = "Half", data = 4800 },
+            { description = "Default",              data = 9600 }, { description = "Double", data = 14400 } },
+        default = 9600
+    },
     {
         name = "ratgrace",
         label = "Rat Raid Grace Period",
@@ -504,16 +475,7 @@ configuration_options = {
             { description = "Default[30 days]",     data = 30 }, { description = "Medium[45 days]", data = 45 },
             { description = "High[60 days]", data = 60 } },
         default = 30
-    },
-    {
-        name = "rattimer",
-        label = "Rat Raid Cooldown",
-        hover = "The cooldown between Rat Raids!",
-        options = {
-            { description = "As soon as possible.", data = 10 }, { description = "Half", data = 4800 },
-            { description = "Default",              data = 9600 }, { description = "Double", data = 14400 } },
-        default = 9600
-    },
+    },	
     {
         name = "ratsnifftimer",
         label = "Rat Sniff Timer",
@@ -525,8 +487,6 @@ configuration_options = {
             { description = "Extended[8 Minutes]", data = 480 } },
         default = 120
     },
-    BinaryConfig("itemcheck", "Item Score", "Equippable items and mole bait items increase the \'rat score\' value.",
-        true),
     SkipSpace(),
 
     -----------------------------
@@ -534,48 +494,12 @@ configuration_options = {
     -----------------------------
     Header("Items and Structures"),
     -----------------------------
-    BinaryConfig("ac_does_ac", "Air Conditioning Air Conditioner", "Air Conditioner works as a reverse furnace, cooling in a small area, and removes smog around it.", false),
-    BinaryConfig("compostoverrot", "Compost Replaces Rot", "Compost replaces Rot in most recipes. Keep in mind the Composting Bin is buffed.\nBooster Shots take Red Caps instead.", true),
-    BinaryConfig("cooldown_orangestaff_", "Cooldown Based Lazy Explorer",
-        "Lazy Explorer no longer has durabilty, but instead has cooldown, like Wanda's watches.\nSuggested by Lux.",
-        false),
-    BinaryConfig("townportal_rework", "Lazy Deserter Rework",
-        "Makes the Lazy Deserter useful in singleplayer, by automatically harvesting nearby plants and objects.", true),
-    BinaryConfig("telestaff_rework", "Telelocator Rework",
-        "You can now select the Focus you wish to teleport to. Foci now cost 3 Purple gems instead of gold.\nThe Staff's uses are doubled.",
-        true),
-    BinaryConfig("no4crafts", "No 4-Ingredient Recipes", "Changes all 4-ingredient recipes to use 3 instead.", false),
-    BinaryConfig("scaledchestbuff", "Scaled Chest Buff",
-        "Enabling this buffs Scaled Chest to 25 slots. Toggling with Scaled Chests existing in the world may cause a crash.",
-        true),
-    BinaryConfig("scalemailbuff", "Scalemail Buff", "Scalemail now spawns 3 Dimvaes to help you in combat.", true),
-    BinaryConfig("canedurability", "Cane Durability (Off by default)",
+	
+	BinaryConfig("ac_does_ac", "Air Conditioning Air Conditioner", "Air Conditioner works as a reverse furnace, cooling in a small area, and removes smog around it.", false),
+    BinaryConfig("lifeinjector_rework", "Booster Shot Rework", "The Booster Shot regenerates 50% of your max health loss overtime.", true),
+    BinaryConfig("canedurability", "Cane Durability",
         "Cane loses durability similarly to a Whirly Fan. Note that MacTusks will drop Tusks 100% of the time with this on.",
-        false),
-    {
-        name = "gotobed",
-        label = "Sleeping Buff",
-        hover =
-        "Sleeping can heal max health loss. Siesta Lean-to cost to craft and cost to use nerfed.",
-        options = {
-            { description = "Default",  data = "default", hover = "Only heal max health loss if BELOW 25%." },
-            { description = "Legacy",   data = "legacy",  hover = "Heal max health lost regardless of %." },
-            { description = "Disabled", data = false } },
-        default =
-        "default"
-    },
-    BinaryConfig("passibleimpassibles", "Remove Cheese-able Collisions",
-        "Removes collision from objects like statues to prevent cheesing mobs and bosses.", true),
-    {
-        name = "sleepingbuff",
-        label = "Sleeping Stat Speed",
-        hover =
-        "Increases the speed at which sleeping gives stats/drains hunger. Default 1.5x.",
-        options = {
-            { description = "2x Faster", data = 2 }, { description = "1.5x Faster", data = 1.5 },
-            { description = "Vanilla",   data = 1 } },
-        default = 1.5
-    },
+        false),	
     {
         name = "pocket_powertrip",
         label = "Clothing Pockets",
@@ -590,10 +514,12 @@ configuration_options = {
             { description = "Off", data = 0 } },
         default = 1
     },
-    BinaryConfig("insul_thermalstone", "Tweaked Thermal Stone",
-        "Thermal Stones now have less insulation, but inherit some insulation from clothing.", true),
-    BinaryConfig("uncool_chester", "Ther. Stone Snow Chester Nerf",
-        "Snow Chester will no longer freeze Thermal Stones.", true),
+	BinaryConfig("compostoverrot", "Compost Replaces Rot", "Compost replaces Rot in most recipes. Keep in mind the Composting Bin is buffed.\nBooster Shots take Red Caps instead.", true),    
+    BinaryConfig("cookiecutterhat", "Cookie Cutter Hat",
+        "Cookie Cutter Caps now reflects some damage back at the attacker.", true),
+    BinaryConfig("cooldown_orangestaff_", "Cooldown Based Lazy Explorer",
+        "Lazy Explorer no longer has durabilty, but instead has cooldown, like Wanda's watches.\nSuggested by Lux.",
+        false),			
     {
         name = "electricalmishap",
         label = "Electrical Weapon Retune",
@@ -612,14 +538,65 @@ configuration_options = {
             },
             { description = "Off", data = 0 } },
         default = 1
+    },	
+	{
+        name = "flingo_setting",
+        label = "Flingomatic Nerf",
+        hover =
+        "Pick the Flingomatic nerf you would like to play around.",
+        options = {
+            { description = "Fuel loss in use",  data = "Fuelmuncher" },
+            { description = "No longer freezes", data = "Waterballs" }, { description = "None", data = "Newb" } },
+        default =
+        "Waterballs"
     },
-    BinaryConfig("hambatnerf", "Ham Bat Nerf", "Spoils faster and minimum damage is lower.", true),
-    BinaryConfig("lifeinjector_rework", "Booster Shot Rework", "The Booster Shot regenerates 50% of your max health loss overtime.", true),
-    BinaryConfig("cookiecutterhat", "Cookie Cutter Hat",
-        "Cookie Cutter Caps now reflects some damage back at the attacker.", true),
-    BinaryConfig("beefalo_nerf", "Beefalo Nerf", "Players will take half of the damage that the Beefalo takes.", true),
+    BinaryConfig("hambatnerf", "Ham Bat Nerf", "Spoils faster and minimum damage is lower.", true),	
+	
+    BinaryConfig("townportal_rework", "Lazy Deserter Rework",
+        "Makes the Lazy Deserter useful in singleplayer, by automatically harvesting nearby plants and objects.", true),
+    BinaryConfig("lifeamulet", "Life Giving Amulet Changes",
+        "The Amulet won't revive ghosts, but it now interrupts death upon taking a fatal hit while wearing it.\nIts hunger > health conversion ticks much faster.",
+        true),
+    BinaryConfig("no4crafts", "No 4-Ingredient Recipes", "Changes all 4-ingredient recipes to use 3 instead.", false),		
+    BinaryConfig("passibleimpassibles", "Remove Cheese-able Collisions",
+        "Removes collision from objects like statues to prevent cheesing mobs and bosses.", true),			
+    BinaryConfig("scalemailbuff", "Scalemail Buff", "Scalemail now spawns 3 Dimvaes to help you in combat.", true),		
+    BinaryConfig("scaledchestbuff", "Scaled Chest Buff",
+        "Enabling this buffs Scaled Chest to 25 slots. Toggling with Scaled Chests existing in the world may cause a crash.",
+        true),
+    BinaryConfig("sewingkit", "Sewing Kit Changes",
+        "Sewing Kit has DOUBLE uses, but repairs HALF value. Pairs very well with Clothing Degredation, lets you keep clothing in top shape more easily.",
+        true),
+    {
+        name = "gotobed",
+        label = "Sleeping Buff",
+        hover =
+        "Sleeping can heal max health loss. Siesta Lean-to cost to craft and cost to use nerfed.",
+        options = {
+            { description = "Default",  data = "default", hover = "Only heal max health loss if BELOW 25%." },
+            { description = "Legacy",   data = "legacy",  hover = "Heal max health lost regardless of %." },
+            { description = "Disabled", data = false } },
+        default =
+        "default"
+    },
+    {
+        name = "sleepingbuff",
+        label = "Sleeping Stat Speed",
+        hover =
+        "Increases the speed at which sleeping gives stats/drains hunger. Default 1.5x.",
+        options = {
+            { description = "2x Faster", data = 2 }, { description = "1.5x Faster", data = 1.5 },
+            { description = "Vanilla",   data = 1 } },
+        default = 1.5
+    },	
+    BinaryConfig("telestaff_rework", "Telelocator Rework",
+        "You can now select the Focus you wish to teleport to. Foci now cost 3 Purple gems instead of gold.\nThe Staff's uses are doubled.",
+        true),
+    BinaryConfig("uncool_chester", "Ther. Stone Snow Chester Nerf",
+        "Snow Chester will no longer freeze Thermal Stones.", true),		
+    BinaryConfig("insul_thermalstone", "Tweaked Thermal Stone",
+        "Thermal Stones now have less insulation, but inherit some insulation from clothing.", true),
     SkipSpace(),
-
     -----------------------------
     -- Food --
     -----------------------------
@@ -1265,12 +1242,16 @@ configuration_options = {
     -----------------------------
     Header("> Experimental <"),
     -----------------------------
-    BinaryConfig("eyebrellarework", "Eyebrella Rework",
-        "Eyebrella stats restored to Vanilla value, must be repaired with Milky Whites, 12 day durability. Isn't affected by clothing degradation.",
-        false),
     BinaryConfig("the_cooler_sacred_chest", "Ancient Chest Crafting Recipes",
         "Disable this if the Metheus puzzle in-game portion breaks. \nIt shouldn't, so please also file a bug report!",
+        false),    
+	BinaryConfig("eyebrellarework", "Eyebrella Rework",
+        "Eyebrella stats restored to Vanilla value, must be repaired with Milky Whites, 12 day durability. Isn't affected by clothing degradation.",
         false),
+    BinaryConfig("winonawackycats", "Experimental Winona Catapults",
+        "Catapults no longer regenerate, have reduced health, and deal 34 AOE damage.", false),	
+    BinaryConfig("wolfgang", "Experimental Wolfgang",
+        "Wolfgang gains mightiness based on hunger level. Hunger drain increases the longer mighty is maintained.", false),
     --	BinaryConfig("MutExt_beta", "Mutation Extrapolation", "Eyes to lie, mouthes to blind, skin to shed.", false),
     --	BinaryConfig("shiversprites_enabled", "Shiversprites", "Something new waits out in the frozen tundra.", false),
     SkipSpace(),
@@ -1280,16 +1261,40 @@ configuration_options = {
     -----------------------------
     Header("> Legacy Options <"),
     -----------------------------
-    BinaryConfig("woodie_wet_goose", "Weregoose Wetness", "Weregoose gains wetness when over water.", false),
-    BinaryConfig("wormwood_fire", "Extra Flamable Wormwood", "[BROKEN] Wormwood is highly flameable, like in Hamlet.",
-        false),
+    BinaryConfig("bernie", "Big Bernie", "Enable Big BERNIE!!", true),	
     BinaryConfig("hangyperds", "Starving Gobblers",
         "Gobblers are now more agressive and will attempt to take berries out of the player's inventory.", false),
-    BinaryConfig("bernie", "Big Bernie", "Enable Big BERNIE!!", true),
-    BinaryConfig("cave_clops", "Cave Deerclops",
-        "During winter, Deerclops can break through the cave ceiling to reach you.", false),	
-    SkipSpace(),
-
+    BinaryConfig("woodie_wet_goose", "Weregoose Wetness", "Weregoose gains wetness when over water.", false),
+    BinaryConfig("cave_clops", "[BROKEN] Cave Deerclops",
+        "During winter, Deerclops can break through the cave ceiling to reach you.", false),
+    {
+        name = "boss_resistance_",
+        label = "[BROKEN] Dynamic Boss Res.",
+        hover =
+        "Some bosses have increasing resistance against multiple players",
+        options = {
+            {
+                description = "Dynamic",
+                hover = "Bosses change their resistance based on hits taken.",
+                data = 1
+            },
+            {
+                description = "Static",
+                hover = "Bosses change their resistance based on nearby players.",
+                data = 2
+            },
+            { description = "Disabled", data = 3 },
+        },
+        default = 3,
+    },
+    BinaryConfig("wormwood_fire", "[BROKEN] Extra Flamable Wormwood", "Wormwood is highly flameable, like in Hamlet.",
+        false),	
+    BinaryConfig("hayfever_disable", "[BROKEN] Hayfever",
+        "Hayfever makes a return from Hamlet, but tweaked so it doesn't make you want to die. Prevent sneezing with antihistamines and certain hats.",
+        false),	
+    BinaryConfig("moon_transformations", "[BROKEN] Moon Transfor.",
+        "Certain things transform under the dim light of the full \"Moon\".", false),
+	SkipSpace(),
     -----------------------------
     -- Dev Tools --
     -----------------------------
