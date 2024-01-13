@@ -119,9 +119,9 @@ configuration_options = {
     SkipSpace(),
 
     Header("Core Gameplay"),
-    BinaryConfig("caved", "[IMPORTANT] Cave Config",
-        "Switches some things around so players who can't run Caves can still enjoy the game. ENABLE IF CAVES ARE ENABLED!",
-        true),
+    --BinaryConfig("caved", "[IMPORTANT] Cave Config",
+        --"Switches some things around so players who can't run Caves can still enjoy the game. ENABLE IF CAVES ARE ENABLED!",
+        --true),
     BinaryConfig("beefalo_nerf", "Beefalo Nerf", "Players will take half of the damage that the Beefalo takes.", true),		
     {
         name = "fireloot",

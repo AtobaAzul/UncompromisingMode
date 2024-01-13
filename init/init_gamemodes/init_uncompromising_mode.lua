@@ -160,9 +160,9 @@ if GetModConfigData("lifeamulet") then
 	modimport("init/init_lifeamulet")
 end
 
-if GetModConfigData("caved") == false and GetModConfigData("acidrain") then
-	modimport("init/init_weather/init_overworld_toadstool")
-end
+--if GetModConfigData("caved") == false and GetModConfigData("acidrain") then
+	--modimport("init/init_weather/init_overworld_toadstool")
+--end
 
 if GetModConfigData("foodregen") then
 	modimport("init/init_food/init_foodregen")

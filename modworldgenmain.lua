@@ -235,19 +235,19 @@ if GetModConfigData("worldgenmastertoggle") then
         end
     end)
 
-    if GetModConfigData("caved") == false then
-        AddTaskSetPreInitAny(function(tasksetdata)
-            if tasksetdata.location ~= "forest" then
-                return
-            end
-            if (tasksetdata.name == STRINGS.UI.CUSTOMIZATIONSCREEN.TASKSETNAMES.SHIPWRECKED) then
-                tasksetdata.set_pieces["ToadstoolArena"] = { 1, tasks = { "ThemeMarshCity" } }
-                return
-            end
+    --if GetModConfigData("caved") == false then
+        --AddTaskSetPreInitAny(function(tasksetdata)
+            --if tasksetdata.location ~= "forest" then
+                --return
+            --end
+            --if (tasksetdata.name == STRINGS.UI.CUSTOMIZATIONSCREEN.TASKSETNAMES.SHIPWRECKED) then
+                --tasksetdata.set_pieces["ToadstoolArena"] = { 1, tasks = { "ThemeMarshCity" } }
+                --return
+            --end
 
-            tasksetdata.set_pieces["ToadstoolArena"] = { 1, tasks = { "Guarded Squeltch", "Merms ahoy", "Sane-Blocked Swamp", "Squeltch", "Swamp start", "Tentacle-Blocked Spider Swamp" } }
-        end)
-    end
+            --tasksetdata.set_pieces["ToadstoolArena"] = { 1, tasks = { "Guarded Squeltch", "Merms ahoy", "Sane-Blocked Swamp", "Squeltch", "Swamp start", "Tentacle-Blocked Spider Swamp" } }
+        --end)
+    --end
 
     Layouts["basefrag_smellykitchen"] = StaticLayout.Get("map/static_layouts/umss_basefrag_smellykitchen")
     Layouts["basefrag_rattystorage"] = StaticLayout.Get("map/static_layouts/umss_basefrag_rattystorage")
