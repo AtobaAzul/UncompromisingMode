@@ -115,11 +115,10 @@ configuration_options = {
 
     Header("In Development"),
     BinaryConfig("ck_loot", "Additional Crab King Loot",
-        "Crab King now drops unique loot based on the gems used.\nMissing art assets.", false),
+    "Crab King now drops unique loot based on the gems used.\nMissing art assets.", false), 
     SkipSpace(),
 
     Header("Core Gameplay"),
-	
     BinaryConfig("caved", "[IMPORTANT] Cave Config",
         "Switches some things around so players who can't run Caves can still enjoy the game. ENABLE IF CAVES ARE ENABLED!",
         true),
@@ -135,12 +134,16 @@ configuration_options = {
         default = 3
     },
     BinaryConfig("durability", "Clothing Degradation",
-        "Winter and Rain protection clothing items become less effective when their durability drops.", false),			
-    BinaryConfig("longpig", "Long Pig", "Skeletons drop Long Pig to prevent Telltale Heart spam.", true),		
-    BinaryConfig("maxtempdamage", "Max Health Temperature Dam.", "Freezing and Overheating will deal max health damage after a brief delay.", true),			
-    BinaryConfig("maxhungerdamage", "Max Health Starving Damage", "Starving will deal max health damage after a brief delay.", true),
-    BinaryConfig("harder_shadows", "Nightmare Creatures Rework",	
-        "Insanity is a bigger threat now. Those who pass the brink may never return.", true),	
+    "Winter and Rain protection clothing items become less effective when their durability drops.", false),	
+    BinaryConfig("harder_shadows", "Harder Nightmare Creatures",	
+    "Insanity is a bigger threat now. Those who pass the brink may never return.", true),	    		
+    BinaryConfig("longpig", "Long Pig", "Skeletons drop Long Pig to prevent Telltale Heart spam.", true),
+    
+    BinaryConfig("maxhphitters", "Max Health Mob",
+        "Some monsters deal Max HP damage.\nTurn this off if you're having problems with mods which also interact Max HP.",
+        true),    
+    BinaryConfig("maxhungerdamage", "Max Health Starving", "Starving will deal max health damage after a brief delay.", true),
+    BinaryConfig("maxtempdamage", "Max Health Temperature", "Freezing and Overheating will deal max health damage after a brief delay.", true),			
 	{
         name = "rne chance",
         label = "Night Terrors Chance",
@@ -173,7 +176,6 @@ configuration_options = {
         default =
         "default"
     },
-
     SkipSpace(),
 
     ------------------------------
@@ -201,7 +203,7 @@ configuration_options = {
     },		
     {
         name = "wathom_armordamage",
-        label = "Wathom - Armor Damage Prior.",
+        label = "Wathom - Armor Damage",
         hover =
         "Wathom can take increased damage, choose if armor damage is ignored.",
         options = {
@@ -231,7 +233,7 @@ configuration_options = {
     BinaryConfig("wx78", "WX-78", "No longer heals from lightning.", true),
     {
         name = "wicker_inv_regen_",
-        label = "Wickerbottom's Regen",
+        label = "Wicker's Regeneration",
         hover = "Configure how Wickerbottom's books regen.",
         options = {
             {
@@ -252,7 +254,8 @@ configuration_options = {
         },
         default = "inv",
     },
-		
+	BinaryConfig("wickerbottom", "Wicker's Sane Reading",
+        "Wickerbottom/Maxwell can no longer read books while insane.", true),		
     BinaryConfig("apicultural notes", "Wickerbottom - Apicultural Notes",
         "\"Apicultural Notes\" now adds 1 Honey to up to 10 Bee Boxes around. Doesn't work on Dusk, Night and/or Winter. Now takes a Honeycomb.", true),		
     BinaryConfig("applied horticulture", "Wickerbottom - Horti., Abridged",
@@ -272,7 +275,6 @@ configuration_options = {
         "Maxwell gets buffed versions of his classic shadows by reading the Codex Umbra. Disable for Maxwell mod compatibility!",
         true),
     --	BinaryConfig("wolfgang", "Improved/Balanced Wolfgang", "Wolfgang gains new perks and downsides. Read the patch notes included in the mod folder or workshop for details.", false),
-    BinaryConfig("wigfrid", "Wigfrid", "Reduced Wigfrids combat leeching effect to more balanced levels.", true),
     BinaryConfig("winonaworker", "Winona - Faster Working",
         "Winona now scales her work/picking efficiency, and tool/weapon durability, off of her hunger level. Drains hunger when taking actions.",
         true),
@@ -313,9 +315,6 @@ configuration_options = {
         true),
     BinaryConfig("wanda_nerf", "Wanda",
         "A bunch of changes to some of Wanda's more overpowered items to make them more balanced.", true),
-	BinaryConfig("wickerbottom", "Sane Reading",
-        "Wickerbottom/Maxwell can no longer read books while insane.", true),
-
     SkipSpace(),
 
     ------------------------------
@@ -554,7 +553,7 @@ configuration_options = {
 	
     BinaryConfig("townportal_rework", "Lazy Deserter Rework",
         "Makes the Lazy Deserter useful in singleplayer, by automatically harvesting nearby plants and objects.", true),
-    BinaryConfig("lifeamulet", "Life Giving Amulet Changes",
+    BinaryConfig("lifeamulet", "Life Giving Amulet Rework",
         "The Amulet won't revive ghosts, but it now interrupts death upon taking a fatal hit while wearing it.\nIts hunger > health conversion ticks much faster.",
         true),
     BinaryConfig("no4crafts", "No 4-Ingredient Recipes", "Changes all 4-ingredient recipes to use 3 instead.", false),		
@@ -564,7 +563,7 @@ configuration_options = {
     BinaryConfig("scaledchestbuff", "Scaled Chest Buff",
         "Enabling this buffs Scaled Chest to 25 slots. Toggling with Scaled Chests existing in the world may cause a crash.",
         true),
-    BinaryConfig("sewingkit", "Sewing Kit Changes",
+    BinaryConfig("sewingkit", "Sewing Kit Rework",
         "Sewing Kit has DOUBLE uses, but repairs HALF value. Pairs very well with Clothing Degredation, lets you keep clothing in top shape more easily.",
         true),
     {
@@ -592,10 +591,11 @@ configuration_options = {
     BinaryConfig("telestaff_rework", "Telelocator Rework",
         "You can now select the Focus you wish to teleport to. Foci now cost 3 Purple gems instead of gold.\nThe Staff's uses are doubled.",
         true),
+    BinaryConfig("insul_thermalstone", "Thermal Stone Rework",
+    "Thermal Stones now have less insulation, but inherit some insulation from clothing.", true),        
     BinaryConfig("uncool_chester", "Ther. Stone Snow Chester Nerf",
-        "Snow Chester will no longer freeze Thermal Stones.", true),		
-    BinaryConfig("insul_thermalstone", "Tweaked Thermal Stone",
-        "Thermal Stones now have less insulation, but inherit some insulation from clothing.", true),
+    "Snow Chester will no longer freeze Thermal Stones.", true),		
+
     SkipSpace(),
     -----------------------------
     -- Food --
@@ -603,20 +603,25 @@ configuration_options = {
     Header("Food"),
     -----------------------------
     Header("Crockpot Recipes"),
+    BinaryConfig("crockpotmonstmeat", "Harder Monster Meat",
+        "Enables the new Monster Lagsana recipe; you can only make non-monster recipes if the meat value is greater than monster value.",
+        true),    
     BinaryConfig("newrecipes", "New Recipes",
         "UM adds a few new Crockpot recipes,\nTurn this off if you're using mods that can cause overlap, such as HoF.",
         true),
-    BinaryConfig("crockpotmonstmeat", "Harder Monster Meat",
-        "Enables the new Monster Lagsana recipe; you can only make non-monster recipes if the meat value is greater than monster value.",
-        true),
+    BinaryConfig("icecrockblocker", "Snowcones",
+        "Snowcones prevent heavy use of Ice specifically in Crockpot dishes that don't call for it.", true),        
     BinaryConfig("generalcrockblocker", "Trash Filler Blocker",
         "Heavy use of certain low quality Crockpot ingredients, such as Twigs, Ice, Buttefly Wings, and other inedibles will result in Wet Goop.",
         true),
-    BinaryConfig("icecrockblocker", "Snowcones",
-        "Snowcones prevent heavy use of Ice specifically in Crockpot dishes that don't call for it.", true),
     SkipSpace(),
 
     Header("Crockpot Food Tweaks"),
+    BinaryConfig("farmfoodredux", "Farmplot Food Redux",
+        "Reallocates most dishes that involve Crock Pot foods. Typically a buff, but may exchange some stats.", true),    
+    BinaryConfig("sr_foodrebalance", "Fish Foods Rebalance", "Several fish based foods have their stats tweaked.", true),        
+    BinaryConfig("goodies_nerf", "Goodies Food Type Changes", "The food type of more avaliable Goodies were changed into either Veggie or Generic.", true),	    
+    BinaryConfig("icecream_buff", "Ice Cream Buff", "Ice Cream now restores 100 sanity.", true),    
     BinaryConfig("meatball", "Meatball Nerf", "Meatballs restore 50 hunger instead of 62.5.", true),
     {
         name = "perogi",
@@ -627,19 +632,12 @@ configuration_options = {
             { description = "1 Veggie Value",   data = 1 }, { description = "Vanilla Value", data = 0.5 } },
         default = 1.5
     },
-    BinaryConfig("icecream_buff", "Ice Cream Buff", "Ice Cream now restores 100 sanity.", true),
-    BinaryConfig("goodies_nerf", "Goodies Food Type Changes", "The food type of more avaliable Goodies were changed into either Veggie or Generic.", true),	
-    BinaryConfig("farmfoodredux", "Farmplot Food Redux",
-        "Reallocates most dishes that involve Crock Pot foods. Typically a buff, but may exchange some stats.", true),
-    BinaryConfig("sr_foodrebalance", "Fish foods rebalance", "Several fish based foods have their stats tweaked.", true),
     SkipSpace(),
 
     Header("General Food Tweaks"),
-    BinaryConfig("monstersmallmeat", "Monster Morsel",
-        "Small creatures like Spiders drop monster morsels instead of Monster Meat.", true),
-    BinaryConfig("no_winter_growing", "No Winter Growing",
-        "Makes a few food sources such as Kelp and Stone Fruit not grow in Winter.", true),
-    BinaryConfig("beebox_nerf", "Bee Box Nerf", "Bee Boxes only release 2 Bees max.", true),
+    BinaryConfig("beebox_nerf", "Bee Box Nerf", "Bee Boxes only release 2 Bees max.", true),  
+    BinaryConfig("butterflywings_nerf", "Butterfly Wings Nerf",
+        "Butterfly Wings have been nerfed to not be cheap healing.", true),     
     {
         name = "more perishing",
         label = "Increased Food Spoilage",
@@ -649,14 +647,8 @@ configuration_options = {
             { description = "2x",           data = 2 }, { description = "2.5x", data = 2.5 },
             { description = "3x", data = 3 } },
         default = 1.5
-    },
-    BinaryConfig("butterflywings_nerf", "Weaker Butterfly Wings",
-        "Butterfly Wings have been nerfed to not be cheap healing.", true),
-	BinaryConfig("horriblefood", "More Horrible Foods",
-        "More items are considered as the horrible food type.", true),
-    BinaryConfig("rawcropsnerf", "Raw Crops Nerf",
-        "Farm crops are nerfed in their base value when raw/cooked to incentivize using Crockpot recipes.", true),
-    BinaryConfig("seeds", "Lowered Seeds Hunger", "Seeds have had their hunger lowered.", true),
+    },     
+    BinaryConfig("seeds", "Lowered Seeds Hunger", "Seeds have had their hunger lowered.", true),  
     {
         name = "monster_eggs",
         label = "Monster Eggs",
@@ -667,7 +659,16 @@ configuration_options = {
             { description = "0.5 Monster", data = 0.5 }, { description = "1 Monster", data = 1 },
             { description = "1.5 Monster", data = 1.5 } },
         default = 1.5
-    },
+    },      
+    BinaryConfig("monstersmallmeat", "Monster Morsel",
+        "Small creatures like Spiders drop monster morsels instead of Monster Meat.", true),
+    BinaryConfig("horriblefood", "More Horrible Foods",
+        "More items are considered as the horrible food type.", true),        
+    BinaryConfig("no_winter_growing", "No Winter Growing",
+        "Makes a few food sources such as Kelp and Stone Fruit not grow in Winter.", true),
+    BinaryConfig("rawcropsnerf", "Raw Crops Nerf",
+        "Farm crops are nerfed in their base value when raw/cooked to incentivize using Crockpot recipes.", true),        
+
     SkipSpace(),
 
     -----------------------------
@@ -676,10 +677,10 @@ configuration_options = {
     Header("Monsters"),
     -----------------------------
     Header("New Hounds"),
+    BinaryConfig("glacialhounds", "Glacial Hounds", "Glacial Hounds are part of Hound waves.", true),    
     BinaryConfig("lightninghounds", "Lightning Hounds", "Lightning Hounds are part of Hound waves.", true),
     BinaryConfig("magmahounds", "Magma Hounds", "Magma Hounds are part of Hound waves.", true),
     BinaryConfig("sporehounds", "Spore Hounds", "Spore Hounds are part of Hound waves.", true),
-    BinaryConfig("glacialhounds", "Glacial Hounds", "Glacial Hounds are part of Hound waves.", true),
     SkipSpace(),
 
     Header("Harder Hounds"),
@@ -737,8 +738,8 @@ configuration_options = {
     BinaryConfig("depthseels", "Depths Eels", "Electrified Depths Eels join the Worm pack in Winter and Spring.", true),
     BinaryConfig("depthsvipers", "Depths Vipers", "Mysterious Depths Vipers join the Worm pack in Summer and Autumn.",
         true),
-
     SkipSpace(),
+    
     Header("Bats"),
     --	BinaryConfig("hardbatilisks", "Harder Batilisks", "Batilisk's health is increased from 50 to 75, drops Wings less often than vanilla, and drops Monster Morsels.", true),
     BinaryConfig("adultbatilisks", "Adult Batilisks",
@@ -758,46 +759,43 @@ configuration_options = {
     BinaryConfig("trepidations", "Ancient Trepidations",
         "Enabling this allows Trepidations to roam the halls of the ruins during the Nightmare Phase, seeking out the weak of mind.",
         true),
-    BinaryConfig("nodespawn_trepidation", "Harder Trepidations",
+    BinaryConfig("nodespawn_trepidation", "Ancient Trepidations - Despawn",
         "Enabling this will prevent the Ancient Trepidation from despawning after the Nightmare Phase calms down.",
         false),
+    BinaryConfig("amalgams", "Clockwork Amalgams",
+        "Enabling this allows Pawns and Broken Clockwork piles to spawn Clockwork Amalgmas", true),        
     BinaryConfig("pawns", "Clockwork Pawns",
         "Enabling this allows Pawns to patrol the depths of the caves, drawing unwanted attention to the foolish and lost.",
         true),
-    BinaryConfig("amalgams", "Clockwork Amalgams",
-        "Enabling this allows Pawns and Broken Clockwork piles to spawn Clockwork Amalgmas", true),
     SkipSpace(),
 
     Header("Misc Monsters"),
+    BinaryConfig("noauradamage_butterfly", "AoE Immune Butterflies",
+    "Butterflies are immune to AoE damage, such as catapults and Abigail.", true),
+    BinaryConfig("_bushcrabs", "Bush Crabs", "Bush Crabs ambush the player when digging up berry bushes.", true), 
+    BinaryConfig("harder_krampus", "Harder Krampus", "Krampii now have a new attack, with knockback.", true),   
     BinaryConfig("pigking_guards", "Pig King Guards",
         "Pig King now has neutral guards watching for any suspicious activity.", true),
-    BinaryConfig("bushcrabs", "Bush Crabs", "Bush Crabs ambush the player when digging up berry bushes.", true),
+    BinaryConfig("pinelings", "Pinelings",
+        "Stumps will become pinelings if awoken by a treeguard, or if stumps are left for long enough.", true),
     BinaryConfig("desertscorpions", "Scorpions",
         "Scorpions plague the Oasis Desert during Dusk and Night. They will spawn from Scorpion Holes spread around the biome.",
         true),
-    BinaryConfig("pinelings", "Pinelings",
-        "Stumps will become pinelings if awoken by a treeguard, or if stumps are left for long enough.", true),
-    -- BinaryConfig("pollenmites", "Pollen Mites", "Pollen mites spawn in spring and quickly infest the nearby area.", false),
-    BinaryConfig("maxhphitters", "Max HP Damage",
-        "Some monsters deal Max HP damage.\nTurn this off if you're having problems with mods which also interact Max HP.",
-        true),
-    BinaryConfig("harder_krampus", "Harder Krampus", "Krampii now have a new attack, with knockback.", true),
-    BinaryConfig("noauradamage_butterfly", "AoE Immune Butterflies",
-        "Butterflies are immune to AoE damage, such as catapults and Abigail.", true),
+    --BinaryConfig("pollenmites", "Pollen Mites", "Pollen mites spawn in spring and quickly infest the nearby area.", false),
     SkipSpace(),
 
     Header("Standard Creatures"),
-    BinaryConfig("angrypenguins", "Territorial Penguins", "Penguins will aggresively defend their land.", true),
-    BinaryConfig("harder_pigs", "Harder Pigs", "Pigs have a new counter and charge attack.", true),
     BinaryConfig("angry_werepigs", "Angry Werepigs", "Werepigs prioritize attacking over eating.", true),
-    BinaryConfig("mermtweaks", "Merm Tweaks", "- Regular Merms can now leave their houses during winter, Merm Guards respawn slower.", true),
-    BinaryConfig("harder_walrus", "Harder MacTusk", "MacTusk has a counter attack and can throw traps.", true),
+    BinaryConfig("cowardfrogs", "Frog Anti-cheese", "Frogs flee from bosses to prevent cheesing.", true),
     BinaryConfig("harder_beefalo", "Harder Beefalo", "Beefalo ocasionally charge after a telegraph.", true),
     BinaryConfig("harder_koalefants", "Harder Koalefants", "Koalefants have brand new attacks and doubled health.", true),
+    BinaryConfig("harder_walrus", "Harder MacTusk", "MacTusk has a counter attack and can throw traps.", true),
+    BinaryConfig("harder_pigs", "Harder Pigs", "Pigs have a new counter and charge attack.", true),
     BinaryConfig("hungryfrogs", "Hungry Frogs", "Frogs eat anything left on the floor.", true),
-    BinaryConfig("cowardfrogs", "Frog Anti-cheese", "Frogs flee from bosses to prevent cheesing.", true),
-    BinaryConfig("fiendforcedmetodothis", "Slurtle Tweaks", "Slurtles attack faster, have less health and drop Shellmets more often.", true),
+    BinaryConfig("mermtweaks", "Merm Tweaks", "Regular Merms can now leave their houses during winter, Merm Guards respawn slower.", true),
     BinaryConfig("sharpshooter_monkeys", "Sharpshooter Powder Monkeys", "Powder monkeys actually aim their cannons and fire at anything they may consider 'fun' shooting at.", true),
+    BinaryConfig("fiendforcedmetodothis", "Slurtle Tweaks", "Slurtles attack faster, have less health and drop Shellmets more often.", true),
+    BinaryConfig("angrypenguins", "Territorial Penguins", "Penguins will aggresively defend their land.", true),
     SkipSpace(),
 
     -----------------------------
@@ -810,7 +808,7 @@ configuration_options = {
         "Mother Goose will now attack the player in Spring, similar to the Reign of Giants' Moose.", true),
     {
         name = "mother_goose_spawn",
-        label = "Mother Goose Spawn Date",
+        label = "Mother Goose - Spawn Date",
         hover = "The year that Mother Goose can spawn.",
         options = {
             { description = "Year 1 (Default)", data = 26 },
@@ -824,7 +822,7 @@ configuration_options = {
         true),
     {
         name = "wiltfly_spawn",
-        label = "Wilting Dragonfly Spawn Date",
+        label = "Wilting Dragonfly - Spawn Date",
         hover = "The year that Wilting Dragonfly can spawn.",
         options = {
             { description = "Year 1 (Default)", data = 26 },
@@ -836,31 +834,31 @@ configuration_options = {
     SkipSpace(),
 
     Header("Giants & Bosses"),
-    BinaryConfig("harder_spider_queen", "Web Bomb",
-        "Spider Queens ocasionally spit web balls that trap players.", false),
     BinaryConfig("harder_deerclops", "Deerclops Mutations",
         "Three different, harder variants of Deerclops can spawn, replacing the vanilla version.", true),
-    BinaryConfig("disable_megaflare", "Disable Hostile Flare", "Hostile Flares no longer spawn Deerclops.", true),
-    BinaryConfig("harder_moose", "Goose Rework",
+    BinaryConfig("disable_megaflare", "Disable Hostile Flare", "Hostile Flares no longer spawn Deerclops.", true),    
+    BinaryConfig("harder_bearger", "Harder Bearger",
+        "Enabling this option grants Bearger more attacks, and will make Bearger more actively seek you out.", true),    
+    BinaryConfig("harder_moose", "Harder Goose",
         "Goose fight has more mechanics and is harder. This also disables Moose AOE. Does not apply to Mother Goose.",
-        true),
-    BinaryConfig("harder_bearger", "Bearger Rework",
-        "Enabling this option grants Bearger more attacks, and will make Bearger more actively seek you out.", true),
-    BinaryConfig("harder_leifs", "Treeguard Rework",
-        "Enabling this option makes Treeguards attack in AoE, perform root attacks, inflict knockback, and summon Pinelings.", true),
+        true),    
+    BinaryConfig("harder_spider_queen", "Harder Spider Queen",    
+    "Spider Queens ocasionally spit web balls that trap players.", false),
+    BinaryConfig("harder_leifs", "Harder Treeguard",
+    "Enabling this option makes Treeguards attack in AoE, perform root attacks, inflict knockback, and summon Pinelings.", true),        
     SkipSpace(),
 
     Header("Raid Bosses"),
-    BinaryConfig("harder_lavae", "Exploding Lavae",
-        "Lavae will now leave exploding paste upon death, capable of destroying walls.", true),
-    BinaryConfig("harder_beequeen", "Bee Queen Rework",
-        "Bee Queen now has a variety of attacks utilizing new types of Bees.", true), -- lame! help!
+    BinaryConfig("harder_lavae", "Dragonfly's Exploding Lavae",
+        "Lavae will now leave exploding paste upon death, capable of destroying walls.", true),    
     BinaryConfig("rework_minotaur", "Ancient Guardian Rework",
-        "The Ancient Guardian's fight is expanded, including more attacks.", true),
+        "The Ancient Guardian's fight is expanded, including more attacks.", true),    
+    BinaryConfig("harder_beequeen", "Bee Queen Rework",
+    "Bee Queen now has a variety of attacks utilizing new types of Bees.", true), -- lame! help!
+    BinaryConfig("reworked_ck", "Crab King Rework",
+        "Crab King has his main attack altered, freeze removed, and some new mechanics.", true),    
     BinaryConfig("reworked_eyes", "Eyes of Terror Rework",
         "Eye of Terror and the Twins have new attacks, inspired by their Terraria counterparts.", true),
-    BinaryConfig("reworked_ck", "Crab King Rework",
-        "Crab King has his main attack altered, freeze removed, and some new mechanics.", true),
     BinaryConfig("changed_shadow_pieces", "Shadow Pieces Rework",
         "Shadow Bishop has a different attack.", true),
     SkipSpace(),
@@ -1245,13 +1243,13 @@ configuration_options = {
     BinaryConfig("the_cooler_sacred_chest", "Ancient Chest Crafting Recipes",
         "Disable this if the Metheus puzzle in-game portion breaks. \nIt shouldn't, so please also file a bug report!",
         false),    
-	BinaryConfig("eyebrellarework", "Eyebrella Rework",
-        "Eyebrella stats restored to Vanilla value, must be repaired with Milky Whites, 12 day durability. Isn't affected by clothing degradation.",
-        false),
     BinaryConfig("winonawackycats", "Experimental Winona Catapults",
-        "Catapults no longer regenerate, have reduced health, and deal 34 AOE damage.", false),	
+    "Catapults no longer regenerate, have reduced health, and deal 34 AOE damage.", false),	
     BinaryConfig("wolfgang", "Experimental Wolfgang",
-        "Wolfgang gains mightiness based on hunger level. Hunger drain increases the longer mighty is maintained.", false),
+    "Wolfgang gains mightiness based on hunger level. Hunger drain increases the longer mighty is maintained.", false),
+    BinaryConfig("eyebrellarework", "Eyebrella Rework",
+    "Eyebrella stats restored to Vanilla value, must be repaired with Milky Whites, 12 day durability. Isn't affected by clothing degradation.",
+    false),        
     --	BinaryConfig("MutExt_beta", "Mutation Extrapolation", "Eyes to lie, mouthes to blind, skin to shed.", false),
     --	BinaryConfig("shiversprites_enabled", "Shiversprites", "Something new waits out in the frozen tundra.", false),
     SkipSpace(),
@@ -1317,9 +1315,10 @@ configuration_options = {
     -- Mara =)
 
     --	Header("General"),
+    BinaryConfig("um_shrink", "Don't Shrink", "Shrink when losing Health / Hunger, become flat when insane.", false),    
+    BinaryConfig("um_advertisements", "Fun Mode", "Enables FUN new messages for an enhanced experience!", false),    
     BinaryConfig("maraboss_bottomtext", "JUDGEMENT", "Enables a particular lunar mutation. Yup!", false),
-    BinaryConfig("um_advertisements", "Fun Mode", "Enables FUN new messages for an enhanced experience!", false),
-    BinaryConfig("um_shrink", "Don't Shrink", "Shrink when losing Health / Hunger, become flat when insane.", false),
+
     --	BinaryConfig("boat_go_vroom", "Boat Tweak", "Allows greater player agency in directing boats.", false),
     --	BinaryConfig("self_combusting_traps", "Burningable Traps", "Back by unpopular demand! Conceptually expanded.", false),
     --	BinaryConfig("rat_arson", "Illegalize Rats", "Rats are now illegal. Please inform them of this.", false),
