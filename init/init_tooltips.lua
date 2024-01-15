@@ -40,7 +40,6 @@ STRINGS.UNCOMP_TOOLTIP = {
 	MULTITOOL_AXE_PICKAXE = "- Creates shockwaves when chopping/mining.",
 	FEATHERPENCIL = "- Can rename Telelocator Focus' location name and Backtrek Watches.",
 	BOAT_ROTATOR_KIT = "- Increases boat steering speed.\n- Helps doing sharp turns.",
-	STAFF_TORNADO = "- Can redirect Giant Tornadoes.",
 	BLOWDART_FIRE = "- Now with EXTRA fire.\n- If already flaming when shot, the target explodes!",
 	BEEMINE = "- Now has 5 uses.\n- Spawns faster, more fragile bees.",
 	WALL_DREADSTONE_ITEM = "- Slowly repairs itself at the cost of sanity.",
@@ -292,4 +291,9 @@ end
 
 if TUNING.DSTU.DISABLE_MEGAFLARE then
 	TOOLTIPS.MEGAFLARE = "- No longer summons Deerclops."
+end
+
+if TUNING.DSTU.STORMS then
+	TOOLTIPS.BOOK_RAIN = "- Can briefly redirect Giant Tornadoes when in its range."
+	TOOLTIPS.STAFF_TORNADO = "- Can briefly redirect Giant Tornadoes."
 end
