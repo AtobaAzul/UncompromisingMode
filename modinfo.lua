@@ -289,7 +289,7 @@ configuration_options = {
         "Warly gets increased stats from food, like Singleplayer. However, he remembers foods for 3 days instead of 2.",
         true),
     BinaryConfig("wortox", "Wortox",
-		"Buff to Map Soul Hop and Nerfs to Health and Sanity from Souls. Birds and Butterflies are considered soulless.",
+		"Better teleports, worse sanity and healing from souls. Birds and butterflies are soulless.",
 		true),
 	--{
         --name = "wortox",
