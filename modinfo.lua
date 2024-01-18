@@ -288,24 +288,27 @@ configuration_options = {
     BinaryConfig("warly_food_taste_", "Warly - Food Taste",
         "Warly gets increased stats from food, like Singleplayer. However, he remembers foods for 3 days instead of 2.",
         true),
-    {
-        name = "wortox",
-        label = "Wortox",
-        hover =
-        "Wortox has different settings that change his characteristics.",
-        options = {
-            { description = "SHOT",    data = "SHOT",   hover = "Souls heal over time." },
-            { description = "Classic", data = "UMNERF", hover = "Less soul sources, less max health." },
-            {
-                description = "Apollo\'s",
-                data = "APOLLO",
-                hover =
-                "Souls heal less and overtime. Sanity loss from eating souls increased.\nIncreased map hop range. Food penalty increased to 75%."
-            },
-            { description = "Vanilla", data = "off" } },
-        default =
-        "UMNERF"
-    },
+    BinaryConfig("wortox", "Wortox",
+		"Buff to Map Soul Hop and Nerfs to Health and Sanity from Souls. Birds and Butterflies are considered soulless.",
+		true),
+	--{
+        --name = "wortox",
+        --label = "Wortox",
+        --hover =
+        --"Wortox has different settings that change his characteristics.",
+        --options = {
+            --{ description = "SHOT",    data = "SHOT",   hover = "Souls heal over time." },
+            --{ description = "Classic", data = "UMNERF", hover = "Less soul sources, less max health." },
+            --{
+                --description = "Apollo\'s",
+                --data = "APOLLO",
+                --hover =
+                --"Some buffs and nerfs to how Wortox's Souls and stats work. Birds and Butterflies are considered soulless."
+            --},
+            --{ description = "Vanilla", data = "off" } },
+        --default =
+        --"UMNERF"
+    --},
     BinaryConfig("wormwood_extrafiredmg", "Wormwood - Extra Fire Damage",
         "Increases Wormwood's fire damage multiplier to 1.75x, from 1.25x.", true),
     BinaryConfig("wormwood_plants", "Wormwood - Planting Sanity", "Increases the sanity loss from digging plants by 5.",
