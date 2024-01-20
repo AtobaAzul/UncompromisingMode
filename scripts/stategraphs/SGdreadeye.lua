@@ -237,6 +237,8 @@ local states =
             inst.components.locomotor:StopMoving()
             inst.Physics:Stop()
 			inst:Disguise()
+			
+			inst:AddTag("notarget")
         end,
 
         events =
@@ -245,6 +247,7 @@ local states =
         },
 
         onexit = function(inst)
+			inst:RemoveTag("notarget")
 			inst.isdisguised = false
 			inst.components.health:SetInvincible(false)
         end,
