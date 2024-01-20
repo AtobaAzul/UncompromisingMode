@@ -71,11 +71,11 @@ return Class(function(self, inst)
 					TheWorld.net:AddTag("snowstormstartnet")
 				end
 
-				if _worldsettingstimer:GetTimeLeft(UM_STOP_SNOW_STORM_TIMERNAME) == nil or not _worldsettingstimer:ActiveTimerExists(UM_STOP_SNOW_STORM_TIMERNAME) then
+				--if _worldsettingstimer:GetTimeLeft(UM_STOP_SNOW_STORM_TIMERNAME) == nil or not _worldsettingstimer:ActiveTimerExists(UM_STOP_SNOW_STORM_TIMERNAME) then
 					_worldsettingstimer:StartTimer(UM_STOP_SNOW_STORM_TIMERNAME, _despawninterval + math.random(80, 120))
-				end
+				--end
 
-				_worldsettingstimer:ResumeTimer(UM_STOP_SNOW_STORM_TIMERNAME)
+				--_worldsettingstimer:ResumeTimer(UM_STOP_SNOW_STORM_TIMERNAME)
 			end)
 		end
 	end
@@ -116,6 +116,7 @@ return Class(function(self, inst)
 				--end
 			end
 		else
+			StopStorming()
 			StopStorms()
 		end
 	end
@@ -142,7 +143,12 @@ return Class(function(self, inst)
 			OnSeasonChange()
 		end
 	end
-
+	
 	self:WatchWorldState("season", OnSeasonChange)
+    self:WatchWorldState("cycles", function(inst)
+        if not TheWorld.state.season == "winter" then
+            OnSeasonChange()
+        end
+    end)
 	-- self.inst:ListenForEvent("forcetornado", PickAttackTarget)
 end)

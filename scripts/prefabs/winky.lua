@@ -87,7 +87,11 @@ local function OnPickSomething(inst, data)
 end
 
 local function OnDropItem(inst)
-	inst.components.sanity:DoDelta(-5)
+	inst:DoTaskInTime(0, function()
+		if not inst.no_sanity_drop then
+			inst.components.sanity:DoDelta(-5)
+		end
+	end)
 end
 
 local function sanityfn(inst)
@@ -102,6 +106,10 @@ local function sanityfn(inst)
     return sanityvalue
 end
 
+local function WinkyDespawn(inst)
+	inst.no_sanity_drop = true
+end
+
 local function master_postinit(inst)
 
 	 -- Minimap icon
@@ -110,7 +118,6 @@ local function master_postinit(inst)
     inst:AddTag("ratwhisperer")
 
 	-- choose which sounds this character will play
-	--inst.soundsname = "winnie"
 	inst.soundsname = "winky"
 	
     inst.components.foodaffinity:AddPrefabAffinity("powcake", 20)
@@ -123,6 +130,8 @@ local function master_postinit(inst)
 	
     inst.components.sanity.night_drain_mult = TUNING.WENDY_SANITY_MULT
     inst.components.sanity.neg_aura_mult = TUNING.WENDY_SANITY_MULT
+	
+	inst.components.eater.spoiled_sanity = TUNING.WINKY_SPOILED_FOOD_SANITY --edible get sanity
 
 	-- todo: Add an example special power here.
 	inst.components.health:SetMaxHealth(175)
@@ -146,7 +155,10 @@ local function master_postinit(inst)
 	end)
 	
     --inst:ListenForEvent("picksomething", OnPickSomething)
+	
+	inst.no_sanity_drop = false
     inst:ListenForEvent("dropitem", OnDropItem)
+    inst:ListenForEvent("player_despawn", WinkyDespawn)
     --inst:ListenForEvent("itemlose", OnDropItem)
 end
 
