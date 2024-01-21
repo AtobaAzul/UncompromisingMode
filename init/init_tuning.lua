@@ -475,6 +475,9 @@ TUNING.WINONA_BATTERY_MIN_LOAD = 0 -- generators don't drain when not powering a
 -- shield buff
 TUNING.SHIELDOFTERROR_DAMAGE = 59.5
 
+-- shelmet nerf
+TUNING.ARMOR_SLURTLEHAT_ABSORPTION = 0.85
+
 TUNING.NO_BOSS_TIME = 24
 -- TUNING.DISEASE_DELAY_TIME = total_day_time * 50 / 1.5
 -- TUNING.DISEASE_DELAY_TIME_VARIANCE = total_day_time * 20
