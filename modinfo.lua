@@ -231,6 +231,8 @@ configuration_options = {
         --"Willow's insulation is tweaked to be 120 on Summer and -120 on Winter.", false),
     BinaryConfig("wendy", "Wendy", "Abigail is nerfed to not increase Wendy's maximum damage above average.", true),
     BinaryConfig("wx78", "WX-78", "No longer heals from lightning.", true),
+    BinaryConfig("wxless", "WX Rework",
+        "Changes the way WX's charge and circuit systems works, alongside the effects of circuits", false),
     {
         name = "wicker_inv_regen_",
         label = "Wicker's Regeneration",
