@@ -78,6 +78,8 @@ local function bite(inst)
 		if inst.host.components.hayfever ~= nil and inst.host.components.hayfever.nextsneeze < 240 then
 			inst.host.components.hayfever:SetNextSneezeTime(inst.host.components.hayfever.nextsneeze + inst.red)
 		end
+    
+        inst.host.components.health:DeltaPenalty(-inst.red*0.01)
 	else
 		TimeToDie(inst)
 	end
