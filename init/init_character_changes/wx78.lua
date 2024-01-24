@@ -56,7 +56,7 @@ end)
 if TUNING.DSTU.WXLESS then --HI ATOBA :3 :3 <3 <3 
 --btw I'm not sure if formatting translated correctly when I uploaded the file? It kinda gets messed up even if I copy pasted so sorry Atober if it ends up being converted into 4 spaces isntead of tab or smth :]
 
-local module_definitions = require("wx78_moduledefsmod").module_definitions -- this is where things circuit definitions actually get loaded from
+local module_definitions = require("um_wx78_moduledefs").module_definitions -- this is where things circuit definitions actually get loaded from
 local UIAnim = require "widgets/uianim"
 local easing = require("easing")
 local CHARGEREGEN_TIMERNAME = "chargeregenupdate"
