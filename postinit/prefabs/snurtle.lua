@@ -6,7 +6,7 @@ SetSharedLootTable('slurtly',
 {
     {'slurtleslime',  1.0},
     {'slurtleslime',  1.0},
-    {'slurtlehat',    0.5},--?
+    {'slurtlehat',    0.5},
 })
 
 
