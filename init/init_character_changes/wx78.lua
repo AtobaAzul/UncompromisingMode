@@ -53,7 +53,8 @@ env.AddPrefabPostInit("wx78", function(inst)
 end)
 
 -------------WX RE-WIRED CHANGES :]------------------
-if TUNING.DSTU.WXLESS then --HI ATOBA :3 :3 <3 <3
+if TUNING.DSTU.WXLESS then --HI ATOBA :3 :3 <3 <3 
+--btw I'm not sure if formatting translated correctly when I uploaded the file? It kinda gets messed up even if I copy pasted so sorry Atober if it ends up being converted into 4 spaces isntead of tab or smth :]
 
 local module_definitions = require("wx78_moduledefsmod").module_definitions -- this is where things circuit definitions actually get loaded from
 local UIAnim = require "widgets/uianim"
@@ -314,7 +315,7 @@ local function stats_negate(inst, health_delta, hunger_delta, sanity_delta) --al
 	return health_delta, hunger_delta, sanity_delta
 end
 
-------------------------------------------- have I said hi before? HI ATOBA :] :] :]
+------------------------------------------- have I said hi before? HI ATOBA :] :] :] --And everyone else too.... I guess..........
 
 local function GetThermicTemperatureFn(inst, observer)
 	--local heat_adjust = 25
