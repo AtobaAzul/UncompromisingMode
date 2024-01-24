@@ -2009,6 +2009,8 @@ Assets = {
 	Asset("ATLAS", "images/bee_slot.xml"),
 	Asset("IMAGE", "images/bee_slot.tex"),
 
+	Asset("ANIM", "anim/um_status_wx.zip"),
+
 
 
 	--ICONS
