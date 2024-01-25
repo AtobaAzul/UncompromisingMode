@@ -36,7 +36,7 @@ ANNOUNCE.ANNOUNCE_DETACH_BUFF_CALIFORNIAKING = "My snout still burns, it does...
 DESCRIBE.CALIFORNIAKING = "Hyuyu, I should spike a mortal's food with this."
 -- CaliforniaKing
 
-ANNOUNCE.ANNOUNCE_RNEFOG = "Hyuyu, do you feel that tension in the air?"
+ANNOUNCE.ANNOUNCE_RNEFOG = "Do you feel it loom? Our impending doom?"
 DESCRIBE.UNCOMPROMISING_RAT = "You can't prank a prankster!"
 DESCRIBE.UNCOMPROMISING_RATHERD = "A portal to the vermin dimension."
 DESCRIBE.UNCOMPROMISING_RATBURROW = "I should prank them back. Maybe I'll toss in a snake."
