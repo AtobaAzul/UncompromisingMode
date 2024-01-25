@@ -95,7 +95,7 @@ ANNOUNCE.ANNOUNCE_ROOTING = "You can't impede this imp!"
 ANNOUNCE.ANNOUNCE_SNOWSTORM = "The winds are stirring. I can tell." -- Hi Anomen.
 ANNOUNCE.SHADOWTALKER = {
     "MY EXISTENCE IS A CURSE.", "THE SOUL HUNGER GNAWS AWAY AT ME.",
-    "THE MORTALS WILL FEAR ME, SOONER OR LATER.", "MOTHER WOULD BE SO SAD." --the least developed yet canon background character award goes to mom-tox.
+    "THE MORTALS WILL FEAR ME, SOONER OR LATER.", "MOTHER WOULD BE SO SAD.", --the least developed yet canon background character award goes to mom-tox.
 	"HOW I MISS OUR BETTER DAYS, KRAMPUS.", "I'M GUILTY."
 }
 ANNOUNCE.ANNOUNCE_OVER_EAT = {
