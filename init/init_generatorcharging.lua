@@ -91,8 +91,8 @@ env.AddPlayerPostInit(function(inst)
 
         if not inst.components.inventory:IsInsulated() then
             inst.sg:GoToState("electrocute")
-            inst.components.health:DoDelta( -TUNING.HEALING_SMALL, false, "lightning")
-            inst.components.sanity:DoDelta( -TUNING.SANITY_SMALL)
+            inst.components.health:DoDelta(-TUNING.HEALING_SMALL, false, "lightning")
+            inst.components.sanity:DoDelta(-TUNING.SANITY_SMALL)
             if inst.components.talker ~= nil then
                 inst:DoTaskInTime(1,
                     inst.components.talker:Say(GetString(inst, "ANNOUNCE_CHARGE_SUCCESS_ELECTROCUTED")))
@@ -108,7 +108,8 @@ env.AddPlayerPostInit(function(inst)
         end
         return true
     end
-
-    inst:AddComponent("batteryuser") -- just the component by itself doesn't do anything
+    if inst.components.batteryuser == nil then
+        inst:AddComponent("batteryuser")     -- just the component by itself doesn't do anything
+    end
     inst.components.batteryuser.onbatteryused = OnChargeFromBattery
 end)
