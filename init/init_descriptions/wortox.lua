@@ -36,7 +36,7 @@ ANNOUNCE.ANNOUNCE_DETACH_BUFF_CALIFORNIAKING = "My snout still burns, it does...
 DESCRIBE.CALIFORNIAKING = "Hyuyu, I should spike a mortal's food with this."
 -- CaliforniaKing
 
-ANNOUNCE.ANNOUNCE_RNEFOG = "Hyuyu, do you feel that tension in the air?"
+ANNOUNCE.ANNOUNCE_RNEFOG = "Do you feel it loom? Our impending doom?"
 DESCRIBE.UNCOMPROMISING_RAT = "You can't prank a prankster!"
 DESCRIBE.UNCOMPROMISING_RATHERD = "A portal to the vermin dimension."
 DESCRIBE.UNCOMPROMISING_RATBURROW = "I should prank them back. Maybe I'll toss in a snake."
@@ -95,7 +95,7 @@ ANNOUNCE.ANNOUNCE_ROOTING = "You can't impede this imp!"
 ANNOUNCE.ANNOUNCE_SNOWSTORM = "The winds are stirring. I can tell." -- Hi Anomen.
 ANNOUNCE.SHADOWTALKER = {
     "MY EXISTENCE IS A CURSE.", "THE SOUL HUNGER GNAWS AWAY AT ME.",
-    "THE MORTALS WILL FEAR ME, SOONER OR LATER.", "MOTHER WOULD BE SO SAD.", --the least developed yet canon background character award goes to mom-tox.
+    "THE MORTALS WILL FEAR ME, SOONER OR LATER.", -- "MOTHER WOULD BE SO SAD.", --the least developed yet canon background character award goes to mom-tox.
 	"HOW I MISS OUR BETTER DAYS, KRAMPUS.", "I'M GUILTY."
 }
 ANNOUNCE.ANNOUNCE_OVER_EAT = {
@@ -199,7 +199,7 @@ DESCRIBE.DEVILSFRUITCAKE = "Seven layers of devilishly good cake!"
 DESCRIBE.SIMPSALAD = "I don't think the mortals like this one too much."
 DESCRIBE.BEEFALOWINGS = "It's not bad, for mortal food."
 ANNOUNCE.ANNOUNCE_ATTACH_BUFF_KNOCKBACKIMMUNE =
-"I've become as immovable as a mountain!"-- rewrite this later. -- you uncreative piece of shit.
+"I am immovable!"-- rewrite this later. -- you uncreative piece of shit.
 ANNOUNCE.ANNOUNCE_DETACH_BUFF_KNOCKBACKIMMUNE = "That's not right, now I feel rather light."-- rewrite this later. -- eh, could do better.
 DESCRIBE.WIDOWSHEAD = "She's dead, so off wit her head."
 DESCRIBE.HOODED_MUSHTREE_TALL = DESCRIBE.MUSHTREE_TALL
@@ -213,9 +213,9 @@ DESCRIBE.VIPERFRUIT = "It's cold and slippery."
 DESCRIBE.VIPERJAM = "At least it comes in a jar. I hate getting jam on my fur."
 
 DESCRIBE.BLUEBERRYPLANT = {
-    READY = "If you don't give it room, It'll give a big boom!",
+    READY = "I've never seen mortal food so hostile.",
     FROZE = "It finally chilled out!",
-    REGROWING = "What a joyful experience!"
+    REGROWING = "Hyuyu, what fun!"
 }
 DESCRIBE.BERNIE_INACTIVE = {
     BROKEN = "He seemed a fine chap.",
