@@ -27,7 +27,7 @@ env.AddPrefabPostInit("minerhat", function(inst)
 
         local OnUnequip_old = inst.components.equippable.onunequipfn
         inst.components.equippable.onunequipfn = function(inst, owner)
-            if owner.components.upgrademoduleowner == nil then
+            if not owner.UM_isBatteryUser then
                 local item = owner.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
 
                 if item ~= nil then
