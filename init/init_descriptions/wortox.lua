@@ -201,7 +201,7 @@ DESCRIBE.BEEFALOWINGS = "It's not bad, for mortal food."
 ANNOUNCE.ANNOUNCE_ATTACH_BUFF_KNOCKBACKIMMUNE =
 "I am immovable!"-- rewrite this later. -- you uncreative piece of shit.
 ANNOUNCE.ANNOUNCE_DETACH_BUFF_KNOCKBACKIMMUNE = "That's not right, now I feel rather light."-- rewrite this later. -- eh, could do better.
-DESCRIBE.WIDOWSHEAD = "She's dead, so off wit her head."
+DESCRIBE.WIDOWSHEAD = "She's dead, so off with her head."
 DESCRIBE.HOODED_MUSHTREE_TALL = DESCRIBE.MUSHTREE_TALL
 DESCRIBE.HOODED_MUSHTREE_MEDIUM = DESCRIBE.MUSHTREE_MEDIUM
 DESCRIBE.HOODED_MUSHTREE_SMALL = DESCRIBE.MUSHTREE_SMALL
