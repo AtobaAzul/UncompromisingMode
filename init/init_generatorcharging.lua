@@ -26,9 +26,16 @@ env.AddPrefabPostInit("winona_battery_low", function(inst)
     end
 end)
 
-
 env.AddPlayerPostInit(function(inst)
-    local _onbatteryused = inst.components.batteryuser ~= nil and inst.components.batteryuser.onbatteryused or nil
+    local _onbatteryused = nil
+    local batteryuser = inst.components.batteryuser
+
+    if batteryuser ~= nil then
+        inst.UM_isBatteryUser = true
+        _onbatteryused = batteryuser.onbatteryused
+    else
+        batteryuser = inst:AddComponent("batteryuser") -- just the component by itself doesn't do anything
+    end
 
     local function OnChargeFromBattery(inst)
         local items = {}
@@ -64,7 +71,7 @@ env.AddPlayerPostInit(function(inst)
             end
         end
 
-        if selected_item == nil and inst.components.upgrademoduleowner == nil then
+        if selected_item == nil and not inst.UM_isBatteryUser then
             return false
         end
 
@@ -108,8 +115,6 @@ env.AddPlayerPostInit(function(inst)
         end
         return true
     end
-    if inst.components.batteryuser == nil then
-        inst:AddComponent("batteryuser")     -- just the component by itself doesn't do anything
-    end
-    inst.components.batteryuser.onbatteryused = OnChargeFromBattery
+
+    batteryuser.onbatteryused = OnChargeFromBattery
 end)

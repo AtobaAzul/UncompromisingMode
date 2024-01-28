@@ -164,7 +164,7 @@ local function onunequip(inst, owner)
     owner.lightningpriority = nil
     owner:ListenForEvent("lightningstrike", nil)
 
-    if owner.components.upgrademoduleowner == nil then
+    if not owner.UM_isBatteryUser then
         local item = owner.components.inventory:GetEquippedItem(EQUIPSLOTS.HEAD)
         if item ~= nil then
             if not item:HasTag("electricaltool") and owner:HasTag("batteryuser") then
