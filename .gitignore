@@ -4,3 +4,4 @@ devcapture_output.lua
 .vscode/settings.json
 *.png
 .editorconfig
+**/~Tertiary/
