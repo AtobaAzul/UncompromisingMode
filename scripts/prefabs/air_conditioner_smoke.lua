@@ -126,6 +126,8 @@ local function fn2()
 	inst.AnimState:SetBank("gnat")
 	inst.AnimState:PlayAnimation("idle_loop")
 	inst:AddTag("soulless")
+    inst:AddTag("noember")
+
 	inst:AddTag("fx")
 	inst:AddTag("notarget")
 	
