@@ -44,7 +44,7 @@ env.AddPrefabPostInit("firestaff", function(inst)
             local ents = TheSim:FindEntities(x, y, z, 4, { "_health" }, { "player", "playerghost", "notarget", "companion", "abigail", "INLIMBO" })
 
             for k, v in ipairs(ents) do
-                if v ~= target then if v.components.burnable ~= nil then v.components.burnable:Ignite(true) end end
+                if v ~= target then if v.components.burnable ~= nil then v.components.burnable:Ignite(true, attacker) end end
                 if v.components.health ~= nil and not v.components.health:IsDead() and v.components.combat ~= nil then v.components.combat:GetAttacked(attacker, 34, nil) end
             end
             return ret

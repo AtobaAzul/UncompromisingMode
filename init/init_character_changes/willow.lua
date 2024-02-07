@@ -27,7 +27,7 @@ if env.GetModConfigData("willow") then
                             v.components.burnable ~= nil and
                             not v.components.burnable:IsBurning() and
                             not v:HasTag("burnt") then
-                            v.components.burnable:Ignite()
+                            v.components.burnable:Ignite(nil, true)
                         end
 
                         if v.components.combat ~= nil and not (v.components.health ~= nil and v.components.health:IsDead()) then
@@ -148,7 +148,7 @@ AllRecipes["bernie_inactive"].sortkey = AllRecipes["healingsalve"].sortkey - .1
                         v.components.burnable ~= nil and
                         not v.components.burnable:IsBurning() and
                         not v:HasTag("burnt") then
-                        v.components.burnable:Ignite()
+                        v.components.burnable:Ignite(nil, true)
                     end
 
                     if v.components.combat ~= nil and not (v.components.health ~= nil and v.components.health:IsDead()) then
