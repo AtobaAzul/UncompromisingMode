@@ -689,6 +689,7 @@ local function bulletfn(ischerry)
     inst:AddTag("scarytoprey")
     inst:AddTag("noauradamage")
     inst:AddTag("soulless")
+    inst:AddTag("noember")
 
     inst.AnimState:SetBank("bee")
 	

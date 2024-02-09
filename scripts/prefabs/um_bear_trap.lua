@@ -273,6 +273,7 @@ local function common_fn()
     inst.AnimState:PlayAnimation("idle")
 
     inst:AddTag("soulless")
+    inst:AddTag("noember")
     inst:AddTag("houndfriend")
     inst:AddTag("trap")
     inst:AddTag("bear_trap")

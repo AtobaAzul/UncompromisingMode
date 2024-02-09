@@ -52,7 +52,7 @@ env.AddPrefabPostInit("blowdart_fire", function(inst)
 			if #ents > 0 then
 				for i, v in pairs(ents) do
 					if v.components.burnable ~= nil then
-						v.components.burnable:Ignite(true)
+						v.components.burnable:Ignite(true, attacker)
 					end
 					if v.components.combat ~= nil then
 						v.components.combat:GetAttacked(inst, 50, inst, "fire")
@@ -73,7 +73,7 @@ env.AddPrefabPostInit("blowdart_fire", function(inst)
 			target.SoundEmitter:PlaySound("dontstarve/wilson/blowdart_impact_fire")
 		end
 		if target.components.burnable ~= nil then
-			target.components.burnable:Ignite(true)
+			target.components.burnable:Ignite(true, attacker)
 		end
 		if target.components.freezable then
 			target.components.freezable:Unfreeze()

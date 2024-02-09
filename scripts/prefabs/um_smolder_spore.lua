@@ -351,6 +351,7 @@ local function fn()
 
 	inst:AddTag("PyreToxinImmune")
 	inst:AddTag("soulless") -- Prefab shouldn't die via health loss, but...just in case.
+    inst:AddTag("noember")
 	inst:AddTag("scarytoprey")
 	inst:AddTag("thorny")
 	--	inst:AddTag("flying") -- Makes them ignore platform borders entirely. Flying over the void isn't ideal...
