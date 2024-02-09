@@ -225,11 +225,11 @@ local function accelaratefn(wx, inst)
 						--seems like most people I talked to find it a bit annoying. Let's leave it out
 				end)
 			end
-			if TUNING.DSTU.WXLESSSPEEDBUMP then
+			if TUNING.DSTU.WXLESSSPEEDBUMP == false then
 				wx.Physics:SetCollisionCallback(collidelikerookandstuff)
 			end
 		else
-			if TUNING.DSTU.WXLESSSPEEDBUMP then --I'm not sure if I need the check for these nils but better be safe than sorry I guess!
+			if TUNING.DSTU.WXLESSSPEEDBUMP == false then --I'm not sure if I need the check for these nils but better be safe than sorry I guess!
 				wx.Physics:SetCollisionCallback(nil)
 			end
 		end
@@ -240,7 +240,7 @@ local function accelaratefn(wx, inst)
 			wx.rooksoundtask:Cancel()
 			wx.rooksoundtask = nil
 		end
-		if TUNING.DSTU.WXLESSSPEEDBUMP then
+		if TUNING.DSTU.WXLESSSPEEDBUMP == false then
 			wx.Physics:SetCollisionCallback(nil)
 		end
 	end
@@ -265,7 +265,7 @@ local function movespeed_deactivate(inst, wx)
     	wx._movespeed_chips = math.max(0, wx._movespeed_chips - 1)
 	wx.accelarate_speed = TUNING.WILSON_RUN_SPEED
     	wx.components.locomotor.runspeed = TUNING.WILSON_RUN_SPEED
-	if TUNING.DSTU.WXLESSSPEEDBUMP then
+	if TUNING.DSTU.WXLESSSPEEDBUMP == false then
 		wx.Physics:SetCollisionCallback(nil)
 	end
 	if wx.rooksoundtask ~= nil then
