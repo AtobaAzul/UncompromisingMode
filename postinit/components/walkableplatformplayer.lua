@@ -11,7 +11,6 @@ local function BoatCam_ActiveFn(params, parent, best_dist_sq)
 end
 
 local function BoatCam_UpdateFn(dt, params, parent, best_dist_sq)
-    print("hi this is running")
     local tpos = params.target:GetPosition()
 
 	local state = params.updater.state
