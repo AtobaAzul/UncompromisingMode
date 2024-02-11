@@ -354,6 +354,31 @@ if STRINGS.SKILLTREE.WILLOW ~= nil then
     STRINGS.SKILLTREE.WILLOW.WILLOW_ATTUNED_LIGHTER_DESC = STRINGS.SKILLTREE.WILLOW.WILLOW_ATTUNED_LIGHTER_DESC .. " Can also absorb Smog."
 end
 
+
+STRINGS.UM_HOUSETAUNTS = {
+    PIGMAN = {
+        "GET OFF LAWN",
+        "LEAVE HOUSE ALONE",
+        "NO SMASH HOUSE",
+        "DO NOT HIT",
+        "NO KILL HOUSE",
+        --"BAD MONKEY MAN",
+        "NO BREAK THINGS",
+        "YOU STOP THAT",
+        "STOP RIGHT THERE"
+    },
+    BUNNYMAN = {
+        "INVADER!",
+        "CRIMINAL!",
+        "SCUM!",
+        "AGGRESSOR!",
+        "NO!",
+        "MINE!",
+        "HOUSE!",
+        "BEGONE!",
+    }
+}
+
 STRINGS.UM_LOADINGTIPS = {
     AMALGAMS = "\"Whoever designed these clockwork thingamawatzits should have installed a surge protector!\" -W",
     RNES = "\"I feel like there's something watching us at night...\" - W",
