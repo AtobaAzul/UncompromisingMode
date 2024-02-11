@@ -156,6 +156,11 @@ return Class(function(self, inst)
         if TheWorld.state.israining and TheWorld:HasTag("heatwavestart") then
             TheWorld:PushEvent("ms_forceprecipitation", false)
         end
+
+        if not TheWorld.state.issummer then
+            StopHeatwave()
+            StopHeatWaves()
+        end
     end
 
     function self:LongUpdate(dt) self:OnUpdate(dt) end
