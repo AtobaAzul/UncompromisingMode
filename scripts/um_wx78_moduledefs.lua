@@ -143,7 +143,7 @@ local function collidelikerookandstuff(wx, other) --This system has gone under s
 
 	local accradius = 200
 	local knockbackstrength = 1.5 - TUNING.WX78_MOVESPEED_CHIPBOOSTS[wx._movespeed_chips + 1]*0.25
-	local collidedamage = 17 * (9 - TUNING.WX78_MOVESPEED_CHIPBOOSTS[wx._movespeed_chips + 1])
+	local collidedamage = 17 * (12 - TUNING.WX78_MOVESPEED_CHIPBOOSTS[wx._movespeed_chips + 1])
 	
 	
 	if not (other ~= nil and other:IsValid() and wx:IsValid()) then return end
@@ -164,10 +164,10 @@ local function collidelikerookandstuff(wx, other) --This system has gone under s
 		if wx.accelarate_speed > 8.5 and not (other.components.health and other.components.health.maxhealth < 150) then 
 			wx.accelarate_speed = TUNING.WILSON_RUN_SPEED
 			wx:PushEvent("knockback", {knocker = other, radius = accradius, strengthmult = knockbackstrength})
-			wx.components.combat:GetAttacked(other, collidedamage * 0.15)
+			wx.components.combat:GetAttacked(other, collidedamage * 0.1)
 		elseif not other:HasTag("prey") and (other.components.health and other.components.health.maxhealth < 150) then
 			wx.accelarate_speed = TUNING.WILSON_RUN_SPEED
-			wx.components.combat:GetAttacked(other, collidedamage * 0.1)
+			wx.components.combat:GetAttacked(other, collidedamage * 0.05)
 		elseif other:HasTag("prey") and (other.components.health and other.components.health.maxhealth < 150) then
 			wx.accelarate_speed = 8.35 --just enough to prevent double hitting but still keeping the somewhat high speed
 		end
@@ -220,12 +220,18 @@ local function accelaratefn(wx, inst)
 			if wx.rooksoundtask == nil then
 				wx.rooksoundtask = wx:DoPeriodicTask(0.33, function(wx)
 					SpawnPrefab("ground_chunks_breaking").Transform:SetPosition(wx.Transform:GetWorldPosition())
-					wx.SoundEmitter:PlaySound("dontstarve/creatures/rook/steam") --in original mod there's a config option to turn this sound off, feel free to just comment it out if it becomes annoying I guess
+					--wx.SoundEmitter:PlaySound("dontstarve/creatures/rook/steam") 
+						--in original mod there's a config option to turn this sound off, feel free to just comment it out if it becomes annoying I guess
+						--seems like most people I talked to find it a bit annoying. Let's leave it out
 				end)
 			end
-			wx.Physics:SetCollisionCallback(collidelikerookandstuff)
+			if TUNING.DSTU.WXLESSSPEEDBUMP == false then
+				wx.Physics:SetCollisionCallback(collidelikerookandstuff)
+			end
 		else
-			wx.Physics:SetCollisionCallback(nil)
+			if TUNING.DSTU.WXLESSSPEEDBUMP == false then --I'm not sure if I need the check for these nils but better be safe than sorry I guess!
+				wx.Physics:SetCollisionCallback(nil)
+			end
 		end
 		
 	else
@@ -234,7 +240,9 @@ local function accelaratefn(wx, inst)
 			wx.rooksoundtask:Cancel()
 			wx.rooksoundtask = nil
 		end
-		wx.Physics:SetCollisionCallback(nil)
+		if TUNING.DSTU.WXLESSSPEEDBUMP == false then
+			wx.Physics:SetCollisionCallback(nil)
+		end
 	end
 	wx.components.locomotor.runspeed = wx.accelarate_speed
 end
@@ -254,10 +262,12 @@ local function movespeed_activate(inst, wx)
 end
 
 local function movespeed_deactivate(inst, wx)
-    wx._movespeed_chips = math.max(0, wx._movespeed_chips - 1)
+    	wx._movespeed_chips = math.max(0, wx._movespeed_chips - 1)
 	wx.accelarate_speed = TUNING.WILSON_RUN_SPEED
-    wx.components.locomotor.runspeed = TUNING.WILSON_RUN_SPEED
-	wx.Physics:SetCollisionCallback(nil)
+    	wx.components.locomotor.runspeed = TUNING.WILSON_RUN_SPEED
+	if TUNING.DSTU.WXLESSSPEEDBUMP == false then
+		wx.Physics:SetCollisionCallback(nil)
+	end
 	if wx.rooksoundtask ~= nil then
 		wx.rooksoundtask:Cancel()
 		wx.rooksoundtask = nil

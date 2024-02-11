@@ -232,7 +232,9 @@ configuration_options = {
     BinaryConfig("wendy", "Wendy", "Abigail is nerfed to not increase Wendy's maximum damage above average.", true),
     BinaryConfig("wx78", "WX-78", "No longer heals from lightning.", true),
     BinaryConfig("wxless", "WX Rework",
-        "Changes the way WX's charge and circuit systems works, alongside the effects of circuits", false),
+        "Changes the way WX's charge and circuit systems works, alongside the effects of circuits", true),
+    BinaryConfig("wxlessspeedbump", "WX Speed circuit collision",
+        "Disable to make reworked WX not bump into mobs with speed circuits", true),
     {
         name = "wicker_inv_regen_",
         label = "Wicker's Regeneration",
