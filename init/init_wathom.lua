@@ -762,7 +762,7 @@ local wathombark = AddAction(
 
 			local act_pos = act:GetActionPoint()
 			local ents = GLOBAL.TheSim:FindEntities(act_pos.x, act_pos.y, act_pos.z, 10, { "_combat" },
-				{ "companion", "INLIMBO", "notarget", "player", "playerghost", "wall", "abigail", "shadow" }) --added playertags because of the taunt.
+				{ "companion", "INLIMBO", "notarget", "player", "playerghost", "wall", "abigail", "shadow", "shadowminion"}) --added playertags because of the taunt.
 			for i, v in ipairs(ents) do
 				if v.components.hauntable ~= nil and v.components.hauntable.panicable and not
 					(
@@ -774,7 +774,7 @@ local wathombark = AddAction(
 				if v.components.hauntable == nil or
 					v.components.hauntable ~= nil and not v.components.hauntable.panicable and not (
 						v.components.follower ~= nil and v.components.follower:GetLeader() and
-						v.components.follower:GetLeader():HasTag("player")) and not v:HasTag("player") then
+						v.components.follower:GetLeader():HasTag("player")) then
 					if not v:HasTag("bird") and v.components.combat then
 						v.components.combat:SetTarget(act.doer)
 						AddEnemyDebuffFx("battlesong_instant_taunt_fx", v)
