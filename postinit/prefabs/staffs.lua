@@ -353,7 +353,7 @@ if env.GetModConfigData("telestaff_rework") then
         inst.components.spellcaster:SetSpellFn(teleport_func)
         inst.components.spellcaster.canonlyuseonlocomotorspvp = nil
         inst.components.spellcaster.can_cast_fn = function(doer, target, pos)
-            if target:HasTag("heavy") or target:HasTag("_inventoryitem") or target.components.locomotor ~= nil then return true end
+            if (target:HasTag("heavy") or target:HasTag("_inventoryitem") or target.components.locomotor ~= nil) and target.Physics then return true end
             return nil
         end
         local _OnEquip = inst.components.equippable.onequipfn
