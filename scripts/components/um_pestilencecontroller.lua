@@ -113,7 +113,7 @@ return Class(function(self, inst)
             time = time * (percent * 10)
 
             if percent >= 0.5 then
-                self.inst:DoTaskInTime(TUNING.TOTAL_DAY_TIME, self.InitializeTimer(self))
+                self.inst:DoTaskInTime(TUNING.TOTAL_DAY_TIME, function() self:InitializeTimer() end)
                 return
             end
 
