@@ -234,7 +234,7 @@ configuration_options = {
     BinaryConfig("wxless", "WX Rework",
         "Changes the way WX's charge and circuit systems works, alongside the effects of circuits", true),
     BinaryConfig("wxlessspeedbump", "WX Speed circuit collision",
-        "Disable to make reworked WX not bump into mobs with speed circuits", true),
+        "Enable to make reworked WX not bump into mobs with speed circuits", false),
     {
         name = "wicker_inv_regen_",
         label = "Wicker's Regeneration",
