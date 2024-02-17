@@ -4,7 +4,7 @@ folder_name = folder_name or "workshop-"
 if not folder_name:find("workshop-") then
     name = "[LOCAL] - " .. name
 end
-local _version = "1.4.10.0"
+local _version = "1.4.11.0"
 description = [[
 󰀔 [ Version: ]].._version..[[ - "Under the Weather Pt.1" ]
 
