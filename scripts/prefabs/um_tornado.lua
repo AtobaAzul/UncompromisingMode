@@ -239,9 +239,7 @@ local function TornadoEnviromentTask(inst)
         -- if GetClosestInstWithTag("player", inst, PLAYER_CAMERA_SEE_DISTANCE * 1.125) ~= nil then -- tornado doesn't sleep. Using alt distance-based check.
         -- PICKABLES
         local pickables = TheSim:FindEntities(x, y, z, 12, nil, { "INLIMBO", "trap", "flower", "tornado_nosucky"}, { "pickable", "HACK_workable" })
-        for k, v in ipairs(pickables) do
-			print(v.prefab)
-		
+        for k, v in ipairs(pickables) do		
             if v.components.pickable ~= nil and v.components.pickable:CanBePicked() then
                 if not v:IsAsleep() and not config == "reduced" then
                     v.components.pickable:Pick(TheWorld)
@@ -490,7 +488,6 @@ local function TornadoTask(inst)
 
         for k, v in pairs(players) do
             local px, py, pz = v.Transform:GetWorldPosition()
-            print("player loc" .. px, py, pz)
 
             if v:HasTag("player") or v:HasTag("um_windturbine") then
                 v:AddTag("under_the_weather")

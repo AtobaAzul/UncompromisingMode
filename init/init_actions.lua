@@ -106,25 +106,6 @@ charge_powercell.instant = true
 charge_powercell.rmb = true
 charge_powercell.priority = HIGH_ACTION_PRIORITY
 
-local _RummageFn = GLOBAL.ACTIONS.RUMMAGE.fn
-
-GLOBAL.ACTIONS.RUMMAGE.fn = function(act)
-    local targ = act.target or act.invobject
-
-    --[[if targ ~= nil and targ:HasTag("winky_storage") then
-		if GLOBAL.TheWorld.components.winkyburrowinventory.trunk and GLOBAL.TheWorld.components.winkyburrowinventory.trunk.components.container:IsOpen() and not GLOBAL.TheWorld.components.winkyburrowinventory.trunk.components.container:IsOpenedBy(act.doer) then
-			return false, "INUSE"
-		end
-	elseif targ ~= nil and targ:HasTag("skull_storage") then
-		if GLOBAL.TheWorld.components.skullchestinventory.trunk and GLOBAL.TheWorld.components.skullchestinventory.trunk.components.container:IsOpen() and not GLOBAL.TheWorld.components.skullchestinventory.trunk.components.container:IsOpenedBy(act.doer) then
-			return false, "INUSE"
-		end
-	else]]
-    if targ ~= nil and targ:HasTag("winona_notouchy") and not act.doer:HasTag("handyperson") then return false, "WINONATOOLBOX"  end
-
-    return _RummageFn(act)
-end
-
 if TUNING.DSTU.WICKERNERF then
     local _ReadFn = GLOBAL.ACTIONS.READ.fn
 

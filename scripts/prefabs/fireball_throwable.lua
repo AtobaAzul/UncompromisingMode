@@ -25,7 +25,7 @@ local function OnHitFire(inst, attacker, target)
 						v.components.burnable ~= nil and
 						not v.components.burnable:IsBurning() and
 						not v:HasTag("burnt") then
-						v.components.burnable:Ignite()
+						v.components.burnable:Ignite(nil, attacker)
 					end
 				end
 			end

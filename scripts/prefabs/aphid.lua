@@ -161,6 +161,7 @@ local function fn()
     inst:AddTag("aphid")
     inst:AddTag("animal")
     inst:AddTag("soulless")
+    inst:AddTag("noember")
 
     MakeInventoryFloatable(inst)
 

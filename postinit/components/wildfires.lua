@@ -42,8 +42,12 @@ env.AddComponentPostInit("wildfires", function(self)
         return _ShouldActivateWildfires() and TheWorld:HasTag("heatwavestart")
     end
 
+
+
+    --TODO: HOOK.
     local CheckValidWildfireStarter = function(obj)
-        return not checkforcanopyshade(obj) and (obj:HasTag("plant") or obj:HasTag("wildfirepriority")) and not obj:HasOneOfTags(notags)
+        local x, y, z = obj.Transform:GetWorldPosition()
+        return obj:IsValid() and not obj:HasTag("fireimmune") and (obj:HasTag("plant") or obj:HasTag("tree")) and not checkforcanopyshade(obj) and not (obj.components.witherable ~= nil and obj.components.witherable:IsProtected()) and GetTemperatureAtXZ(x, z) >= TUNING.WILDFIRE_THRESHOLD
     end
 
     UpvalueHacker.SetUpvalue(_ms_startwildfireforplayerfn, ShouldActivateWildfires, "ShouldActivateWildfires")

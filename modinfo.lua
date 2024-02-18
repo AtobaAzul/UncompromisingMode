@@ -4,7 +4,7 @@ folder_name = folder_name or "workshop-"
 if not folder_name:find("workshop-") then
     name = "[LOCAL] - " .. name
 end
-local _version = "1.4.10.0"
+local _version = "1.4.11.3"
 description = [[
 󰀔 [ Version: ]].._version..[[ - "Under the Weather Pt.1" ]
 
@@ -232,7 +232,9 @@ configuration_options = {
     BinaryConfig("wendy", "Wendy", "Abigail is nerfed to not increase Wendy's maximum damage above average.", true),
     BinaryConfig("wx78", "WX-78", "No longer heals from lightning.", true),
     BinaryConfig("wxless", "WX Rework",
-        "Changes the way WX's charge and circuit systems works, alongside the effects of circuits", false),
+        "Changes the way WX's charge and circuit systems works, alongside the effects of circuits", true),
+    BinaryConfig("wxlessspeedbump", "WX Speed circuit collision",
+        "Enable to make reworked WX not bump into mobs with speed circuits", false),
     {
         name = "wicker_inv_regen_",
         label = "Wicker's Regeneration",

@@ -106,7 +106,9 @@ local function do_snap(inst)
 	if inst.Harvestable == "full" then
 		inst.AnimState:PushAnimation("spawn")
 		inst.AnimState:PushAnimation("trap_idle", true)
+		inst.SoundEmitter:PlaySound("wintersfeast2019/creatures/gingerbread_vargr/splat")
 		inst.SoundEmitter:PlaySound("turnoftides/creatures/together/starfishtrap/trap")
+
 		FxAppear(inst)
 		-- Do an AOE attack, based on how the combat component does it.
 		local x, y, z = inst.Transform:GetWorldPosition()

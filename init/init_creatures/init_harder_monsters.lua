@@ -1,36 +1,12 @@
 -----------------------------------------------------------------
 --Pigs and bunnies defend their turf if their home is destroyed
 -----------------------------------------------------------------
-local pigtaunts =
-{
-    "GET OFF LAWN",
-    "LEAVE HOUSE ALONE",
-    "NO SMASH HOUSE",
-    "DO NOT HIT",
-    "NO KILL HOUSE",
-    --"BAD MONKEY MAN",
-    "NO BREAK THINGS",
-    "YOU STOP THAT",
-    "STOP RIGHT THERE"
-}
-
-local bunnytaunts =
-{
-    "INVADER!",
-    "CRIMINAL!",
-    "SCUM!",
-    "AGGRESSOR!",
-    "NO!",
-    "MINE!",
-    "HOUSE!",
-    "BEGONE!",
-}
 
 local function TalkShit(inst, taunts)
     if taunts ~= nil then
         local tauntnr = GLOBAL.math.floor(GLOBAL.GetRandomMinMax(1, GLOBAL.GetTableSize(taunts)))
         if inst and inst.components.talker then
-            inst.components.talker:Say(taunts[tauntnr])
+            inst.components.talker:Say(STRINGS.UM_HOUSETAUNTS[string.upper(inst.prefab)][math.random(#STRINGS.UM_HOUSETAUNTS[string.upper(inst.prefab)])])
         end
     end
 end

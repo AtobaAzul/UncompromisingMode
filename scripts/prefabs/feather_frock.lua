@@ -38,7 +38,7 @@ local function SpawnThorns(inst, feather, owner)
 						v.components.burnable ~= nil and
 						not v.components.burnable:IsBurning() and
 						not v:HasTag("burnt") then
-						v.components.burnable:Ignite()
+						v.components.burnable:Ignite(nil, owner)
 						v.components.combat:GetAttacked(owner, 40)
 
 						if v.components.freezable then
