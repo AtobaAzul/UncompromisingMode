@@ -268,7 +268,7 @@ local function OnEatFun(inst, food) -- stuff for charges for food and reversing 
 	elseif food.components.edible:GetHunger(inst) >= 37.5 then charge_hungeramount = 2 
 	elseif food.components.edible:GetHunger(inst) >= 25 then charge_hungeramount = 1 end]] --Gonna try a different system, keep it here if there's a sudden feeling to go back :P
 	
-	local hunger_to_charge = 37.5
+	local hunger_to_charge = 50
 	
 	inst._hungercharge_stored = (inst._hungercharge_stored or 0) + (food.components.edible:GetHunger(inst) / hunger_to_charge)
 	
@@ -308,7 +308,7 @@ local function stats_negate(inst, health_delta, hunger_delta, sanity_delta) --al
 			sanity_delta = sanity_delta * HUNGER_TABLES[inst._hunger_chips]
 		end
 		if hunger_delta < 0 then
-			hunger_delta = hunger_delta * HUNGER_TABLES[inst._hunger_chips ]
+			hunger_delta = hunger_delta * HUNGER_TABLES[inst._hunger_chips]
 		end
 	end
 	
@@ -458,7 +458,7 @@ TUNING.WX78_BEE_TICKPERIOD = 5
 TUNING.WX78_BEE_HEALTHPERTICK = 1
 TUNING.WX78_COLD_ICEMOISTURE = 35
 TUNING.WX78_PERISH_COLDRATE = 0.75
-HUNGER_TABLES={0.25, 0.0, -0.25, -0.5}
+HUNGER_TABLES={0.5, 0.25, 0.00, 0.25}
 TUNING.WX78_CHARGING_FOODS = 
 {
     voltgoatjelly = 8,
