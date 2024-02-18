@@ -104,7 +104,7 @@ return Class(function(self, inst)
         return 1
     end
 
-    function self:InitializeTimer()
+    function self:InitializePestilenceTimer()
         if not self.inst.components.timer:TimerExists("spreadaphids") then
             local time = 10 * 60 * 8 -- Max Time to spread at 10 days
 
@@ -114,13 +114,12 @@ return Class(function(self, inst)
 
             if percent >= 0.5 then
                 self.inst:DoTaskInTime(TUNING.TOTAL_DAY_TIME, function(inst) inst.components.um_pestilencecontroller:InitializeTimer() end)
-                return
-            end
-
-            if TheWorld.state.iswinter then
-                self.inst.components.timer:StartTimer("spreadaphids", 5 * time) -- Winter means we'll wait a lot longer before starting up aphids again...
-            else
-                self.inst.components.timer:StartTimer("spreadaphids", time)
+			else
+				if TheWorld.state.iswinter then
+					self.inst.components.timer:StartTimer("spreadaphids", 5 * time) -- Winter means we'll wait a lot longer before starting up aphids again...
+				else
+					self.inst.components.timer:StartTimer("spreadaphids", time)
+				end
             end
         end
     end
@@ -142,7 +141,7 @@ return Class(function(self, inst)
         if not self.redwoods then
             self.inst:DoTaskInTime(1, function(inst)
                 inst.components.um_pestilencecontroller:FindTrees()
-                inst.components.um_pestilencecontroller:InitializeTimer()
+                inst.components.um_pestilencecontroller:InitializePestilenceTimer()
             end)
         elseif not self.inst.components.timer:TimerExists("spreadaphids") then
             self.inst.components.timer:InitializeTimer()
@@ -155,7 +154,7 @@ return Class(function(self, inst)
                 if not TheWorld.state.iswinter then
                     self:SpawnNymph()
                 end
-                self:InitializeTimer()
+                self:InitializePestilenceTimer()
             end
         end
     end)
