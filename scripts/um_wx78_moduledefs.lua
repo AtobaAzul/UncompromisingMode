@@ -67,7 +67,7 @@ local function maxsanity1_activate(inst, wx, isloading)
 
 		wx.components.sanity.dapperness = wx.components.sanity.dapperness + TUNING.DAPPERNESS_TINY
         wx.components.sanity:SetMax(wx.components.sanity.max + TUNING.WX78_MAXSANITY1_BOOST)
-		wx.components.sanity.neg_aura_modifiers:SetModifier(inst, 0.95)
+		wx.components.sanity.neg_aura_modifiers:SetModifier(inst, 0.9)
 
         if not isloading then
             wx.components.sanity:SetPercent(current_sanity_percent, false)
@@ -104,7 +104,7 @@ local function maxsanity_activate(inst, wx, isloading)
 
         wx.components.sanity.dapperness = wx.components.sanity.dapperness + TUNING.WX78_MAXSANITY_DAPPERNESS
         wx.components.sanity:SetMax(wx.components.sanity.max + TUNING.WX78_MAXSANITY_BOOST)
-		wx.components.sanity.neg_aura_modifiers:SetModifier(inst, 0.8)
+		wx.components.sanity.neg_aura_modifiers:SetModifier(inst, 0.75)
 
         if not isloading then
             wx.components.sanity:SetPercent(current_sanity_percent, false)
