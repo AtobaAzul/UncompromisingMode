@@ -67,7 +67,7 @@ local function maxsanity1_activate(inst, wx, isloading)
 
 		wx.components.sanity.dapperness = wx.components.sanity.dapperness + TUNING.DAPPERNESS_TINY
         wx.components.sanity:SetMax(wx.components.sanity.max + TUNING.WX78_MAXSANITY1_BOOST)
-		wx.components.sanity.neg_aura_modifiers:SetModifier(inst, 0.9)
+		wx.components.sanity.neg_aura_modifiers:SetModifier(inst, 0.95)
 
         if not isloading then
             wx.components.sanity:SetPercent(current_sanity_percent, false)
@@ -104,7 +104,7 @@ local function maxsanity_activate(inst, wx, isloading)
 
         wx.components.sanity.dapperness = wx.components.sanity.dapperness + TUNING.WX78_MAXSANITY_DAPPERNESS
         wx.components.sanity:SetMax(wx.components.sanity.max + TUNING.WX78_MAXSANITY_BOOST)
-		wx.components.sanity.neg_aura_modifiers:SetModifier(inst, 0.75)
+		wx.components.sanity.neg_aura_modifiers:SetModifier(inst, 0.8)
 
         if not isloading then
             wx.components.sanity:SetPercent(current_sanity_percent, false)
@@ -345,7 +345,7 @@ end
 
 local function onworkingwarmup(wx, data, inst, isattack)
 	local cur = wx.components.temperature.current
-	local tempmult = (cur >= 60 and 0.33) or (cur >= 50 and 0.66) or 1
+	local tempmult = (cur >= 60 and 0.25) or (cur >= 50 and 0.50) or 1
 	
 	if not isattack then
 		wx.components.temperature:SetTemperature(cur + 0.3*tempmult)
@@ -611,7 +611,7 @@ local function taser_onblockedorattacked(wx, data, inst)
 			
 			local tased_duration = wx._taser_chips/1.5
 			
-			if data.attacker.sg ~= nil and not data.attacker.sg.statemem.devoured then
+			if data.attacker.sg ~= nil and not data.attacker.sg.statemem.devoured and not (data.attacker:HasTag("Epic") or data.attacker:HasTag("shadowthrall") or data.attacker:HasTag("shadow")) then
 				data.attacker.sg:GoToState("hit")
 				if data.attacker.tased_stunlocktask == nil then
 				data.attacker.tased_stunlocktask = data.attacker:DoPeriodicTask(0.15, function()
