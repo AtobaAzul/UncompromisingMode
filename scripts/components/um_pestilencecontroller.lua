@@ -113,7 +113,7 @@ return Class(function(self, inst)
             time = time * (percent * 10)
 
             if percent >= 0.5 then
-                self.inst:DoTaskInTime(TUNING.TOTAL_DAY_TIME, function(inst) inst.components.um_pestilencecontroller:InitializeTimer() end)
+                self.inst:DoTaskInTime(TUNING.TOTAL_DAY_TIME, function(inst) inst.components.um_pestilencecontroller:InitializePestilenceTimer() end)
 			else
 				if TheWorld.state.iswinter then
 					self.inst.components.timer:StartTimer("spreadaphids", 5 * time) -- Winter means we'll wait a lot longer before starting up aphids again...
