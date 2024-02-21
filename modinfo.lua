@@ -236,7 +236,7 @@ configuration_options = {
     BinaryConfig("wxlessspeedbump", "WX Speed circuit collision",
         "Enable to make reworked WX not bump into mobs with speed circuits", false),
     {
-        name = "wicker_inv_regen_",
+        name = "wicker_inv_regen",
         label = "Wicker's Regeneration",
         hover = "Configure how Wickerbottom's books regen.",
         options = {
@@ -256,7 +256,7 @@ configuration_options = {
                 hover = "Like vanilla."
             }
         },
-        default = "inv",
+        default = "vanilla",
     },
 	BinaryConfig("wickerbottom", "Wicker's Sane Reading",
         "Wickerbottom/Maxwell can no longer read books while insane.", true),		
@@ -286,9 +286,9 @@ configuration_options = {
         "Limits access to Winona's Generators to only allow her to use them.", false),		
     BinaryConfig("winona_portables_", "Winona - Portable Structures",
         "Makes Winona's structures portable and changes what can be stored into Winona's Toolbox depending if it's enabled or not.", true),
-    BinaryConfig("warly_butcher_", "Warly - Butchering",
+    BinaryConfig("warly_butcher", "Warly - Butchering",
         "Warly is a certified butcher, he will get more resources from kills in his inventory.",
-        true),
+        false),
     BinaryConfig("warly_food_taste_", "Warly - Food Taste",
         "Warly gets increased stats from food, like Singleplayer. However, he remembers foods for 3 days instead of 2.",
         true),

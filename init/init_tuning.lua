@@ -216,7 +216,7 @@ TUNING.DSTU = {
 	WARLY_FOOD_TASTE = GetModConfigData("warly_food_taste_"),
     WARLY_SAME_OLD_COOLDOWN = total_day_time * 3,
     WARLY_SAME_OLD_MULTIPLIERS = { .6, .5, .35, .2, .1 },
-    WARLY_BUTCHER = GetModConfigData("warly_butcher_"),
+    WARLY_BUTCHER = GetModConfigData("warly_butcher"),
     --WARLY_FOOD = GetModConfigData("warly_food"),
     -- Wigfrid
     BATTLESONG_FIRE_RESIST_MOD = 0, -- orig 33% fire resis
@@ -241,7 +241,7 @@ TUNING.DSTU = {
     WICKERNERF_MOONBOOK = GetModConfigData("lunar grimoire"),
     WICKERBUFF_HORTICULTURE = GetModConfigData("lux aeterna"),
     WICKERBUFF_LIGHT = GetModConfigData("horticulture, expanded"),
-    WICKER_INV_REGEN = GetModConfigData("wicker_inv_regen_"),
+    WICKER_INV_REGEN = GetModConfigData("wicker_inv_regen"),
     -- Wanda
     WANDA_NERF = GetModConfigData("wanda_nerf"),
     -- Wortox
