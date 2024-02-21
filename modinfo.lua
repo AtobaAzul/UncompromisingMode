@@ -236,7 +236,7 @@ configuration_options = {
     BinaryConfig("wxlessspeedbump", "WX Speed circuit collision",
         "Enable to make reworked WX not bump into mobs with speed circuits", false),
     {
-        name = "wicker_inv_regen_",
+        name = "wicker_inv_regen",
         label = "Wicker's Regeneration",
         hover = "Configure how Wickerbottom's books regen.",
         options = {
@@ -256,7 +256,7 @@ configuration_options = {
                 hover = "Like vanilla."
             }
         },
-        default = "inv",
+        default = "vanilla",
     },
 	BinaryConfig("wickerbottom", "Wicker's Sane Reading",
         "Wickerbottom/Maxwell can no longer read books while insane.", true),		
