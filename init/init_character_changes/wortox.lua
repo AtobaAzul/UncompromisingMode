@@ -108,31 +108,10 @@ local function UncompromisingSoulHeal(inst)
     end
 end
 
-
---If there's a better way of doing this, lemme know, I'm not sure how to grab the wortox_soul_common.DoHeal, it doesn't work if I reference it in its own postinit like inst.DoHeal = NewHeal
-local function KillSoul(inst)
-    inst:ListenForEvent("animover", inst.Remove)
-    inst.AnimState:PlayAnimation("idle_pst")
-    inst.SoundEmitter:PlaySound("dontstarve/characters/wortox/soul/spawn", nil, .5)
-
-    UncompromisingSoulHeal(inst)
-end
-
-local function toground(inst)
-    inst.persists = false
-    if inst._task == nil then
-        inst._task = inst:DoTaskInTime(.4 + math.random() * .7, KillSoul)
-    end
-    if inst.AnimState:IsCurrentAnimation("idle_loop") then
-        inst.AnimState:SetTime(math.random() * inst.AnimState:GetCurrentAnimationLength())
-    end
-end
-
 --beta uses
 --if GLOBAL.TUNING.DSTU.WORTOX == "SHOT" or GLOBAL.TUNING.DSTU.WORTOX == "APOLLO" then
-    AddPrefabPostInit("wortox_soul", function(inst)
-        UpvalueHacker.SetUpvalue(GLOBAL.Prefabs.wortox_soul.fn, toground, "toground")
-    end)
+	local wortox_soul_common = require("prefabs/wortox_soul_common")
+	wortox_soul_common.DoHeal = UncompromisingSoulHeal
 --end
 
 AddPrefabPostInit("wortox", function(inst)
