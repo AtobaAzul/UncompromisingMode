@@ -185,7 +185,7 @@ function ThankYouToshInit(inst)
 end
 
 env.AddPrefabPostInit("birdcage", ThankYouToshInit)
---[[env.AddPrefabPostInit("birdcage", function(inst)
+env.AddPrefabPostInit("birdcage", function(inst)
 	if not TheWorld.ismastersim then
 		return
 	end
@@ -197,9 +197,9 @@ env.AddPrefabPostInit("birdcage", ThankYouToshInit)
 			_ShouldAcceptItem(inst, item)
 		end
 
-		if item.prefab == "rice" or item.prefab == "rice_cooked" then
-			local can_accept = true
-			return can_accept
-		end
+		--if item.prefab == "rice" or item.prefab == "rice_cooked" then
+			--local can_accept = true
+			--return can_accept
+		--end
 	end
-end)]]
+end)
