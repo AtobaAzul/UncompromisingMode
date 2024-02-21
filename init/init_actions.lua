@@ -208,13 +208,11 @@ if TUNING.DSTU.WARLY_BUTCHER then
                 local pos = GLOBAL.Vector3(x, y, z)
                 for i = 1, stacksize do
                     local loots = murdered.components.lootdropper:GenerateLoot()
-                    
+
                     local lootprefab = loots[#loots > 1 and math.random(#loots) or 1]
-                        local loot = GLOBAL.SpawnPrefab(lootprefab)
-                        if loot ~= nil then
-                            act.doer.components.inventory:GiveItem(loot, nil, pos)
-                        end
-                        
+                    local loot = GLOBAL.SpawnPrefab(lootprefab)
+                    if loot ~= nil then
+                        act.doer.components.inventory:GiveItem(loot, nil, pos)
                     end
                 end
             end
@@ -226,4 +224,3 @@ if TUNING.DSTU.WARLY_BUTCHER then
         return _murderfn(act)
     end
 end
-
