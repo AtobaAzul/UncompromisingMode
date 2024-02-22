@@ -40,12 +40,10 @@ end
 
 local function maxhealth_activate(inst, wx, isloading)
     maxhealth_change(inst, wx, TUNING.WX78_MAXHEALTH_BOOST, isloading)
-	wx.components.health:SetAbsorptionAmount(wx.components.health.absorb + 0.075)
 end
 
 local function maxhealth_deactivate(inst, wx)
     maxhealth_change(inst, wx, -TUNING.WX78_MAXHEALTH_BOOST)
-	wx.components.health:SetAbsorptionAmount(wx.components.health.absorb - 0.075)
 end
 
 
