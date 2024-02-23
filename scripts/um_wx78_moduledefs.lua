@@ -960,13 +960,13 @@ AddCreatureScanDataDefinition("beequeen", "bee", 10)
 local function maxhealth2_activate(inst, wx, isloading)
     local maxhealth2_boost = TUNING.WX78_MAXHEALTH_BOOST * TUNING.WX78_MAXHEALTH2_MULT
     maxhealth_change(inst, wx, maxhealth2_boost, isloading)
-    wx.components.health:SetAbsorptionAmount(wx.components.health.absorb + 0.2)
+    --wx.components.health:SetAbsorptionAmount(wx.components.health.absorb + 0.2)
 end
 
 local function maxhealth2_deactivate(inst, wx)
     local maxhealth2_boost = TUNING.WX78_MAXHEALTH_BOOST * TUNING.WX78_MAXHEALTH2_MULT
     maxhealth_change(inst, wx, -maxhealth2_boost)
-    wx.components.health:SetAbsorptionAmount(wx.components.health.absorb - 0.2)
+   -- wx.components.health:SetAbsorptionAmount(wx.components.health.absorb - 0.2)
 end
 
 local MAXHEALTH2_MODULE_DATA =
