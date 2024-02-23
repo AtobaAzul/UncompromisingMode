@@ -102,13 +102,14 @@ env.AddComponentPostInit("health", function(self)
     local _DoDelta = self.DoDelta
     --(self:HasTag("wathom") and self:HasTag("amped")
     function self:DoDelta(amount, overtime, cause, ignore_invincible, afflicter, ignore_absorb, ...)
-        if self.inst.components.upgrademoduleowner ~= nil then
+        if self.inst.components.upgrademoduleowner ~= nil and TUNING.DSTU.WXLESS then --btw I think this change is not that useful since you pretty much can achieve the same thing by unequipping module and healing
+                                                                                         --but I guess this way is another choice of being more convenient but less effective?
             local hpmodulemult = self.inst.components.upgrademoduleowner:GetModuleTypeCount('maxhealth') * 0.05 + self.inst.components.upgrademoduleowner:GetModuleTypeCount('maxhealth2') * 0.15
             print("hpmodulemult")
             if amount > 0 then
                 print("true")
                 amount = amount * (1+hpmodulemult)
-                print("amount")
+                print("amount") -- -Hey so how much health did I regen? -"amount" of health.    --I'm gonna leave it as it is lol
             end
         end
 
