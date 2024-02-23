@@ -63,9 +63,9 @@ local function maxsanity1_activate(inst, wx, isloading)
     if wx.components.sanity ~= nil then
         local current_sanity_percent = wx.components.sanity:GetPercent()
 
-		wx.components.sanity.dapperness = wx.components.sanity.dapperness + TUNING.DAPPERNESS_TINY
+        wx.components.sanity.dapperness = wx.components.sanity.dapperness + TUNING.DAPPERNESS_TINY
         wx.components.sanity:SetMax(wx.components.sanity.max + TUNING.WX78_MAXSANITY1_BOOST)
-		wx.components.sanity.neg_aura_modifiers:SetModifier(inst, 0.9)
+        wx.components.sanity.neg_aura_modifiers:SetModifier(inst, 0.9)
 
         if not isloading then
             wx.components.sanity:SetPercent(current_sanity_percent, false)
@@ -76,8 +76,8 @@ end
 local function maxsanity1_deactivate(inst, wx)
     if wx.components.sanity ~= nil then
         local current_sanity_percent = wx.components.sanity:GetPercent()
-		wx.components.sanity.dapperness = wx.components.sanity.dapperness - TUNING.DAPPERNESS_TINY
-		wx.components.sanity.neg_aura_modifiers:RemoveModifier(inst)
+        wx.components.sanity.dapperness = wx.components.sanity.dapperness - TUNING.DAPPERNESS_TINY
+        wx.components.sanity.neg_aura_modifiers:RemoveModifier(inst)
         wx.components.sanity:SetMax(wx.components.sanity.max - TUNING.WX78_MAXSANITY1_BOOST)
         wx.components.sanity:SetPercent(current_sanity_percent, false)
     end
@@ -102,7 +102,7 @@ local function maxsanity_activate(inst, wx, isloading)
 
         wx.components.sanity.dapperness = wx.components.sanity.dapperness + TUNING.WX78_MAXSANITY_DAPPERNESS
         wx.components.sanity:SetMax(wx.components.sanity.max + TUNING.WX78_MAXSANITY_BOOST)
-		wx.components.sanity.neg_aura_modifiers:SetModifier(inst, 0.75)
+        wx.components.sanity.neg_aura_modifiers:SetModifier(inst, 0.75)
 
         if not isloading then
             wx.components.sanity:SetPercent(current_sanity_percent, false)
@@ -116,7 +116,7 @@ local function maxsanity_deactivate(inst, wx)
 
         wx.components.sanity.dapperness = wx.components.sanity.dapperness - TUNING.WX78_MAXSANITY_DAPPERNESS
         wx.components.sanity:SetMax(wx.components.sanity.max - TUNING.WX78_MAXSANITY_BOOST)
-		wx.components.sanity.neg_aura_modifiers:RemoveModifier(inst)
+        wx.components.sanity.neg_aura_modifiers:RemoveModifier(inst)
         wx.components.sanity:SetPercent(current_sanity_percent, false)
     end
 end
@@ -138,47 +138,46 @@ AddCreatureScanDataDefinition("oceanhorror", "maxsanity", 3)
 
 ---------------------------------------------------------------
 local function collidelikerookandstuff(wx, other) --This system has gone under so much changes
+    local accradius = 200
+    local knockbackstrength = 1.5 - TUNING.WX78_MOVESPEED_CHIPBOOSTS[wx._movespeed_chips + 1] * 0.25
+    local collidedamage = 17 * (12 - TUNING.WX78_MOVESPEED_CHIPBOOSTS[wx._movespeed_chips + 1])
 
-	local accradius = 200
-	local knockbackstrength = 1.5 - TUNING.WX78_MOVESPEED_CHIPBOOSTS[wx._movespeed_chips + 1]*0.25
-	local collidedamage = 17 * (12 - TUNING.WX78_MOVESPEED_CHIPBOOSTS[wx._movespeed_chips + 1])
-	
-	
-	if not (other ~= nil and other:IsValid() and wx:IsValid()) then return end
-	
-	local CANTCOLLIDETAGS = {"player", "companion", "abigail", "NOCLICK", "INLIMBO", "wall"}
-	
-	local function iscollidable(other) --Honestly at this point since there are no more proper objects collision might as well replace the entire thing with finding entities in range
-		for _, v in ipairs(CANTCOLLIDETAGS) do
-			if other:HasTag(v) then 
-				return false
-			end
-		end
-		return true
-	end
 
-	local function collideknocking(wx)
-		if other and other:IsValid() and iscollidable(other) then
-		if wx.accelarate_speed > 8.5 and not (other.components.health and other.components.health.maxhealth < 150) then 
-			wx.accelarate_speed = TUNING.WILSON_RUN_SPEED
-			wx:PushEvent("knockback", {knocker = other, radius = accradius, strengthmult = knockbackstrength})
-			wx.components.combat:GetAttacked(other, collidedamage * 0.1)
-		elseif not other:HasTag("prey") and (other.components.health and other.components.health.maxhealth < 150) then
-			wx.accelarate_speed = TUNING.WILSON_RUN_SPEED
-			wx.components.combat:GetAttacked(other, collidedamage * 0.05)
-		elseif other:HasTag("prey") and (other.components.health and other.components.health.maxhealth < 150) then
-			wx.accelarate_speed = 8.35 --just enough to prevent double hitting but still keeping the somewhat high speed
-		end
-		wx.SoundEmitter:PlaySound("dontstarve/characters/woodie/moose/bounce")
-		SpawnPrefab("collapse_small").Transform:SetPosition(other.Transform:GetWorldPosition())
-		ShakeAllCameras(CAMERASHAKE.SIDE, .5, .05, .1, wx, 10)
-		end
-	end
-	
-	
-	if not other:IsValid() then
+    if not (other ~= nil and other:IsValid() and wx:IsValid()) then return end
+
+    local CANTCOLLIDETAGS = { "player", "companion", "abigail", "NOCLICK", "INLIMBO", "wall" }
+
+    local function iscollidable(other) --Honestly at this point since there are no more proper objects collision might as well replace the entire thing with finding entities in range
+        for _, v in ipairs(CANTCOLLIDETAGS) do
+            if other:HasTag(v) then
+                return false
+            end
+        end
+        return true
+    end
+
+    local function collideknocking(wx)
+        if other and other:IsValid() and iscollidable(other) then
+            if wx.accelarate_speed > 8.5 and not (other.components.health and other.components.health.maxhealth < 150) then
+                wx.accelarate_speed = TUNING.WILSON_RUN_SPEED
+                wx:PushEvent("knockback", { knocker = other, radius = accradius, strengthmult = knockbackstrength })
+                wx.components.combat:GetAttacked(other, collidedamage * 0.1)
+            elseif not other:HasTag("prey") and (other.components.health and other.components.health.maxhealth < 150) then
+                wx.accelarate_speed = TUNING.WILSON_RUN_SPEED
+                wx.components.combat:GetAttacked(other, collidedamage * 0.05)
+            elseif other:HasTag("prey") and (other.components.health and other.components.health.maxhealth < 150) then
+                wx.accelarate_speed = 8.35 --just enough to prevent double hitting but still keeping the somewhat high speed
+            end
+            wx.SoundEmitter:PlaySound("dontstarve/characters/woodie/moose/bounce")
+            SpawnPrefab("collapse_small").Transform:SetPosition(other.Transform:GetWorldPosition())
+            ShakeAllCameras(CAMERASHAKE.SIDE, .5, .05, .1, wx, 10)
+        end
+    end
+
+
+    if not other:IsValid() then
         return
-    --[[elseif other:HasTag("smashable") and other.components.health ~= nil then
+        --[[elseif other:HasTag("smashable") and other.components.health ~= nil then
         other.components.combat:GetAttacked(wx, collidedamage)
 		collideknocking(wx)
     elseif other.components.workable ~= nil
@@ -194,84 +193,80 @@ local function collidelikerookandstuff(wx, other) --This system has gone under s
 			other.components.workable:WorkedBy(wx, 4/TUNING.WX78_MOVESPEED_CHIPBOOSTS[wx._movespeed_chips + 1])
 			collideknocking(wx)
 		end]]
-		
     elseif other.components.health ~= nil and not other.components.health:IsDead() and iscollidable(other) then
         wx.SoundEmitter:PlaySound("dontstarve/creatures/rook/explo")
-		collideknocking(wx)
+        collideknocking(wx)
         other.components.combat:GetAttacked(wx, collidedamage)
     end
-	
-	wx.Physics:SetCollisionCallback(nil)
+
+    wx.Physics:SetCollisionCallback(nil)
 end
 
 local function accelaratefn(wx, inst)
-
-	local accelarate_limit = 12 - TUNING.WX78_MOVESPEED_CHIPBOOSTS[wx._movespeed_chips + 1]
-	--local accelarate_increase = 0.025 * (1.2 - TUNING.WX78_MOVESPEED_CHIPBOOSTS[wx._movespeed_chips + 1] * 0.08) --why this? math --I think too much math causes the game to crash sometimes wth
-	--No seriously it stopped crashing after I changed it to static value, was this really the reason? Sad cause I wanted it to be faster the more modules you have
-	if wx.components.locomotor ~= nil and not wx.components.rider:IsRiding() and wx.sg:HasStateTag("running") and wx.accelarate_speed ~= nil and wx.components.locomotor:GetTimeMoving() >= (TUNING.WX78_MOVESPEED_CHIPBOOSTS[wx._movespeed_chips + 1] - 1) then
-		if wx.accelarate_speed <= accelarate_limit then 
-			wx.accelarate_speed = wx.accelarate_speed + 0.015
-		end
-	--print(wx.accelarate_speed)
-		if wx.accelarate_speed >= 9 then
-			if wx.rooksoundtask == nil then
-				wx.rooksoundtask = wx:DoPeriodicTask(0.33, function(wx)
-					SpawnPrefab("ground_chunks_breaking").Transform:SetPosition(wx.Transform:GetWorldPosition())
-					--wx.SoundEmitter:PlaySound("dontstarve/creatures/rook/steam") 
-						--in original mod there's a config option to turn this sound off, feel free to just comment it out if it becomes annoying I guess
-						--seems like most people I talked to find it a bit annoying. Let's leave it out
-				end)
-			end
-			if TUNING.DSTU.WXLESSSPEEDBUMP == false then
-				wx.Physics:SetCollisionCallback(collidelikerookandstuff)
-			end
-		else
-			if TUNING.DSTU.WXLESSSPEEDBUMP == false then --I'm not sure if I need the check for these nils but better be safe than sorry I guess!
-				wx.Physics:SetCollisionCallback(nil)
-			end
-		end
-		
-	else
-		wx.accelarate_speed = TUNING.WILSON_RUN_SPEED
-		if wx.rooksoundtask ~= nil then
-			wx.rooksoundtask:Cancel()
-			wx.rooksoundtask = nil
-		end
-		if TUNING.DSTU.WXLESSSPEEDBUMP == false then
-			wx.Physics:SetCollisionCallback(nil)
-		end
-	end
-	wx.components.locomotor.runspeed = wx.accelarate_speed
+    local accelarate_limit = 12 - TUNING.WX78_MOVESPEED_CHIPBOOSTS[wx._movespeed_chips + 1]
+    --local accelarate_increase = 0.025 * (1.2 - TUNING.WX78_MOVESPEED_CHIPBOOSTS[wx._movespeed_chips + 1] * 0.08) --why this? math --I think too much math causes the game to crash sometimes wth
+    --No seriously it stopped crashing after I changed it to static value, was this really the reason? Sad cause I wanted it to be faster the more modules you have
+    if wx.components.locomotor ~= nil and not wx.components.rider:IsRiding() and wx.sg:HasStateTag("running") and wx.accelarate_speed ~= nil and wx.components.locomotor:GetTimeMoving() >= (TUNING.WX78_MOVESPEED_CHIPBOOSTS[wx._movespeed_chips + 1] - 1) then
+        if wx.accelarate_speed <= accelarate_limit then
+            wx.accelarate_speed = wx.accelarate_speed + 0.015
+        end
+        --print(wx.accelarate_speed)
+        if wx.accelarate_speed >= 9 then
+            if wx.rooksoundtask == nil then
+                wx.rooksoundtask = wx:DoPeriodicTask(0.33, function(wx)
+                    SpawnPrefab("ground_chunks_breaking").Transform:SetPosition(wx.Transform:GetWorldPosition())
+                    --wx.SoundEmitter:PlaySound("dontstarve/creatures/rook/steam")
+                    --in original mod there's a config option to turn this sound off, feel free to just comment it out if it becomes annoying I guess
+                    --seems like most people I talked to find it a bit annoying. Let's leave it out
+                end)
+            end
+            if TUNING.DSTU.WXLESSSPEEDBUMP == false then
+                wx.Physics:SetCollisionCallback(collidelikerookandstuff)
+            end
+        else
+            if TUNING.DSTU.WXLESSSPEEDBUMP == false then --I'm not sure if I need the check for these nils but better be safe than sorry I guess!
+                wx.Physics:SetCollisionCallback(nil)
+            end
+        end
+    else
+        wx.accelarate_speed = TUNING.WILSON_RUN_SPEED
+        if wx.rooksoundtask ~= nil then
+            wx.rooksoundtask:Cancel()
+            wx.rooksoundtask = nil
+        end
+        if TUNING.DSTU.WXLESSSPEEDBUMP == false then
+            wx.Physics:SetCollisionCallback(nil)
+        end
+    end
+    wx.components.locomotor.runspeed = wx.accelarate_speed
 end
 
 local function movespeed_activate(inst, wx)
-
-	if inst.accelarate == nil then
+    if inst.accelarate == nil then
         inst.accelarate = function(owner, inst)
             accelaratefn(owner, inst)
         end
     end
 
     wx._movespeed_chips = (wx._movespeed_chips or 0) + 1
-	wx.accelarate_speed = TUNING.WILSON_RUN_SPEED
-	wx:ListenForEvent("locomote", inst.accelarate, wx) --Listenning on WX just to not cause any real troubles with multiple modules
+    wx.accelarate_speed = TUNING.WILSON_RUN_SPEED
+    wx:ListenForEvent("locomote", inst.accelarate, wx) --Listenning on WX just to not cause any real troubles with multiple modules
     --wx.components.locomotor.runspeed = TUNING.WILSON_RUN_SPEED * (1 + TUNING.WX78_MOVESPEED_CHIPBOOSTS[wx._movespeed_chips + 1])
 end
 
 local function movespeed_deactivate(inst, wx)
-    	wx._movespeed_chips = math.max(0, wx._movespeed_chips - 1)
-	wx.accelarate_speed = TUNING.WILSON_RUN_SPEED
-    	wx.components.locomotor.runspeed = TUNING.WILSON_RUN_SPEED
-	if TUNING.DSTU.WXLESSSPEEDBUMP == false then
-		wx.Physics:SetCollisionCallback(nil)
-	end
-	if wx.rooksoundtask ~= nil then
-		wx.rooksoundtask:Cancel()
-		wx.rooksoundtask = nil
-	end
-	
-	wx:RemoveEventCallback("locomote", inst.accelarate, wx)
+    wx._movespeed_chips = math.max(0, wx._movespeed_chips - 1)
+    wx.accelarate_speed = TUNING.WILSON_RUN_SPEED
+    wx.components.locomotor.runspeed = TUNING.WILSON_RUN_SPEED
+    if TUNING.DSTU.WXLESSSPEEDBUMP == false then
+        wx.Physics:SetCollisionCallback(nil)
+    end
+    if wx.rooksoundtask ~= nil then
+        wx.rooksoundtask:Cancel()
+        wx.rooksoundtask = nil
+    end
+
+    wx:RemoveEventCallback("locomote", inst.accelarate, wx)
 end
 
 local MOVESPEED_MODULE_DATA =
@@ -303,11 +298,11 @@ AddCreatureScanDataDefinition("rook_nightmare", "movespeed2", 3)
 ---------------------------------------------------------------
 local EXTRA_DRYRATE = 0.1
 
-local affected_actions = 
+local affected_actions =
 {
-	ACTIONS.CHOP,
-	ACTIONS.MINE,
-	ACTIONS.HAMMER
+    ACTIONS.CHOP,
+    ACTIONS.MINE,
+    ACTIONS.HAMMER
 }
 
 local function heater_cooldown(inst)
@@ -315,41 +310,41 @@ local function heater_cooldown(inst)
 end
 
 local function ontemperaturechange(wx, data, inst)
-	local deltatemp = data.new - data.last
-	local cur = wx.components.temperature.current
-	local workmult = 1
-	local extraheat_bonus = wx._heat_chips - 1
-	
-	if deltatemp > 0 and inst._heatcdtask == nil then
-        inst._heatcdtask = inst:DoTaskInTime(0.05, heater_cooldown) 
-		wx.components.temperature:SetTemperature(cur + deltatemp*4)
-	end
-	
-	--[[if cur >= 50 then
+    local deltatemp = data.new - data.last
+    local cur = wx.components.temperature.current
+    local workmult = 1
+    local extraheat_bonus = wx._heat_chips - 1
+
+    if deltatemp > 0 and inst._heatcdtask == nil then
+        inst._heatcdtask = inst:DoTaskInTime(0.05, heater_cooldown)
+        wx.components.temperature:SetTemperature(cur + deltatemp * 4)
+    end
+
+    --[[if cur >= 50 then
 		workmult = 2.5 + extraheat_bonus
 	elseif cur >= 35 then
 		workmult = 2 + extraheat_bonus
 	elseif cur >= 20 then
 		workmult = 1.5 + extraheat_bonus
 	end]]
-	
-	workmult = (cur > 60 and 2.5+extraheat_bonus) or (cur > 20 and easing.linear(cur-20, 1, 2.5+extraheat_bonus - 1, 40)) or 1
-	
-	for _, act in ipairs(affected_actions) do
-		wx.components.efficientuser:AddMultiplier(act, workmult, wx)
-		wx.components.workmultiplier:AddMultiplier(act, workmult, wx)
-	end
+
+    workmult = (cur > 60 and 2.5 + extraheat_bonus) or (cur > 20 and easing.linear(cur - 20, 1, 2.5 + extraheat_bonus - 1, 40)) or 1
+
+    for _, act in ipairs(affected_actions) do
+        wx.components.efficientuser:AddMultiplier(act, workmult, wx)
+        wx.components.workmultiplier:AddMultiplier(act, workmult, wx)
+    end
 end
 
 local function onworkingwarmup(wx, data, inst, isattack)
-	local cur = wx.components.temperature.current
-	local tempmult = (cur >= 60 and 0.25) or (cur >= 50 and 0.50) or 1
-	
-	if not isattack then
-		wx.components.temperature:SetTemperature(cur + 0.3*tempmult)
-	elseif isattack == true then
-		wx.components.temperature:SetTemperature(cur + 0.1*tempmult)
-	end
+    local cur = wx.components.temperature.current
+    local tempmult = (cur >= 60 and 0.25) or (cur >= 50 and 0.50) or 1
+
+    if not isattack then
+        wx.components.temperature:SetTemperature(cur + 0.3 * tempmult)
+    elseif isattack == true then
+        wx.components.temperature:SetTemperature(cur + 0.1 * tempmult)
+    end
 end
 
 local function heat_activate(inst, wx)
@@ -358,35 +353,35 @@ local function heat_activate(inst, wx)
     --wx.components.temperature.maxtemp = wx.components.temperature.maxtemp + TUNING.WX78_MINTEMPCHANGEPERMODULE
 
 
-	if wx._ontempmodulechange == nil then
+    if wx._ontempmodulechange == nil then
         wx._ontempmodulechange = function(owner, data)
             ontemperaturechange(owner, data, inst)
         end
     end
 
-	if wx._onworktemp == nil then
+    if wx._onworktemp == nil then
         wx._onworktemp = function(owner, data)
             onworkingwarmup(owner, data, inst)
         end
     end
-	
-	if wx._onattacktemp == nil then
-		wx._onattacktemp = function(owner, data)
-			onworkingwarmup(owner, data, inst, true)
-		end
-	end
 
-	wx._heat_chips = (wx._heat_chips or 0) + 1
+    if wx._onattacktemp == nil then
+        wx._onattacktemp = function(owner, data)
+            onworkingwarmup(owner, data, inst, true)
+        end
+    end
 
-	inst:ListenForEvent("temperaturedelta", wx._ontempmodulechange, wx)
-	inst:ListenForEvent("working", wx._onworktemp, wx)
-	inst:ListenForEvent("onattackother", wx._onattacktemp, wx)
+    wx._heat_chips = (wx._heat_chips or 0) + 1
 
-	
+    inst:ListenForEvent("temperaturedelta", wx._ontempmodulechange, wx)
+    inst:ListenForEvent("working", wx._onworktemp, wx)
+    inst:ListenForEvent("onattackother", wx._onattacktemp, wx)
+
+
     wx.components.moisture.maxDryingRate = wx.components.moisture.maxDryingRate + EXTRA_DRYRATE
     wx.components.moisture.baseDryingRate = wx.components.moisture.baseDryingRate + EXTRA_DRYRATE
-	
-	wx.components.temperature.inherentinsulation = wx.components.temperature.inherentinsulation + TUNING.INSULATION_MED
+
+    wx.components.temperature.inherentinsulation = wx.components.temperature.inherentinsulation + TUNING.INSULATION_MED
 
     if wx.AddTemperatureModuleLeaning ~= nil then
         wx:AddTemperatureModuleLeaning(1)
@@ -395,30 +390,30 @@ end
 
 local function heat_deactivate(inst, wx)
     --wx.components.temperature.mintemp = wx.components.temperature.mintemp - TUNING.WX78_MINTEMPCHANGEPERMODULE
-   -- wx.components.temperature.maxtemp = wx.components.temperature.maxtemp - TUNING.WX78_MINTEMPCHANGEPERMODULE
-	
-	--[[if wx._heat_chips == 1 then
+    -- wx.components.temperature.maxtemp = wx.components.temperature.maxtemp - TUNING.WX78_MINTEMPCHANGEPERMODULE
+
+    --[[if wx._heat_chips == 1 then
 		wx.components.temperature:RemoveModifier("1_heat_module_warm")
 	elseif wx._heat_chips == 2 then
 		wx.components.temperature:RemoveModifier("2_heat_module_warm")
 		wx.components.temperature:SetModifier("1_heat_module_warm", 60)
 	end]]
-	
-	wx._heat_chips = math.max(0, wx._heat_chips - 1)
-	
-	for _, act in ipairs(affected_actions) do
-		wx.components.efficientuser:RemoveMultiplier(act, wx)
-		wx.components.workmultiplier:RemoveMultiplier(act, wx)
-	end
-	
-	inst:RemoveEventCallback("temperaturedelta", wx._ontempmodulechange, wx)
-	inst:RemoveEventCallback("working", wx._onworktemp, wx)
-	inst:RemoveEventCallback("onattackother", wx._onattacktemp, wx)
+
+    wx._heat_chips = math.max(0, wx._heat_chips - 1)
+
+    for _, act in ipairs(affected_actions) do
+        wx.components.efficientuser:RemoveMultiplier(act, wx)
+        wx.components.workmultiplier:RemoveMultiplier(act, wx)
+    end
+
+    inst:RemoveEventCallback("temperaturedelta", wx._ontempmodulechange, wx)
+    inst:RemoveEventCallback("working", wx._onworktemp, wx)
+    inst:RemoveEventCallback("onattackother", wx._onattacktemp, wx)
 
     wx.components.moisture.maxDryingRate = wx.components.moisture.maxDryingRate - EXTRA_DRYRATE
     wx.components.moisture.baseDryingRate = wx.components.moisture.baseDryingRate - EXTRA_DRYRATE
-	
-	wx.components.temperature.inherentinsulation = wx.components.temperature.inherentinsulation - TUNING.INSULATION_MED
+
+    wx.components.temperature.inherentinsulation = wx.components.temperature.inherentinsulation - TUNING.INSULATION_MED
 
     if wx.AddTemperatureModuleLeaning ~= nil then
         wx:AddTemperatureModuleLeaning(-1)
@@ -486,8 +481,8 @@ local function cold_activate(inst, wx)
     -- A lower maxtemp means it's harder to overheat.
     --wx.components.temperature.maxtemp = wx.components.temperature.maxtemp - TUNING.WX78_MINTEMPCHANGEPERMODULE
     --wx.components.temperature.mintemp = wx.components.temperature.mintemp - TUNING.WX78_MINTEMPCHANGEPERMODULE
-	
-	--[[if wx._oncoldstop == nil then
+
+    --[[if wx._oncoldstop == nil then
         wx._oncoldstop = function(owner, data)
             StopAddFreeze(owner, data, inst)
         end
@@ -498,37 +493,37 @@ local function cold_activate(inst, wx)
             MoveStopFreeze(owner, data, inst)
         end
     end]]
-	
-	if inst.stoppedfreezetask == nil then
-		inst.stoppedfreezetask = wx:DoPeriodicTask(0.5, function(wx)
-			if wx.sg:HasStateTag("idle") then 
-				--print("hi :3 :3 :3 :3 ") --I am going insane
-				wx.components.freezable:AddColdness(0.3, 5)
-				wx.components.temperature:DoDelta(-1.25)
-			end
-		end)
-	end
-	
-	if inst.icemakertask == nil then
-		inst.icemakertask = wx:DoPeriodicTask(25, function(wx)
-			local x, y, z = wx.Transform:GetWorldPosition()
-			--for i = 1, TUNING.WX78_COLD_ICECOUNT do
-				local ice = SpawnPrefab("ice")
-				ice.Transform:SetPosition(x, y, z)
-				Launch(ice, wx, 1.5)
-			--end
-		end)
-	end
-	
-	--wx:ListenForEvent("onreachdestination", wx._oncoldstop, wx)
-	--inst:ListenForEvent("locomote", wx._oncoldmove, wx)
-	
+
+    if inst.stoppedfreezetask == nil then
+        inst.stoppedfreezetask = wx:DoPeriodicTask(0.5, function(wx)
+            if wx.sg:HasStateTag("idle") then
+                --print("hi :3 :3 :3 :3 ") --I am going insane
+                wx.components.freezable:AddColdness(0.3, 5)
+                wx.components.temperature:DoDelta(-1.25)
+            end
+        end)
+    end
+
+    if inst.icemakertask == nil then
+        inst.icemakertask = wx:DoPeriodicTask(25, function(wx)
+            local x, y, z = wx.Transform:GetWorldPosition()
+            --for i = 1, TUNING.WX78_COLD_ICECOUNT do
+            local ice = SpawnPrefab("ice")
+            ice.Transform:SetPosition(x, y, z)
+            Launch(ice, wx, 1.5)
+            --end
+        end)
+    end
+
+    --wx:ListenForEvent("onreachdestination", wx._oncoldstop, wx)
+    --inst:ListenForEvent("locomote", wx._oncoldmove, wx)
+
     if wx.AddTemperatureModuleLeaning ~= nil then
         wx:AddTemperatureModuleLeaning(-1)
     end
-	
-	--local modvalue = 40 * wx._temperature_modulelean
-	--wx.components.temperature:SetModifier("wx78module_cold", modvalue)
+
+    --local modvalue = 40 * wx._temperature_modulelean
+    --wx.components.temperature:SetModifier("wx78module_cold", modvalue)
 end
 
 local function cold_deactivate(inst, wx)
@@ -538,21 +533,21 @@ local function cold_deactivate(inst, wx)
     if wx.AddTemperatureModuleLeaning ~= nil then
         wx:AddTemperatureModuleLeaning(1)
     end
-	
-	--local modvalue = 45 * wx._temperature_modulelean
-	
-	if inst.stoppedfreezetask ~= nil then
-		inst.stoppedfreezetask:Cancel()
-		inst.stoppedfreezetask = nil
-	end
-	
-	if inst.icemakertask ~= nil then
-		inst.icemakertask:Cancel()
-		inst.icemakertask = nil
-	end
-	
-	--inst:RemoveEventCallback("locomote", wx._oncoldmove, wx)
-	--[[wx.components.temperature:RemoveModifier("wx78module_cold")
+
+    --local modvalue = 45 * wx._temperature_modulelean
+
+    if inst.stoppedfreezetask ~= nil then
+        inst.stoppedfreezetask:Cancel()
+        inst.stoppedfreezetask = nil
+    end
+
+    if inst.icemakertask ~= nil then
+        inst.icemakertask:Cancel()
+        inst.icemakertask = nil
+    end
+
+    --inst:RemoveEventCallback("locomote", wx._oncoldmove, wx)
+    --[[wx.components.temperature:RemoveModifier("wx78module_cold")
 	if modvalue ~= 0 then
 		wx.components.temperature:SetModifier("wx78module_cold", modvalue)
 	end]]
@@ -581,13 +576,12 @@ local function taser_onblockedorattacked(wx, data, inst)
         inst._cdtask = inst:DoTaskInTime(0.3, taser_cooldown)
 
         if data.attacker.components.combat ~= nil
-                and (data.attacker.components.health ~= nil and not data.attacker.components.health:IsDead())
-                and (data.attacker.components.inventory == nil or not data.attacker.components.inventory:IsInsulated())
-                and (data.weapon == nil or 
-                        (data.weapon.components.projectile == nil
-                        and (data.weapon.components.weapon == nil or data.weapon.components.weapon.projectile == nil))
-                ) then
-
+            and (data.attacker.components.health ~= nil and not data.attacker.components.health:IsDead())
+            and (data.attacker.components.inventory == nil or not data.attacker.components.inventory:IsInsulated())
+            and (data.weapon == nil or
+                (data.weapon.components.projectile == nil
+                    and (data.weapon.components.weapon == nil or data.weapon.components.weapon.projectile == nil))
+            ) then
             SpawnPrefab("electrichitsparks"):AlignToTarget(data.attacker, wx, true)
 
             local damage_mult = 1
@@ -602,48 +596,48 @@ local function taser_onblockedorattacked(wx, data, inst)
             end
 
             data.attacker.components.combat:GetAttacked(wx, damage_mult * TUNING.WX78_TASERDAMAGE, nil, "electric")
-			
-			--local function tasedamaged(data)
-				
-			--end
-			
-			local tased_duration = wx._taser_chips/1.5
-			
-			if data.attacker.sg ~= nil and not data.attacker.sg.statemem.devoured and not (data.attacker:HasTag("Epic") or data.attacker:HasTag("shadowthrall") or data.attacker:HasTag("shadow")) then
-				data.attacker.sg:GoToState("hit")
-				if data.attacker.tased_stunlocktask == nil then
-				data.attacker.tased_stunlocktask = data.attacker:DoPeriodicTask(0.15, function()
-					if data.attacker ~= nil and not data.attacker.components.health:IsDead() then
-						--print("WORKS TOTALLY")
-						if data.attacker:HasTag("spider") then
-							data.attacker.sg:GoToState("hit_stunlock")
-						else
-							data.attacker.sg:GoToState("hit")
-							if data.attacker.components.combat.hurtsound ~= nil then
-								data.attacker.SoundEmitter:PlaySound(data.attacker.components.combat.hurtsound)
-							end
-						end
-						SpawnPrefab("electrichitsparks"):AlignToTarget(data.attacker, wx, true)
-					end
-				end)
-				end
-				data.attacker:DoTaskInTime(tased_duration, function()
-					if data.attacker.tased_stunlocktask ~= nil then
-						data.attacker.tased_stunlocktask:Cancel()
-						data.attacker.tased_stunlocktask = nil
-					end
-				end)
-			end
+
+            --local function tasedamaged(data)
+
+            --end
+
+            local tased_duration = wx._taser_chips / 1.5
+
+            if data.attacker.sg ~= nil and not data.attacker.sg.statemem.devoured and not (data.attacker:HasTag("Epic") or data.attacker:HasTag("shadowthrall") or data.attacker:HasTag("shadow")) then
+                data.attacker.sg:GoToState("hit")
+                if data.attacker.tased_stunlocktask == nil then
+                    data.attacker.tased_stunlocktask = data.attacker:DoPeriodicTask(0.15, function()
+                        if data.attacker ~= nil and not data.attacker.components.health:IsDead() then
+                            --print("WORKS TOTALLY")
+                            if data.attacker:HasTag("spider") then
+                                data.attacker.sg:GoToState("hit_stunlock")
+                            else
+                                data.attacker.sg:GoToState("hit")
+                                if data.attacker.components.combat.hurtsound ~= nil then
+                                    data.attacker.SoundEmitter:PlaySound(data.attacker.components.combat.hurtsound)
+                                end
+                            end
+                            SpawnPrefab("electrichitsparks"):AlignToTarget(data.attacker, wx, true)
+                        end
+                    end)
+                end
+                data.attacker:DoTaskInTime(tased_duration, function()
+                    if data.attacker.tased_stunlocktask ~= nil then
+                        data.attacker.tased_stunlocktask:Cancel()
+                        data.attacker.tased_stunlocktask = nil
+                    end
+                end)
+            end
         end
     end
 end
 
 local function taser_onattackother(wx, data, inst)
-	wx._taserchip_attackcounter = wx._taserchip_attackcounter + 1
-	if wx._taserchip_attackcounter >= 12 then
-		wx._taserchip_attackcounter = 0
-		wx.components.upgrademoduleowner:AddCharge(1)
-	end
+    wx._taserchip_attackcounter = wx._taserchip_attackcounter + 1
+    if wx._taserchip_attackcounter >= 12 then
+        wx._taserchip_attackcounter = 0
+        wx.components.upgrademoduleowner:AddCharge(1)
+    end
 end
 
 local function taser_activate(inst, wx)
@@ -652,20 +646,20 @@ local function taser_activate(inst, wx)
             taser_onblockedorattacked(owner, data, inst)
         end
     end
-	
-	if inst._onattackelec == nil then
-		inst._onattackelec = function(owner, data)
-			taser_onattackother(owner, data, inst)
-		end
-	end
-	
-	wx._taserchip_attackcounter = 0
-	
-	wx._taser_chips = (wx._taser_chips or 0) + 1
-	
+
+    if inst._onattackelec == nil then
+        inst._onattackelec = function(owner, data)
+            taser_onattackother(owner, data, inst)
+        end
+    end
+
+    wx._taserchip_attackcounter = 0
+
+    wx._taser_chips = (wx._taser_chips or 0) + 1
+
     inst:ListenForEvent("blocked", inst._onblocked, wx)
     inst:ListenForEvent("attacked", inst._onblocked, wx)
-	inst:ListenForEvent("onattackother", inst._onattackelec, wx)
+    inst:ListenForEvent("onattackother", inst._onattackelec, wx)
 
     if wx.components.inventory ~= nil then
         wx.components.inventory.isexternallyinsulated:SetModifier(inst, true)
@@ -673,11 +667,11 @@ local function taser_activate(inst, wx)
 end
 
 local function taser_deactivate(inst, wx)
-	wx._taser_chips = math.max(0, wx._taser_chips - 1)
+    wx._taser_chips = math.max(0, wx._taser_chips - 1)
 
     inst:RemoveEventCallback("blocked", inst._onblocked, wx)
     inst:RemoveEventCallback("attacked", inst._onblocked, wx)
-	inst:RemoveEventCallback("onattackother", inst._onattackelec, wx)
+    inst:RemoveEventCallback("onattackother", inst._onattackelec, wx)
 
     if wx.components.inventory ~= nil then
         wx.components.inventory.isexternallyinsulated:RemoveModifier(inst)
@@ -703,7 +697,7 @@ local function light_activate(inst, wx)
     wx._light_modules = (wx._light_modules or 0) + 1
 
     wx.Light:SetRadius(TUNING.WX78_LIGHT_BASERADIUS + (wx._light_modules - 1) * TUNING.WX78_LIGHT_EXTRARADIUS)
-    
+
     -- If we had 0 before, set up the light properties.
     if wx._light_modules == 1 then
         wx.Light:SetIntensity(0.90)
@@ -758,10 +752,10 @@ local function maxhunger_activate(inst, wx, isloading)
         if not isloading then
             wx.components.hunger:SetPercent(current_hunger_percent, false)
         end
-		
-		wx._hunger_chips = (wx._hunger_chips or 0) + 1
-		
-		--[[if wx.components.eater.custom_stats_mod_fn == nil then
+
+        wx._hunger_chips = (wx._hunger_chips or 0) + 1
+
+        --[[if wx.components.eater.custom_stats_mod_fn == nil then
 			wx.components.eater.custom_stats_mod_fn = stats_negate
 		end]]
 
@@ -776,8 +770,8 @@ local function maxhunger_deactivate(inst, wx)
 
         wx.components.hunger:SetMax(wx.components.hunger.max - TUNING.WX78_MAXHUNGER_BOOST)
         wx.components.hunger:SetPercent(current_hunger_percent, false)
-		
-		wx._hunger_chips = math.max(0, wx._hunger_chips - 1)
+
+        wx._hunger_chips = math.max(0, wx._hunger_chips - 1)
 
         wx.components.hunger.burnratemodifiers:RemoveModifier(inst)
     end
@@ -805,8 +799,8 @@ local function maxhunger1_activate(inst, wx, isloading)
         if not isloading then
             wx.components.hunger:SetPercent(current_hunger_percent, false)
         end
-		
-		wx.components.hunger.burnratemodifiers:SetModifier(inst, 0.95)
+
+        wx.components.hunger.burnratemodifiers:SetModifier(inst, 0.95)
     end
 end
 
@@ -816,8 +810,8 @@ local function maxhunger1_deactivate(inst, wx)
 
         wx.components.hunger:SetMax(wx.components.hunger.max - TUNING.WX78_MAXHUNGER1_BOOST)
         wx.components.hunger:SetPercent(current_hunger_percent, false)
-		
-		wx.components.hunger.burnratemodifiers:RemoveModifier(inst)
+
+        wx.components.hunger.burnratemodifiers:RemoveModifier(inst)
     end
 end
 
@@ -842,7 +836,7 @@ local function music_sanityfalloff_fn(inst, observer, distsq)
     return 1
 end
 
-local MUSIC_TENDINGTAGS_MUST = {"farm_plant"}
+local MUSIC_TENDINGTAGS_MUST = { "farm_plant" }
 local function music_update_fn(inst)
     local x, y, z = inst.Transform:GetWorldPosition()
     local ents = TheSim:FindEntities(x, y, z, TUNING.WX78_MUSIC_TENDRANGE, MUSIC_TENDINGTAGS_MUST)
@@ -966,13 +960,13 @@ AddCreatureScanDataDefinition("beequeen", "bee", 10)
 local function maxhealth2_activate(inst, wx, isloading)
     local maxhealth2_boost = TUNING.WX78_MAXHEALTH_BOOST * TUNING.WX78_MAXHEALTH2_MULT
     maxhealth_change(inst, wx, maxhealth2_boost, isloading)
-	wx.components.health:SetAbsorptionAmount(wx.components.health.absorb + 0.2)
+    wx.components.health:SetAbsorptionAmount(wx.components.health.absorb + 0.2)
 end
 
 local function maxhealth2_deactivate(inst, wx)
     local maxhealth2_boost = TUNING.WX78_MAXHEALTH_BOOST * TUNING.WX78_MAXHEALTH2_MULT
     maxhealth_change(inst, wx, -maxhealth2_boost)
-	wx.components.health:SetAbsorptionAmount(wx.components.health.absorb - 0.2)
+    wx.components.health:SetAbsorptionAmount(wx.components.health.absorb - 0.2)
 end
 
 local MAXHEALTH2_MODULE_DATA =
