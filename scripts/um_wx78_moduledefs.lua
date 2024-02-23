@@ -336,8 +336,8 @@ local function ontemperaturechange(wx, data, inst)
 	workmult = (cur > 60 and 2.5+extraheat_bonus) or (cur > 20 and easing.linear(cur-20, 1, 2.5+extraheat_bonus - 1, 40)) or 1
 	
 	for _, act in ipairs(affected_actions) do
-		wx.components.efficientuser:AddMultiplier(act, workmult, inst)
-		wx.components.workmultiplier:AddMultiplier(act, workmult, inst)
+		wx.components.efficientuser:AddMultiplier(act, workmult, wx)
+		wx.components.workmultiplier:AddMultiplier(act, workmult, wx)
 	end
 end
 
@@ -407,8 +407,8 @@ local function heat_deactivate(inst, wx)
 	wx._heat_chips = math.max(0, wx._heat_chips - 1)
 	
 	for _, act in ipairs(affected_actions) do
-		wx.components.efficientuser:RemoveMultiplier(act, inst)
-		wx.components.workmultiplier:RemoveMultiplier(act, inst)
+		wx.components.efficientuser:RemoveMultiplier(act, wx)
+		wx.components.workmultiplier:RemoveMultiplier(act, wx)
 	end
 	
 	inst:RemoveEventCallback("temperaturedelta", wx._ontempmodulechange, wx)
