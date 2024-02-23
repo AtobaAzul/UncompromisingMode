@@ -225,8 +225,6 @@ configuration_options = {
         true),
     BinaryConfig("bernie_buffs", "Willow - Bernie Buffs",
         "Holding Bernie prevents shadows from aggroing.", true),		
-    BinaryConfig("willow", "Willow - Lighter Buffs",
-        "Willow's Lighter now lasts forever when she holds it.", true),
     --BinaryConfig("willow insulation", "Willow's Experimental Insulation",
         --"Willow's insulation is tweaked to be 120 on Summer and -120 on Winter.", false),
     BinaryConfig("wendy", "Wendy", "Abigail is nerfed to not increase Wendy's maximum damage above average.", true),

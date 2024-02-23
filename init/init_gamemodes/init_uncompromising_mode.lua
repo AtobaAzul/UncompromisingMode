@@ -135,9 +135,7 @@ end
 
 modimport("init/init_durability")
 
-if GetModConfigData("willow") then
-	modimport("init/init_character_changes/willow")
-end
+modimport("init/init_character_changes/willow")
 
 modimport("init/init_character_changes/willow_bernie")
 
