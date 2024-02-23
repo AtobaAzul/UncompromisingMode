@@ -2,20 +2,17 @@
 --Pigs and bunnies defend their turf if their home is destroyed
 -----------------------------------------------------------------
 
-local function TalkShit(inst, taunts)
-    if taunts ~= nil then
-        local tauntnr = GLOBAL.math.floor(GLOBAL.GetRandomMinMax(1, GLOBAL.GetTableSize(taunts)))
-        if inst and inst.components.talker then
-            inst.components.talker:Say(STRINGS.UM_HOUSETAUNTS[string.upper(inst.prefab)][math.random(#STRINGS.UM_HOUSETAUNTS[string.upper(inst.prefab)])])
-        end
-    end
+local function TalkShit(inst)
+    inst.components.talker:Say(STRINGS.UM_HOUSETAUNTS[string.upper(inst.prefab)][math.random(#STRINGS.UM_HOUSETAUNTS[string.upper(inst.prefab)])])
 end
 
 local function RetaliateAttacker(inst, attacker, taunts)
     if inst and attacker and inst.components.combat and not inst:HasTag("merm") then
         inst.components.combat:SuggestTarget(attacker)
     end
-    if taunts ~= nil then TalkShit(inst, taunts) end
+    if inst.components.talker then
+        TalkShit(inst)
+    end
 end
 
 --Get the pig to attack the perpetrator of the crime against pig-kind
@@ -40,9 +37,9 @@ local function onworked_pighouse(inst, worker)
     end
 
     if inst.components.spawner ~= nil and inst.components.spawner.child then
-        RetaliateAttacker(inst.components.spawner.child, worker, pigtaunts)
+        RetaliateAttacker(inst.components.spawner.child, worker)
         local x, y, z = inst.Transform:GetWorldPosition()
-        local guards = TheSim:FindEntities(x, y, z, 40, { "guard" }, {"merm"})
+        local guards = TheSim:FindEntities(x, y, z, 40, { "guard" }, { "merm" })
         for i, v in ipairs(guards) do
             if v.components.health ~= nil and v.components.combat ~= nil and not v.components.health:IsDead() then
                 v.components.combat:SuggestTarget(worker)
@@ -72,7 +69,7 @@ if GetModConfigData("harder_pigs") then
         end
 
         if inst.components.spawner ~= nil and inst.components.spawner.child then
-            RetaliateAttacker(inst.components.spawner.child, worker, bunnytaunts)
+            RetaliateAttacker(inst.components.spawner.child, worker)
             inst.components.spawner:ReleaseChild()
         end
     end
@@ -221,14 +218,14 @@ local function GuardRetargetFn(inst)
             end
         end
     end
-	
+
     local wall = GLOBAL.FindEntity(defenseTarget, defendDist, AliveWall, { "wall" }, { "INLIMBO" })
 
-	if wall ~= nil then
-		return wall
-	end
-			
-    local oneof_tags = {"monster"}
+    if wall ~= nil then
+        return wall
+    end
+
+    local oneof_tags = { "monster" }
     if not inst:HasTag("merm") then
         table.insert(oneof_tags, "merm")
     end
