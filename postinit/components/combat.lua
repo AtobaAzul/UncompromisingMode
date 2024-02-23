@@ -159,6 +159,12 @@ env.AddComponentPostInit("combat", function(self)
             -- Take extra damage
             damage = damage * self.inst.AmpDamageTakenModifier
             return _GetAttacked(self, attacker, damage, weapon_check, stimuli)
+	elseif self.inst ~= nil and self.inst.components.upgrademoduleowner and damage and (self.inst.components.rider ~= nil and not self.inst.components.rider:IsRiding() or self.inst.components.rider == nil) and TUNING.DSTU.WXLESS then
+	    -- Hardy circuit flat damage reduction
+	    local hpmodulereduct = self.inst.components.upgrademoduleowner:GetModuleTypeCount('maxhealth') * 2.5 + self.inst.components.upgrademoduleowner:GetModuleTypeCount('maxhealth2') * 6
+	    damage = damage - hpmodulereduct
+	    if damage < 2 then damage = 2 end
+	    return _GetAttacked(self, attacker, damage, weapon_check, stimuli)
         elseif self.inst ~= nil and attacker ~= nil and attacker:HasTag("wathom") and TUNING.DSTU.WATHOM_MAX_DAMAGE_CAP then
             if damage > 600 then damage = 600 end
             return _GetAttacked(self, attacker, damage, weapon_check, stimuli, ...)
