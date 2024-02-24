@@ -103,14 +103,11 @@ env.AddComponentPostInit("health", function(self)
     --(self:HasTag("wathom") and self:HasTag("amped")
     function self:DoDelta(amount, overtime, cause, ignore_invincible, afflicter, ignore_absorb, ...)
         if self.inst.components.upgrademoduleowner ~= nil and TUNING.DSTU.WXLESS then --btw I think this change is not that useful since you pretty much can achieve the same thing by unequipping module and healing
-                                                                                         --but I guess this way is another choice of being more convenient but less effective?
-            local hpmodulemult = self.inst.components.upgrademoduleowner:GetModuleTypeCount('maxhealth') * 0.05 + self.inst.components.upgrademoduleowner:GetModuleTypeCount('maxhealth2') * 0.15
-
+            --but I guess this way is another choice of being more convenient but less effective?
             if amount > 0 then
-                amount = amount * (self.maxhealth/100 + hpmodulemult)
+                amount = amount * (self.maxhealth / 75)
             end
         end
-
 
         if TUNING.DSTU.SHADOW_WATHOM and self.inst:HasTag("wathom") then
             if MayKill(self, amount) and cause == "shadowvortex" and TUNING.DSTU.COMPROMISING_SHADOWVORTEX and not self.inst.sg:HasStateTag("blackpuddle_death") then
@@ -134,7 +131,7 @@ env.AddComponentPostInit("health", function(self)
                     self.inst:ToggleUndeathState(self.inst, true)
                     return _DoDelta(self, -self.currenthealth + 1, false, cause, true, afflicter, ignore_absorb, ...) --needed to do this for ignore_invincible...
                 end
-            elseif not self.inst:HasTag("deathamp") then                                               -- No positive healing if you're on your last breath
+            elseif not self.inst:HasTag("deathamp") then                                                              -- No positive healing if you're on your last breath
                 return _DoDelta(self, amount, overtime, cause, ignore_invincible, afflicter, ignore_absorb, ...)
             end
         elseif MayKill(self, amount) and HasLLA(self) then
