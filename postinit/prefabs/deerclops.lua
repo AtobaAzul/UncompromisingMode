@@ -115,7 +115,7 @@ local function MakeEnrageable(inst)
 end
 
 local function MakeStrong(inst)
-    inst.components.health:SetMaxHealth((TUNING.DEERCLOPS_HEALTH * 1.125) * TUNING.DSTU.DEERCLOPS_HEALTH)
+    inst.components.health:SetMaxHealth((TUNING.DEERCLOPS_HEALTH * 1.125))
     inst.upgrade = "strength_mutation"
     inst:DoTaskInTime(0.1, function(inst) inst:AddComponent("timer") end)
     if inst.components.healthtrigger ~= nil then
@@ -124,7 +124,7 @@ local function MakeStrong(inst)
 end
 
 local function MakeIcey(inst)
-    inst.components.health:SetMaxHealth((TUNING.DEERCLOPS_HEALTH * 0.875) * TUNING.DSTU.DEERCLOPS_HEALTH)
+    inst.components.health:SetMaxHealth((TUNING.DEERCLOPS_HEALTH * 0.875))
     inst.upgrade = "ice_mutation"
     if inst.components.freezable ~= nil then
         inst:RemoveComponent("freezable")
