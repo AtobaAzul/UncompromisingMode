@@ -38,7 +38,9 @@ for k, v in pairs(bosses) do
             end
 
             if inst.components.health ~= nil then
-                inst.components.health:SetMaxHealth(inst.components.health.maxhealth * GetModConfigData(v .. "_health"))
+                inst:DoTaskInTime(0, function(inst)
+                    inst.components.health:SetMaxHealth(inst.components.health.maxhealth * GetModConfigData(v .. "_health"))
+                end)
             end
         end)
 
@@ -48,7 +50,9 @@ for k, v in pairs(bosses) do
             end
 
             if inst.components.health ~= nil then
-                inst.components.health:SetMaxHealth(inst.components.health.maxhealth * GetModConfigData(v .. "_health"))
+                inst:DoTaskInTime(0, function(inst)
+                    inst.components.health:SetMaxHealth(inst.components.health.maxhealth * GetModConfigData(v .. "_health"))
+                end)
             end
         end)
 
@@ -58,7 +62,9 @@ for k, v in pairs(bosses) do
             end
 
             if inst.components.health ~= nil then
-                inst.components.health:SetMaxHealth(inst.components.health.maxhealth * GetModConfigData(v .. "_health"))
+                inst:DoTaskInTime(0, function(inst)
+                    inst.components.health:SetMaxHealth(inst.components.health.maxhealth * GetModConfigData(v .. "_health"))
+                end)
             end
         end)
     elseif v == "twinofterror" then
@@ -68,7 +74,9 @@ for k, v in pairs(bosses) do
             end
 
             if inst.components.health ~= nil then
-                inst.components.health:SetMaxHealth(inst.components.health.maxhealth * GetModConfigData(v .. "_health"))
+                inst:DoTaskInTime(0, function(inst)
+                    inst.components.health:SetMaxHealth(inst.components.health.maxhealth * GetModConfigData(v .. "_health"))
+                end)
             end
         end)
 
@@ -78,7 +86,9 @@ for k, v in pairs(bosses) do
             end
 
             if inst.components.health ~= nil then
-                inst.components.health:SetMaxHealth(inst.components.health.maxhealth * GetModConfigData(v .. "_health"))
+                inst:DoTaskInTime(0, function(inst)
+                    inst.components.health:SetMaxHealth(inst.components.health.maxhealth * GetModConfigData(v .. "_health"))
+                end)
             end
         end)
     elseif v == "leif" then
@@ -88,7 +98,9 @@ for k, v in pairs(bosses) do
             end
 
             if inst.components.health ~= nil then
-                inst.components.health:SetMaxHealth(inst.components.health.maxhealth * GetModConfigData(v .. "_health"))
+                inst:DoTaskInTime(0, function(inst)
+                    inst.components.health:SetMaxHealth(inst.components.health.maxhealth * GetModConfigData(v .. "_health"))
+                end)
             end
         end)
 
@@ -98,7 +110,9 @@ for k, v in pairs(bosses) do
             end
 
             if inst.components.health ~= nil then
-                inst.components.health:SetMaxHealth(inst.components.health.maxhealth * GetModConfigData(v .. "_health"))
+                inst:DoTaskInTime(0, function(inst)
+                    inst.components.health:SetMaxHealth(inst.components.health.maxhealth * GetModConfigData(v .. "_health"))
+                end)
             end
         end)
     else
@@ -106,9 +120,10 @@ for k, v in pairs(bosses) do
             if not GLOBAL.TheWorld.ismastersim then
                 return
             end
-
             if inst.components.health ~= nil then
-                inst.components.health:SetMaxHealth(inst.components.health.maxhealth * GetModConfigData(v .. "_health"))
+                inst:DoTaskInTime(0, function(inst)
+                    inst.components.health:SetMaxHealth(inst.components.health.maxhealth * GetModConfigData(v .. "_health"))
+                end)
             end
         end)
     end
@@ -120,7 +135,9 @@ AddPrefabPostInitAny(function(inst)
     end
     if not table.contains(bosses, inst.prefab) then
         if inst.components.health ~= nil and inst:HasTag("epic") then
-            inst.components.health:SetMaxHealth(inst.components.health.maxhealth * GetModConfigData("boss_health"))
+            inst:DoTaskInTime(0, function(inst)
+                inst.components.health:SetMaxHealth(inst.components.health.maxhealth * GetModConfigData(v .. "_health"))
+            end)
         end
     end
 end)
