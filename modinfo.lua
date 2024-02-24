@@ -1218,19 +1218,6 @@ configuration_options = {
         default = 1
     },
     {
-        name = "crabking_health",
-        label = "Crab King's Health",
-        hover = "Tweak Crab King's (Base) Health to your liking!",
-        options = {
-            { description = "Lowest (/4)",   data = 0.25 },
-            { description = "Lowered (/2)",  data = 0.5 },
-            { description = "Default",       data = 1 },
-            { description = "Higher (x1.5)", data = 1.5 },
-            { description = "Highest (x2)",  data = 2 },
-            { description = "Uncomp (x3)",   data = 3 } },
-        default = 1
-    },
-    {
         name = "mutated_deerclops_health",
         label = "Crystal Deerclops's Health",
         hover = "Tweak Crystal Deerclops Health to your liking!",
