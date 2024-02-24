@@ -43,10 +43,9 @@ if TUNING.DSTU.IMPASSBLES then
 end
 
 local function TeleportOverrideFn(inst)
-
     local pt = inst:GetPosition()
     local offset = FindWalkableOffset(pt, math.random() * 2 * PI, 4, 8, true, false) or
-                    FindWalkableOffset(pt, math.random() * 2 * PI, 8, 8, true, false)
+        FindWalkableOffset(pt, math.random() * 2 * PI, 8, 8, true, false)
     if offset ~= nil then
         pt = pt + offset
     end
@@ -57,8 +56,10 @@ end
 env.AddPrefabPostInitAny(function(inst)
     if not TheWorld.ismastersim then return end
     if inst ~= nil and inst:IsValid() and inst:HasTag("epic") then
-        inst:AddComponent("teleportedoverride")
-        inst.components.teleportedoverride:SetDestPositionFn(TeleportOverrideFn)
+        if inst.components.teleportedoverride == nil then
+            inst:AddComponent("teleportedoverride")
+            inst.components.teleportedoverride:SetDestPositionFn(TeleportOverrideFn)
+        end
     end
 end)
 
