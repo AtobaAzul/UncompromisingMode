@@ -493,7 +493,7 @@ local function fn()
 end
 
 local function near_burst(inst, target)
-	if target ~= nil and target.components.sanity ~= nil and target.components.sanity:GetPercent() <= .7 then
+	if target ~= nil and target.components.sanity ~= nil and target.components.sanity:GetPercent() <= .5 then
 		if target.components.sanity ~= nil and target.components.sanity:IsSane() then
 			target.components.sanity:DoDelta(-10)
 		end
