@@ -868,19 +868,6 @@ configuration_options = {
 
     Header("Health Adjustment"),
     {
-        name = "boss_health",
-        label = "Other Boss's Health",
-        hover = "Tweak any other bosses's Health to your liking! Mainly for modded bosses.",
-        options = {
-            { description = "Lowest (/4)",   data = 0.25 },
-            { description = "Lowered (/2)",  data = 0.5 },
-            { description = "Default",       data = 1 },
-            { description = "Higher (x1.5)", data = 1.5 },
-            { description = "Highest (x2)",  data = 2 },
-            { description = "Uncomp (x3)",   data = 3 } },
-        default = 1
-    },
-    {
         name = "stalker_atrium_health",
         label = "Ancient Fuelweaver's Health",
         hover = "Tweak Ancient Fuelweaver's Health to your liking!",

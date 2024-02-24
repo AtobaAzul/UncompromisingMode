@@ -129,20 +129,6 @@ for k, v in pairs(bosses) do
     end
 end
 
-AddPrefabPostInitAny(function(inst)
-    if not GLOBAL.TheWorld.ismastersim then
-        return
-    end
-    if not table.contains(bosses, inst.prefab) then
-        if inst.components.health ~= nil and inst:HasTag("epic") then
-            inst:DoTaskInTime(0, function(inst)
-                inst.components.health:SetMaxHealth(inst.components.health.maxhealth * GetModConfigData(v .. "_health"))
-            end)
-        end
-    end
-end)
-
-
 TUNING.STALKER_ATRIUM_PHASE2_HEALTH = TUNING.STALKER_ATRIUM_PHASE2_HEALTH * GetModConfigData("stalker_atrium_health")
 TUNING.SHADOW_ROOK.HEALTH = { (1000 * GetModConfigData("shadowpieces_health")), (4000 * GetModConfigData("shadowpieces_health")), (10000 * GetModConfigData("shadowpieces_health")) }
 TUNING.SHADOW_KNIGHT.HEALTH = { (900 * GetModConfigData("shadowpieces_health")), (2700 * GetModConfigData("shadowpieces_health")), (8100 * GetModConfigData("shadowpieces_health")) }
