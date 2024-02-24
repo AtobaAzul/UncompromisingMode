@@ -116,13 +116,13 @@ local function oil_fn()
     end
 
     inst:AddComponent("fuel")
-    inst.components.fuel.fuelvalue = TUNING.LARGE_FUEL * 2
+    inst.components.fuel.fuelvalue = TUNING.LARGE_FUEL
     inst.components.fuel.fueltype = FUELTYPE.SLUDGE
     inst.components.fuel:SetOnTakenFn(ontaken) -- :)
 
     inst:AddComponent("finiteuses")
-    inst.components.finiteuses:SetMaxUses(25)
-    inst.components.finiteuses:SetUses(25)
+    inst.components.finiteuses:SetMaxUses(10)
+    inst.components.finiteuses:SetUses(10)
     inst.components.finiteuses:SetOnFinished(onfinished)
 
     MakeSmallBurnable(inst, TUNING.LARGE_BURNTIME)
