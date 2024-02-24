@@ -42,9 +42,23 @@ if TUNING.DSTU.IMPASSBLES then
     end)
 end
 
+local function TeleportOverrideFn(inst)
+
+    local pt = inst:GetPosition()
+    local offset = FindWalkableOffset(pt, math.random() * 2 * PI, 4, 8, true, false) or
+                    FindWalkableOffset(pt, math.random() * 2 * PI, 8, 8, true, false)
+    if offset ~= nil then
+        pt = pt + offset
+    end
+
+    return pt
+end
+
 env.AddPrefabPostInitAny(function(inst)
-    if TheWorld and TheWorld.shard == inst then
-        -- inst:AddComponent("shard_acidmushrooms")
+    if not TheWorld.ismastersim then return end
+    if inst ~= nil and inst:IsValid() and inst:HasTag("epic") then
+        inst:AddComponent("teleportedoverride")
+        inst.components.teleportedoverride:SetDestPositionFn(TeleportOverrideFn)
     end
 end)
 
