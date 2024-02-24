@@ -38,7 +38,7 @@ for k, v in pairs(bosses) do
             end
 
             if inst.components.health ~= nil then
-                inst:DoTaskInTime(0, function(inst)
+                inst:DoTaskInTime(GLOBAL.FRAMES, function(inst)
                     inst.components.health:SetMaxHealth(inst.components.health.maxhealth * GetModConfigData(v .. "_health"))
                 end)
             end
@@ -50,7 +50,7 @@ for k, v in pairs(bosses) do
             end
 
             if inst.components.health ~= nil then
-                inst:DoTaskInTime(0, function(inst)
+                inst:DoTaskInTime(GLOBAL.FRAMES, function(inst)
                     inst.components.health:SetMaxHealth(inst.components.health.maxhealth * GetModConfigData(v .. "_health"))
                 end)
             end
@@ -62,7 +62,7 @@ for k, v in pairs(bosses) do
             end
 
             if inst.components.health ~= nil then
-                inst:DoTaskInTime(0, function(inst)
+                inst:DoTaskInTime(GLOBAL.FRAMES, function(inst)
                     inst.components.health:SetMaxHealth(inst.components.health.maxhealth * GetModConfigData(v .. "_health"))
                 end)
             end
@@ -74,7 +74,7 @@ for k, v in pairs(bosses) do
             end
 
             if inst.components.health ~= nil then
-                inst:DoTaskInTime(0, function(inst)
+                inst:DoTaskInTime(GLOBAL.FRAMES, function(inst)
                     inst.components.health:SetMaxHealth(inst.components.health.maxhealth * GetModConfigData(v .. "_health"))
                 end)
             end
@@ -86,7 +86,7 @@ for k, v in pairs(bosses) do
             end
 
             if inst.components.health ~= nil then
-                inst:DoTaskInTime(0, function(inst)
+                inst:DoTaskInTime(GLOBAL.FRAMES, function(inst)
                     inst.components.health:SetMaxHealth(inst.components.health.maxhealth * GetModConfigData(v .. "_health"))
                 end)
             end
@@ -98,7 +98,7 @@ for k, v in pairs(bosses) do
             end
 
             if inst.components.health ~= nil then
-                inst:DoTaskInTime(0, function(inst)
+                inst:DoTaskInTime(GLOBAL.FRAMES, function(inst)
                     inst.components.health:SetMaxHealth(inst.components.health.maxhealth * GetModConfigData(v .. "_health"))
                 end)
             end
@@ -110,7 +110,7 @@ for k, v in pairs(bosses) do
             end
 
             if inst.components.health ~= nil then
-                inst:DoTaskInTime(0, function(inst)
+                inst:DoTaskInTime(GLOBAL.FRAMES, function(inst)
                     inst.components.health:SetMaxHealth(inst.components.health.maxhealth * GetModConfigData(v .. "_health"))
                 end)
             end
@@ -121,7 +121,7 @@ for k, v in pairs(bosses) do
                 return
             end
             if inst.components.health ~= nil then
-                inst:DoTaskInTime(0, function(inst)
+                inst:DoTaskInTime(GLOBAL.FRAMES, function(inst)
                     inst.components.health:SetMaxHealth(inst.components.health.maxhealth * GetModConfigData(v .. "_health"))
                 end)
             end
