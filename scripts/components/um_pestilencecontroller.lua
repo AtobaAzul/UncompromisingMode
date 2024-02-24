@@ -72,7 +72,11 @@ return Class(function(self, inst)
                 end
             end
 
-            return infested / #self.redwoods
+            if #self.redwoods == 0 then
+                return 0
+            else
+                return infested / #self.redwoods
+            end
         end
 
         return 1
