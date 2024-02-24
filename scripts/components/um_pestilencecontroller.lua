@@ -13,11 +13,10 @@ return Class(function(self, inst)
         end
     end
     local function SpawnPosse(nymph, x, z)
-        nymph.aphidposse = {}
-        for i = 1, math.random(5, 8) do
+        for i = 1, math.random(4, 6) do
             local x_off, z_off = FindSmallOffset(x, z)
             local aphid = SpawnPrefab("aphid")
-            table.insert(nymph.aphidposse, aphid)
+            nymph.aphidposse = (nymph.aphidposse or 0) + 1
             aphid.Transform:SetPosition(x_off, 0, z_off)
             aphid.nymph = nymph
             aphid.components.follower:SetLeader(nymph)
