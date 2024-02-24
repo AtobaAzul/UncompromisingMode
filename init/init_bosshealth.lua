@@ -1,131 +1,46 @@
 local bosses = {
-    "minotaur",
-    "stalker_atrium",
-    "bearger",
-    "mutatedbearger",
-    "beequeen",
-    "alterguardian",
-    "deerclops",
-    "mutateddeerclops",
-    "dragonfly",
-    "eyeofterror",
-    "twinofterror",
-    "sharkboi",
-    "lordfruitfly",
-    "malbatross",
-    "moose",
-    "daywalker",
-    --"warg" WARG IS NOT A BOSS.
-    "mutatedwarg",
-    "spiderqueen",
-    "toadstool",
-    "toadstool_dark",
-    "klaus",
-    "antlion",
-    "crabking",
-    "hoodedwidow",
-    "moonmaw_dragonfly",
-    "mothergoose",
-    "mock_dragonfly"
+    "MINOTAUR",
+    "STALKER_ATRIUM",
+    "BEARGER",
+    "MUTATED_BEARGER",
+    "BEEQUEEN",
+    "ALTERGUARDIAN",
+    "DEERCLOPS",
+    "MUTATED_DEERCLOPS",
+    "DRAGONFLY",
+    "EYEOFTERROR",
+    "TWINOFTERROR",
+    "SHARKBOI",
+    "LORDFRUITFLY",
+    "MALBATROSS",
+    "MOOSE",
+    "DAYWALKER",
+    --"WARG" WARG IS NOT A BOSS.
+    "MUTATED_WARG",
+    "SPIDERQUEEN",
+    "TOADSTOOL",
+    "TOADSTOOL_DARK",
+    "KLAUS",
+    "ANTLION",
+    "CRABKING",
 }
 
-
 for k, v in pairs(bosses) do
-    if v == "alterguardian" then
-        AddPrefabPostInit("alterguardian_phase1", function(inst)
-            if not GLOBAL.TheWorld.ismastersim then
-                return
-            end
-
-            if inst.components.health ~= nil then
-                inst:DoTaskInTime(GLOBAL.FRAMES, function(inst)
-                    inst.components.health:SetMaxHealth(inst.components.health.maxhealth * GetModConfigData(v .. "_health"))
-                end)
-            end
-        end)
-
-        AddPrefabPostInit("alterguardian_phase2", function(inst)
-            if not GLOBAL.TheWorld.ismastersim then
-                return
-            end
-
-            if inst.components.health ~= nil then
-                inst:DoTaskInTime(GLOBAL.FRAMES, function(inst)
-                    inst.components.health:SetMaxHealth(inst.components.health.maxhealth * GetModConfigData(v .. "_health"))
-                end)
-            end
-        end)
-
-        AddPrefabPostInit("alterguardian_phase3", function(inst)
-            if not GLOBAL.TheWorld.ismastersim then
-                return
-            end
-
-            if inst.components.health ~= nil then
-                inst:DoTaskInTime(GLOBAL.FRAMES, function(inst)
-                    inst.components.health:SetMaxHealth(inst.components.health.maxhealth * GetModConfigData(v .. "_health"))
-                end)
-            end
-        end)
-    elseif v == "twinofterror" then
-        AddPrefabPostInit("twinofterror1", function(inst)
-            if not GLOBAL.TheWorld.ismastersim then
-                return
-            end
-
-            if inst.components.health ~= nil then
-                inst:DoTaskInTime(GLOBAL.FRAMES, function(inst)
-                    inst.components.health:SetMaxHealth(inst.components.health.maxhealth * GetModConfigData(v .. "_health"))
-                end)
-            end
-        end)
-
-        AddPrefabPostInit("twinofterror2", function(inst)
-            if not GLOBAL.TheWorld.ismastersim then
-                return
-            end
-
-            if inst.components.health ~= nil then
-                inst:DoTaskInTime(GLOBAL.FRAMES, function(inst)
-                    inst.components.health:SetMaxHealth(inst.components.health.maxhealth * GetModConfigData(v .. "_health"))
-                end)
-            end
-        end)
-    elseif v == "leif" then
-        AddPrefabPostInit("leif", function(inst)
-            if not GLOBAL.TheWorld.ismastersim then
-                return
-            end
-
-            if inst.components.health ~= nil then
-                inst:DoTaskInTime(GLOBAL.FRAMES, function(inst)
-                    inst.components.health:SetMaxHealth(inst.components.health.maxhealth * GetModConfigData(v .. "_health"))
-                end)
-            end
-        end)
-
-        AddPrefabPostInit("leif_sparse", function(inst)
-            if not GLOBAL.TheWorld.ismastersim then
-                return
-            end
-
-            if inst.components.health ~= nil then
-                inst:DoTaskInTime(GLOBAL.FRAMES, function(inst)
-                    inst.components.health:SetMaxHealth(inst.components.health.maxhealth * GetModConfigData(v .. "_health"))
-                end)
-            end
-        end)
+    if v == "ALTERGUARDIAN" then
+        TUNING["ALTERGUARDIAN_PHASE1_HEALTH"] = TUNING["ALTERGUARDIAN_PHASE1_HEALTH"] * GetModConfigData("alterguardian_health")
+        TUNING["ALTERGUARDIAN_PHASE2_MAXHEALTH"] = TUNING["ALTERGUARDIAN_PHASE2_MAXHEALTH"] * GetModConfigData("alterguardian_health")
+        TUNING["ALTERGUARDIAN_PHASE2_STARTHEALTH"] = TUNING["ALTERGUARDIAN_PHASE2_STARTHEALTH"] * GetModConfigData("alterguardian_health")
+        TUNING["ALTERGUARDIAN_PHASE3_STARTHEALTH"] = TUNING["ALTERGUARDIAN_PHASE3_STARTHEALTH"] * GetModConfigData("alterguardian_health")
+        TUNING["ALTERGUARDIAN_PHASE3_MAXHEALTH"] = TUNING["ALTERGUARDIAN_PHASE3_MAXHEALTH"] * GetModConfigData("alterguardian_health")
+    elseif v == "TWINOFTERROR" then
+        TUNING["TWIN1_HEALTH"] = TUNING["TWIN1_HEALTH"] * GetModConfigData("twinofterror_health")
+        TUNING["TWIN2_HEALTH"] = TUNING["TWIN1_HEALTH"] * GetModConfigData("twinofterror_health")
+    elseif v == "LEIF" then
+        TUNING["LEIF_HEALTH"] = TUNING["LEIF_HEALTH"] * GetModConfigData("leif")
     else
-        AddPrefabPostInit(v, function(inst)
-            if not GLOBAL.TheWorld.ismastersim then
-                return
-            end
-            if inst.components.health ~= nil then
-                inst:DoTaskInTime(GLOBAL.FRAMES, function(inst)
-                    inst.components.health:SetMaxHealth(inst.components.health.maxhealth * GetModConfigData(v .. "_health"))
-                end)
-            end
-        end)
+        print(v)
+        print(TUNING[v .. "_HEALTH"])
+        TUNING[v .. "_HEALTH"] = TUNING[v .. "_HEALTH"] * GetModConfigData(string.lower(v) .. "_health")
     end
 end
 

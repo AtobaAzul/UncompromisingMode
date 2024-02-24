@@ -1230,6 +1230,47 @@ configuration_options = {
             { description = "Uncomp (x3)",   data = 3 } },
         default = 1
     },
+    {
+        name = "mutated_deerclops_health",
+        label = "Crystal Deerclops's Health",
+        hover = "Tweak Crystal Deerclops Health to your liking!",
+        options = {
+            { description = "Lowest (/4)",   data = 0.25 },
+            { description = "Lowered (/2)",  data = 0.5 },
+            { description = "Default",       data = 1 },
+            { description = "Higher (x1.5)", data = 1.5 },
+            { description = "Highest (x2)",  data = 2 },
+            { description = "Uncomp (x3)",   data = 3 } },
+        default = 1
+    },
+
+    {
+        name = "mutated_bearger_health",
+        label = "Armored Bearger's Health",
+        hover = "Tweak Armored Bearger's Health to your liking!",
+        options = {
+            { description = "Lowest (/4)",   data = 0.25 },
+            { description = "Lowered (/2)",  data = 0.5 },
+            { description = "Default",       data = 1 },
+            { description = "Higher (x1.5)", data = 1.5 },
+            { description = "Highest (x2)",  data = 2 },
+            { description = "Uncomp (x3)",   data = 3 } },
+        default = 1
+    },
+
+    {
+        name = "mutated_warg_health",
+        label = "Possesed Varg's Health",
+        hover = "Tweak Possesed Varg's Health to your liking!",
+        options = {
+            { description = "Lowest (/4)",   data = 0.25 },
+            { description = "Lowered (/2)",  data = 0.5 },
+            { description = "Default",       data = 1 },
+            { description = "Higher (x1.5)", data = 1.5 },
+            { description = "Highest (x2)",  data = 2 },
+            { description = "Uncomp (x3)",   data = 3 } },
+        default = 1
+    },
 
     --	BinaryConfig("crabking_claws", "Crabking Fight Adjustment", "The Crabkings imposing claws now deal 500 damage to the king when killed.", false),
     SkipSpace(),

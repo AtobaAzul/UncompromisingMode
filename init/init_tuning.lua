@@ -401,6 +401,18 @@ TUNING.DSTU = {
     --CLIENT CONFIGS
 
     REDUCED_TORNADO_VFX = GetModConfigData("um_storms_over", true),
+
+        -- boss hp qol
+
+    WIDOW_HEALTH = 8000 * GetModConfigData("hoodedwidow_health"),	
+	MOONFLY_HEALTH = 8000 * GetModConfigData("moonmaw_dragonfly_health"),	
+    WILTFLY_HEALTH = 4000 * GetModConfigData("mock_dragonfly_health"),
+    MOTHER_GOOSE_HEALTH = 6000 * GetModConfigData("mothergoose_health"),	
+
+	ALTERGUARDIAN_PHASE1_HEALTH = GetModConfigData("Celestial Champion's Health"),
+	ALTERGUARDIAN_PHASE2_HEALTH = GetModConfigData("Celestial Champion's Health"),
+	ALTERGUARDIAN_PHASE3_HEALTH	= GetModConfigData("Celestial Champion's Health"),
+
 }
 
 -- [              DST Related Overrides                  ]
