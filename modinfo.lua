@@ -866,10 +866,22 @@ configuration_options = {
         "Shadow Bishop has a different attack.", true),
     SkipSpace(),
 
-    Header("Boss Quality of Life"),
-
+    Header("Health Adjustment"),
     {
-        name = "Ancient Fuelweaver's Health",
+        name = "boss_health",
+        label = "Other Boss's Health",
+        hover = "Tweak any other bosses's Health to your liking! Mainly for modded bosses.",
+        options = {
+            { description = "Lowest (/4)",   data = 0.25 },
+            { description = "Lowered (/2)",  data = 0.5 },
+            { description = "Default",       data = 1 },
+            { description = "Higher (x1.5)", data = 1.5 },
+            { description = "Highest (x2)",  data = 2 },
+            { description = "Uncomp (x3)",   data = 3 } },
+        default = 1
+    },
+    {
+        name = "stalker_atrium_health",
         label = "Ancient Fuelweaver's Health",
         hover = "Tweak Ancient Fuelweaver's Health to your liking!",
         options = {
@@ -882,7 +894,7 @@ configuration_options = {
         default = 1
     },
     {
-        name = "Ancient Guardian's Health",
+        name = "minotaur_health",
         label = "Ancient Guardian's Health",
         hover = "Tweak Ancient Guardian's Health to your liking!",
         options = {
@@ -895,20 +907,20 @@ configuration_options = {
         default = 1
     },
     {
-        name = "Antlion's Health",
+        name = "antlion_health",
         label = "Antlion's Health",
         hover = "Tweak Antlion's Health to your liking!",
         options = {
-            { description = "Lowest (/4)",   data = 2000 },
-            { description = "Lowered (/2)",  data = 3000 },
-            { description = "Default",       data = 6000 },
-            { description = "Higher (x1.5)", data = 9000 },
-            { description = "Highest (x2)",  data = 12000 },
-            { description = "Uncomp (x3)",   data = 18000 } },
+            { description = "Lowest (/4)",   data = 0.25 },
+            { description = "Lowered (/2)",  data = 0.5 },
+            { description = "Default",       data = 1 },
+            { description = "Higher (x1.5)", data = 1.5 },
+            { description = "Highest (x2)",  data = 2 },
+            { description = "Uncomp (x3)",   data = 3 } },
         default = 6000
     },
     {
-        name = "Bearger's Health",
+        name = "bearger_health",
         label = "Bearger's Health",
         hover = "Tweak Bearger's Health to your liking!",
         options = {
@@ -921,7 +933,7 @@ configuration_options = {
         default = 1
     },
     {
-        name = "Bee Queen's Health",
+        name = "beequeen_health",
         label = "Bee Queen's Health",
         hover = "Tweak Bee Queen's Health to your liking!",
         options = {
@@ -934,7 +946,7 @@ configuration_options = {
         default = 1
     },
     {
-        name = "Celestial Champion's Health",
+        name = "alterguardian_health",
         label = "Celestial Champion's Health",
         hover = "Tweak Celestial Champion's Health to your liking!",
         options = {
@@ -951,19 +963,6 @@ configuration_options = {
         label = "Crab King's Health",
         hover = "Tweak Crab King's Health to your liking!",
         options = {
-            { description = "Lowest (/4)",   data = 5000 },
-            { description = "Lowered (/2)",  data = 10000 },
-            { description = "Default",       data = 20000 },
-            { description = "Higher (x1.5)", data = 30000 },
-            { description = "Highest (x2)",  data = 40000 },
-            { description = "Uncomp (x3)",   data = 60000 } },
-        default = 20000
-    },
-    {
-        name = "Deerclops's Health",
-        label = "Deerclops's Health",
-        hover = "Tweak Deerclops's Health to your liking!",
-        options = {
             { description = "Lowest (/4)",   data = 0.25 },
             { description = "Lowered (/2)",  data = 0.5 },
             { description = "Default",       data = 1 },
@@ -973,7 +972,19 @@ configuration_options = {
         default = 1
     },
     {
-        name = "Dragonfly's Health",
+        name = "deerclops_health",
+        label = "Deerclops's Health",
+        hover = "Tweak Deerclops's Health to your liking!",
+        options = {
+            { description = "Lowered (/2)",  data = 0.5 },
+            { description = "Default",       data = 1 },
+            { description = "Higher (x1.5)", data = 1.5 },
+            { description = "Highest (x2)",  data = 2 },
+            { description = "Uncomp (x3)",   data = 3 } },
+        default = 1
+    },
+    {
+        name = "dragonfly_health",
         label = "Dragonfly's Health",
         hover = "Tweak Dragonfly's Health to your liking!",
         options = {
@@ -986,7 +997,7 @@ configuration_options = {
         default = 1
     },
     {
-        name = "Eye of Terror's Health",
+        name = "eyeofterror_health",
         label = "Eye of Terror's Health",
         hover = "Tweak Eye of Terror's Health to your liking!",
         options = {
@@ -999,7 +1010,7 @@ configuration_options = {
         default = 1
     },
     {
-        name = "Frostjaw's Health",
+        name = "sharkboi_health",
         label = "Frostjaw's Health",
         hover = "Tweak Frostjaw's Health to your liking!",
         options = {
@@ -1012,7 +1023,7 @@ configuration_options = {
         default = 1
     },
     {
-        name = "Hooded Widow's Health",
+        name = "hoodedwidow_health",
         label = "Hooded Widow's Health",
         hover = "Tweak Hooded Widow's Health to your liking!",
         options = {
@@ -1025,20 +1036,20 @@ configuration_options = {
         default = 1
     },
     {
-        name = "Klaus's Health",
+        name = "klaus_health",
         label = "Klaus's Health",
         hover = "Tweak Klaus's Health to your liking!",
         options = {
-            { description = "Lowest (/4)",   data = 2500 },
-            { description = "Lowered (/2)",  data = 5000 },
-            { description = "Default",       data = 10000 },
-            { description = "Higher (x1.5)", data = 15000 },
-            { description = "Highest (x2)",  data = 20000 },
-            { description = "Uncomp (x3)",   data = 30000 } },
+            { description = "Lowest (/4)",   data = 0.25 },
+            { description = "Lowered (/2)",  data = 0.5 },
+            { description = "Default",       data = 1 },
+            { description = "Higher (x1.5)", data = 1.5 },
+            { description = "Highest (x2)",  data = 2 },
+            { description = "Uncomp (x3)",   data = 3 } },
         default = 10000
     },
     {
-        name = "Lord of the Fruit Flies's Health",
+        name = "lordfruitfly_health",
         label = "Lord of the Fruit Flies's Health",
         hover = "Tweak Lord of the Fruit Flies's Health to your liking!",
         options = {
@@ -1051,7 +1062,7 @@ configuration_options = {
         default = 1
     },
     {
-        name = "Malbatross's Health",
+        name = "malbatross_health",
         label = "Malbatross's Health",
         hover = "Tweak Malbatross's Health to your liking!",
         options = {
@@ -1064,7 +1075,7 @@ configuration_options = {
         default = 1
     },
     {
-        name = "Misery Toadstool's Health",
+        name = "toadstool_dark_health",
         label = "Misery Toadstool's Health",
         hover = "Tweak Misery Toadstool's Health to your liking!",
         options = {
@@ -1077,7 +1088,7 @@ configuration_options = {
         default = 1
     },
     {
-        name = "Moonmaw Dragonfly's Health",
+        name = "moonmaw_dragonfly_health",
         label = "Moonmaw Dragonfly's Health",
         hover = "Tweak Moonmaw Dragonfly's Health to your liking!",
         options = {
@@ -1090,7 +1101,7 @@ configuration_options = {
         default = 1
     },
     {
-        name = "Moose/Geese's Health",
+        name = "moose_health",
         label = "Moose/Geese's Health",
         hover = "Tweak Moose/Geese's Health to your liking!",
         options = {
@@ -1103,7 +1114,7 @@ configuration_options = {
         default = 1
     },
     {
-        name = "Mother Goose's Health",
+        name = "mothergoose_health",
         label = "Mother Goose's Health",
         hover = "Tweak Mother Goose's Health to your liking!",
         options = {
@@ -1116,7 +1127,7 @@ configuration_options = {
         default = 1
     },
     {
-        name = "Nightmare Werepig's Health",
+        name = "daywalker_health",
         label = "Nightmare Werepig's Health",
         hover = "Tweak Nightmare Werepig's Health to your liking!",
         options = {
@@ -1129,7 +1140,7 @@ configuration_options = {
         default = 1
     },
     {
-        name = "Reanimated Skeleton's Health",
+        name = "stalker_atrium_health",
         label = "Reanimated Skeleton's Health",
         hover = "Tweak Reanimated Skeleton's Health to your liking!",
         options = {
@@ -1142,7 +1153,7 @@ configuration_options = {
         default = 1
     },
     {
-        name = "Shadow Pieces's Health",
+        name = "shadowpieces_health",
         label = "Shadow Pieces's Health",
         hover = "Tweak Shadow Pieces's Health to your liking!",
         options = {
@@ -1155,7 +1166,7 @@ configuration_options = {
         default = 1
     },
     {
-        name = "Spider Queen's Health",
+        name = "spiderqueen_health",
         label = "Spider Queen's Health",
         hover = "Tweak Spider Queen's Health to your liking!",
         options = {
@@ -1168,7 +1179,7 @@ configuration_options = {
         default = 1
     },
     {
-        name = "Toadstool's Health",
+        name = "toadstool_health",
         label = "Toadstool's Health",
         hover = "Tweak Toadstool's Health to your liking!",
         options = {
@@ -1181,20 +1192,20 @@ configuration_options = {
         default = 1
     },
     {
-        name = "Treeguard's Health",
+        name = "leif_health",
         label = "Treeguard's Health",
         hover = "Tweak Treeguard's Health to your liking!",
         options = {
-            { description = "Lowest (/4)",   data = 750 },
-            { description = "Lowered (/2)",  data = 1500 },
-            { description = "Default",       data = 3000 },
-            { description = "Higher (x1.5)", data = 4500 },
-            { description = "Highest (x2)",  data = 6000 },
-            { description = "Uncomp (x3)",   data = 9000 } },
+            { description = "Lowest (/4)",   data = 0.25 },
+            { description = "Lowered (/2)",  data = 0.5 },
+            { description = "Default",       data = 1 },
+            { description = "Higher (x1.5)", data = 1.5 },
+            { description = "Highest (x2)",  data = 2 },
+            { description = "Uncomp (x3)",   data = 3 } },
         default = 3000
     },
     {
-        name = "Twins of Terror's Health",
+        name = "twinofterror_health",
         label = "Twins of Terror's Health",
         hover = "Tweak Twins of Terror's Health to your liking!",
         options = {
@@ -1207,9 +1218,9 @@ configuration_options = {
         default = 1
     },
     {
-        name = "Varg's Health",
-        label = "Varg's Health",
-        hover = "Tweak Varg's Health to your liking!",
+        name = "mock_dragonfly_health",
+        label = "Wilting Dragonfly's Health",
+        hover = "Tweak Wilting Dragonfly's Health to your liking!",
         options = {
             { description = "Lowest (/4)",   data = 0.25 },
             { description = "Lowered (/2)",  data = 0.5 },
@@ -1220,9 +1231,9 @@ configuration_options = {
         default = 1
     },
     {
-        name = "Wilting Dragonfly's Health",
-        label = "Wilting Dragonfly's Health",
-        hover = "Tweak Wilting Dragonfly's Health to your liking!",
+        name = "crabking_health",
+        label = "Crab King's Health",
+        hover = "Tweak Crab King's (Base) Health to your liking!",
         options = {
             { description = "Lowest (/4)",   data = 0.25 },
             { description = "Lowered (/2)",  data = 0.5 },

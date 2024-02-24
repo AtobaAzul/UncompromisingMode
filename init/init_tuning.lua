@@ -389,39 +389,6 @@ TUNING.DSTU = {
     BEEBOX_NERF = GetModConfigData("beebox_nerf"),
     CANEDURABILITY = GetModConfigData("canedurability"),
     AC_COOLING = GetModConfigData("ac_does_ac"),
-	
-    -- boss hp qol
-
-	MINOTAUR_HEALTH = GetModConfigData("Ancient Guardian's Health"),
-	STALKER_HEALTH = GetModConfigData("Reanimated Skeleton's Health"),
-	STALKER_ATRIUM_HEALTH = GetModConfigData("Ancient Fuelweaver's Health"),
-	BEARGER_HEALTH = GetModConfigData("Bearger's Health"),
-	MUTATED_BEARGER_HEALTH = GetModConfigData("Twins of Terror's Health"),
-	BEEQUEEN_HEALTH = GetModConfigData("Bee Queen's Health"),
-	DEERCLOPS_HEALTH = GetModConfigData("Deerclops's Health"),
-	MUTATED_DEERCLOPS_HEALTH = GetModConfigData("Deerclops's Health"),
-	DRAGONFLY_HEALTH = GetModConfigData("Dragonfly's Health"),
-	EYEOFTERROR_HEALTH = GetModConfigData("Eye of Terror's Health"),
-	SHARKBOI_HEALTH = GetModConfigData("Frostjaw's Health"),
-    WIDOW_HEALTH = GetModConfigData("Hooded Widow's Health"),	
-	LORDFRUITFLY_HEALTH = GetModConfigData("Lord of the Fruit Flies's Health"),
-	MALBATROSS_HEALTH = GetModConfigData("Malbatross's Health"),
-	MOONFLY_HEALTH = GetModConfigData("Moonmaw Dragonfly's Health"),	
-	MOOSE_HEALTH = GetModConfigData("Moose/Geese's Health"),
-    MOTHER_GOOSE_HEALTH = GetModConfigData("Mother Goose's Health"),	
-	DAYWALKER_HEALTH = GetModConfigData("Nightmare Werepig's Health"),
-	WARG_HEALTH = GetModConfigData("Varg's Health"),
-	MUTATED_WARG_HEALTH = GetModConfigData("Varg's Health"),
-	SPIDERQUEEN_HEALTH = GetModConfigData("Spider Queen's Health"),
-	TOADSTOOL_HEALTH = GetModConfigData("Toadstool's Health"),
-	TOADSTOOL_DARK_HEALTH = GetModConfigData("Misery Toadstool's Health"),
-    TWIN1_HEALTH = GetModConfigData("Twins of Terror's Health"),
-    TWIN2_HEALTH = GetModConfigData("Twins of Terror's Health"),
-    WILTFLY_HEALTH = GetModConfigData("Wilting Dragonfly's Health"),
-	
-	ALTERGUARDIAN_PHASE1_HEALTH = GetModConfigData("Celestial Champion's Health"),
-	ALTERGUARDIAN_PHASE2_HEALTH = GetModConfigData("Celestial Champion's Health"),
-	ALTERGUARDIAN_PHASE3_HEALTH	= GetModConfigData("Celestial Champion's Health"),
 
     --mod chekcs
     ISLAND_ADVENTURES = ia_check,
@@ -561,14 +528,6 @@ TUNING.BOAT.BOAT_MAGNET.MAX_DISTANCE = TUNING.BOAT.BOAT_MAGNET.MAX_DISTANCE * 2
 TUNING.BOAT.BOAT_MAGNET.MAX_VELOCITY = TUNING.BOAT.BOAT_MAGNET.MAX_VELOCITY *
     10 -- No matter the boatspeed, nautopilots should be able to keep up.
 TUNING.BOAT.BOAT_MAGNET.CATCH_UP_SPEED = TUNING.BOAT.BOAT_MAGNET.CATCH_UP_SPEED * 100
-
-TUNING.ANTLION_HEALTH = GetModConfigData("Antlion's Health")
-TUNING.CRABKING_HEALTH = GetModConfigData("Crab King's Health")
-TUNING.KLAUS_HEALTH = GetModConfigData("Klaus's Health")
-TUNING.LEIF_HEALTH = GetModConfigData("Treeguard's Health")
-TUNING.SHADOW_ROOK.HEALTH = {(1000 * GetModConfigData("Shadow Pieces's Health")), (4000 * GetModConfigData("Shadow Pieces's Health")), (10000 * GetModConfigData("Shadow Pieces's Health"))}
-TUNING.SHADOW_KNIGHT.HEALTH = {(900 * GetModConfigData("Shadow Pieces's Health")), (2700 * GetModConfigData("Shadow Pieces's Health")), (8100 * GetModConfigData("Shadow Pieces's Health"))}
-TUNING.SHADOW_BISHOP.HEALTH = {(800 * GetModConfigData("Shadow Pieces's Health")), (2500 * GetModConfigData("Shadow Pieces's Health")), (7500 * GetModConfigData("Shadow Pieces's Health"))}
 
 -- lowered CK health
 -- TUNING.CRABKING_HEALTH = TUNING.CRABKING_HEALTH * 0.66
