@@ -119,7 +119,7 @@ AddPrefabPostInitAny(function(inst)
         return
     end
     if not table.contains(bosses, inst.prefab) then
-        if inst.components.health ~= nil then
+        if inst.components.health ~= nil and inst:HasTag("epic") then
             inst.components.health:SetMaxHealth(inst.components.health.maxhealth * GetModConfigData("boss_health"))
         end
     end
