@@ -87,7 +87,9 @@ return Class(function(self, inst)
         end
     end
 
-    function self:OnSave()
+    --THIS IS SAVING ACTUAL ENTITIES. Do NOT save actual entites as it very consistently causes crashes on save/load.
+    --On this case especifically saving/loading is redundant as well as populating the component postinit always occurs.
+    --[[function self:OnSave()
         local data = {}
         data.redwoods = self.redwoods
     end
@@ -98,7 +100,7 @@ return Class(function(self, inst)
                 self.redwoods = data.redwoods
             end
         end
-    end
+    end]]
 
     function self:OnPostInit()
         if not self.redwoods then
