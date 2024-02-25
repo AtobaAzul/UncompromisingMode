@@ -105,7 +105,7 @@ env.AddComponentPostInit("health", function(self)
         if self.inst.components.upgrademoduleowner ~= nil and TUNING.DSTU.WXLESS then --btw I think this change is not that useful since you pretty much can achieve the same thing by unequipping module and healing
             --but I guess this way is another choice of being more convenient but less effective?
             if amount > 0 then
-                amount = amount * (self.maxhealth / 75)
+                amount = amount * (self.maxhealth / 25)
             end
         end
 
