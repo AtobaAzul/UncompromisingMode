@@ -1033,7 +1033,7 @@ configuration_options = {
             { description = "Higher (x1.5)", data = 1.5 },
             { description = "Highest (x2)",  data = 2 },
             { description = "Uncomp (x3)",   data = 3 } },
-        default = 10000
+        default = 1
     },
     {
         name = "lordfruitfly_health",
