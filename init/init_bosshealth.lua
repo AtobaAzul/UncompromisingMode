@@ -23,6 +23,7 @@ local bosses = {
     "KLAUS",
     "ANTLION",
     "CRABKING",
+    "LEIF"
 }
 
 for k, v in pairs(bosses) do
@@ -35,11 +36,9 @@ for k, v in pairs(bosses) do
     elseif v == "TWINOFTERROR" then
         TUNING["TWIN1_HEALTH"] = TUNING["TWIN1_HEALTH"] * GetModConfigData("twinofterror_health_")
         TUNING["TWIN2_HEALTH"] = TUNING["TWIN2_HEALTH"] * GetModConfigData("twinofterror_health_")
-    --elseif v == "LEIF" then
-        --TUNING["LEIF_HEALTH"] = TUNING["LEIF_HEALTH"] * GetModConfigData("leif_health_")
+    elseif v == "LEIF" then
+        TUNING["LEIF_HEALTH"] = TUNING["LEIF_HEALTH"] * GetModConfigData("leif_health")
     else
-        print(v)
-        print(TUNING[v .. "_HEALTH"])
         TUNING[v .. "_HEALTH"] = TUNING[v .. "_HEALTH"] * GetModConfigData(string.lower(v) .. "_health_")
     end
 end
