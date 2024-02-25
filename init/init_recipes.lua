@@ -951,10 +951,10 @@ AddRecipe2(
 ChangeSortKey("hermitshop_cookies", "hermitshop_supertacklecontainer", "CRAFTING_STATION", true)
 
 AddRecipe2(
-    "normal_chum",
+    "chum",
     { Ingredient("spoiled_food", 2), Ingredient("rope", 1), Ingredient("waterplant_bomb", 1) },
     TECH.FISHING_ONE,
-    { product = "chum", nounlock = false, numtogive = 2 },
+    { numtogive = 2 },
     { "FISHING" }
 )
 AllRecipes["chum"].ingredients = {
