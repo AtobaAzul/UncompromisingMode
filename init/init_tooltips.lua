@@ -350,7 +350,7 @@ if TUNING.DSTU.WXLESS then
         MOVESPEED2 = "- Increases run speed over time the longer you run.\n- When fast enough, you begin a charge, hitting creatures in your way.",
         BEE = "- Now regenerates 1 health every 5 seconds.",
         LIGHT = "- Increased light radius.",
-        MUSIC = "- Provides more sanity.",
+        MUSIC = "- Provides more sanity.\n- Attracts birds.",
         MAXHEALTH = "- Increases healing recieved proportionally to your max health.\n- Provides a bit of static damage reduction.\n- Now increases health by 40.",
         MAXHEALTH2 = "\n- Provides static damage reduction.\n- Now increases health by 100.",
         MAXSANITY = "- Provides a bit more sanity over time.\n- Reduces insanity aura effects.",
