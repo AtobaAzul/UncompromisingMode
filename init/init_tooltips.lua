@@ -345,20 +345,20 @@ end
 
 if TUNING.DSTU.WXLESS then
     local CircuitDefs = {
-        HEAT = "- Now provides heat when working or attacking.\n- No longer decreases max temperature.\n- Provides insulation.\n- Increases work efficiency the hotter you are.",
+        HEAT = "- Now provides heat when working or attacking.\n- No longer changes max and min temperature.\n- Provides insulation.\n- Increases work efficiency the hotter you are.",
         MOVESPEED = "- Increases run speed over time the longer you run.",
         MOVESPEED2 = "- Increases run speed over time the longer you run.\n- When fast enough, you begin a charge, hitting creatures in your way.",
-        BEE = "- Now regenerates 1 health every 6 seconds.",
+        BEE = "- Now regenerates 1 health every 5 seconds.",
         LIGHT = "- Increased light radius.",
         MUSIC = "- Provides more sanity.",
-        MAXHEALTH = "- Increases healing recieved.\n- Provides a bit of static damage reduction.",
-        MAXHEALTH2 = "- Significantly Increases healing recieved.\n- Provides static damage reduction.",
-        MAXSANITY = "- Provides a bit sanity over time.\n- Reduces insanity aura effects.",
+        MAXHEALTH = "- Increases healing recieved proportionally to your max health.\n- Provides a bit of static damage reduction.\n- Now increases health by 40.",
+        MAXHEALTH2 = "- Increases healing recieved proportionally to your max health.\n- Provides static damage reduction.\n- Now increases health by 100.",
+        MAXSANITY = "- Provides a bit more sanity over time.\n- Reduces insanity aura effects.",
         MAXSANITY1 = "- Provides a bit of sanity over time.\n- Slighly reduces insanity aura effects.",
-        TASER = "- Getting hit stuns the attacker.",
-        COLD = "- Periodically produces ice.\n- No longer increases minimum temperature.\n- Decreases food spoilage rate.\n- Decreased drying threshold\n- Chills you significantly, if idle.",
-        MAXHUNGER = "- Slows down hunger drain\n- Reduces negative food effects, up until reversing them entirely.", --WHOEVER AT KLEI WHO DECIDED THEY'D MAKE THE MAXHUNGER1 THE WEAK VERSION AND MAXHUNGER THE STRONG VERSION SHOULD HAVE THEIR FINGERS BOILED.
-        MAXHUNGER1 = "- Slightly Slows down hunger drain.",
+        TASER = "- Getting hit stuns the attacker.\n- Gives you charge when you attack enough times.",
+        COLD = "- Periodically produces ice.\n- No longer changes max and min temperature.\n- Decreases food spoilage rate.\n- Decreased drying threshold\n- Chills you significantly, if idle.",
+        MAXHUNGER = "- Slows down charge drain\n- Reduces negative food effects, up until reversing them entirely.", --WHOEVER AT KLEI WHO DECIDED THEY'D MAKE THE MAXHUNGER1 THE WEAK VERSION AND MAXHUNGER THE STRONG VERSION SHOULD HAVE THEIR FINGERS BOILED.
+        MAXHUNGER1 = "- Slightly slows down hunger drain.",
     }
     for k, v in pairs(CircuitDefs) do
         TOOLTIPS["WX78MODULE_" .. k] = v
