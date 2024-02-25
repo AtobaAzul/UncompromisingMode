@@ -854,6 +854,11 @@ local function music_activate(inst, wx)
 
     -- Sanity auras don't affect their owner, so add dapperness to also give WX sanity regen.
     wx.components.sanity.dapperness = wx.components.sanity.dapperness + TUNING.WX78_MUSIC_DAPPERNESS
+    if wx.components.birdattractor ~= nil then
+        wx.components.birdattractor.spawnmodifier:SetModifier(inst, TUNING.BIRD_SPAWN_MAXDELTA_FEATHERHAT, "maxbirds")
+        wx.components.birdattractor.spawnmodifier:SetModifier(inst, TUNING.BIRD_SPAWN_DELAYDELTA_FEATHERHAT.MIN, "mindelay")
+        wx.components.birdattractor.spawnmodifier:SetModifier(inst, TUNING.BIRD_SPAWN_DELAYDELTA_FEATHERHAT.MAX, "maxdelay")
+    end
 
     if wx._music_modules == 1 then
         if wx.components.sanityaura == nil then
@@ -892,6 +897,10 @@ local function music_deactivate(inst, wx)
         wx.SoundEmitter:KillSound("music_sound")
     elseif wx._music_modules == 1 then
         wx.SoundEmitter:SetParameter("music_sound", "wathgrithr_intensity", 0)
+    end
+
+    if wx.components.birdattractor ~= nil then
+        wx.components.birdattractor.spawnmodifier:RemoveModifier(inst)
     end
 end
 
@@ -966,7 +975,7 @@ end
 local function maxhealth2_deactivate(inst, wx)
     local maxhealth2_boost = TUNING.WX78_MAXHEALTH_BOOST * TUNING.WX78_MAXHEALTH2_MULT
     maxhealth_change(inst, wx, -maxhealth2_boost)
-   -- wx.components.health:SetAbsorptionAmount(wx.components.health.absorb - 0.2)
+    -- wx.components.health:SetAbsorptionAmount(wx.components.health.absorb - 0.2)
 end
 
 local MAXHEALTH2_MODULE_DATA =
