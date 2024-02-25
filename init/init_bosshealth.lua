@@ -35,8 +35,8 @@ for k, v in pairs(bosses) do
     elseif v == "TWINOFTERROR" then
         TUNING["TWIN1_HEALTH"] = TUNING["TWIN1_HEALTH"] * GetModConfigData("twinofterror_health_")
         TUNING["TWIN2_HEALTH"] = TUNING["TWIN2_HEALTH"] * GetModConfigData("twinofterror_health_")
-    elseif v == "LEIF" then
-        TUNING["LEIF_HEALTH"] = TUNING["LEIF_HEALTH"] * GetModConfigData("leif_health_")
+    --elseif v == "LEIF" then
+        --TUNING["LEIF_HEALTH"] = TUNING["LEIF_HEALTH"] * GetModConfigData("leif_health_")
     else
         print(v)
         print(TUNING[v .. "_HEALTH"])

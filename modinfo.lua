@@ -1179,17 +1179,17 @@ configuration_options = {
         default = 1
     },
     {
-        name = "leif_health_",
+        name = "leif_health",
         label = "Treeguard's Health",
         hover = "Tweak Treeguard's Health to your liking!",
         options = {
-            { description = "Lowest (/4)",   data = 0.25 },
-            { description = "Lowered (/2)",  data = 0.5 },
-            { description = "Default",       data = 1 },
-            { description = "Higher (x1.5)", data = 1.5 },
-            { description = "Highest (x2)",  data = 2 },
-            { description = "Uncomp (x3)",   data = 3 } },
-        default = 1
+			{ description = "Lowest (/4)", data = 750 },
+			{ description = "Lowered (/2)", data = 1500 },			
+            { description = "Default", data = 3000 },
+            { description = "Higher (x1.5)", data = 4500 },
+            { description = "Highest (x2)", data = 6000 },
+            { description = "Uncomp (x3)", data = 9000 } },
+        default = 3000
     },
     {
         name = "twinofterror_health_",
