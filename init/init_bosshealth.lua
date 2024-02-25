@@ -27,24 +27,24 @@ local bosses = {
 
 for k, v in pairs(bosses) do
     if v == "ALTERGUARDIAN" then
-        TUNING["ALTERGUARDIAN_PHASE1_HEALTH"] = TUNING["ALTERGUARDIAN_PHASE1_HEALTH"] * GetModConfigData("alterguardian_health")
-        TUNING["ALTERGUARDIAN_PHASE2_MAXHEALTH"] = TUNING["ALTERGUARDIAN_PHASE2_MAXHEALTH"] * GetModConfigData("alterguardian_health")
-        TUNING["ALTERGUARDIAN_PHASE2_STARTHEALTH"] = TUNING["ALTERGUARDIAN_PHASE2_STARTHEALTH"] * GetModConfigData("alterguardian_health")
-        TUNING["ALTERGUARDIAN_PHASE3_STARTHEALTH"] = TUNING["ALTERGUARDIAN_PHASE3_STARTHEALTH"] * GetModConfigData("alterguardian_health")
-        TUNING["ALTERGUARDIAN_PHASE3_MAXHEALTH"] = TUNING["ALTERGUARDIAN_PHASE3_MAXHEALTH"] * GetModConfigData("alterguardian_health")
+        TUNING["ALTERGUARDIAN_PHASE1_HEALTH"] = TUNING["ALTERGUARDIAN_PHASE1_HEALTH"] * GetModConfigData("alterguardian_health_")
+        TUNING["ALTERGUARDIAN_PHASE2_MAXHEALTH"] = TUNING["ALTERGUARDIAN_PHASE2_MAXHEALTH"] * GetModConfigData("alterguardian_health_")
+        TUNING["ALTERGUARDIAN_PHASE2_STARTHEALTH"] = TUNING["ALTERGUARDIAN_PHASE2_STARTHEALTH"] * GetModConfigData("alterguardian_health_")
+        TUNING["ALTERGUARDIAN_PHASE3_STARTHEALTH"] = TUNING["ALTERGUARDIAN_PHASE3_STARTHEALTH"] * GetModConfigData("alterguardian_health_")
+        TUNING["ALTERGUARDIAN_PHASE3_MAXHEALTH"] = TUNING["ALTERGUARDIAN_PHASE3_MAXHEALTH"] * GetModConfigData("alterguardian_health_")
     elseif v == "TWINOFTERROR" then
-        TUNING["TWIN1_HEALTH"] = TUNING["TWIN1_HEALTH"] * GetModConfigData("twinofterror_health")
-        TUNING["TWIN2_HEALTH"] = TUNING["TWIN1_HEALTH"] * GetModConfigData("twinofterror_health")
+        TUNING["TWIN1_HEALTH"] = TUNING["TWIN1_HEALTH"] * GetModConfigData("twinofterror_health_")
+        TUNING["TWIN2_HEALTH"] = TUNING["TWIN1_HEALTH"] * GetModConfigData("twinofterror_health_")
     elseif v == "LEIF" then
-        TUNING["LEIF_HEALTH"] = TUNING["LEIF_HEALTH"] * GetModConfigData("leif")
+        TUNING["LEIF_HEALTH"] = TUNING["LEIF_HEALTH"] * GetModConfigData("leif_health_")
     else
         print(v)
         print(TUNING[v .. "_HEALTH"])
-        TUNING[v .. "_HEALTH"] = TUNING[v .. "_HEALTH"] * GetModConfigData(string.lower(v) .. "_health")
+        TUNING[v .. "_HEALTH"] = TUNING[v .. "_HEALTH"] * GetModConfigData(string.lower(v) .. "_health_")
     end
 end
 
-TUNING.STALKER_ATRIUM_PHASE2_HEALTH = TUNING.STALKER_ATRIUM_PHASE2_HEALTH * GetModConfigData("stalker_atrium_health")
-TUNING.SHADOW_ROOK.HEALTH = { (1000 * GetModConfigData("shadowpieces_health")), (4000 * GetModConfigData("shadowpieces_health")), (10000 * GetModConfigData("shadowpieces_health")) }
-TUNING.SHADOW_KNIGHT.HEALTH = { (900 * GetModConfigData("shadowpieces_health")), (2700 * GetModConfigData("shadowpieces_health")), (8100 * GetModConfigData("shadowpieces_health")) }
-TUNING.SHADOW_BISHOP.HEALTH = { (800 * GetModConfigData("shadowpieces_health")), (2500 * GetModConfigData("shadowpieces_health")), (7500 * GetModConfigData("shadowpieces_health")) }
+TUNING.STALKER_ATRIUM_PHASE2_HEALTH = TUNING.STALKER_ATRIUM_PHASE2_HEALTH * GetModConfigData("stalker_atrium_health_")
+TUNING.SHADOW_ROOK.HEALTH = { (1000 * GetModConfigData("shadowpieces_health_")), (4000 * GetModConfigData("shadowpieces_health_")), (10000 * GetModConfigData("shadowpieces_health_")) }
+TUNING.SHADOW_KNIGHT.HEALTH = { (900 * GetModConfigData("shadowpieces_health_")), (2700 * GetModConfigData("shadowpieces_health_")), (8100 * GetModConfigData("shadowpieces_health_")) }
+TUNING.SHADOW_BISHOP.HEALTH = { (800 * GetModConfigData("shadowpieces_health_")), (2500 * GetModConfigData("shadowpieces_health_")), (7500 * GetModConfigData("shadowpieces_health_")) }
