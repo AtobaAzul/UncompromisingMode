@@ -404,15 +404,10 @@ TUNING.DSTU = {
 
         -- boss hp qol
 
-    WIDOW_HEALTH = 8000 * GetModConfigData("hoodedwidow_health"),	
-	MOONFLY_HEALTH = 8000 * GetModConfigData("moonmaw_dragonfly_health"),	
-    WILTFLY_HEALTH = 4000 * GetModConfigData("mock_dragonfly_health"),
-    MOTHER_GOOSE_HEALTH = 6000 * GetModConfigData("mothergoose_health"),	
-
-	ALTERGUARDIAN_PHASE1_HEALTH = GetModConfigData("Celestial Champion's Health"),
-	ALTERGUARDIAN_PHASE2_HEALTH = GetModConfigData("Celestial Champion's Health"),
-	ALTERGUARDIAN_PHASE3_HEALTH	= GetModConfigData("Celestial Champion's Health"),
-
+    WIDOW_HEALTH = 8000 * GetModConfigData("hoodedwidow_health_"),	
+	MOONFLY_HEALTH = 8000 * GetModConfigData("moonmaw_dragonfly_health_"),	
+    WILTFLY_HEALTH = 4000 * GetModConfigData("mock_dragonfly_health_"),
+    MOTHER_GOOSE_HEALTH = 6000 * GetModConfigData("mothergoose_health_"),
 }
 
 -- [              DST Related Overrides                  ]
