@@ -69,10 +69,10 @@ local function InitEnvelope()
     EnvelopeManager:AddColourEnvelope(
         COLOUR_ENVELOPE_NAME_SMOKE,
         {
-            { 0,  IntColour(255, 255, 255, 16) },
-            { .3, IntColour(255, 255, 255, 16) },
-            { .7, IntColour(255, 255, 255, 16) },
-            { 1,  IntColour(255, 255, 255, 16) },
+            { 0,  IntColour(255, 255, 255, 24) },
+            { .3, IntColour(255, 255, 255, 24) },
+            { .7, IntColour(255, 255, 255, 24) },
+            { 1,  IntColour(255, 255, 255, 24) },
         }
     )
 
@@ -91,7 +91,7 @@ local function InitEnvelope()
 end
 
 local RADIUS_SQ_DENY = 4 * 4
-local RADIUS_SQ_ALLOW = 40 * 40
+local RADIUS_SQ_ALLOW = PLAYER_CAMERA_SEE_DISTANCE_SQ
 
 
 local function emit_smoke_fn(effect, smoke_circle_emitter, px, pz, ex, ez, isdiminishing, isfront, _world, _sim)
@@ -121,7 +121,7 @@ local function emit_smoke_fn(effect, smoke_circle_emitter, px, pz, ex, ez, isdim
     end
 
 
-    local vx, vy, vz = .01 * UnitRand(), 0.005 * UnitRand(), .01 * UnitRand()
+    local vx, vy, vz = -.025, 0.01 * UnitRand(), .001 * UnitRand()
     local lifetime = SMOKE_MAX_LIFETIME -- Do not vary VFX will make it pop on the engine side and we do not want any pops.
     local oy = 0.5 * (1 + math.random())
 
@@ -129,12 +129,12 @@ local function emit_smoke_fn(effect, smoke_circle_emitter, px, pz, ex, ez, isdim
 
     effect:AddRotatingParticleUV(
         0,
-        lifetime,            -- lifetime
-        ox, oy, oz,          -- position
-        vx, vy, vz,          -- velocity
-        0,--math.random() * 360, -- angle
-        UnitRand() * 0.1,    -- angle velocity
-        uv_offset, 0         -- UV
+        lifetime,         -- lifetime
+        ox, oy, oz,       -- position
+        vx, vy, vz,       -- velocity
+        0,                --math.random() * 360, -- angle
+        UnitRand() * 0.1, -- angle velocity
+        uv_offset, 0      -- UV
     )
 end
 
@@ -145,7 +145,7 @@ local function SetupParticles(inst)
     end
 
     local effect = inst.entity:AddVFXEffect()
-    effect:InitEmitters(2)
+    effect:InitEmitters(1)
 
     -- SMOKE
     effect:SetRenderResources(0, ANIM_SMOKE_TEXTURE, SMOKE_SHADER)
@@ -155,11 +155,11 @@ local function SetupParticles(inst)
     effect:SetColourEnvelope(0, COLOUR_ENVELOPE_NAME_SMOKE)
     effect:SetScaleEnvelope(0, SCALE_ENVELOPE_NAME_SMOKE)
     effect:SetUVFrameSize(0, 1, 1)
-    effect:SetBlendMode(0, BLENDMODE.AlphaBlended)
-    --effect:SetSortOrder(0, 0)
+    effect:SetBlendMode(0, BLENDMODE.Premultiplied)
+    effect:SetSortOrder(0, 3)
     effect:SetSortOffset(5, 1)
     effect:SetRadius(0, SMOKE_RADIUS) --only needed on a single emitter
-    effect:SetDragCoefficient(0, .1)
+    effect:SetDragCoefficient(0, 0)
 
     -----------------------------------------------------
     -- Local cache for when FX are emitted.
@@ -269,6 +269,12 @@ local function fn()
     if not TheWorld.ismastersim then return inst end
 
     inst:DoTaskInTime(0, function(inst)
+        if c_countprefabs("smog", true) > 150 then --200 means 400 emitters, leave some wiggle room for more non-smog emitters.
+            local smog = TheSim:FindFirstEntityWithTag("smog")
+            if smog ~= nil then
+                smog:Remove()
+            end
+        end
         local x, y, z = inst.Transform:GetWorldPosition()
         if #TheSim:FindEntities(x, y, z, 4, { "smog" }) > 1 then
             inst:Remove()
@@ -309,10 +315,10 @@ local function fn()
 
     inst:DoPeriodicTask(5 + math.random(5), function(inst)
         local x, y, z = inst.Transform:GetWorldPosition()
-        local ents = TheSim:FindEntities(x, y, z, 12, nil, { "playerghost", "has_gasmask", "pyromaniac", "smogimmune", "minifansuppressor" }, { "player", "insect" })
+        local ents = TheSim:FindEntities(x, y, z, 8, nil, { "INLIMBO", "playerghost", "has_gasmask", "pyromaniac", "smogimmune", "minifansuppressor" }, { "player", "insect" })
         for k, v in ipairs(ents) do
-            if v.components.health ~= nil and math.random() > 0.33 then
-                if v.components.oldager ~= nil or v.components.health.penalty == 0.75 then
+            if v.components.health ~= nil and math.random() > 0.25 then
+                if v.components.oldager ~= nil or v.components.health.penalty >= TUNING.MAXIMUM_HEALTH_PENALTY-.05 or not TUNING.HEALTH_PENALTY_ENABLED then
                     v.components.health:DoDelta(-1, false, "smog")
                 elseif v:HasTag("player") then
                     v.components.health:DeltaPenalty(0.025)
