@@ -371,7 +371,7 @@ ChangeSortKey("diseasecurebomb", "premiumwateringcan", "TOOLS", true)
 ChangeSortKey("diseasecurebomb", "lifeinjector", "RESTORATION", true)
 
 if GetModConfigData("snowstorms") then
-    AddRecipe2("ice_snowball", { Ingredient("snowball_throwable", 4) }, TECH.SCIENCE_ONE, { product = "ice" },
+    AddRecipe2("ice", { Ingredient("snowball_throwable", 4) }, TECH.SCIENCE_ONE,
         { "REFINE" })
     ChangeSortKey("ice_snowball", "beeswax", "REFINE", true)
 end
