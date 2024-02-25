@@ -1126,19 +1126,19 @@ configuration_options = {
             { description = "Uncomp (x3)",   data = 3 } },
         default = 1
     },
-    {
-        name = "stalker_atrium_health_",
-        label = "Reanimated Skeleton's Health",
-        hover = "Tweak Reanimated Skeleton's Health to your liking!",
-        options = {
-            { description = "Lowest (/4)",   data = 0.25 },
-            { description = "Lowered (/2)",  data = 0.5 },
-            { description = "Default",       data = 1 },
-            { description = "Higher (x1.5)", data = 1.5 },
-            { description = "Highest (x2)",  data = 2 },
-            { description = "Uncomp (x3)",   data = 3 } },
-        default = 1
-    },
+    --{
+        --name = "stalker_atrium_health_",
+        --label = "Reanimated Skeleton's Health",
+        --hover = "Tweak Reanimated Skeleton's Health to your liking!",
+        --options = {
+            --{ description = "Lowest (/4)",   data = 0.25 },
+            --{ description = "Lowered (/2)",  data = 0.5 },
+            --{ description = "Default",       data = 1 },
+            --{ description = "Higher (x1.5)", data = 1.5 },
+            --{ description = "Highest (x2)",  data = 2 },
+            --{ description = "Uncomp (x3)",   data = 3 } },
+        --default = 1
+    --},
     {
         name = "shadowpieces_health_",
         label = "Shadow Pieces's Health",
