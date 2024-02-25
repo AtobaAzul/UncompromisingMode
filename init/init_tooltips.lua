@@ -352,7 +352,7 @@ if TUNING.DSTU.WXLESS then
         LIGHT = "- Increased light radius.",
         MUSIC = "- Provides more sanity.",
         MAXHEALTH = "- Increases healing recieved proportionally to your max health.\n- Provides a bit of static damage reduction.\n- Now increases health by 40.",
-        MAXHEALTH2 = "- Increases healing recieved proportionally to your max health.\n- Provides static damage reduction.\n- Now increases health by 100.",
+        MAXHEALTH2 = "\n- Provides static damage reduction.\n- Now increases health by 100.",
         MAXSANITY = "- Provides a bit more sanity over time.\n- Reduces insanity aura effects.",
         MAXSANITY1 = "- Provides a bit of sanity over time.\n- Slighly reduces insanity aura effects.",
         TASER = "- Getting hit stuns the attacker.\n- Gives you charge when you attack enough times.",

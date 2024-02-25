@@ -102,13 +102,6 @@ env.AddComponentPostInit("health", function(self)
     local _DoDelta = self.DoDelta
     --(self:HasTag("wathom") and self:HasTag("amped")
     function self:DoDelta(amount, overtime, cause, ignore_invincible, afflicter, ignore_absorb, ...)
-        if self.inst.components.upgrademoduleowner ~= nil and TUNING.DSTU.WXLESS then --btw I think this change is not that useful since you pretty much can achieve the same thing by unequipping module and healing
-            --but I guess this way is another choice of being more convenient but less effective?
-            if amount > 0 then
-                amount = amount * (self.maxhealth / 25)
-            end
-        end
-
         if TUNING.DSTU.SHADOW_WATHOM and self.inst:HasTag("wathom") then
             if MayKill(self, amount) and cause == "shadowvortex" and TUNING.DSTU.COMPROMISING_SHADOWVORTEX and not self.inst.sg:HasStateTag("blackpuddle_death") then
                 self.inst.components.rider:ActualDismount()
