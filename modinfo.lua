@@ -1179,7 +1179,7 @@ configuration_options = {
         default = 1
     },
     {
-        name = "leif_health",
+        name = "leif_health_",
         label = "Treeguard's Health",
         hover = "Tweak Treeguard's Health to your liking!",
         options = {
