@@ -231,7 +231,7 @@ end
 
 local function OnOvercharge(inst, toggle)
     inst.overcharged = toggle
-    inst.components.fueled.rate = toggle and 4 or 2
+    inst.components.fueled.rate = toggle and 2 or 1
 
     if toggle and inst.sparktask == nil and inst.components.equippable:IsEquipped() then
         inst.sparktask = inst:DoTaskInTime(math.random(), spark)

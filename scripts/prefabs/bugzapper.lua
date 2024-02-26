@@ -203,7 +203,7 @@ end
 
 local function OnOvercharge(inst, toggle)
 	inst.overcharged = toggle
-	inst.components.fueled.rate = toggle and 4 or 2
+	inst.components.fueled.rate = toggle and 2 or 1
 end
 
 local function fn()
