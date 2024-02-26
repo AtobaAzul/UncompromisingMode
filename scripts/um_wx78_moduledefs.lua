@@ -477,6 +477,11 @@ table.insert(module_definitions, NIGHTVISION_MODULE_DATA)
 AddCreatureScanDataDefinition("mole", "nightvision", 4)
 
 ---------------------------------------------------------------
+
+local function OnFreeze(inst)
+    inst.components.temperature:DoDelta(-25)
+end
+
 local function cold_activate(inst, wx)
     -- A lower maxtemp means it's harder to overheat.
     --wx.components.temperature.maxtemp = wx.components.temperature.maxtemp - TUNING.WX78_MINTEMPCHANGEPERMODULE
@@ -493,7 +498,7 @@ local function cold_activate(inst, wx)
             MoveStopFreeze(owner, data, inst)
         end
     end]]
-
+    wx:ListenForEvent("freeze", OnFreeze)
     if inst.stoppedfreezetask == nil then
         inst.stoppedfreezetask = wx:DoPeriodicTask(0.5, function(wx)
             if wx.sg:HasStateTag("idle") then
@@ -503,6 +508,8 @@ local function cold_activate(inst, wx)
             end
         end)
     end
+
+
 
     if inst.icemakertask == nil then
         inst.icemakertask = wx:DoPeriodicTask(25, function(wx)
@@ -529,6 +536,9 @@ end
 local function cold_deactivate(inst, wx)
     --wx.components.temperature.maxtemp = wx.components.temperature.maxtemp + TUNING.WX78_MINTEMPCHANGEPERMODULE
     --wx.components.temperature.mintemp = wx.components.temperature.mintemp + TUNING.WX78_MINTEMPCHANGEPERMODULE
+
+    wx:RemoveEventCallback("freeze", OnFreeze)
+
 
     if wx.AddTemperatureModuleLeaning ~= nil then
         wx:AddTemperatureModuleLeaning(1)
