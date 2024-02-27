@@ -440,7 +440,6 @@ if GetModConfigData("reworked_ck") then
     table.insert(prefab_post, "crabking")
     table.insert(prefab_post, "crabking_claw")
     table.insert(stategraph_post, "crabkingclaw")
-    table.insert(stategraph_post, "crabking")
 end
 
 table.insert(prefab_post, "shadowchesspieces") --changes to  all 3 pieces. (no collision and shadowcrown loot)
