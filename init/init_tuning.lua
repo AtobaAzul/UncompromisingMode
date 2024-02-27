@@ -419,8 +419,6 @@ if GetModConfigData("beebox_nerf") then
     TUNING.BEEBOX_RELEASE_TIME = day_time * 1.5
 end
 
-TUNING.RABBITHOUSE_SPAWN_TIME = total_day_time * 2
-
 --if GetModConfigData("woodie_skilltree") then
 	--TUNING.WEREMOOSE_DAMAGE = wilson_attack * 1.5
 	--TUNING.SKILLS.WOODIE.MOOSE_SMASH_DAMAGE = wilson_attack * 3
