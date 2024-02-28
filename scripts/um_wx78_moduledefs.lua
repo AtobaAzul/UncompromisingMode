@@ -399,16 +399,18 @@ local function heat_deactivate(inst, wx)
 		wx.components.temperature:SetModifier("1_heat_module_warm", 60)
 	end]]
 
-    wx._heat_chips = math.max(0, wx._heat_chips - 1)
-
-    for _, act in ipairs(affected_actions) do
-        wx.components.efficientuser:RemoveMultiplier(act, inst)
-        wx.components.workmultiplier:RemoveMultiplier(act, inst)
-    end
-
     inst:RemoveEventCallback("temperaturedelta", wx._ontempmodulechange, wx)
     inst:RemoveEventCallback("working", wx._onworktemp, wx)
     inst:RemoveEventCallback("onattackother", wx._onattacktemp, wx)
+
+    wx._heat_chips = math.max(0, wx._heat_chips - 1)
+    wx:DoTaskInTime(0, function(wx)
+        for _, act in ipairs(affected_actions) do
+            wx.components.efficientuser:RemoveMultiplier(act, inst)
+            wx.components.workmultiplier:RemoveMultiplier(act, inst)
+        end
+    end)
+
 
     wx.components.moisture.maxDryingRate = wx.components.moisture.maxDryingRate - EXTRA_DRYRATE
     wx.components.moisture.baseDryingRate = wx.components.moisture.baseDryingRate - EXTRA_DRYRATE
