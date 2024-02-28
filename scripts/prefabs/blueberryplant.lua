@@ -15,7 +15,7 @@ local mine_no_tags = { "notraptrigger", "flying", "ghost", "playerghost", "snapd
 
 local function on_deactivate(inst)
     if inst.components.lootdropper ~= nil then
-        if inst.Harvestable == "full" then
+        if inst.harvestable == "full" then
             if math.random() > 0.1 then
                 inst.components.lootdropper:SpawnLootPrefab("giant_blueberry")
 				local x, y, z = inst.Transform:GetWorldPosition()
@@ -31,17 +31,17 @@ local function on_deactivate(inst)
             end
         end    
     end
-    if inst.Harvestable == "regrow" then
+    if inst.harvestable == "regrow" then
         inst:Remove()
     else
         inst.components.workable:SetWorkLeft(1)
-        inst.Harvestable = "regrow"
+        inst.harvestable = "regrow"
     end
 end
 
 local function on_blueberry_dug_up(inst, digger)
 	if digger:HasTag("player") then
-		if inst.Harvestable == "full" then
+		if inst.harvestable == "full" then
 			if not inst.components.mine.issprung then
 				inst.components.mine:Explode()
 			end
@@ -83,7 +83,7 @@ local function on_anim_over(inst)
         return
     end
 	if inst.froze then
-		if inst.Harvestable == "full" and TheWorld.state.iswinter then
+		if inst.harvestable == "full" and TheWorld.state.iswinter then
 			inst.AnimState:PushAnimation("idle_frozen", true)
 			elseif not TheWorld.state.iswinter  then
 			inst.froze = false
@@ -103,7 +103,7 @@ local mine_test_fn = function(target, inst)
 end
 
 local function do_snap(inst)
-	if inst.Harvestable == "full" then
+	if inst.harvestable == "full" then
 		inst.AnimState:PushAnimation("spawn")
 		inst.AnimState:PushAnimation("trap_idle", true)
 		inst.SoundEmitter:PlaySound("wintersfeast2019/creatures/gingerbread_vargr/splat")
@@ -124,7 +124,7 @@ local function do_snap(inst)
                     target.components.mine:Explode(target)
 			end
 		end
-		inst.Harvestable = "regrow"
+		inst.harvestable = "regrow"
 	end
     if inst._snap_task ~= nil then
         inst._snap_task:Cancel()
@@ -135,7 +135,7 @@ end
 local function Regrow(inst)
 	inst.components.mine:SetRadius(TUNING.STARFISH_TRAP_RADIUS*1.1)
     inst.components.mine:Reset()
-	inst.Harvestable = "full"
+	inst.harvestable = "full"
 end
 
 local function CheckTimeRegrow(inst)
@@ -192,7 +192,7 @@ local function on_save(inst, data)
         end
     end
 	data.froze = inst.froze
-	data.Harvestable = inst.Harvestable
+	data.harvestable = inst.harvestable
 	data.pendingregrow = inst.pendingregrow
 end
 
@@ -205,7 +205,7 @@ local function on_blueberry_mine(inst)
 			v.components.moisture:DoDelta(5)
 		end
 	end
-	inst.Harvestable = "regrow"
+	inst.harvestable = "regrow"
 	inst.components.workable:SetWorkAction(ACTIONS.DIG)
 	inst.components.workable:SetWorkLeft(1)
 	inst.components.workable:SetOnFinishCallback(on_blueberry_dug_up)
@@ -218,7 +218,7 @@ end
 
 local function MakeWinter(inst)
 	inst.components.mine:SetRadius(TUNING.STARFISH_TRAP_RADIUS*0)
-	if inst.Harvestable == "full" then
+	if inst.harvestable == "full" then
 		inst.components.workable:SetWorkAction(ACTIONS.MINE)
 		inst.components.workable:SetWorkLeft(1)
 		inst.components.workable:SetOnFinishCallback(on_blueberry_mine)
@@ -233,8 +233,8 @@ end
 
 local function on_load(inst, data)
     if data then
-		if data.Harvestable then
-			inst.Harvestable = data.Harvestable
+		if data.harvestable then
+			inst.harvestable = data.harvestable
 		end
 		if data.reset_task_time_remaining then
 			if inst._reset_task then
@@ -259,10 +259,10 @@ end
 
 
 local function OnSpring(inst)
-	if inst.pendingregrow or (inst.Harvestable == "regrow" and not inst.components.timer:TimerExists("regrow"))then
+	if inst.pendingregrow or (inst.harvestable == "regrow" and not inst.components.timer:TimerExists("regrow"))then
 		Regrow(inst)
 	end
-	if inst.Harvestable == "full" and inst.froze then
+	if inst.harvestable == "full" and inst.froze then
 		inst:RemoveEventCallback("animover",on_anim_over)
 		inst:DoTaskInTime(3+math.random(0,15), function(inst) 
 			Melt(inst)
@@ -275,7 +275,7 @@ end
 local function Freeze(inst)
 	if TheWorld.state.iswinter then
 		MakeWinter(inst)
-		if inst.Harvestable == "full" then
+		if inst.harvestable == "full" then
 			inst.AnimState:PlayAnimation("freeze")
 			inst.froze = true
 		end
@@ -358,7 +358,7 @@ local function blueberryplant()
     -- Start the task for the characterizing additional idles.
     inst:ListenForEvent("animover", on_anim_over)
 	
-	inst:DoTaskInTime(0,function(inst) if not inst.Harvestable then inst.Harvestable = "full" end end)
+	inst:DoTaskInTime(0,function(inst) if not inst.harvestable then inst.harvestable = "full" end end)
     inst.OnSave = on_save
     inst.OnLoad = on_load
 	inst.pendingregrow = false
