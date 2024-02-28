@@ -109,10 +109,8 @@ local function UncompromisingSoulHeal(inst)
 end
 
 --beta uses
---if GLOBAL.TUNING.DSTU.WORTOX == "SHOT" or GLOBAL.TUNING.DSTU.WORTOX == "APOLLO" then
 	local wortox_soul_common = require("prefabs/wortox_soul_common")
 	wortox_soul_common.DoHeal = UncompromisingSoulHeal
---end
 
 AddPrefabPostInit("wortox", function(inst)
 	if not GLOBAL.TheWorld.ismastersim then
@@ -123,7 +121,6 @@ AddPrefabPostInit("wortox", function(inst)
 		inst.components.foodaffinity:AddPrefabAffinity("devilsfruitcake", 1.24)
 	end
 	
-	--if GLOBAL.TUNING.DSTU.WORTOX == "APOLLO" then
         if inst.components.souleater ~= nil then
             local oneatsoulfn_ = inst.components.souleater.oneatsoulfn
 
@@ -132,5 +129,5 @@ AddPrefabPostInit("wortox", function(inst)
                 inst.components.sanity:DoDelta(-TUNING.SANITY_TINY)
             end
         end
-	--end
 end)
+

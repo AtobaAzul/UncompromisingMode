@@ -106,12 +106,8 @@ end
 if GetModConfigData("winonaworker") then
     STRINGS.CHARACTER_DESCRIPTIONS.winona = STRINGS.CHARACTER_DESCRIPTIONS.winona .. "\n󰀕Works hard until lunch"
 end
-if GetModConfigData("wortox") == "UMNERF" then
-    STRINGS.CHARACTER_DESCRIPTIONS.wortox = STRINGS.CHARACTER_DESCRIPTIONS.wortox ..
-        "\n󰀕Some weak creatures have no meaningful Soul"
-end
-if GetModConfigData("wortox") == "SHOT" then
-    STRINGS.CHARACTER_DESCRIPTIONS.wortox = STRINGS.CHARACTER_DESCRIPTIONS.wortox .. "\n󰀕Souls take time to heal"
+if GetModConfigData("wortox") then
+    STRINGS.CHARACTER_DESCRIPTIONS.wortox = STRINGS.CHARACTER_DESCRIPTIONS.wortox .. "\n󰀕Souls take time to heal, and heal less\n󰀕Some weak creatures have no soul."
 end
 if GetModConfigData("wigfrid") then
     STRINGS.CHARACTER_DESCRIPTIONS.wathgrithr = STRINGS.CHARACTER_DESCRIPTIONS.wathgrithr .. "\n󰀕Combat is less sustaining"
