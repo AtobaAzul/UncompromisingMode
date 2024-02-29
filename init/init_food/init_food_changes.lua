@@ -311,6 +311,26 @@ if TUNING.DSTU.FARMFOODREDUX then
 		end)
 	end
 end
+
+if GetModConfigData("bonestew_nerf") then
+    local BONESTEW =
+	{
+		"bonestew",
+		"bonestew_spice_chili",
+		"bonestew_spice_garlic",
+		"bonestew_spice_salt",
+		"bonestew_spice_sugar",
+	}
+
+	for k, v in pairs(BONESTEW) do
+		AddPrefabPostInit(v, function(inst)
+			if inst ~= nil and inst.components.edible ~= nil then
+				inst.components.edible.hungervalue = 100
+			end
+		end)
+	end
+end
+
 -----------------------------------------------------------------
 -- Prevent cooked eggs birdcage infinite loop
 -----------------------------------------------------------------
