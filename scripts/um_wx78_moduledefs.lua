@@ -481,7 +481,7 @@ AddCreatureScanDataDefinition("mole", "nightvision", 4)
 ---------------------------------------------------------------
 
 local function OnFreeze(inst)
-    inst.components.temperature:DoDelta(-25)
+    inst.components.temperature:DoDelta(-math.random(5, 10))
 end
 
 local function cold_activate(inst, wx)
@@ -505,7 +505,7 @@ local function cold_activate(inst, wx)
         inst.stoppedfreezetask = wx:DoPeriodicTask(0.5, function(wx)
             if wx.sg:HasStateTag("idle") then
                 --print("hi :3 :3 :3 :3 ") --I am going insane
-                wx.components.freezable:AddColdness(0.3, 5)
+                wx.components.freezable:AddColdness(0.15, 5)
                 wx.components.temperature:DoDelta(-1.25)
             end
         end)
