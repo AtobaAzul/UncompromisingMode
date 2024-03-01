@@ -8,7 +8,7 @@ modimport("init/minimap_icons")
 
 --  [   Import customized shard RPC module ]    --
 
-
+modimport('init/init_dynlayout')
 --  [   Mock Dragonfly Spit Bait ]    --
 modimport("init/init_weather/init_dragonfly_bait")
 
