@@ -70,26 +70,26 @@ local meat_reduction_factor = GLOBAL.TUNING.DSTU.MONSTER_MEAT_MEAT_REDUCTION_PER
 local function MonsterMeatSupport(tags)
     return (
         (
-        tags ~= nil and not tags.monster or tags.monster < 2 or
-        (tags.meat and (tags.monster - tags.meat * meat_reduction_factor) < 2)) and TUNING.DSTU.CROCKPOTMONSTMEAT
-        ) or TUNING.DSTU.CROCKPOTMONSTMEAT == false
+            tags ~= nil and not tags.monster or tags.monster < 2 or
+            (tags.meat and (tags.monster - tags.meat * meat_reduction_factor) < 2)) and TUNING.DSTU.CROCKPOTMONSTMEAT
+    ) or TUNING.DSTU.CROCKPOTMONSTMEAT == false
 end
 
 if TUNING.DSTU.CROCKPOTMONSTMEAT then
     AddIngredientValues({ "monstermeat" },
         { meat = 1, monster = GLOBAL.TUNING.DSTU.MONSTER_MEAT_COOKED_MONSTER_VALUE --[[ + meat_reduction_factor]] }, true
-        , true)                                                                       --2.5 monster total, Will be calculated with -1 meat
+        , true) --2.5 monster total, Will be calculated with -1 meat
     AddIngredientValues({ "monstermeat_cooked" }, {
         meat = 1,
         monster = GLOBAL.TUNING.DSTU.MONSTER_MEAT_COOKED_MONSTER_VALUE
-    }, true, true)                                                                    --2 monster total, Will be calculated with -1 meat
+    }, true, true) --2 monster total, Will be calculated with -1 meat
     AddIngredientValues({ "monstermeat_dried" },
-    { meat = 1, monster = GLOBAL.TUNING.DSTU.MONSTER_MEAT_DRIED_MONSTER_VALUE }
-    , true, true)                                                                     --1 monster total, Will be calculated with -1 meat
+        { meat = 1, monster = GLOBAL.TUNING.DSTU.MONSTER_MEAT_DRIED_MONSTER_VALUE }
+        , true, true) --1 monster total, Will be calculated with -1 meat
     AddIngredientValues({ "monstersmallmeat" }, {
         meat = 0.5,
         monster = GLOBAL.TUNING.DSTU.MONSTER_MEAT_COOKED_MONSTER_VALUE
-    }, true, true)                                                                    --2 monster total, Will be calculated with -1 meat
+    }, true, true) --2 monster total, Will be calculated with -1 meat
 
     RegisterInventoryItemAtlas("images/inventoryimages/monstersmallmeat.xml", "monstersmallmeat.tex")
     AddIngredientValues({ "cookedmonstersmallmeat" },
@@ -130,26 +130,26 @@ AddIngredientValues({ "rabbit" }, { meat = 0.5 })
 
 recipes.koalefig_trunk.test = function(cooker, names, tags)
     return (names.trunk_summer or names.trunk_cooked or names.trunk_winter) and (names.fig or names.fig_cooked or names.aphid) and
-		UncompromisingFillers(tags) and not (tags.insectoid and tags.insectoid >= 1)
+        UncompromisingFillers(tags) and not (tags.insectoid and tags.insectoid >= 1)
 end
 -- Original:	test = function(cooker, names, tags) return (names.trunk_summer or names.trunk_cooked or names.trunk_winter) and (names.fig or names.fig_cooked) end,
 
 recipes.figkabab.test = function(cooker, names, tags)
-	return (names.fig or names.fig_cooked or names.aphid) and names.twigs and tags.meat and tags.meat >= 1 and
-		(not tags.monster or tags.monster <= 1) and not tags.frozen and not tags.foliage and not (tags.insectoid and tags.insectoid >= 1)
+    return (names.fig or names.fig_cooked or names.aphid) and names.twigs and tags.meat and tags.meat >= 1 and
+        (not tags.monster or tags.monster <= 1) and not tags.frozen and not tags.foliage and not (tags.insectoid and tags.insectoid >= 1)
 end
 -- Original:	test = function(cooker, names, tags) return (names.fig or names.fig_cooked) and names.twigs and tags.meat and tags.meat >= 1 and (not tags.monster or tags.monster <= 1) end,
 
 recipes.figatoni.test = function(cooker, names, tags)
     return ((names.fig or names.fig_cooked) and
-        tags.veggie and tags.veggie >= 2 and not tags.meat)
+            tags.veggie and tags.veggie >= 2 and not tags.meat)
         or ((names.aphid) and tags.veggie and tags.veggie >= 2 and tags.meat and tags.meat <= 0.5 and not (tags.insectoid and tags.insectoid >= 1))
 end
 -- Original:	test = function(cooker, names, tags) return (names.fig or names.fig_cooked) and tags.veggie and tags.veggie >= 2  and not tags.meat end,
 
 recipes.frognewton.test = function(cooker, names, tags)
     return (names.fig or names.fig_cooked or names.aphid) and (names.froglegs or names.froglegs_cooked) and
-		UncompromisingFillers(tags) and not (tags.insectoid and tags.insectoid >= 1)
+        UncompromisingFillers(tags) and not (tags.insectoid and tags.insectoid >= 1)
 end
 -- Original:	test = function(cooker, names, tags) return (names.fig or names.fig_cooked) and (names.froglegs or names.froglegs_cooked) end,
 
@@ -164,11 +164,11 @@ recipes.frognewton.priority = 20
 
 if TUNING.DSTU.CROCKPOTMONSTMEAT then
     recipes.monsterlasagna.test = function(cooker, names, tags)
-        return tags.monster and (tags.meat and tags.monster > tags.meat or tags.monster >= 3) and 
-				not tags.inedible and LimitIceTestFn(tags, RECIPE_ICE_LIMIT)
+        return tags.monster and (tags.meat and tags.monster > tags.meat or tags.monster >= 3) and
+            not tags.inedible and LimitIceTestFn(tags, RECIPE_ICE_LIMIT)
     end
-	-- Original:           test = function(cooker, names, tags) return tags.monster and tags.monster >= 2 and not tags.inedible end,
-	recipes.monsterlasagna.priority = 51
+    -- Original:           test = function(cooker, names, tags) return tags.monster and tags.monster >= 2 and not tags.inedible end,
+    recipes.monsterlasagna.priority = 51
 end
 
 -- Meats
@@ -180,52 +180,52 @@ end
 -- Original:	test = function(cooker, names, tags) return names.wobster_sheller_land and tags.frozen end,
 
 recipes.lobsterdinner.test = function(cooker, names, tags)
-    return names.wobster_sheller_land and names.butter and (tags.meat == 1.0) and (tags.fish == 1.0) and 
-		not tags.frozen and UncompromisingFillers(tags) and not (tags.insectoid and tags.insectoid >= 1)
+    return names.wobster_sheller_land and names.butter and (tags.meat == 1.0) and (tags.fish == 1.0) and
+        not tags.frozen and UncompromisingFillers(tags) and not (tags.insectoid and tags.insectoid >= 1)
 end
 -- Original:	test =  function(cooker, names, tags) return names.wobster_sheller_land and names.butter and (tags.meat == 1.0) and (tags.fish == 1.0) and not tags.frozen end
 
 recipes.barnaclepita.test = function(cooker, names, tags)
     return (names.barnacle or names.barnacle_cooked) and tags.veggie and tags.veggie >= 0.5 and
-		UncompromisingFillers(tags) and not (tags.insectoid and tags.insectoid >= 1)
+        UncompromisingFillers(tags) and not (tags.insectoid and tags.insectoid >= 1)
 end
 -- Original:	test = function(cooker, names, tags) return (names.barnacle or names.barnacle_cooked) and tags.veggie and tags.veggie >= 0.5 end
 
 recipes.leafloaf.test = function(cooker, names, tags)
     return ((names.plantmeat or 0) + (names.plantmeat_cooked or 0) >= 2) and
-		UncompromisingFillers(tags) and not (tags.insectoid and tags.insectoid >= 1)
+        UncompromisingFillers(tags) and not (tags.insectoid and tags.insectoid >= 1)
 end
 -- Original:	test = function(cooker, names, tags) return ((names.plantmeat or 0) + (names.plantmeat_cooked or 0) >= 2 ) end
 
 recipes.barnaclestuffedfishhead.test = function(cooker, names, tags)
     return (names.barnacle or names.barnacle_cooked) and tags.fish and tags.fish >= 1.25 and
-		UncompromisingFillers(tags) and not (tags.insectoid and tags.insectoid >= 1)
+        UncompromisingFillers(tags) and not (tags.insectoid and tags.insectoid >= 1)
 end
 -- Original:	test = function(cooker, names, tags) return (names.barnacle or names.barnacle_cooked) and tags.fish and tags.fish >= 1.25 end,
 
 recipes.pepperpopper.test = function(cooker, names, tags)
-    return (names.pepper or names.pepper_cooked) and tags.meat and tags.meat <= 1.5 and 
-		not tags.inedible and UncompromisingFillers(tags) and not (tags.insectoid and tags.insectoid >= 1)
+    return (names.pepper or names.pepper_cooked) and tags.meat and tags.meat <= 1.5 and
+        not tags.inedible and UncompromisingFillers(tags) and not (tags.insectoid and tags.insectoid >= 1)
 end
 -- Original:	test = function(cooker, names, tags) return (names.pepper or names.pepper_cooked) and tags.meat and tags.meat <= 1.5 and not tags.inedible end,
 
 recipes.unagi.test = function(cooker, names, tags)
-	return (names.cutlichen or names.kelp or names.kelp_cooked or names.kelp_dried) and (names.eel or names.eel_cooked or names.pondeel) and
-		UncompromisingFillers(tags) and not (tags.insectoid and tags.insectoid >= 1)
+    return (names.cutlichen or names.kelp or names.kelp_cooked or names.kelp_dried) and (names.eel or names.eel_cooked or names.pondeel) and
+        UncompromisingFillers(tags) and not (tags.insectoid and tags.insectoid >= 1)
 end
 -- Original:	test = function(cooker, names, tags) return (names.cutlichen or names.kelp or names.kelp_cooked or names.kelp_dried) and (names.eel or names.eel_cooked or names.pondeel) end,
 
 recipes.unagi.priority = 52
 
 recipes.ceviche.test = function(cooker, names, tags)
-	return tags.fish and tags.fish >= 2 and tags.frozen and
-		not tags.inedible and not tags.egg and UncompromisingFillers(tags) and not (tags.insectoid and tags.insectoid >= 1)
+    return tags.fish and tags.fish >= 2 and tags.frozen and
+        not tags.inedible and not tags.egg and UncompromisingFillers(tags) and not (tags.insectoid and tags.insectoid >= 1)
 end
 -- Original:	test = function(cooker, names, tags) return tags.fish and tags.fish >= 2 and tags.frozen and not tags.inedible and not tags.egg end,
 
 recipes.guacamole.test = function(cooker, names, tags)
-    return names.mole and (names.rock_avocado_fruit_ripe or names.cactus_meat) and 
-		not tags.fruit and UncompromisingFillers(tags) and not (tags.insectoid and tags.insectoid >= 1)
+    return names.mole and (names.rock_avocado_fruit_ripe or names.cactus_meat) and
+        not tags.fruit and UncompromisingFillers(tags) and not (tags.insectoid and tags.insectoid >= 1)
 end
 -- Original:	test = function(cooker, names, tags) return names.mole and (names.rock_avocado_fruit_ripe or names.cactus_meat) and not tags.fruit end,
 
@@ -237,19 +237,19 @@ end
 
 recipes.fishsticks.test = function(cooker, names, tags)
     return tags.fish and names.twigs and
-		UncompromisingFillers(tags) and not (tags.insectoid and tags.insectoid >= 1) and not tags.monster
+        UncompromisingFillers(tags) and not (tags.insectoid and tags.insectoid >= 1) and not tags.monster
 end
 -- Original:	test = function(cooker, names, tags) return tags.fish and names.twigs and (tags.inedible and tags.inedible <= 1) end,
 
 recipes.perogies.test = function(cooker, names, tags)
     return tags.egg and tags.meat and (tags.veggie and tags.veggie >= TUNING.DSTU.PIEROGI) and
-		not tags.inedible and not (tags.insectoid and tags.insectoid >= 1)
+        not tags.inedible and not (tags.insectoid and tags.insectoid >= 1)
 end
 -- Original:	test = function(cooker, names, tags) return tags.egg and tags.meat and tags.veggie and not tags.inedible end,
 
 recipes.kabobs.test = function(cooker, names, tags)
-    return tags.meat and names.twigs and 
-		(not tags.monster or tags.monster <= 3.5) and UncompromisingFillers(tags) and not (tags.insectoid and tags.insectoid >= 1)
+    return tags.meat and names.twigs and
+        (not tags.monster or tags.monster <= 3.5) and UncompromisingFillers(tags) and not (tags.insectoid and tags.insectoid >= 1)
 end
 -- Original:	test = function(cooker, names, tags) return tags.meat and names.twigs and (not tags.monster or tags.monster <= 1) and (tags.inedible and tags.inedible <= 1) end,
 
@@ -261,7 +261,7 @@ end
 
 recipes.frogglebunwich.test = function(cooker, names, tags)
     return (names.froglegs or names.froglegs_cooked) and tags.veggie and
-		UncompromisingFillers(tags) and not (tags.insectoid and tags.insectoid >= 1)
+        UncompromisingFillers(tags) and not (tags.insectoid and tags.insectoid >= 1)
 end
 -- Original:	test = function(cooker, names, tags) return (names.froglegs or names.froglegs_cooked) and tags.veggie end,
 
@@ -269,57 +269,63 @@ recipes.frogglebunwich.priority = 6 --Kabobs is 5... putting this just above kab
 
 recipes.meatballs.test = function(cooker, names, tags)
     return tags.meat and
-		not tags.inedible and UncompromisingFillers(tags) and not (tags.insectoid and tags.insectoid >= 1)
+        not tags.inedible and UncompromisingFillers(tags) and not (tags.insectoid and tags.insectoid >= 1)
 end
 -- Original:	test = function(cooker, names, tags) return tags.meat and not tags.inedible end,
 
 recipes.bunnystew.test = function(cooker, names, tags)
-    return (names.rabbit) and (tags.frozen and tags.frozen == 2) and 
-		(not tags.inedible) and (not tags.foliage)
+    return (names.rabbit) and (tags.frozen and tags.frozen == 2) and
+        (not tags.inedible) and (not tags.foliage)
 end
 -- Original: test = function(cooker, names, tags) return (tags.meat and tags.meat < 1) and (tags.frozen and tags.frozen >= 2) and (not tags.inedible) end
+if GetModConfigData("bonestew_nerf") then
+    recipes.bonestew.test = function(cooker, names, tags)
+        return tags.meat and tags.meat >= 3.5 and not tags.inedible
+    end
+end
+-- Original: test = function(cooker, names, tags) return tags.meat and tags.meat >= 3 and not tags.inedible end,
 
 -- Veggies and Fruits
 
 recipes.salsa.test = function(cooker, names, tags)
     return (names.tomato or names.tomato_cooked) and (names.onion or names.onion_cooked) and
-		not tags.meat and not tags.inedible and not tags.egg and UncompromisingFillers(tags) and not (tags.insectoid and tags.insectoid >= 1)
+        not tags.meat and not tags.inedible and not tags.egg and UncompromisingFillers(tags) and not (tags.insectoid and tags.insectoid >= 1)
 end
 -- Original:	test = function(cooker, names, tags) return (names.tomato or names.tomato_cooked) and (names.onion or names.onion_cooked) and not tags.meat and not tags.inedible and not tags.egg end,
 
 recipes.bananapop.test = function(cooker, names, tags)
-	return (names.cave_banana or names.cave_banana_cooked) and tags.frozen and names.twigs and
-		not tags.meat and not tags.fish and LimitIceTestFn(tags, RECIPE_ICE_LIMIT) and LimitTwigTestFn(tags, RECIPE_TWIG_LIMIT)
+    return (names.cave_banana or names.cave_banana_cooked) and tags.frozen and names.twigs and
+        not tags.meat and not tags.fish and LimitIceTestFn(tags, RECIPE_ICE_LIMIT) and LimitTwigTestFn(tags, RECIPE_TWIG_LIMIT)
 end
 -- Original:	test = function(cooker, names, tags) return (names.cave_banana or names.cave_banana_cooked) and tags.frozen and names.twigs and not tags.meat and not tags.fish end,
 
 recipes.watermelonicle.test = function(cooker, names, tags)
-	return names.watermelon and tags.frozen and names.twigs and
-		not tags.meat and not tags.veggie and not tags.egg and not tags.foliage
+    return names.watermelon and tags.frozen and names.twigs and
+        not tags.meat and not tags.veggie and not tags.egg and not tags.foliage
 end
 -- Original:	test = function(cooker, names, tags) return names.watermelon and tags.frozen and names.twigs and not tags.meat and not tags.veggie and not tags.egg end,
 
 recipes.icecream.test = function(cooker, names, tags)
-	return tags.frozen and tags.dairy and tags.sweetener and
-		not tags.meat and not tags.veggie and not tags.inedible and not tags.egg and UncompromisingFillers(tags) 
+    return tags.frozen and tags.dairy and tags.sweetener and
+        not tags.meat and not tags.veggie and not tags.inedible and not tags.egg and UncompromisingFillers(tags)
 end
 -- Original:	test = function(cooker, names, tags) return tags.frozen and tags.dairy and tags.sweetener and not tags.meat and not tags.veggie and not tags.inedible and not tags.egg end,
 
 recipes.potatotornado.test = function(cooker, names, tags)
-	return (names.potato or names.potato_cooked) and names.twigs and names.twigs <=2 and
-		(not tags.monster or tags.monster <= 1) and not tags.meat and not (tags.insectoid and tags.insectoid >= 1) and not tags.frozen and not tags.foliage
+    return (names.potato or names.potato_cooked) and names.twigs and names.twigs <= 2 and
+        (not tags.monster or tags.monster <= 1) and not tags.meat and not (tags.insectoid and tags.insectoid >= 1) and not tags.frozen and not tags.foliage
 end
 -- Original:	test = function(cooker, names, tags) return (names.potato or names.potato_cooked) and names.twigs and (not tags.monster or tags.monster <= 1) and not tags.meat and (tags.inedible and tags.inedible <= 2) end,
 
 recipes.powcake.test = function(cooker, names, tags)
     return names.twigs and names.honey and (names.corn or names.corn_cooked) and
-		not tags.frozen and not tags.foliage
+        not tags.frozen and not tags.foliage
 end
 -- Original:	test = function(cooker, names, tags) return names.twigs and names.honey and (names.corn or names.corn_cooked) end,
 
-recipes.mandrakesoup.test = function(cooker, names, tags) 
-	return names.mandrake and
-		UncompromisingFillers(tags) and not (tags.insectoid and tags.insectoid >= 1) 
+recipes.mandrakesoup.test = function(cooker, names, tags)
+    return names.mandrake and
+        UncompromisingFillers(tags) and not (tags.insectoid and tags.insectoid >= 1)
 end
 -- Original:	test = function(cooker, names, tags) return names.mandrake end,
 
@@ -343,25 +349,25 @@ end
 
 recipes.ratatouille.test = function(cooker, names, tags)
     return not tags.meat and tags.veggie and not tags.inedible and
-		UncompromisingFillers(tags) and not (tags.insectoid and tags.insectoid >= 1) 
+        UncompromisingFillers(tags) and not (tags.insectoid and tags.insectoid >= 1)
 end
 -- Original:	test = function(cooker, names, tags) return not tags.meat and tags.veggie and not tags.inedible end,
 
 recipes.jammypreserves.test = function(cooker, names, tags)
     return tags.fruit and not tags.meat and not tags.veggie and not tags.inedible and
-		UncompromisingFillers(tags) and not (tags.insectoid and tags.insectoid >= 1)
+        UncompromisingFillers(tags) and not (tags.insectoid and tags.insectoid >= 1)
 end
 -- Original:	test = function(cooker, names, tags) return tags.fruit and not tags.meat and not tags.veggie and not tags.inedible end,
 
 recipes.frozenbananadaiquiri.test = function(cooker, names, tags)
-	return (names.cave_banana or names.cave_banana_cooked) and (tags.frozen and tags.frozen >= 1) and
-		not tags.meat and not tags.fish and UncompromisingFillers(tags) and not (tags.insectoid and tags.insectoid >= 1)
-end		
+    return (names.cave_banana or names.cave_banana_cooked) and (tags.frozen and tags.frozen >= 1) and
+        not tags.meat and not tags.fish and UncompromisingFillers(tags) and not (tags.insectoid and tags.insectoid >= 1)
+end
 -- Original:	test = function(cooker, names, tags) return (names.cave_banana or names.cave_banana_cooked) and (tags.frozen and tags.frozen >= 1) and not tags.meat and not tags.fish end,
 
 recipes.bananajuice.test = function(cooker, names, tags)
-	return ((names.cave_banana or 0) + (names.cave_banana_cooked or 0) >= 2) and
-		not tags.meat and not tags.fish and not tags.monster and UncompromisingFillers(tags) and not (tags.insectoid and tags.insectoid >= 1)
+    return ((names.cave_banana or 0) + (names.cave_banana_cooked or 0) >= 2) and
+        not tags.meat and not tags.fish and not tags.monster and UncompromisingFillers(tags) and not (tags.insectoid and tags.insectoid >= 1)
 end
 -- Original:	test = function(cooker, names, tags) return ((names.cave_banana or 0) + (names.cave_banana_cooked or 0) >= 2) and not tags.meat and not tags.fish and not tags.monster end,
 
@@ -369,25 +375,25 @@ end
 
 recipes.jellybean.test = function(cooker, names, tags)
     return names.royal_jelly and not tags.inedible and not tags.monster and
-		UncompromisingFillers(tags) and not (tags.insectoid and tags.insectoid >= 1)
+        UncompromisingFillers(tags) and not (tags.insectoid and tags.insectoid >= 1)
 end
 -- Original:	test = function(cooker, names, tags) return names.royal_jelly and not tags.inedible and not tags.monster end,
 
 recipes.taffy.test = function(cooker, names, tags)
     return tags.sweetener and tags.sweetener >= 3 and
-		not tags.meat and UncompromisingFillers(tags) and not (tags.insectoid and tags.insectoid >= 1)
+        not tags.meat and UncompromisingFillers(tags) and not (tags.insectoid and tags.insectoid >= 1)
 end
 -- Original:	test = function(cooker, names, tags) return tags.sweetener and tags.sweetener >= 3 and not tags.meat end,
 
 recipes.sweettea.test = function(cooker, names, tags)
-	return names.forgetmelots and tags.foliage and tags.foliage <= 1 and tags.sweetener and tags.frozen and tags.frozen <= 1 and
-		not tags.monster and not tags.veggie and not tags.meat and not tags.fish and not tags.egg and not tags.fat and not tags.dairy and not tags.inedible
+    return names.forgetmelots and tags.foliage and tags.foliage <= 1 and tags.sweetener and tags.frozen and tags.frozen <= 1 and
+        not tags.monster and not tags.veggie and not tags.meat and not tags.fish and not tags.egg and not tags.fat and not tags.dairy and not tags.inedible
 end
 -- Original:		test = function(cooker, names, tags) return names.forgetmelots and tags.sweetener and tags.frozen and not tags.monster and not tags.veggie and not tags.meat and not tags.fish and not tags.egg and not tags.fat and not tags.dairy and not tags.inedible end,
 
 recipes.justeggs.test = function(cooker, names, tags)
-	return tags.egg and tags.egg >= 3 and
-		UncompromisingFillers(tags) and not (tags.insectoid and tags.insectoid >= 1)
+    return tags.egg and tags.egg >= 3 and
+        UncompromisingFillers(tags) and not (tags.insectoid and tags.insectoid >= 1)
 end
 -- Original:	test = function(cooker, names, tags) return tags.egg and tags.egg >= 3 end,
 
@@ -397,16 +403,16 @@ end
 -- Original:	test = function(cooker, names, tags) return names.tallbirdegg and tags.veggie and tags.veggie >= 1 end,
 
 recipes.veggieomlet.test = function(cooker, names, tags)
-	return tags.egg and tags.egg >= 1 and tags.veggie and tags.veggie >= 1 and
-		not tags.meat and not tags.dairy and UncompromisingFillers(tags) and not (tags.insectoid and tags.insectoid >= 1)
-end		
+    return tags.egg and tags.egg >= 1 and tags.veggie and tags.veggie >= 1 and
+        not tags.meat and not tags.dairy and UncompromisingFillers(tags) and not (tags.insectoid and tags.insectoid >= 1)
+end
 -- Original:	test = function(cooker, names, tags) return tags.egg and tags.egg >= 1 and tags.veggie and tags.veggie >= 1 and not tags.meat and not tags.dairy end,
 
 -- WARLY recipes
 
 warly_recipes.dragonchilisalad.test = function(cooker, names, tags)
     return (
-        names.dragonfruit or names.dragonfruit_cooked) and (names.pepper or names.pepper_cooked) and not tags.meat and
+            names.dragonfruit or names.dragonfruit_cooked) and (names.pepper or names.pepper_cooked) and not tags.meat and
         not tags.inedible and not tags.egg and UncompromisingFillers(tags) and not (tags.insectoid and tags.insectoid >= 1)
 end
 -- Original:	test = function(cooker, names, tags) return (names.dragonfruit or names.dragonfruit_cooked) and (names.pepper or names.pepper_cooked) and not tags.meat and not tags.inedible and not tags.egg end,
@@ -433,7 +439,7 @@ end
 
 warly_recipes.glowberrymousse.test = function(cooker, names, tags)
     return (
-        names.wormlight or (names.wormlight_lesser and names.wormlight_lesser >= 2)) and (tags.fruit and tags.fruit >= 2) and
+            names.wormlight or (names.wormlight_lesser and names.wormlight_lesser >= 2)) and (tags.fruit and tags.fruit >= 2) and
         not tags.meat and not tags.inedible and UncompromisingFillers(tags) and not (tags.insectoid and tags.insectoid >= 1)
 end
 -- Original:	test = function(cooker, names, tags) return (names.wormlight or (names.wormlight_lesser and names.wormlight_lesser >= 2)) and (tags.fruit and tags.fruit >= 2) and not tags.meat and not tags.inedible end,
@@ -514,7 +520,7 @@ RegisterInventoryItemAtlas("images/inventoryimages/rice.xml", "rice.tex")
 InsertIngredientValues({ "rice_cooked" }, { veggie = 1 }, true, false, false)
 RegisterInventoryItemAtlas("images/inventoryimages/rice_cooked.xml", "rice_cooked.tex")
 if TUNING.DSTU.NEWRECIPES then
-	InsertIngredientValues({ "firenettles" }, { foliage = 1 }, true, false, false)
+    InsertIngredientValues({ "firenettles" }, { foliage = 1 }, true, false, false)
     InsertIngredientValues({ "foliage" }, { foliage = 1 }, true, false, false)
     InsertIngredientValues({ "greenfoliage" }, { foliage = 1 }, true, false, false)
 end
@@ -530,57 +536,57 @@ InsertIngredientValues({ "smallfishmeat_dried" }, { meat = .5, fish = .5 }, true
 RegisterInventoryItemAtlas("images/inventoryimages/smallfishmeat_dried.xml", "smallfishmeat_dried.tex")
 
 if TUNING.DSTU.NEWRECIPES then
-	local cookpots = {
-		"cookpot", 
-		"portablecookpot", 
-		"archive_cookpot"
-	}
-		
-	local spicers = {
-		"portablespicer"
-	}
+    local cookpots = {
+        "cookpot",
+        "portablecookpot",
+        "archive_cookpot"
+    }
 
-	local um_preparedfoods = require("um_preparedfoods")
-	local um_spicedfoods = require("um_spicedfoods")
-	local recipe_cards = require("cooking").recipe_cards
+    local spicers = {
+        "portablespicer"
+    }
 
-	for i, v in pairs(cookpots) do
-		for n, b in pairs(um_preparedfoods) do 
-			if TUNING.DSTU.NEWRECIPES then
-				AddCookerRecipe(v, b) 
-		
-				if b.card_def then 
-					table.insert(recipe_cards, {recipe_name = b.name, cooker_name = "cookpot"}) 
-				end 
-			end
-				
-			RegisterInventoryItemAtlas(b.atlasname, b.name..".tex")
-		end
-	end
+    local um_preparedfoods = require("um_preparedfoods")
+    local um_spicedfoods = require("um_spicedfoods")
+    local recipe_cards = require("cooking").recipe_cards
 
-	for i, v in pairs(spicers) do
-		for n, b in pairs(um_spicedfoods) do 
-			AddCookerRecipe(v, b) 
-		end
-	end
+    for i, v in pairs(cookpots) do
+        for n, b in pairs(um_preparedfoods) do
+            if TUNING.DSTU.NEWRECIPES then
+                AddCookerRecipe(v, b)
+
+                if b.card_def then
+                    table.insert(recipe_cards, { recipe_name = b.name, cooker_name = "cookpot" })
+                end
+            end
+
+            RegisterInventoryItemAtlas(b.atlasname, b.name .. ".tex")
+        end
+    end
+
+    for i, v in pairs(spicers) do
+        for n, b in pairs(um_spicedfoods) do
+            AddCookerRecipe(v, b)
+        end
+    end
 end
-	
+
 --sailing rebalance related food changes.
 
 if GetModConfigData("sr_foodrebalance") then
-	recipes.barnaclesushi.test = function(cooker, names, tags)
-		return (names.barnacle or names.barnacle_cooked) and (names.kelp or names.kelp_cooked) and
-			UncompromisingFillers(tags) and not (tags.insectoid and tags.insectoid >= 1)
-	end
-	-- Original:	test = function(cooker, names, tags) return (names.barnacle or names.barnacle_cooked) and (names.kelp or names.kelp_cooked) and tags.egg and tags.egg >= 1
+    recipes.barnaclesushi.test = function(cooker, names, tags)
+        return (names.barnacle or names.barnacle_cooked) and (names.kelp or names.kelp_cooked) and
+            UncompromisingFillers(tags) and not (tags.insectoid and tags.insectoid >= 1)
+    end
+    -- Original:	test = function(cooker, names, tags) return (names.barnacle or names.barnacle_cooked) and (names.kelp or names.kelp_cooked) and tags.egg and tags.egg >= 1
     recipes.surfnturf.test = function(cooker, names, tags)
         return tags.meat and tags.meat >= 2.5 and tags.fish and tags.fish >= 2.0 and not tags.frozen
     end
-	-- Original:	test = function(cooker, names, tags) return tags.meat and tags.meat >= 2.5 and tags.fish and tags.fish >= 1.5 and not tags.frozen end,
+    -- Original:	test = function(cooker, names, tags) return tags.meat and tags.meat >= 2.5 and tags.fish and tags.fish >= 1.5 and not tags.frozen end,
     recipes.seafoodgumbo.test = function(cooker, names, tags)
-		return tags.fish and tags.fish >= 3 and tags.meat >= 3
-	end
-	-- Original:	test = function(cooker, names, tags) return tags.fish and tags.fish > 2 end,
+        return tags.fish and tags.fish >= 3 and tags.meat >= 3
+    end
+    -- Original:	test = function(cooker, names, tags) return tags.fish and tags.fish > 2 end,
     recipes.seafoodgumbo.priority = 31
 end
 
@@ -589,149 +595,149 @@ AddPrefabPostInitAny(function(inst)
     if not GLOBAL.TheWorld.ismastersim then return end
 
     if inst:HasTag("preparedfood") and inst.components ~= nil and inst.components.edible ~= nil then
-        inst.components.edible.temperaturedelta = inst.components.edible.temperaturedelta*2--i stg if some mod sets these to nil
-        inst.components.edible.temperatureduration = inst.components.edible.temperatureduration*2
+        inst.components.edible.temperaturedelta = inst.components.edible.temperaturedelta * 2 --i stg if some mod sets these to nil
+        inst.components.edible.temperatureduration = inst.components.edible.temperatureduration * 2
     end
 end)
 
 if TUNING.DSTU.GOODIESNERF then
-AddPrefabPostInit("shroomcake", function(inst)
-    if not GLOBAL.TheWorld.ismastersim then
-        return
-    end
-	inst.components.edible.foodtype = GLOBAL.FOODTYPE.VEGGIE
-end)
+    AddPrefabPostInit("shroomcake", function(inst)
+        if not GLOBAL.TheWorld.ismastersim then
+            return
+        end
+        inst.components.edible.foodtype = GLOBAL.FOODTYPE.VEGGIE
+    end)
 
-AddPrefabPostInit("shroomcake_spice_salt", function(inst)
-    if not GLOBAL.TheWorld.ismastersim then
-        return
-    end
-	inst.components.edible.foodtype = GLOBAL.FOODTYPE.VEGGIE
-end)
+    AddPrefabPostInit("shroomcake_spice_salt", function(inst)
+        if not GLOBAL.TheWorld.ismastersim then
+            return
+        end
+        inst.components.edible.foodtype = GLOBAL.FOODTYPE.VEGGIE
+    end)
 
-AddPrefabPostInit("shroomcake_spice_chili", function(inst)
-    if not GLOBAL.TheWorld.ismastersim then
-        return
-    end
-	inst.components.edible.foodtype = GLOBAL.FOODTYPE.VEGGIE
-end)
+    AddPrefabPostInit("shroomcake_spice_chili", function(inst)
+        if not GLOBAL.TheWorld.ismastersim then
+            return
+        end
+        inst.components.edible.foodtype = GLOBAL.FOODTYPE.VEGGIE
+    end)
 
-AddPrefabPostInit("shroomcake_spice_sugar", function(inst)
-    if not GLOBAL.TheWorld.ismastersim then
-        return
-    end
-	inst.components.edible.foodtype = GLOBAL.FOODTYPE.VEGGIE
-end)
+    AddPrefabPostInit("shroomcake_spice_sugar", function(inst)
+        if not GLOBAL.TheWorld.ismastersim then
+            return
+        end
+        inst.components.edible.foodtype = GLOBAL.FOODTYPE.VEGGIE
+    end)
 
-AddPrefabPostInit("shroomcake_spice_garlic", function(inst)
-    if not GLOBAL.TheWorld.ismastersim then
-        return
-    end
-	inst.components.edible.foodtype = GLOBAL.FOODTYPE.VEGGIE
-end)
+    AddPrefabPostInit("shroomcake_spice_garlic", function(inst)
+        if not GLOBAL.TheWorld.ismastersim then
+            return
+        end
+        inst.components.edible.foodtype = GLOBAL.FOODTYPE.VEGGIE
+    end)
 
-AddPrefabPostInit("icecream", function(inst)
-    if not GLOBAL.TheWorld.ismastersim then
-        return
-    end
-	inst.components.edible.foodtype = GLOBAL.FOODTYPE.GENERIC
-end)
+    AddPrefabPostInit("icecream", function(inst)
+        if not GLOBAL.TheWorld.ismastersim then
+            return
+        end
+        inst.components.edible.foodtype = GLOBAL.FOODTYPE.GENERIC
+    end)
 
-AddPrefabPostInit("icecream_spice_chili", function(inst)
-    if not GLOBAL.TheWorld.ismastersim then
-        return
-    end
-	inst.components.edible.foodtype = GLOBAL.FOODTYPE.GENERIC
-end)
+    AddPrefabPostInit("icecream_spice_chili", function(inst)
+        if not GLOBAL.TheWorld.ismastersim then
+            return
+        end
+        inst.components.edible.foodtype = GLOBAL.FOODTYPE.GENERIC
+    end)
 
-AddPrefabPostInit("icecream_spice_salt", function(inst)
-    if not GLOBAL.TheWorld.ismastersim then
-        return
-    end
-	inst.components.edible.foodtype = GLOBAL.FOODTYPE.GENERIC
-end)
+    AddPrefabPostInit("icecream_spice_salt", function(inst)
+        if not GLOBAL.TheWorld.ismastersim then
+            return
+        end
+        inst.components.edible.foodtype = GLOBAL.FOODTYPE.GENERIC
+    end)
 
-AddPrefabPostInit("icecream_spice_sugar", function(inst)
-    if not GLOBAL.TheWorld.ismastersim then
-        return
-    end
-	inst.components.edible.foodtype = GLOBAL.FOODTYPE.GENERIC
-end)
+    AddPrefabPostInit("icecream_spice_sugar", function(inst)
+        if not GLOBAL.TheWorld.ismastersim then
+            return
+        end
+        inst.components.edible.foodtype = GLOBAL.FOODTYPE.GENERIC
+    end)
 
-AddPrefabPostInit("icecream_spice_garlic", function(inst)
-    if not GLOBAL.TheWorld.ismastersim then
-        return
-    end
-	inst.components.edible.foodtype = GLOBAL.FOODTYPE.GENERIC
-end)
+    AddPrefabPostInit("icecream_spice_garlic", function(inst)
+        if not GLOBAL.TheWorld.ismastersim then
+            return
+        end
+        inst.components.edible.foodtype = GLOBAL.FOODTYPE.GENERIC
+    end)
 
-AddPrefabPostInit("taffy", function(inst)
-    if not GLOBAL.TheWorld.ismastersim then
-        return
-    end
-	inst.components.edible.foodtype = GLOBAL.FOODTYPE.GENERIC
-end)
+    AddPrefabPostInit("taffy", function(inst)
+        if not GLOBAL.TheWorld.ismastersim then
+            return
+        end
+        inst.components.edible.foodtype = GLOBAL.FOODTYPE.GENERIC
+    end)
 
-AddPrefabPostInit("taffy_spice_chili", function(inst)
-    if not GLOBAL.TheWorld.ismastersim then
-        return
-    end
-	inst.components.edible.foodtype = GLOBAL.FOODTYPE.GENERIC
-end)
+    AddPrefabPostInit("taffy_spice_chili", function(inst)
+        if not GLOBAL.TheWorld.ismastersim then
+            return
+        end
+        inst.components.edible.foodtype = GLOBAL.FOODTYPE.GENERIC
+    end)
 
-AddPrefabPostInit("taffy_spice_salt", function(inst)
-    if not GLOBAL.TheWorld.ismastersim then
-        return
-    end
-	inst.components.edible.foodtype = GLOBAL.FOODTYPE.GENERIC
-end)
+    AddPrefabPostInit("taffy_spice_salt", function(inst)
+        if not GLOBAL.TheWorld.ismastersim then
+            return
+        end
+        inst.components.edible.foodtype = GLOBAL.FOODTYPE.GENERIC
+    end)
 
-AddPrefabPostInit("taffy_spice_sugar", function(inst)
-    if not GLOBAL.TheWorld.ismastersim then
-        return
-    end
-	inst.components.edible.foodtype = GLOBAL.FOODTYPE.GENERIC
-end)
+    AddPrefabPostInit("taffy_spice_sugar", function(inst)
+        if not GLOBAL.TheWorld.ismastersim then
+            return
+        end
+        inst.components.edible.foodtype = GLOBAL.FOODTYPE.GENERIC
+    end)
 
-AddPrefabPostInit("taffy_spice_garlic", function(inst)
-    if not GLOBAL.TheWorld.ismastersim then
-        return
-    end
-	inst.components.edible.foodtype = GLOBAL.FOODTYPE.GENERIC
-end)
+    AddPrefabPostInit("taffy_spice_garlic", function(inst)
+        if not GLOBAL.TheWorld.ismastersim then
+            return
+        end
+        inst.components.edible.foodtype = GLOBAL.FOODTYPE.GENERIC
+    end)
 
-AddPrefabPostInit("frozenbananadaiquiri", function(inst)
-    if not GLOBAL.TheWorld.ismastersim then
-        return
-    end
-	inst.components.edible.foodtype = GLOBAL.FOODTYPE.VEGGIE
-end)
+    AddPrefabPostInit("frozenbananadaiquiri", function(inst)
+        if not GLOBAL.TheWorld.ismastersim then
+            return
+        end
+        inst.components.edible.foodtype = GLOBAL.FOODTYPE.VEGGIE
+    end)
 
-AddPrefabPostInit("frozenbananadaiquiri_spice_chili", function(inst)
-    if not GLOBAL.TheWorld.ismastersim then
-        return
-    end
-	inst.components.edible.foodtype = GLOBAL.FOODTYPE.VEGGIE
-end)
+    AddPrefabPostInit("frozenbananadaiquiri_spice_chili", function(inst)
+        if not GLOBAL.TheWorld.ismastersim then
+            return
+        end
+        inst.components.edible.foodtype = GLOBAL.FOODTYPE.VEGGIE
+    end)
 
-AddPrefabPostInit("frozenbananadaiquiri_spice_salt", function(inst)
-    if not GLOBAL.TheWorld.ismastersim then
-        return
-    end
-	inst.components.edible.foodtype = GLOBAL.FOODTYPE.VEGGIE
-end)
+    AddPrefabPostInit("frozenbananadaiquiri_spice_salt", function(inst)
+        if not GLOBAL.TheWorld.ismastersim then
+            return
+        end
+        inst.components.edible.foodtype = GLOBAL.FOODTYPE.VEGGIE
+    end)
 
-AddPrefabPostInit("frozenbananadaiquiri_spice_sugar", function(inst)
-    if not GLOBAL.TheWorld.ismastersim then
-        return
-    end
-	inst.components.edible.foodtype = GLOBAL.FOODTYPE.VEGGIE
-end)
+    AddPrefabPostInit("frozenbananadaiquiri_spice_sugar", function(inst)
+        if not GLOBAL.TheWorld.ismastersim then
+            return
+        end
+        inst.components.edible.foodtype = GLOBAL.FOODTYPE.VEGGIE
+    end)
 
-AddPrefabPostInit("frozenbananadaiquiri_spice_garlic", function(inst)
-    if not GLOBAL.TheWorld.ismastersim then
-        return
-    end
-	inst.components.edible.foodtype = GLOBAL.FOODTYPE.VEGGIE
-end)
+    AddPrefabPostInit("frozenbananadaiquiri_spice_garlic", function(inst)
+        if not GLOBAL.TheWorld.ismastersim then
+            return
+        end
+        inst.components.edible.foodtype = GLOBAL.FOODTYPE.VEGGIE
+    end)
 end

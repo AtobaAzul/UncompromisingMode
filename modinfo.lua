@@ -626,7 +626,7 @@ configuration_options = {
     BinaryConfig("goodies_nerf", "Goodies Food Type Changes", "The food type of more avaliable Goodies were changed into either Veggie or Generic.", true),
     BinaryConfig("icecream_buff", "Ice Cream Buff", "Ice Cream now restores 100 sanity.", true),
     BinaryConfig("meatball", "Meatball Nerf", "Meatballs restore 50 hunger instead of 62.5.", true),
-    BinaryConfig("bonestew_nerf", "Meaty Stew Nerf", "Reduces meaty stew hunger value to 100.", true),
+    BinaryConfig("bonestew_nerf", "Meaty Stew Nerf", "Makes meaty stew require 3.5 meat value to be cooked.", true),
     {
         name = "perogi",
         label = "Pierogi Recipe Nerf",
