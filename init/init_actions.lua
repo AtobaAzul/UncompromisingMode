@@ -200,19 +200,21 @@ if TUNING.DSTU.WARLY_BUTCHER then
     GLOBAL.ACTIONS.MURDER.fn = function(act)
         local murdered = act.invobject or act.target
         if murdered ~= nil and (murdered.components.health ~= nil or murdered.components.murderable ~= nil) and act.doer ~= nil and act.doer:HasTag("masterchef") then
-            local murdered = act.invobject or act.target
             local stacksize = murdered.components.stackable ~= nil and murdered.components.stackable:StackSize() or 1
+            local x, y, z = act.doer.Transform:GetWorldPosition()
 
             if murdered.components.lootdropper ~= nil then
                 murdered.causeofdeath = act.doer
                 local pos = GLOBAL.Vector3(x, y, z)
                 for i = 1, stacksize do
                     local loots = murdered.components.lootdropper:GenerateLoot()
-
                     local lootprefab = loots[#loots > 1 and math.random(#loots) or 1]
-                    local loot = GLOBAL.SpawnPrefab(lootprefab)
-                    if loot ~= nil then
-                        act.doer.components.inventory:GiveItem(loot, nil, pos)
+
+                    if lootprefab ~= nil then
+                        local loot = GLOBAL.SpawnPrefab(lootprefab)
+                        if loot ~= nil then
+                            act.doer.components.inventory:GiveItem(loot, nil, pos)
+                        end
                     end
                 end
             end
