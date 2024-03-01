@@ -218,8 +218,8 @@ local function retargetfn(inst)
     local playerleader = leader ~= nil and leader:HasTag("player")
     local ispet = inst:HasTag("pet_hound")
     return (leader == nil or
-        (ispet and not playerleader) or
-        inst:IsNear(leader, TUNING.HOUND_FOLLOWER_AGGRO_DIST))
+            (ispet and not playerleader) or
+            inst:IsNear(leader, TUNING.HOUND_FOLLOWER_AGGRO_DIST))
         and FindEntity(
             inst,
             (ispet or leader ~= nil) and TUNING.HOUND_FOLLOWER_TARGET_DIST or TUNING.HOUND_TARGET_DIST,
@@ -240,11 +240,11 @@ local function KeepTarget(inst, target)
     local playerleader = leader ~= nil and leader:HasTag("player")
     local ispet = inst:HasTag("pet_hound")
     return (leader == nil or
-        (ispet and not playerleader) or
-        inst:IsNear(leader, TUNING.HOUND_FOLLOWER_RETURN_DIST))
+            (ispet and not playerleader) or
+            inst:IsNear(leader, TUNING.HOUND_FOLLOWER_RETURN_DIST))
         and inst.components.combat:CanTarget(target)
         and (not (ispet or leader ~= nil) or
-        inst:IsNear(target, TUNING.HOUND_FOLLOWER_TARGET_KEEP))
+            inst:IsNear(target, TUNING.HOUND_FOLLOWER_TARGET_KEEP))
 end
 
 local function IsNearMoonBase(inst, dist)
@@ -307,8 +307,6 @@ local function OnAttackOther(inst, data)
                 local shockvictim = data.target.sg ~= nil and data.target.sg:GoToState("electrocute")
                 inst:DoTaskInTime(2, shockvictim)
             end
-		
-			
         end
     end
 
@@ -723,6 +721,37 @@ local function OnGlacialAttacked(inst, data)
     end
 end
 
+local function RemoveFreezeProtection(inst)
+    inst:RemoveTag("um_freezeprotection")
+end
+
+local function OnHitOtherFreeze(inst, data)
+    local other = data.target
+    print(data.weapon)
+    if other ~= nil and data.weapon == nil then
+        if not (other.components.health ~= nil and other.components.health:IsDead()) then
+            if not other:HasTag("um_freezeprotection") and other.components.freezable ~= nil and other:HasTag("player") and not other.components.freezable:IsFrozen() and not other.sg:HasStateTag("frozen") then
+                other.components.freezable:AddColdness(2)
+
+                if other.components.freezable:IsFrozen() then
+                    other:AddTag("um_freezeprotection")
+                    other:DoTaskInTime(3, RemoveFreezeProtection)
+                end
+            end
+            if other.components.temperature ~= nil then
+                local mintemp = math.max(other.components.temperature.mintemp, 0)
+                local curtemp = other.components.temperature:GetCurrent()
+                if mintemp < curtemp then
+                    other.components.temperature:DoDelta(math.max(-5, mintemp - curtemp))
+                end
+            end
+        end
+        if other.components.freezable ~= nil then
+            other.components.freezable:SpawnShatterFX()
+        end
+    end
+end
+
 local function fnglacial()
     local inst = fncommon("hound", "glacial_hound_ocean", nil, nil, nil, { amphibious = true })
 
@@ -744,6 +773,7 @@ local function fnglacial()
 
     inst:ListenForEvent("attacked", OnGlacialAttacked)
     inst:ListenForEvent("death", DoGlacialExplosion)
+    inst:ListenForEvent("onhitother", OnHitOtherFreeze)
 
     inst.LaunchProjectile = GlacialProjectile
     inst.CancelCharge = CancelGlacialCharge
@@ -786,12 +816,12 @@ local function onhit(inst, attacker, target)
     end
 
     if target.components.freezable ~= nil and target.sg ~= nil and not target.sg:HasStateTag("frozen") then
-        target.components.freezable:AddColdness(1)
+        target.components.freezable:AddColdness(1.5, 1, true)
         target.components.freezable:SpawnShatterFX()
     end
 
     if target.sg ~= nil and not target.sg:HasStateTag("frozen") then
-		target.components.combat:GetAttacked(attacker, 25, inst)
+        target.components.combat:GetAttacked(attacker, 25, inst)
         --target:PushEvent("attacked", { attacker = attacker, damage = 25, weapon = inst })
     end
 
@@ -920,8 +950,8 @@ local function OnMagmaAttacked(inst, data)
                 data.attacker.components.health ~= nil and
                 not data.attacker.components.health:IsDead() and
                 (data.weapon == nil or ((data.weapon.components.weapon == nil or data.weapon.components.weapon.projectile == nil) and
-                data.weapon.components.projectile == nil)) and data.attacker.components.health.redirect == nil then
-                    data.attacker.components.health:DoFireDamage(5, inst.prefab, true)  --redirect calls "afllicter"
+                    data.weapon.components.projectile == nil)) and data.attacker.components.health.redirect == nil then
+                data.attacker.components.health:DoFireDamage(5, inst.prefab, true)     --redirect calls "afllicter"
                 if data.attacker:HasTag("player") and not data.attacker.components.burnable ~= nil then
                     data.attacker.components.burnable:Ignite()
                 end
