@@ -735,7 +735,13 @@ local function OnHitOtherFreeze(inst, data)
 
                 if other.components.freezable:IsFrozen() then
                     other:AddTag("um_freezeprotection")
-                    other:DoTaskInTime(3, RemoveFreezeProtection)
+                    
+                    if other.freeze_protection_task ~= nil then
+                        other.freeze_protection_task:Cancel()
+                        other.freeze_protection_task = nil
+                    end
+
+                    other.freeze_protection_task = other:DoTaskInTime(3, RemoveFreezeProtection)
                 end
             end
             if other.components.temperature ~= nil then
