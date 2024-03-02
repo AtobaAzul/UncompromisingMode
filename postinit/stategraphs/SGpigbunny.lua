@@ -25,41 +25,43 @@ local events =
 	
 	EventHandler("attacked", function(inst)
 		
-		if inst:HasTag("pigattacker") and not inst:HasTag("werepig") and inst.components.health ~= nil and not inst.components.health:IsDead() then
-			if inst.counter ~= nil and inst.counter >= math.random(3, 5) then
-				inst.counter = 0
-				inst.sg:GoToState("counterattack_pre")
-				return
-			else
-				if inst.counter ~= nil then
-					inst.counter = inst.counter + 1
+		if inst:HasTag("pigattacker") and not inst:HasTag("werepig") and inst.components.health ~= nil and not inst.components.health:IsDead() and not inst.sg:HasStateTag("counter") then
+		
+			if inst.counter ~= nil then
+				inst.counter = inst.counter + 1
 					if inst.countertask ~= nil then
 						inst.countertask:Cancel()
 						inst.countertask = nil
-					end
-					inst.countertask = inst:DoTaskInTime(10, function(inst) inst.counter = 0 end)
-				else
-					inst.counter = 0
-				end
+					end	
+			else
+				inst.counter = 1
 			end
+
+			inst.countertask = inst:DoTaskInTime(10, function(inst) inst.counter = 0 end)
+			
+			if inst.counter ~= nil and inst.counter >= math.random(3, 4) then
+				if inst.countertask ~= nil then
+					inst.countertask:Cancel()
+					inst.countertask = nil
+				end
+				inst.counter = 0
+				inst.sg:GoToState("counterattack_pre")
+				return				
+			end
+			
 		end
 	
-		if inst.components.health ~= nil and not inst.components.health:IsDead()
-		and (not inst.sg:HasStateTag("busy") or
-		inst.sg:HasStateTag("caninterrupt") or
-		inst.sg:HasStateTag("frozen")) then
+		if inst.components.health ~= nil and not inst.components.health:IsDead() and (not inst.sg:HasStateTag("busy") or inst.sg:HasStateTag("caninterrupt") or inst.sg:HasStateTag("frozen")) then
 			inst.sg:GoToState("hit")
 		end
 	
 	end),
-    
-    
 }
 
 local states = {
 	State{
         name = "counterattack_pre",
-        tags = { "attack", "busy" },
+        tags = {"attack", "busy", "counter"},
 
         onenter = function(inst)
             inst.SoundEmitter:PlaySound("dontstarve/pig/attack")
@@ -83,7 +85,7 @@ local states = {
 	
 	State{
         name = "counterattack",
-        tags = { "attack", "busy" },
+        tags = {"attack", "busy", "counter"},
 
         onenter = function(inst)
             inst.SoundEmitter:PlaySound("dontstarve/pig/attack")
@@ -99,7 +101,7 @@ local states = {
 				local target = inst.components.combat.target
 				
 				if target ~= nil and distsq(target:GetPosition(), inst:GetPosition()) <= inst.components.combat:CalcAttackRangeSq(target) then
-					target.components.combat:GetAttacked(inst, 5)
+					target.components.combat:GetAttacked(inst, 33)
 					
 					if target ~= nil and target.components.inventory ~= nil and not target:HasTag("fat_gang") and not target:HasTag("foodknockbackimmune") and not (target.components.rider ~= nil and target.components.rider:IsRiding()) and 
 					--Don't knockback if you wear marble
@@ -110,6 +112,7 @@ local states = {
 				
                 inst.sg:RemoveStateTag("attack")
                 inst.sg:RemoveStateTag("busy")
+				inst.sg:RemoveStateTag("counter")
             end),
         },
 
