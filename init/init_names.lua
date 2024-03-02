@@ -82,7 +82,6 @@ SKINSDESC.ms_hat_plaguemask_formal = "A fancy mask to stand out in a rotting wor
 
 SKINS.wormwood_shadow = "The Corrupted" -- personal vendetta, bruh that shit aint 'triumphant'
 
-STRINGS.MINOTAUR_ORGAN = "Shadow Heart"
 STRINGS.TRAPDOOR = "Inconspicuous Mound"
 STRINGS.SPIDER_TRAPDOOR = "Trapdoor Spider"
 STRINGS.MUTATOR_TRAPDOOR = "Trapdoor Switcherdoodle"
