@@ -26,34 +26,36 @@ local events =
 	EventHandler("attacked", function(inst)
 		
 		if inst:HasTag("pigattacker") and not inst:HasTag("werepig") and inst.components.health ~= nil and not inst.components.health:IsDead() and not inst.sg:HasStateTag("counter") then
-			if inst.counter ~= nil and inst.counter >= math.random(1, 2) then
-				inst.counter = -1
-				inst.sg:GoToState("counterattack_pre")
-				return
-			else
-				if inst.counter ~= nil then
-					inst.counter = inst.counter + 1
+		
+			if inst.counter ~= nil then
+				inst.counter = inst.counter + 1
 					if inst.countertask ~= nil then
 						inst.countertask:Cancel()
 						inst.countertask = nil
-					end
-					inst.countertask = inst:DoTaskInTime(10, function(inst) inst.counter = -1 end)
-				else
-					inst.counter = 0
-				end
+					end	
+			else
+				inst.counter = 1
 			end
+
+			inst.countertask = inst:DoTaskInTime(10, function(inst) inst.counter = 0 end)
+			
+			if inst.counter ~= nil and inst.counter >= math.random(3, 4) then
+				if inst.countertask ~= nil then
+					inst.countertask:Cancel()
+					inst.countertask = nil
+				end
+				inst.counter = 0
+				inst.sg:GoToState("counterattack_pre")
+				return				
+			end
+			
 		end
 	
-		if inst.components.health ~= nil and not inst.components.health:IsDead()
-		and (not inst.sg:HasStateTag("busy") or
-		inst.sg:HasStateTag("caninterrupt") or
-		inst.sg:HasStateTag("frozen")) then
+		if inst.components.health ~= nil and not inst.components.health:IsDead() and (not inst.sg:HasStateTag("busy") or inst.sg:HasStateTag("caninterrupt") or inst.sg:HasStateTag("frozen")) then
 			inst.sg:GoToState("hit")
 		end
 	
 	end),
-    
-    
 }
 
 local states = {
