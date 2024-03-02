@@ -482,7 +482,7 @@ if GetModConfigData("lifeinjector_rework") then
     table.insert(prefab_post, "lifeinjector")
 end
 
-if GetModConfigData("sharpshooter_monkeys") then
+if GetModConfigData("sharpshooter_monkeys_") then
     table.insert(brain_post, "powdermonkey")
 end
 
