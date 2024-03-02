@@ -2,10 +2,9 @@ local foods = { --health/hunger/sanity
     coontail = { 9, 9, 7 },
     shroom_skin = { 10, 10, 0 },
     tentaclespots = { 10, 10, 0 },
-    --waterplant_bomb = {-2.5,}
     glommerwings = { 10, 10, 0 },
+	hambat = { 10, 10, 0 },
 }
-
 
 for prefab, stats in pairs(foods) do
     AddPrefabPostInit(prefab, function(inst)
