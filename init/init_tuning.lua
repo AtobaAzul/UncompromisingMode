@@ -408,7 +408,6 @@ TUNING.DSTU = {
 	MOONFLY_HEALTH = 8000 * GetModConfigData("moonmaw_dragonfly_health_"),	
     WILTFLY_HEALTH = 4000 * GetModConfigData("mock_dragonfly_health_"),
     MOTHER_GOOSE_HEALTH = 6000 * GetModConfigData("mothergoose_health_"),
-	DEERCLOPS_MUTATIONS_HEALTH = GetModConfigData("deerclops_health_"),
 	
 }
 
