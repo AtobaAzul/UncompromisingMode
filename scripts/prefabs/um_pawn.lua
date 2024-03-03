@@ -376,6 +376,15 @@ local function pawn_common(pawntype)
 
     inst:AddComponent("inspectable")
     inst.components.inspectable.getstatus = getstatus
+	
+	inst:AddComponent("burnable")
+	inst.components.burnable:SetOnIgniteFn(function(inst) inst.components.explosive:OnBurnt() end)
+	
+	inst:AddComponent("explosive")
+	inst.components.explosive:SetOnExplodeFn(OnExplodeFn)
+	inst.components.explosive.explosiverange = 6
+	inst.components.explosive.buildingdamage = 0
+	inst.components.explosive.explosivedamage = TUNING.GUNPOWDER_DAMAGE
 
     if inst.pawntype == "_nightmare" then
 		inst.explode_timer_count = 1
@@ -384,13 +393,6 @@ local function pawn_common(pawntype)
 	
         inst:AddTag("uncompromising_nightmarepawn")
         inst.components.combat:SetRetargetFunction(1, NormalRetarget)
-        inst:AddComponent("explosive")
-        inst.components.explosive:SetOnExplodeFn(OnExplodeFn)
-        inst.components.explosive.explosiverange = 6
-        inst.components.explosive.buildingdamage = 0
-        inst.components.explosive.explosivedamage = TUNING.GUNPOWDER_DAMAGE
-        inst:AddComponent("burnable")
-        inst.components.burnable:SetOnIgniteFn(function(inst) inst.components.explosive:OnBurnt() end)
     end
 
     inst.OnEntityWake = OnWake
