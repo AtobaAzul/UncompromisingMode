@@ -500,7 +500,7 @@ local function cold_activate(inst, wx)
             MoveStopFreeze(owner, data, inst)
         end
     end]]
-    wx:ListenForEvent("freeze", OnFreeze)
+    inst:ListenForEvent("freeze", OnFreeze, wx)
     if inst.stoppedfreezetask == nil then
         inst.stoppedfreezetask = wx:DoPeriodicTask(0.5, function(wx)
             if wx.sg:HasStateTag("idle") then
@@ -539,7 +539,7 @@ local function cold_deactivate(inst, wx)
     --wx.components.temperature.maxtemp = wx.components.temperature.maxtemp + TUNING.WX78_MINTEMPCHANGEPERMODULE
     --wx.components.temperature.mintemp = wx.components.temperature.mintemp + TUNING.WX78_MINTEMPCHANGEPERMODULE
 
-    wx:RemoveEventCallback("freeze", OnFreeze)
+    inst:RemoveEventCallback("freeze", OnFreeze, wx)
 
 
     if wx.AddTemperatureModuleLeaning ~= nil then
