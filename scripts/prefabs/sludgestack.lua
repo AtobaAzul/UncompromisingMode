@@ -62,6 +62,7 @@ local function DoLootExplosion(inst)
 
     SpawnPrefab("honey_splash").Transform:SetPosition(inst.Transform:GetWorldPosition())
     inst.SoundEmitter:PlaySound("dontstarve/common/blackpowder_explo")
+    inst.SoundEmitter:PlaySound("dontstarve/forest/treeCrumble")
 
     local cork_pop_loot = {
         "sludge", "sludge", "sludge", "sludge" --, "sludge_cork"
@@ -85,6 +86,16 @@ local function DoLootExplosion(inst)
     end
 
 
+    for i = 1, 16 do
+        inst:DoTaskInTime(i / 2, function(inst)
+            local x, y, z = inst.Transform:GetWorldPosition()
+            local smog = SpawnPrefab("smog")
+
+
+            smog.Transform:SetPosition(x + math.random(-160, 160) / 10, math.random(0, 4),
+                z + math.random(-320, 320) / 10)
+        end)
+    end
     inst.AnimState:PlayAnimation("pop")
     --inst.AnimState:PushAnimation("grow")
     --inst.AnimState:PushAnimation("idle_sludge", true)
@@ -99,12 +110,44 @@ local function DoLootExplosion(inst)
     end
 end
 
+local function PopNoCork(inst)
+    SpawnPrefab("honey_splash").Transform:SetPosition(inst.Transform:GetWorldPosition())
+    inst.SoundEmitter:PlaySound("wintersfeast2019/creatures/gingerbread_vargr/splat")
+    inst.SoundEmitter:PlaySound("wintersfeast2019/creatures/gingerbread_vargr/splat") --"just play 2, surely it's gonna get louder!"
+
+    inst.SoundEmitter:SetParameter("splat", "intensity", 10)
+
+    inst.SoundEmitter:PlaySound("dontstarve/forest/treeCrumble")
+
+    for i = 1, 8 do
+        inst:DoTaskInTime(i / 2, function(inst)
+            local x, y, z = inst.Transform:GetWorldPosition()
+            local smog = SpawnPrefab("smog")
+
+
+            smog.Transform:SetPosition(x + math.random(-80, 80) / 10, math.random(0, 4),
+                z + math.random(-80, 80) / 10)
+        end)
+    end
+
+    inst.components.timer:StartTimer("pop", TUNING.GRASS_REGROW_TIME * GetRandomWithVariance(0.75, 0.25))
+end
+
 local function TimerDone(inst, data)
     if data.name == "pop_cork" then
         if not inst:IsAsleep() then
             DoLootExplosion(inst)
         else
             inst.explode_when_loaded = true
+        end
+    end
+
+    if data.name == "pop" then
+        local player = inst:GetNearestPlayer()
+        if player ~= nil then
+            if inst:GetDistanceSqToInst(player) < PLAYER_CAMERA_SEE_DISTANCE_SQ * 1.5 then
+                PopNoCork(inst)
+            end
         end
     end
 end
@@ -125,12 +168,15 @@ end
 
 local function OnPicked(inst)
     inst.AnimState:PushAnimation("idle", true)
+    inst.components.timer:StopTimer("pop")
 end
 
 local function OnLoad(inst, data)
     if data ~= nil then
         if data.upgraded ~= nil then OnUpgraded(inst) end
+
         inst.explode_when_loaded = data.explode_when_loaded
+
         if data.picked then
             OnPicked(inst)
         end
@@ -142,8 +188,18 @@ end
 local function OnRegen(inst)
     inst.AnimState:PushAnimation("grow")
     inst.AnimState:PushAnimation("idle_sludge", true)
+    inst.components.timer:StartTimer("pop", TUNING.GRASS_REGROW_TIME * GetRandomWithVariance(0.75, 0.25))
 end
 
+
+local function DoSteamFX(inst)
+    inst._fx = SpawnPrefab("slow_steam_fx" .. math.random(1, 5))
+    inst._fx.entity:SetParent(inst.entity)
+    inst._fx.entity:AddFollower()
+    inst._fx.Follower:FollowSymbol(inst.GUID, "stack_short", 0, -500, 0)
+
+    inst:DoTaskInTime(math.random(10, 30) / 10, DoSteamFX)
+end
 local function fn_stack()
     local inst = CreateEntity()
 
@@ -165,6 +221,8 @@ local function fn_stack()
     inst.AnimState:SetBank("sludgestack_short")
     inst.AnimState:SetBuild("sludgestack_short")
     inst.AnimState:PlayAnimation("idle_sludge", true)
+    inst.AnimState:SetFinalOffset(1)
+
     --inst.AnimState:SetMultColour(0.5, 0.5, 0.5, 1)
 
     MakeInventoryFloatable(inst, "med", 0.1, { 1.1, 0.9, 1.1 })
@@ -175,13 +233,24 @@ local function fn_stack()
         inst.components.floater:OnLandedServer()
     end)
 
+    DoSteamFX(inst)
+
     -- Have to add to pristine state.
     inst:AddTag("SLUDGE_CORK_upgradeable")
     inst:AddTag("sludgestack")
 
     inst.entity:SetPristine()
 
-    if not TheWorld.ismastersim then return inst end
+
+    if not TheWorld.ismastersim then
+        return inst
+    end
+
+    inst:DoTaskInTime(0, function(inst)
+        if inst.components.pickable:CanBePicked() and not inst.components.timer:TimerExists("pop") then
+            inst.components.timer:StartTimer("pop", TUNING.GRASS_REGROW_TIME * GetRandomWithVariance(0.75, 0.25))
+        end
+    end)
 
     inst:AddComponent("lootdropper")
     inst.components.lootdropper:SetChanceLootTable('sludgestack')
