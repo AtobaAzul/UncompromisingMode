@@ -112,12 +112,9 @@ end
 
 local function PopNoCork(inst)
     SpawnPrefab("honey_splash").Transform:SetPosition(inst.Transform:GetWorldPosition())
-    inst.SoundEmitter:PlaySound("wintersfeast2019/creatures/gingerbread_vargr/splat")
-    inst.SoundEmitter:PlaySound("wintersfeast2019/creatures/gingerbread_vargr/splat") --"just play 2, surely it's gonna get louder!"
-
-    inst.SoundEmitter:SetParameter("splat", "intensity", 10)
-
-    inst.SoundEmitter:PlaySound("dontstarve/forest/treeCrumble")
+    inst.SoundEmitter:PlaySound("wintersfeast2019/creatures/gingerbread_vargr/splat", nil, 2)
+    inst.SoundEmitter:PlaySound("dontstarve/forest/treeCrumble", nil, 0.5)
+    inst.SoundEmitter:PlaySound("dontstarve/beefalo/fart")
 
     for i = 1, 8 do
         inst:DoTaskInTime(i / 2, function(inst)
@@ -198,8 +195,11 @@ local function DoSteamFX(inst)
         inst._fx.entity:SetParent(inst.entity)
         inst._fx.entity:AddFollower()
         inst._fx.Follower:FollowSymbol(inst.GUID, "stack_short", 0, -450, 0)
+        if math.random() > 0.25 then
+            inst.SoundEmitter:PlaySound("dontstarve/beefalo/fart", 0.25)
+        end
     end
-    inst:DoTaskInTime(math.random(10, 30) / 10, DoSteamFX)
+    inst:DoTaskInTime(math.random(30, 60) / 10, DoSteamFX)
 end
 local function fn_stack()
     local inst = CreateEntity()
@@ -209,7 +209,6 @@ local function fn_stack()
     inst.entity:AddSoundEmitter()
     inst.entity:AddMiniMapEntity()
     inst.entity:AddNetwork()
-
     inst.MiniMapEntity:SetIcon("seastack.png")
 
     inst:SetPhysicsRadiusOverride(2.35)
