@@ -234,7 +234,6 @@ local function fn_stack()
         inst.components.floater:OnLandedServer()
     end)
 
-    DoSteamFX(inst)
 
     -- Have to add to pristine state.
     inst:AddTag("SLUDGE_CORK_upgradeable")
@@ -252,6 +251,8 @@ local function fn_stack()
             inst.components.timer:StartTimer("pop", TUNING.GRASS_REGROW_TIME * GetRandomWithVariance(0.75, 0.25))
         end
     end)
+
+    DoSteamFX(inst)
 
     inst:AddComponent("lootdropper")
     inst.components.lootdropper:SetChanceLootTable('sludgestack')
