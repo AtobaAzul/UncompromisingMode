@@ -49,6 +49,7 @@ local component_post = {
     "firedetector",
     "slipperyfeet",
     "walkableplatformplayer",
+    "schoolspawner",
 }
 
 local prefab_post = {

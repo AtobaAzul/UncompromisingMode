@@ -780,6 +780,7 @@ Assets = {
 	Asset("ANIM", "anim/bearger_rockthrow.zip"),
 	Asset("ANIM", "anim/bearger_build_old.zip"),
 
+    Asset("ANIM", "anim/sea_shadow.zip"),
 
 	--MISC.
 	Asset("ANIM", "anim/sludgestack_short.zip"),
