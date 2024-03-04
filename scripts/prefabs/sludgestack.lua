@@ -193,11 +193,12 @@ end
 
 
 local function DoSteamFX(inst)
-    inst._fx = SpawnPrefab("slow_steam_fx" .. math.random(1, 5))
-    inst._fx.entity:SetParent(inst.entity)
-    inst._fx.entity:AddFollower()
-    inst._fx.Follower:FollowSymbol(inst.GUID, "stack_short", 0, -500, 0)
-
+    if not inst.upgraded and not inst.components.pickable:CanBePicked() then
+        inst._fx = SpawnPrefab("slow_steam_fx" .. math.random(1, 5))
+        inst._fx.entity:SetParent(inst.entity)
+        inst._fx.entity:AddFollower()
+        inst._fx.Follower:FollowSymbol(inst.GUID, "stack_short", 0, -500, 0)
+    end
     inst:DoTaskInTime(math.random(10, 30) / 10, DoSteamFX)
 end
 local function fn_stack()
