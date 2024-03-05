@@ -493,7 +493,7 @@ local treasure_templates =
 
                 guaranteed_loot =
                 {
-                    moon_beacon_kit = 1,
+                    kaleidoscope_blueprint = 1,
                     moonrocknugget = { 1, 4 },
                     moonglass = { 0, 5 },
                     moonstorm_spark = { 1, 3 }, -- Teehee :)

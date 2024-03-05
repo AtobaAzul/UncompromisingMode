@@ -1063,6 +1063,14 @@ if GetModConfigData("ck_loot") then
         nil,
         { "WEAPONS", "SHADOWMAGIC" }
     )
+    AddRecipe2(
+        "kaleidoscope",
+        { Ingredient("moonglass", 3), Ingredient("moonbutterfly", 5), Ingredient("redgem", 1), Ingredient("greengem", 1), Ingredient("bluegem", 1) },
+        TECH.LOST,
+        nil,
+        { "WEAPONS" }
+    )
+
     ChangeSortKey("staff_starfall", "firestaff", "WEAPONS", true)
     ChangeSortKey("staff_starfall", "firestaff", "MAGIC", true)
 end

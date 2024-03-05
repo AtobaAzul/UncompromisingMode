@@ -510,6 +510,8 @@ STRINGS.STAFF_STARFALL = "Starfall Staff"
 STRINGS.STAFF_MOONFALL = "Moonfall Staff"
 STRINGS.HAT_CRAB = "Crab Crown"
 STRINGS.HAT_CRAB_ICE = "Frigid Crown"
+STRINGS.KALEIDOSCOPE = "Kaleidoscope"
+
 STRINGS.ARMOR_CRAB_MAXHP = "Gem Encrusted Shell Armor"
 STRINGS.ARMOR_CRAB_REGEN = "Healing Rock Armor"
 STRINGS.MOON_BEACON_KIT = "Inactive Moon Beacon"

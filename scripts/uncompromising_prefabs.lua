@@ -436,6 +436,7 @@ local prefabs = {
     "dl_biometable",
 
     "sea_shadow",
+    "kaleidoscope"
 }
 
 if TUNING.DSTU ~= nil and TUNING.DSTU.WIXIE ~= nil and TUNING.DSTU.WIXIE then
