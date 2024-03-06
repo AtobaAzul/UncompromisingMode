@@ -282,7 +282,7 @@ AddShardModRPCHandler("UncompromisingSurvival", "DeerclopsStored_caves", functio
 end)
 
 AddShardModRPCHandler("UncompromisingSurvival", "CaveTornado", function(def, x, z, wise, dest_can_move)
-    if GLOBAL.TheWorld:HasTag("cave") then
+    if GLOBAL.TheWorld ~= nil and GLOBAL.TheWorld:HasTag("cave") then
         GLOBAL.TheWorld:PushEvent("spawncavetornado", { xdata = x, zdata = z, wisedata = wise, dest_can_movedata = dest_can_move })
     end
 end)
