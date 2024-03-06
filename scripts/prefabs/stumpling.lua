@@ -107,6 +107,7 @@ local function fnmain(TYPE)
     inst.Transform:SetSixFaced()
 
     inst:AddTag("monster")
+    inst:AddTag("hostile")
     inst:AddTag("stumpling")
 	inst:AddTag("plant")
 
