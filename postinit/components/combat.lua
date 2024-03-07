@@ -172,7 +172,7 @@ env.AddComponentPostInit("combat", function(self)
             local hpmodulereduct = self.inst.components.upgrademoduleowner:GetModuleTypeCount('maxhealth') * 2 + self.inst.components.upgrademoduleowner:GetModuleTypeCount('maxhealth2') * 5
             damage = damage - hpmodulereduct
             if damage < 2 then damage = 2 end
-            return _GetAttacked(self, attacker, damage, weapon_check, stimuli)
+            return _GetAttacked(self, attacker, damage, weapon_check, stimuli, ...)
         elseif self.inst ~= nil and attacker ~= nil and attacker:HasTag("wathom") and TUNING.DSTU.WATHOM_MAX_DAMAGE_CAP then
             if damage > 600 then damage = 600 end
             return _GetAttacked(self, attacker, damage, weapon_check, stimuli, ...)
