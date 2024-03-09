@@ -422,6 +422,12 @@ if TUNING.DSTU.WXLESS then --HI ATOBA :3 :3 <3 <3
         --inst:ListenForEvent("upgrademoduleowner_popallmodules", OnTryRegenTimerStart) --not needed
         --inst:ListenForEvent("onmoduleadded", inst._onpusheddegen) --not needed
         inst:ListenForEvent("timerdone", OnTimerFinished)
+	inst:ListenForEvent("healthdelta", function(inst, data)
+		if data.cause == "water" then
+			local maxhealth = inst.components.health.maxhealth
+			inst.components.health:DeltaPenalty(math.abs(data.amount/maxhealth/1.25))
+		end
+	end)
         --For some reason I have a habit of keeping commented out stuff, maybe seeing previous mistakes that you overcame just makes me feel good :] :]  feel free to delete the comments anyway :]
     end)
 

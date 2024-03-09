@@ -27,6 +27,12 @@ AddComponentPostInit("sleepingbaguser", function(SleepingBagUser)
 					end
 				end)
 			end
+			if TUNING.DSTU.WXLESS and self.inst:HasTag("upgrademoduleowner") then
+				local recharge_rate = 6 + self.inst._chip_inuse*2
+				self._wxsleepchargetask = self.inst:DoPeriodicTask(recharge_rate, function()
+					self.inst.components.upgrademoduleowner:AddCharge(1)
+				end)
+			end
 		end
 
 		SleepingBagUser.DoWakeUp = function(self, nostatechange)

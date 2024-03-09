@@ -609,11 +609,16 @@ local function taser_onblockedorattacked(wx, data, inst)
 
             data.attacker.components.combat:GetAttacked(wx, damage_mult * TUNING.WX78_TASERDAMAGE, nil, "electric")
 
+
+            if data.attacker._chargeharvestable == nil then
+                data.attacker._chargeharvestable = true
+                data.attacker:DoTaskInTime(3, function() data.attacker._chargeharvestable = nil end)
+            end
             --local function tasedamaged(data)
 
             --end
 
-            local tased_duration = wx._taser_chips / 1.5
+            local tased_duration = wx._taser_chips / 1.25
 
             if data.attacker.sg ~= nil and not data.attacker.sg.statemem.devoured and not (data.attacker:HasTag("Epic") or data.attacker:HasTag("shadowthrall") or data.attacker:HasTag("shadow") or data.attacker:HasTag("trepidation")) then
                 data.attacker.sg:GoToState("hit")
@@ -645,7 +650,9 @@ local function taser_onblockedorattacked(wx, data, inst)
 end
 
 local function taser_onattackother(wx, data, inst)
-    wx._taserchip_attackcounter = wx._taserchip_attackcounter + 1
+    if data.target._chargeharvestable == true then
+        wx._taserchip_attackcounter = wx._taserchip_attackcounter + 1
+    end
     if wx._taserchip_attackcounter >= 12 then
         wx._taserchip_attackcounter = 0
         wx.components.upgrademoduleowner:AddCharge(1)
