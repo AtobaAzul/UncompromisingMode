@@ -3,12 +3,13 @@ GLOBAL.setfenv(1, GLOBAL)
 -----------------------------------------------------------------
 
 local bumpers = {
-    "boat_bumper_shell_kit",
-    "boat_bumper_kelp_kit",
+    "shell",
+    "kelp",
+    "yotd"
 }
 local BUMPER_DEPLOY_IGNORE_TAGS = { "NOBLOCK", "player", "FX", "INLIMBO", "DECOR", "walkableplatform", "structure"}
 
-for k,v in ipairs(bumpers) do
+for k,v in ipairs("boat_bumper_"..bumpers.."_kit") do
     env.AddPrefabPostInit(v, function(inst)
         inst._custom_candeploy_fn = function(inst, pt, mouseover, deployer, rot)
             local boat = mouseover ~= nil and mouseover:HasTag("boat") and mouseover or nil
