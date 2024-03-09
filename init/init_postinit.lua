@@ -171,7 +171,6 @@ local prefab_post = {
     "boat_pirate",
     "trident", -- for giving the leak a cause.
     "boat_bumpers",
-    "slurtle_shellpieces",
     "sludge_fueled",
     -- "nightsword",
     "bigshadowtentacle",
@@ -289,6 +288,10 @@ if GetModConfigData("wixie_walter") then
     RemapSoundEvent("dontstarve/characters/wixie/eye_rub_vo", "wixie/characters/wixie/eye_rub_vo")
     RemapSoundEvent("dontstarve/characters/wixie/carol", "wixie/characters/wixie/carol")
     RemapSoundEvent("dontstarve/characters/wixie/sinking", "wixie/characters/wixie/sinking")
+end
+
+if not GLOBAL.TUNING.DSTU.UPDATE_CHECK then
+    table.insert(prefab_post, "slurtle_shellpieces")
 end
 
 if GetModConfigData("hangyperds") then

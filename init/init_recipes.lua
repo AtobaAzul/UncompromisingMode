@@ -105,7 +105,7 @@ end
 
 local config_skilltrees = GetModConfigData("woodie_skilltree")
 if config_skilltrees then
-	AllRecipes["walking_stick"].ingredients = { Ingredient("lucy", 0), Ingredient("log", 3), Ingredient("wereitem_goose", 1) }
+    AllRecipes["walking_stick"].ingredients = { Ingredient("lucy", 0), Ingredient("log", 3), Ingredient("wereitem_goose", 1) }
 end
 
 if GetModConfigData("wanda_nerf") then
@@ -117,12 +117,11 @@ if GetModConfigData("wanda_nerf") then
 end
 
 if TUNING.DSTU.GOTOBED ~= false then
-	AllRecipes["siestahut"].ingredients = {
+    AllRecipes["siestahut"].ingredients = {
         Ingredient("silk", 6),
         Ingredient("boards", 4),
         Ingredient("rope", 3)
-    }		
-		
+    }
 end
 
 if GetModConfigData("beebox_nerf") then
@@ -962,8 +961,10 @@ AllRecipes["chum"].ingredients = {
     Ingredient("rope", 1),
     Ingredient("waterplant_bomb", 1)
 }
-AllRecipes["hermitshop_chum"].ingredients = { Ingredient("messagebottleempty", 1) }
-AllRecipes["hermitshop_chum"].numtogive = 3
+if not GLOBAL.TUNING.DSTU.UPDATE_CHECK then
+    AllRecipes["hermitshop_chum"].ingredients = { Ingredient("messagebottleempty", 1) }
+    AllRecipes["hermitshop_chum"].numtogive = 3
+end
 --[[
 AddRecipe2(
 "hermitshop_oil",

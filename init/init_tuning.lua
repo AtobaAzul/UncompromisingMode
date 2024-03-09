@@ -213,7 +213,7 @@ TUNING.DSTU = {
     WORMWOOD_CONFIG_PLANTS = GetModConfigData("wormwood_plants"),
     WORMWOOD_CONFIG_TRAPS = GetModConfigData("wormwood_trapbuffs"),
     -- Warly
-	WARLY_FOOD_TASTE = GetModConfigData("warly_food_taste_"),
+    WARLY_FOOD_TASTE = GetModConfigData("warly_food_taste_"),
     WARLY_SAME_OLD_COOLDOWN = total_day_time * 3,
     WARLY_SAME_OLD_MULTIPLIERS = { .6, .5, .35, .2, .1 },
     WARLY_BUTCHER = GetModConfigData("warly_butcher_"),
@@ -232,10 +232,10 @@ TUNING.DSTU = {
     -- Wickerbottom
     WICKERNERF = GetModConfigData("wickerbottom"),
     WICKERNERF_TENTACLES = GetModConfigData("on tentacles"),
-	
-	-- Willow
-	--WILLOW_INSULATION = GetModConfigData("willow insulation"),
-	
+
+    -- Willow
+    --WILLOW_INSULATION = GetModConfigData("willow insulation"),
+
     -- WICKERNERF_HORTICULTURE = GetModConfigData("applied horticulture"),
     WICKERNERF_BEEBOOK = GetModConfigData("apicultural notes"),
     WICKERNERF_MOONBOOK = GetModConfigData("lunar grimoire"),
@@ -332,7 +332,7 @@ TUNING.DSTU = {
     ANNOUNCE_BASESTATUS = GetModConfigData("announce_basestatus"),
     EYEBRELLAREWORK = GetModConfigData("eyebrellarework"),
     -- More Config
-    UPDATE_CHECK = CurrentRelease.GreaterOrEqualTo("R32_ST_WATHGRITHRWILLOW"), -- REMEMBER TO ALWAYS UPDATE THIS WITH NEW BETAS.
+    UPDATE_CHECK = CurrentRelease.GreaterOrEqualTo("R33_QOL_SPRINGCLEANING"), -- REMEMBER TO ALWAYS UPDATE THIS WITH NEW BETAS.
     POCKET_POWERTRIP = GetModConfigData("pocket_powertrip"),
     WINTER_BURNING = GetModConfigData("winter_burning"),
     HUNGRY_VOID = GetModConfigData("hungry_void"),
@@ -393,22 +393,22 @@ TUNING.DSTU = {
     --mod chekcs
     ISLAND_ADVENTURES = ia_check,
     TREATS_FOR_WEBBER = tfw_check,
-	
-	--MEME CONFIG
-	ADVERTISEMENTS = GetModConfigData("um_advertisements"),
-	SHRINK = GetModConfigData("um_shrink"),
+
+    --MEME CONFIG
+    ADVERTISEMENTS = GetModConfigData("um_advertisements"),
+    SHRINK = GetModConfigData("um_shrink"),
 
     --CLIENT CONFIGS
 
     REDUCED_TORNADO_VFX = GetModConfigData("um_storms_over", true),
 
-        -- boss hp qol
+    -- boss hp qol
 
-    WIDOW_HEALTH = 8000 * GetModConfigData("hoodedwidow_health_"),	
-	MOONFLY_HEALTH = 8000 * GetModConfigData("moonmaw_dragonfly_health_"),	
+    WIDOW_HEALTH = 8000 * GetModConfigData("hoodedwidow_health_"),
+    MOONFLY_HEALTH = 8000 * GetModConfigData("moonmaw_dragonfly_health_"),
     WILTFLY_HEALTH = 4000 * GetModConfigData("mock_dragonfly_health_"),
     MOTHER_GOOSE_HEALTH = 6000 * GetModConfigData("mothergoose_health_"),
-	
+
 }
 
 -- [              DST Related Overrides                  ]
@@ -419,8 +419,8 @@ if GetModConfigData("beebox_nerf") then
 end
 
 --if GetModConfigData("woodie_skilltree") then
-	--TUNING.WEREMOOSE_DAMAGE = wilson_attack * 1.5
-	--TUNING.SKILLS.WOODIE.MOOSE_SMASH_DAMAGE = wilson_attack * 3
+--TUNING.WEREMOOSE_DAMAGE = wilson_attack * 1.5
+--TUNING.SKILLS.WOODIE.MOOSE_SMASH_DAMAGE = wilson_attack * 3
 --end
 
 if GetModConfigData("wixie_walter") then
@@ -429,13 +429,13 @@ if GetModConfigData("wixie_walter") then
 
     TUNING.WOBY_SMALL_HUNGER = GLOBAL.TUNING.WALTER_HUNGER
     TUNING.WOBY_SMALL_HUNGER_RATE = GLOBAL.TUNING.WILSON_HUNGER_RATE / 2
-	
-	TUNING.WOBY_BIG_SPEED =
-        {
-            FAST = 12,
-            MEDIUM = 11,
-            SLOW = 10
-        }
+
+    TUNING.WOBY_BIG_SPEED =
+    {
+        FAST = 12,
+        MEDIUM = 11,
+        SLOW = 10
+    }
 
     TUNING.GAMEMODE_STARTING_ITEMS.DEFAULT.WALTER = { "walterhat", "meatrack_hat", "meat", "monstermeat" }
     TUNING.GAMEMODE_STARTING_ITEMS.DEFAULT.WIXIE = { "slingshot", "slingshotammo_rock", "slingshotammo_rock",
@@ -525,8 +525,9 @@ TUNING.CANNONBALL_SPLASH_DAMAGE_PERCENT = 1
 
 -- sea weed changes
 TUNING.WATERPLANT.DAMAGE = TUNING.WATERPLANT.DAMAGE * 0.75
-TUNING.WATERPLANT.ITEM_DAMAGE = TUNING.WATERPLANT.ITEM_DAMAGE * 1.75
-
+if not TUNING.DSTU.UPDATE_CHECK then
+    TUNING.WATERPLANT.ITEM_DAMAGE = TUNING.WATERPLANT.ITEM_DAMAGE * 1.75
+end
 -- shark nerf
 TUNING.SHARK.DAMAGE = 50 / 3
 
@@ -560,14 +561,14 @@ if GetModConfigData("heatwaves") then
 end
 
 if GetModConfigData("changed_shadow_pieces") then
-	TUNING.SHADOW_BISHOP.ATTACK_RANGE = {8, 10, 12}
-	TUNING.SHADOW_BISHOP.ATTACK_PERIOD = {14, 15, 16}
-	--TUNING.SHADOW_BISHOP.HIT_RANGE = 2.5 --NUH UH
-	TUNING.SHADOW_BISHOP.DAMAGE = {15, 25, 35}
-	--TUNING.SHADOW_KNIGHT.ATTACK_RANGE = 3.2
-	--TUNING.SHADOW_KNIGHT.ATTACK_RANGE_LONG = 4
-	--TUNING.SHADOW_KNIGHT.HEALTH = {600, 1800, 5400}
-	--TUNING.SHADOW_KNIGHT.ATTACK_PERIOD = {3.5, 2.5, 1.5} --evilishly low
+    TUNING.SHADOW_BISHOP.ATTACK_RANGE = { 8, 10, 12 }
+    TUNING.SHADOW_BISHOP.ATTACK_PERIOD = { 14, 15, 16 }
+    --TUNING.SHADOW_BISHOP.HIT_RANGE = 2.5 --NUH UH
+    TUNING.SHADOW_BISHOP.DAMAGE = { 15, 25, 35 }
+    --TUNING.SHADOW_KNIGHT.ATTACK_RANGE = 3.2
+    --TUNING.SHADOW_KNIGHT.ATTACK_RANGE_LONG = 4
+    --TUNING.SHADOW_KNIGHT.HEALTH = {600, 1800, 5400}
+    --TUNING.SHADOW_KNIGHT.ATTACK_PERIOD = {3.5, 2.5, 1.5} --evilishly low
 end
 
 --flingo emergency buff
