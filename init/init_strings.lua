@@ -71,7 +71,7 @@ STRINGS.PIG_GUARD_PIGKING_TALK_LOOKATWILSON_FRIEND = { "KING SAY PROTECT", "PROT
 -- Hey look! I actually did something! -Canis
 STRINGS.CHARACTER_DESCRIPTIONS.willow = STRINGS.CHARACTER_DESCRIPTIONS.willow ..
     "\n󰀕Can ignite things in the cold"
-    
+
 if GetModConfigData("wx78") then
     STRINGS.CHARACTER_DESCRIPTIONS.wx78 = STRINGS.CHARACTER_DESCRIPTIONS.wx78 .. "\n󰀕Systems are not repaired via lightning"
 end
@@ -341,14 +341,10 @@ STRINGS.STALKER_ATRIUM_WATHOM_BATTLECRY = {
 
 STRINGS.ACTIONS.SET_CUSTOM_NAME = "Set Custom Name"
 
-STRINGS.SKILLTREE.WILSON.WILSON_ALCHEMY_4_DESC =
-    STRINGS.SKILLTREE.WILSON.WILSON_ALCHEMY_4_DESC ..
-    "\nTransform 3 Monster Morsels into a Monster Meat.\nTransform a Monster Meat into 2 Monster Morsels."
+local SkillTreeDefs = GLOBAL.require("prefabs/skilltree_defs")
 
-if STRINGS.SKILLTREE.WILLOW ~= nil then
-    STRINGS.SKILLTREE.WILLOW.WILLOW_ATTUNED_LIGHTER_DESC = STRINGS.SKILLTREE.WILLOW.WILLOW_ATTUNED_LIGHTER_DESC .. " Can also absorb Smog."
-end
-
+SkillTreeDefs.SKILLTREE_DEFS["wilson"].wilson_alchemy_4.desc = STRINGS.SKILLTREE.WILSON.WILSON_ALCHEMY_4_DESC .. "\nTransform 3 Monster Morsels into a Monster Meat and Monster Meat into 2 Monster Morsels."
+SkillTreeDefs.SKILLTREE_DEFS["willow"].willow_attuned_lighter.desc = STRINGS.SKILLTREE.WILLOW.WILLOW_ATTUNED_LIGHTER_DESC .. " Can also absorb Smog."
 
 STRINGS.UM_HOUSETAUNTS = {
     PIGMAN = {
