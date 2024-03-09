@@ -9,8 +9,8 @@ local bumpers = {
 }
 local BUMPER_DEPLOY_IGNORE_TAGS = { "NOBLOCK", "player", "FX", "INLIMBO", "DECOR", "walkableplatform", "structure"}
 
-for k,v in ipairs("boat_bumper_"..bumpers.."_kit") do
-    env.AddPrefabPostInit(v, function(inst)
+for k,v in ipairs(bumpers) do
+    env.AddPrefabPostInit("boat_bumper_"..v.."_kit", function(inst)
         inst._custom_candeploy_fn = function(inst, pt, mouseover, deployer, rot)
             local boat = mouseover ~= nil and mouseover:HasTag("boat") and mouseover or nil
             if boat == nil then
@@ -32,8 +32,8 @@ for k,v in ipairs("boat_bumper_"..bumpers.."_kit") do
             local radius = boat.components.boatringdata and boat.components.boatringdata:GetRadius() + 0.25 or 0 --  Need to look a little outside of the boat edge here
             local boatsegments = boat.components.boatringdata and boat.components.boatringdata:GetNumSegments()
             local boatangle = boat.Transform:GetRotation()
-        
             local snap_point = GetCircleEdgeSnapTransform(boatsegments, radius, boatpos, pt, boatangle)
+            
             return TheWorld.Map:IsDeployPointClear(snap_point, nil, inst.replica.inventoryitem:DeploySpacingRadius(), nil, nil, nil, BUMPER_DEPLOY_IGNORE_TAGS)
         end
     end)
