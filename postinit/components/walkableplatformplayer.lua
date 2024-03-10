@@ -41,13 +41,13 @@ local function BoatCam_UpdateFn(dt, params, parent, best_dist_sq)
 
     state.last_platform_x, state.last_platform_z = platform_x, platform_z
 
-    local camera_offset_lerp_speed = 0.25
+    local camera_offset_lerp_speed = 0.9
     state.camera_offset.x, state.camera_offset.z = VecUtil_Lerp(state.camera_offset.x, state.camera_offset.z, state.target_camera_offset.x, state.target_camera_offset.z, dt * camera_offset_lerp_speed)
 
     TheCamera:SetOffset(state.camera_offset + (tpos - parent:GetPosition()))
 
     local pan_gain, heading_gain, distance_gain = TheCamera:GetGains()
-    local pan_lerp_speed = 0.75
+    local pan_lerp_speed = 1
     pan_gain = Lerp(pan_gain, state.target_pan_gain, dt * pan_lerp_speed)
 
     TheCamera:SetGains(pan_gain, heading_gain, distance_gain)
@@ -61,7 +61,7 @@ env.AddComponentPostInit("walkableplatformplayer", function(self)
                 target_camera_offset = Vector3(0,1.5,0),
                 camera_offset = Vector3(0,1.5,0),
                 last_platform_x = 0, last_platform_z = 0,
-                target_pan_gain = 4,
+                target_pan_gain = 6,
             },
             UpdateFn = BoatCam_UpdateFn,
             ActiveFn = BoatCam_ActiveFn,
