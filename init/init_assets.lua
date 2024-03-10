@@ -2160,9 +2160,4 @@ Assets = {
     Asset("IMAGE", "fx/smog3.tex"),
     Asset("IMAGE", "fx/smog4.tex"),
 
-	-- SKILL TREES
-
-	Asset( "IMAGE", "images/wathgrithr_rework_skilltree.tex" ),
-    Asset( "ATLAS", "images/wathgrithr_rework_skilltree.xml" ),
-
 }
