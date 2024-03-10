@@ -116,11 +116,11 @@ local function UpdateInspirationBadge(inst)
 
     local userid = TheNet:GetUserID()
 
-    if inst:HasTag("player_shadow_aligned") == true and inst:HasTag("beefaloinspiration") == false then
+    --[[if inst:HasTag("player_shadow_aligned") == true and inst:HasTag("beefaloinspiration") == false then
         SendModRPCToClient(GetClientModRPC("InspirationBadgeRPC", "HideBadge"),userid)
     else
         SendModRPCToClient(GetClientModRPC("InspirationBadgeRPC", "ShowBadge"),userid)
-    end
+    end]]
 
 end
 

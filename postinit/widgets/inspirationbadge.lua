@@ -28,5 +28,5 @@ env.AddClassPostConstruct("widgets/inspirationbadge", function(self, owner, colo
 
 end)
 
-AddClientModRPCHandler("InspirationBadgeRPC", "HideBadge", function() myself:Hide() end)
-AddClientModRPCHandler("InspirationBadgeRPC", "ShowBadge", function() myself:Show() end)
+--AddClientModRPCHandler("InspirationBadgeRPC", "HideBadge", function() myself:Hide() end)
+--AddClientModRPCHandler("InspirationBadgeRPC", "ShowBadge", function() myself:Show() end)
