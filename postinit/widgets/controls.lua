@@ -24,6 +24,12 @@ AddClassPostConstruct( "widgets/controls", function(self, inst)
 	local uncompromising_tooltip = require "widgets/uncompromising_tooltip"
 	self.uncompromising_tooltip = self:AddChild( uncompromising_tooltip(ownr) )
 	self.uncompromising_tooltip:MoveToBack()
+	
+	if self.owner:HasTag("wathom") then
+		local Wathom_Sonar = require "widgets/wathom_sonar"
+		self.wathom_sonar = self:AddChild( Wathom_Sonar(self.owner) )
+		self.wathom_sonar:MoveToBack()
+	end
 end)
 --[[
 AddClassPostConstruct("screens/playerhud",function(inst)

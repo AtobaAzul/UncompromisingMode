@@ -23,12 +23,12 @@ local function healowner(inst, owner)
         and (owner.components.hunger and owner.components.hunger.current > 5) and not owner:HasTag("deathamp") and owner.components.oldager == nil then
         owner.components.health:DoDelta(TUNING.REDAMULET_CONVERSION, false, "redamulet")
         owner.components.hunger:DoDelta(-TUNING.REDAMULET_CONVERSION)
-        inst.components.fueled:DoDelta(-36)
+        inst.components.fueled:DoDelta(-18)
 
         local healtime = 10
 
         if owner.components.health ~= nil and owner.components.health:GetPercent() <= 0.5 then
-            healtime = 1 + (10 * owner.components.health:GetPercent())
+            healtime = 1 + (8 * owner.components.health:GetPercent())
         end
 
         inst.task = inst:DoTaskInTime(healtime, healowner, owner)
@@ -47,7 +47,7 @@ local function onequip_red(inst, owner)
     local healtime = 10
 
     if owner.components.health ~= nil and owner.components.health:GetPercent() <= 0.5 then
-        healtime = 1 + (10 * owner.components.health:GetPercent())
+        healtime = 1 + (8 * owner.components.health:GetPercent())
     end
 
     inst.task = inst:DoTaskInTime(healtime, healowner, nil, owner)
@@ -85,7 +85,7 @@ local function ontakefuel_red(inst)
             local healtime = 10
 
             if owner.components.health ~= nil and owner.components.health:GetPercent() <= 0.5 then
-                healtime = 1 + (10 * owner.components.health:GetPercent())
+                healtime = 1 + (8 * owner.components.health:GetPercent())
             end
 
             inst.task = inst:DoTaskInTime(healtime, healowner, owner)
@@ -101,7 +101,7 @@ env.AddPrefabPostInit("amulet", function(inst)
     inst:RemoveComponent("finiteuses")
 
     inst:AddComponent("fueled")
-    inst.components.fueled:InitializeFuelLevel(TUNING.LARGE_FUEL * 4)
+    inst.components.fueled:InitializeFuelLevel(TUNING.LARGE_FUEL * 2)
     inst.components.fueled.fueltype = FUELTYPE.NIGHTMARE
     inst.components.fueled:SetDepletedFn(nofuel_red)
     inst.components.fueled:SetTakeFuelFn(ontakefuel_red)

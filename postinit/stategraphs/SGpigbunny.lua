@@ -3,6 +3,36 @@ GLOBAL.setfenv(1, GLOBAL)
 
 env.AddStategraphPostInit("pig", function(inst)
 
+local function hit_recovery_delay(inst, delay, max_hitreacts, skip_cooldown_fn)
+	local on_cooldown = false
+	if (inst._last_hitreact_time ~= nil and inst._last_hitreact_time + (delay or inst.hit_recovery or TUNING.DEFAULT_HIT_RECOVERY) >= GetTime()) then	-- is hit react is on cooldown?
+		max_hitreacts = max_hitreacts or inst._max_hitreacts
+		if max_hitreacts then
+			if inst._hitreact_count == nil then
+				inst._hitreact_count = 2
+				return false
+			elseif inst._hitreact_count < max_hitreacts then
+				inst._hitreact_count = inst._hitreact_count + 1
+				return false
+			end
+		end
+
+		skip_cooldown_fn = skip_cooldown_fn or inst._hitreact_skip_cooldown_fn
+		if skip_cooldown_fn ~= nil then
+			on_cooldown = not skip_cooldown_fn(inst, inst._last_hitreact_time, delay)
+		elseif inst.components.combat ~= nil then
+			on_cooldown = not (inst.components.combat:InCooldown() and inst.sg:HasStateTag("idle"))		-- skip the hit react cooldown if the creature is ready to attack
+		else
+			on_cooldown = true
+		end
+	end
+
+	if inst._hitreact_count ~= nil and not on_cooldown then
+		inst._hitreact_count = 1
+	end
+	return on_cooldown
+end
+
 local events =
 {	
     EventHandler("doattack", function(inst, data) 

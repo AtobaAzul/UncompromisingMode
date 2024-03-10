@@ -12,6 +12,7 @@ local prefabs = {
 	--"wonaldmcronald
 
 	"deathstick",
+	"scrimbles_vanishing_sword",
 	"uncompromising_toad",
 	"mushroomsprout_overworld",
 	"sporecloud_toad",
@@ -126,7 +127,6 @@ local prefabs = {
 	"wicker_tentacle",
 	"snapperturtle",
 	"snapperturtlenest",
-	"cursed_antler",
 	"marsh_grass",
 	"web_net_splat_fx",
 	"web_bomb",
@@ -144,6 +144,7 @@ local prefabs = {
 	"berniebox",
 	"chomper",
 	"old_shadowwaxwell",
+	"real_shadowwaxwell",
 	"snapdragon",
 	"snapdragonherd",
 	"snapplant",
@@ -176,15 +177,12 @@ local prefabs = {
 	"watermelon_lantern",
 	"gnome_organizer",
 	"fireball_throwable",
-	"crabclaw",
 	"ancient_trepidation",
 	"ancient_trepidation_anchor",
-	"klaus_amulet",
 	"ancient_amulet_red",
 	"buff_ancient_amulet_red",
 	"amulet_health_orb",
 	"nightcrawler",
-	--"um_nightcrawler",
 	"ancient_trepidation_arm",
 	--"steel_sweater",
 	"rat_whip",
@@ -222,14 +220,10 @@ local prefabs = {
 	"dragonfly_egg",
 	"um_trap_snare",
 	"um_bear_trap",
-	"gore_horn_hat",
-	"slobberlobber",
 	"uncompromising_birds",
 	"um_shambler",
 	"mothergoose_tornado",
 	"corncan",
-	"feather_frock",
-	"beargerclaw",
 	"skullchest",
 	"drink_with_the_living_dead",
 	"hoodedturfchanger",
@@ -287,7 +281,6 @@ local prefabs = {
 	"oculet_pets",
 	"terrarium",
 	"reedbuncher",
-	"itemscrapper",
 	"um_areahandler",
 	"specter_shipwreck",
 	--"resurrectionphonograph",
@@ -309,7 +302,6 @@ local prefabs = {
 	"driftwood_waterlogged",
 	"kelpstack",
 	"siren_throne",
-
 	"uncompromising_harpoon",
 	"uncompromising_axepoon",
 	"uncompromising_magharpoon",
@@ -317,7 +309,6 @@ local prefabs = {
 	"uncompromising_fishingnetvisualizer",
 	"um_windturbine",
 	"mastupgrade_windturbine",
-	"um_beegun",
 
 	"armor_reed_um",
 	"armor_sharksuit_um",
@@ -364,6 +355,7 @@ local prefabs = {
 
 	"wathom",
 	"wathom_none",
+	"wathom_heartbeat_ringfx",
 
 	"um_halloween_ornaments",
 	"trinket_wathom1",
@@ -371,12 +363,21 @@ local prefabs = {
 	"uncompromising_skins",
 
 	"codex_mantra",
+	"pact_armor_sanity",
+	"pact_sword_sanity",
 
 	--WIXIE RELATED PREFABS
 	"charles_t_horse",
 	"wixie_piano",
 	"wixie_clock",
 	"wixie_wardrobe",
+
+
+	"uncompromising_skins",
+
+	"codex_mantra",
+
+
 	"slingshotammo_secondary",
 	"slingshotammo_extras",
 	"slingshotammo_IA",
@@ -431,6 +432,18 @@ local prefabs = {
 	"um_preparedfoods",
 	"um_foliage",
 	"lifeinjector_redcap_buff",
+	
+	--The Cursed!
+	"cursed_antler",
+	"feather_frock",
+	"slobberlobber",
+	"beargerclaw",
+	"klaus_amulet",
+	"gore_horn_hat",
+	"crabclaw",
+	"um_beegun",
+	
+	"um_records",
 
     "dl_prefabs",
     "dl_biometable",

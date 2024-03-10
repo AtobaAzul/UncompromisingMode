@@ -58,6 +58,8 @@ STRINGS.VETS = "You're about to be afflicted with a crippling curse.\nYour body 
 
 STRINGS.VETS_OK = "Ok"
 
+STRINGS.PACTSWORN_TITLE = "The Shadow Pact"
+STRINGS.PACTSWORN_TEXT = "A new path lies before you, if you give up the Codex Umbra. You will lose your spells, take 20% more damage, but you will gain a summonable sword, armor, and true classic shadows.\nThis canot be undone."
 
 STRINGS.PIG_REMEMBER_THREAT = { "REMEMBER YOU!", "YOU HURT US!", "YOU MEAN!" }
 STRINGS.PIG_GUARD_PIGKING_TALK_LOOKATWILSON = { "NO SMASH HOUSES", "US WATCHING YOU", "BE GOOD HERE", "WATCHING YOU" }

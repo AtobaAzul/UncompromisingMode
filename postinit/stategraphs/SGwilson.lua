@@ -92,7 +92,7 @@ env.AddStategraphPostInit("wilson", function(inst)
         local equip = inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
 
         if equip ~= nil and target ~= nil and target.components.health ~= nil and not target.components.health:IsDead() then
-            inst.components.combat:DoNaughtAttack(target)
+			inst.components.combat:DoNaughtAttack(target)
         end
         --[[
         local equip = inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
@@ -309,11 +309,6 @@ env.AddStategraphPostInit("wilson", function(inst)
             function(inst, action)
                 return action.invobject ~= nil
                     and action.invobject:HasTag("lighter") and "castspelllighter"
-            end),
-        ActionHandler(ACTIONS.WINGSUIT,
-            function(inst, action)
-                return action.invobject ~= nil
-                    and action.invobject:HasTag("wingsuit") and "castspell"
             end),
         ActionHandler(ACTIONS.CREATE_BURROW,
             function(inst, action)
@@ -1785,6 +1780,117 @@ env.AddStategraphPostInit("wilson", function(inst)
             },
 
         },
+		
+		State{
+			name = "pact_armor_craft",
+			tags = { "doing", "busy", "nocraftinginterrupt", "nomorph" },
+
+			onenter = function(inst, product)
+				inst.components.locomotor:Stop()
+				inst.AnimState:PlayAnimation("wendy_recall")
+				inst.AnimState:PushAnimation("wendy_recall_pst", false)
+				
+				inst.sg.statemem.action = inst.bufferedaction
+			end,
+
+			timeline =
+			{
+				FrameEvent(20, function(inst)
+					inst.SoundEmitter:PlaySound("dontstarve/sanity/creature2/attack")
+					
+					local body = inst.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY)
+					
+					if body ~= nil then
+						inst.components.inventory:GiveItem(inst.components.inventory:Unequip(EQUIPSLOTS.BODY))
+					end
+					
+					inst:PerformBufferedAction()
+					SpawnPrefab("um_shadow_attune_fx").Transform:SetPosition(inst.Transform:GetWorldPosition())
+				end),
+				FrameEvent(25, function(inst)
+					inst.sg:RemoveStateTag("busy")
+				end),
+			},
+
+			events =
+			{
+				EventHandler("animover", function(inst)
+					if inst.AnimState:AnimDone() then
+						inst.sg:GoToState("idle")
+					end
+				end),
+			},
+
+			onexit = function(inst)
+				if inst.bufferedaction == inst.sg.statemem.action and
+						(not inst.components.playercontroller or
+						inst.components.playercontroller.lastheldaction ~= inst.bufferedaction) then
+					inst:ClearBufferedAction()
+				end
+			end,
+		},
+		
+		State{
+			name = "pact_sword_craft",
+			tags = { "doing", "busy", "nocraftinginterrupt", "nomorph" },
+
+			onenter = function(inst, product)
+				inst.components.locomotor:Stop()
+				inst.AnimState:PlayAnimation("tornado")
+				
+				inst.sg.statemem.action = inst.bufferedaction
+				
+				local hands = inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
+					
+				if hands == nil then
+					inst.AnimState:OverrideSymbol("swap_object", "nothing_lmao", "nothing_lmao")
+					inst.AnimState:Show("ARM_carry")
+				end
+			end,
+
+			timeline =
+			{
+				FrameEvent(15, function(inst)
+					inst.SoundEmitter:PlaySound("dontstarve/sanity/creature2/attack")
+					
+					local hands = inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
+					
+					if hands ~= nil then
+						inst.components.inventory:GiveItem(inst.components.inventory:Unequip(EQUIPSLOTS.HANDS))
+					end
+					
+					inst:PerformBufferedAction()
+					SpawnPrefab("um_shadow_attune_fx").Transform:SetPosition(inst.Transform:GetWorldPosition())
+				end),
+				FrameEvent(20, function(inst)
+					inst.sg:RemoveStateTag("busy")
+				end),
+			},
+
+			events =
+			{
+				EventHandler("animover", function(inst)
+					if inst.AnimState:AnimDone() then
+						inst.sg:GoToState("idle")
+					end
+				end),
+			},
+
+			onexit = function(inst)
+				if inst.bufferedaction == inst.sg.statemem.action and
+						(not inst.components.playercontroller or
+						inst.components.playercontroller.lastheldaction ~= inst.bufferedaction) then
+						
+					local hands = inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
+					
+					if hands == nil then
+						inst.AnimState:Hide("ARM_carry")
+					end
+					
+					inst:ClearBufferedAction()
+				end
+			end,
+		},
 
     }
 

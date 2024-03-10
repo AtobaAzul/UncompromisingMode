@@ -123,6 +123,15 @@ DESCRIBE.MINOTAUR_BOULDER = "Stop! You might bury this whole place!"
 DESCRIBE.MINOTAUR_BOULDER_BIG = "Oooh, you are making a huge mess!"
 DESCRIBE.SNOWBALL_THROWABLE = "I don't have time to play!"
 DESCRIBE.VETERANSHRINE = "Oooh, I have a bad feeling about this..."
+DESCRIBE.VET_SKULL = "The clock stopped long ago for this one."
+DESCRIBE.UM_BOSS_SOUL = "Something lingers inside it."
+DESCRIBE.UM_DARK_VESTIGES = "It's constantly moving..."
+DESCRIBE.UM_VOXOLOPHONE = "I can't tell when this was made, and by whom..."
+
+DESCRIBE.UM_EXHUMER = "I guess something *can* wind the clock back on death."
+DESCRIBE.UM_WINGSUIT = "Early bird gets the worm, or so they say."
+DESCRIBE.UM_MOONFLY_LANTERN = "Very convenient."
+
 DESCRIBE.RAT_TAIL = "It just... popped right off!"
 DESCRIBE.PLAGUEMASK = "It just looks so silly! I must try it on!"
 DESCRIBE.SPIDER_TRAPDOOR =
@@ -172,6 +181,7 @@ DESCRIBE.SHADOW_TELEPORTER = "Oh, how you tempt me..."
 DESCRIBE.POLLENMITEDEN = "They'll multiply in no time."
 DESCRIBE.POLLENMITES = "Don't you dare nest in my hair!"
 DESCRIBE.SHADOW_CROWN = "It makes me feel so... privileged."
+DESCRIBE.UM_SHADOW_AXE = "A rudimentary solution to being several places at once."
 DESCRIBE.RNEGHOST = DESCRIBE.GHOST
 DESCRIBE.TRAPDOORGRASS = DESCRIBE.GRASS
 DESCRIBE.LUREPLAGUE_RAT = "Oh botheration, what happened to you?"
@@ -184,7 +194,12 @@ DESCRIBE.GIANT_TREE =
 "They've had quite a long time to grow."
 DESCRIBE.ANCIENTHOODEDTURF = DESCRIBE.TURF_FOREST
 DESCRIBE.HOODEDMOSS = DESCRIBE.TURF_FOREST
+
 DESCRIBE.WIDOWSGRASP = "Might loosen up those cocoons."
+
+DESCRIBE.SILKSACK = "Some silk inside can compact our supplies."
+DESCRIBE.SILKEN_BUNDLE = "Stickily kept for efficient transport."
+
 DESCRIBE.WEBBEDCREATURE = "Preserved for later, I presume."
 ANNOUNCE.WEBBEDCREATURE = "I'll need something more fitting or else I'd just be wasting my time."
 DESCRIBE.SNAPDRAGON_BUDDY = "My very own time-saver!"
@@ -516,6 +531,10 @@ DESCRIBE.SLINGSHOTAMMO_MOONGLASS = DESCRIBE.SLINGSHOTAMMO_ROCK
 DESCRIBE.SLINGSHOTAMMO_SALT = DESCRIBE.SLINGSHOTAMMO_ROCK
 DESCRIBE.SLINGSHOTAMMO_SLIME = DESCRIBE.SLINGSHOTAMMO_ROCK
 DESCRIBE.SLINGSHOTAMMO_GOOP = DESCRIBE.SLINGSHOTAMMO_ROCK
+DESCRIBE.SLINGSHOTAMMO_FLARE = DESCRIBE.SLINGSHOTAMMO_ROCK
+
+DESCRIBE.SLINGSHOTAMMO_INSANITY = DESCRIBE.SLINGSHOTAMMO_ROCK
+DESCRIBE.SLINGSHOTAMMO_LUNARVINE = DESCRIBE.SLINGSHOTAMMO_ROCK
 
 DESCRIBE.SLINGSHOTAMMO_LIMESTONE = DESCRIBE.SLINGSHOTAMMO_ROCK
 DESCRIBE.SLINGSHOTAMMO_TAR = DESCRIBE.SLINGSHOTAMMO_ROCK

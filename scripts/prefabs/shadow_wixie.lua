@@ -194,7 +194,7 @@ local function fn()
 	
 	inst:AddComponent("locomotor")
 	inst.components.locomotor.walkspeed = 8
-	inst.components.locomotor.runspeed = 20
+	inst.components.locomotor.runspeed = 8
 	inst.components.locomotor:SetTriggersCreep(false)
     inst.components.locomotor.pathcaps = { ignorecreep = true }
     inst.components.locomotor:SetSlowMultiplier(.6)
@@ -216,7 +216,7 @@ local function fn()
 	inst.components.combat:SetKeepTargetFunction(KeepTargetFn)
 	
     inst:AddComponent("lootdropper")
-    inst.components.lootdropper:SetLoot({"nightmarefuel", "nightmarefuel", "nightmarefuel", "the_real_charles_t_horse"})
+    inst.components.lootdropper:SetLoot({"nightmarefuel", "nightmarefuel", "nightmarefuel", "the_real_charles_t_horse", "um_record_shadow_wixie"})
 
     inst:AddComponent("sanityaura")
     inst.components.sanityaura.penalty = TUNING.OLD_SHADOWWAXWELL_SANITY_PENALTY

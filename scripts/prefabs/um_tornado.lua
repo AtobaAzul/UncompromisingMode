@@ -431,7 +431,7 @@ local function TornadoItemTossTask(inst)
 
                 local scaleFactor = Lerp(.5, 1.5, 1)
                 random_item.shadow.Transform:SetScale(scaleFactor, scaleFactor, scaleFactor)
-                random_item.updatetask = random_item:DoPeriodicTask(FRAMES, _GroundDetectionUpdate, nil, 5)
+                random_item.updatetask = random_item:DoPeriodicTask(.1, _GroundDetectionUpdate, nil, 5)
 
                 random_item.updatetask_timeout = random_item:DoTaskInTime(30, function(inst)
 					if random_item.Physics ~= nil then
@@ -522,11 +522,11 @@ local function TornadoTask(inst)
                             hat:AddTag("tornado_nosucky")
                             hat:AddTag("gotgrabbed")
 
-                            hat:DoTaskInTime(0.5, function(inst)
+                            hat:DoTaskInTime(1.5, function(inst)
                                 hat:RemoveTag("tornado_nosucky")
                             end)
 
-                            hat:DoTaskInTime(2.5, function(inst)
+                            hat:DoTaskInTime(3.5, function(inst)
                                 hat:RemoveTag("gotgrabbed")
                             end)
 
@@ -534,7 +534,7 @@ local function TornadoTask(inst)
                             v.components.inventory:DropItem(hat, true, true)
                             if hat.Physics ~= nil then
                                 local x, y, z = hat.Transform:GetWorldPosition()
-                                hat.Physics:Teleport(x, .3, z)
+                                hat.Physics:Teleport(x, .8, z)
 
                                 local angle = (math.random() * 20 - 10) * DEGREES
                                 if inst ~= nil and inst:IsValid() then
@@ -572,8 +572,8 @@ local function TornadoTask(inst)
                             end
                         end
 
-                        local dx, dy, dz = px + (((FRAMES * 5) * velx) / multiplierplayer) * inst.Transform:GetScale(), 0,
-                            pz + (((FRAMES * 5) * velz) / multiplierplayer) * inst.Transform:GetScale()
+                        local dx, dy, dz = px + (((.1 * 5) * velx) / multiplierplayer) * inst.Transform:GetScale(), 0,
+                            pz + (((.1 * 5) * velz) / multiplierplayer) * inst.Transform:GetScale()
 
                         local ground = TheWorld.Map:IsOceanTileAtPoint(dx, dy, dz) -- changed to IsOceanTile for better ocean support, don't want tornado scuking things into the void.
                         local boat = TheWorld.Map:GetPlatformAtPoint(dx, dz)
@@ -593,7 +593,7 @@ local function TornadoTask(inst)
             local dest_velx = math.cos(dest_rad)
             local dest_velz = -math.sin(dest_rad)
 
-            local x_dest2, y_dest2, z_dest2 = x + ((FRAMES * 3) * dest_velx), 0, z + ((FRAMES * 3) * dest_velz)
+            local x_dest2, y_dest2, z_dest2 = x + ((.1 * 3) * dest_velx), 0, z + ((.1 * 3) * dest_velz)
 
             if x_dest2 ~= nil then
                 inst.Transform:SetPosition(x_dest2, y_dest2, z_dest2)
@@ -719,8 +719,10 @@ local function fn()
     inst.icon = SpawnPrefab("um_tornado_icon")
     inst.icon.entity:SetParent(inst.entity)
 
-    inst:AddComponent("updatelooper")
-    inst.components.updatelooper:AddOnUpdateFn(TornadoTask)
+	inst:DoPeriodicTask(.1, TornadoTask)
+
+    --inst:AddComponent("updatelooper")
+   -- inst.components.updatelooper:AddOnUpdateFn(TornadoTask)
 
     inst:AddComponent("inventory")
     inst.components.inventory.ignorescangoincontainer = true
@@ -793,7 +795,7 @@ local function CaveTornadoTask(inst)
         local dest_velx = math.cos(dest_rad)
         local dest_velz = -math.sin(dest_rad)
 
-        local x_dest2, y_dest2, z_dest2 = x + ((FRAMES * 3) * dest_velx), 0, z + ((FRAMES * 3) * dest_velz)
+        local x_dest2, y_dest2, z_dest2 = x + ((.1 * 3) * dest_velx), 0, z + ((.1 * 3) * dest_velz)
 
         if x_dest2 ~= nil then
             inst.Transform:SetPosition(x_dest2, y_dest2, z_dest2)
@@ -848,6 +850,11 @@ local function TrySpawnWaterfall(inst, x, z)
     if CanSpawnWaterfall(inst, x, y, z) then
         SpawnPrefab("um_waterfall_spawner").Transform:SetPosition(x, y, z)
     end
+	
+    if not TheWorld.state.isspring then
+        inst.persists = false
+        inst:Remove()
+	end
 end
 
 local function cavefn()
@@ -869,8 +876,9 @@ local function cavefn()
         return inst
     end
 
-    inst:AddComponent("updatelooper")
-    inst.components.updatelooper:AddOnUpdateFn(CaveTornadoTask)
+	inst:DoPeriodicTask(.1, CaveTornadoTask)
+    --inst:AddComponent("updatelooper")
+    --inst.components.updatelooper:AddOnUpdateFn(CaveTornadoTask)
 
     inst:DoPeriodicTask(5, TrySpawnWaterfall)
 

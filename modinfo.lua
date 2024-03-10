@@ -4,7 +4,7 @@ folder_name = folder_name or "workshop-"
 if not folder_name:find("workshop-") then
     name = "[LOCAL] - " .. name
 end
-local _version = "1.4.13.0"
+local _version = "1.4.14.0"
 description = [[
 󰀔 [ Version: ]] .. _version .. [[ - "Under the Weather Pt.1" ]
 
@@ -16,7 +16,7 @@ Latest update features:
 - Krampii will more effectively steal things and do their job.
 - A ton of misc. changes, ranging from Wickerbottom's books to hounds.
 
-󰀏 NEXT UPDATE: ?????? ???? ??? ????]]
+󰀏 NEXT UPDATE: ?????? ?? ??? ????]]
 
 author = "󰀈 The Uncomp Dev Team 󰀈"
 

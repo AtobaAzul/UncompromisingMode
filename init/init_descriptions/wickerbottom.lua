@@ -133,6 +133,15 @@ DESCRIBE.MINOTAUR_BOULDER_BIG = "It's size may be to our benefit..."
 DESCRIBE.SNOWBALL_THROWABLE =
 "A handful of snow, mashed together so it can be thrown."
 DESCRIBE.VETERANSHRINE = "That's certainly not the best idea."
+DESCRIBE.VET_SKULL = "The skull of some strange homosapien."
+DESCRIBE.UM_BOSS_SOUL = "I normally don't believe in this kind of thing."
+DESCRIBE.UM_DARK_VESTIGES = "I'm not sure how to catagorize it..."
+DESCRIBE.UM_VOXOLOPHONE = "It is some kind of radio."
+
+DESCRIBE.UM_EXHUMER = "We've long since crossed into dark territory."
+DESCRIBE.UM_WINGSUIT = "Magic is at work here, no other explanation."
+DESCRIBE.UM_MOONFLY_LANTERN = "I'm not sure what powers it..."
+
 DESCRIBE.RAT_TAIL = "Goodness, I believe it's infected with the bubonic plague."
 DESCRIBE.PLAGUEMASK =
 "A mask, popularized by plague doctors during the bubonic plague."
@@ -187,6 +196,7 @@ DESCRIBE.POLLENMITEDEN = "Obviously the work of a eusocial insect."
 DESCRIBE.POLLENMITES =
 "A swarm of Melittiphis Alvearlus. Strange behavior for a parasite."
 DESCRIBE.SHADOW_CROWN = "It permeates a dark aura over it's wearer."
+DESCRIBE.UM_SHADOW_AXE = "There's a lingering aura connected to this axe."
 DESCRIBE.RNEGHOST = DESCRIBE.GHOST
 DESCRIBE.SUNGLASSES = "Time for some daylight reading."
 DESCRIBE.TRAPDOORGRASS = DESCRIBE.GRASS
@@ -201,7 +211,11 @@ DESCRIBE.HOODEDWIDOW =
 DESCRIBE.GIANT_TREE = "Sequoioideae, the redwood tree."
 DESCRIBE.ANCIENTHOODEDTURF = DESCRIBE.TURF_FOREST
 DESCRIBE.HOODEDMOSS = DESCRIBE.TURF_FOREST
+
 DESCRIBE.WIDOWSGRASP = "The limb of the predator arachnid."
+DESCRIBE.SILKSACK = "It seems some of the internal organs still function, fascinating."
+DESCRIBE.SILKEN_BUNDLE = "Stickily bundled up nice and tight."
+
 DESCRIBE.WEBBEDCREATURE =
 "It doesnt appear to be a nest. I assume it contains something."
 ANNOUNCE.WEBBEDCREATURE =
@@ -558,6 +572,10 @@ DESCRIBE.SLINGSHOTAMMO_MOONGLASS = DESCRIBE.SLINGSHOTAMMO_THULECITE
 DESCRIBE.SLINGSHOTAMMO_SALT = DESCRIBE.SLINGSHOTAMMO_ROCK
 DESCRIBE.SLINGSHOTAMMO_SLIME = DESCRIBE.SLINGSHOTAMMO_ROCK
 DESCRIBE.SLINGSHOTAMMO_GOOP = DESCRIBE.SLINGSHOTAMMO_ROCK
+DESCRIBE.SLINGSHOTAMMO_FLARE = DESCRIBE.SLINGSHOTAMMO_ROCK
+
+DESCRIBE.SLINGSHOTAMMO_INSANITY = DESCRIBE.SLINGSHOTAMMO_ROCK
+DESCRIBE.SLINGSHOTAMMO_LUNARVINE = DESCRIBE.SLINGSHOTAMMO_ROCK
 
 DESCRIBE.SLINGSHOTAMMO_LIMESTONE = DESCRIBE.SLINGSHOTAMMO_ROCK
 DESCRIBE.SLINGSHOTAMMO_TAR = DESCRIBE.SLINGSHOTAMMO_ROCK
@@ -583,11 +601,11 @@ DESCRIBE.MARA_BOSS1 = "WHAT in the..."
 ANNOUNCE.GAS_DAMAGE = "Ahem. Cough. Ahem. Ahem."
 
 -- Pyre Nettle stuff
-DESCRIBE.UM_PYRE_NETTLES = "The increased virulence of the wild strain seems to reduce the toxin's potency."
+DESCRIBE.UM_PYRE_NETTLES = "The increased virulancy of the wild strain seems to reduce the toxin's potency."
 DESCRIBE.UM_SMOLDER_SPORE = "The nettles appear to spread via a symbiotic fungal infection... Fascinating!"
 ANNOUNCE.ANNOUNCE_SMOLDER_SPORE_EATEN = "I suppose I was feeling nostalgic."
 ANNOUNCE.ANNOUNCE_SMOLDER_SPORE_INVENTORY_POP = "Oh, that little specimen slipped my mind!!"
-DESCRIBE.UM_ARMOR_PYRE_NETTLES = "A basic natural camouflage and deterrent."
+DESCRIBE.UM_ARMOR_PYRE_NETTLES = "A basic natural camoflage and deterant."
 DESCRIBE.UM_BLOWDART_PYRE = "Equal parts conventional and psychological warfare! Er... Ahem."
 
 -- Under the Weather Part 1

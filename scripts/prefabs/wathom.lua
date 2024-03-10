@@ -268,10 +268,10 @@ end
 
 local WATHOM_COLOURCUBES =
 {
-    day = "images/colour_cubes/ruins_dim_cc.tex",
-    dusk = "images/colour_cubes/ruins_dim_cc.tex",
-    night = "images/colour_cubes/ruins_dim_cc.tex",
-    full_moon = "images/colour_cubes/ruins_dim_cc.tex",
+    day = resolvefilepath("images/colour_cubes/bat_vision_on_cc.tex"),
+    dusk = resolvefilepath("images/colour_cubes/bat_vision_on_cc.tex"),
+    night = resolvefilepath("images/colour_cubes/bat_vision_on_cc.tex"),
+    full_moon = "images/colour_cubes/fungus_cc.tex",
 }
 
 local function GetMusicValues(inst)
@@ -282,28 +282,44 @@ local function GetMusicValues(inst)
     end
 end
 
+local function WathomEnterLight(inst)
+end
+
+local function WathomEnterDark(inst)
+end
+
+local function CheckLight(inst)
+	if inst:IsInLight() then
+		print("WATHOM ENTER LIGHT")
+		inst.components.playervision:SetCustomCCTable(nil)
+		inst.components.playervision:ForceNightVision(false)
+		inst:RemoveTag("WathomInDark")
+	else
+		print("WATHOM ENTER DARK")
+		inst.components.playervision:SetCustomCCTable(WATHOM_COLOURCUBES)
+		inst.components.playervision:ForceNightVision(true)
+		inst:AddTag("WathomInDark")
+	end
+end
+
 -- When loading or spawning the character
 local function onload(inst, data)
     inst:ListenForEvent("ms_respawnedfromghost", onbecamehuman)
     inst:ListenForEvent("ms_becameghost", onbecameghost)
-    --	inst.components.playervision:SetCustomCCTable(nil)
-    --    inst.components.playervision:ForceNightVision(false) -- So Wathom doesn't get flashbanged by his nightvision.
-
+	
     if inst:HasTag("playerghost") then
         onbecameghost(inst)
     else
         onbecamehuman(inst)
     end
-    if TheWorld:HasTag("cave") then
-        inst.components.playervision:ForceNightVision(true)
-        inst.components.playervision:SetCustomCCTable(WATHOM_COLOURCUBES)
-    end
+	
     if data then
         if data.amped then
             inst:AddTag("amped")
             SendModRPCToClient(GetClientModRPC("UncompromisingSurvival", "WathomMusicToggle"), inst.userid,
                 GetMusicValues(inst))
         end
+		
         if data.deathamped then
             inst:AddTag("deathamp")
             SendModRPCToClient(GetClientModRPC("UncompromisingSurvival", "WathomMusicToggle"), inst.userid,
@@ -435,32 +451,9 @@ local common_postinit = function(inst)
     inst.OnLoad = onload
     inst.OnNewSpawn = onload
 
-    -- Wathom's Nightvision aboveground
-    if TheWorld:HasTag("cave") or TheWorld.state.isnight then
-        inst.components.playervision:ForceNightVision(true)
-        inst.components.playervision:SetCustomCCTable(WATHOM_COLOURCUBES)
-        inst:AddTag("WathomInDark")
-    else
-        inst.components.playervision:ForceNightVision(false)
-        inst.components.playervision:SetCustomCCTable(nil)
-        inst:RemoveTag("WathomInDark")
-    end
-
-    inst:WatchWorldState("isnight", function()
-        inst:DoTaskInTime(TheWorld.state.isnight and 0 or 1, function(inst)
-            if not TheWorld:HasTag("cave") then
-                if TheWorld.state.isnight then
-                    inst.components.playervision:ForceNightVision(true)
-                    inst.components.playervision:SetCustomCCTable(WATHOM_COLOURCUBES)
-                    inst:AddTag("WathomInDark")
-                else
-                    inst.components.playervision:ForceNightVision(false)
-                    inst.components.playervision:SetCustomCCTable(nil)
-                    inst:RemoveTag("WathomInDark")
-                end
-            end
-        end)
-    end)
+	inst:DoPeriodicTask(.3, CheckLight)
+	inst:ListenForEvent("enterdark", WathomEnterDark)
+	inst:ListenForEvent("enterlight", WathomEnterLight)
 
     --t'was revealed to me in a dream, and I'm not even kidding.
     inst:ListenForEvent("wathommusic_start", UpdateMusic)
@@ -475,17 +468,6 @@ local common_postinit = function(inst)
 
         UpdateMusic(inst)
     end)
-
-    -- Wathom's Nightvision aboveground
-    if TheWorld:HasTag("cave") or TheWorld.state.isnight then
-        inst.components.playervision:ForceNightVision(true)
-        inst.components.playervision:SetCustomCCTable(WATHOM_COLOURCUBES)
-        inst:AddTag("WathomInDark")
-    else
-        inst.components.playervision:ForceNightVision(false)
-        inst.components.playervision:SetCustomCCTable(nil)
-        inst:RemoveTag("WathomInDark")
-    end
 end
 
 -- This initializes for the server only. Components are added here.
@@ -554,31 +536,9 @@ local master_postinit = function(inst)
         end
     end
 
-    -- Wathom's Nightvision aboveground
-    if TheWorld:HasTag("cave") or TheWorld.state.isnight then
-        inst.components.playervision:ForceNightVision(true)
-        inst.components.playervision:SetCustomCCTable(WATHOM_COLOURCUBES)
-        inst:AddTag("WathomInDark")
-    else
-        inst.components.playervision:ForceNightVision(false)
-        inst.components.playervision:SetCustomCCTable(nil)
-        inst:RemoveTag("WathomInDark")
-    end
-
-    inst:WatchWorldState("isnight", function()
-        inst:DoTaskInTime(TheWorld.state.isnight and 0 or 1, function(inst)
-            if not TheWorld:HasTag("cave") then
-                if TheWorld.state.isnight then
-                    inst.components.playervision:ForceNightVision(true)
-                    inst.components.playervision:SetCustomCCTable(WATHOM_COLOURCUBES)
-                    inst:AddTag("WathomInDark")
-                else
-                    inst.components.playervision:ForceNightVision(false)
-                    inst.components.playervision:SetCustomCCTable(nil)
-                end
-            end
-        end)
-    end)
+	inst:DoPeriodicTask(.3, CheckLight)
+	inst:ListenForEvent("enterdark", WathomEnterDark)
+	inst:ListenForEvent("enterlight", WathomEnterLight)
 
     -- stuff relating to Wathom's adrenaline timer. This can most likely be optimized.
     inst:DoPeriodicTask(1.5, function() AmpTimer(inst) end)

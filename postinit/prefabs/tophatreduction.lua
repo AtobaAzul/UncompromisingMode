@@ -6,8 +6,7 @@ GLOBAL.setfenv(1, GLOBAL)
 --Dark Sword
 local function CalcDappernessNightSword(inst, owner)
 	if owner:HasTag("Funny_Words_Magic_Man") then
-		return TUNING.CRAZINESS_MED /
-		4                         -- This ends up being about -5/min + 3.3/min from the hat itself instead of -20/min + 3.3/min
+		return TUNING.CRAZINESS_MED * .8 -- This ends up blah blah blah shut up bro ur weird
 	else
 		return TUNING.CRAZINESS_MED
 	end
@@ -32,7 +31,7 @@ env.AddPrefabPostInit("firestaff", function(inst)
 
 	local function RedOnAttack(inst, attacker, target, skipsanity)
 		if not skipsanity and attacker ~= nil and attacker.components.sanity ~= nil and attacker:HasTag("Funny_Words_Magic_Man") then
-			attacker.components.sanity:DoDelta(TUNING.SANITY_SUPERTINY) --Counter the sanity drain					
+			attacker.components.sanity:DoDelta(TUNING.SANITY_SUPERTINY * .5) --Counter the sanity drain					
 		end
 		_redonattack(inst, attacker, target, skipsanity)
 	end
@@ -48,7 +47,7 @@ env.AddPrefabPostInit("icestaff", function(inst)
 
 	local function BlueOnAttack(inst, attacker, target, skipsanity)
 		if not skipsanity and attacker ~= nil and attacker.components.sanity ~= nil and attacker:HasTag("Funny_Words_Magic_Man") then
-			attacker.components.sanity:DoDelta(TUNING.SANITY_SUPERTINY) --Counter the sanity drain					
+			attacker.components.sanity:DoDelta(TUNING.SANITY_SUPERTINY * .5) --Counter the sanity drain					
 		end
 		_blueonattack(inst, attacker, target, skipsanity)
 	end
@@ -71,7 +70,7 @@ env.AddPrefabPostInit("telestaff", function(inst)
 		end
 
 		if caster ~= nil and caster.components.sanity ~= nil and caster:HasTag("Funny_Words_Magic_Man") then
-			caster.components.sanity:DoDelta(TUNING.SANITY_HUGE / 2) --Cut the sanity loss in half
+			caster.components.sanity:DoDelta(TUNING.SANITY_HUGE * .8) --Cut the sanity loss in half
 		end
 	end
 	inst.components.spellcaster:SetSpellFn(TeleFunction)
@@ -88,7 +87,7 @@ env.AddPrefabPostInit("batbat", function(inst)
 	local function OnAttackBatBat(inst, owner, target)
 		_onattack(inst, owner, target)
 		if owner.components.sanity ~= nil and owner:HasTag("Funny_Words_Magic_Man") and owner.components.health:GetPercent() < 1 then
-			owner.components.sanity:DoDelta(0.25 * TUNING.BATBAT_DRAIN)
+			owner.components.sanity:DoDelta(TUNING.BATBAT_DRAIN * .8)
 		end
 	end
 

@@ -116,6 +116,15 @@ DESCRIBE.ICEBOOMERANG = "No one can run from my spear!"
 DESCRIBE.MINOTAUR_BOULDER = "Foul trickery!"
 DESCRIBE.MINOTAUR_BOULDER_BIG = "Let the beast ram it's head into this one!"
 DESCRIBE.VETERANSHRINE = "No challenge is above me!"
+DESCRIBE.VET_SKULL = "I accept your challenge, fiend!"
+DESCRIBE.UM_BOSS_SOUL = "My final reward!"
+DESCRIBE.UM_DARK_VESTIGES = "Not much of a trophy."
+DESCRIBE.UM_VOXOLOPHONE = "An underworld trick, no doubt!"
+
+DESCRIBE.UM_EXHUMER = "Ripped from the underworld, I command thine soul!"
+DESCRIBE.UM_WINGSUIT = "I shall grace the skies like a true Valkrie!"
+DESCRIBE.UM_MOONFLY_LANTERN = "Like a comet in the sky, with a blazing trail!"
+
 DESCRIBE.SNOWBALL_THROWABLE = "Aim betwixt the eyes!"
 DESCRIBE.PLAGUEMASK = "I am a warrior against Pestilence!"
 DESCRIBE.SPIDER_TRAPDOOR = "My own battle tactics, used against me!"
@@ -162,6 +171,7 @@ DESCRIBE.SHADOW_TELEPORTER = "Let us strike it down, and take it's treasure!"
 DESCRIBE.POLLENMITEDEN = "The Valhalla of bugs."
 DESCRIBE.POLLENMITES = "Infest not me, bugs!"
 DESCRIBE.SHADOW_CROWN = "I shall dodge with great swiftness!"
+DESCRIBE.UM_SHADOW_AXE = "The bearer of this weapon owns an army!"
 DESCRIBE.RNEGHOST = DESCRIBE.GHOST
 DESCRIBE.LICELOAF = "Toss it back to the swampwater!"
 DESCRIBE.SUNGLASSES = "No longer can foes use the sunlight against me!"
@@ -175,7 +185,11 @@ DESCRIBE.HOODEDWIDOW = "I... I am not fearful!"
 DESCRIBE.GIANT_TREE = "Surely I stand before Yggdrasil!"
 DESCRIBE.ANCIENTHOODEDTURF = DESCRIBE.TURF_FOREST
 DESCRIBE.HOODEDMOSS = DESCRIBE.TURF_FOREST
+
 DESCRIBE.WIDOWSGRASP = "A key to my spoils!"
+DESCRIBE.SILKSACK = "This will make a fine addition to my collection."
+DESCRIBE.SILKEN_BUNDLE = "Sticky supplies stored for an epic."
+
 DESCRIBE.WEBBEDCREATURE = "I see spoils!"
 ANNOUNCE.WEBBEDCREATURE = "Too tough! The spider hath the key!"
 DESCRIBE.SNAPDRAGON_BUDDY = "'Tis no warrior!"
@@ -491,6 +505,10 @@ DESCRIBE.SLINGSHOTAMMO_MOONGLASS = DESCRIBE.SLINGSHOTAMMO_ROCK
 DESCRIBE.SLINGSHOTAMMO_SALT = DESCRIBE.SLINGSHOTAMMO_ROCK
 DESCRIBE.SLINGSHOTAMMO_SLIME = DESCRIBE.SLINGSHOTAMMO_ROCK
 DESCRIBE.SLINGSHOTAMMO_GOOP = DESCRIBE.SLINGSHOTAMMO_ROCK
+DESCRIBE.SLINGSHOTAMMO_FLARE = DESCRIBE.SLINGSHOTAMMO_ROCK
+
+DESCRIBE.SLINGSHOTAMMO_INSANITY = DESCRIBE.SLINGSHOTAMMO_ROCK
+DESCRIBE.SLINGSHOTAMMO_LUNARVINE = DESCRIBE.SLINGSHOTAMMO_ROCK
 
 DESCRIBE.SLINGSHOTAMMO_LIMESTONE = DESCRIBE.SLINGSHOTAMMO_ROCK
 DESCRIBE.SLINGSHOTAMMO_TAR = DESCRIBE.SLINGSHOTAMMO_ROCK

@@ -139,10 +139,7 @@ modimport("init/init_character_changes/willow")
 
 modimport("init/init_character_changes/willow_bernie")
 
---[[if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING and GetModConfigData("waxwell") or
-	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("waxwell")) then
-		modimport("init/init_character_changes/waxwell")
-	end]]
+modimport("init/init_character_changes/waxwell")
 
 --if GetModConfigData("warly") then
 --modimport("init/init_character_changes/warly")

@@ -123,6 +123,15 @@ DESCRIBE.MINOTAUR_BOULDER = "This place is in much worse shape than I thought."
 DESCRIBE.MINOTAUR_BOULDER_BIG = "Maybe we can use this to our advantage?"
 DESCRIBE.SNOWBALL_THROWABLE = "Not. The. Suit. What do you not get about this?"
 DESCRIBE.VETERANSHRINE = "I already have fuel-related problems, what's another?"
+DESCRIBE.VET_SKULL = "Hm, the fuel has infested these remains."
+DESCRIBE.UM_BOSS_SOUL = "Their dark essence has been left behind."
+DESCRIBE.UM_DARK_VESTIGES = "We've only tapped the surface of our potential."
+DESCRIBE.UM_VOXOLOPHONE = "Someone is using my old trick."
+
+DESCRIBE.UM_EXHUMER = "This magic should have stayed buried."
+DESCRIBE.UM_WINGSUIT = "The magic is doing most of the work."
+DESCRIBE.UM_MOONFLY_LANTERN = "I've profited from her folley."
+
 DESCRIBE.RAT_TAIL = "Eugh, disgusting!"
 DESCRIBE.PLAGUEMASK = "The beak looks ridiculous."
 DESCRIBE.SPIDER_TRAPDOOR = "Oh great, they're getting smarter."
@@ -170,6 +179,7 @@ DESCRIBE.POLLENMITEDEN = "Ugh. The horde home."
 DESCRIBE.POLLENMITES = "Horde horrible."
 DESCRIBE.SHADOW_CROWN =
 "Darkness brings great power, but leaves your body fragile. I should know."
+DESCRIBE.UM_SHADOW_AXE = "A tool after my own heart."
 DESCRIBE.RNEGHOST = DESCRIBE.GHOST
 DESCRIBE.LICELOAF = "Upsettingly plain."
 DESCRIBE.SUNGLASSES = "It's not quite my style."
@@ -184,7 +194,11 @@ DESCRIBE.HOODEDWIDOW = "I want to stay FAR away from her."
 DESCRIBE.GIANT_TREE = "This tree is unusually large."
 DESCRIBE.ANCIENTHOODEDTURF = DESCRIBE.TURF_FOREST
 DESCRIBE.HOODEDMOSS = DESCRIBE.TURF_FOREST
+
 DESCRIBE.WIDOWSGRASP = "It got blood on my suit!"
+DESCRIBE.SILKSACK = "I have no intent on wearing this hideous thing."
+DESCRIBE.SILKEN_BUNDLE = "Sticky, but snug."
+
 DESCRIBE.WEBBEDCREATURE = "There's probably carcasses in there."
 ANNOUNCE.WEBBEDCREATURE = "Only the spider can access the contents. Hmmm."
 DESCRIBE.SNAPDRAGON_BUDDY = "If I feed it, will it go away?"
@@ -526,6 +540,10 @@ DESCRIBE.SLINGSHOTAMMO_MOONGLASS = DESCRIBE.SLINGSHOTAMMO_THULECITE
 DESCRIBE.SLINGSHOTAMMO_SALT = DESCRIBE.SLINGSHOTAMMO_ROCK
 DESCRIBE.SLINGSHOTAMMO_SLIME = DESCRIBE.SLINGSHOTAMMO_ROCK
 DESCRIBE.SLINGSHOTAMMO_GOOP = DESCRIBE.SLINGSHOTAMMO_ROCK
+DESCRIBE.SLINGSHOTAMMO_FLARE = DESCRIBE.SLINGSHOTAMMO_ROCK
+
+DESCRIBE.SLINGSHOTAMMO_INSANITY = DESCRIBE.SLINGSHOTAMMO_ROCK
+DESCRIBE.SLINGSHOTAMMO_LUNARVINE = DESCRIBE.SLINGSHOTAMMO_ROCK
 
 DESCRIBE.SLINGSHOTAMMO_LIMESTONE = DESCRIBE.SLINGSHOTAMMO_ROCK
 DESCRIBE.SLINGSHOTAMMO_TAR = DESCRIBE.SLINGSHOTAMMO_ROCK

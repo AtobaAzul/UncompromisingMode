@@ -1178,8 +1178,19 @@ if GetModConfigData("wixie_walter") then
     ChangeSortKey("slingshotammo_freeze", "slingshotammo_poop", "WEAPONS", true)
     ChangeSortKey("slingshotammo_freeze", "slingshotammo_poop", "CHARACTER", true)
 
-    ChangeSortKey("slingshotammo_slow", "slingshotammo_freeze", "WEAPONS", true)
-    ChangeSortKey("slingshotammo_slow", "slingshotammo_freeze", "CHARACTER", true)
+    AddRecipe2(
+        "slingshotammo_flare",
+        { Ingredient("redgem", 1) },
+        GLOBAL.TECH.MAGIC_TWO,
+        { builder_tag = "pebblemaker", numtogive = 10, no_deconstruction = true },
+        { "CHARACTER", "WEAPONS" }
+    )
+    GLOBAL.STRINGS.RECIPE_DESC.SLINGSHOTAMMO_FLARE = "A scorching shot!"
+    ChangeSortKey("slingshotammo_flare", "slingshotammo_freeze", "WEAPONS", true)
+    ChangeSortKey("slingshotammo_flare", "slingshotammo_freeze", "CHARACTER", true)
+
+    ChangeSortKey("slingshotammo_slow", "slingshotammo_flare", "WEAPONS", true)
+    ChangeSortKey("slingshotammo_slow", "slingshotammo_flare", "CHARACTER", true)
 
     ChangeSortKey("slingshotammo_thulecite", "slingshotammo_slow", "WEAPONS", true)
     ChangeSortKey("slingshotammo_thulecite", "slingshotammo_slow", "CHARACTER", true)
@@ -1366,6 +1377,33 @@ if GetModConfigData("wixie_walter") then
     end)
 end
 
+AddRecipe2("codex_mantra", { Ingredient("papyrus", 2), Ingredient("nightmarefuel", 2), Ingredient(GLOBAL.CHARACTER_INGREDIENT.HEALTH, 50) }, TECH.NONE, { builder_tag = "codexmantrareader" },
+	{ "CHARACTER" })
+ChangeSortKey("codex_mantra", "waxwelljournal", "CHARACTER", true)
+
+AddRecipe2(
+	"pact_armor_sanity",
+	{ Ingredient("nightmarefuel", 2) },
+	GLOBAL.TECH.NONE,
+	{ builder_tag = "codexmantrareader", sg_state = "pact_armor_craft", image = "armor_sanity.tex" },
+	{ "CHARACTER", "ARMOUR" }
+)
+AddRecipe2(
+	"pact_sword_sanity",
+	{ Ingredient("nightmarefuel", 2) },
+	GLOBAL.TECH.NONE,
+	{ builder_tag = "codexmantrareader", sg_state = "pact_sword_craft", image = "nightsword.tex" },
+	{ "CHARACTER", "WEAPONS" }
+)
+
+AddRecipe2("um_record_menu", {Ingredient("batwing", 1), Ingredient("charcoal", 1)}, TECH.SCIENCE_TWO, {atlas = "images/inventoryimages/um_record_menu.xml"}, {"DECOR"})
+AddRecipe2("um_record_wixie", {Ingredient("batwing", 1), Ingredient("charcoal", 1)}, TECH.SCIENCE_TWO, {atlas = "images/inventoryimages/um_record_wixie.xml"}, {"DECOR"})
+AddRecipe2("um_record_walter", {Ingredient("batwing", 1), Ingredient("charcoal", 1)}, TECH.SCIENCE_TWO, {atlas = "images/inventoryimages/um_record_walter.xml"}, {"DECOR"})
+AddRecipe2("um_record_wathom", {Ingredient("batwing", 1), Ingredient("charcoal", 1)}, TECH.SCIENCE_TWO, {atlas = "images/inventoryimages/um_record_wathom.xml"}, {"DECOR"})
+AddRecipe2("um_record_winky", {Ingredient("batwing", 1), Ingredient("charcoal", 1)}, TECH.SCIENCE_TWO, {atlas = "images/inventoryimages/um_record_winky.xml"}, {"DECOR"})
+AddRecipe2("um_record_hooded_widow", {Ingredient("batwing", 1), Ingredient("charcoal", 1)}, TECH.SCIENCE_TWO, {atlas = "images/inventoryimages/um_record_hooded_widow.xml"}, {"DECOR"})
+AddRecipe2("um_record_stranger", {Ingredient("batwing", 1), Ingredient("charcoal", 1)}, TECH.SCIENCE_TWO, {atlas = "images/inventoryimages/um_record_stranger.xml"}, {"DECOR"})
+
 --recipe postinits
 AddPrefabPostInit("forest", function(inst)
     AddRecipePostInitAny(function(recipe)
@@ -1527,6 +1565,9 @@ STRINGS.RECIPE_DESC.WINONA_CATAPULT_ITEM = STRINGS.RECIPE_DESC.WINONA_CATAPULT
 STRINGS.RECIPE_DESC.WINONA_SPOTLIGHT_ITEM = STRINGS.RECIPE_DESC.WINONA_SPOTLIGHT
 STRINGS.RECIPE_DESC.WINONA_BATTERY_LOW_ITEM = STRINGS.RECIPE_DESC.WINONA_BATTERY_LOW
 STRINGS.RECIPE_DESC.WINONA_BATTERY_HIGH_ITEM = STRINGS.RECIPE_DESC.WINONA_BATTERY_HIGH
+
+GLOBAL.STRINGS.RECIPE_DESC.PACT_ARMOR_SANITY = "Wrapped in your sins."
+GLOBAL.STRINGS.RECIPE_DESC.PACT_SWORD_SANITY = "Hefty, like the weight on your shoulders."
 
 -- [ PROTOTYPERS ] --
 GLOBAL.PROTOTYPER_DEFS.critterlab_real = GLOBAL.PROTOTYPER_DEFS.critterlab

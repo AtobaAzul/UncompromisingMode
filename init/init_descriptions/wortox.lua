@@ -115,6 +115,15 @@ DESCRIBE.ICEBOOMERANG = "It'll give you the chills, hyuyu."
 DESCRIBE.MINOTAUR_BOULDER = "The pillars are falling apart!"
 DESCRIBE.MINOTAUR_BOULDER_BIG = "It all comes tumbling down, tumbling down."
 DESCRIBE.VETERANSHRINE = "I'm cursed enough as I am."
+DESCRIBE.VET_SKULL = "Another poor mortal met their end."
+DESCRIBE.UM_BOSS_SOUL = "This one is particularly strong!"
+DESCRIBE.UM_DARK_VESTIGES = "Not quite a soul... I'm not sure what it is!"
+DESCRIBE.UM_VOXOLOPHONE = "And which dimension did you pop out of?"
+
+DESCRIBE.UM_EXHUMER = "An army of pranksters in the palm of my hand!"
+DESCRIBE.UM_WINGSUIT = "Flying doesn't appeal to me."
+DESCRIBE.UM_MOONFLY_LANTERN = "Hyuyuyu! What a brilliant dance of lights!"
+
 DESCRIBE.SNOWBALL_THROWABLE = "Hyuyu! I like this game!"
 DESCRIBE.RAT_TAIL = "A furred tail is much nicer!"
 DESCRIBE.PLAGUEMASK = "A crow's beak. For when things are bleak."
@@ -164,6 +173,7 @@ DESCRIBE.SHADOW_TELEPORTER =
 DESCRIBE.POLLENMITEDEN = "I'm not too keen on approaching that."
 DESCRIBE.POLLENMITES = "They intend to sting my delicate imp skin!"
 DESCRIBE.SHADOW_CROWN = "It fits nicely over my horns."
+DESCRIBE.UM_SHADOW_AXE = "Hue Hue Hue a tragic axe indeed."
 DESCRIBE.RNEGHOST = DESCRIBE.GHOST
 DESCRIBE.TRAPDOORGRASS = DESCRIBE.GRASS
 DESCRIBE.LUREPLAGUE_RAT = "Look at that! It's a rat."
@@ -178,6 +188,9 @@ DESCRIBE.HOODEDMOSS = DESCRIBE.TURF_FOREST
 DESCRIBE.WIDOWSGRASP = "Now where oh where did she hang those cocoons?"
 DESCRIBE.WEBBEDCREATURE = "A trapped soul lurks within."
 ANNOUNCE.WEBBEDCREATURE = "I can't make a tear!"
+DESCRIBE.WIDOWSGRASP = "It costed it an arm and a leg! Hyuyu!"
+DESCRIBE.SILKSACK = "A grotesque burden to be carried."
+DESCRIBE.SILKEN_BUNDLE = "A sticky surprise awaits."
 DESCRIBE.SNAPDRAGON_BUDDY = "It seems we've made a new plant friend!"
 DESCRIBE.SNAPDRAGON = "Goodness me, you're huge as can be!" -- rewrite this later. -- done
 DESCRIBE.SNAPPLANT = "They have a captive audience!" -- rewrite this later. -- nevermind
@@ -492,6 +505,10 @@ DESCRIBE.SLINGSHOTAMMO_MOONGLASS = DESCRIBE.SLINGSHOTAMMO_ROCK
 DESCRIBE.SLINGSHOTAMMO_SALT = DESCRIBE.SLINGSHOTAMMO_ROCK
 DESCRIBE.SLINGSHOTAMMO_SLIME = DESCRIBE.SLINGSHOTAMMO_ROCK
 DESCRIBE.SLINGSHOTAMMO_GOOP = DESCRIBE.SLINGSHOTAMMO_ROCK
+DESCRIBE.SLINGSHOTAMMO_FLARE = DESCRIBE.SLINGSHOTAMMO_ROCK
+
+DESCRIBE.SLINGSHOTAMMO_INSANITY = DESCRIBE.SLINGSHOTAMMO_ROCK
+DESCRIBE.SLINGSHOTAMMO_LUNARVINE = DESCRIBE.SLINGSHOTAMMO_ROCK
 
 DESCRIBE.SLINGSHOTAMMO_LIMESTONE = DESCRIBE.SLINGSHOTAMMO_ROCK
 DESCRIBE.SLINGSHOTAMMO_TAR = DESCRIBE.SLINGSHOTAMMO_ROCK

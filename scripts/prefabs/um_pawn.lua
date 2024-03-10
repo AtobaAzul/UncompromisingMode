@@ -387,6 +387,7 @@ local function pawn_common(pawntype)
 	inst.components.explosive.explosivedamage = TUNING.GUNPOWDER_DAMAGE
 
     if inst.pawntype == "_nightmare" then
+		inst.components.locomotor.runspeed = 6.5
 		inst.explode_timer_count = 1
 	
 		inst:ListenForEvent("newcombattarget", OnNewTarget)

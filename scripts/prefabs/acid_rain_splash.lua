@@ -3,7 +3,7 @@ local assets =
     Asset("ANIM", "anim/meat_rack_food.zip"),
 }
 
-local function fn()
+local function fncommon()
     local inst = CreateEntity()
 
     inst.entity:AddTransform()
@@ -15,10 +15,22 @@ local function fn()
     inst.AnimState:SetBank("raindrop")
 	inst.AnimState:PlayAnimation("anim")
 
-	inst.AnimState:SetMultColour(0.5, 1, 0, 1)
-
     inst.entity:SetPristine()
 	
+    if not TheWorld.ismastersim then
+        return inst
+    end
+	
+	inst:ListenForEvent("animover", inst.Remove)
+	
+    return inst
+end
+
+local function acidfn()
+    local inst = fncommon()
+
+	inst.AnimState:SetMultColour(0.5, 1, 0, 1)
+
     if not TheWorld.ismastersim then
         return inst
     end
@@ -27,10 +39,17 @@ local function fn()
 		local x, y, z = inst.Transform:GetWorldPosition()
 		SpawnPrefab("acid_rain_splash_hiss").Transform:SetPosition(x,0,z)
 	end)
-	
-	
-	inst:ListenForEvent("animover", inst.Remove)
-	
+
+    return inst
+end
+
+local function waterfallfn()
+    local inst = fncommon()
+
+    if not TheWorld.ismastersim then
+        return inst
+    end
+
     return inst
 end
 
@@ -62,5 +81,6 @@ local function fnhiss()
     return inst
 end
 
-return Prefab("acid_rain_splash", fn),--, assets)
-		Prefab("acid_rain_splash_hiss", fnhiss)
+return Prefab("acid_rain_splash", acidfn),--, assets)
+		Prefab("acid_rain_splash_hiss", fnhiss),
+		Prefab("um_waterfall_rain_splash", waterfallfn)

@@ -13,7 +13,7 @@ local function OnAttached(inst, target)
     inst.entity:SetParent(target.entity)
     inst.Transform:SetPosition(0, 0, 0) --in case of loading
     inst.task = inst:DoPeriodicTask(1, OnTick, nil, target)
-	local heal = 240
+	local heal = 50
 	if target.configheal ~= nil then
 		heal = target.configheal
 		target.configheal = nil
@@ -32,7 +32,7 @@ end
 
 local function OnExtended(inst, target)
     inst.components.timer:StopTimer("regenover")
-	local heal = 240
+	local heal = 50
 	if target.configheal ~= nil then
 		heal = target.configheal
 		target.configheal = nil

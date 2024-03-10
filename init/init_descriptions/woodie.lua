@@ -118,7 +118,16 @@ DESCRIBE.ICEBOOMERANG = "This is just Canada on a stick, eh?"
 DESCRIBE.MINOTAUR_BOULDER = "That guys causing some serious damage."
 DESCRIBE.MINOTAUR_BOULDER_BIG = "Wreck this one, why dont'cha!"
 DESCRIBE.SNOWBALL_THROWABLE = "I'm an expert on snowball fights!"
-DESCRIBE.VETERANSHRINE = "It makes my skin crawl. eh?"
+DESCRIBE.VETERANSHRINE = "It makes my skin crawl, eh?"
+DESCRIBE.VET_SKULL = "What a shame, eh?"
+DESCRIBE.UM_BOSS_SOUL = "Stuck in limbo, eh?"
+DESCRIBE.UM_DARK_VESTIGES = "Shouldn't be messin' with this stuff."
+DESCRIBE.UM_VOXOLOPHONE = "Another radio, eh?"
+
+DESCRIBE.UM_EXHUMER = "Horrors beyond our comprehension, eh?"
+DESCRIBE.UM_WINGSUIT = "Foul."
+DESCRIBE.UM_MOONFLY_LANTERN = "For those cold dark nights, eh?"
+
 DESCRIBE.RAT_TAIL = "I don't want to breathe that smell in, eh?"
 DESCRIBE.PLAGUEMASK = "Keeps the bad air out and the good air in, eh?"
 DESCRIBE.SPIDER_TRAPDOOR = "They look nastier without hair."
@@ -167,6 +176,7 @@ DESCRIBE.SHADOW_TELEPORTER = "Well I'll be darned."
 DESCRIBE.POLLENMITEDEN = "Industrious little guys, eh Lucy?"
 DESCRIBE.POLLENMITES = "Lotta those guys in the lumber camps."
 DESCRIBE.SHADOW_CROWN = "I ain't a king of nothing, least of which fools."
+DESCRIBE.UM_SHADOW_AXE = "I still prefer Lucy, though this has its uses."
 DESCRIBE.RNEGHOST = DESCRIBE.GHOST
 DESCRIBE.TRAPDOORGRASS = DESCRIBE.GRASS
 DESCRIBE.LUREPLAGUE_RAT = "Not comin' for kit this time, eh?"
@@ -178,7 +188,11 @@ DESCRIBE.HOODEDWIDOW = "That ain't no normal spider."
 DESCRIBE.GIANT_TREE = "That's a real beaut."
 DESCRIBE.ANCIENTHOODEDTURF = DESCRIBE.TURF_FOREST
 DESCRIBE.HOODEDMOSS = DESCRIBE.TURF_FOREST
+
 DESCRIBE.WIDOWSGRASP = "Maybe this could rip open those cocoons, eh?"
+DESCRIBE.SILKSACK = "That's a weird lookin rucksack."
+DESCRIBE.SILKEN_BUNDLE = "There better be logs in there."
+
 DESCRIBE.WEBBEDCREATURE =
 "Should I really put my neck out to find out what it has?"
 ANNOUNCE.WEBBEDCREATURE = "This ain't a cocoon Luce'll be choppin'. Best to leave 'em to the spiders."
@@ -509,6 +523,10 @@ DESCRIBE.SLINGSHOTAMMO_MOONGLASS = DESCRIBE.SLINGSHOTAMMO_ROCK
 DESCRIBE.SLINGSHOTAMMO_SALT = DESCRIBE.SLINGSHOTAMMO_ROCK
 DESCRIBE.SLINGSHOTAMMO_SLIME = DESCRIBE.SLINGSHOTAMMO_ROCK
 DESCRIBE.SLINGSHOTAMMO_GOOP = DESCRIBE.SLINGSHOTAMMO_ROCK
+DESCRIBE.SLINGSHOTAMMO_FLARE = DESCRIBE.SLINGSHOTAMMO_ROCK
+
+DESCRIBE.SLINGSHOTAMMO_INSANITY = DESCRIBE.SLINGSHOTAMMO_ROCK
+DESCRIBE.SLINGSHOTAMMO_LUNARVINE = DESCRIBE.SLINGSHOTAMMO_ROCK
 
 DESCRIBE.SLINGSHOTAMMO_LIMESTONE = DESCRIBE.SLINGSHOTAMMO_ROCK
 DESCRIBE.SLINGSHOTAMMO_TAR = DESCRIBE.SLINGSHOTAMMO_ROCK

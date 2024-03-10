@@ -91,7 +91,7 @@ DESCRIBE.WINKY = {
 }
 
 DESCRIBE.WATHOM = {
-    GENERIC = "Should I speak slowly, %s?",
+    GENERIC = "You'll let flies in with that mouth, %s.",
     ATTACKER = "I think %s has a taste for blood.",
     MURDERER = "%s has gone feral! Run for your lives!",
     REVIVER = "Well, atleast you didn't eat the heart!",

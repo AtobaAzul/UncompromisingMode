@@ -175,7 +175,7 @@ function ThankYouToshInit(inst)
         local _onaccept = inst.components.trader.onaccept
 
         inst.components.trader.onaccept = function(inst, giver, item)
-            if item.prefab == "rice" or item.prefab == "rice_cooked" or item.components.edible.secondaryfoodtype ~= nil and item.components.edible.secondaryfoodtype == FOODTYPE.MONSTER and TUNING.DSTU.MONSTER_EGGS > 0 then
+            if item.prefab ~= "um_monsteregg" and item.prefab ~= "um_monsteregg_cooked" and (item.prefab == "rice" or item.prefab == "rice_cooked" or item.components.edible.secondaryfoodtype ~= nil and item.components.edible.secondaryfoodtype == FOODTYPE.MONSTER and TUNING.DSTU.MONSTER_EGGS > 0) then
                 OnGetItem(inst, giver, item)
             else
                 return _onaccept(inst, giver, item)

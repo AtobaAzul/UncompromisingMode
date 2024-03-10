@@ -142,7 +142,7 @@ local function fn()
 	inst.grow_mini = grow_mini
 	inst:grow_mini()
 	
-	inst:DoPeriodicTask(FRAMES, Vac)
+	inst:DoPeriodicTask(FRAMES, Vac, 4)
 	
 	inst:DoTaskInTime(0, Init)
 	

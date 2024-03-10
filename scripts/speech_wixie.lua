@@ -73,6 +73,7 @@ return{
 			KITCOON_HIDEANDSEEK_ONE_GAME_PER_DAY = "Bored now!",
             MANNEQUIN_EQUIPSWAPFAILED = "Yeah, you WOULD look pretty dumb wearing that...",
             PILLOWFIGHT_NO_HANDPILLOW = "What, are my fists not enough for a fight?",
+            NOTMYBERNIE = "It's someones dumb stuffed bear.",
 		},
 		OPEN_CRAFTING = 
 		{
@@ -391,6 +392,9 @@ return{
 		{
 --fallback to speech_wilson.lua 			NO_MAX_SANITY = "only_used_by_waxwell",
             NOT_ENOUGH_EMBERS = "only_used_by_willow",
+            NO_TARGETS = "only_used_by_willow",
+            CANT_SPELL_MOUNTED = "only_used_by_willow",
+            SPELL_ON_COOLDOWN = "only_used_by_willow", 
 		},
     },
 
@@ -504,6 +508,7 @@ return{
 	ANNOUNCE_HIGHRESEARCH = "Not to sound like a know-it-all, but...",
 	ANNOUNCE_HOUNDS = "Whose making all that racket?",
 	ANNOUNCE_WORMS = "There's something under the ground.",
+    ANNOUNCE_ACIDBATS = "Some stinkin' flying jerks coming in!",
 	ANNOUNCE_HUNGRY = "I'm hungry enough to eat a horse.",
 	ANNOUNCE_HUNT_BEAST_NEARBY = "I can smell it from here. Gross.",
 	ANNOUNCE_HUNT_LOST_TRAIL = "The trail has vanished into thin air!",
@@ -872,6 +877,8 @@ return{
 
     ANNOUNCE_CHAIR_ON_FIRE = "Hot seat! HOT SEAT!",
 
+    ANNOUNCE_HEALINGSALVE_ACIDBUFF_DONE = "My acid protection is wearing off!",
+
     ANNOUNCE_COACH = 
     {
         "only_used_by_wolfgang",
@@ -894,6 +901,10 @@ return{
         "only_used_by_wolfgang",
         "only_used_by_wolfgang",
     },
+
+    ANNOUNCE_YOTD_NOBOATS = "Fine! I won't cheat, I'll go to the start...",
+    ANNOUNCE_YOTD_NOCHECKPOINTS = "Gotta have some checkpoints to sail to.",
+    ANNOUNCE_YOTD_NOTENOUGHBOATS = "Can't race with no boats around!",
 	
 	BATTLECRY =
 	{
@@ -1419,18 +1430,25 @@ return{
         {
             GENERIC = "They kinda look like drum cymbals.",
             BLOOM = "Someone's been drumming too hard.",
+            ACIDCOVERED = "Its covered in some gross stuff.",
         },
         MUSHTREE_MEDIUM =
         {
             GENERIC = "It's a weird conjoined mushroom.",
             BLOOM = "Is this some kinda threat? Are you threatening me?!",
+            ACIDCOVERED = "Its covered in some gross stuff.",
         },
         MUSHTREE_SMALL =
         {
             GENERIC = "Hey there stumpy.",
             BLOOM = "Your bloomers are showing.", -- these mushtree lines are some of my favorites :)
+            ACIDCOVERED = "Its covered in some gross stuff.",
         },
-        MUSHTREE_TALL_WEBBED = "Why would anyone want to live in a mushroom?",
+        MUSHTREE_TALL_WEBBED =
+        {
+            GENERIC = "Why would anyone want to live in a mushroom?",
+            ACIDCOVERED = "Its covered in some gross stuff.",
+        },
         SPORE_TALL =
         {
             GENERIC = "You better not go up my nose.",
@@ -2560,6 +2578,7 @@ return{
 		SILK = "It's not the soft and smooth kind.",
 		SKELETON = "Bummer.",
 		SCORCHED_SKELETON = "Roasted bones.",
+        SKELETON_NOTPLAYER = "What a freakshow!",
 		SKULLCHEST = "It's my kind of style!", --removed
 		SMALLBIRD =
 		{
@@ -2676,8 +2695,10 @@ return{
 		{
 			GENERIC = "It's full of my stuff.",
 			BURNT = "The only thing stored inside it is disappointment.",
+            UPGRADED_STACKSIZE = "I can stack more stuff. Neat.",
 		},
 		TREASURECHEST_TRAP = "It better have something good inside!",
+        CHESTUPGRADE_STACKSIZE = "Putting more *box* in my boxes.", -- Describes the kit upgrade item.
 		SACRED_CHEST =
 		{
 			GENERIC = "Ancient treasure? It's all mine!",
@@ -2702,7 +2723,7 @@ return{
 		TRINKET_15 = "It's mine to control.", --Pawn
 		TRINKET_16 = "It's mine to control.", --Pawn
 		TRINKET_17 = "It doesn't beat my hands.", --Bent Spork
-		TRINKET_18 = "Oh, it's like something my mom would make!", --Trojan Horse
+		TRINKET_18 = "Oh, it's like something my mom would make! Hello Mr. Horse!", --Trojan Horse
 		TRINKET_19 = "Don't give up, top!", --Unbalanced Top
 		TRINKET_20 = "It's some kind of primitive weapon.", --Backscratcher
 		TRINKET_21 = "Can't handle the heat? Then get out of my kitchen!", --Egg Beater
@@ -2974,6 +2995,10 @@ return{
 		WALL_WOOD_ITEM = "Extra pointy.",
 		WALL_MOONROCK = "I don't care if it's from the moon, I don't like it!",
 		WALL_MOONROCK_ITEM = "This does NOT rock.",
+		WALL_DREADSTONE = "Oh, good, my fears have become reality.",
+		WALL_DREADSTONE_ITEM = "My worst nightmare.",
+        WALL_SCRAP = "Nothing I love more than being surrounded by garbage.",
+        WALL_SCRAP_ITEM = "And straight into the garbage it goes!",
 		FENCE = "It's less restrictive than a wall.",
         FENCE_ITEM = "I don't like being fenced in.",
         FENCE_GATE = "Atleast I can shove it out of the way.",
@@ -3805,8 +3830,10 @@ return{
         SLINGSHOTAMMO_SLIME = "Don't get it in my hair!",
         SLINGSHOTAMMO_LAZY = "Catch me if you can!",
         SLINGSHOTAMMO_SHADOW = "I'm in control! And don't you forget it!",
+        SLINGSHOTAMMO_FLARE = "Check it out! I'm going to bank this right off a dummies head!",
 		
-        COCONUT = "Careful you don't get clonked on the head!",
+        SLINGSHOTAMMO_INSANITY = "Drive em' nuts!",
+        SLINGSHOTAMMO_LUNARVINE = "Now THIS is my kind of gardening!",
 		
         PORTABLETENT = "Atleast it's not a two person tent...",
         PORTABLETENT_ITEM = "I'm fine with a sleeping bag, honest.",
@@ -4099,6 +4126,7 @@ return{
         DUSTMERINGUE = "Maybe I can feed it to one of those sad looking moths",
 
         SHROOMCAKE = "Mushrooms and cake do NOT mix.",
+        SHROOMBAIT = "Would be nice to get a good nights sleep...",
 
         NIGHTMAREGROWTH = "I've felt this before...",
 
@@ -4829,6 +4857,12 @@ return{
 			GENERIC = "Ooh, fancy.",
 			EXPOSED = "He-he-he, I broke it.",
 		},
+		DAYWALKER2 =
+		{
+			GENERIC = "Oh great, now he's spreading his stink around.",
+			BURIED = "Ha-ha! You stink!",
+			HOSTILE = "Stay back, garbage man!",
+		},
 		ARMORDREADSTONE = "It's just a bunch of rocks.",
 		DREADSTONEHAT = "I feel like I'm in the stone age...",
 
@@ -5042,7 +5076,64 @@ return{
         BOOTLEG = "All I got was a boot?!",
         OCEANWHIRLPORTAL = "Whats the worst that could happen? Death by drowning?",
 
+        EMBERLIGHT = "Whats cookin'?",
         WILLOW_EMBER = "only_used_by_willow",
+
+        -- Year of the Dragon
+        YOTD_DRAGONSHRINE =
+        {
+            GENERIC = "All sorts of junk available here.",
+            EMPTY = "I think it eats ash?",
+            BURNT = "Fire and wood don't mix. Go figure.",
+        },
+
+        DRAGONBOAT_KIT = "I can set it up all by myself!",
+        DRAGONBOAT_PACK = "I think its going to explode.",
+
+        BOATRACE_CHECKPOINT = "Hope no one moves my goalposts.",
+        BOATRACE_CHECKPOINT_THROWABLE_DEPLOYKIT = "Let me toss it!",
+        BOATRACE_START = "The beggining of my future triumph!",
+        BOATRACE_START_THROWABLE_DEPLOYKIT = "I get to choose where to start, got it?",
+
+        BOATRACE_PRIMEMATE = "I won't be beaten by some smelly ape!",
+        BOATRACE_SPECTATOR_DRAGONLING = "Shoo! Go away!",
+
+        YOTD_STEERINGWHEEL = "My sense of direction is perfect!",
+        YOTD_STEERINGWHEEL_ITEM = "Can't steer a boat without a steering wheel, duh!",
+        YOTD_OAR = "Slap the water!",
+        YOTD_ANCHOR = "Soon to be covered in ocean gunk.",
+        YOTD_ANCHOR_ITEM = "It's not that heavy.",
+        MAST_YOTD = "Fly like a dragon!",
+        MAST_YOTD_ITEM = "I've got the need for speed!",
+        BOAT_BUMPER_YOTD = "Darn, the claws aren't sharp...",
+        BOAT_BUMPER_YOTD_KIT = "I guess its safe...",
+        BOATRACE_SEASTACK = "Head on collision! Smash!!",
+        BOATRACE_SEASTACK_THROWABLE_DEPLOYKIT = "Let me toss it!",
+        BOATRACE_SEASTACK_MONKEY = "Head on collision! Smash!!",
+        BOATRACE_SEASTACK_MONKEY_THROWABLE_DEPLOYKIT = "Let me toss it!",
+        MASTUPGRADE_LAMP_YOTD = "Some light is always nice.",
+        MASTUPGRADE_LAMP_ITEM_YOTD = "Oh look, a light.",
+        WALKINGPLANK_YOTD = "Get to paddlin' or walk the plank!",
+        CHESSPIECE_YOTD = "What a boring trophy.",
+
+        -- Rifts / Meta QoL
+
+        HEALINGSALVE_ACID = "That acid rain will slide right off!",
+
+        BEESWAX_SPRAY = "Just needs a spritz.",
+        WAXED_PLANT = "It'll last longer. Maybe.", -- Used for all waxed plants, from farm plants to trees.
+
+        STORAGE_ROBOT = {
+            GENERIC = "This is perfect! I can make as much of a mess as I want!",
+            BROKEN = "Only good for a kicking.",
+        },
+
+        SCRAP_MONOCLEHAT = "I can spy some ripe targets for slinging!",
+        SCRAP_CONEHAT = "It's really uncomfortable...",
+
+        FENCE_JUNK = "It's a wall of garbage.",
+        JUNK_PILE = "It's some junk. Do I hear squeaking?",
+        JUNK_PILE_BIG = "Is something buried in there?",
     },
 
     DESCRIBE_GENERIC = "That sure is... something!",

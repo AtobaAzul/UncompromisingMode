@@ -1,7 +1,6 @@
 local env = env
 GLOBAL.setfenv(1, GLOBAL)
 -----------------------------------------------------------------
-
 if TUNING.DSTU.BERNIE_BUFF then
 	env.AddPrefabPostInit("bernie_inactive", function(inst)
 		if not TheWorld.ismastersim then

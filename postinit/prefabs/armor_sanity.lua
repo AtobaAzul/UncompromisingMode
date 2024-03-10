@@ -9,7 +9,7 @@ local function OnTakeDamage(inst, damage_amount)
 			local sanity = owner.components.sanity
 			if sanity then
             local unsaneness = damage_amount * TUNING.ARMOR_SANITY_DMG_AS_SANITY
-			unsaneness = unsaneness/2 -- Cutting it by this much because of the fact that you're giving up your headslot, which is usually VERY important for using night armor so you can extend its small durability.
+			unsaneness = unsaneness  * .8 -- Cutting it by this much because of the fact that you're giving up your headslot, which is usually VERY important for using night armor so you can extend its small durability.
             sanity:DoDelta(-unsaneness, false)
 			end
         end
@@ -20,7 +20,7 @@ end
 
 local function CalcDapperness(inst, owner)
 	if owner:HasTag("Funny_Words_Magic_Man") then
-		return TUNING.CRAZINESS_SMALL/2 -- This ends up being about -5/min + 3.3/min from the hat itself, willing to cut it more for this one
+		return TUNING.CRAZINESS_SMALL * .8 -- This ends up being about -5/min + 3.3/min from the hat itself, willing to cut it more for this one
 	else
 		return TUNING.CRAZINESS_SMALL
 	end

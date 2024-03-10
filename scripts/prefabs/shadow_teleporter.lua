@@ -1,3 +1,5 @@
+local BigPopupDialogScreen = require "screens/popupdialog"
+
 local assets =
 {
     Asset("ANIM", "anim/shadow_teleporter.zip"),
@@ -324,4 +326,122 @@ local function fn()
     return inst
 end
 
-return Prefab("shadow_teleporter", fn, assets)
+local function ShouldAcceptItem(inst, item, giver)
+    return item ~= nil and item.prefab == "waxwelljournal" and giver ~= nil and giver:HasTag("magician") and not giver:HasTag("codexmantrareader")
+end
+
+local function OnGetItemFromPlayer(inst, giver, item)
+    if item ~= nil and item.prefab == "waxwelljournal" and giver:HasTag("magician") and not giver:HasTag("codexmantrareader") then
+		giver.pact_sworn = true
+		giver:AddTag("codexmantrareader")
+		giver:RemoveTag("magician")
+		giver:RemoveTag("shadowmagic")
+			
+		giver:DoTaskInTime(0, function()
+			giver:RemoveComponent("magician")
+		end)
+			
+		giver.components.health:SetAbsorptionAmount(-TUNING.WATHGRITHR_ABSORPTION)
+		
+		giver.components.inventory:GiveItem(SpawnPrefab("codex_mantra"))
+		
+		local x, y, z = giver.Transform:GetWorldPosition()
+		local despawnfx = SpawnPrefab("shadow_despawn")
+		despawnfx.Transform:SetPosition(x, y, z)
+
+        inst:AddTag("NOCLICK")
+		
+        inst:RemoveEventCallback("animover", OnAppear)
+        inst:RemoveEventCallback("death", OnDeath)
+
+        inst:ListenForEvent("animover", inst.Remove)
+        inst.AnimState:PlayAnimation("disappear")
+
+        inst:DoTaskInTime(inst.AnimState:GetCurrentAnimationLength() + FRAMES, inst.Remove)
+    end
+end
+
+local function PactWarning(inst)
+	local player = inst.PactTarget:value()
+	if player == ThePlayer then
+		local function clear_screen(inst)
+			TheFrontEnd:PopScreen()
+			TheFocalPoint.SoundEmitter:KillSound("pact_music")
+		end
+
+		local title = STRINGS.PACTSWORN_TITLE
+		local bodytext = STRINGS.PACTSWORN_TEXT
+		local yes_box = { text = STRINGS.VETS_OK, cb = clear_screen }
+
+		local bpds = BigPopupDialogScreen(title, bodytext, { yes_box })
+		bpds.title:SetPosition(0, 90, 0)
+		bpds.text:SetPosition(0, -15, 0)
+
+		TheFrontEnd:PushScreen(bpds)
+		TheFocalPoint.SoundEmitter:PlaySound("dontstarve/common/teleportato/ragtime", "pact_music")
+	end
+end
+
+local function OnActivate(inst, doer)
+	if doer:HasTag("magician") then
+		inst.PactTarget:set_local(doer)
+		inst.PactTarget:set(doer)
+	elseif doer.components.talker ~= nil then
+		doer.components.talker:Say(GetString(doer, "ACTIONFAIL_GENERIC"))
+	end
+	
+	inst.components.activatable.inactive = true
+end
+
+local function RegisterNetListeners(inst)
+	inst:ListenForEvent("SetPactTargetdirty", PactWarning)
+end
+
+local function pactfn()
+    local inst = CreateEntity()
+
+    inst.entity:AddTransform()
+    inst.entity:AddAnimState()
+    inst.entity:AddSoundEmitter()
+    inst.entity:AddNetwork()
+	
+    inst.Transform:SetTwoFaced()
+
+    inst:AddTag("shadow")
+    inst:AddTag("trader")
+	
+	inst.PactTarget = net_entity(inst.GUID, "SetPactTarget.plyr", "SetPactTargetdirty")
+
+	inst:DoTaskInTime(0, RegisterNetListeners)
+	
+    inst.AnimState:SetBank("shadow_channeler")
+    inst.AnimState:SetBuild("shadow_channeler")
+    inst.AnimState:PlayAnimation("appear")
+    inst.AnimState:PushAnimation("idle", true)
+    inst.AnimState:SetMultColour(1, 1, 1, 1)
+	inst.AnimState:HideSymbol("moon_glow2")
+	inst.AnimState:HideSymbol("moon_glow3")
+
+    inst.entity:SetPristine()
+
+    if not TheWorld.ismastersim then
+        return inst
+    end
+	
+    inst:AddComponent("activatable")
+    inst.components.activatable.OnActivate = OnActivate
+    inst.components.activatable.inactive = true
+	inst.components.activatable.standingaction = true
+
+    inst:AddComponent("trader")
+    inst.components.trader:SetAcceptTest(ShouldAcceptItem)
+    inst.components.trader.onaccept = OnGetItemFromPlayer
+    inst.components.trader.deleteitemonaccept = true
+	
+	inst.persists = false
+
+    return inst
+end
+
+return Prefab("shadow_teleporter", fn, assets),
+	Prefab("waxwell_pact_trader", pactfn, assets)
