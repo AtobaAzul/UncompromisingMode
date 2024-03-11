@@ -597,7 +597,7 @@ if GetModConfigData("kramped_buff") then
 end
 
 if GetModConfigData("waxwell_nerf") then
-    TUNING.SHADOWWAXWELL_SANITY_PENALTY.SHADOWPROTECTOR = 0.30 --can summon 3 fighters
+    TUNING.SHADOWWAXWELL_SANITY_PENALTY.SHADOWPROTECTOR = 0.2 --can summon 3 fighters
     TUNING.SHADOWWAXWELL_PROTECTOR_DURATION = seg_time * 2 -- lasts half of the duration
     TUNING.SHADOW_PILLAR_DURATION_BOSS = 4
     TUNING.SHADOW_PILLAR_BREAK_MULT =
