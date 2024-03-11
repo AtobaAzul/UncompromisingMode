@@ -64,7 +64,7 @@ local function onsave(inst, data)
 end
 ]]
 local function KeepTarget(isnt, target)
-    return target and target:IsValid() and not target:HasTag("shadowminion")
+    return target and target:IsValid() and not target:HasTag("shadowminion") and not target:HasTag("classicshadow")
 end
 --[[
 local function onload(inst, data)
@@ -81,12 +81,6 @@ end
 
 local function nodebrisdmg(inst, amount, overtime, cause, ignore_invincible, afflicter, ignore_absorb)
     return afflicter ~= nil and afflicter:HasTag("quakedebris")
-end
-
-local function DisappearShadow(inst)
-	if ThePlayer then
-	    ThePlayer.waxwellshadow = nil
-    end	
 end
 
 local function fn()
@@ -111,7 +105,6 @@ local function fn()
     inst.AnimState:Hide("hat")
     inst.AnimState:Hide("hat_hair")
 
-	inst:AddTag("shadowminion")
     inst:AddTag("scarytoprey")
     inst:AddTag("NOBLOCK")
     inst:AddTag("classicshadow")
@@ -172,15 +165,6 @@ local function fn()
 	local brain = require"brains/real_shadowwaxwellbrain"
 	inst:SetBrain(brain)
 	inst:SetStateGraph("SGreal_shadowwaxwell")
-
-    inst:DoTaskInTime(0, function()	
-		inst:DoPeriodicTask(0.02, function()
-			if ThePlayer then
-			    ThePlayer.waxwellshadow = inst
-            end			
-		end)
-	end)
-	inst:ListenForEvent("onremove", DisappearShadow)
 	
 	return inst
 end

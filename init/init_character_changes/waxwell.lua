@@ -148,6 +148,7 @@ local function OnSpawnPet(inst, pet)
         if not (inst.components.health:IsDead() or inst:HasTag("playerghost")) then
             inst.components.sanity:AddSanityPenalty(pet, TUNING.DSTU.OLD_SHADOWWAXWELL_SANITY_PENALTY)
             inst:ListenForEvent("onremove", inst._onpetlost, pet)
+            pet.components.skinner:CopySkinsFromPlayer(inst)
         elseif pet._killtask == nil then
             pet._killtask = pet:DoTaskInTime(math.random(), KillPet)
         end
@@ -158,12 +159,8 @@ end
 
 local function OnDespawnPet(inst, pet)
     if pet:HasTag("classicshadow") then
-        if pet:HasTag("shadowminion") then
-            DoEffects(pet)
-            pet:Remove()
-        elseif inst._OnDespawnPet ~= nil then
-            inst:_OnDespawnPet(pet)
-        end
+		DoEffects(pet)
+		pet:Remove()
     else
         return inst.OldOnDespawnPet(inst, pet)
     end
@@ -177,6 +174,54 @@ env.AddPrefabPostInit("multiplayer_portal", function(inst)
 		end
 	end, TheWorld)
 end)
+
+local function ReskinPet(pet, player, nofx)
+    pet._dressuptask = nil
+    if player:IsValid() then
+        if not nofx then
+            local x, y, z = pet.Transform:GetWorldPosition()
+            local fx = SpawnPrefab("slurper_respawn")
+            fx.Transform:SetPosition(x, y, z)
+        end
+        pet.components.skinner:CopySkinsFromPlayer(player)
+    end
+end
+
+local function OnSkinsChanged(inst, data)
+    for k, v in pairs(inst.components.petleash:GetPets()) do
+        if v:HasTag("classicshadow") then
+            if v._dressuptask ~= nil then
+                v._dressuptask:Cancel()
+                v._dressuptask = nil
+            end
+            if data and data.nofx then
+                ReskinPet(v, inst, data.nofx)
+            else
+                v._dressuptask = v:DoTaskInTime(math.random()*0.5 + 0.25, ReskinPet, inst)
+            end
+        end
+    end
+end
+
+local function OnDeath(inst)
+    for k, v in pairs(inst.components.petleash:GetPets()) do
+        if v:HasTag("classicshadow") and v._killtask == nil then
+            v._killtask = v:DoTaskInTime(math.random(), KillPet)
+        end
+    end
+end
+
+local function OnBecameGhost(inst)
+	for k, v in pairs(inst.components.petleash:GetPets()) do
+		if v:HasTag("classicshadow") then
+			inst:RemoveEventCallback("onremove", inst._onpetlost, v)
+			inst.components.sanity:RemoveSanityPenalty(v)
+			if v._killtask == nil then
+				v._killtask = v:DoTaskInTime(math.random(), KillPet)
+			end
+		end
+	end
+end
 
 env.AddPrefabPostInit("waxwell", function(inst)
     if not TheWorld.ismastersim then
@@ -196,6 +241,8 @@ env.AddPrefabPostInit("waxwell", function(inst)
 	end
 	
 	local function OnLoad(inst, data)
+		OnSkinsChanged(inst, {nofx = true})
+		
 		if data then
 			if data.pact_sworn ~= nil then
 				inst.pact_sworn = data.pact_sworn
@@ -221,6 +268,9 @@ env.AddPrefabPostInit("waxwell", function(inst)
 	
 	inst.OnSave = OnSave
     inst.OnLoad = OnLoad
+	
+    inst:ListenForEvent("onskinschanged", OnSkinsChanged) -- Fashion Shadows.
+	inst:ListenForEvent("ms_becameghost", OnBecameGhost)
 
     if inst.components.petleash ~= nil then
         inst.OldSpawnPet = inst.components.petleash.onspawnfn

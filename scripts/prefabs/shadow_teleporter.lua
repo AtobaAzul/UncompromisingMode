@@ -336,6 +336,18 @@ local function OnGetItemFromPlayer(inst, giver, item)
 		giver:AddTag("codexmantrareader")
 		giver:RemoveTag("magician")
 		giver:RemoveTag("shadowmagic")
+		
+		if giver.components.petleash ~= nil then
+			local todespawn = {}
+			for k, v in pairs(giver.components.petleash:GetPets()) do
+				if v:HasTag("shadowminion") then
+					table.insert(todespawn, v)
+				end
+			end
+			for i, v in ipairs(todespawn) do
+				giver.components.petleash:DespawnPet(v)
+			end
+		end
 			
 		giver:DoTaskInTime(0, function()
 			giver:RemoveComponent("magician")
