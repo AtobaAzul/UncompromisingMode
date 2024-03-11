@@ -98,7 +98,7 @@ env.AddPrefabPostInit("waxwelljournal", function(inst)
     --if not TheWorld.ismastersim then
     --	return
     --end Commented out to see if this is causing the issue of the spell sometimes not appearing
-    if TUNING.DSTU.WAXWELL ~= "off" then
+    if TUNING.DSTU.WAXWELL then
         if inst.components.spellbook ~= nil then
             for k, v in pairs(UMSPELLS) do
                 if not table.contains(inst.components.spellbook.items, v) then

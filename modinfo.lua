@@ -274,6 +274,7 @@ configuration_options = {
     BinaryConfig("waxwell", "Maxwell",
         "Maxwell gets buffed versions of his classic shadows by reading the Codex Umbra. Disable for Maxwell mod compatibility!",
         true),
+    BinaryConfig("waxwell_nerf", "Maxwell - Nerfs", "Several nerfs to Maxwell to bring him down in power.", true),
     --	BinaryConfig("wolfgang", "Improved/Balanced Wolfgang", "Wolfgang gains new perks and downsides. Read the patch notes included in the mod folder or workshop for details.", false),
     BinaryConfig("wathgrithr_rework", "Wigfrid - Rework", "Reduced Wigfrids combat leeching, revamped skill tree, added more meaningful alingment choices", true),
     BinaryConfig("wathgrithr_arsenal", "Wigfrid - Arsenal", "Changed wigfrid's new tools to not have infinite skills.", true),

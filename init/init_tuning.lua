@@ -590,3 +590,23 @@ local extraitems = {
 for k, v in ipairs(extraitems) do
     table.insert(TUNING.EXTRA_STARTING_ITEMS.winter, v)
 end
+
+-- Kramped buff
+if GetModConfigData("kramped_buff") then
+    TUNING.KRAMPUS_NAUGHTINESS_DECAY_PERIOD = math.huge
+end
+
+if GetModConfigData("waxwell_nerf") then
+    TUNING.SHADOWWAXWELL_SANITY_PENALTY.SHADOWPROTECTOR = 0.30 --can summon 3 fighters
+    TUNING.SHADOWWAXWELL_PROTECTOR_DURATION = seg_time * 2 -- lasts half of the duration
+    TUNING.SHADOW_PILLAR_DURATION_BOSS = 4
+    TUNING.SHADOW_PILLAR_BREAK_MULT =
+    {
+        MIN = 1,  -- but breaks slower
+        MAX = 2,   --breaks faster with the more attacked a cage is.
+    }
+
+    TUNING.WAXWELLJOURNAL_SPELL_COST.SHADOW_PROTECTOR = 0.1 --costs 10%
+    TUNING.WAXWELLJOURNAL_SPELL_COST.SHADOW_PILLARS = 0.25 --costs 25%
+    TUNING.SHADOWWAXWELL_PROTECTOR_HEALTH_CLAMP_TAKEN = 30 --double min dmg take
+end
