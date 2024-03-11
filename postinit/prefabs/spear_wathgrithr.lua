@@ -105,6 +105,12 @@ end)
 
 -------------------------------------------------------------------------------------------------------
 
+local function OnBroken(inst)
+end
+
+local function OnRepaired(inst)
+	inst.components.finiteuses:SetPercent(1)
+end
 
 env.AddPrefabPostInit("spear_wathgrithr_lightning_charged", function(inst)
 	if not TheWorld.ismastersim then
@@ -114,6 +120,7 @@ env.AddPrefabPostInit("spear_wathgrithr_lightning_charged", function(inst)
 	if env.GetModConfigData("wathgrithr_arsenal") then
 		inst.components.aoeweapon_lunge:SetOnLungedFn(Lightning_OnLunged)
 		inst.components.aoeweapon_lunge:SetOnHitFn(Lightning_OnLungedHit)
+
+		MakeForgeRepairable(inst, FORGEMATERIALS.WAGPUNKBITS, OnBroken, OnRepaired)
 	end
 end)
-
