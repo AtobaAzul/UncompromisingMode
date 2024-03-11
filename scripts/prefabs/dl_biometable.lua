@@ -26,7 +26,7 @@ local OceanTable = {
 
 }
 
-local function AddToTheWorld(inst, umss) table.insert(TheWorld.dl_setpieces, umss) end
+local function AddToTheWorld(inst, umss) table.insert(TheWorld.components.dynamic_layouts.layouts, umss) end
 
 local function FinalizeSpawn(inst, dl, x, y, z)
     local spawner = SpawnPrefab("dl_spawner")
@@ -103,11 +103,11 @@ local function SpawnBiomeDL(inst)
         dl = weighted_random_choice(Table)
     end
 
-    if not TheWorld.dl_setpieces then
-        TheWorld.dl_setpieces = {}
+    if not TheWorld.components.dynamic_layouts.layouts then
+        TheWorld.components.dynamic_layouts.layouts = {}
     end
 
-    for i, v in ipairs(TheWorld.dl_setpieces) do
+    for i, v in ipairs(TheWorld.components.dynamic_layouts.layouts) do
         if v == dl then
             for i, v in ipairs(Table) do
                 if v == dl then

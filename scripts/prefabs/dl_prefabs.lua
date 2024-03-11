@@ -326,17 +326,14 @@ local function SpawnLayout(inst, extradata)
 
 		local angles, angle
 		if group ~= nil and reversible then
-			if TheWorld.dl_setpieces == nil then
-				TheWorld.dl_setpieces = {}
+			if TheWorld.components.dynamic_layouts.layouts[group] == nil then
+				TheWorld.components.dynamic_layouts.layouts[group] = {}
 			end
-			if TheWorld.dl_setpieces[group] == nil then
-				TheWorld.dl_setpieces[group] = {}
+			if TheWorld.components.dynamic_layouts.layouts[group].tiles == nil then
+				TheWorld.components.dynamic_layouts.layouts[group].tiles = {}
 			end
-			if TheWorld.dl_setpieces[group].tiles == nil then
-				TheWorld.dl_setpieces[group].tiles = {}
-			end
-			if TheWorld.dl_setpieces[group].prefabs == nil then
-				TheWorld.dl_setpieces[group].prefabs = {}
+			if TheWorld.components.dynamic_layouts.layouts[group].prefabs == nil then
+				TheWorld.components.dynamic_layouts.layouts[group].prefabs = {}
 			end
 		end
 
@@ -384,7 +381,7 @@ local function SpawnLayout(inst, extradata)
 					if group ~= nil then
 						for k, v in pairs(nearbyents) do
 							local data = v:GetSaveRecord()
-							table.insert(TheWorld.dl_setpieces[group].prefabs, data)
+							table.insert(TheWorld.components.dynamic_layouts.layouts[group].prefabs, data)
 							v:Remove()
 						end
 					end
