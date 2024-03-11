@@ -200,10 +200,6 @@ end
 
 modimport("init/init_character_changes/warly")
 
-if GetModConfigData("waxwell") then
-	modimport("init/init_character_changes/waxwell")
-end
-
 if GetModConfigData("hardcore") then
     modimport("init/init_gamemodes/init_hardcore")
 end

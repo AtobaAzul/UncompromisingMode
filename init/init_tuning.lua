@@ -304,7 +304,7 @@ TUNING.DSTU = {
     GREEN_VOMIT_NUTRIENTS = { 0, 0, 24 },
     PINK_VOMIT_NUTRIENTS = { 24, 0, 0 },
     PALE_VOMIT_NUTRIENTS = { 8, 8, 8 },
-
+    WAXWELL = GetModConfigData("waxwell"),
     ----------------------------------------------------------------------------
     -- Dynamic Boss Resistance
     ----------------------------------------------------------------------------
