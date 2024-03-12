@@ -11,7 +11,7 @@ local mooneyes = {
 }
 
 local function tosack(inst, owner)
-	if owner ~= nil and owner:HasTag("klaussacklock") then
+	if owner ~= nil and (owner:HasTag("klaussacklock") or owner:HasTag("garbagepatchflotsam")) then
 		if inst.icon == nil then
 			inst.icon = SpawnPrefab("globalmapicon")
 			inst.icon:TrackEntity(inst)
