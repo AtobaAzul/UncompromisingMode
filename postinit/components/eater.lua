@@ -16,6 +16,16 @@ AddComponentPostInit("eater", function(self)
 		end
 	end
 
+    local _DoFoodEffects = self.DoFoodEffects
+    function self:DoFoodEffects(food)
+        -- Check for favorite food sanity. Otherwise, foods that normally
+        -- give negative sanity may not trigger (e.g. Wurt and Durians).
+        if food.components.edible:IsFavoriteFood(self.inst) then
+            return true
+        end
+        return _DoFoodEffects(self, food)
+    end
+
 	local _PrefersToEat = self.PrefersToEat
 
 	function self:PrefersToEat(food)
