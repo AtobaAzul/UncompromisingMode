@@ -7,7 +7,7 @@ GarbagePatchManager = Class(function(self, inst)
 
     --Public
     self.inst = inst
-    self.inventory = nil
+    self.garbage_inventory = nil
 
     self.inst:DoTaskInTime(0, function(inst)
         self:AddInventory()
@@ -15,9 +15,14 @@ GarbagePatchManager = Class(function(self, inst)
 end)
 
 function GarbagePatchManager:FindSpotForPatch()
-    local pos = TheWorld.Map:FindRandomPointInOcean(5)
-    local x, y, z = FindRandomPointOnShoreFromOcean(pos.x, pos.y, pos.z)
-    return Vector3(x, y, z) --return as vec
+    local pos = TheWorld.Map:FindRandomPointInOcean(10)
+
+    if pos ~= nil then
+        local x, y, z = FindRandomPointOnShoreFromOcean(pos.x, pos.y, pos.z)
+        return Vector3(x, y, z)        --return as vec
+    else
+        return self:FindSpotForPatch() --probably NOT a good idea, lol, but there's no WAY it'll cause a SO, RIGHT???????
+    end
 end
 
 function GarbagePatchManager:AddInventory()

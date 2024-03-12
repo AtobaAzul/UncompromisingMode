@@ -211,7 +211,6 @@ local function PickItem(item, inst)
     if item.components.inventoryitem ~= nil and item.prefab ~= "bullkelp_beachedroot" and item:IsValid() and not item:HasTag("heavy") then
         if item.Physics ~= nil then item.Physics:Stop() end
         inst.components.inventory:GiveItem(item)
-        if table.contains(destroy_prefabs, item.prefab) and math.random() > 0.5 then item:Remove() end
         local stacksize = item.components.stackable ~= nil and item.components.stackable:StackSize() or 1
 
         if item.components.health ~= nil then
@@ -321,7 +320,11 @@ local function TornadoEnviromentTask(inst)
                         v.Physics:ClearMotorVelOverride()
                         v.Physics:SetMotorVelOverride(math.cos(angle) * 5, 0, math.sin(angle) * 5)
                     else
-                        PickItem(v, inst) --skip all the steps above if you're just gonna do it off-screen.
+                        if table.contains(destroy_prefabs, v.prefab) and math.random() > 0.5 then
+                            v:Remove()
+                        else
+                            PickItem(v, inst) --skip all the steps above if you're just gonna do it off-screen.
+                        end
                     end
                 end
             else
@@ -338,7 +341,11 @@ local function TornadoEnviromentTask(inst)
                 if config == "reduced" and v:IsAsleep() then
                     return
                 end
-                PickItem(v, inst)
+                if table.contains(destroy_prefabs, v.prefab) and math.random() > 0.5 then
+                    v:Remove()
+                else
+                    PickItem(v, inst)
+                end
             end
         end
     end
@@ -627,14 +634,10 @@ local function TornadoTask(inst)
                 inst:ListenForEvent("animover", function()
                     inst.startmoving = false
 
-                    for k, v in ipairs(inst.components.inventory.itemslots) do
-                        local item = inst.components.inventory:RemoveItem(v, true)
-                        print(TheWorld.components.garbagepatch_manager)
-                        local inv = TheWorld.components.garbagepatch_manager:GetInventory()
-                        print(inv)
 
-                        inv.components.inventory:GiveItem(item, nil, inst:GetPosition())
-                    end
+                    local inv = TheWorld.components.garbagepatch_manager:GetInventory()
+                    inst.components.inventory:TransferInventory(inv)
+
                     TheWorld.components.garbagepatch_manager:SpawnPatch()
                     if destination ~= nil then
                         destination:Remove()
@@ -731,9 +734,7 @@ local function fn()
         inst:ListenForEvent("animover", function()
             inst.startmoving = false
 
-            for k, v in ipairs(inst.components.inventory.itemslots) do
-                inst.components.inventory:TransferInventory(TheWorld.components.garbagepatch_manager:GetInventory())
-            end
+            inst.components.inventory:TransferInventory(TheWorld.components.garbagepatch_manager:GetInventory())
 
             TheWorld.components.garbagepatch_manager:SpawnPatch()
 
