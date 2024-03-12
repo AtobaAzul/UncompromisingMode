@@ -211,7 +211,7 @@ local function PickItem(item, inst)
     if item.components.inventoryitem ~= nil and item.prefab ~= "bullkelp_beachedroot" and item:IsValid() and not item:HasTag("heavy") then
         if item.Physics ~= nil then item.Physics:Stop() end
         inst.components.inventory:GiveItem(item)
-        if table.contains(destroy_prefabs, item.prefab) and math.random() > 0.5 then item:remove() end
+        if table.contains(destroy_prefabs, item.prefab) and math.random() > 0.5 then item:Remove() end
         local stacksize = item.components.stackable ~= nil and item.components.stackable:StackSize() or 1
 
         if item.components.health ~= nil then
