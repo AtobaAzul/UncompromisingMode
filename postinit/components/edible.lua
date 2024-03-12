@@ -17,26 +17,9 @@ AddComponentPostInit("edible", function(self)
         local multiplier = 1
 
         if eater and eater.components.foodaffinity then
-            local affinity = eater.components.foodaffinity
-            local affinity_penalty = affinity.prefab_affinites[self.inst.prefab]
-
-            if affinity_penalty then
-                multiplier = multiplier / affinity_penalty
-
-                local foodtype_affinity = 1
-                local tag_affinity = 1
-
-                if affinity.foodtype_affinities[self.foodtype] then
-                    foodtype_affinity = affinity.foodtype_affinities[self.foodtype]
-                end
-
-                for tag, bonus in pairs(affinity.tag_affinities) do
-                    if food:HasTag(tag) then
-                        tag_affinity = bonus
-                    end
-                end
-
-                multiplier = math.max(multiplier * foodtype_affinity, multiplier * tag_affinity)
+            local affinity_bonus = eater.components.foodaffinity:GetAffinity(self.inst)
+            if affinity_bonus then
+                multiplier = multiplier / affinity_bonus
             end
         end
 
@@ -58,15 +41,16 @@ AddComponentPostInit("edible", function(self)
         local addend = 0
         
         if eater and eater.components.foodaffinity then
-            local affinity_bonus = eater.components.foodaffinity.prefab_affinites[self.inst.prefab]
+            local prefab = eater.components.foodaffinity:GetFoodBasePrefab(self.inst)
+            local affinity_bonus = eater.components.foodaffinity.prefab_affinites[prefab]
             local favorite_foods = eater.components.foodaffinity.favorite_foods
             local favorite_food_fn = eater.components.foodaffinity.favorite_food_fn
             -- check if this food is already defined as the character's favorite food
-            if favorite_foods and favorite_foods[self.inst.prefab] then
-                addend = favorite_foods[self.inst.prefab]
+            if favorite_foods and favorite_foods[prefab] then
+                addend = favorite_foods[prefab]
             -- check for the affinity bonus or if this food satisfies the eater's favorite food function
             elseif affinity_bonus or favorite_food_fn and favorite_food_fn(self.inst) then
-                -- favorite foods will not incur sanity penalities
+                -- favorite foods will not incur sanity penalties
                 if sanityvalue < 0 then
                     sanityvalue = 0
                 end
