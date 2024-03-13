@@ -336,6 +336,11 @@ if TUNING.DSTU.WICKERNERF_BEEBOOK then
     TOOLTIPS.BOOK_BEES = "- Now adds Honey to 10 nearby Bee Boxes.\n- Doesn't work during Dusk, Night and/or Winter."
 end
 
+if TUNING.DSTU.WATHGRITHR_ARSENAL then
+    TOOLTIPS.SPEAR_WATHGRITHR_LIGHTNING = "- The lightning charge attack will consume additional durability per mob hit up to a limit.\n - The Charged Eldin Spear can be recharged with lightning."
+    TOOLTIPS.WATHGRITHR_SHIELD = "- Blocking attacks will consume durability by 60% of the damage taken.\n - Each additional perk reduces it by 20%."
+end
+
 if TUNING.DSTU.DISABLE_MEGAFLARE then
     TOOLTIPS.MEGAFLARE = "- No longer summons Deerclops."
 end

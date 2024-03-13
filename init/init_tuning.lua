@@ -219,7 +219,9 @@ TUNING.DSTU = {
     WARLY_BUTCHER = GetModConfigData("warly_butcher_"),
     --WARLY_FOOD = GetModConfigData("warly_food"),
     -- Wigfrid
-    BATTLESONG_FIRE_RESIST_MOD = 0, -- orig 33% fire resis
+    BATTLESONG_FIRE_RESIST_MOD = 0, -- orig 33% fire resist
+    WATHGRITHR_ARSENAL = GetModConfigData("wathgrithr_arsenal"),
+    WATHGRITHR_REWORK =  GetModConfigData("wathgrithr_rework"),
     -- Maxwell
     SHADOWWAXWELL_FUEL_COST = 2,
     SHADOWWAXWELL_HEALTH_COST = 15,

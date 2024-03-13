@@ -749,7 +749,7 @@ SkillTreeDefs.SKILLTREE_ORDERS["wathgrithr"] = ORDERS
 	STRINGS.SKILLTREE.WATHGRITHR.WATHGRITHR_ARSENAL_SPEAR_4_DESC = "The Elding Spear can perform a special attack.\n This attack will consume additional durability per mob hit up to a limit."
     SkillTreeDefs.SKILLTREE_DEFS["wathgrithr"].wathgrithr_arsenal_spear_4.desc = STRINGS.SKILLTREE.WATHGRITHR.WATHGRITHR_ARSENAL_SPEAR_4_DESC
 
-    STRINGS.SKILLTREE.WATHGRITHR.WATHGRITHR_ARSENAL_SPEAR_5_DESC = "Upgrade the Elding Spear using Restrained Static to deal +20 Planar Damage. The Charged Eldin Spear can be repaired with the Auto-Mat-O-Chanic."
+    STRINGS.SKILLTREE.WATHGRITHR.WATHGRITHR_ARSENAL_SPEAR_5_DESC = "Upgrade the Elding Spear using Restrained Static to deal +20 Planar Damage. The Charged Eldin Spear can be recharged with lightning."
     SkillTreeDefs.SKILLTREE_DEFS["wathgrithr"].wathgrithr_arsenal_spear_5.desc = STRINGS.SKILLTREE.WATHGRITHR.WATHGRITHR_ARSENAL_SPEAR_5_DESC
 
     -- HELMET
