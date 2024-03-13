@@ -105,6 +105,36 @@ end)
 
 -------------------------------------------------------------------------------------------------------
 
+
+local function Strike(owner)
+    --onlightningground(inst)
+
+    if owner ~= nil then
+        local fx = SpawnPrefab("electrichitsparks")
+
+        fx.entity:SetParent(owner.entity)
+        fx.entity:AddFollower()
+        fx.Follower:FollowSymbol(owner.GUID, "swap_object", 0, -145, 0)
+        --fx.Transform:SetScale(.66, .66, .66)
+        local item = owner.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
+        item.components.fueled:DoDelta(TUNING.MED_FUEL)
+        item.components.fueled.ontakefuelfn(item, TUNING.SMALL_FUEL)
+        if item.components.fueled:GetPercent() > 1 then
+            item.components.fueled:SetPercent(1)
+        end
+
+    end
+end
+
+local function onlightningground(inst)
+    inst.components.fueled:DoDelta(TUNING.MED_FUEL)
+    inst.components.fueled.ontakefuelfn(inst, TUNING.SMALL_FUEL)
+    if inst.components.fueled:GetPercent() > 1 then
+        inst.components.fueled:SetPercent(1)
+    end
+end
+
+
 env.AddPrefabPostInit("spear_wathgrithr_lightning_charged", function(inst)
     inst:AddTag("electricaltool")
 
@@ -113,6 +143,10 @@ env.AddPrefabPostInit("spear_wathgrithr_lightning_charged", function(inst)
     end
 
     if env.GetModConfigData("wathgrithr_arsenal") then
+
+        inst:AddTag("lightningrod")
+        inst:ListenForEvent("lightningstrike", onlightningground)
+
         inst.components.aoeweapon_lunge:SetOnLungedFn(Lightning_OnLunged)
         inst.components.aoeweapon_lunge:SetOnHitFn(Lightning_OnLungedHit)
 
@@ -120,6 +154,13 @@ env.AddPrefabPostInit("spear_wathgrithr_lightning_charged", function(inst)
             local OnEquip_old = inst.components.equippable.onequipfn
             inst.components.equippable.onequipfn = function(inst, owner)
                 owner:AddTag("batteryuser")
+
+                owner.lightningpriority = 0
+                owner:ListenForEvent("lightningstrike", Strike, owner)
+                owner:RemoveTag("lightningrod")
+                owner.lightningpriority = nil
+                owner:RemoveEventCallback("lightningstrike", Strike)
+                        
 
                 if OnEquip_old ~= nil then
                     OnEquip_old(inst, owner)
