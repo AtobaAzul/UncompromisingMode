@@ -105,33 +105,8 @@ end)
 
 -------------------------------------------------------------------------------------------------------
 
-
-local function Strike(owner)
-    --onlightningground(inst)
-
-    if owner ~= nil then
-        local fx = SpawnPrefab("electrichitsparks")
-
-        fx.entity:SetParent(owner.entity)
-        fx.entity:AddFollower()
-        fx.Follower:FollowSymbol(owner.GUID, "swap_object", 0, -145, 0)
-        --fx.Transform:SetScale(.66, .66, .66)
-        local item = owner.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
-        item.components.fueled:DoDelta(TUNING.MED_FUEL)
-        item.components.fueled.ontakefuelfn(item, TUNING.SMALL_FUEL)
-        if item.components.fueled:GetPercent() > 1 then
-            item.components.fueled:SetPercent(1)
-        end
-
-    end
-end
-
 local function onlightningground(inst)
-    inst.components.fueled:DoDelta(TUNING.MED_FUEL)
-    inst.components.fueled.ontakefuelfn(inst, TUNING.SMALL_FUEL)
-    if inst.components.fueled:GetPercent() > 1 then
-        inst.components.fueled:SetPercent(1)
-    end
+    inst.components.finiteuses:Repair(TUNING.DSTU.SPEAR_WATHGRITHR_LIGHTNING_CHARGED_LIGHTNINGREPAIR)
 end
 
 
