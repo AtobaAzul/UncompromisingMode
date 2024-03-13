@@ -85,7 +85,7 @@ env.AddPlayerPostInit(function(inst)
         local refuelnumber = math.clamp(percent + 0.33, 0, inst:HasTag("handyperson") and 2 or 1)
 
         if selected_item.components.finiteuses ~= nil and
-            (inst:hasTag("handyperson") and percent == 2 or not inst:HasTag("handyperson") and percent > 1) then
+            (inst:HasTag("handyperson") and percent == 2 or not inst:HasTag("handyperson") and percent > 1) then
             return false, "CHARGE_FULL"
         end
 

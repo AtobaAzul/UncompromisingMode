@@ -197,6 +197,11 @@ local function OnPicked(inst, picker)
         SpawnPrefab("halloween_ornament_" .. tostring(math.random(NUM_HALLOWEEN_ORNAMENTS))).Transform:SetPosition(x, y, z)
     end
 
+    if TheWorld.components.ratcheck:GetBurrows() >= 1 and math.random() > 0.5 then
+        SpawnPrefab("uncompromising_rat").Transform:SetPosition(x, y, z)
+
+    end 
+
     SpawnPrefab("flotsam_break").Transform:SetPosition(x, y, z)
 
     return true
