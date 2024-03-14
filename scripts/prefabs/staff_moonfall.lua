@@ -589,7 +589,7 @@ local function fn_flame()
     inst.AnimState:SetHue(math.random())
     inst.AnimState:SetDeltaTimeMultiplier(2)
     inst.AnimState:SetBloomEffectHandle("shaders/anim.ksh")
-    inst.AnimState:SetLightOverride(.1)
+    inst.AnimState:SetLightOverride(.5)
 
     inst.Transform:SetScale(0.25, 0.25, 0.25)
 
