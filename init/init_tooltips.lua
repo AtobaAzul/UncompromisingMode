@@ -337,7 +337,7 @@ if TUNING.DSTU.WICKERNERF_BEEBOOK then
 end
 
 if TUNING.DSTU.WATHGRITHR_ARSENAL then
-    TOOLTIPS.SPEAR_WATHGRITHR_LIGHTNING = "- The lightning charge attack will consume additional durability per mob hit up to a limit.\n - The Charged Eldin Spear can be recharged with lightning."
+    TOOLTIPS.SPEAR_WATHGRITHR_LIGHTNING = "- The lightning charge attack will consume additional durability per mob hit up to a limit.\n - The Charged Elding Spear can be recharged with lightning."
     TOOLTIPS.WATHGRITHR_SHIELD = "- Blocking attacks will consume durability by 60% of the damage taken.\n - Each additional perk reduces it by 20%."
 end
 
