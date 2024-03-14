@@ -316,12 +316,12 @@ local function CreateTail(is_thin, color)
     inst.entity:AddTransform()
     inst.entity:AddAnimState()
     inst.entity:AddLight()
-    inst.Light:SetFalloff(3)
+    inst.Light:SetFalloff(1)
     inst.Light:SetColour(color.r, color.g, color.b)
-    inst.Light:SetIntensity(0.1)
+    inst.Light:SetIntensity(0.5)
     inst.Light:SetRadius(1)
     inst.AnimState:SetBloomEffectHandle("shaders/anim.ksh")
-	inst.AnimState:SetLightOverride(.1)
+    inst.AnimState:SetLightOverride(.1)
 
     inst.AnimState:SetBank("lavaarena_blowdart_attacks")
     inst.AnimState:SetBuild("lavaarena_blowdart_attacks")
@@ -332,6 +332,7 @@ local function CreateTail(is_thin, color)
     inst.AnimState:SetHue(color.h)
 
     inst:ListenForEvent("animover", inst.Remove)
+
     return inst
 end
 
@@ -361,9 +362,9 @@ local function fn_proj()
     inst.entity:AddNetwork()
     inst.entity:AddLight()
 
-    inst.Light:SetFalloff(3)
+    inst.Light:SetFalloff(1)
     inst.Light:SetColour(r, g, b)
-    inst.Light:SetIntensity(0.1)
+    inst.Light:SetIntensity(0.5)
     inst.Light:SetRadius(1)
 
     MakeInventoryPhysics(inst)
@@ -374,7 +375,7 @@ local function fn_proj()
     inst.AnimState:PlayAnimation("attack_3", true)
     inst.AnimState:SetOrientation(ANIM_ORIENTATION.OnGround)
     inst.AnimState:SetBloomEffectHandle("shaders/anim.ksh")
-	inst.AnimState:SetLightOverride(.1)
+    inst.AnimState:SetLightOverride(.1)
 
     inst:AddTag("projectile")
 
@@ -588,7 +589,7 @@ local function fn_flame()
     inst.AnimState:SetHue(math.random())
     inst.AnimState:SetDeltaTimeMultiplier(2)
     inst.AnimState:SetBloomEffectHandle("shaders/anim.ksh")
-	inst.AnimState:SetLightOverride(.1)
+    inst.AnimState:SetLightOverride(.1)
 
     inst.Transform:SetScale(0.25, 0.25, 0.25)
 
