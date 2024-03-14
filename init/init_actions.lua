@@ -226,3 +226,10 @@ if TUNING.DSTU.WARLY_BUTCHER then
         return _murderfn(act)
     end
 end
+
+GLOBAL.STRINGS.ACTIONS.START_CHANNELCAST.MOONFALL = "Start Casting"
+
+local _Start_ChannelCastStrFn = GLOBAL.ACTIONS.START_CHANNELCAST.strfn
+GLOBAL.ACTIONS.START_CHANNELCAST.strfn = function(act)
+    return act.invobject and act.invobject:HasTag("moonfallstaff") and "MOONFALL" or _Start_ChannelCastStrFn(act) 
+end

@@ -450,7 +450,7 @@ local function fn()
     --weapon (from weapon component) added to pristine state for optimization
     inst:AddTag("weapon")
     inst:AddTag("rangedweapon")
-
+    inst:AddTag("moonfallstaff")
 
     inst.entity:SetPristine()
 
