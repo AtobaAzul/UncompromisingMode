@@ -32,7 +32,7 @@ local Wathom_Sonar = Class(Widget, function(self, owner)
 end)
 
 function Wathom_Sonar:StartSonar()
-    print("START")
+   
     if not self.active then
     self.time = self.transitiontimeIN
         self.alphagoal = 1

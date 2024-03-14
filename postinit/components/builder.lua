@@ -47,9 +47,9 @@ env.AddComponentPostInit("builder", function(self)
         local prototyper_active = false
         for i, v in ipairs(ents) do
             if self.inst.prefab ~= "wickerbottom" then
-                print(v ~= self.inst)
-                print(v)
-                print(self.inst)
+               
+               
+               
             end
             if v ~= self.inst and v.components.prototyper ~= nil and (v.components.prototyper.restrictedtag == nil or self.inst:HasTag(v.components.prototyper.restrictedtag)) then
                 if not prototyper_active then
@@ -165,11 +165,11 @@ env.AddComponentPostInit("builder", function(self)
     end
 
     function self:UsePrototyper(prototyper)
-        print(prototyper ~= nil)
-        print(not prototyper:HasTags(PROTOTYPER_TAGS))
-        print(prototyper:HasOneOfTags(self.exclude_tags))
-        printwrap("", self.exclude_tags)
-        print((prototyper.components.prototyper ~= nil and prototyper.components.prototyper.restrictedtag ~= nil and not self.inst:HasTag(prototyper.components.prototyper.restrictedtag)))
+       
+       
+       
+       
+       
 
         if prototyper ~= nil then
             if not prototyper:HasTags(PROTOTYPER_TAGS)

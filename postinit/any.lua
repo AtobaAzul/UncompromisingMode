@@ -125,8 +125,8 @@ local function AdjustVisibility(inst, distance, angle)
         inst.um_visibilityclient = -(seebehinddistance - distance) + inst.um_visibilityclient
         if inst.um_visibilityclient > 1 then inst.um_visibilityclient = 1 end
     end
-    print("distance ", distance)
-    print("visclient ", inst.um_visibilityclient)
+   
+   
     if inst.um_visibilityclient <= 0 then
         FullHide(inst)
     else
@@ -165,7 +165,7 @@ local function AdjustVisibility(inst, distance, angle)
 end
 
 local function UpdateVisibility(inst)
-    print("hello")
+   
     --if ThePlayer and ThePlayer:HasTag("um_darkwood") then
     local distance = math.sqrt(ThePlayer:GetDistanceSqToInst(inst))
     local x, y, z = inst.Transform:GetWorldPosition()
@@ -184,8 +184,8 @@ local function UpdateVisibility(inst)
     local angle1 = -math.atan2((z2 - z1), (x2 - x1))
     local angle2 = -math.atan2(z - z1, x - x1)
     local angle = math.abs(angle1 - angle2)
-    print("Adjusting")
-    print("Distance")
+   
+   
     if distance > 20 then
         FullHide(inst)
     else

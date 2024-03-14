@@ -173,7 +173,7 @@ if TUNING.DSTU.WXLESS then --HI ATOBA :3 :3 <3 <3
 		print("slots in use now")
 		print(slotsinuse)]]
         else
-            print("All modules *should* be gone")
+           
             if inst._chip_inuse == 0 then
                 inst.components.timer:StopTimer(CHARGEDEGEN_TIMERNAME)
                 inst.components.timer:StartTimer(CHARGEREGEN_TIMERNAME, TUNING.WX78_CHARGE_REGENTIME)

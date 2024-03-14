@@ -7,24 +7,30 @@ return Class(function(self, inst)
     self.inst = inst
     self.layouts = {}
 
-    inst:ListenForEvent("revertterraform", self.RevertTerraform)--legacy compatibility, please just call the method itself.
+    inst:ListenForEvent("revertterraform", function(inst, group)
+        self:RevertTerraform(group)
+    end) --legacy compatibility, please just call the method itself.
     function self:OnSave()
         return {
             layouts = self.layouts
         }
     end
+
     function self:OnLoad(data)
         self.layouts = data.layouts
     end
-    function self:RevertTerraform(inst, group)
+
+    function self:RevertTerraform(group)
         if group == nil or group ~= nil and self.layouts[group] == nil then
             return
         end
 
         for k, v in pairs(self.layouts[group].tiles) do
-            self.Map:SetTile(v.x, v.y, v.original_tile)
+            TheWorld.Map:SetTile(v.x, v.y, v.original_tile)
             if k == #self.layouts[group].tiles then
-                self.inst:PushEvent("finishedterraform")
+                TheWorld:DoTaskInTime(0, function()
+                    TheWorld:PushEvent("finishedterraform")
+                end)
             end
         end
 
@@ -32,7 +38,7 @@ return Class(function(self, inst)
 
         for k, v in pairs(self.layouts[group].prefabs) do
             if v ~= nil and v.prefab ~= nil then
-                SpawnSaveRecord(v)--while spawnsaverecord provides the biggest fidelity, it is a lot of data to store onsave. I'm not sure if that's a problem
+                SpawnSaveRecord(v) --while spawnsaverecord provides the biggest fidelity, it is a lot of data to store onsave. I'm not sure if that's a problem
             end
         end
 

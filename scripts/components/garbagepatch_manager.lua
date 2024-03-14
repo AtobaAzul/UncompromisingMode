@@ -27,13 +27,13 @@ end
 
 function GarbagePatchManager:AddInventory()
     if self.garbage_inventory == nil and TheSim:FindFirstEntityWithTag("garbagepatch_inventory") then
-        print("found a inventory!")
+       
         self.garbage_inventory = TheSim:FindFirstEntityWithTag("garbagepatch_inventory")
     elseif self.garbage_inventory == nil then
-        print("didn't find an inventory, spawning one!")
+       
         self.garbage_inventory = SpawnPrefab("garbagepatch_inventory")
     else
-        print("inventory already exists!")
+       
     end
 
     return self.garbage_inventory

@@ -367,15 +367,15 @@ local function landfn(data)
 
     inst:DoTaskInTime(0, function(inst)
         local _inv = TheWorld.components.garbagepatch_manager:GetInventory()
-        print(_inv)
+       
         local x, y, z = inst.Transform:GetWorldPosition()
 
         for i = 0, math.random(3, 6) do
             local item = _inv.components.inventory:RemoveItem(_inv.components.inventory:GetFirstItemInAnySlot(), true)
-            print(item)
+           
             if item ~= nil then
                 inst.components.inventory:GiveItem(item, nil, Vector3(x, y, z))
-                print("giving item")
+               
             end
         end
     end)

@@ -727,7 +727,7 @@ end
 
 local function OnHitOtherFreeze(inst, data)
     local other = data.target
-    print(data.weapon)
+   
     if other ~= nil and data.weapon == nil then
         if not (other.components.health ~= nil and other.components.health:IsDead()) then
             if not other:HasTag("um_freezeprotection") and other.components.freezable ~= nil and other:HasTag("player") and not other.components.freezable:IsFrozen() and not other.sg:HasStateTag("frozen") then
