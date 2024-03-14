@@ -109,6 +109,22 @@ local function onlightningground(inst)
     inst.components.finiteuses:Repair(TUNING.DSTU.SPEAR_WATHGRITHR_LIGHTNING_CHARGED_LIGHTNINGREPAIR)
 end
 
+local function Strike(owner)
+    --onlightningground(inst)
+
+    if owner ~= nil then
+        local fx = SpawnPrefab("electrichitsparks")
+
+        fx.entity:SetParent(owner.entity)
+        fx.entity:AddFollower()
+        fx.Follower:FollowSymbol(owner.GUID, "swap_object", 0, -145, 0)
+        local item = owner.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
+        if item ~= nil then
+            item.components.finiteuses:Repair(TUNING.DSTU.SPEAR_WATHGRITHR_LIGHTNING_CHARGED_LIGHTNINGREPAIR)
+        end
+    end
+end
+
 
 env.AddPrefabPostInit("spear_wathgrithr_lightning_charged", function(inst)
     inst:AddTag("electricaltool")
@@ -118,7 +134,6 @@ env.AddPrefabPostInit("spear_wathgrithr_lightning_charged", function(inst)
     end
 
     if env.GetModConfigData("wathgrithr_arsenal") then
-
         inst:AddTag("lightningrod")
         inst:ListenForEvent("lightningstrike", onlightningground)
 
@@ -135,7 +150,7 @@ env.AddPrefabPostInit("spear_wathgrithr_lightning_charged", function(inst)
                 owner:RemoveTag("lightningrod")
                 owner.lightningpriority = nil
                 owner:RemoveEventCallback("lightningstrike", Strike)
-                        
+
 
                 if OnEquip_old ~= nil then
                     OnEquip_old(inst, owner)
