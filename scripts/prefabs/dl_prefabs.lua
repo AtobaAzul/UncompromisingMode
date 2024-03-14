@@ -30,8 +30,8 @@ local function CheckAndGetValidEntities(inst, reset)
 
     local itemsinside = inst.components.container:GetAllItems() --get all items inside
 
-    for i, v in ipairs(itemsinside) do                       --iterate over all of them...
-        if v.prefab == "log" then                            --if it's a log, increase range by 1 of each in the stack.
+    for i, v in ipairs(itemsinside) do                          --iterate over all of them...
+        if v.prefab == "log" then                               --if it's a log, increase range by 1 of each in the stack.
             inst.range = inst.range + v.components.stackable:StackSize()
         end
         if v.prefab == "boards" then --if it's a log, increase it by 4.
@@ -331,6 +331,11 @@ local function SpawnLayout(inst, extradata)
         local autotrigger_spawners = data[inst.components.writeable.text].autotrigger_spawners
         local no_spawners_in_water = data[inst.components.writeable.text].no_spawners_in_water
         local no_prefab_overlap = data[inst.components.writeable.text].no_prefab_overlap
+
+        if prevent_overlap and #TheSim:FindEntities(x, y, z, 10, { "DYNLAYOUT_BLOCKER"}) > 0 then
+            inst:Remove()
+            return
+        end
 
         local angles, angle
         if group ~= nil and reversible then
