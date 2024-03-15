@@ -66,10 +66,10 @@ AddComponentPostInit("edible", function(self)
     local _GetSanity = self.GetSanity
     self.GetSanity = function(self, eater)
         local sanityvalue = _GetSanity(self, eater) or 0
-        -- favorite foods will not incur sanity penalties
-        sanityvalue = math.max(0, sanityvalue)
         local addend = 0
         if self:IsFavoriteFood(eater) then
+            -- favorite foods will not incur sanity penalties
+            sanityvalue = math.max(0, sanityvalue)
             local prefab = eater.components.foodaffinity:GetFoodBasePrefab(self.inst)
             local affinity_bonus = eater.components.foodaffinity:HasAffinity(self.inst)
             local favorite_foods = eater.components.foodaffinity.favorite_foods
