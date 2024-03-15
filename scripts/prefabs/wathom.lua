@@ -290,12 +290,23 @@ end
 
 local function CheckLight(inst)
 	if inst:IsInLight() then
-		print("WATHOM ENTER LIGHT")
-		inst.components.playervision:SetCustomCCTable(nil)
-		inst.components.playervision:ForceNightVision(false)
-		inst:RemoveTag("WathomInDark")
-	else
-		print("WATHOM ENTER DARK")
+		if inst.updatewathomvisiontask == nil then
+			inst.updatewathomvisiontask = inst:DoTaskInTime(1, function()
+				inst.components.playervision:SetCustomCCTable(nil)
+				inst.components.playervision:ForceNightVision(false)
+				inst:RemoveTag("WathomInDark")
+				
+				if inst.updatewathomvisiontask ~= nil then
+					inst.updatewathomvisiontask:Cancel()
+				end
+			end)
+		end
+	else	
+		if inst.updatewathomvisiontask ~= nil then
+			inst.updatewathomvisiontask:Cancel()
+		end
+				
+		inst.updatewathomvisiontask = nil
 		inst.components.playervision:SetCustomCCTable(WATHOM_COLOURCUBES)
 		inst.components.playervision:ForceNightVision(true)
 		inst:AddTag("WathomInDark")

@@ -194,7 +194,7 @@ local function fn()
 	
 	inst:AddComponent("locomotor")
 	inst.components.locomotor.walkspeed = 8
-	inst.components.locomotor.runspeed = 8
+	inst.components.locomotor.runspeed = 20
 	inst.components.locomotor:SetTriggersCreep(false)
     inst.components.locomotor.pathcaps = { ignorecreep = true }
     inst.components.locomotor:SetSlowMultiplier(.6)

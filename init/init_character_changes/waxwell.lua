@@ -165,15 +165,22 @@ local function OnDespawnPet(inst, pet)
         return inst.OldOnDespawnPet(inst, pet)
     end
 end
+local portals = {
+	"multiplayer_portal",
+	"multiplayer_portal_moonrock_constr",
+	"multiplayer_portal_moonrock",
+}
 
-env.AddPrefabPostInit("multiplayer_portal", function(inst)
-	inst:ListenForEvent("ms_newplayercharacterspawned", function(world, data)
-		if data and data.player and data.player.prefab and data.player.prefab == "waxwell" then
-			local x, y, z = inst.Transform:GetWorldPosition()
-			SpawnPrefab("waxwell_pact_trader").Transform:SetPosition(x + 5, 0, z - 5)
-		end
-	end, TheWorld)
-end)
+for i, v in ipairs(portals) do
+	env.AddPrefabPostInit(v, function(inst)
+		inst:ListenForEvent("ms_newplayercharacterspawned", function(world, data)
+			if data and data.player and data.player.prefab and data.player.prefab == "waxwell" then
+				local x, y, z = inst.Transform:GetWorldPosition()
+				SpawnPrefab("waxwell_pact_trader").Transform:SetPosition(x + 5, 0, z - 5)
+			end
+		end, TheWorld)
+	end)
+end
 
 local function ReskinPet(pet, player, nofx)
     pet._dressuptask = nil
