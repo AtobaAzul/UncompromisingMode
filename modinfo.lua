@@ -284,7 +284,6 @@ configuration_options = {
             { description = "Disabled", data = 0, hover = "All changes disabled. Same as vanilla." } },
         default = 1
     },
-    BinaryConfig("wathgrithr_arsenal", "Wigfrid - Arsenal", "Changed wigfrid's new tools to not have infinite skills.", true),
     BinaryConfig("winonaworker", "Winona - Faster Working",
         "Winona now scales her work/picking efficiency, and tool/weapon durability, off of her hunger level. Drains hunger when taking actions.",
         true),

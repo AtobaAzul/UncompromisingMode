@@ -164,6 +164,7 @@ if GetModConfigData("wathgrithr_arsenal") then
 	modimport("postinit/prefabs/wathgrithr_shield")
 end
 modimport("postinit/prefabs/spear_wathgrithr") -- Has stuff from both, don't put it inside the if
+modimport("postinit/prefabs/spear_wathgrithr") -- Has stuff from both, don't put it inside the if
 
 modimport("init/init_skilltreeimports")
 

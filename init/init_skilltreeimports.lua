@@ -7,6 +7,9 @@ function GLOBAL.GetSkilltreeBG(imagename, ...)
 
     --else if then
     --ADD OTHER CHARACTERS HERE
+
+    --else if then
+    --ADD OTHER CHARACTERS HERE
     else
         return OldGetSkilltreeBG(imagename, ...)
     end

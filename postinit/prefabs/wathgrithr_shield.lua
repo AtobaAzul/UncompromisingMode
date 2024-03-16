@@ -26,6 +26,7 @@ local function OnParry(inst, doer, attacker, damage)
 	
 	local parryMult = 1
 	local skill_level = 2 -- If the rework is disabled it will always use the max value, as it's otherwise unusable
+	local skill_level = 2 -- If the rework is disabled it will always use the max value, as it's otherwise unusable
 
 	if env.GetModConfigData("wathgrithr_rework_") == 1 then 
 		skill_level = doer.components.skilltreeupdater:CountSkillTag("parryefficiency") -- Parryefficiency doesn't exist without the tree

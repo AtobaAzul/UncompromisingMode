@@ -225,6 +225,7 @@ local ONACTIVATE_FNS = {
 			--inst.components.battleborn:SetClampMin(0.33 * TUNING.WATHGRITHR_LUNAR_BATTLEBORN_MULT)
 			--inst.components.battleborn:SetClampMax(2 * TUNING.WATHGRITHR_LUNAR_BATTLEBORN_MULT)
             --inst.components.battleborn:SetBattlebornBonus(0.25 * TUNING.WATHGRITHR_LUNAR_BATTLEBORN_MULT)
+            --inst.components.battleborn:SetBattlebornBonus(0.25 * TUNING.WATHGRITHR_LUNAR_BATTLEBORN_MULT)
 
             inst.components.battleborn:SetHealthEnabled(false)
             inst.components.battleborn:SetSanityEnabled(false)

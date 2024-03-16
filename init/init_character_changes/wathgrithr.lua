@@ -91,3 +91,31 @@ TUNING.DSTU.WATHGRITHR_SHIELD_UPGRADE_PARRY_EFFICIENCY = 0.2 -- additive per upg
 TUNING.BATTLEBORN_REPAIR_EQUIPMENT_MULT = 3.5 * 0.4
 end
 
+end
+
+
+--------------------------------------------------------------------------
+-- WEAPON PERKS
+--------------------------------------------------------------------------
+
+if env.GetModConfigData("wathgrithr_arsenal") then -- Only with arsenal enabled
+-- Spear
+TUNING.DSTU.SPEAR_WATHGRITHR_LIGHTNING_LUNGE_USES = 1 -- Base cost of lunge
+TUNING.DSTU.SPEAR_WATHGRITHR_LIGHTNING_LUNGE_ONHIT_USES = 0.5 -- Durability lost per mob hit
+TUNING.DSTU.SPEAR_WATHGRITHR_LIGHTNING_LUNGE_MAX_HITS = 8 -- After this number of hits it will no longer drain durability
+
+TUNING.SPEAR_WATHGRITHR_LIGHTNING_USES = 250 ---150 base
+TUNING.SPEAR_WATHGRITHR_LIGHTNING_CHARGED_USES = 250 -- 200 base
+TUNING.DSTU.SPEAR_WATHGRITHR_LIGHTNING_CHARGED_LIGHTNINGREPAIR = 25 -- Uses
+
+-- Shield
+TUNING.DSTU.WATHGRITHR_SHIELD_DURABILITY_MULT = 1.3
+--TUNUNG.WATHGRITHR_SHIELD_DAMAGE = wilson_attack * 1.5
+
+TUNING.DSTU.WATHGRITHR_SHIELD_BASE_PARRY_EFFICIENCY = 0.6 --Parry durability loss = Hit damage * ( BASE_PARRY_EFFICIENCY - (UPGRADE_PARRY_EFFICIENCY * skil level))
+TUNING.DSTU.WATHGRITHR_SHIELD_UPGRADE_PARRY_EFFICIENCY = 0.2 -- additive per upgrade with WATHGRITHR_SHIELD_BASE_PARRY_EFFICIENCY
+
+-- Commander Helm
+TUNING.BATTLEBORN_REPAIR_EQUIPMENT_MULT = 3.5 * 0.4
+end
+
