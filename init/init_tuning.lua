@@ -596,6 +596,8 @@ end
 -- Kramped buff
 if GetModConfigData("kramped_buff") then
     TUNING.KRAMPUS_NAUGHTINESS_DECAY_PERIOD = math.huge
+	TUNING.KRAMPUS_THRESHOLD = 60
+    TUNING.KRAMPUS_THRESHOLD_VARIANCE = 40
 end
 
 if GetModConfigData("waxwell_nerf") then
