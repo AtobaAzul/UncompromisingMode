@@ -70,45 +70,9 @@ local function ShadowPactSwordFn(inst, doer)
     end
 end
 
-local UMSPELLS = {
-    ["shadow_mimic"] = {
-        onselect = function(inst)
-            inst.components.spellbook:SetSpellName(STRINGS.SPELLS.SHADOW_MIMIC)
-            if TheWorld.ismastersim then
-                inst.components.aoespell:SetSpellFn(nil)
-                inst.components.spellbook:SetSpellFn(ShadowMimicSpellFn)
-            end
-        end,
-        execute = function(inst)
-            local inventory = ThePlayer.replica.inventory
-
-            if inventory ~= nil then
-                inventory:CastSpellBookFromInv(inst)
-            end
-        end,
-        label = STRINGS.SPELLS.SHADOW_MIMIC,
-        atlas = "images/the_men.xml", --didn't rename because I thought it was funny.
-        normal = "the_men.tex",
-        widget_scale = ICON_SCALE,
-        hit_radius = ICON_RADIUS,
-    },
-}
 
 env.AddPrefabPostInit("waxwelljournal", function(inst)
-    --if not TheWorld.ismastersim then
-    --	return
-    --end Commented out to see if this is causing the issue of the spell sometimes not appearing
-    if TUNING.DSTU.WAXWELL then
-        if inst.components.spellbook ~= nil then
-            for k, v in pairs(UMSPELLS) do
-                if not table.contains(inst.components.spellbook.items, v) then
-                    table.insert(inst.components.spellbook.items, v)
-                end
-            end
-        end
-    end
-	
-	inst:AddComponent("tradable")
+    inst:AddComponent("tradable")
 end)
 
 
@@ -159,27 +123,27 @@ end
 
 local function OnDespawnPet(inst, pet)
     if pet:HasTag("classicshadow") then
-		DoEffects(pet)
-		pet:Remove()
+        DoEffects(pet)
+        pet:Remove()
     else
         return inst.OldOnDespawnPet(inst, pet)
     end
 end
 local portals = {
-	"multiplayer_portal",
-	"multiplayer_portal_moonrock_constr",
-	"multiplayer_portal_moonrock",
+    "multiplayer_portal",
+    "multiplayer_portal_moonrock_constr",
+    "multiplayer_portal_moonrock",
 }
 
 for i, v in ipairs(portals) do
-	env.AddPrefabPostInit(v, function(inst)
-		inst:ListenForEvent("ms_newplayercharacterspawned", function(world, data)
-			if data and data.player and data.player.prefab and data.player.prefab == "waxwell" then
-				local x, y, z = inst.Transform:GetWorldPosition()
-				SpawnPrefab("waxwell_pact_trader").Transform:SetPosition(x + 5, 0, z - 5)
-			end
-		end, TheWorld)
-	end)
+    env.AddPrefabPostInit(v, function(inst)
+        inst:ListenForEvent("ms_newplayercharacterspawned", function(world, data)
+            if data and data.player and data.player.prefab and data.player.prefab == "waxwell" then
+                local x, y, z = inst.Transform:GetWorldPosition()
+                SpawnPrefab("waxwell_pact_trader").Transform:SetPosition(x + 5, 0, z - 5)
+            end
+        end, TheWorld)
+    end)
 end
 
 local function ReskinPet(pet, player, nofx)
@@ -204,7 +168,7 @@ local function OnSkinsChanged(inst, data)
             if data and data.nofx then
                 ReskinPet(v, inst, data.nofx)
             else
-                v._dressuptask = v:DoTaskInTime(math.random()*0.5 + 0.25, ReskinPet, inst)
+                v._dressuptask = v:DoTaskInTime(math.random() * 0.5 + 0.25, ReskinPet, inst)
             end
         end
     end
@@ -219,15 +183,15 @@ local function OnDeath(inst)
 end
 
 local function OnBecameGhost(inst)
-	for k, v in pairs(inst.components.petleash:GetPets()) do
-		if v:HasTag("classicshadow") then
-			inst:RemoveEventCallback("onremove", inst._onpetlost, v)
-			inst.components.sanity:RemoveSanityPenalty(v)
-			if v._killtask == nil then
-				v._killtask = v:DoTaskInTime(math.random(), KillPet)
-			end
-		end
-	end
+    for k, v in pairs(inst.components.petleash:GetPets()) do
+        if v:HasTag("classicshadow") then
+            inst:RemoveEventCallback("onremove", inst._onpetlost, v)
+            inst.components.sanity:RemoveSanityPenalty(v)
+            if v._killtask == nil then
+                v._killtask = v:DoTaskInTime(math.random(), KillPet)
+            end
+        end
+    end
 end
 
 env.AddPrefabPostInit("waxwell", function(inst)
@@ -235,49 +199,49 @@ env.AddPrefabPostInit("waxwell", function(inst)
         return
     end
 
-	inst.pact_sworn = false
-	
-	local _OnSave = inst.OnSave
-	local _OnLoad = inst.OnLoad
-	
-	local function OnSave(inst, data)
-		data.pact_sworn = inst.pact_sworn
-		if _OnSave ~= nil then
-			return _OnSave(inst, data)
-		end
-	end
-	
-	local function OnLoad(inst, data)
-		OnSkinsChanged(inst, {nofx = true})
-		
-		if data then
-			if data.pact_sworn ~= nil then
-				inst.pact_sworn = data.pact_sworn
-					
-				if inst.pact_sworn then
-					inst:AddTag("codexmantrareader")
-					inst:RemoveTag("magician")
-					inst:RemoveTag("shadowmagic")
-						
-					inst:DoTaskInTime(0, function()
-						inst:RemoveComponent("magician")
-					end)
-						
-					inst.components.health:SetAbsorptionAmount(-TUNING.WATHGRITHR_ABSORPTION)
-				end
-			end
-		end
-		
-		if _OnLoad ~= nil then
-			return _OnLoad(inst, data)
-		end
-	end
-	
-	inst.OnSave = OnSave
+    inst.pact_sworn = false
+
+    local _OnSave = inst.OnSave
+    local _OnLoad = inst.OnLoad
+
+    local function OnSave(inst, data)
+        data.pact_sworn = inst.pact_sworn
+        if _OnSave ~= nil then
+            return _OnSave(inst, data)
+        end
+    end
+
+    local function OnLoad(inst, data)
+        OnSkinsChanged(inst, { nofx = true })
+
+        if data then
+            if data.pact_sworn ~= nil then
+                inst.pact_sworn = data.pact_sworn
+
+                if inst.pact_sworn then
+                    inst:AddTag("codexmantrareader")
+                    inst:RemoveTag("magician")
+                    inst:RemoveTag("shadowmagic")
+
+                    inst:DoTaskInTime(0, function()
+                        inst:RemoveComponent("magician")
+                    end)
+
+                    inst.components.health:SetAbsorptionAmount(-TUNING.WATHGRITHR_ABSORPTION)
+                end
+            end
+        end
+
+        if _OnLoad ~= nil then
+            return _OnLoad(inst, data)
+        end
+    end
+
+    inst.OnSave = OnSave
     inst.OnLoad = OnLoad
-	
+
     inst:ListenForEvent("onskinschanged", OnSkinsChanged) -- Fashion Shadows.
-	inst:ListenForEvent("ms_becameghost", OnBecameGhost)
+    inst:ListenForEvent("ms_becameghost", OnBecameGhost)
 
     if inst.components.petleash ~= nil then
         inst.OldSpawnPet = inst.components.petleash.onspawnfn
