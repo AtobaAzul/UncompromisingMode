@@ -12,7 +12,7 @@ end
 local ORANGE_PICKUP_MUST_TAGS = { "_inventoryitem", "plant", "witherable", "kelp", "structure", "lureplant", "mush-room",
     "waterplant", "oceanvine", "lichen", "pickable" }
 local ORANGE_PICKUP_CANT_TAGS = { "INLIMBO", "NOCLICK", "knockbackdelayinteraction", "catchable", "fire", "minesprung",
-    "mineactive" }
+    "mineactive", "irreplaceable"}
 local function pickup(inst, channeler)
     if channeler == nil or channeler.components.inventory == nil then
         return

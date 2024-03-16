@@ -152,7 +152,7 @@ modimport("init/init_character_changes/wormwood")
 --end
 
 -- All of these are wathgrightr changes
-if GetModConfigData("wathgrithr_rework") then
+if GetModConfigData("wathgrithr_rework") == 1 then
 	modimport("postinit/prefabs/skilltree_wathgrithr")
 	modimport("postinit/prefabs/beefalo") -- Yes, even this one
 	modimport("postinit/prefabs/battlesongs")
@@ -163,7 +163,7 @@ end
 if GetModConfigData("wathgrithr_arsenal") then
 	modimport("postinit/prefabs/wathgrithr_shield")
 end
-modimport("postinit/prefabs/spear_wathgrithr")
+modimport("postinit/prefabs/spear_wathgrithr") -- Has stuff from both, don't put it inside the if
 
 modimport("init/init_skilltreeimports")
 
