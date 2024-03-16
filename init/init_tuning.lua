@@ -241,8 +241,8 @@ TUNING.DSTU = {
     -- WICKERNERF_HORTICULTURE = GetModConfigData("applied horticulture"),
     WICKERNERF_BEEBOOK = GetModConfigData("apicultural notes"),
     WICKERNERF_MOONBOOK = GetModConfigData("lunar grimoire"),
-    WICKERBUFF_HORTICULTURE = GetModConfigData("lux aeterna"),
-    WICKERBUFF_LIGHT = GetModConfigData("horticulture, expanded"),
+    WICKERBUFF_HORTICULTURE = GetModConfigData("horticulture, expanded"),
+    WICKERBUFF_LIGHT = GetModConfigData("lux aeterna"),
     WICKER_INV_REGEN = GetModConfigData("wicker_inv_regen"),
     -- Wanda
     WANDA_NERF = GetModConfigData("wanda_nerf"),
