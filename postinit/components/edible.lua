@@ -12,7 +12,7 @@ Wurt would gain sanity from eating any vegetable!). If you want to specify a cha
 foods of a certain tag or foodtype to be their favorite foods, please use the favorite_food_fn function
 in the foodaffinity component.
 
-Please refer to postinit/components/foodaffinity for related changes and further documentation 
+Please refer to postinit/components/foodaffinity for related changes and further documentation
 regarding characters' favorite foods.
 
 DoFoodEffects in postinit/components/eater was modified to check for favorite foods.
@@ -30,7 +30,7 @@ AddComponentPostInit("edible", function(self)
     --- @eater: The character eating this food.
     function self:IsFavoriteFood(eater)
         if eater and eater.components.foodaffinity then
-            foodaffinity = eater.components.foodaffinity
+            local foodaffinity = eater.components.foodaffinity
             local prefab = foodaffinity:GetFoodBasePrefab(self.inst)
             local prefab_affinity = foodaffinity:HasPrefabAffinity(self.inst)
             local favorite_foods = foodaffinity.favorite_foods
@@ -45,25 +45,28 @@ AddComponentPostInit("edible", function(self)
         local hungervalue = _GetHunger(self, eater)
         local multiplier = 1
 
-        foodaffinity = eater.components.foodaffinity
-        local found_affinities = {}
+        --temp fix we should probably seee *why* eater is being nil.
+        if eater ~= nil then
+            local foodaffinity = eater.components.foodaffinity
+            local found_affinities = {}
 
-        if foodaffinity.prefab_affinities[self.inst.prefab] ~= nil then
-            table.insert(found_affinities, foodaffinity.prefab_affinities[self.inst.prefab])
-        end
-    
-        local basefood = foodaffinity:GetFoodBasePrefab(self.inst)
-        local prefabaffinity = foodaffinity.prefab_affinities[basefood]
-        if prefabaffinity ~= nil then
-            table.insert(found_affinities, prefabaffinity)
-        end
-
-        if #found_affinities > 0 then
-            if #found_affinities > 1 then
-                -- Sort the found_affinities so we return the biggest bonus
-                table.sort(found_affinities, function(a,b) return a > b end)
+            if foodaffinity.prefab_affinities[self.inst.prefab] ~= nil then
+                table.insert(found_affinities, foodaffinity.prefab_affinities[self.inst.prefab])
             end
-            multiplier = multiplier / found_affinities[1]
+
+            local basefood = foodaffinity:GetFoodBasePrefab(self.inst)
+            local prefabaffinity = foodaffinity.prefab_affinities[basefood]
+            if prefabaffinity ~= nil then
+                table.insert(found_affinities, prefabaffinity)
+            end
+
+            if #found_affinities > 0 then
+                if #found_affinities > 1 then
+                    -- Sort the found_affinities so we return the biggest bonus
+                    table.sort(found_affinities, function(a, b) return a > b end)
+                end
+                multiplier = multiplier / found_affinities[1]
+            end
         end
 
         return hungervalue * multiplier
@@ -79,11 +82,11 @@ AddComponentPostInit("edible", function(self)
         return healthvalue
     end
 
-    function self:GetSanity(eater, ...)--scuffed af but I don't really know how to integrate that with the next GetSanity lmao
+    function self:GetSanity(eater, ...)                       --scuffed af but I don't really know how to integrate that with the next GetSanity lmao
         if eater ~= nil and eater:HasTag("ratwhisperer") then --if winky
-            return self.sanityvalue --return the normal sanity val with no multipliers
+            return self.sanityvalue                           --return the normal sanity val with no multipliers
         else
-            return _GetSanity(self, eater, ...) -- return the vanilla behaviour otherwise
+            return _GetSanity(self, eater, ...)               -- return the vanilla behaviour otherwise
         end
     end
 
