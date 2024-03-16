@@ -16,7 +16,7 @@ env.AddPrefabPostInit("beefalo", function(inst)
 		return
 	end
 	
-	if env.GetModConfigData("wathgrithr_rework") == 1 then
+	if env.GetModConfigData("wathgrithr_rework_") == 1 then
 		inst:ListenForEvent("riderchanged", OnRiderChanged)
 	end
 end)

@@ -221,7 +221,7 @@ TUNING.DSTU = {
     -- Wigfrid
     BATTLESONG_FIRE_RESIST_MOD = 0, -- orig 33% fire resist
     WATHGRITHR_ARSENAL = GetModConfigData("wathgrithr_arsenal"),
-    WATHGRITHR_REWORK =  GetModConfigData("wathgrithr_rework"),
+    WATHGRITHR_REWORK =  GetModConfigData("wathgrithr_rework_"),
     -- Maxwell
     SHADOWWAXWELL_FUEL_COST = 2,
     SHADOWWAXWELL_HEALTH_COST = 15,

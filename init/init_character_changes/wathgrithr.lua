@@ -1,7 +1,7 @@
 local env = env
 GLOBAL.setfenv(1, GLOBAL)
 
-if env.GetModConfigData("wathgrithr_rework") ~= 0 then
+if env.GetModConfigData("wathgrithr_rework_") ~= 0 then
 	env.AddPrefabPostInit("wathgrithr", function(inst)
 		
 		if not TheWorld.ismastersim then
@@ -14,7 +14,7 @@ if env.GetModConfigData("wathgrithr_rework") ~= 0 then
 			inst.components.battleborn:SetBattlebornBonus(0.25 * TUNING.DSTU.WATHGRITHR_BASE_BATTLEBORN_BONUS_MULT)
 		end
 
-		if env.GetModConfigData("wathgrithr_rework") == 1 then inst:AddComponent("efficientuser") end
+		if env.GetModConfigData("wathgrithr_rework_") == 1 then inst:AddComponent("efficientuser") end
 	end)
 end
 
@@ -31,7 +31,7 @@ end
 TUNING.DSTU.WATHGRITHR_BASE_BATTLEBORN_CLAMP_MULT = 0.33 -- This has an effect on small creatures only
 TUNING.DSTU.WATHGRITHR_BASE_BATTLEBORN_BONUS_MULT = 0.66 -- This affects mainly big creatures
 
-if env.GetModConfigData("wathgrithr_rework") == 1 then -- Enabled only
+if env.GetModConfigData("wathgrithr_rework_") == 1 then -- Enabled only
 TUNING.WATHGRITHR_BASE_INSPIRATION_GAIN_MULT = 1 
 
 --------------------------------------------------------------------------

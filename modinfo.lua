@@ -276,7 +276,17 @@ configuration_options = {
         true),
     BinaryConfig("waxwell_nerf", "Maxwell - Nerfs", "Several nerfs to Maxwell to bring him down in power.", true),
     --	BinaryConfig("wolfgang", "Improved/Balanced Wolfgang", "Wolfgang gains new perks and downsides. Read the patch notes included in the mod folder or workshop for details.", false),
-    BinaryConfig("wathgrithr_rework", "Wigfrid - Rework", "Reduced Wigfrids combat leeching, revamped skill tree, added more meaningful alingment choices", true),
+    BinaryConfig("wathgrithr_arsenal", "Wigfrid - Arsenal", "Changed wigfrid's new tools to not have infinite skills.", true),
+    {
+        name = "wathgrithr_rework_",
+        label = "Wigfrid - Rework",
+        hover = "Reduced Wigfrids combat leeching, revamped skill tree, added more meaningful alingment choices.",
+        options = {
+            { description = "Enabled",  data = 1, hover = "All changes enabled." },
+            { description = "Legacy",   data = 2, hover = "Only the leeching nerf. Use with other rework mods." },
+            { description = "Disabled", data = 0, hover = "All changes disabled. Same as vanilla." } },
+        default = 1
+    },
     BinaryConfig("wathgrithr_arsenal", "Wigfrid - Arsenal", "Changed wigfrid's new tools to not have infinite skills.", true),
     BinaryConfig("winonaworker", "Winona - Faster Working",
         "Winona now scales her work/picking efficiency, and tool/weapon durability, off of her hunger level. Drains hunger when taking actions.",
