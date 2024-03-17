@@ -78,13 +78,10 @@ SetSharedLootTable('hound_lightning',
 SetSharedLootTable('hound_magma',
     {
         { 'monstermeat', 1.0 },
-        { 'monstermeat', 1.0 },
         { 'rocks',       1.0 },
         { 'rocks',       1.0 },
-        { 'rocks',       1.0 },
-        --{'deer_fire_circle',   1.0},
-        { 'redgem',      1.0 },
-        { 'redgem',      0.5 },
+        { 'rocks',       0.5 },
+        { 'redgem',      0.3 },
     })
 
 SetSharedLootTable('hound_rne',
@@ -101,7 +98,6 @@ SetSharedLootTable('hound_glacial',
         { 'houndstooth', 1.0 },
         { 'ice',         1.0 },
         { 'ice',         0.5 },
-        --{'deer_ice_circle', 1.0},
         { 'bluegem',     0.3 },
     })
 
