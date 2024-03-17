@@ -70,15 +70,14 @@ SetSharedLootTable('hound_lightning',
     {
         { 'monstermeat', 1.0 },
         { 'houndstooth', 1.0 },
-        { 'goldnugget',  1 },
-        { 'goldnugget',  1 },
-        { 'yellowgem',   0.05 },
+        { 'goldnugget',  1.0 },
+        { 'goldnugget',  0.5 },
     })
 
 SetSharedLootTable('hound_magma',
     {
         { 'monstermeat', 1.0 },
-        { 'rocks',       1.0 },
+        { 'flint',       1.0 },
         { 'rocks',       1.0 },
         { 'rocks',       0.5 },
         { 'redgem',      0.3 },
@@ -104,9 +103,10 @@ SetSharedLootTable('hound_glacial',
 SetSharedLootTable('hound_spore',
     {
         { 'monstermeat',          1.0 },
-        { 'houndstooth',          1.0 },
+        { 'houndstooth',          1.0 },		
         { 'sporecloud_toad',      1.0 },
-        { 'shroom_skin_fragment', 0.25 },
+        { 'shroom_skin_fragment', 0.5 },		
+
     })
 
 local WAKE_TO_FOLLOW_DISTANCE = 8
