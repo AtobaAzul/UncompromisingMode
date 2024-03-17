@@ -91,8 +91,6 @@ TUNING.DSTU.WATHGRITHR_SHIELD_UPGRADE_PARRY_EFFICIENCY = 0.2 -- additive per upg
 TUNING.BATTLEBORN_REPAIR_EQUIPMENT_MULT = 3.5 * 0.4
 end
 
-end
-
 
 --------------------------------------------------------------------------
 -- WEAPON PERKS
