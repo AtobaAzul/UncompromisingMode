@@ -671,7 +671,7 @@ ChangeSortKey("powercell", "winona_battery_high", "CHARACTER", true)
 
 AddRecipe2(
     "winona_upgradekit_electrical",
-    { Ingredient("goldnugget", 6), Ingredient("sewing_tape", 2), Ingredient("trinket_6", 2) },
+    { Ingredient("goldnugget", 6), Ingredient("sewing_tape", 2), Ingredient(GLOBAL.TUNING.DSTU.UPDATE_CHECK and "wagpunk_bits" or "trinket_6", GLOBAL.TUNING.DSTU.UPDATE_CHECK and 6 or 2) },
     TECH.SCIENCE_TWO,
     { builder_tag = "handyperson" },
     { "CHARACTER", "LIGHT" }
