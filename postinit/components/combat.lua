@@ -126,10 +126,11 @@ env.AddComponentPostInit("combat", function(self)
 
     function self:GetAttacked(attacker, damage, weapon, stimuli, spdamage, ...)
         if self.inst:HasTag("take_extra_spdamage") and attacker ~= nil and not attacker:HasTag("player") and attacker.components.health ~= nil and attacker.components.combat ~= nil  then
-            if spdamage ~= nil then
+            --type check to not crash mods that pass spdamage as something other than actual spdamage.
+            if spdamage ~= nil and type(spdamage) == "table" and spdamage.planar ~= nil then
                 spdamage.planar = spdamage.planar + 10
             else
-                spdamage ={planar = 10}
+                spdamage = {planar = 10}
             end
         end
 
