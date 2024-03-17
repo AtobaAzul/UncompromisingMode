@@ -171,7 +171,6 @@ local prefab_post = {
     "boat_pirate",
     "trident", -- for giving the leak a cause.
     "boat_bumpers",
-    "sludge_fueled",
     -- "nightsword",
     "bigshadowtentacle",
     "mast",

@@ -231,5 +231,23 @@ GLOBAL.STRINGS.ACTIONS.START_CHANNELCAST.MOONFALL = "Start Casting"
 
 local _Start_ChannelCastStrFn = GLOBAL.ACTIONS.START_CHANNELCAST.strfn
 GLOBAL.ACTIONS.START_CHANNELCAST.strfn = function(act)
-    return act.invobject and act.invobject:HasTag("moonfallstaff") and "MOONFALL" or _Start_ChannelCastStrFn(act) 
+    return act.invobject and act.invobject:HasTag("moonfallstaff") and "MOONFALL" or _Start_ChannelCastStrFn(act)
 end
+
+
+AddComponentAction("USEITEM", "fuel", function(inst, doer, target, actions)
+    if not (doer.replica.rider ~= nil and doer.replica.rider:IsRiding())
+        or (target.replica.inventoryitem ~= nil and target.replica.inventoryitem:IsGrandOwner(doer)) then
+        if inst.prefab ~= "spoiled_food" and
+            inst:HasTag("quagmire_stewable") and
+            target:HasTag("quagmire_stewer") and
+            target.replica.container ~= nil and
+            target.replica.container:IsOpenedBy(doer) then
+            return
+        end
+
+        if inst:HasTag("SLUDGE_fuel") and (target:HasTag("BURNABLE_fueled") or target:HasTag("CHEMICAL_fueled") or target:HasTag("CAVE_fueled")) then
+            table.insert(actions, inst:GetIsWet() and GLOBAL.ACTIONS.ADDWETFUEL or GLOBAL.ACTIONS.ADDFUEL)
+        end
+    end
+end)
