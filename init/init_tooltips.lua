@@ -81,7 +81,8 @@ STRINGS.UNCOMP_TOOLTIP = {
     WINONA_UPGRADEKIT_ELECTRICAL = "- Upgrades a Miner Hat or Latern to use electricity.\n- Increases max fuel.",
 	CODEX_MANTRA = "- Will spawn Classic Shadows when read.\n- Acts as a Prestihatitator (Tier 1 Magic) when dropped.",
 	PACT_ARMOR_SANITY = "- Creates temporary Night Armor.\n- Disappears when unequipped.",
-	PACT_SWORD_SANITY = "- Creates a temporary Dark Sword.\n- Disappears when unequipped."
+	PACT_SWORD_SANITY = "- Creates a temporary Dark Sword.\n- Disappears when unequipped.",
+    BRINE_BALM = "- Hurts you a little, heals you, over time, a lot.\n- Restores lost maximum health."
 }
 local TOOLTIPS = STRINGS.UNCOMP_TOOLTIP
 
