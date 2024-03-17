@@ -57,7 +57,7 @@ env.AddPrefabPostInit("spear_wathgrithr", function(inst)
         return
     end
 
-    if env.GetModConfigData("wathgrithr_rework") then
+    if env.GetModConfigData("wathgrithr_rework_") then
         inst.ApplySkillsChanges  = ApplySkillsChanges
         inst.RemoveSkillsChanges = RemoveSkillsChanges
     end

@@ -25,9 +25,12 @@ local function OnParry(inst, doer, attacker, damage)
 	-- Parries lose durability
 	
 	local parryMult = 1
+	local skill_level = 2 -- If the rework is disabled it will always use the max value, as it's otherwise unusable
 
-	local skill_level = doer.components.skilltreeupdater:CountSkillTag("parryefficiency")
-
+	if env.GetModConfigData("wathgrithr_rework_") == 1 then 
+		skill_level = doer.components.skilltreeupdater:CountSkillTag("parryefficiency") -- Parryefficiency doesn't exist without the tree
+	end
+		
 	if skill_level > 0 then 
 		parryMult = TUNING.DSTU.WATHGRITHR_SHIELD_BASE_PARRY_EFFICIENCY - (TUNING.DSTU.WATHGRITHR_SHIELD_UPGRADE_PARRY_EFFICIENCY * skill_level)
 	else

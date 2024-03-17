@@ -184,9 +184,9 @@ local ONACTIVATE_FNS = {
         end
 
         if inst.components.battleborn ~= nil then
-			inst.components.battleborn:SetClampMin(0.33 * TUNING.DSTU.WATHGRITHR_SHADOW_BATTLEBORN_MULT)
-			inst.components.battleborn:SetClampMax(2 * TUNING.DSTU.WATHGRITHR_SHADOW_BATTLEBORN_MULT)
-            inst.components.battleborn:SetBattlebornBonus(TUNING.DSTU.WATHGRITHR_SHADOW_BATTLEBORN_MULT)
+			inst.components.battleborn:SetClampMin(0.33 * TUNING.DSTU.WATHGRITHR_SHADOW_BATTLEBORN_CLAMP_MULT)
+			inst.components.battleborn:SetClampMax(2 * TUNING.DSTU.WATHGRITHR_SHADOW_BATTLEBORN_CLAMP_MULT)
+            inst.components.battleborn:SetBattlebornBonus(0.25 * TUNING.DSTU.WATHGRITHR_SHADOW_BATTLEBORN_BONUS_MULT)
 		end
 
         if inst.components.hunger ~= nil then
@@ -224,7 +224,7 @@ local ONACTIVATE_FNS = {
         if inst.components.battleborn ~= nil then
 			--inst.components.battleborn:SetClampMin(0.33 * TUNING.WATHGRITHR_LUNAR_BATTLEBORN_MULT)
 			--inst.components.battleborn:SetClampMax(2 * TUNING.WATHGRITHR_LUNAR_BATTLEBORN_MULT)
-            --inst.components.battleborn:SetBattlebornBonus(TUNING.WATHGRITHR_LUNAR_BATTLEBORN_MULT)
+            --inst.components.battleborn:SetBattlebornBonus(0.25 * TUNING.WATHGRITHR_LUNAR_BATTLEBORN_MULT)
 
             inst.components.battleborn:SetHealthEnabled(false)
             inst.components.battleborn:SetSanityEnabled(false)
@@ -277,9 +277,9 @@ local ONDEACTIVATE_FNS = {
         end
 
         if inst.components.battleborn ~= nil then
-			inst.components.battleborn:SetClampMin(0.33 * TUNING.DSTU.WATHGRITHR_BASE_BATTLEBORN_MULT)
-			inst.components.battleborn:SetClampMax(2 * TUNING.DSTU.WATHGRITHR_BASE_BATTLEBORN_MULT)
-            inst.components.battleborn:SetBattlebornBonus(TUNING.DSTU.WATHGRITHR_BASE_BATTLEBORN_MULT)
+			inst.components.battleborn:SetClampMin(0.33 * TUNING.DSTU.WATHGRITHR_BASE_BATTLEBORN_CLAMP_MULT)
+			inst.components.battleborn:SetClampMax(2 * TUNING.DSTU.WATHGRITHR_BASE_BATTLEBORN_CLAMP_MULT)
+            inst.components.battleborn:SetBattlebornBonus(0.25 * TUNING.DSTU.WATHGRITHR_BASE_BATTLEBORN_BONUS_MULT)
 		end
 
         if inst.components.hunger ~= nil then
@@ -316,9 +316,9 @@ local ONDEACTIVATE_FNS = {
         end
 
         if inst.components.battleborn ~= nil then
-			--inst.components.battleborn:SetClampMin(0.33 * TUNING.DSTU.WATHGRITHR_BASE_BATTLEBORN_MULT)
-			--inst.components.battleborn:SetClampMax(2 * TUNING.DSTU.WATHGRITHR_BASE_BATTLEBORN_MULT)
-            --inst.components.battleborn:SetBattlebornBonus(TUNING.DSTU.WATHGRITHR_BASE_BATTLEBORN_MULT)
+			--inst.components.battleborn:SetClampMin(0.33 * TUNING.DSTU.WATHGRITHR_BASE_BATTLEBORN_CLAMP_MULT)
+			--inst.components.battleborn:SetClampMax(2 * TUNING.DSTU.WATHGRITHR_BASE_BATTLEBORN_CLAMP_MULT)
+            --inst.components.battleborn:SetBattlebornBonus(0.25 * TUNING.DSTU.WATHGRITHR_BASE_BATTLEBORN_BONUS_MULT)
 
             inst.components.battleborn:SetHealthEnabled(true)
             inst.components.battleborn:SetSanityEnabled(true)
