@@ -695,7 +695,7 @@ if GetModConfigData("snowstorms") then
     AddRecipeToFilter("turf_dragonfly", "WINTER")
     ChangeSortKey("turf_dragonfly", "dragonflyfurnace", "WINTER", true)
     AddRecipeToFilter("wall_dreadstone_item", "WINTER")
-    ChangeSortKey("wall_dreadstone_item", "wall_dreadstone_item", "WINTER", true)
+    ChangeSortKey("wall_dreadstone_item", "wall_moonrock_item", "WINTER", true)
 end
 
 AddRecipe2(
