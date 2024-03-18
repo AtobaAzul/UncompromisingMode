@@ -610,7 +610,6 @@ if GetModConfigData("waxwell_nerf") then
         MAX = 2,   --breaks faster with the more attacked a cage is.
     }
 
-    TUNING.WAXWELLJOURNAL_SPELL_COST.SHADOW_PROTECTOR = 0.1 --costs 10%
     TUNING.WAXWELLJOURNAL_SPELL_COST.SHADOW_PILLARS = 0.25 --costs 25%
     TUNING.SHADOWWAXWELL_PROTECTOR_HEALTH_CLAMP_TAKEN = 30 --double min dmg take
 end
