@@ -46,6 +46,7 @@ STRINGS.UNCOMP_TOOLTIP = {
     FIRESUPRESSOR = "- Reacts faster to nearby fires in Emergency Mode.\n- Ignores campfires and firepits.",
     BOAT_CANNON_KIT = "- Increased firepower.\n- Can fire Seedshells.",
     TRIDENT = "- Altered, more powerful spell.\n- More uses and damage.\n- May multi-hit.",
+    COMPASS = "- Now works while on the inventory.\n- Increased durability.",
     BREAK = "BREAK HERE",
     --uncomp content
     RAT_WHIP = "- Stronger when well fed.",

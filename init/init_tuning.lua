@@ -613,3 +613,5 @@ if GetModConfigData("waxwell_nerf") then
     TUNING.WAXWELLJOURNAL_SPELL_COST.SHADOW_PILLARS = 0.25 --costs 25%
     TUNING.SHADOWWAXWELL_PROTECTOR_HEALTH_CLAMP_TAKEN = 30 --double min dmg take
 end
+
+TUNING.COMPASS_FUEL = total_day_time * 10
