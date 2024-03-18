@@ -195,6 +195,7 @@ local prefab_post = {
     "bomb_lunarplant",
     "compostingbin",
     "plantables",
+    "compass",
 }
 
 local stategraph_post = {
