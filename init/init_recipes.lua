@@ -57,9 +57,10 @@ CONSTRUCTION_PLANS["multiplayer_portal_moonrock_constr"] = {
 
 --moving most recipe changes to AllRecipes because of beta. Using AddRecipe adds them to the mod recipe filter
 --while AllRecipes doesn't. Not sure if there's any issues with that.
---skins broke! help!
 
 -- Recipe changes
+AllRecipes["compass"].ingredients = { Ingredient("goldnugget", 4), Ingredient("flint", 2) }
+
 if GetModConfigData("longpig") then
     AllRecipes["reviver"].ingredients = {
         Ingredient("skeletonmeat", 1),
