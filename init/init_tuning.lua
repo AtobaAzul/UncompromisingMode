@@ -614,4 +614,4 @@ if GetModConfigData("waxwell_nerf") then
     TUNING.SHADOWWAXWELL_PROTECTOR_HEALTH_CLAMP_TAKEN = 30 --double min dmg take
 end
 
-TUNING.COMPASS_FUEL = total_day_time * 10
+TUNING.COMPASS_FUEL = total_day_time * 5
