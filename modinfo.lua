@@ -4,7 +4,9 @@ folder_name = folder_name or "workshop-"
 if not folder_name:find("workshop-") then
     name = "[LOCAL] - " .. name
 end
-local _version = "1.4.14.6"
+
+--RELEASE.MAJOR.MINOR.FIX
+local _version = "1.4.15.0"
 description = [[
 󰀔 [ Version: ]] .. _version .. [[ - "Under the Weather Pt.1" ]
 
@@ -20,7 +22,6 @@ Latest update features:
 
 author = "󰀈 The Uncomp Dev Team 󰀈"
 
---RELEASE.MAJOR.MINOR.FIX
 version = "Under the Weather Pt.1 v" .. _version
 
 
