@@ -593,8 +593,19 @@ for k, v in ipairs(extraitems) do
     table.insert(TUNING.EXTRA_STARTING_ITEMS.winter, v)
 end
 
+local um_naughtiness = {
+    fruitbat = 4,
+    woodpecker = 2,
+    snapdragon = 4,
+    snapdragon_buddy = 8,--wtf!!! doin't do that!!
+}
+for k,v in pairs(um_naughtiness) do
+    GLOBAL.NAUGHTY_VALUE[k] = v
+end
+
 -- Kramped buff
 if GetModConfigData("kramped_buff") then
+    GLOBAL.NAUGHTY_VALUE["glommer"] = 100
     TUNING.KRAMPUS_NAUGHTINESS_DECAY_PERIOD = math.huge
 	TUNING.KRAMPUS_THRESHOLD = 60
     TUNING.KRAMPUS_THRESHOLD_VARIANCE = 40
