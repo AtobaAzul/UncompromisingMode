@@ -1,6 +1,6 @@
-local assets = {Asset("ANIM", "anim/snowpile.zip")}
+local assets = { Asset("ANIM", "anim/snowpile.zip") }
 
-local anims = {"low", "med", "full"}
+local anims = { "low", "med", "full" }
 
 local function DoColdMenace(inst)
     local snowattack = SpawnPrefab("snowmong")
@@ -18,7 +18,7 @@ local function TryColdMenace(inst)
         inst:DoColdMenace(inst)
         local x, y, z = inst.Transform:GetWorldPosition()
         if math.random() > 0.3 then -- Have a good chance of spawning buddies with them.
-            local sno = TheSim:FindEntities(x, y, z, 10, {"snowpile"})
+            local sno = TheSim:FindEntities(x, y, z, 10, { "snowpile" })
             local nummongs = math.random(1, 3)
             for i, pile in ipairs(sno) do
                 if nummongs > 0 then
@@ -27,7 +27,7 @@ local function TryColdMenace(inst)
                 end
             end
         end
-        local sno = TheSim:FindEntities(x, y, z, 20, {"snowpile"})
+        local sno = TheSim:FindEntities(x, y, z, 20, { "snowpile" })
         for i, pile in ipairs(sno) do
             pile.mongproof = true
         end
@@ -40,9 +40,9 @@ TUNING.SNOW_REGROW_TIME = 180
 TUNING.SNOW_REGROW_VARIANCE = 60
 TUNING.SNOW_DEPLETE_CHANCE = 0.25
 
-local AURA_EXCLUDE_TAGS = {"noauradamage", "INLIMBO", "notarget", "noattack", "flight", "invisible"}
+local AURA_EXCLUDE_TAGS = { "noauradamage", "INLIMBO", "notarget", "noattack", "flight", "invisible" }
 
-local INVALID_TILES = table.invert({GROUND.SCALE})
+local INVALID_TILES = table.invert({ GROUND.SCALE })
 
 local startregen
 
@@ -64,19 +64,19 @@ local function FindSpreadSpot(inst)
         end
     end
 
-    if #TheSim:FindEntities(x, y, z, 4, {"snowpile"}) > 2 then -- Don't want to be close to a single pile
+    if #TheSim:FindEntities(x, y, z, 4, { "snowpile" }) > 2 then -- Don't want to be close to a single pile
         inst.redo = true
     end
 
-    if #TheSim:FindEntities(x, y, z, 6, {"snowpile"}) > 3 then -- Don't want to clog the piles all in one location either
+    if #TheSim:FindEntities(x, y, z, 6, { "snowpile" }) > 3 then -- Don't want to clog the piles all in one location either
         inst.redo = true
     end
 
-    if #TheSim:FindEntities(x, y, z, 6, {"snowpileblocker"}) > 1 then -- Snowpile blockers
+    if #TheSim:FindEntities(x, y, z, 6, { "snowpileblocker" }) > 1 then -- Snowpile blockers
         inst.redo = true
     end
 
-    if #TheSim:FindEntities(x, y, z, 64, {"snowpile"}) > 48 then -- limit all snowpiles in a big radius
+    if #TheSim:FindEntities(x, y, z, 64, { "snowpile" }) > 48 then -- limit all snowpiles in a big radius
         inst.redo = true
         inst.count = 9
     end
@@ -105,7 +105,7 @@ local function SpreadSno(inst)
             sno.Transform:SetPosition(x, y, z)
             sno:DoTaskInTime(0, function(inst)
                 local x, y, z = inst.Transform:GetWorldPosition()
-                if #TheSim:FindEntities(x, y, z, 2, {"snowpile"}) > 1 then
+                if #TheSim:FindEntities(x, y, z, 2, { "snowpile" }) > 1 then
                     inst:Remove()
                 end
             end)
@@ -119,7 +119,7 @@ local function onregen(inst)
     if my_x ~= nil and my_y ~= nil and my_z ~= nil then
         tile = TheWorld.Map:GetTileAtPoint(my_x, 0, my_z)
     end
-    if TheWorld.state.iswinter and TheWorld.state.issnowing and not (tile ~= nil and INVALID_TILES[tile]) then -- or ents2 ~= nil and #ents2 < 0 then
+    if TheWorld.state.iswinter and not (tile ~= nil and INVALID_TILES[tile]) then -- or ents2 ~= nil and #ents2 < 0 then
         if inst.components.workable.workleft < 3 then
             SpawnPrefab("splash_snow_fx").Transform:SetPosition(my_x, 0, my_z)
             inst.components.workable:SetWorkLeft(inst.components.workable.workleft + 1)
@@ -142,7 +142,7 @@ local function onregen(inst)
     end
 
     local x, y, z = inst.Transform:GetWorldPosition()
-    local plants = TheSim:FindEntities(x, y, z, 1.5, {"farm_plant"})
+    local plants = TheSim:FindEntities(x, y, z, 1.5, { "farm_plant" })
 
     if #plants > 0 then
         for k, v in ipairs(plants) do
@@ -160,31 +160,19 @@ startregen = function(inst, regentime)
     if inst.components.workable.workleft < #anims + 1 then
         -- more to grow
         -- regentime = regentime or (TUNING.SNOW_REGROW_TIME + math.random()*TUNING.SNOW_REGROW_VARIANCE)
+        local snowmult, stormmult = TheWorld.state.issnowing and 0.75 or 1, TheWorld:HasTag("snowstormstart") and 0.25 or 1
+        print(snowmult, stormmult)
+        regentime = (regentime or (TUNING.SNOW_REGROW_TIME + math.random() * TUNING.SNOW_REGROW_VARIANCE)) * snowmult * stormmult
 
-        regentime = regentime or (TUNING.SNOW_REGROW_TIME + math.random() * TUNING.SNOW_REGROW_VARIANCE)
-
-        if TheWorld.state.issnowing or ((TheWorld.net ~= nil and TheWorld.net:HasTag("snowstormstartnet")) or TheWorld:HasTag("snowstormstart")) then
-            regentime = regentime / 2
-        elseif TheWorld.state.iswinter and not TheWorld.state.issnowing and not ((TheWorld.net ~= nil and TheWorld.net:HasTag("snowstormstartnet")) or TheWorld:HasTag("snowstormstart")) then
-            regentime = regentime
-        else
-            regentime = regentime / 2
-        end
 
         if inst.task then
             inst.task:Cancel()
         end
-		
-		inst.task = nil
-		
+
+        inst.task = nil
+
         inst.task = inst:DoTaskInTime(regentime, onregen, "regen")
         inst.targettime = GetTime() + regentime
-        --[[else
-		-- no more to do
-		if inst.task then
-			inst.task:Cancel()
-		end
-		inst.targettime = nil]]
     end
 
     if inst.components.workable.workleft <= 0 or inst.components.pickable.cycles_left <= 0 then
@@ -230,15 +218,15 @@ local function workcallback(inst, worker, workleft)
         inst:Remove()
     end
     if inst.components.workable.workleft <= 0 then
-	inst.components.lootdropper:SpawnLootPrefab("snowball_throwable")
-	if IsSpecialEventActive(SPECIAL_EVENTS.WINTERS_FEAST) then --IT'S INSANE HOW JOLLY AND FESTIVE I AM BRAGHHGGH
-		local more_balls = math.floor(math.random(1.5,4))
-		for i = 1, more_balls do
-			local ball = inst.components.lootdropper:SpawnLootPrefab("snowball_throwable")
-			local strength = math.random(1, 2.25)
-			Launch(ball, inst, strength)
-		end
-	end
+        inst.components.lootdropper:SpawnLootPrefab("snowball_throwable")
+        if IsSpecialEventActive(SPECIAL_EVENTS.WINTERS_FEAST) then --IT'S INSANE HOW JOLLY AND FESTIVE I AM BRAGHHGGH
+            local more_balls = math.floor(math.random(1.5, 4))
+            for i = 1, more_balls do
+                local ball = inst.components.lootdropper:SpawnLootPrefab("snowball_throwable")
+                local strength = math.random(1, 2.25)
+                Launch(ball, inst, strength)
+            end
+        end
         inst:Remove()
     else
         startregen(inst)
@@ -289,29 +277,29 @@ local function TryColdness(v)
     end
 end
 
-local NOTAGS = {"playerghost", "wall"}
+local NOTAGS = { "playerghost", "wall" }
 
 local function DoAreaColdness(inst)
     local x, y, z = inst.Transform:GetWorldPosition()
-	
+
     local ents = TheSim:FindEntities(x, y, z, inst.components.aura.radius, nil, NOTAGS)
-	
+
     for i, v in ipairs(ents) do
-		if v:HasTag("player") then
-			TryColdness(v)
-		elseif v:HasTag("structure") then
-			if inst.components.workable.workleft and inst.components.workable.workleft > 1 then
-				inst:AddTag("snowpile")
+        if v:HasTag("player") then
+            TryColdness(v)
+        elseif v:HasTag("structure") then
+            if inst.components.workable.workleft and inst.components.workable.workleft > 1 then
+                inst:AddTag("snowpile")
 
-				v:AddTag("NOCLICK")
-			else
-				inst:RemoveTag("snowpile")
+                v:AddTag("NOCLICK")
+            else
+                inst:RemoveTag("snowpile")
 
-				if v:HasTag("NOCLICK") then
-					v:RemoveTag("NOCLICK")
-				end
-			end
-		end
+                if v:HasTag("NOCLICK") then
+                    v:RemoveTag("NOCLICK")
+                end
+            end
+        end
     end
 end
 
@@ -384,7 +372,7 @@ local function on_anim_over(inst)
 end
 
 local function Init(inst)
-    if FindEntity(inst, 5, nil, {"snowpileblocker"}) then
+    if FindEntity(inst, 5, nil, { "snowpileblocker" }) then
         if inst.Transform:GetWorldPosition() ~= nil then
             local x, y, z = inst.Transform:GetWorldPosition()
             SpawnPrefab("splash_snow_fx").Transform:SetPosition(x, 0, z)
@@ -393,7 +381,7 @@ local function Init(inst)
     end
 
     local x, y, z = inst.Transform:GetWorldPosition()
-    local plants = TheSim:FindEntities(x, y, z, 1.5, {"farm_plant"})
+    local plants = TheSim:FindEntities(x, y, z, 1.5, { "farm_plant" })
 
     if #plants > 0 then
         for k, v in ipairs(plants) do
@@ -415,16 +403,16 @@ local function OnSeasonChange(inst)
 end
 
 local function onwake(inst)
-	if inst._coldtask == nil then
-		inst._coldtask = inst:DoPeriodicTask(inst.components.aura.tickperiod, DoAreaColdness, inst.components.aura.tickperiod / 2)
-	end
+    if inst._coldtask == nil then
+        inst._coldtask = inst:DoPeriodicTask(inst.components.aura.tickperiod, DoAreaColdness, inst.components.aura.tickperiod / 2)
+    end
 end
 
 local function onsleep(inst)
-	if inst._coldtask ~= nil then
-		inst._coldtask:Cancel()
-		inst._coldtask = nil
-	end
+    if inst._coldtask ~= nil then
+        inst._coldtask:Cancel()
+        inst._coldtask = nil
+    end
 end
 
 
@@ -469,7 +457,7 @@ local function snowpilefn(Sim)
 
     inst:AddComponent("unevenground")
     inst.components.unevenground.radius = 2
-	
+
     ----------------------
     inst:AddComponent("inspectable")
     ----------------------
@@ -503,7 +491,7 @@ local function snowpilefn(Sim)
 
     inst:ListenForEvent("onremove", function()
         local x, y, z = inst.Transform:GetWorldPosition()
-        local inlimbostructures = TheSim:FindEntities(x, y, z, inst.components.aura.radius, {"structure", "NOCLICK"}, {"wall"})
+        local inlimbostructures = TheSim:FindEntities(x, y, z, inst.components.aura.radius, { "structure", "NOCLICK" }, { "wall" })
         for i, v in ipairs(inlimbostructures) do
             v:RemoveTag("NOCLICK")
         end
@@ -514,7 +502,7 @@ local function snowpilefn(Sim)
     startregen(inst)
     inst:DoTaskInTime(0, Init)
     inst.DoColdMenace = DoColdMenace
-	
+
     inst.OnLongUpdate = LongUpdate
     inst.OnSave = onsave
     inst.OnLoad = onload

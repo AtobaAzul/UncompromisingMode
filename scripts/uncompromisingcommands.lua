@@ -1,18 +1,13 @@
 -- toggle snowstorm
 function c_um_snowstorm()
-    if TheWorld:HasTag("snowstormstart") == false and TheWorld.state.iswinter then
-        TheWorld:AddTag("snowstormstart")
-        if TheWorld.net ~= nil then
-            TheWorld.net:AddTag("snowstormstartnet")
+    if TheWorld.components.um_snow_stormspawner ~= nil and TheWorld.state.iswinter then
+        if TheWorld.components.um_snow_stormspawner:ToggleSnowstorm() then
+            print("starting snowstorm...")
+        else
+            print("stopping snowstorm...")
         end
-        print("starting snowstorm...")
-    elseif TheWorld:HasTag("snowstormstart") then
-        TheWorld:RemoveTag("snowstormstart")
-        if TheWorld.net ~= nil then
-            TheWorld.net:RemoveTag("snowstormstartnet")
-        end
-        print("stopping snowstorm...")
     end
+
 end
 
 -- toggles vetcurse
