@@ -495,7 +495,7 @@ DESCRIBE.HOUNDIOUS_OBSERVIOUS = "IT'S ALIVE!"
 
 DESCRIBE.ARMOR_REED_UM = "I'll still be light on my feet with it on."
 DESCRIBE.ARMOR_SHARKSUIT_UM = "It makes me feel like the alpha predator."
-DESCRIBE.ROCKJAWLEATHER = "It's cold and surprinsgly smooth."
+DESCRIBE.ROCKJAWLEATHER = "It's cold and surprisingly smooth."
 
 -- DESCRIBE.UM_SIREN = "Science says we may be able to \"help\" each other."
 -- WHAT THE FUCK VARIANT
