@@ -12,13 +12,7 @@ local function OnUse2(inst, target)
 
     local smog = TheSim:FindEntities(x, y, z, TUNING.FEATHERFAN_RADIUS * 3, { "smog" }, { "INLIMBO" })
     for k, v in pairs(smog) do
-        v:DoPeriodicTask(0.125, function(inst)
-            inst.AnimState:SetMultColour(0.05, 0.05, 0.05, inst.mult)
-            inst.mult = inst.mult - 0.025
-            if inst.mult <= 0 then
-                inst:Remove()
-            end
-        end)
+        v:Remove()
     end
 end
 

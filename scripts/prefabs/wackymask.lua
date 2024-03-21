@@ -384,11 +384,11 @@ local function IsAVersionOfRot(v)
 end
 
 local function TrySpawnIcon(v,intensity)
-	local nearbyicon = FindEntity(v,2,nil,{"ratmask_icon"})
+	local nearbyicon = FindEntity(v,2,nil,{"ratmask_stinklines"})
 	if nearbyicon ~= nil then
 		nearbyicon.Resize(nearbyicon,intensity)
 	else	
-		local icon = SpawnPrefab("ratmask_icon")
+		local icon = SpawnPrefab("ratmask_stinklines")
 		local x,y,z = v.Transform:GetWorldPosition()
 		icon.Transform:SetPosition(x,y,z)
 		icon.Resize(icon,intensity)
@@ -398,26 +398,26 @@ end
 local function FoodScoreCalculations(container,v)
 	if container then
 		if v:HasTag("stale") then
-			TrySpawnIcon(v,1.5)
+			TrySpawnIcon(v,.5)
 		end
 		if v:HasTag("spoiled") then
-			TrySpawnIcon(v,1.75)
+			TrySpawnIcon(v,.75)
 		end
 		if IsAVersionOfRot(v) then
-			TrySpawnIcon(v,2)
+			TrySpawnIcon(v,1)
 		end
 	else
 		if v:HasTag("fresh") then
-			TrySpawnIcon(v,1.5)
+			TrySpawnIcon(v,.5)
 		end
 		if v:HasTag("stale") then
-			TrySpawnIcon(v,1.75)
+			TrySpawnIcon(v,.75)
 		end
 		if v:HasTag("spoiled") then
-			TrySpawnIcon(v,1.8)
+			TrySpawnIcon(v,.8)
 		end
 		if IsAVersionOfRot(v) then
-			TrySpawnIcon(v,2)
+			TrySpawnIcon(v,1)
 		end
 	end
 end
@@ -440,9 +440,9 @@ local function Sniffertime(owner)
 				end
 				if not (v:HasTag("balloon") or v:HasTag("heavy") or v:HasTag("projectile") or v:HasTag("NORATCHECK")) then
 					if (v:HasTag("_equippable") or v:HasTag("gem") or v:HasTag("tool"))  then
-						TrySpawnIcon(v,1.5)
+						TrySpawnIcon(v,.5)
 					elseif v:HasTag("molebait") then
-						TrySpawnIcon(v,1.5)
+						TrySpawnIcon(v,.5)
 					end
 				end
 			end
@@ -987,6 +987,10 @@ local function Icon_Resize(inst,intensity)
 	inst.Transform:SetScale(inst.intensity,inst.intensity,inst.intensity)
 end
 
+local function Icon_Resize_Stink(inst,intensity)
+	inst.Transform:SetScale(intensity, intensity, intensity)
+end
+
 local function ratmask_iconfn()
     local inst = CreateEntity()
     inst.entity:AddTransform()
@@ -1009,6 +1013,44 @@ local function ratmask_iconfn()
 	inst.Resize = Icon_Resize
 	inst.AnimState:PlayAnimation("anim"..math.random(0,2)) 
 	inst:ListenForEvent("animover",function(inst) inst:Remove() end)
+	return inst
+end
+
+local function ratmask_stinkfn()
+    local inst = CreateEntity()
+    inst.entity:AddTransform()
+    inst.entity:AddAnimState()
+    inst.entity:AddNetwork()
+	
+    inst.AnimState:SetBank("fumes_fx")
+    inst.AnimState:SetBuild("fumes_fx")
+     
+	inst:AddTag("INLIMBO")
+	inst:AddTag("ratmask_stinklines")
+	
+    inst.entity:SetPristine()
+	
+    if not TheWorld.ismastersim then
+        return inst
+    end
+	
+	inst.Resize = Icon_Resize_Stink
+	inst.anim_loop = 1
+	inst.anim_loop_rand = math.random(2, 3)
+	
+	inst:DoTaskInTime(math.random(0, .5), function()
+		inst.AnimState:PlayAnimation("fumes")
+	end)
+	
+	inst:ListenForEvent("animover",function(inst)
+		if inst.anim_loop >= inst.anim_loop_rand then
+			inst:Remove() 
+		else
+			inst.anim_loop = inst.anim_loop + 1	
+			inst.AnimState:PlayAnimation("fumes") 
+		end
+	end)
+	
 	return inst
 end
 
@@ -1119,4 +1161,5 @@ return Prefab("hat_bagmask", bagfn, assets),
 		Prefab("hat_opossummask", opossumfn, assets),
 		Prefab("hat_ratmask", ratfn, assets),
 		Prefab("ratring_fx", ratringfn, assets),
-		Prefab("ratmask_icon", ratmask_iconfn, assets)
+		Prefab("ratmask_icon", ratmask_iconfn, assets),
+		Prefab("ratmask_stinklines", ratmask_stinkfn, assets)

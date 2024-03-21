@@ -214,7 +214,7 @@ local function onmiss_return(inst, attacker, target)
 		inst.reel:ListenForEvent("animover", inst.Remove)
 	end
 
-	if target ~= nil then
+	if target ~= nil and target.Transform:GetWorldPosition() ~= nil then
 		local x, y, z = target.Transform:GetWorldPosition()
 		local magnerang = SpawnPrefab("um_magnerang")
 		if inst.uses and magnerang.components.finiteuses then
@@ -225,7 +225,7 @@ local function onmiss_return(inst, attacker, target)
 		end
 		magnerang.Transform:SetPosition(x, 1.5, z)
 		magnerang.target = target
-	elseif attacker ~= nil then
+	elseif attacker ~= nil and attacker.Transform:GetWorldPosition() then
 		local x, y, z = attacker.Transform:GetWorldPosition()
 		local magnerang = SpawnPrefab("um_magnerang")
 		if inst.uses and magnerang.components.finiteuses then

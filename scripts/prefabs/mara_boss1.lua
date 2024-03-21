@@ -33,7 +33,7 @@ local function BoneZone(inst)
 		--if math.random() > 0.05 then
 			bulletspawn.Transform:SetPosition(inst.Transform:GetWorldPosition())
 		--else
-			-- print ("SSSAAAAAN: IMA FIRIN MAH")
+			--
 			-- codegoesherelol codegoesherelol codegoesherelol
 			-- Gaster Blaster makes a good graphical beam stretching test. Also test for dealing damage in a line.
 			-- Needed for Moonseer phase 2 dash attack; I'll have to do most of the work for this anyway, might as well.

@@ -9,10 +9,10 @@ GLOBAL.setfenv(1, GLOBAL)
 
 function TestForIA()
     if TheWorld ~= nil and (TheWorld:HasTag("island") or TheWorld:HasTag("volcano")) then
-        print("TestForIA: is IA world!")
+       
         return true
     else
-        print("TestForIA: not IA world!")
+       
         return false
     end
 end

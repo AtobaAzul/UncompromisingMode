@@ -133,9 +133,9 @@ env.AddPrefabPostInit("toadstool", function(inst)
     inst.components.healthtrigger:AddTrigger(PHASE2_HEALTH, EnterPhase2Trigger)
     inst.components.healthtrigger:AddTrigger(PHASE3_HEALTH, EnterPhase3Trigger)
 	
-	if inst.components.health ~= nil then
-		inst.components.health:SetMaxHealth(TUNING.DSTU.TOADSTOOL_HEALTH)
-	end
+	--if inst.components.health ~= nil then
+		--inst.components.health:SetMaxHealth(TUNING.DSTU.TOADSTOOL_HEALTH)
+	--end
 	
 	if inst.components.lootdropper ~= nil then
 		inst.components.lootdropper:SetChanceLootTable("toadystool")

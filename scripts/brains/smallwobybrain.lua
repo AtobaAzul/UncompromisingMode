@@ -4,6 +4,7 @@ require "behaviours/faceentity"
 require "behaviours/panic"
 require "behaviours/doaction"
 require "behaviours/jukeandjive"
+require "behaviours/wobydance"
 
 local TARGET_FOLLOW_DIST = 4
 local MAX_FOLLOW_DIST = 4.5
@@ -264,6 +265,11 @@ local function ShouldWobyRun(inst)
 		inst:IsNear(inst.components.follower.leader, 25)
 end
 
+local function ShouldDanceParty(inst)
+    local leader = inst.components.follower.leader
+    return leader ~= nil and leader.sg:HasStateTag("dancing")
+end
+
 -------------------------------------------------------------------------------
 --  Brain
 
@@ -300,6 +306,11 @@ function SmallWobyBrain:OnStart()
 				WhileNode( function() return HasSitTarget(self.inst) end, "Has Target",
 					DoAction(self.inst, GoSitAction, nil, true )
 				),
+				
+				WhileNode(function() return ShouldDanceParty(self.inst) end, "Dance Party",
+					PriorityNode({
+						WobyDance(self.inst),
+				}, .25)),
 				
                 WhileNode(function() return FindPlaymate(self) end, "Playful",
                     SequenceNode{

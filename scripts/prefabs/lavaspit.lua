@@ -5,7 +5,7 @@ local assets =
 
 local easing = require("easing")
 
-local AURA_EXCLUDE_TAGS = { "player", "playerghost", "companion", "ghost", "shadow", "shadowminion", "noauradamage",
+local AURA_EXCLUDE_TAGS = { "playerghost", "companion", "ghost", "shadow", "shadowminion", "noauradamage",
     "INLIMBO", "notarget", "noattack", "flight", "flying", "dragonfly", "lavae", "invisible", "rabbit", "bird" }
 
 local AURA_EXCLUDE_TAGS_DRAGONFLY = { "playerghost", "ghost", "shadow", "shadowminion", "noauradamage", "INLIMBO",
@@ -36,34 +36,47 @@ end
 
 local function TrySlowdown(inst, target)
     local debuffkey = inst.prefab
+    if inst.prefab ~= "lavaspit_slobber" then
+        if (not target:HasTag("player") or target == inst.lobber) and target.components.locomotor ~= nil then
+            if target._lavavomit_speedmulttask ~= nil then
+                target._lavavomit_speedmulttask:Cancel()
+            end
+            target._lavavomit_speedmulttask = target:DoTaskInTime(0.6,
+                function(i)
+                    i.components.locomotor:RemoveExternalSpeedMultiplier(i, debuffkey)
+                    i._lavavomit_speedmulttask = nil
+                end)
 
-    if not target:HasTag("player") and target.components.locomotor ~= nil then
-        if target._lavavomit_speedmulttask ~= nil then
-            target._lavavomit_speedmulttask:Cancel()
+            target.components.locomotor:SetExternalSpeedMultiplier(target, debuffkey, 0.5)
         end
-        target._lavavomit_speedmulttask = target:DoTaskInTime(0.6,
-            function(i) i.components.locomotor:RemoveExternalSpeedMultiplier(i, debuffkey) i._lavavomit_speedmulttask = nil end)
-
-        target.components.locomotor:SetExternalSpeedMultiplier(target, debuffkey, 0.5)
     end
 
-    if (inst.prefab ~= "lavaspit_slobber" and inst.components.propagator ~= nil or inst.prefab == "lavaspit_slobber") and target.components.combat ~= nil and target.components.health ~= nil and
-        not target:HasTag("dragonfly") and not target:HasTag("lavae") then
+    if (not target:HasTag("player") or target == inst.lobber) and (inst.prefab ~= "lavaspit_slobber" and inst.components.propagator ~= nil or inst.prefab == "lavaspit_slobber") and target.components.combat ~= nil and target.components.health ~= nil and
+        not target:HasTag("dragonfly") and not target:HasTag("lavae") and target.components.burnable ~= nil then
+
         target.components.health:DoFireDamage(inst.prefab == "lavaspit_slobber" and 6 or 4, inst.lobber, true)
+        if target.components.freezable ~= nil then
+            if target.components.freezable:IsFrozen() then
+                target.components.freezable:Unfreeze()
+            elseif target.components.freezable.coldness > 0 then
+                target.components.freezable:AddColdness(-2)
+            end
+        end
+
 
         target:PushEvent("onignite")
 
         if inst.lobber ~= nil then
             target.components.combat:SuggestTarget(inst.lobber)
+            if target.components.combat.onhitfn ~= nil then
+                target.components.combat.onhitfn(target, inst.lobber, 0, 0) --fences don't really take damage to break, onhit they get hammered, normal walls update their visuals onhit.
+            end
         end
 
         SpawnPrefab("halloween_firepuff_1").Transform:SetPosition(target.Transform:GetWorldPosition())
-		
-		--especial case handling for walls.
+        --especial case handling for walls.
         if target:HasTag("wall") and target.components.combat.onhitfn ~= nil then
             target.components.health:DoDelta(inst.prefab == "lavaspit_slobber" and -6 or -4)
-
-            target.components.combat.onhitfn(target, inst.lobber, 0, 0) --fences don't really take damage to break, onhit they get hammered, normal walls update their visuals onhit.
         end
     end
 end
@@ -85,8 +98,8 @@ local function DoAreaSlow(inst)
             end
         end
     end
-	
-	local walls = TheSim:FindEntities(x, y, z, inst.components.aura.radius, { "wall" }, { "INLIMBO", "_inventoryitem" })
+
+    local walls = TheSim:FindEntities(x, y, z, inst.components.aura.radius, { "wall" }, { "INLIMBO", "_inventoryitem" })
 
     for i, v in ipairs(walls) do
         if v.components ~= nil then
@@ -124,8 +137,8 @@ local function fn(Sim) --Sim
     inst.AnimState:SetBloomEffectHandle("shaders/anim.ksh")
 
     inst.Transform:SetScale(1.1, 1.1, 1.1)
-	
-	inst:AddTag("scarytoprey")
+
+    inst:AddTag("scarytoprey")
 
     inst.entity:SetPristine()
     --[[]]
@@ -161,8 +174,11 @@ local function fn(Sim) --Sim
             inst:AddComponent("colourtweener")
         end
 
-        inst.cooltask3 = inst:DoTaskInTime(4, function(inst)
+        inst.cooltask3 = inst:DoTaskInTime(1, function(inst)
             inst:RemoveComponent("unevenground")
+            if inst._spoiltask ~= nil then
+                inst._spoiltask:Cancel()
+            end
             inst._spoiltask = nil
         end)
 
@@ -172,9 +188,9 @@ local function fn(Sim) --Sim
 
     --[[inst:ListenForEvent("animqueueover", function(inst)
    		inst.AnimState:SetPercent("cool", 1)
-        if inst.components.propagator then 
+        if inst.components.propagator then
             inst.components.propagator:StopSpreading()
-            inst:RemoveComponent("propagator") 
+            inst:RemoveComponent("propagator")
         end
         inst.cooled = true
         inst:AddComponent("colourtweener")
@@ -219,13 +235,52 @@ local function slobberfn()
 
     inst.lobber = nil
 
-    inst.coolingtime = 8
+    inst.coolingtime = 15
+
+    inst.cooltask:Cancel()
+    inst.cooltask2:Cancel()
+    inst._spoiltask:Cancel()
+
+    inst.cooltask = inst:DoTaskInTime(inst.coolingtime, function(inst)
+        inst.AnimState:PushAnimation("cool", false)
+        fade_out(inst)
+        inst:DoTaskInTime(4 * FRAMES, function(inst)
+            inst.AnimState:ClearBloomEffectHandle()
+        end)
+    end)
+
+    inst.cooltask2 = inst:DoTaskInTime(inst.coolingtime, function(inst)
+        inst.AnimState:SetPercent("cool", 1)
+        if inst.components.propagator then
+            inst.components.propagator:StopSpreading()
+            inst:RemoveComponent("propagator")
+        end
+        inst.cooled = true
+
+        if not inst.components.colortweener then
+            inst:AddComponent("colourtweener")
+        end
+
+        inst.cooltask3 = inst:DoTaskInTime(1, function(inst)
+            inst:RemoveComponent("unevenground")
+            if inst._spoiltask ~= nil then
+                inst._spoiltask:Cancel()
+            end
+            inst._spoiltask = nil
+        end)
+
+
+        inst.components.colourtweener:StartTween({ 0, 0, 0, 0 }, 7, function(inst) inst:Remove() end)
+    end)
+
+    inst._spoiltask = inst:DoPeriodicTask(inst.components.aura.tickperiod, DoAreaSlow,
+        inst.components.aura.tickperiod * .5)
+
 
     return inst
 end
 
 local function LaunchMore(inst, xpos, zpos, sound)
-
     if sound then
         inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/dragonfly/vomit")
     end
@@ -234,7 +289,7 @@ local function LaunchMore(inst, xpos, zpos, sound)
     local targetpos = inst:GetPosition()
 
     local projectile = SpawnPrefab("lavaspit_projectile")
-    projectile.coolingtime = 5
+    projectile.coolingtime = 15
     projectile.Transform:SetPosition(x, y, z)
     projectile.LaunchMorePhys = true
     projectile.lobber = inst.lobber
@@ -257,27 +312,26 @@ local function LaunchMore(inst, xpos, zpos, sound)
 end
 
 local function OnHitInk(inst, attacker, target)
-	if inst.nomorespawns == nil then
-		local x, y, z = inst.Transform:GetWorldPosition()
-		local lavaspit = SpawnPrefab("lavaspit_slobber")
+    if inst.nomorespawns == nil then
+        local x, y, z = inst.Transform:GetWorldPosition()
+        local lavaspit = SpawnPrefab("lavaspit_slobber")
 
-		lavaspit.Transform:SetPosition(x, 0, z)
-		lavaspit.lobber = inst.lobber
+        lavaspit.Transform:SetPosition(x, 0, z)
+        lavaspit.lobber = inst.lobber
+        lavaspit.coolingtime = 15
 
+        if inst.LaunchMoreSpit then
+            LaunchMore(inst, -2.5, 0, true)
+            LaunchMore(inst, 2.5, -2.5)
+            LaunchMore(inst, 2.5, 2.5)
+        else
+            inst.SoundEmitter:PlaySound("dontstarve/common/fireAddFuel")
+        end
 
-		if inst.LaunchMoreSpit then
-			LaunchMore(inst, -2.5, 0, true)
-			LaunchMore(inst, 2.5, -2.5)
-			LaunchMore(inst, 2.5, 2.5)
-		else
-			inst.SoundEmitter:PlaySound("dontstarve/common/fireAddFuel")
+        inst.nomorespawns = true
 
-		end
-
-		inst.nomorespawns = true
-
-		inst:DoTaskInTime(0, inst.Remove)
-	end
+        inst:DoTaskInTime(0, inst.Remove)
+    end
 end
 
 local function oncollide(inst, other)
@@ -343,7 +397,7 @@ local function projectilefn()
     inst.lobber = nil
     inst.LaunchMoreSpit = false
     inst.LaunchMorePhys = false
-	inst.nomorespawns = nil
+    inst.nomorespawns = nil
 
     inst:AddComponent("complexprojectile")
     inst.components.complexprojectile:SetHorizontalSpeed(15)

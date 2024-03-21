@@ -200,9 +200,12 @@ local states =
 						
 						if inst.disguisetarget ~= nil then
 							local x1, y1, z1 = inst.disguisetarget.Transform:GetWorldPosition()
-							x = x1
-							y = y1
-							z = z1
+							
+							if x1 ~= nil then
+								x = x1
+								y = y1
+								z = z1
+							end
 						end
 						
 						local offset = 25
@@ -234,6 +237,8 @@ local states =
             inst.components.locomotor:StopMoving()
             inst.Physics:Stop()
 			inst:Disguise()
+			
+			inst:AddTag("notarget")
         end,
 
         events =
@@ -242,6 +247,7 @@ local states =
         },
 
         onexit = function(inst)
+			inst:RemoveTag("notarget")
 			inst.isdisguised = false
 			inst.components.health:SetInvincible(false)
         end,

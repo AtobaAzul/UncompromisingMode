@@ -112,7 +112,7 @@ env.AddComponentPostInit("pickable", function(self)
 	end
 
 	function self:Pick(picker)
-		if picker ~= nil and picker.components.container ~= nil then
+		if picker ~= nil and picker.components.container ~= nil and picker:HasTag("customwobytag") then
 			if self.canbepicked and self.caninteractwith then
 			
 				local loot = nil

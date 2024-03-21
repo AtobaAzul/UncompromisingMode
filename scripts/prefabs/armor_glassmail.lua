@@ -79,7 +79,7 @@ local function UpdateGlass(inst,data)
             inst.armormeleehits = 0
         end
         inst.armormeleehits = inst.armormeleehits + 1
-        if inst.armormeleehits >= 2 and NoCrystalsLeftToSpawn(inst) == false then
+        if inst.armormeleehits >= 3 and NoCrystalsLeftToSpawn(inst) == false then
             TryAddCrystal(inst)
             inst.armormeleehits = 0
         end

@@ -129,7 +129,7 @@ function MoonMaw_DragonflyBrain:OnStart()
             WhileNode(function() return ShouldFollowFn(self.inst) end, "Follow To Base",
                 PriorityNode(
                 {   --[[We want the dragonfly to follow the player]]
-                    Follow(self.inst, function() return self.inst:GetNearestPlayer(true) end, 0, 15, 20)
+                    Follow(self.inst, function() return self.inst:GetNearestPlayer(true) end, 0, 20, 25)
 					--Follow(self.inst, function() return  GetPlayer() end, 0, 15, 20)
                 })),
             Wander(self.inst, function() return self.inst:GetPosition() end, 5),

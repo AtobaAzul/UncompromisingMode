@@ -158,7 +158,7 @@ local function Sinkholes(inst)
 						local fx1 = SpawnPrefab("antlion_sinkhole_boat")
 						fx1.Transform:SetPosition(dx, dy, dz)
 					elseif ground and not boat then
-						local fx1 = SpawnPrefab("bearger_sinkhole")
+						local fx1 = SpawnPrefab("um_bearger_sinkhole")
 						fx1.Transform:SetPosition(dx, dy, dz)
 						fx1:PushEvent("startcollapse")
 						fx1.bearger = inst

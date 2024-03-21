@@ -7,6 +7,8 @@ env.AddPrefabPostInit("world", function(inst)
         return
     end
 
+    inst:AddComponent("garbagepatch_manager")
+
     local count_skull, count_winky, items_skull, items_winky = 0, 0
     inst:DoTaskInTime(0, function()
 

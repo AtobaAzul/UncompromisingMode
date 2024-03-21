@@ -411,6 +411,20 @@ if TUNING.DSTU.WICKER_INV_REGEN == "inv" then
     end)
 end
 
+PROTOTYPER_DEFS.wickerbottom = { icon_atlas = "images/crafting_menu_avatars.xml", icon_image = "avatar_wickerbottom.tex", action_str = "WICKERBOTTOM", is_crafting_station = false }
+STRINGS.ACTIONS.OPEN_CRAFTING.WICKERBOTTOM = "Learn with"
+
+env.AddPrefabPostInit("wickerbottom", function(inst)
+    inst:AddTag("prototyper")
+
+    if not TheWorld.ismastersim then
+        return
+    end
+    inst:AddComponent("prototyper")
+    inst.components.prototyper.trees = TUNING.PROTOTYPER_TREES.SCIENCEMACHINE
+    inst.components.prototyper.restrictedtag = "notwickerbottom"
+end)
+
 if TUNING.DSTU.WICKER_INV_REGEN ~= "vanilla" then
     env.AddPrefabPostInit("bookstation", function(inst)
         if not TheWorld.ismastersim then return end
@@ -468,5 +482,12 @@ env.AddPrefabPostInit("book_rain", function(inst)
         if _OnRead ~= nil then
             return _OnRead(inst, reader)
         end
+    end
+end)
+
+
+env.AddPlayerPostInit(function (inst)
+    if inst.prefab ~= "wickerbottom" then
+        inst:AddTag("notwickerbottom")
     end
 end)

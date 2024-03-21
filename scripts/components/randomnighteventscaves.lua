@@ -441,7 +441,8 @@ local function SpawnShadowBoomer(player)
 				ent.Physics:CollidesWith(COLLISION.CHARACTERS)
 				ent.Physics:SetCollisionCallback(OnCollide)
 				ent:AddTag("soulless")
-				
+                ent:AddTag("noember")
+
 				ent:WatchWorldState("isday", function() 
 					ent.components.health:Kill()
 				end)

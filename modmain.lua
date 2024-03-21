@@ -125,7 +125,7 @@ AddShardModRPCHandler("UncompromisingSurvival", "Hayfever_Stop", function() GLOB
 AddShardModRPCHandler("UncompromisingSurvival", "Hayfever_Start", function(...) GLOBAL.TheWorld:PushEvent("beequeenrespawned") end)
 
 local function WathomMusicToggle(level)
-    if level ~= nil then
+    if level ~= nil and GetModConfigData("um_music", true) then
         GLOBAL.TheWorld:PushEvent("enabledynamicmusic", false)
         GLOBAL.TheWorld.wathom_enabledynamicmusic = false
         if not GLOBAL.TheFocalPoint.SoundEmitter:PlayingSound("wathommusic") then
@@ -282,8 +282,8 @@ AddShardModRPCHandler("UncompromisingSurvival", "DeerclopsStored_caves", functio
 end)
 
 AddShardModRPCHandler("UncompromisingSurvival", "CaveTornado", function(def, x, z, wise, dest_can_move)
-    if not GLOBAL.TheWorld.ismastershard then
-        GLOBAL.TheWorld:PushEvent("spawncavetornado", {xdata = x, zdata = z, wisedata = wise, dest_can_movedata = dest_can_move})
+    if GLOBAL.TheWorld ~= nil and GLOBAL.TheWorld:HasTag("cave") then
+        GLOBAL.TheWorld:PushEvent("spawncavetornado", { xdata = x, zdata = z, wisedata = wise, dest_can_movedata = dest_can_move })
     end
 end)
 

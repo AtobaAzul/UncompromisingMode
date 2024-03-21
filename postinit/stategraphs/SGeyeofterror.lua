@@ -145,8 +145,8 @@ local function ShootProjectile(inst, target)
 		local targetpos = finaltarget:GetPosition()
 		targetpos.x = targetpos.x + math.random(-1,1)
 		targetpos.z = targetpos.z + math.random(-1,1)
-		local dx = a - x
-		local dz = c - z
+		local dx = (a ~= nil and a or targetpos.x) - x
+		local dz = (c ~= nil and c or targetpos.z) - z
 		local rangesq = dx * dx + dz * dz
 		local maxrange = 20
 		local bigNum = 15

@@ -32,20 +32,22 @@ end
 local function onunequip(inst, owner)
     owner.AnimState:ClearOverrideSymbol("swap_body")
     inst:RemoveEventCallback("blocked", OnBlocked, owner)
-    if inst.prefab == "armor_crab_maxhp" and owner.components.health ~= nil and owner:HasTag("player") then
-        owner:DoTaskInTime(0, function()
-            local current_health_percent = owner.components.health:GetPercent()
 
-            owner.components.health.maxhealth = owner.components.health.maxhealth - 150
+    inst:DoTaskInTime(0, function(inst) --delay by a frame because health replica might be missing!
+        if inst.prefab == "armor_crab_maxhp" and owner.components.health ~= nil and owner:HasTag("player") then
+            owner:DoTaskInTime(0, function()
+                local current_health_percent = owner.components.health:GetPercent()
 
-            owner.components.health:SetPercent(current_health_percent)
+                owner.components.health.maxhealth = owner.components.health.maxhealth - 150
 
-            -- We want to force a badge pulse, but also maintain the health percent as much as we can.
-            local badgedelta     = -0.01
-            owner.components.health:DoDelta(badgedelta, false, nil, true)
-        end)
-    end
+                owner.components.health:SetPercent(current_health_percent)
 
+                -- We want to force a badge pulse, but also maintain the health percent as much as we can.
+                local badgedelta = -0.01
+                owner.components.health:DoDelta(badgedelta, false, nil, true)
+            end)
+        end
+    end)
 end
 
 local function common_fn(type)
@@ -84,7 +86,7 @@ local function common_fn(type)
 
     if type == "armor_crab_regen" then
         inst:DoPeriodicTask(1, function()
-            inst.components.armor:SetPercent(inst.components.armor:GetPercent()+0.005)
+            inst.components.armor:SetPercent(inst.components.armor:GetPercent() + 0.005)
         end)
     end
 

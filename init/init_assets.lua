@@ -218,7 +218,21 @@ local inventoryitems =
 	"um_smolder_spore",
 	"um_armor_pyre_nettles",
 	"um_blowdart_pyre",
-
+	
+	-- Mutation Extrapolation
+	"um_staff_meteor",
+	
+	-- Records
+	
+	"um_record_menu",
+	"um_record_walter",
+	"um_record_wixie",
+	"um_record_shadow_wixie",
+	"um_record_hooded_widow",
+	"um_record_wathom",
+	"um_record_stranger",
+	"um_record_winky",
+	
 	--Wixie related inventory icons
 
 	"slingshot_gnasher",
@@ -237,6 +251,7 @@ local inventoryitems =
 	"slingshotammo_slime",
 	"slingshotammo_lazy",
 	"slingshotammo_shadow",
+	"slingshotammo_flare",
 	"bagofmarbles",
 
 	"placeholder_ingredient_ia",
@@ -357,6 +372,9 @@ Assets = {
 	-- WATHOM!!!
 	Asset("ANIM", "anim/vvathom_run.zip"),
 	Asset("ANIM", "anim/ampbadge.zip"),
+
+	Asset("IMAGE", "images/colour_cubes/bat_vision_on_cc.tex"),
+	--Asset("ATLAS", "images/colour_cubes/hamlet_colour_cubes_import.xml"),
 
 	Asset("IMAGE", "images/saveslot_portraits/wathom.tex"),
 	Asset("ATLAS", "images/saveslot_portraits/wathom.xml"),
@@ -490,10 +508,13 @@ Assets = {
 	Asset("ATLAS", "images/inventoryimages/slingshotammo_lazy.xml"),
 	Asset("IMAGE", "images/inventoryimages/slingshotammo_shadow.tex"),
 	Asset("ATLAS", "images/inventoryimages/slingshotammo_shadow.xml"),
+	Asset("IMAGE", "images/inventoryimages/slingshotammo_flare.tex"),
+	Asset("ATLAS", "images/inventoryimages/slingshotammo_flare.xml"),
 	Asset("IMAGE", "images/inventoryimages/placeholder_ingredient_ia.tex"),
 	Asset("ATLAS", "images/inventoryimages/placeholder_ingredient_ia.xml"),
 	Asset("IMAGE", "images/inventoryimages/placeholder_ingredient_ia_um.tex"),
 	Asset("ATLAS", "images/inventoryimages/placeholder_ingredient_ia_um.xml"),
+	
 	Asset("IMAGE", "images/inventoryimages/meatrack_hat.tex"),
 	Asset("ATLAS", "images/inventoryimages/meatrack_hat.xml"),
 	Asset("IMAGE", "images/inventoryimages/meatrack_hat_batnose.tex"),
@@ -593,8 +614,6 @@ Assets = {
 
 	Asset("ANIM", "anim/um_minotaur_actions.zip"),
 
-	Asset("ANIM", "anim/haul_pigman.zip"),
-
 	Asset("ANIM", "anim/wackycocoons.zip"),
 	Asset("ANIM", "anim/wackycocoonsmall.zip"), --Had to seperate into second build, too big for a single build
 
@@ -613,7 +632,8 @@ Assets = {
 	Asset("ANIM", "anim/deerclops_mutation_anims.zip"),
 	Asset("ANIM", "anim/deerclops_barrier.zip"),
 	Asset("ANIM", "anim/laserclops_anims.zip"),
-
+	Asset("ANIM", "anim/deerclops_build_old.zip"), --Until I fix the anims, this'll be the solution (AXE)
+	
 	Asset("ANIM", "anim/nymph.zip"),
 
 	Asset("ANIM", "anim/carnival_host_death.zip"),
@@ -679,7 +699,7 @@ Assets = {
 
 	Asset("ANIM", "anim/widow1.zip"),
 	Asset("ANIM", "anim/widow2.zip"),
-
+	
 	Asset("ANIM", "anim/sheeplet.zip"),
 	Asset("ANIM", "anim/sheepletbomb.zip"),
 
@@ -776,8 +796,9 @@ Assets = {
 	--Asset("ANIM", "anim/yuleclops_actions_UM.zip"),
 	Asset("ANIM", "anim/deerclops_laser_hit_sparks_fx_blue.zip"),
 	Asset("ANIM", "anim/bearger_rockthrow.zip"),
+	Asset("ANIM", "anim/bearger_build_old.zip"),
 
-
+    Asset("ANIM", "anim/sea_shadow.zip"),
 
 	--MISC.
 	Asset("ANIM", "anim/sludgestack_short.zip"),
@@ -919,10 +940,10 @@ Assets = {
 	Asset("ANIM", "anim/air_conditioner_cloud.zip"),
 
 	Asset("ANIM", "anim/veteranshrine.zip"),
+	
+	Asset("ANIM", "anim/um_records.zip"),
 
 	Asset("ANIM", "anim/walrus_house_summer.zip"),
-
-	Asset("ANIM", "anim/phonograph.zip"),
 
 	Asset("ANIM", "anim/critterlab_broken.zip"),
 
@@ -977,6 +998,25 @@ Assets = {
 	Asset("ATLAS", "images/fx5.xml"),
 	Asset("IMAGE", "images/fx5.tex"),
 
+	--RECORDS
+	
+	Asset("ATLAS", "images/inventoryimages/um_record_menu.xml"),
+	Asset("IMAGE", "images/inventoryimages/um_record_menu.tex"),
+	Asset("ATLAS", "images/inventoryimages/um_record_walter.xml"),
+	Asset("IMAGE", "images/inventoryimages/um_record_walter.tex"),
+	Asset("ATLAS", "images/inventoryimages/um_record_wixie.xml"),
+	Asset("IMAGE", "images/inventoryimages/um_record_wixie.tex"),
+	Asset("ATLAS", "images/inventoryimages/um_record_shadow_wixie.xml"),
+	Asset("IMAGE", "images/inventoryimages/um_record_shadow_wixie.tex"),
+	Asset("ATLAS", "images/inventoryimages/um_record_hooded_widow.xml"),
+	Asset("IMAGE", "images/inventoryimages/um_record_hooded_widow.tex"),
+	Asset("ATLAS", "images/inventoryimages/um_record_wathom.xml"),
+	Asset("IMAGE", "images/inventoryimages/um_record_wathom.tex"),
+	Asset("ATLAS", "images/inventoryimages/um_record_stranger.xml"),
+	Asset("IMAGE", "images/inventoryimages/um_record_stranger.tex"),
+	Asset("ATLAS", "images/inventoryimages/um_record_winky.xml"),
+	Asset("IMAGE", "images/inventoryimages/um_record_winky.tex"),
+
 	--
 	Asset("ATLAS", "images/wixiepiano_whitekey.xml"),
 	Asset("IMAGE", "images/wixiepiano_whitekey.tex"),
@@ -1011,6 +1051,11 @@ Assets = {
 	Asset("ANIM", "anim/um_armor_pyre_nettles.zip"), -- This file is both a swap and a floor item. Hell if I know where to put it...so it's here!
 	Asset("ANIM", "anim/um_blowdart_pyre.zip"),
 	Asset("ANIM", "anim/swap_blowdart.zip"), -- Same here. Naming convention is vanilla, blame Mr. Kelly Entertainment.
+	
+	-- Mutation Extrapolation
+	Asset("ANIM", "anim/umdebuff_moonburn_fx.zip"),
+	Asset("ANIM", "anim/um_staff_meteor.zip"),
+	Asset("ANIM", "anim/um_pathfinderpulse.zip"),
 
 
 
@@ -1102,7 +1147,8 @@ Assets = {
 	Asset("ANIM", "anim/hat_opossummask.zip"),
 
 	Asset("ANIM", "anim/hat_ratmask.zip"),
-
+	Asset("ANIM", "anim/fumes_fx.zip"),
+	
 	Asset("ANIM", "anim/um_beegun.zip"),
 
 	Asset("ANIM", "anim/boat_bumper_sludge.zip"),
@@ -1143,7 +1189,6 @@ Assets = {
 	Asset("ANIM", "anim/blueberry.zip"),
 
 	Asset("ANIM", "anim/widowsgrasp.zip"),
-
 	Asset("ANIM", "anim/hat_widowshead.zip"),
 
 	Asset("ANIM", "anim/greenfoliage.zip"),
@@ -1239,7 +1284,7 @@ Assets = {
 	Asset("ANIM", "anim/winona_portables.zip"),
 
 	--INVENTORY ITEMS [IMAGES & ATLAS]
-
+	
 	Asset("ATLAS", "images/inventoryimages/hat_crab.xml"),
 	Asset("IMAGE", "images/inventoryimages/hat_crab.tex"),
 
@@ -1584,12 +1629,14 @@ Assets = {
 	--ASSET("ATLAS_BUILD", "images/inventoryimages/mastupgrade_windturbine_item.xml"),
 	Asset("ATLAS", "images/inventoryimages/mastupgrade_windturbine_item.xml"),
 	Asset("IMAGE", "images/inventoryimages/mastupgrade_windturbine_item.tex"),
+	
 	Asset("IMAGE", "images/inventoryimages/cursed_antler.tex"),
 	--ASSET("ATLAS_BUILD", "images/inventoryimages/cursed_antler.xml"),
 	Asset("ATLAS", "images/inventoryimages/cursed_antler.xml"),
 	Asset("IMAGE", "images/inventoryimages/ms_twisted_antler.tex"),
 	--ASSET("ATLAS_BUILD", "images/inventoryimages/ms_twisted_antler.xml"),
 	Asset("ATLAS", "images/inventoryimages/ms_twisted_antler.xml"),
+	
 	Asset("IMAGE", "images/inventoryimages/seafoodpaella.tex"),
 	--ASSET("ATLAS_BUILD", "images/inventoryimages/seafoodpaella.xml"),
 	Asset("ATLAS", "images/inventoryimages/seafoodpaella.xml"),
@@ -1597,9 +1644,9 @@ Assets = {
 	--ASSET("ATLAS_BUILD", "images/inventoryimages/giant_blueberry.xml"),
 	Asset("ATLAS", "images/inventoryimages/giant_blueberry.xml"),
 	Asset("IMAGE", "images/inventoryimages/widowsgrasp.tex"),
-	--ASSET("ATLAS_BUILD", "images/inventoryimages/widowsgrasp.xml"),
 	Asset("ATLAS", "images/inventoryimages/widowsgrasp.xml"),
-
+	
+	
 	Asset("IMAGE", "images/inventoryimages/widowshead.tex"),
 	--ASSET("ATLAS_BUILD", "images/inventoryimages/widowshead.xml"),
 	Asset("ATLAS", "images/inventoryimages/widowshead.xml"),
@@ -1904,7 +1951,9 @@ Assets = {
 	--ASSET("ATLAS_BUILD", "images/inventoryimages/um_armor_pyre_nettles.xml"),
 	Asset("IMAGE", "images/inventoryimages/um_armor_pyre_nettles.tex"),
 	
-	
+	Asset("ATLAS", "images/inventoryimages/um_staff_meteor.xml"),
+	--ASSET("ATLAS_BUILD", "images/inventoryimages/um_staff_meteor.xml"),
+	Asset("IMAGE", "images/inventoryimages/um_staff_meteor.tex"),
 
 	--SWAPS
 	Asset("ANIM", "anim/swap_driftwood_fishingrod.zip"),
@@ -1959,6 +2008,8 @@ Assets = {
 	Asset("ANIM", "anim/swap_um_harpoon.zip"),
 
 	Asset("ANIM", "anim/swap_magnerang.zip"),
+	
+	Asset("ANIM", "anim/swap_um_staff_meteor.zip"),
 
 	Asset("ANIM", "anim/winona_toolbox.zip"),
 	Asset("ANIM", "anim/winona_upgradekit_electrical.zip"),
@@ -1975,7 +2026,7 @@ Assets = {
 
 	Asset("ATLAS", "images/mushroom_slot.xml"),
 	Asset("IMAGE", "images/mushroom_slot.tex"),
-
+	
 	Asset("ATLAS", "images/wardrobe_tool_slot.xml"),
 	Asset("IMAGE", "images/wardrobe_tool_slot.tex"),
 
@@ -1996,6 +2047,8 @@ Assets = {
 
 	Asset("ATLAS", "images/bee_slot.xml"),
 	Asset("IMAGE", "images/bee_slot.tex"),
+
+	Asset("ANIM", "anim/um_status_wx.zip"),
 
 
 
@@ -2098,5 +2151,18 @@ Assets = {
 	Asset("ATLAS", "bigportraits/willow.xml"),
 	Asset("IMAGE", "bigportraits/willow_none.tex"),
 	Asset("ATLAS", "bigportraits/willow_none.xml"),
+
+
+    --FX TEXTURES
+
+    Asset("IMAGE", "fx/smog1.tex"),
+    Asset("IMAGE", "fx/smog2.tex"),
+    Asset("IMAGE", "fx/smog3.tex"),
+    Asset("IMAGE", "fx/smog4.tex"),
+
+	-- SKILL TREES
+
+	Asset( "IMAGE", "images/wathgrithr_rework_skilltree.tex" ),
+    Asset( "ATLAS", "images/wathgrithr_rework_skilltree.xml" ),
 
 }

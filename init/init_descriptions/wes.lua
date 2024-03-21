@@ -13,3 +13,5 @@
 --	DESCRIBE.MARA_BOSS1 = "Ahhh, mine old nemesis... This conflict shall be LEGEND."
 
 -- wes will move tornadoes with the power of interpretive dance :loosegmoose:
+
+-- DESCRIBE.VET_SKULL = "enter the bonezone idiot!!"

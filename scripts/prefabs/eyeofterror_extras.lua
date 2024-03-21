@@ -21,13 +21,14 @@ local function OnHitFire(inst, attacker, target)
 					if v.components.health ~= nil and not (v.components.health ~= nil and v.components.health:IsDead()) then
 						local dmg = -5
 						
-						if v.components.health.fire_damage_scale > 0 then
-							dmg = dmg * v.components.health.fire_damage_scale
-						end
+						--if v.components.health.fire_damage_scale > 0 then
+							--dmg = dmg * v.components.health.fire_damage_scale
+						--end
 						
-						if v:HasTag("pyromaniac") or dmg > -1 then
-							dmg = -1
-						end
+						--if v.components.health.fire_damage_scale == 0 or v.components.health.externalfiredamagemultipliers:Get() <= 0 or v:HasTag("ghost") or
+						--v.prefab == "hound_magma" or v.prefab == "firehound" or v.prefab == "wobysmall" or v.prefab == "wobybig" or v.prefab == "stalker_minion1" or v.prefab == "stalker_minion2" then
+							--dmg = 0
+						--end
 						
 						v.components.health:DoDelta(dmg, false, "twinofterror2")
 					end
@@ -123,13 +124,14 @@ local function Burning(inst)
 					if v.components.health ~= nil and not (v.components.health ~= nil and v.components.health:IsDead()) then
 						local dmg = -5
 						
-						if v.components.health.fire_damage_scale > 0 then
-							dmg = dmg * v.components.health.fire_damage_scale
-						end
+						--if v.components.health.fire_damage_scale > 0 then
+							--dmg = dmg * v.components.health.fire_damage_scale
+						--end
 						
-						if v:HasTag("pyromaniac") or dmg > -1 then
-							dmg = -1
-						end
+						--if v.components.health.fire_damage_scale == 0 or v.components.health.externalfiredamagemultipliers:Get() <= 0 or v:HasTag("ghost") or
+						--v.prefab == "hound_magma" or v.prefab == "firehound" or v.prefab == "wobysmall" or v.prefab == "wobybig" or v.prefab == "stalker_minion1" or v.prefab == "stalker_minion2" then
+							--dmg = 0
+						--end
 						
 						v.components.health:DoDelta(dmg, false, "twinofterror2")
 					end

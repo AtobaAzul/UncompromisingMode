@@ -141,6 +141,7 @@ local function nightmarebeak_postinit(inst)
 
     inst:WatchWorldState("isday", daytime)
 end
+
 AddPrefabPostInit("crawlinghorror", crawlinghorror_postinit)
 AddPrefabPostInit("terrorbeak", terrorbeak_postinit)
 AddPrefabPostInit("crawlingnightmare", crawlingnightmare_postinit)

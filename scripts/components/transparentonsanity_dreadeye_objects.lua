@@ -2,13 +2,13 @@
 --      logic should be driven off this component!
 
 local function PushAlpha(self, alpha, most_alpha)
-    self.inst.AnimState:SetMultColour(alpha, alpha, alpha, alpha)
+    self.inst.AnimState:SetMultColour(GetRandomWithVariance(alpha, 0.05), GetRandomWithVariance(alpha, 0.05), GetRandomWithVariance(alpha, 0.05), alpha-.025)
     if self.inst.SoundEmitter ~= nil then
         self.inst.SoundEmitter:OverrideVolumeMultiplier(alpha / most_alpha)
     end
-	if self.onalphachangedfn ~= nil then
-		self.onalphachangedfn(self.inst, alpha, most_alpha)
-	end
+    if self.onalphachangedfn ~= nil then
+        self.onalphachangedfn(self.inst, alpha, most_alpha)
+    end
 end
 
 local TransparentOnSanity = Class(function(self, inst)
@@ -17,13 +17,13 @@ local TransparentOnSanity = Class(function(self, inst)
     self.osc_speed = .25 + math.random() * 2
     self.osc_amp = .15 --amplitude
     self.alpha = 0.6
-    self.most_alpha = 1.2
+    self.most_alpha = 1.1
     self.target_alpha = nil
 
-    PushAlpha(self, 0.6, 1.2)
+    PushAlpha(self, 0.6, 1.1)
     inst:StartUpdatingComponent(self)
 
-	--self.inst.AnimState:UsePointFiltering(true)
+    --self.inst.AnimState:UsePointFiltering(true)
 end)
 
 function TransparentOnSanity:OnUpdate(dt)
@@ -35,9 +35,9 @@ function TransparentOnSanity:OnUpdate(dt)
     else
         self.offset = self.offset + dt
         self.target_alpha =
-            (self.calc_percent_fn and self.calc_percent_fn(self.inst, player) or (1.4 - player.replica.sanity:GetPercent())) *  --insanity factor
-            self.most_alpha *                           --max alpha value
-            (1 + self.osc_amp * (math.sin(self.offset * self.osc_speed) - 1)) --variance
+            (self.calc_percent_fn and self.calc_percent_fn(self.inst, player) or (1.4 - player.replica.sanity:GetPercent())) * --insanity factor
+            self.most_alpha *                                                                                                  --max alpha value
+            (1 + self.osc_amp * (math.sin(self.offset * self.osc_speed) - 1))                                                  --variance
     end
 
     if self.alpha ~= self.target_alpha then

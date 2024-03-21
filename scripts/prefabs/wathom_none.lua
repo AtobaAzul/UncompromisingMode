@@ -17,7 +17,7 @@ local prefabs = {
 		}),
 
 }
---[[
+
 table.insert(prefabs,
 	CreatePrefabSkin("wathom_triumphant", { --The ID of your skin, e.g. “whimsy_none”, “ms_whimsy_victorian”
 		assets = { --All the assets correlated to your skin
@@ -41,7 +41,7 @@ table.insert(prefabs,
 		skin_tags = { "BASE", "WATHOM", "SHADOW" },
 	})
 )
-]]
+
 
 
 return unpack(prefabs)

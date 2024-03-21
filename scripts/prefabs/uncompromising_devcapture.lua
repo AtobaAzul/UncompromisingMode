@@ -159,8 +159,8 @@ local function Capture(inst)
 
     local file_name = TUNING.DSTU.MODROOT .. "scripts/umss_tables.lua"
 
-    print(file_name)
-    print(totaltable_number)
+   
+   
 
     local file = io.open(file_name, "r+")
     if file then

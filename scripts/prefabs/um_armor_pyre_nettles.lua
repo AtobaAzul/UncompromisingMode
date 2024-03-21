@@ -40,7 +40,7 @@ local function OnBlocked(owner, data, inst)
 		
 		if data.stimuli ~= "fire" or (data.weapon ~= nil and data.weapon.components.weapon ~= nil and data.weapon.components.weapon.stimuli ~= "fire") then
 			if data.damage ~= nil then
-				local armorperish = data.damage * 0.01 -- 1% of the blocked attack's damage...
+				local armorperish = data.damage * 0.001 -- 1% of the blocked attack's damage...
 				inst.components.perishable:ReducePercent(armorperish) -- ...becomes the percentage that we 'spoil' the armor when hit.
 			else
 				inst.components.perishable:ReducePercent(0.01) -- If no damage info is available, still remove 1% durability to prevent cheese.

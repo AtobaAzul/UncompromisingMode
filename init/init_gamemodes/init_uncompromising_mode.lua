@@ -8,7 +8,7 @@ modimport("init/minimap_icons")
 
 --  [   Import customized shard RPC module ]    --
 
-
+modimport('init/init_dynlayout')
 --  [   Mock Dragonfly Spit Bait ]    --
 modimport("init/init_weather/init_dragonfly_bait")
 
@@ -77,11 +77,15 @@ modimport("init/init_creatures/init_treebuffs")
 modimport("init/init_creatures/init_harder_monsters")
 --end
 
+if GetModConfigData("horriblefood") then
+    modimport("init/init_horriblefood")
+end
 
 modimport("init/init_food/init_food_changes")
 modimport("init/init_food/init_bird_changes")
 modimport("init/init_food/init_rare_foods")
 modimport("init/init_vetcurse")
+modimport("init/init_bosshealth")
 
 --if  GetModConfigData("harder_recipes") then <-- This isn't even a config change, yet.
 modimport("init/init_recipes")
@@ -90,16 +94,16 @@ modimport("init/init_food/monsterfoods")
 --end
 
 if GetModConfigData("rat_raids") then
-	modimport("init/init_ratraid")
-	modimport("init/init_noratcheck")
+    modimport("init/init_ratraid")
+    modimport("init/init_noratcheck")
 end
 
 modimport("init/init_creatures/init_knockback")
 
 if GetModConfigData("harder_shadows") then
-	modimport("init/init_creatures/init_harder_shadows")
-	modimport("postinit/prefabs/shadowcreature")
-	modimport("postinit/stategraphs/SGshadowcreature")
+    modimport("init/init_creatures/init_harder_shadows")
+    modimport("postinit/prefabs/shadowcreature")
+    modimport("postinit/stategraphs/SGshadowcreature")
 end
 
 --if  GetModConfigData("harder_weather") then <-- This isn't even a config change, yet.
@@ -110,18 +114,18 @@ modimport("init/init_weather/init_harder_weather")
 --modimport("init/init_weather/init_snowstorm")
 modimport("init/init_weather/init_snowstorm_structures")
 if GetModConfigData("smog") then
-	modimport("init/init_weather/init_smog")
+    modimport("init/init_weather/init_smog")
 end
 --end
 
 if GetModConfigData("acidrain") then
-	--modimport("init/init_uncompromisingshardrpc")
-	modimport("init/init_weather/init_acidmushroom_networking")
-	modimport("postinit/prefabs/toadstool_cap")
+    --modimport("init/init_uncompromisingshardrpc")
+    modimport("init/init_weather/init_acidmushroom_networking")
+    modimport("postinit/prefabs/toadstool_cap")
 end
 
 if GetModConfigData("snowstorms") then
-	modimport("init/init_weather/init_snowstorm")
+    modimport("init/init_weather/init_snowstorm")
 end
 
 if GetModConfigData("hayfever_disable") then
@@ -131,19 +135,14 @@ end
 
 modimport("init/init_durability")
 
-if GetModConfigData("willow") then
-	modimport("init/init_character_changes/willow")
-end
+modimport("init/init_character_changes/willow")
 
 modimport("init/init_character_changes/willow_bernie")
 
---[[if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING and GetModConfigData("waxwell") or
-	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("waxwell")) then
-		modimport("init/init_character_changes/waxwell")
-	end]]
+modimport("init/init_character_changes/waxwell")
 
 --if GetModConfigData("warly") then
-	--modimport("init/init_character_changes/warly")
+--modimport("init/init_character_changes/warly")
 --end
 
 --if GetModConfigData("wolfgang") then
@@ -152,16 +151,35 @@ modimport("init/init_character_changes/wolfgang2")
 modimport("init/init_character_changes/wormwood")
 --end
 
+-- All of these are wathgrightr changes
+if GetModConfigData("wathgrithr_rework_") == 1 then
+	modimport("postinit/prefabs/skilltree_wathgrithr")
+	modimport("postinit/prefabs/beefalo") -- Yes, even this one
+	modimport("postinit/prefabs/battlesongs")
+	modimport("postinit/components/singinginspiration")
+	modimport("postinit/components/battleborn")
+	modimport("postinit/widgets/inspirationbadge")
+end
+if GetModConfigData("wathgrithr_arsenal") then
+	modimport("postinit/prefabs/wathgrithr_shield")
+end
+modimport("postinit/prefabs/spear_wathgrithr") -- Has stuff from both, don't put it inside the if
+modimport("postinit/prefabs/spear_wathgrithr") -- Has stuff from both, don't put it inside the if
+
+modimport("init/init_skilltreeimports")
+
+
+
 if GetModConfigData("lifeamulet") then
-	modimport("init/init_lifeamulet")
+    modimport("init/init_lifeamulet")
 end
 
-if GetModConfigData("caved") == false and GetModConfigData("acidrain") then
-	modimport("init/init_weather/init_overworld_toadstool")
-end
+--if GetModConfigData("caved") == false and GetModConfigData("acidrain") then
+--modimport("init/init_weather/init_overworld_toadstool")
+--end
 
 if GetModConfigData("foodregen") then
-	modimport("init/init_food/init_foodregen")
+    modimport("init/init_food/init_foodregen")
 end
 
 --TODO: Add settings for each individual character after we add many changes
@@ -176,15 +194,15 @@ modimport("init/init_character_changes/wathgrithr")
 modimport("init/init_character_changes/webber")
 modimport("init/init_character_changes/winona")
 modimport("init/init_character_changes/wanda")
-modimport("init/init_character_changes/wortox")
-modimport("init/init_character_changes/warly")
 
-if GetModConfigData("waxwell") then
-	modimport("init/init_character_changes/waxwell")
+if GetModConfigData("wortox") then
+    modimport("init/init_character_changes/wortox")
 end
 
+modimport("init/init_character_changes/warly")
+
 if GetModConfigData("hardcore") then
-	modimport("init/init_gamemodes/init_hardcore")
+    modimport("init/init_gamemodes/init_hardcore")
 end
 
 modimport("init/init_loadingtips")

@@ -140,6 +140,12 @@ local function on_terraformer_longupdate(inst, delta_time)
     end
 end
 
+local function on_day_change(inst)
+	if TheWorld.state.isspring then
+		terraformer_forcefinishterraform(inst)
+	end
+end
+
 ------------------------------------------------------------------
 local function terraformerfn()
     local inst = CreateEntity()
@@ -167,6 +173,7 @@ local function terraformerfn()
 
     --
     inst:ListenForEvent("forcefinishterraforming", terraformer_forcefinishterraform)
+	inst:WatchWorldState("cycles", on_day_change)
 
     --
     inst.OnSave = on_terraformer_save

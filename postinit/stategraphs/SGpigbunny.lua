@@ -3,6 +3,36 @@ GLOBAL.setfenv(1, GLOBAL)
 
 env.AddStategraphPostInit("pig", function(inst)
 
+local function hit_recovery_delay(inst, delay, max_hitreacts, skip_cooldown_fn)
+	local on_cooldown = false
+	if (inst._last_hitreact_time ~= nil and inst._last_hitreact_time + (delay or inst.hit_recovery or TUNING.DEFAULT_HIT_RECOVERY) >= GetTime()) then	-- is hit react is on cooldown?
+		max_hitreacts = max_hitreacts or inst._max_hitreacts
+		if max_hitreacts then
+			if inst._hitreact_count == nil then
+				inst._hitreact_count = 2
+				return false
+			elseif inst._hitreact_count < max_hitreacts then
+				inst._hitreact_count = inst._hitreact_count + 1
+				return false
+			end
+		end
+
+		skip_cooldown_fn = skip_cooldown_fn or inst._hitreact_skip_cooldown_fn
+		if skip_cooldown_fn ~= nil then
+			on_cooldown = not skip_cooldown_fn(inst, inst._last_hitreact_time, delay)
+		elseif inst.components.combat ~= nil then
+			on_cooldown = not (inst.components.combat:InCooldown() and inst.sg:HasStateTag("idle"))		-- skip the hit react cooldown if the creature is ready to attack
+		else
+			on_cooldown = true
+		end
+	end
+
+	if inst._hitreact_count ~= nil and not on_cooldown then
+		inst._hitreact_count = 1
+	end
+	return on_cooldown
+end
+
 local events =
 {	
     EventHandler("doattack", function(inst, data) 
@@ -25,41 +55,43 @@ local events =
 	
 	EventHandler("attacked", function(inst)
 		
-		if inst:HasTag("pigattacker") and not inst:HasTag("werepig") and inst.components.health ~= nil and not inst.components.health:IsDead() then
-			if inst.counter ~= nil and inst.counter >= math.random(3, 5) then
-				inst.counter = 0
-				inst.sg:GoToState("counterattack_pre")
-				return
-			else
-				if inst.counter ~= nil then
-					inst.counter = inst.counter + 1
+		if inst:HasTag("pigattacker") and not inst:HasTag("werepig") and inst.components.health ~= nil and not inst.components.health:IsDead() and not inst.sg:HasStateTag("counter") then
+		
+			if inst.counter ~= nil then
+				inst.counter = inst.counter + 1
 					if inst.countertask ~= nil then
 						inst.countertask:Cancel()
 						inst.countertask = nil
-					end
-					inst.countertask = inst:DoTaskInTime(10, function(inst) inst.counter = 0 end)
-				else
-					inst.counter = 0
-				end
+					end	
+			else
+				inst.counter = 1
 			end
+
+			inst.countertask = inst:DoTaskInTime(10, function(inst) inst.counter = 0 end)
+			
+			if inst.counter ~= nil and inst.counter >= math.random(3, 4) then
+				if inst.countertask ~= nil then
+					inst.countertask:Cancel()
+					inst.countertask = nil
+				end
+				inst.counter = 0
+				inst.sg:GoToState("counterattack_pre")
+				return				
+			end
+			
 		end
 	
-		if inst.components.health ~= nil and not inst.components.health:IsDead()
-		and (not inst.sg:HasStateTag("busy") or
-		inst.sg:HasStateTag("caninterrupt") or
-		inst.sg:HasStateTag("frozen")) then
+		if inst.components.health ~= nil and not inst.components.health:IsDead() and (not inst.sg:HasStateTag("busy") or inst.sg:HasStateTag("caninterrupt") or inst.sg:HasStateTag("frozen")) then
 			inst.sg:GoToState("hit")
 		end
 	
 	end),
-    
-    
 }
 
 local states = {
 	State{
         name = "counterattack_pre",
-        tags = { "attack", "busy" },
+        tags = {"attack", "busy", "counter"},
 
         onenter = function(inst)
             inst.SoundEmitter:PlaySound("dontstarve/pig/attack")
@@ -83,7 +115,7 @@ local states = {
 	
 	State{
         name = "counterattack",
-        tags = { "attack", "busy" },
+        tags = {"attack", "busy", "counter"},
 
         onenter = function(inst)
             inst.SoundEmitter:PlaySound("dontstarve/pig/attack")
@@ -99,7 +131,7 @@ local states = {
 				local target = inst.components.combat.target
 				
 				if target ~= nil and distsq(target:GetPosition(), inst:GetPosition()) <= inst.components.combat:CalcAttackRangeSq(target) then
-					target.components.combat:GetAttacked(inst, 5)
+					target.components.combat:GetAttacked(inst, 33)
 					
 					if target ~= nil and target.components.inventory ~= nil and not target:HasTag("fat_gang") and not target:HasTag("foodknockbackimmune") and not (target.components.rider ~= nil and target.components.rider:IsRiding()) and 
 					--Don't knockback if you wear marble
@@ -110,6 +142,7 @@ local states = {
 				
                 inst.sg:RemoveStateTag("attack")
                 inst.sg:RemoveStateTag("busy")
+				inst.sg:RemoveStateTag("counter")
             end),
         },
 

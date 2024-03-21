@@ -160,6 +160,7 @@ local function fn()
 	inst:AddTag("no_durability_loss_on_hit")
     inst:AddTag("hostile")
 	inst:AddTag("soulless")
+    inst:AddTag("noember")
     inst:AddTag("burnable") -- needs this to be frozen by flingomatic
 
     inst:AddTag("lastresort") -- for auto attacking

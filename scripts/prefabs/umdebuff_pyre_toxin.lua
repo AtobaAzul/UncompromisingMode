@@ -96,12 +96,14 @@ local function debuff_OnAttached(inst, target, followsymbol, followoffset, data)
 			inst.fx = SpawnPrefab("umdebuff_pyre_toxin_fx")
 		end
 		if target.components.combat ~= nil then
-			inst.fx.entity:AddFollower():FollowSymbol(target.GUID, target.components.combat.hiteffectsymbol, 0, -1, 0)
+			inst.fx.entity:AddFollower():FollowSymbol(target.GUID, target.components.combat.hiteffectsymbol, 0, 0, 0)
 		else
 			inst.fx.entity:SetParent(target.entity)
 		end
 		if target:HasTag("smallcreature") then
 			inst.fx.Transform:SetScale(0.5, 0.5, 0.5)
+		elseif target:HasTag("epic") then
+			inst.fx.Transform:SetScale(4.5, 4.5, 4.5)
 		end
 		
 		-- Say the line...

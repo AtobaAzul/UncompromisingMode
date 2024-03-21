@@ -176,15 +176,16 @@ local function onequip(inst, owner)
 	else
 		owner.AnimState:OverrideSymbol("swap_hat", "hat_gore_horn_swap_off", "swap_hat")
 
-		owner.AnimState:Show("HAT")
-		owner.AnimState:Show("HAIR_HAT")
-		owner.AnimState:Hide("HAIR_NOHAT")
-		owner.AnimState:Hide("HAIR")
-		owner.AnimState:Hide("HEAD")
+        owner.AnimState:Show("HAT")
+        owner.AnimState:Show("HAIR_HAT")
+        owner.AnimState:Hide("HAIR_NOHAT")
+        owner.AnimState:Hide("HAIR")
 
 		if owner:HasTag("player") then
-			owner.AnimState:Hide("HEAD")
-			owner.AnimState:Show("HEAD_HAT")
+            owner.AnimState:Hide("HEAD")
+            owner.AnimState:Show("HEAD_HAT")
+			owner.AnimState:Show("HEAD_HAT_NOHELM")
+			owner.AnimState:Hide("HEAD_HAT_HELM")
 		end
 
 		owner.gorehorn = inst
@@ -208,6 +209,8 @@ local function onunequip(inst, owner)
 	if owner:HasTag("player") then
 		owner.AnimState:Show("HEAD")
 		owner.AnimState:Hide("HEAD_HAT")
+		owner.AnimState:Hide("HEAD_HAT_NOHELM")
+		owner.AnimState:Hide("HEAD_HAT_HELM")
 	end
 
 	owner:RemoveEventCallback("locomote", speedcheck)
@@ -277,6 +280,7 @@ local function fn()
 	inst:AddComponent("inventoryitem")
 	inst.components.inventoryitem.atlasname = "images/inventoryimages/gore_horn_hat.xml"
 
+    inst:AddComponent("tradable")
 	inst:AddComponent("inspectable")
 
 	inst:AddComponent("fueled")

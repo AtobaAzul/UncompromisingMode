@@ -9,29 +9,39 @@ local function FxAppear(inst)
 	SpawnPrefab("blueberrypuddle").Transform:SetPosition(inst.Transform:GetWorldPosition())
 end
 
+local mine_test_tags = { "monster", "character", "animal" }
+local mine_must_tags = { "_combat" }
+local mine_no_tags = { "notraptrigger", "flying", "ghost", "playerghost", "snapdragon" }
+
 local function on_deactivate(inst)
     if inst.components.lootdropper ~= nil then
-		if inst.Harvestable == "full" then
-			if math.random() > 0.1 then
-				inst.components.lootdropper:SpawnLootPrefab("giant_blueberry")
-			else
-				local berryman = SpawnPrefab("fruitbat")
-				berryman.Transform:SetPosition(inst.Transform:GetWorldPosition())
-			end
-		end	
+        if inst.harvestable == "full" then
+            if math.random() > 0.1 then
+                inst.components.lootdropper:SpawnLootPrefab("giant_blueberry")
+				local x, y, z = inst.Transform:GetWorldPosition()
+				local otherbombs = TheSim:FindEntities(x, y, z, 1.1*TUNING.STARFISH_TRAP_RADIUS, {"blueberrybomb"}, mine_no_tags)
+					for i, target in ipairs(otherbombs) do
+                if target ~= inst and target.components.mine and not target.components.mine.issprung and not target.froze then
+                    target.components.mine:Explode(target)
+                end
+            end				
+            else
+                local berryman = SpawnPrefab("fruitbat")
+                berryman.Transform:SetPosition(inst.Transform:GetWorldPosition())
+            end
+        end    
     end
-    if inst.Harvestable == "regrow" then
-		inst:Remove()
-	else
-		inst.components.workable:SetWorkLeft(1)
-		inst.Harvestable = "regrow"
-	end
+    if inst.harvestable == "regrow" then
+        inst:Remove()
+    else
+        inst.components.workable:SetWorkLeft(1)
+        inst.harvestable = "regrow"
+    end
 end
-
 
 local function on_blueberry_dug_up(inst, digger)
 	if digger:HasTag("player") then
-		if inst.Harvestable == "full" then
+		if inst.harvestable == "full" then
 			if not inst.components.mine.issprung then
 				inst.components.mine:Explode()
 			end
@@ -73,7 +83,7 @@ local function on_anim_over(inst)
         return
     end
 	if inst.froze then
-		if inst.Harvestable == "full" and TheWorld.state.iswinter then
+		if inst.harvestable == "full" and TheWorld.state.iswinter then
 			inst.AnimState:PushAnimation("idle_frozen", true)
 			elseif not TheWorld.state.iswinter  then
 			inst.froze = false
@@ -92,15 +102,13 @@ local mine_test_fn = function(target, inst)
             and (target.components.combat ~= nil and target.components.combat:CanBeAttacked(inst))
 end
 
-local mine_test_tags = { "monster", "character", "animal" }
-local mine_must_tags = { "_combat" }
-local mine_no_tags = { "notraptrigger", "flying", "ghost", "playerghost", "snapdragon" }
-
 local function do_snap(inst)
-	if inst.Harvestable == "full" then
+	if inst.harvestable == "full" then
 		inst.AnimState:PushAnimation("spawn")
 		inst.AnimState:PushAnimation("trap_idle", true)
+		inst.SoundEmitter:PlaySound("wintersfeast2019/creatures/gingerbread_vargr/splat", nil, 2)
 		inst.SoundEmitter:PlaySound("turnoftides/creatures/together/starfishtrap/trap")
+
 		FxAppear(inst)
 		-- Do an AOE attack, based on how the combat component does it.
 		local x, y, z = inst.Transform:GetWorldPosition()
@@ -113,10 +121,10 @@ local function do_snap(inst)
 		local otherbombs = TheSim:FindEntities(x, y, z, 3*TUNING.STARFISH_TRAP_RADIUS, {"blueberrybomb"}, mine_no_tags)
 		for i, target in ipairs(otherbombs) do
 			if target ~= inst and target.components.mine and not target.components.mine.issprung and not target.froze then
-			target.components.mine:SetRadius(TUNING.STARFISH_TRAP_RADIUS*12)
+                    target.components.mine:Explode(target)
 			end
 		end
-		inst.Harvestable = "regrow"
+		inst.harvestable = "regrow"
 	end
     if inst._snap_task ~= nil then
         inst._snap_task:Cancel()
@@ -127,7 +135,7 @@ end
 local function Regrow(inst)
 	inst.components.mine:SetRadius(TUNING.STARFISH_TRAP_RADIUS*1.1)
     inst.components.mine:Reset()
-	inst.Harvestable = "full"
+	inst.harvestable = "full"
 end
 
 local function CheckTimeRegrow(inst)
@@ -184,7 +192,7 @@ local function on_save(inst, data)
         end
     end
 	data.froze = inst.froze
-	data.Harvestable = inst.Harvestable
+	data.harvestable = inst.harvestable
 	data.pendingregrow = inst.pendingregrow
 end
 
@@ -197,7 +205,7 @@ local function on_blueberry_mine(inst)
 			v.components.moisture:DoDelta(5)
 		end
 	end
-	inst.Harvestable = "regrow"
+	inst.harvestable = "regrow"
 	inst.components.workable:SetWorkAction(ACTIONS.DIG)
 	inst.components.workable:SetWorkLeft(1)
 	inst.components.workable:SetOnFinishCallback(on_blueberry_dug_up)
@@ -210,7 +218,7 @@ end
 
 local function MakeWinter(inst)
 	inst.components.mine:SetRadius(TUNING.STARFISH_TRAP_RADIUS*0)
-	if inst.Harvestable == "full" then
+	if inst.harvestable == "full" then
 		inst.components.workable:SetWorkAction(ACTIONS.MINE)
 		inst.components.workable:SetWorkLeft(1)
 		inst.components.workable:SetOnFinishCallback(on_blueberry_mine)
@@ -225,8 +233,8 @@ end
 
 local function on_load(inst, data)
     if data then
-		if data.Harvestable then
-			inst.Harvestable = data.Harvestable
+		if data.harvestable then
+			inst.harvestable = data.harvestable
 		end
 		if data.reset_task_time_remaining then
 			if inst._reset_task then
@@ -251,10 +259,10 @@ end
 
 
 local function OnSpring(inst)
-	if inst.pendingregrow or (inst.Harvestable == "regrow" and not inst.components.timer:TimerExists("regrow"))then
+	if inst.pendingregrow or (inst.harvestable == "regrow" and not inst.components.timer:TimerExists("regrow"))then
 		Regrow(inst)
 	end
-	if inst.Harvestable == "full" and inst.froze then
+	if inst.harvestable == "full" and inst.froze then
 		inst:RemoveEventCallback("animover",on_anim_over)
 		inst:DoTaskInTime(3+math.random(0,15), function(inst) 
 			Melt(inst)
@@ -267,7 +275,7 @@ end
 local function Freeze(inst)
 	if TheWorld.state.iswinter then
 		MakeWinter(inst)
-		if inst.Harvestable == "full" then
+		if inst.harvestable == "full" then
 			inst.AnimState:PlayAnimation("freeze")
 			inst.froze = true
 		end
@@ -335,7 +343,7 @@ local function blueberryplant()
 
     inst:AddComponent("mine")
     inst.components.mine:SetRadius(TUNING.STARFISH_TRAP_RADIUS*1.1)
-    inst.components.mine:SetAlignment(nil) -- blueberries trigger on EVERYTHING on the ground, players and non-players alike.
+    inst.components.mine:SetAlignment("plantkin") -- blueberries trigger on EVERYTHING on the ground, players and non-players alike.
     inst.components.mine:SetOnExplodeFn(on_explode)
     inst.components.mine:SetOnResetFn(on_reset)
     inst.components.mine:SetOnSprungFn(on_sprung)
@@ -350,7 +358,7 @@ local function blueberryplant()
     -- Start the task for the characterizing additional idles.
     inst:ListenForEvent("animover", on_anim_over)
 	
-	inst:DoTaskInTime(0,function(inst) if not inst.Harvestable then inst.Harvestable = "full" end end)
+	inst:DoTaskInTime(0,function(inst) if not inst.harvestable then inst.harvestable = "full" end end)
     inst.OnSave = on_save
     inst.OnLoad = on_load
 	inst.pendingregrow = false

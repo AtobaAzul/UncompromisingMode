@@ -208,6 +208,42 @@ local function OnEntityReplicated(inst)
     inst.Transform:SetInterpolateRotation(true)
 end
 
+local function GetSafePhysicsRadius(inst)
+    return (inst.components.hull ~= nil and inst.components.hull:GetRadius() or TUNING.BOAT.RADIUS) + 0.18 -- Add a small offset for item overhangs.
+end
+
+local function IsBoatEdgeOverLand(inst, override_position_pt)
+    local map = TheWorld.Map
+    local radius = inst:GetSafePhysicsRadius()
+    local segment_count = 20 * 2
+    local segment_span = math.pi * 2 / segment_count
+    local x, y, z
+    if override_position_pt then
+        x, y, z = override_position_pt:Get()
+    else
+        x, y, z = inst.Transform:GetWorldPosition()
+    end
+    for segement_idx = 0, segment_count do
+        local angle = segement_idx * segment_span
+
+        local angle0 = angle - segment_span / 2
+        local x0 = math.cos(angle0) * radius
+        local z0 = math.sin(angle0) * radius
+        if not map:IsOceanTileAtPoint(x + x0, 0, z + z0) or map:IsVisualGroundAtPoint(x + x0, 0, z + z0) then
+            return true
+        end
+
+        local angle1 = angle + segment_span / 2
+        local x1 = math.cos(angle1) * radius
+        local z1 = math.sin(angle1) * radius
+        if not map:IsOceanTileAtPoint(x + x1, 0, z + z1) or map:IsVisualGroundAtPoint(x + x1, 0, z + z1) then
+            return true
+        end
+    end
+
+    return false
+end
+
 local function fn()
     local inst = CreateEntity()
 
@@ -337,6 +373,8 @@ local function fn()
 
     inst.StopBoatPhysics = StopBoatPhysics
     inst.StartBoatPhysics = StartBoatPhysics
+    inst.GetSafePhysicsRadius = GetSafePhysicsRadius
+    inst.IsBoatEdgeOverLand = IsBoatEdgeOverLand
 
     inst.OnPhysicsWake = OnPhysicsWake
     inst.OnPhysicsSleep = OnPhysicsSleep

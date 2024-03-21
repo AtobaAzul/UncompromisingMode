@@ -38,6 +38,12 @@ local function fn()
 
     inst:AddComponent("inventoryitem")
 	inst.components.inventoryitem.atlasname = "images/inventoryimages/rockjawleather.xml"
+	
+	inst:AddComponent("edible")
+    inst.components.edible.healthvalue = -5
+    inst.components.edible.hungervalue = 10
+    inst.components.edible.sanityvalue = 0      
+    inst.components.edible.foodtype = FOODTYPE.HORRIBLE
 
     return inst
 end

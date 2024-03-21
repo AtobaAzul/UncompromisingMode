@@ -5,7 +5,7 @@ local function doacidrain(inst, dt)
     if inst.components.moisture ~= nil and inst.components.moisture:GetMoisture() > 0 and GLOBAL.TheWorld.state.isautumn and GLOBAL.TheWorld.state.cycles > GLOBAL.TUNING.DSTU.ACID_RAIN_START_AFTER_DAY then
 
         local t = GLOBAL.GetTime()
-		local mushroomcheck = TheSim:FindFirstEntityWithTag("acidrain_mushroom")
+		local mushroomcheck = nil--TheSim:FindFirstEntityWithTag("acidrain_mushroom")
         -- Raining, no moisture-giving equipment on head, and moisture is increasing. Pro-rate damage based on waterproofness.
         if inst.components.inventory:GetEquippedMoistureRate(GLOBAL.EQUIPSLOTS.HEAD) <= 0 and inst.components.moisture:GetRate() > 0 and mushroomcheck ~= nil then
             local waterproofmult =

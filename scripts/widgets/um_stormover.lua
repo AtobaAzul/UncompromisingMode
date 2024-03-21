@@ -57,6 +57,10 @@ local Um_StormOver = Class(Widget, function(self, owner, storm_overlays)
     self.bg3:GetAnimState():SetBuild("um_storm_over")
     self.bg3:GetAnimState():PlayAnimation("cloud_loop", true)
 
+    if TUNING.DSTU.REDUCED_TORNADO_VFX then
+        self.bg3:GetAnimState():SetDeltaTimeMultiplier(0.5)
+    end
+
     self.changed = 0
 
     self:Hide()
@@ -67,6 +71,8 @@ local Um_StormOver = Class(Widget, function(self, owner, storm_overlays)
         self.inst:ListenForEvent("seasontick", function(owner) return self:ToggleUpdating() end, owner)
     end
 end)
+
+
 
 function Um_StormOver:OnUpdate(dt)
     local tornado = FindClosestEntity(self.owner, 300, true, { "um_tornado" })

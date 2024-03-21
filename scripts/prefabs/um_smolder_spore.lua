@@ -211,7 +211,7 @@ local function OnPerish(inst)
 	if inst.components.inventoryitem:IsHeld() then
 		local holder = inst.components.inventoryitem:GetGrandOwner()
 
-		if holder.components.talker ~= nil and holder.components.health ~= nil and not holder.components.health:IsDead() then
+		if holder ~= nil and holder.components.talker ~= nil and holder.components.health ~= nil and not holder.components.health:IsDead() then
 			holder.components.talker:Say(GetString(holder, "ANNOUNCE_SMOLDER_SPORE_INVENTORY_POP"))
 		end
 
@@ -351,6 +351,7 @@ local function fn()
 
 	inst:AddTag("PyreToxinImmune")
 	inst:AddTag("soulless") -- Prefab shouldn't die via health loss, but...just in case.
+    inst:AddTag("noember")
 	inst:AddTag("scarytoprey")
 	inst:AddTag("thorny")
 	--	inst:AddTag("flying") -- Makes them ignore platform borders entirely. Flying over the void isn't ideal...

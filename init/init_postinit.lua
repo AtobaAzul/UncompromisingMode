@@ -44,9 +44,13 @@ local component_post = {
     "weather",
     "worldtemperature",
     "worldwind",
-	"planarentity",
+    "planarentity",
     "geyserfx",
     "firedetector",
+    "slipperyfeet",
+    "walkableplatformplayer",
+    "schoolspawner",
+    "builder"
 }
 
 local prefab_post = {
@@ -141,7 +145,7 @@ local prefab_post = {
     "siestahut",
     "bedroll_furry",
     "bees",
-	"beemine",
+    "beemine",
     "farmplants",
     "rainhat",
     "darts",
@@ -162,14 +166,11 @@ local prefab_post = {
     "lantern",
     "minerhat",
     "shark",
-    --	"shadowchesspieces", Only bring this back when we make the fight cool
     "fertilizer",
     "stinger",
     "boat_pirate",
     "trident", -- for giving the leak a cause.
     "boat_bumpers",
-    "slurtle_shellpieces",
-    "sludge_fueled",
     -- "nightsword",
     "bigshadowtentacle",
     "mast",
@@ -186,11 +187,15 @@ local prefab_post = {
     "lightninggoatherd",
     "archive_centipede",
     "firenettles",
-	"staff_tornado",
-	"rainometer",
+    "staff_tornado",
+    "rainometer",
     "winterometer",
-	"mooneye",
+    "mooneye",
     "dragoonegg",
+    "bomb_lunarplant",
+    "compostingbin",
+    "plantables",
+    "compass",
 }
 
 local stategraph_post = {
@@ -203,7 +208,8 @@ local stategraph_post = {
     "stalker_minion",
     --	"merm",
     "carnival_host",
-    "catcoon"
+    "catcoon",
+    "powdermonkey"
 }
 
 local class_post = {
@@ -229,7 +235,6 @@ local brain_post = {
     "deer",
     "shadowwaxwell",
     "terrorguisestuff",
-    "powdermonkey",
 }
 
 if GetModConfigData("wixie_walter") then
@@ -283,6 +288,10 @@ if GetModConfigData("wixie_walter") then
     RemapSoundEvent("dontstarve/characters/wixie/eye_rub_vo", "wixie/characters/wixie/eye_rub_vo")
     RemapSoundEvent("dontstarve/characters/wixie/carol", "wixie/characters/wixie/carol")
     RemapSoundEvent("dontstarve/characters/wixie/sinking", "wixie/characters/wixie/sinking")
+end
+
+if not GLOBAL.TUNING.DSTU.UPDATE_CHECK then
+    table.insert(prefab_post, "slurtle_shellpieces")
 end
 
 if GetModConfigData("hangyperds") then
@@ -356,7 +365,7 @@ if GetModConfigData("harder_beefalo") then
     table.insert(stategraph_post, "Beefalo")
 end
 
-if GetModConfigData("harder_spiderqueen") then
+if GetModConfigData("harder_spider_queen") then
     table.insert(prefab_post, "spiderqueen")
     table.insert(stategraph_post, "spiderqueen")
 end
@@ -378,7 +387,7 @@ if GetModConfigData("scalemailbuff") then
     table.insert(prefab_post, "armor_dragonfly")
 end
 
-if (not GLOBAL:TestForIA() or GetModConfigData("um_music")) then
+if (not GLOBAL:TestForIA() or GetModConfigData("um_music", true)) then
     table.insert(component_post, "dynamicmusic")
 end
 
@@ -436,13 +445,14 @@ if GetModConfigData("reworked_ck") then
     table.insert(prefab_post, "crabking")
     table.insert(prefab_post, "crabking_claw")
     table.insert(stategraph_post, "crabkingclaw")
-    table.insert(stategraph_post, "crabking")
 end
 
-if GetModConfigData("changed_shadowpieces") then
-	table.insert(prefab_post, "shadow_knight")
-	table.insert(stategraph_post, "shadow_bishop")
-	table.insert(stategraph_post, "shadow_knight")
+table.insert(prefab_post, "shadowchesspieces") --changes to  all 3 pieces. (no collision and shadowcrown loot)
+
+if GetModConfigData("changed_shadow_pieces") then
+    --table.insert(prefab_post, "shadow_knight")
+    table.insert(stategraph_post, "shadow_bishop")
+    --table.insert(stategraph_post, "shadow_knight")
 end
 
 if GetModConfigData("hambatnerf") then
@@ -465,12 +475,20 @@ if GetModConfigData("cookiecutterhat") then
     table.insert(prefab_post, "cookiecutterhat")
 end
 
-if GetModConfigData("bossresistance") ~= false then
+if GetModConfigData("boss_resistance_") ~= false then
     modimport("postinit/boss_resistance")
 end
 
 if GetModConfigData("heatwaves") then
     table.insert(component_post, "wildfires")
+end
+
+if GetModConfigData("lifeinjector_rework") then
+    table.insert(prefab_post, "lifeinjector")
+end
+
+if GetModConfigData("sharpshooter_monkeys_") then
+    table.insert(brain_post, "powdermonkey")
 end
 
 modimport("postinit/sim")

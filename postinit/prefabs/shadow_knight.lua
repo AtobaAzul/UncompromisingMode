@@ -1,11 +1,11 @@
 local env = env
 GLOBAL.setfenv(1, GLOBAL)
 
-
 env.AddPrefabPostInit("shadow_knight", function(inst)
 	if not TheWorld.ismastersim then
         return
     end
+
 	local function OnHitOther(inst, other)
 		if inst.sg.currentstate.name ~= "pound" then
 			if other:HasTag("creatureknockbackable") then

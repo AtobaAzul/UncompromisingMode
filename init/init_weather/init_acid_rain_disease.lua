@@ -1,5 +1,5 @@
 local function RandomDiseaseChance(inst)
-	local mushroomcheck = TheSim:FindFirstEntityWithTag("acidrain_mushroom")
+	local mushroomcheck = nil--TheSim:FindFirstEntityWithTag("acidrain_mushroom")
 	if inst.components.pickable ~= nil then
 		if mushroomcheck ~= nil and math.random() < 0.05 and 
 		GLOBAL.TheWorld.state.israining and GLOBAL.TheWorld.state.isautumn then

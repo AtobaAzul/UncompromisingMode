@@ -216,7 +216,7 @@ local function fn()
 	inst.components.combat:SetKeepTargetFunction(KeepTargetFn)
 	
     inst:AddComponent("lootdropper")
-    inst.components.lootdropper:SetLoot({"nightmarefuel", "nightmarefuel", "nightmarefuel", "the_real_charles_t_horse"})
+    inst.components.lootdropper:SetLoot({"nightmarefuel", "nightmarefuel", "nightmarefuel", "the_real_charles_t_horse", "um_record_shadow_wixie"})
 
     inst:AddComponent("sanityaura")
     inst.components.sanityaura.penalty = TUNING.OLD_SHADOWWAXWELL_SANITY_PENALTY

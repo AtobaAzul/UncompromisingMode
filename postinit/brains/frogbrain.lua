@@ -23,6 +23,7 @@ local function EatFoodAction(inst)
         function(item)
             return item.prefab ~= "mandrake"
                 and item.components.edible ~= nil
+				and not (item.components.burnable ~= nil and item.components.burnable:IsBurning())
                 and item:IsOnPassablePoint()
 				and item:IsOnValidGround()
 				and not (item:HasTag("bee") or item:HasTag("mosquito"))

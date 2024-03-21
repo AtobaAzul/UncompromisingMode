@@ -134,10 +134,16 @@ end
 local function GettingBullied(inst)
 	local x, y, z = inst.Transform:GetWorldPosition()
     local ents = TheSim:FindEntities(x, y, z, 20, { "epic" }, { "hoodedwidow","leif" } )
-	if #ents >= 1 or inst.components.homeseeker ~= nil and inst.components.homeseeker.home and inst:GetDistanceSqToInst(inst.components.homeseeker.home) > TUNING.DRAGONFLY_RESET_DIST*20 then
+	if inst.components.homeseeker ~= nil and inst.components.homeseeker.home and inst:GetDistanceSqToInst(inst.components.homeseeker.home) > TUNING.DRAGONFLY_RESET_DIST*20 then
 	inst.bullier = true
 	else
 	inst.bullier = false
+	end
+	
+	for i, v in pairs(ents) do
+		if v ~= nil and v.components.combat ~= nil and v.components.combat.target ~= nil and v.components.combat.target == inst then
+			inst.bullier = true
+		end
 	end
 end
 -----HE:LP [ASME] MEE 

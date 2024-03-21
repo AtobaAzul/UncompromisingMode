@@ -67,6 +67,20 @@ local function OnDeath(inst, data)
 end
 
 local DIET = { FOODTYPE.MEAT }
+
+local function OnSave(inst, data)
+    if data ~= nil then
+        data.maxhealth = inst.components.health.maxhealth
+    end
+    return data
+end
+
+local function OnLoad(inst, data)
+    if data ~= nil and data.maxhealth then
+        inst.components.health.maxhealth = data.maxhealth
+    end
+end
+
 local function commonfn(build, tags)
     local inst = CreateEntity()
 
@@ -101,6 +115,10 @@ local function commonfn(build, tags)
     if not TheWorld.ismastersim then
         return inst
     end
+
+    inst.OnSave = OnSave
+    inst.OnLoad = OnLoad
+    
     inst.Transform:SetScale(1.2, 1.2, 1.2)
     ---------------------
     inst:AddComponent("locomotor")

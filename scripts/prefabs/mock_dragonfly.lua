@@ -391,7 +391,7 @@ local function LaunchProjectile(inst)
         projectile.components.complexprojectile:SetLaunchOffset(Vector3(5, 4, 0))
         --projectile.components.wateryprotection.addwetness = TUNING.WATERBALLOON_ADD_WETNESS/2
         projectile.components.complexprojectile:SetHorizontalSpeed(speed + math.random(4, 9))
-        projectile.components.complexprojectile:SetGravity(-45)
+        projectile.components.complexprojectile:SetGravity(-55)
         projectile.components.complexprojectile:Launch(targetpos, inst, inst)
         projectile.dragonflyspit = true
     end

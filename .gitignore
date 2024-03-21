@@ -1,5 +1,17 @@
+# Files, filename portions, folders, and extensions in this list will be ignored when pushing from anywhere else.
+# They'll still be downloaded automatically if they're already in the project, or added manually.
 
 exported
 devcapture_output.lua
 .vscode/settings.json
 *.png
+.editorconfig
+## **/~Tertiary/
+
+
+### Soundbank junk files ###
+
+sound/.fsbcache/*
+*.log
+*-log.txt
+*.bak

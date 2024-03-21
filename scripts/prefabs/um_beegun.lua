@@ -204,6 +204,14 @@ local function can_cast_fn(doer, target, pos)
     end
 end
 
+local function onattack(inst, attacker, target)
+	if target ~= nil and target:IsValid() and attacker ~= nil and attacker:IsValid() and attacker:HasTag("vetcurse") then
+		if target.components.health ~= nil and not target.components.health:IsDead() and target.components.combat ~= nil then
+			target.components.combat:GetAttacked(attacker, 10, nil)
+		end
+	end
+end
+
 local function fn(anim, name, swap, beetype)
     local inst = CreateEntity()
 
@@ -260,7 +268,8 @@ local function fn(anim, name, swap, beetype)
     inst.components.equippable:SetOnUnequip(OnUnequip)
 
     inst:AddComponent("weapon")
-    inst.components.weapon:SetDamage(15)
+	inst.components.weapon:SetDamage(0)
+	inst.components.weapon:SetOnAttack(onattack)
     inst.components.weapon:SetRange(TUNING.SLINGSHOT_DISTANCE, TUNING.SLINGSHOT_DISTANCE_MAX)
     inst.components.weapon:SetOnProjectileLaunched(OnProjectileLaunched)
     inst.components.weapon:SetProjectile(nil)
@@ -367,7 +376,7 @@ local function bullet(beetype, anim, ischerry)
     inst.anim = anim
 
     inst:AddComponent("weapon")
-    inst.components.weapon:SetDamage(15)
+    inst.components.weapon:SetDamage(10)
     inst.components.weapon:SetRange(8, 10)
 
     inst:AddComponent("projectile")
@@ -678,6 +687,9 @@ local function bulletfn(ischerry)
     inst:AddTag("flying")
     inst:AddTag("ignorewalkableplatformdrowning")
     inst:AddTag("scarytoprey")
+    inst:AddTag("noauradamage")
+    inst:AddTag("soulless")
+    inst:AddTag("noember")
 
     inst.AnimState:SetBank("bee")
 	

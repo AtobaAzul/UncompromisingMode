@@ -13,7 +13,7 @@ env.AddPrefabPostInit("armorruins", function(inst)
 
 	inst.components.equippable.onequipfn = function(inst, owner)
 		if owner.components.sanity ~= nil then
-			owner.components.sanity.neg_aura_modifiers:SetModifier(inst, 0.6)
+			owner.components.sanity.neg_aura_modifiers:SetModifier(inst, 0.7)
 		end
 		
 		if _OldOnEquip ~= nil then

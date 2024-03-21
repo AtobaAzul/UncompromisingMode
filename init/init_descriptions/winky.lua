@@ -139,6 +139,15 @@ DESCRIBE.LAVAE2 = DESCRIBE.LAVAE
 DESCRIBE.DISEASECUREBOMB = "Sack of rock oils."
 DESCRIBE.TOADLINGSPAWNER = "Smells smelly."
 DESCRIBE.VETERANSHRINE = "Why are you speaking..."
+DESCRIBE.VET_SKULL = "Stupid head, not even good for gnawing!"
+DESCRIBE.UM_BOSS_SOUL = "Can't eat it. What's the point?"
+DESCRIBE.UM_DARK_VESTIGES = "Chewy, tastes horrible!"
+DESCRIBE.UM_VOXOLOPHONE = "Stupid box is trying to talk to me."
+
+DESCRIBE.UM_EXHUMER = "Dirty bones, not worth chewing on."
+DESCRIBE.UM_WINGSUIT = "Now I can fly like those filthy birds!"
+DESCRIBE.UM_MOONFLY_LANTERN = "Another shiny thing for my collection."
+
 DESCRIBE.WICKER_TENTACLE = "Green and slimier."
 DESCRIBE.HONEY_LOG = "Crunchy and sweet, like beetles."
 
@@ -182,6 +191,7 @@ DESCRIBE.SHADOW_TELEPORTER = "Maybe it won't notice me taking the gem."
 DESCRIBE.POLLENMITEDEN = "A snack shack, full of juicy bugs."
 DESCRIBE.POLLENMITES = "If only there was a good way to eat them."
 DESCRIBE.SHADOW_CROWN = "It matches my fur at least."
+DESCRIBE.UM_SHADOW_AXE = "Another keepsake, it'll never be used."
 DESCRIBE.RNEGHOST = DESCRIBE.GHOST
 DESCRIBE.LICELOAF = "I'll keep it for later."
 DESCRIBE.SUNGLASSES = "Eye Darkner."
@@ -195,7 +205,11 @@ DESCRIBE.HOODEDWIDOW = "Ah! Who invited you!"
 DESCRIBE.GIANT_TREE = "I should climb up it, and eat the baby birds."
 DESCRIBE.ANCIENTHOODEDTURF = DESCRIBE.TURF_FOREST
 DESCRIBE.HOODEDMOSS = DESCRIBE.TURF_FOREST
+
 DESCRIBE.WIDOWSGRASP = "Haha, my personal toothpick."
+DESCRIBE.SILKSACK = "Wacky, I have no idea what to say about this stupid sack. Please help me papa."
+DESCRIBE.SILKEN_BUNDLE = "I bet I would say something about liking to hoard, but my papa, Wacky, would know better."
+
 DESCRIBE.WEBBEDCREATURE = ""
 ANNOUNCE.WEBBEDCREATURE = "I keep getting stuck when I try to rip it up!"
 DESCRIBE.SNAPDRAGON_BUDDY = "It looks hungry, I am hungry too."

@@ -122,6 +122,15 @@ DESCRIBE.MINOTAUR_BOULDER = "Once again we have barely avoided death."
 DESCRIBE.MINOTAUR_BOULDER_BIG = "Recklessness will be that creatures demise."
 DESCRIBE.SNOWBALL_THROWABLE = "I remember playing in the snow with Abigail."
 DESCRIBE.VETERANSHRINE = "I am used to pain."
+DESCRIBE.VET_SKULL = "We are denied this inevitability."
+DESCRIBE.UM_BOSS_SOUL = "A corrupted soul."
+DESCRIBE.UM_DARK_VESTIGES = "Is this all that remains?"
+DESCRIBE.UM_VOXOLOPHONE = "Will you lead me down another dark path?"
+
+DESCRIBE.UM_EXHUMER = "Death is only the beginning."
+DESCRIBE.UM_WINGSUIT = "Even flight won't free me from this place."
+DESCRIBE.UM_MOONFLY_LANTERN = "Another light in the darkness. How unfortunate."
+
 DESCRIBE.RAT_TAIL = "It contains an acolyte of death."
 DESCRIBE.PLAGUEMASK = "Like a crow, a plague doctor is attracted to death."
 DESCRIBE.SPIDER_TRAPDOOR = "Is it the prey, or am I?"
@@ -169,6 +178,7 @@ DESCRIBE.POLLENMITEDEN = "They're building their own doom."
 DESCRIBE.POLLENMITES = "Like life, they wear you down little by little."
 DESCRIBE.SHADOW_CROWN =
 "Is this what youth feels like for older people? Energetic, yet fragile?"
+DESCRIBE.UM_SHADOW_AXE = "A ghoast from the past seems attached to it still."
 DESCRIBE.RNEGHOST = DESCRIBE.GHOST
 DESCRIBE.SUNGLASSES = "Wonderful, now the world is another shade darker."
 DESCRIBE.TRAPDOORGRASS = DESCRIBE.GRASS
@@ -181,7 +191,11 @@ DESCRIBE.HOODEDWIDOW = "She could eat me in a single bite."
 DESCRIBE.GIANT_TREE = "Ancient, and full of life."
 DESCRIBE.ANCIENTHOODEDTURF = DESCRIBE.TURF_FOREST
 DESCRIBE.HOODEDMOSS = DESCRIBE.TURF_FOREST
+
 DESCRIBE.WIDOWSGRASP = "It could've impaled my chest with ease. I wish it did."
+DESCRIBE.SILKSACK = "For carrying heavy and grotesque burdens."
+DESCRIBE.SILKEN_BUNDLE = "Whatever's in there is sticky now."
+
 DESCRIBE.WEBBEDCREATURE = "If I make a mistake, it could be me in one of those."
 ANNOUNCE.WEBBEDCREATURE = "Unraveling this would require a spiders touch..."
 DESCRIBE.SNAPDRAGON_BUDDY = "Lives for food, like everything else."
@@ -505,6 +519,10 @@ DESCRIBE.SLINGSHOTAMMO_MOONGLASS = DESCRIBE.SLINGSHOTAMMO_THULECITE
 DESCRIBE.SLINGSHOTAMMO_SALT = DESCRIBE.SLINGSHOTAMMO_ROCK
 DESCRIBE.SLINGSHOTAMMO_SLIME = DESCRIBE.SLINGSHOTAMMO_ROCK
 DESCRIBE.SLINGSHOTAMMO_GOOP = DESCRIBE.SLINGSHOTAMMO_ROCK
+DESCRIBE.SLINGSHOTAMMO_FLARE = DESCRIBE.SLINGSHOTAMMO_ROCK
+
+DESCRIBE.SLINGSHOTAMMO_INSANITY = DESCRIBE.SLINGSHOTAMMO_ROCK
+DESCRIBE.SLINGSHOTAMMO_LUNARVINE = DESCRIBE.SLINGSHOTAMMO_ROCK
 
 DESCRIBE.SLINGSHOTAMMO_LIMESTONE = DESCRIBE.SLINGSHOTAMMO_ROCK
 DESCRIBE.SLINGSHOTAMMO_TAR = DESCRIBE.SLINGSHOTAMMO_ROCK

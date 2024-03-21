@@ -31,6 +31,18 @@ local function Zap(inst)
 	SpawnPrefab("sparks").Transform:SetPosition(x, y + .25 + math.random() * 2, z)
 	SpawnPrefab("sparks").Transform:SetPosition(x, y + .25 + math.random() * 2, z)
 	local ents = TheSim:FindEntities(x, y, z, 3.5, { "_health" }, inst.NoTags)
+    local chargeables = TheSim:FindEntities(x,y,z, 3.5, {"_inventoryitem",}, inst.NoTags)
+
+    for k,item in pairs(chargeables) do
+        print(k, item)
+        if item ~= nil and item.components.fueled ~= nil and item.components.fueled.fueltype == FUELTYPE.BATTERYPOWER then
+            item.components.fueled:DoDelta(TUNING.SMALL_FUEL)
+            item.components.fueled.ontakefuelfn(item, TUNING.SMALL_FUEL)
+            if item.components.fueled:GetPercent() > 1 then
+                item.components.fueled:SetPercent(1)
+            end    
+        end
+    end
 
 	for i, v in ipairs(ents) do
 		if v ~= nil and v.components.health ~= nil and not v.components.health:IsDead() and v.components.combat ~= nil then
@@ -45,7 +57,7 @@ local function Zap(inst)
 					
 				local damage = -10 * mult
 				
-				if v.sg ~= nil and not v.sg:HasStateTag("nointerrupt") and not insulated and v:HasTag("player") and not v:HasTag("playerghost") then
+				if v.sg ~= nil and not v.sg:HasStateTag("nointerrupt") and not insulated and v:HasTag("player") and not v:HasTag("playerghost") and v.components.health ~= nil and not v.components.health:IsDead() then
 					v.sg:GoToState("electrocute")
 				end
 						
@@ -56,9 +68,9 @@ local function Zap(inst)
 					v.components.playerlightningtarget:DoStrike()
 				end
 
-				if v.sg ~= nil and not v.sg:HasStateTag("nointerrupt") then
-					v.sg:GoToState("hit")
-				end
+				--if v.sg ~= nil and not v.sg:HasStateTag("nointerrupt") and v.components.health ~= nil and not v.components.health:IsDead() then
+					--v.sg:GoToState("hit")
+				--end
 			end
 		end
 	end
@@ -77,7 +89,8 @@ local function fn()
 
 	inst:AddTag("hound_lightning")
 	inst:AddTag("sharp")
-
+    inst:AddTag("ignorewalkableplatforms")
+    
 	inst.entity:SetPristine()
 
 	if not TheWorld.ismastersim then

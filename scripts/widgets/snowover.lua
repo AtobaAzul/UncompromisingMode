@@ -103,7 +103,7 @@ function SnowOver:OnUpdate(dt)
 			self.changed = 0.01
 		elseif self.changed <= 0.8 then
 			self.changed = self.changed + 0.001
-			self.bg2:GetAnimState():SetMultColour(1, 1, 1, self.changed - 0.2)
+			self.bg2:GetAnimState():SetMultColour(1, 1, 1, self.changed - 0.4)
 
 			if self.owner.components.playervision ~= nil and self.owner.components.playervision:HasGoggleVision() then
 				self.bg:GetAnimState():SetMultColour(1, 1, 1, 0)
@@ -120,7 +120,7 @@ function SnowOver:OnUpdate(dt)
 			self.changed = 0
 		elseif self.changed >= 0 then
 			self.changed = self.changed - 0.001
-			self.bg2:GetAnimState():SetMultColour(1, 1, 1, self.changed - 0.2)
+			self.bg2:GetAnimState():SetMultColour(1, 1, 1, self.changed - 0.4)
 			if self.owner.components.playervision ~= nil and self.owner.components.playervision:HasGoggleVision() then
 				self.bg:GetAnimState():SetMultColour(1, 1, 1, 0)
 			else

@@ -85,7 +85,6 @@ local function MakeTackleContainer(name, bank, build, assets)
 
         inst:AddComponent("hauntable")
         inst.components.hauntable:SetHauntValue(TUNING.HAUNT_TINY)
-        inst:AddTag("winona_notouchy")
 
 
         inst.OnSave = onsave

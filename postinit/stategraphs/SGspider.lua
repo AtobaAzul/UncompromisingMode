@@ -18,7 +18,7 @@ env.AddStategraphPostInit("spider", function(inst)
         return "dontstarve/creatures/" .. creature .. "/" .. event
     end
 
-    local _OldAttackEvent = inst.events["doattack"].fn
+    local _OldAttackEvent = inst.events["doattack"] ~= nil and inst.events["doattack"].fn or nil
     if _OldAttackEvent then
         inst.events["doattack"].fn = function(inst, data)
             if not (inst.sg:HasStateTag("busy") or inst.components.health:IsDead()) and inst:HasTag("spider_regular") then

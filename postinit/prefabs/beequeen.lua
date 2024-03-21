@@ -32,10 +32,10 @@ local function StompHandler(inst, data)
 	--[[if inst.components.health and inst.components.health:GetPercent() > 0.5 then --fast foward to the 3rd phase
 		inst.components.health:SetPercent(0.49)
 	end]]
-	if inst.components.timer:GetTimeLeft("spawnguards_cd") then
+	if inst.components.timer:GetTimeLeft("spawnguards_cd") and inst.components.timer:GetTimeLeft("spawnguards_cd") > 3 then
 		local newtime = inst.components.timer:GetTimeLeft("spawnguards_cd") - data.damage / 50 --new code to adjust bq to speed up the fight if player is going through her really quickly, need to make sure her abilities actually get the chance to proc.
-		if newtime < 0 then
-			newtime = 0.1
+		if newtime < 3 then
+			newtime = 3
 		end
 		inst.components.timer:SetTimeLeft("spawnguards_cd", newtime)
 	end
@@ -43,7 +43,12 @@ local function StompHandler(inst, data)
 
 	if inst.components.health and not inst.components.health:IsDead() then
 		if inst.tiredcount then
-			inst.tiredcount = inst.tiredcount - 0.1
+			inst.tiredcount = inst.tiredcount - 0.5
+		end
+		if data.damage >= 100 then
+			if inst.tiredcount then
+				inst.tiredcount = inst.tiredcount - 2
+			end
 		end
 		local soldiers = inst.components.commander:GetAllSoldiers()
 
@@ -67,16 +72,16 @@ local function StompHandler(inst, data)
 				if inst.components.combat.target ~= nil then
 					if data.attacker ~= inst.components.combat.target then
 						if inst.tiredcount then
-							inst.tiredcount = inst.tiredcount - 1
+							inst.tiredcount = inst.tiredcount - 0.5
 						end
 						inst.stomprage = inst.stomprage + 4
 					end
 				end
 				local x, y, z = data.attacker.Transform:GetWorldPosition()
 				if TheWorld.Map:GetPlatformAtPoint(x, z) ~= nil then
-					inst.stomprage = inst.stomprage + 10
+					inst.stomprage = inst.stomprage + 20
 				end
-				if inst.stomprage > 20 and not inst.sg:HasStateTag("ability") and inst.components.health and
+				if inst.stomprage > 40 and not inst.sg:HasStateTag("ability") and inst.components.health and
 					not inst.components.health:IsDead() and not inst:HasTag("doingability") then
 					inst:ForceFacePoint(x, y, z)
 					inst.stomprage = 0
@@ -402,7 +407,7 @@ local function RedoSpawnguard_cd(inst)
 	local x, y, z = inst.Transform:GetWorldPosition()
 	local players = TheSim:FindEntities(x, y, z, 30, { "player" })
 	local count = math.sqrt(#players) * 10
-	local time = math.random(80, 100) - count
+	local time = math.random(100, 120) - count
 	if time < 10 then
 		time = 10
 	end
@@ -468,7 +473,7 @@ local function FinalFormation(inst)
 		else
 			inst:DoTaskInTime(time, function(inst)
 				inst.components.timer:ResumeTimer("spawnguards_cd")
-				inst.tiredcount = 12
+				inst.tiredcount = 15
 				if inst.components.health and not inst.components.health:IsDead() then
 					inst.sg:GoToState("tired_pre")
 				end
@@ -534,7 +539,7 @@ local function ActivateHitAbility(inst)
 	--[[if inst.should_ability then
 		TheNet:Announce(inst.previousability)
 	end]]
-	if inst.components.health and not inst.components.health:IsDead() then
+	if inst.components.health and not inst.components.health:IsDead() and not inst.sg:HasStateTag("spawnguards") and not inst.sg:HasStateTag("ability") and not inst.sg:HasStateTag("tired") then
 		if pct > 0.75 then
 			--Nothing.... for now. There are no post-spawn abilities at 100%-75%
 		elseif pct > 0.5 then -------------------------------------------------------------------------------------------------
@@ -644,9 +649,9 @@ end
 local function BeeQueenPost(inst)
 	inst.Physics:CollidesWith(COLLISION.FLYERS)
 
-	if inst.components.health ~= nil then
-		inst.components.health:SetMaxHealth(TUNING.DSTU.BEEQUEEN_HEALTH)
-	end
+	--if inst.components.health ~= nil then
+		--inst.components.health:SetMaxHealth(TUNING.DSTU.BEEQUEEN_HEALTH)
+	--end
 
 	inst:AddComponent("groundpounder") --Groundpounder is visual only
 	inst.components.groundpounder.destroyer = true
@@ -758,8 +763,10 @@ local function BeeQueenPost(inst)
 		local x, y, z = inst.Transform:GetWorldPosition()
 		local ents = TheSim:FindEntities(x, y, z, 20, { "epic" }, { "beequeen", "cherrybeequeen", "lordfruitfly" } )
 		
-		if #ents > 0 then
-			inst:PushEvent("flee")
+		for i, v in pairs(ents) do
+			if v ~= nil and v.components.combat ~= nil and v.components.combat.target ~= nil and v.components.combat.target == inst then
+				inst:PushEvent("flee")
+			end
 		end
 
 		if inst.components.health and not inst.components.health:IsDead() and not inst.sg:HasStateTag("busy") and
@@ -767,6 +774,7 @@ local function BeeQueenPost(inst)
 			inst.sg:GoToState("lob")
 		end
 	end)
+	
 	inst:DoTaskInTime(0, function(inst) inst.StopHoney(inst) end)
 end
 

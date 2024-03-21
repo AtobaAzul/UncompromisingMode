@@ -250,9 +250,11 @@ local states =
             inst.Physics:SetMotorVelOverride(0, 25, 0)
             local x, y, z = inst.Transform:GetWorldPosition()
             if y > 50 then
-                inst.food_baby:Remove()
-                inst.food_baby = nil
-                inst.sg:GoToState("digest")
+				if inst.food_baby then
+					inst.food_baby:Remove()
+					inst.food_baby = nil
+					inst.sg:GoToState("digest")
+				end
             end
         end,
         events =
@@ -271,7 +273,7 @@ local states =
 
         ontimeout = function(inst)
             inst.sg:GoToState("glide")
-            if math.random() > 0.33 then
+            if math.random() > 0.66 then
                 local pitcherplant = FindClosestEntity(inst, 80, true, { "pitcherplant" }) --probably overkill radius.
                 if pitcherplant ~= nil and pitcherplant.components.lootdropper ~= nil then
                     pitcherplant.components.lootdropper:DropLoot()

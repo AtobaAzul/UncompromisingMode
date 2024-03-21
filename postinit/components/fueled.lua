@@ -2,99 +2,121 @@ local env = env
 GLOBAL.setfenv(1, GLOBAL)
 -----------------------------------------------------------------
 env.AddComponentPostInit("fueled", function(self)
-	local _TakeFuelItem = self.TakeFuelItem
+    local _CanAcceptFuelItem = self.CanAcceptFuelItem
 
-	function self:TakeFuelItem(item, doer)
-		if item ~= nil and item:HasTag("sludge_oil") and item.components.finiteuses ~= nil and self:CanAcceptFuelItem(item) then
-			local fuel_obj = item or doer
 
-			local masterymult = doer ~= nil and doer.components.fuelmaster ~= nil and
-				doer.components.fuelmaster:GetBonusMult(fuel_obj, self.inst) or 1
+    local sludge_valid_fuels = {
+        FUELTYPE.BURNABLE,
+        FUELTYPE.CAVE,
+        FUELTYPE.CHEMICAL
+    }
+    function self:CanAcceptFuelItem(item)
+        print(item)
+        if self.accepting and item then
+            local fuel = item.components.fuel or item.components.fueler
+            print((table.contains(sludge_valid_fuels, self.fueltype) or
+                table.contains(sludge_valid_fuels, self.secondaryfueltype)), fuel.fueltype == FUELTYPE.SLUDGE)
 
-			local fuel = fuel_obj.components.fuel or fuel_obj.components.fueler
+            return ((table.contains(sludge_valid_fuels, self.fueltype) or
+                        table.contains(sludge_valid_fuels, self.secondaryfueltype)) and
+                    fuel.fueltype == FUELTYPE.SLUDGE) or
+                _CanAcceptFuelItem(self, item)
+        end
+        return _CanAcceptFuelItem(self, item)
+    end
 
-			local fuelvalue = fuel.fuelvalue * self.bonusmult * masterymult
+    local _TakeFuelItem = self.TakeFuelItem
+    function self:TakeFuelItem(item, doer)
+        if item ~= nil and item:HasTag("sludge_oil") and item.components.finiteuses ~= nil and self:CanAcceptFuelItem(item) then
+            local fuel_obj = item or doer
 
-			self:DoDelta(fuelvalue, doer)
+            local masterymult = doer ~= nil and doer.components.fuelmaster ~= nil and
+                doer.components.fuelmaster:GetBonusMult(fuel_obj, self.inst) or 1
 
-			fuel:Taken(self.inst)
+            local fuel = fuel_obj.components.fuel or fuel_obj.components.fueler
 
-			item.components.finiteuses:Use()
+            local fuelvalue = fuel.fuelvalue * self.bonusmult * masterymult
 
-			if self.ontakefuelfn ~= nil then
-				self.ontakefuelfn(self.inst, fuelvalue)
-			end
-			self.inst:PushEvent("takefuel", { fuelvalue = fuelvalue })
+            self:DoDelta(fuelvalue, doer)
 
-			return true
-		end
+            fuel:Taken(self.inst)
 
-		if self.inst:HasTag("overchargeable") then
-			local _currentfuel = self.currentfuel
-			local ret = _TakeFuelItem(self, item, doer)
+            item.components.finiteuses:Use()
 
-			local fuel_obj = item or doer
-			local fuel = fuel_obj.components.fuel or fuel_obj.components.fueler
-			local wetmult = fuel_obj:GetIsWet() and TUNING.WET_FUEL_PENALTY or 1
-			local masterymult = doer ~= nil and doer.components.fuelmaster ~= nil and
-				doer.components.fuelmaster:GetBonusMult(fuel_obj, self.inst) or 1
-			local fuelvalue = fuel.fuelvalue * self.bonusmult * wetmult * masterymult
+            if self.ontakefuelfn ~= nil then
+                self.ontakefuelfn(self.inst, fuelvalue)
+            end
+            self.inst:PushEvent("takefuel", { fuelvalue = fuelvalue })
 
-			if _currentfuel < self.maxfuel and self.currentfuel > self.maxfuel and doer ~= nil and not doer:HasTag("handyperson") then
-				self:SetPercent(1)
-			end
+            return true
+        end
 
-			if self.currentfuel > self.maxfuel and doer ~= nil and not doer:HasTag("handyperson") then
-				self:DoDelta( -fuelvalue, doer)
-			end
+        if self.inst:HasTag("overchargeable") then
+            local _currentfuel = self.currentfuel
+            local ret = _TakeFuelItem(self, item, doer)
 
-			return ret
-		end
+            local fuel_obj = item or doer
+            local fuel = fuel_obj.components.fuel or fuel_obj.components.fueler
+            local wetmult = fuel_obj:GetIsWet() and TUNING.WET_FUEL_PENALTY or 1
+            local masterymult = doer ~= nil and doer.components.fuelmaster ~= nil and
+                doer.components.fuelmaster:GetBonusMult(fuel_obj, self.inst) or 1
+            local fuelvalue = fuel.fuelvalue * self.bonusmult * wetmult * masterymult
 
-		return _TakeFuelItem(self, item, doer)
-	end
+            if _currentfuel < self.maxfuel and self.currentfuel > self.maxfuel and doer ~= nil and not doer:HasTag("handyperson") then
+                self:SetPercent(1)
+            end
 
-	local _DoDelta = self.DoDelta
+            if self.currentfuel > self.maxfuel and doer ~= nil and not doer:HasTag("handyperson") then
+                self:DoDelta(-fuelvalue, doer)
+            end
 
-	function self:DoDelta(amount, doer)
-		if self.inst:HasTag("overchargeable") then
-			local oldsection = self:GetCurrentSection()
+            return ret
+        end
 
-			self.currentfuel = math.max(0, math.min(self.maxfuel * 2, self.currentfuel + amount))
+        return _TakeFuelItem(self, item, doer)
+    end
 
-			local newsection = self:GetCurrentSection()
+    local _DoDelta = self.DoDelta
 
-			if oldsection ~= newsection then
-				if self.sectionfn then
-					self.sectionfn(newsection, oldsection, self.inst, doer)
-				end
+    function self:DoDelta(amount, doer)
+        if self.inst:HasTag("overchargeable") then
+            local oldsection = self:GetCurrentSection()
 
-				self.inst:PushEvent("onfueldsectionchanged",
-					{ newsection = newsection, oldsection = oldsection, doer = doer })
-				if self.currentfuel <= 0 and self.depleted then
-					self.depleted(self.inst)
-				end
-			end
+            self.currentfuel = math.max(0, math.min(self.maxfuel * 2, self.currentfuel + amount))
 
-			self.inst:PushEvent("percentusedchange", { percent = self:GetPercent() })
+            local newsection = self:GetCurrentSection()
 
-			if self.currentfuel > self.maxfuel then
-				self.inst:PushEvent("overcharged", true)
-			else
-				self.inst:PushEvent("overcharged", false)
-			end
-		else
-			_DoDelta(self, amount, doer)
-		end
-	end
+            if oldsection ~= newsection then
+                if self.sectionfn then
+                    self.sectionfn(newsection, oldsection, self.inst, doer)
+                end
 
-	local _GetPercent = self.GetPercent
+                self.inst:PushEvent("onfueldsectionchanged",
+                    { newsection = newsection, oldsection = oldsection, doer = doer })
+                if self.currentfuel <= 0 and self.depleted then
+                    self.depleted(self.inst)
+                end
+            end
 
-	function self:GetPercent()
-		if self.inst:HasTag("overchargeable") then
-			return self.maxfuel > 0 and math.max(0, math.min(2, self.currentfuel / self.maxfuel)) or 0
-		else
-			return _GetPercent(self)
-		end
-	end
+            self.inst:PushEvent("percentusedchange", { percent = self:GetPercent() })
+
+            if self.currentfuel > self.maxfuel then
+                self.inst:PushEvent("overcharged", true)
+            else
+                self.inst:PushEvent("overcharged", false)
+            end
+        else
+            _DoDelta(self, amount, doer)
+        end
+    end
+
+    local _GetPercent = self.GetPercent
+
+    function self:GetPercent()
+        if self.inst:HasTag("overchargeable") then
+            return self.maxfuel > 0 and math.max(0, math.min(2, self.currentfuel / self.maxfuel)) or 0
+        else
+            return _GetPercent(self)
+        end
+    end
 end)

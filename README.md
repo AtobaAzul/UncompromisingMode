@@ -1,15 +1,14 @@
-![logo](https://user-images.githubusercontent.com/94794129/215330839-29a554ed-4965-4a85-9295-b39883f991cc.png)
+![Uncompromising Logo](~Tertiary/Logo%20Boxes/Uncomp%20Text.png)
 
 # Uncompromising Mode
 
-This is the mod repository for the Uncompromising Mode Community Collab.
+This is the offical repository for the Uncompromising Mode mod, an expansion and rebalance mod for Don't Starve Together.
 
-[Steam Workshop Mod Page Link](https://steamcommunity.com/sharedfiles/filedetails/?id=2013783736)
+### Links
+
+[Steam Workshop Mod Page Link](https://steamcommunity.com/sharedfiles/filedetails/?id=2039181790)
 
 [Discord Server Link](https://discord.gg/UF7FKpn)
 
-[Steam Group](https://steamcommunity.com/groups/UncompromisingDST)
+[Wiki](https://uncompromisingmode.wiki.gg/)
 
-[Klei Forum Link](https://forums.kleientertainment.com/forums/topic/111892-announcement-uncompromising-mode/)
-
-[Mod Wiki](https://gitlab.com/uncompromising-survival/uncompromising-survival/wikis/home)

@@ -11,7 +11,7 @@ env.AddPrefabPostInit("sweatervest", function(inst)
 
 	inst.components.equippable.onequipfn = function(inst, owner)
 		if owner.components.sanity ~= nil then
-			owner.components.sanity.neg_aura_modifiers:SetModifier(inst, 0.3)
+			owner.components.sanity.neg_aura_modifiers:SetModifier(inst, 0.4)
 		end
 		
 		if _OldOnEquip ~= nil then

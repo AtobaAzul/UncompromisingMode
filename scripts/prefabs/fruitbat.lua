@@ -4,6 +4,7 @@ require "stategraphs/SGfruitbat"
 SetSharedLootTable('fruitbat',
     {
         { 'giant_blueberry', 1 },
+        { 'batwing', .5 },
     })
 
 
@@ -135,7 +136,8 @@ local function OnAttackOther(inst, data)
             inst.food_baby.brain:Stop()
             inst.food_baby.sg:Stop()
         end
-
+		inst.food_baby.persists = false
+		inst.food_baby:DoTaskInTime(60,function(inst) inst:Remove() end) -- Backup removal if it's somehow interrupted
         inst.food_baby:AddTag("fruitbat_eating")
         inst.sg:GoToState("eat_loop")
     end

@@ -57,14 +57,56 @@ CONSTRUCTION_PLANS["multiplayer_portal_moonrock_constr"] = {
 
 --moving most recipe changes to AllRecipes because of beta. Using AddRecipe adds them to the mod recipe filter
 --while AllRecipes doesn't. Not sure if there's any issues with that.
---skins broke! help!
 
 -- Recipe changes
+AllRecipes["compass"].ingredients = { Ingredient("goldnugget", 4), Ingredient("flint", 2) }
+
 if GetModConfigData("longpig") then
     AllRecipes["reviver"].ingredients = {
         Ingredient("skeletonmeat", 1),
         Ingredient("spidergland", 1)
     }
+end
+
+if GetModConfigData("compostoverrot") then
+    -- Rot Related Recipe Changes [AXE]
+    AllRecipes["lifeinjector"].ingredients = {
+        Ingredient("nitre", 2),
+        Ingredient("red_cap", 6),
+        Ingredient("stinger", 1),
+    }
+    AllRecipes["mushroom_farm"].ingredients = {
+        Ingredient("compost", 4),
+        Ingredient("poop", 5),
+        Ingredient("livinglog", 2),
+    }
+    AllRecipes["compostwrap"].ingredients = {
+        Ingredient("poop", 5),
+        Ingredient("compost", 1),
+        Ingredient("nitre", 1),
+    }
+    AllRecipes["compostingbin"].ingredients = {
+        Ingredient("boards", 3),
+        Ingredient("twigs", 2),
+        Ingredient("cutgrass", 1),
+    }
+
+    --wormwood stuffs
+    AllRecipes["ipecacsyrup"].ingredients = { Ingredient("red_cap", 1), Ingredient("honey", 1), Ingredient("compost", 1) }
+    AllRecipes["wormwood_berrybush"].ingredients = { Ingredient("compost", 2), Ingredient("berries_juicy", 8) }
+    AllRecipes["wormwood_berrybush2"].ingredients = { Ingredient("compost", 2), Ingredient("berries_juicy", 8) }
+    AllRecipes["wormwood_juicyberrybush"].ingredients = { Ingredient("compost", 2), Ingredient("berries", 8) }
+
+    --turf
+    AllRecipes["turf_marsh"].ingredients = { Ingredient("cutreeds", 1), Ingredient("compost", 1) }
+    AllRecipes["wurt_turf_marsh"].ingredients = { Ingredient("cutreeds", 1), Ingredient("compost", 1) }
+end
+
+--woodie stuff
+
+local config_skilltrees = GetModConfigData("woodie_skilltree")
+if config_skilltrees then
+    AllRecipes["walking_stick"].ingredients = { Ingredient("lucy", 0), Ingredient("log", 3), Ingredient("wereitem_goose", 1) }
 end
 
 if GetModConfigData("wanda_nerf") then
@@ -75,11 +117,19 @@ if GetModConfigData("wanda_nerf") then
     }
 end
 
+if TUNING.DSTU.GOTOBED ~= false then
+    AllRecipes["siestahut"].ingredients = {
+        Ingredient("silk", 6),
+        Ingredient("boards", 4),
+        Ingredient("rope", 3)
+    }
+end
+
 if GetModConfigData("beebox_nerf") then
     AllRecipes["beebox"].ingredients = {
         Ingredient("boards", 2),
         Ingredient("honeycomb", 1),
-        Ingredient("bee", 1)
+        Ingredient("bee", 2)
     }
 end
 
@@ -279,7 +329,13 @@ AllRecipes["mast_malbatross"].ingredients = {
     Ingredient("malbatross_feathered_weave", 3)
 }
 
+AllRecipes["winona_spotlight"].ingredients = { Ingredient("sewing_tape", 1), Ingredient("goldnugget", 2), Ingredient("lightbulb", 1) }
+
+AllRecipes["featherpencil"].numtogive = 4 -- 8
+
+
 -- new recipes
+
 if GetModConfigData("snowstorms") then
     AddRecipe2(
         "snowgoggles",
@@ -315,7 +371,7 @@ ChangeSortKey("diseasecurebomb", "premiumwateringcan", "TOOLS", true)
 ChangeSortKey("diseasecurebomb", "lifeinjector", "RESTORATION", true)
 
 if GetModConfigData("snowstorms") then
-    AddRecipe2("ice_snowball", { Ingredient("snowball_throwable", 4) }, TECH.SCIENCE_ONE, { product = "ice" },
+    AddRecipe2("ice", { Ingredient("snowball_throwable", 4) }, TECH.SCIENCE_ONE,
         { "REFINE" })
     ChangeSortKey("ice_snowball", "beeswax", "REFINE", true)
 end
@@ -616,7 +672,7 @@ ChangeSortKey("powercell", "winona_battery_high", "CHARACTER", true)
 
 AddRecipe2(
     "winona_upgradekit_electrical",
-    { Ingredient("goldnugget", 6), Ingredient("sewing_tape", 2), Ingredient("trinket_6", 2) },
+    { Ingredient("goldnugget", 6), Ingredient("sewing_tape", 2), Ingredient(GLOBAL.TUNING.DSTU.UPDATE_CHECK and "wagpunk_bits" or "trinket_6", GLOBAL.TUNING.DSTU.UPDATE_CHECK and 6 or 2) },
     TECH.SCIENCE_TWO,
     { builder_tag = "handyperson" },
     { "CHARACTER", "LIGHT" }
@@ -640,7 +696,7 @@ if GetModConfigData("snowstorms") then
     AddRecipeToFilter("turf_dragonfly", "WINTER")
     ChangeSortKey("turf_dragonfly", "dragonflyfurnace", "WINTER", true)
     AddRecipeToFilter("wall_dreadstone_item", "WINTER")
-    ChangeSortKey("wall_dreadstone_item", "wall_dreadstone_item", "WINTER", true)
+    ChangeSortKey("wall_dreadstone_item", "wall_moonrock_item", "WINTER", true)
 end
 
 AddRecipe2(
@@ -895,10 +951,10 @@ AddRecipe2(
 ChangeSortKey("hermitshop_cookies", "hermitshop_supertacklecontainer", "CRAFTING_STATION", true)
 
 AddRecipe2(
-    "normal_chum",
+    "chum",
     { Ingredient("spoiled_food", 2), Ingredient("rope", 1), Ingredient("waterplant_bomb", 1) },
     TECH.FISHING_ONE,
-    { product = "chum", nounlock = false, numtogive = 2 },
+    { numtogive = 2 },
     { "FISHING" }
 )
 AllRecipes["chum"].ingredients = {
@@ -906,8 +962,10 @@ AllRecipes["chum"].ingredients = {
     Ingredient("rope", 1),
     Ingredient("waterplant_bomb", 1)
 }
-AllRecipes["hermitshop_chum"].ingredients = { Ingredient("messagebottleempty", 1) }
-AllRecipes["hermitshop_chum"].numtogive = 3
+if not GLOBAL.TUNING.DSTU.UPDATE_CHECK then
+    AllRecipes["hermitshop_chum"].ingredients = { Ingredient("messagebottleempty", 1) }
+    AllRecipes["hermitshop_chum"].numtogive = 3
+end
 --[[
 AddRecipe2(
 "hermitshop_oil",
@@ -1007,6 +1065,14 @@ if GetModConfigData("ck_loot") then
         nil,
         { "WEAPONS", "SHADOWMAGIC" }
     )
+    AddRecipe2(
+        "kaleidoscope",
+        { Ingredient("moonglass", 3), Ingredient("moonbutterfly", 5), Ingredient("redgem", 1), Ingredient("greengem", 1), Ingredient("bluegem", 1) },
+        TECH.LOST,
+        nil,
+        { "WEAPONS" }
+    )
+
     ChangeSortKey("staff_starfall", "firestaff", "WEAPONS", true)
     ChangeSortKey("staff_starfall", "firestaff", "MAGIC", true)
 end
@@ -1113,8 +1179,19 @@ if GetModConfigData("wixie_walter") then
     ChangeSortKey("slingshotammo_freeze", "slingshotammo_poop", "WEAPONS", true)
     ChangeSortKey("slingshotammo_freeze", "slingshotammo_poop", "CHARACTER", true)
 
-    ChangeSortKey("slingshotammo_slow", "slingshotammo_freeze", "WEAPONS", true)
-    ChangeSortKey("slingshotammo_slow", "slingshotammo_freeze", "CHARACTER", true)
+    AddRecipe2(
+        "slingshotammo_flare",
+        { Ingredient("redgem", 1) },
+        GLOBAL.TECH.MAGIC_TWO,
+        { builder_tag = "pebblemaker", numtogive = 10, no_deconstruction = true },
+        { "CHARACTER", "WEAPONS" }
+    )
+    GLOBAL.STRINGS.RECIPE_DESC.SLINGSHOTAMMO_FLARE = "A scorching shot!"
+    ChangeSortKey("slingshotammo_flare", "slingshotammo_freeze", "WEAPONS", true)
+    ChangeSortKey("slingshotammo_flare", "slingshotammo_freeze", "CHARACTER", true)
+
+    ChangeSortKey("slingshotammo_slow", "slingshotammo_flare", "WEAPONS", true)
+    ChangeSortKey("slingshotammo_slow", "slingshotammo_flare", "CHARACTER", true)
 
     ChangeSortKey("slingshotammo_thulecite", "slingshotammo_slow", "WEAPONS", true)
     ChangeSortKey("slingshotammo_thulecite", "slingshotammo_slow", "CHARACTER", true)
@@ -1301,11 +1378,38 @@ if GetModConfigData("wixie_walter") then
     end)
 end
 
+AddRecipe2("codex_mantra", { Ingredient("papyrus", 2), Ingredient("nightmarefuel", 2), Ingredient(GLOBAL.CHARACTER_INGREDIENT.HEALTH, 50) }, TECH.NONE, { builder_tag = "codexmantrareader" },
+	{ "CHARACTER" })
+ChangeSortKey("codex_mantra", "waxwelljournal", "CHARACTER", true)
+
+AddRecipe2(
+	"pact_armor_sanity",
+	{ Ingredient("nightmarefuel", 2) },
+	GLOBAL.TECH.NONE,
+	{ builder_tag = "codexmantrareader", sg_state = "pact_armor_craft", image = "armor_sanity.tex" },
+	{ "CHARACTER", "ARMOUR" }
+)
+AddRecipe2(
+	"pact_sword_sanity",
+	{ Ingredient("nightmarefuel", 2) },
+	GLOBAL.TECH.NONE,
+	{ builder_tag = "codexmantrareader", sg_state = "pact_sword_craft", image = "nightsword.tex" },
+	{ "CHARACTER", "WEAPONS" }
+)
+
+AddRecipe2("um_record_menu", {Ingredient("batwing", 1), Ingredient("charcoal", 1)}, TECH.SCIENCE_TWO, {atlas = "images/inventoryimages/um_record_menu.xml"}, {"DECOR"})
+AddRecipe2("um_record_wixie", {Ingredient("batwing", 1), Ingredient("charcoal", 1)}, TECH.SCIENCE_TWO, {atlas = "images/inventoryimages/um_record_wixie.xml"}, {"DECOR"})
+AddRecipe2("um_record_walter", {Ingredient("batwing", 1), Ingredient("charcoal", 1)}, TECH.SCIENCE_TWO, {atlas = "images/inventoryimages/um_record_walter.xml"}, {"DECOR"})
+AddRecipe2("um_record_wathom", {Ingredient("batwing", 1), Ingredient("charcoal", 1)}, TECH.SCIENCE_TWO, {atlas = "images/inventoryimages/um_record_wathom.xml"}, {"DECOR"})
+AddRecipe2("um_record_winky", {Ingredient("batwing", 1), Ingredient("charcoal", 1)}, TECH.SCIENCE_TWO, {atlas = "images/inventoryimages/um_record_winky.xml"}, {"DECOR"})
+AddRecipe2("um_record_hooded_widow", {Ingredient("batwing", 1), Ingredient("charcoal", 1)}, TECH.SCIENCE_TWO, {atlas = "images/inventoryimages/um_record_hooded_widow.xml"}, {"DECOR"})
+AddRecipe2("um_record_stranger", {Ingredient("batwing", 1), Ingredient("charcoal", 1)}, TECH.SCIENCE_TWO, {atlas = "images/inventoryimages/um_record_stranger.xml"}, {"DECOR"})
+
 --recipe postinits
 AddPrefabPostInit("forest", function(inst)
     AddRecipePostInitAny(function(recipe)
         if recipe.FindAndConvertIngredient ~= nil then
-            local tar = recipe:FindAndConvertIngredient("tar")    -- tar/sludge can replace eachother!
+            local tar = recipe:FindAndConvertIngredient("tar")             -- tar/sludge can replace eachother!
             local sludge = recipe:FindAndConvertIngredient("sludge")
             local shark_fin = recipe:FindAndConvertIngredient("shark_fin") -- shark fins/rockjaw leather can replace eachother!
             local rockjawleather = recipe:FindAndConvertIngredient("rockjawleather")
@@ -1389,10 +1493,6 @@ STRINGS.ACTIONS.OPEN_CRAFTING.BOMBMIXER = "Mix at"
 STRINGS.RECIPE_DESC.TRANSMUTE_MONSTERMEAT = "Transmute Monster Morsels into Monster Meat"
 STRINGS.RECIPE_DESC.TRANSMUTE_MONSTERSMALLMEAT = "Transmute Monster Morsels into Monster Meat"
 
-STRINGS.SKILLTREE.WILSON.WILSON_ALCHEMY_4_DESC =
-    STRINGS.SKILLTREE.WILSON.WILSON_ALCHEMY_4_DESC ..
-    "\nTransform 3 Monster Morsels into a Monster Meat.\nTransform a Monster Meat into 2 Monster Morsels."
-
 STRINGS.RECIPE_DESC.WATERMELON_LANTERN = "Juicy illumination."
 STRINGS.RECIPE_DESC.CRITTERLAB_REAL = "Cute pals to ruin the mood."
 STRINGS.RECIPE_DESC.UM_SAND = "Turn a big rock into smaller rocks."
@@ -1466,6 +1566,9 @@ STRINGS.RECIPE_DESC.WINONA_CATAPULT_ITEM = STRINGS.RECIPE_DESC.WINONA_CATAPULT
 STRINGS.RECIPE_DESC.WINONA_SPOTLIGHT_ITEM = STRINGS.RECIPE_DESC.WINONA_SPOTLIGHT
 STRINGS.RECIPE_DESC.WINONA_BATTERY_LOW_ITEM = STRINGS.RECIPE_DESC.WINONA_BATTERY_LOW
 STRINGS.RECIPE_DESC.WINONA_BATTERY_HIGH_ITEM = STRINGS.RECIPE_DESC.WINONA_BATTERY_HIGH
+
+GLOBAL.STRINGS.RECIPE_DESC.PACT_ARMOR_SANITY = "Wrapped in your sins."
+GLOBAL.STRINGS.RECIPE_DESC.PACT_SWORD_SANITY = "Hefty, like the weight on your shoulders."
 
 -- [ PROTOTYPERS ] --
 GLOBAL.PROTOTYPER_DEFS.critterlab_real = GLOBAL.PROTOTYPER_DEFS.critterlab

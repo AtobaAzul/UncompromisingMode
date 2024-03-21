@@ -36,7 +36,7 @@ end
 
 TUNING.SNOW_X_SCALE = 0 + math.random(0.3, 0.5)
 TUNING.SNOW_Y_SCALE = 0 + math.random(0.1, 0.3)
-TUNING.SNOW_REGROW_TIME = 300
+TUNING.SNOW_REGROW_TIME = 180
 TUNING.SNOW_REGROW_VARIANCE = 60
 TUNING.SNOW_DEPLETE_CHANCE = 0.25
 
@@ -76,7 +76,7 @@ local function FindSpreadSpot(inst)
         inst.redo = true
     end
 
-    if #TheSim:FindEntities(x, y, z, 64, {"snowpile"}) > 32 then -- limit all snowpiles in a big radius
+    if #TheSim:FindEntities(x, y, z, 64, {"snowpile"}) > 48 then -- limit all snowpiles in a big radius
         inst.redo = true
         inst.count = 9
     end
@@ -230,7 +230,15 @@ local function workcallback(inst, worker, workleft)
         inst:Remove()
     end
     if inst.components.workable.workleft <= 0 then
-		inst.components.lootdropper:SpawnLootPrefab("snowball_throwable")
+	inst.components.lootdropper:SpawnLootPrefab("snowball_throwable")
+	if IsSpecialEventActive(SPECIAL_EVENTS.WINTERS_FEAST) then --IT'S INSANE HOW JOLLY AND FESTIVE I AM BRAGHHGGH
+		local more_balls = math.floor(math.random(1.5,4))
+		for i = 1, more_balls do
+			local ball = inst.components.lootdropper:SpawnLootPrefab("snowball_throwable")
+			local strength = math.random(1, 2.25)
+			Launch(ball, inst, strength)
+		end
+	end
         inst:Remove()
     else
         startregen(inst)
@@ -473,6 +481,9 @@ local function snowpilefn(Sim)
     inst.components.workable:SetWorkLeft(1)
     inst.components.workable:SetOnWorkCallback(workcallback)
 
+
+    local balls_count = 1
+    if IsSpecialEventActive(SPECIAL_EVENTS.WINTERS_FEAST) then balls_count = math.floor(math.random(2, 4.5)) end --THIS IS SO JOLLY GRAAAH
     inst:AddComponent("pickable")
     inst.components.pickable.picksound = "dontstarve/wilson/harvest_berries"
 
@@ -482,7 +493,7 @@ local function snowpilefn(Sim)
     inst.components.pickable.makefullfn = makefullfn
     inst.components.pickable.max_cycles = 3
     inst.components.pickable.cycles_left = 1
-    inst.components.pickable:SetUp("snowball_throwable", 0)
+    inst.components.pickable:SetUp("snowball_throwable", 0, balls_count)
     inst.components.pickable.transplanted = true
 
     local x, y, z = inst.Transform:GetWorldPosition()
@@ -492,9 +503,9 @@ local function snowpilefn(Sim)
 
     inst:ListenForEvent("onremove", function()
         local x, y, z = inst.Transform:GetWorldPosition()
-        local inlimbostructures = TheSim:FindEntities(x, y, z, inst.components.aura.radius, {"structure", "INLIMBO"}, {"wall"})
+        local inlimbostructures = TheSim:FindEntities(x, y, z, inst.components.aura.radius, {"structure", "NOCLICK"}, {"wall"})
         for i, v in ipairs(inlimbostructures) do
-            v:RemoveTag("INLIMBO")
+            v:RemoveTag("NOCLICK")
         end
     end)
 

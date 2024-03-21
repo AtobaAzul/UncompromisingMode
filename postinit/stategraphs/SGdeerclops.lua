@@ -409,7 +409,7 @@ env.AddStategraphPostInit("deerclops", function(inst)
             onenter = function(inst, target)
                 inst.Physics:Stop()
                 inst.AnimState:PlayAnimation("atk2")
-                EnableEightFaced(inst)
+				inst:SwitchToEightFaced()
                 if target ~= nil and target:IsValid() then
                     if inst.components.combat:TargetIs(target) then
                         inst.components.combat:StartAttack()
@@ -444,8 +444,7 @@ env.AddStategraphPostInit("deerclops", function(inst)
             timeline =
             {
                 TimeEvent(FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/deerclops/attack", nil) end),
-                TimeEvent(4 * FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/deerclops/step",
-                        nil, .7) end),
+                TimeEvent(4 * FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/deerclops/step", nil, .7) end),
                 TimeEvent(6 * FRAMES, function(inst)
                     ShakeAllCameras(CAMERASHAKE.VERTICAL, .2, .02, .5, inst, SHAKE_DIST)
                     SetLightValue(inst, .97)
@@ -521,7 +520,7 @@ env.AddStategraphPostInit("deerclops", function(inst)
                 SetLightValueAndOverride(inst, 1, 0)
                 SetLightColour(inst, 1)
                 if not inst.sg.statemem.keepfacing then
-                    DisableEightFaced(inst)
+					inst:SwitchToFourFaced()
                 end
             end,
         },
@@ -676,6 +675,7 @@ env.AddStategraphPostInit("deerclops", function(inst)
 
             onenter = function(inst)
                 --inst.components.sleeper:SetResistance(400)
+				inst.AnimState:SetBuild("deerclops_build_old")
                 inst.Physics:Stop()
                 inst.AnimState:PlayAnimation("fortresscast_pre")
                 SpawnBlocks(inst, inst:GetPosition(), 19)
@@ -700,14 +700,16 @@ env.AddStategraphPostInit("deerclops", function(inst)
                     inst.sg:GoToState("aurafreeze")
                 end),
             },
-
-
+            onexit = function(inst)
+				inst.AnimState:SetBuild("deerclops_build")
+            end,
         },
         State {
             name = "aurafreeze_pst",
             tags = { "busy", "nosleep", "noshove" },
 
             onenter = function(inst)
+				inst.AnimState:SetBuild("deerclops_build_old")
                 inst.Physics:Stop()
                 inst.AnimState:PlayAnimation("fortresscast_pst")
                 inst.components.timer:StartTimer("auratime", 24 + math.random(1, 11))
@@ -731,7 +733,9 @@ env.AddStategraphPostInit("deerclops", function(inst)
                     inst.sg:GoToState("idle")
                 end),
             },
-
+            onexit = function(inst)
+				inst.AnimState:SetBuild("deerclops_build")
+            end,
 
         },
         State {
@@ -739,6 +743,7 @@ env.AddStategraphPostInit("deerclops", function(inst)
             tags = { "busy", "aurafreeze", "nosleep", "noshove"},
 
             onenter = function(inst)
+				inst.AnimState:SetBuild("deerclops_build_old")
                 inst.Physics:Stop()
                 inst.AnimState:PushAnimation("fortresscast_loop")
             end,
@@ -757,7 +762,9 @@ env.AddStategraphPostInit("deerclops", function(inst)
             {
                 EventHandler("animover", function(inst) inst.sg:GoToState("aurafreeze") end),
             },
-
+            onexit = function(inst)
+				inst.AnimState:SetBuild("deerclops_build")
+            end,
 
         },
         State {
@@ -765,6 +772,7 @@ env.AddStategraphPostInit("deerclops", function(inst)
             tags = { "busy", },
 
             onenter = function(inst)
+				inst.AnimState:SetBuild("deerclops_build_old")
                 inst.Physics:Stop()
                 inst.AnimState:PushAnimation("fortresscast_hit")
             end,
@@ -783,7 +791,9 @@ env.AddStategraphPostInit("deerclops", function(inst)
             {
                 EventHandler("animover", function(inst) inst.sg:GoToState("aurafreeze") end),
             },
-
+            onexit = function(inst)
+				inst.AnimState:SetBuild("deerclops_build")
+            end,
 
         },
         State {
@@ -851,6 +861,7 @@ env.AddStategraphPostInit("deerclops", function(inst)
             tags = { "attack", "busy", "heavyhit" },
 
             onenter = function(inst)
+				inst.AnimState:SetBuild("deerclops_build_old")
                 inst.Physics:Stop()
                 inst.AnimState:PlayAnimation("uppercut")
                 inst.components.combat:StartAttack()
@@ -919,13 +930,16 @@ env.AddStategraphPostInit("deerclops", function(inst)
             {
                 EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
             },
-
+            onexit = function(inst)
+				inst.AnimState:SetBuild("deerclops_build")
+            end,
         },
         State {
             name = "uppercutcombo",
             tags = { "attack", "busy", "heavyhit", "noice" },
 
             onenter = function(inst)
+				inst.AnimState:SetBuild("deerclops_build_old")
                 inst.Physics:Stop()
                 inst.AnimState:PlayAnimation("uppercutcombo")
                 inst.components.combat:StartAttack()
@@ -1019,6 +1033,7 @@ env.AddStategraphPostInit("deerclops", function(inst)
 
             onexit = function(inst)
 				inst.components.locomotor.walkspeed = 3
+				inst.AnimState:SetBuild("deerclops_build")
             end,
 
             events =
@@ -1033,6 +1048,7 @@ env.AddStategraphPostInit("deerclops", function(inst)
             tags = { "attack", "busy", },
 
             onenter = function(inst)
+				inst.AnimState:SetBuild("deerclops_build_old")
                 inst.Physics:Stop()
                 inst.AnimState:PlayAnimation("atk")
                 inst.components.combat:StartAttack()
@@ -1074,7 +1090,9 @@ env.AddStategraphPostInit("deerclops", function(inst)
             {
                 EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
             },
-
+            onexit = function(inst)
+				inst.AnimState:SetBuild("deerclops_build")
+            end,
         },
     }
 
@@ -1120,7 +1138,7 @@ env.AddStategraphPostInit("deerclops", function(inst)
                 end),
                 TimeEvent(36 * FRAMES, function(inst) inst.sg:RemoveStateTag("attack") end),
             },
-            deathtimeline =
+			--[[deathtimeline =
             {
                 TimeEvent(0 * FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/deerclops/death") end),
                 TimeEvent(3 * FRAMES, function(inst) SetLightValue(inst, 1.01) end),
@@ -1129,7 +1147,7 @@ env.AddStategraphPostInit("deerclops", function(inst)
                 TimeEvent(6 * FRAMES, function(inst) SetLightValue(inst, 1.07) end),
                 TimeEvent(32 * FRAMES, function(inst)
                     if IsSpecialEventActive(SPECIAL_EVENTS.WINTERS_FEAST) then
-                        local player --[[, rangesq]] = inst:GetNearestPlayer()
+                        local player = inst:GetNearestPlayer()
                         LaunchAt(SpawnPrefab("winter_ornament_light1"), inst, player, 1, 6, .5)
                         inst.SoundEmitter:PlaySound("dontstarve/wilson/equip_item_gold")
                     end
@@ -1172,7 +1190,7 @@ env.AddStategraphPostInit("deerclops", function(inst)
                     end
                     ShakeAllCameras(CAMERASHAKE.FULL, .7, .02, 2, inst, SHAKE_DIST)
                 end),
-            },
+            },]]
         })
 
     CommonStates.AddSleepStates(states,

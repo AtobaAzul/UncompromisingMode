@@ -6,7 +6,7 @@ AddAction("LAVASPIT", "LAVASPIT", function(act)
         local offsetangle = math.atan2(downvec.z, downvec.x) * (180 / math.pi)
         if act.doer.AnimState:GetCurrentFacing() == 0 then -- Facing right
             offsetangle = offsetangle + 70
-        else -- Facing left
+        else                                               -- Facing left
             offsetangle = offsetangle - 70
         end
         while offsetangle > 180 do offsetangle = offsetangle - 360 end
@@ -65,7 +65,7 @@ end)
 local createburrow = AddAction("CREATE_BURROW", GLOBAL.STRINGS.ACTIONS.CREATE_BURROW, function(act)
     local act_pos = act:GetActionPoint()
     if act.doer.components.hunger.current > 15 and not GLOBAL.TheWorld.Map:GetPlatformAtPoint(act_pos.x, act_pos.z) then
-        local burrows = GLOBAL.TheSim:FindEntities(act_pos.x, 0, act_pos.z, 10000, {"winkyburrow"})
+        local burrows = GLOBAL.TheSim:FindEntities(act_pos.x, 0, act_pos.z, 10000, { "winkyburrow" })
         local home = false
 
         for i, v in pairs(burrows) do if v.myowner == act.doer.userid then home = true end end
@@ -105,24 +105,6 @@ end)
 charge_powercell.instant = true
 charge_powercell.rmb = true
 charge_powercell.priority = HIGH_ACTION_PRIORITY
-
-local _RummageFn = GLOBAL.ACTIONS.RUMMAGE.fn
-
-GLOBAL.ACTIONS.RUMMAGE.fn = function(act)
-    local targ = act.target or act.invobject
-
-    --[[if targ ~= nil and targ:HasTag("winky_storage") then
-		if GLOBAL.TheWorld.components.winkyburrowinventory.trunk and GLOBAL.TheWorld.components.winkyburrowinventory.trunk.components.container:IsOpen() and not GLOBAL.TheWorld.components.winkyburrowinventory.trunk.components.container:IsOpenedBy(act.doer) then
-			return false, "INUSE"
-		end
-	elseif targ ~= nil and targ:HasTag("skull_storage") then
-		if GLOBAL.TheWorld.components.skullchestinventory.trunk and GLOBAL.TheWorld.components.skullchestinventory.trunk.components.container:IsOpen() and not GLOBAL.TheWorld.components.skullchestinventory.trunk.components.container:IsOpenedBy(act.doer) then
-			return false, "INUSE"
-		end
-	else]]
-    if targ ~= nil and targ:HasTag("winona_notouchy") and not act.doer:HasTag("handyperson") then return false, "WINONATOOLBOX" end
-    return _RummageFn(act)
-end
 
 if TUNING.DSTU.WICKERNERF then
     local _ReadFn = GLOBAL.ACTIONS.READ.fn
@@ -182,7 +164,7 @@ GLOBAL.ACTIONS.USESPELLBOOK.strfn = function(act)
     return target:HasTag("telestaff") and "TELESTAFF" or _UseSpellBookStrFn ~= nil and _UseSpellBookStrFn(act) or "BOOK"
 end
 
-local SET_CUSTOM_NAME = GLOBAL.Action({distance = 2, mount_valid = true})
+local SET_CUSTOM_NAME = GLOBAL.Action({ distance = 2, mount_valid = true })
 SET_CUSTOM_NAME.id = "SET_CUSTOM_NAME"
 SET_CUSTOM_NAME.str = STRINGS.ACTIONS.SET_CUSTOM_NAME
 AddAction(SET_CUSTOM_NAME)
@@ -207,4 +189,65 @@ SET_CUSTOM_NAME.fn = function(act)
     end
 end
 
-AddComponentAction("USEITEM", "drawingtool", function(inst, doer, target, actions, right) if target:HasTag("telebase") or target.prefab == "pocketwatch_recall" or target.prefab == "pocketwatch_portal" or target:HasTag("_equippable") then table.insert(actions, GLOBAL.ACTIONS.SET_CUSTOM_NAME) end end)
+GLOBAL.ACTIONS.CHANGEIN.rmb = true
+GLOBAL.ACTIONS.CHANGEIN.priority = 10
+
+GLOBAL.ACTIONS.REPAIR.distance = 2.5
+
+AddComponentAction("USEITEM", "drawingtool", function(inst, doer, target, actions, right) if target:HasTag("telebase") or target.prefab == "pocketwatch_recall" or target.prefab == "pocketwatch_portal" then table.insert(actions, GLOBAL.ACTIONS.SET_CUSTOM_NAME) end end)
+if TUNING.DSTU.WARLY_BUTCHER then
+    local _murderfn = GLOBAL.ACTIONS.MURDER.fn
+    GLOBAL.ACTIONS.MURDER.fn = function(act)
+        local murdered = act.invobject or act.target
+        if murdered ~= nil and (murdered.components.health ~= nil or murdered.components.murderable ~= nil) and act.doer ~= nil and act.doer:HasTag("masterchef") then
+            local stacksize = murdered.components.stackable ~= nil and murdered.components.stackable:StackSize() or 1
+            local x, y, z = act.doer.Transform:GetWorldPosition()
+
+            if murdered.components.lootdropper ~= nil then
+                murdered.causeofdeath = act.doer
+                local pos = GLOBAL.Vector3(x, y, z)
+                for i = 1, stacksize do
+                    local loots = murdered.components.lootdropper:GenerateLoot()
+                    local lootprefab = loots[#loots > 1 and math.random(#loots) or 1]
+
+                    if lootprefab ~= nil then
+                        local loot = GLOBAL.SpawnPrefab(lootprefab)
+                        if loot ~= nil then
+                            act.doer.components.inventory:GiveItem(loot, nil, pos)
+                        end
+                    end
+                end
+            end
+
+            if murdered.components.inventory and murdered:HasTag("drop_inventory_onmurder") then
+                murdered.components.inventory:TransferInventory(act.doer)
+            end
+        end
+        return _murderfn(act)
+    end
+end
+
+GLOBAL.STRINGS.ACTIONS.START_CHANNELCAST.MOONFALL = "Start Casting"
+
+local _Start_ChannelCastStrFn = GLOBAL.ACTIONS.START_CHANNELCAST.strfn
+GLOBAL.ACTIONS.START_CHANNELCAST.strfn = function(act)
+    return act.invobject and act.invobject:HasTag("moonfallstaff") and "MOONFALL" or _Start_ChannelCastStrFn(act)
+end
+
+
+AddComponentAction("USEITEM", "fuel", function(inst, doer, target, actions)
+    if not (doer.replica.rider ~= nil and doer.replica.rider:IsRiding())
+        or (target.replica.inventoryitem ~= nil and target.replica.inventoryitem:IsGrandOwner(doer)) then
+        if inst.prefab ~= "spoiled_food" and
+            inst:HasTag("quagmire_stewable") and
+            target:HasTag("quagmire_stewer") and
+            target.replica.container ~= nil and
+            target.replica.container:IsOpenedBy(doer) then
+            return
+        end
+
+        if inst:HasTag("SLUDGE_fuel") and (target:HasTag("BURNABLE_fueled") or target:HasTag("CHEMICAL_fueled") or target:HasTag("CAVE_fueled")) then
+            table.insert(actions, inst:GetIsWet() and GLOBAL.ACTIONS.ADDWETFUEL or GLOBAL.ACTIONS.ADDFUEL)
+        end
+    end
+end)

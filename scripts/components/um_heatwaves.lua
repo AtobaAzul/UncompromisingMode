@@ -156,11 +156,22 @@ return Class(function(self, inst)
         if TheWorld.state.israining and TheWorld:HasTag("heatwavestart") then
             TheWorld:PushEvent("ms_forceprecipitation", false)
         end
+
+        if not TheWorld.state.issummer then
+            StopHeatwave()
+            StopHeatWaves()
+        end
     end
 
     function self:LongUpdate(dt) self:OnUpdate(dt) end
 
     self:WatchWorldState("season", OnSeasonChange)
+    self:WatchWorldState("cycles", function(inst)
+        if not TheWorld.state.season == "summer" then
+            OnSeasonChange()
+        end
+    end)
+
     -- self.inst:ListenForEvent("forcetornado", PickAttackTarget)
 
     self.inst:StartUpdatingComponent(self)

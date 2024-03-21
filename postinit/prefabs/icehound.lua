@@ -2,7 +2,7 @@ local env = env
 GLOBAL.setfenv(1, GLOBAL)
 -----------------------------------------------------------------
 local function RemoveFreezeProtection(inst)
-	inst:RemoveTag("um_freezeprotection")
+    inst:RemoveTag("um_freezeprotection")
 end
 
 local function OnHitOtherFreeze(inst, data)
@@ -11,11 +11,17 @@ local function OnHitOtherFreeze(inst, data)
         if not (other.components.health ~= nil and other.components.health:IsDead()) then
             if not other:HasTag("um_freezeprotection") and other.components.freezable ~= nil and other:HasTag("player") and not other.components.freezable:IsFrozen() and not other.sg:HasStateTag("frozen") then
                 other.components.freezable:AddColdness(2)
-				
-				if other.components.freezable:IsFrozen() then
-					other:AddTag("um_freezeprotection")
-					other:DoTaskInTime(3, RemoveFreezeProtection)
-				end
+
+                if other.components.freezable:IsFrozen() then
+                    other:AddTag("um_freezeprotection")
+
+                    if other.freeze_protection_task ~= nil then
+                        other.freeze_protection_task:Cancel()
+                        other.freeze_protection_task = nil
+                    end
+
+                    other.freeze_protection_task = other:DoTaskInTime(3, RemoveFreezeProtection)
+                end
             end
             if other.components.temperature ~= nil then
                 local mintemp = math.max(other.components.temperature.mintemp, 0)
@@ -31,24 +37,14 @@ local function OnHitOtherFreeze(inst, data)
     end
 end
 
-env.AddPrefabPostInit("icehound", function (inst)
-	if not TheWorld.ismastersim then
-		return
-	end
-	
-	if TUNING.DSTU.FROSTBITEHOUNDS then
-    if inst.components.combat ~= nil then
-        inst:ListenForEvent("onhitother", OnHitOtherFreeze)
+env.AddPrefabPostInit("icehound", function(inst)
+    if not TheWorld.ismastersim then
+        return
     end
-	end
-end)
 
-env.AddPrefabPostInit("glacialhound", function (inst)
-	if not TheWorld.ismastersim then
-		return
-	end
-	
-    if inst.components.combat ~= nil then
-        inst:ListenForEvent("onhitother", OnHitOtherFreeze)
+    if TUNING.DSTU.FROSTBITEHOUNDS then
+        if inst.components.combat ~= nil then
+            inst:ListenForEvent("onhitother", OnHitOtherFreeze)
+        end
     end
 end)

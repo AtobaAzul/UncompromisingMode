@@ -50,7 +50,7 @@ TUNING.DSTU = {
     FOOD_SPOILED_FOOD_SANITY = -5,
     FOOD_SEEDS_HUNGER = 1.5,
     -- Food production
-    FOOD_HONEY_PRODUCTION_PER_STAGE = { 0, 1, 2, 4 },
+    FOOD_HONEY_PRODUCTION_PER_STAGE = { 0, 1, 3, 6 },
     -- Respawn time increases
     BUNNYMAN_RESPAWN_TIME_DAYS = 3,
     ----------------------------------------------------------------------------""""
@@ -124,7 +124,7 @@ TUNING.DSTU = {
     MEATBALL = GetModConfigData("meatball"),
     PIEROGI = GetModConfigData("perogi"),
     FARMFOODREDUX = GetModConfigData("farmfoodredux"),
-    ICECREAMBUFF = GetModConfigData("icecreambuff"),
+    ICECREAMBUFF = GetModConfigData("icecream_buff"),
     ----------------------------------------------------------------------------
     -- Mob changes
     ----------------------------------------------------------------------------
@@ -141,12 +141,6 @@ TUNING.DSTU = {
     MONSTER_MCTUSK_HOUND_NUMBER = 5,
     -- Hounds
     MONSTER_HOUNDS_PER_WAVE_INCREASE = 1.5, -- Controlled by player settings
-    -- Hooded Widow
-    WIDOW_HEALTH = GetModConfigData("widow health"),
-    -- Mother Goose
-    MOTHER_GOOSE_HEALTH = GetModConfigData("mother goose health"),
-    -- Wiltfly Health
-    WILTFLY_HEALTH = GetModConfigData("wiltfly health"),
     -- Spawn New Bosses
     SPAWNMOTHERGOOSE = GetModConfigData("mother_goose"),
     SPAWNWILTINGFLY = GetModConfigData("wiltfly"),
@@ -202,13 +196,16 @@ TUNING.DSTU = {
     ----------------------------------------------------------------------------
     -- Woodie
     GOOSE_WATER_WETNESS_RATE = 3,
-    WOODIE = GetModConfigData("woodie"),
+    WOODIE_WET_GOOSE = GetModConfigData("woodie_wet_goose"),
     -- Wolfgang
     WOLFGANG_SANITY_MULTIPLIER = 1.3, -- prev was 1.1
     WOLFGANG_HUNGERMIGHTY = GetModConfigData("wolfgang"),
     -- WX78
     WX78_MOISTURE_DAMAGE_INCREASE = 3,
     WX78_CONFIG = GetModConfigData("wx78"),
+    WXLESS = GetModConfigData("wxless"),
+    WXLESSSPEEDBUMP = GetModConfigData("wxlessspeedbump"),
+
     -- Wormwood
     WORMWOOD_BURN_TIME = 6.66,   -- orig 4.3
     WORMWOOD_FIRE_DAMAGE = 1.75, -- orig 1.25
@@ -216,13 +213,15 @@ TUNING.DSTU = {
     WORMWOOD_CONFIG_PLANTS = GetModConfigData("wormwood_plants"),
     WORMWOOD_CONFIG_TRAPS = GetModConfigData("wormwood_trapbuffs"),
     -- Warly
-	WARLY_FOOD_TASTE = GetModConfigData("warly_food_taste_"),
+    WARLY_FOOD_TASTE = GetModConfigData("warly_food_taste_"),
     WARLY_SAME_OLD_COOLDOWN = total_day_time * 3,
     WARLY_SAME_OLD_MULTIPLIERS = { .6, .5, .35, .2, .1 },
     WARLY_BUTCHER = GetModConfigData("warly_butcher_"),
     --WARLY_FOOD = GetModConfigData("warly_food"),
     -- Wigfrid
-    BATTLESONG_FIRE_RESIST_MOD = 0, -- orig 33% fire resis
+    BATTLESONG_FIRE_RESIST_MOD = 0, -- orig 33% fire resist
+    WATHGRITHR_ARSENAL = GetModConfigData("wathgrithr_arsenal"),
+    WATHGRITHR_REWORK =  GetModConfigData("wathgrithr_rework_"),
     -- Maxwell
     SHADOWWAXWELL_FUEL_COST = 2,
     SHADOWWAXWELL_HEALTH_COST = 15,
@@ -235,15 +234,15 @@ TUNING.DSTU = {
     -- Wickerbottom
     WICKERNERF = GetModConfigData("wickerbottom"),
     WICKERNERF_TENTACLES = GetModConfigData("on tentacles"),
-	
-	-- Willow
-	WILLOW_INSULATION = GetModConfigData("willow insulation"),
-	
+
+    -- Willow
+    --WILLOW_INSULATION = GetModConfigData("willow insulation"),
+
     -- WICKERNERF_HORTICULTURE = GetModConfigData("applied horticulture"),
     WICKERNERF_BEEBOOK = GetModConfigData("apicultural notes"),
     WICKERNERF_MOONBOOK = GetModConfigData("lunar grimoire"),
-    WICKERBUFF_HORTICULTURE = GetModConfigData("lux aeterna"),
-    WICKERBUFF_LIGHT = GetModConfigData("horticulture, expanded"),
+    WICKERBUFF_HORTICULTURE = GetModConfigData("horticulture, expanded"),
+    WICKERBUFF_LIGHT = GetModConfigData("lux aeterna"),
     WICKER_INV_REGEN = GetModConfigData("wicker_inv_regen"),
     -- Wanda
     WANDA_NERF = GetModConfigData("wanda_nerf"),
@@ -307,7 +306,7 @@ TUNING.DSTU = {
     GREEN_VOMIT_NUTRIENTS = { 0, 0, 24 },
     PINK_VOMIT_NUTRIENTS = { 24, 0, 0 },
     PALE_VOMIT_NUTRIENTS = { 8, 8, 8 },
-
+    WAXWELL = GetModConfigData("waxwell"),
     ----------------------------------------------------------------------------
     -- Dynamic Boss Resistance
     ----------------------------------------------------------------------------
@@ -335,7 +334,7 @@ TUNING.DSTU = {
     ANNOUNCE_BASESTATUS = GetModConfigData("announce_basestatus"),
     EYEBRELLAREWORK = GetModConfigData("eyebrellarework"),
     -- More Config
-    UPDATE_CHECK = CurrentRelease.GreaterOrEqualTo("R30_ST_WOODWOLFWORM"), -- REMEMBER TO ALWAYS UPDATE THIS WITH NEW BETAS.
+    UPDATE_CHECK = CurrentRelease.GreaterOrEqualTo("R33_QOL_SPRINGCLEANING"), -- REMEMBER TO ALWAYS UPDATE THIS WITH NEW BETAS.
     POCKET_POWERTRIP = GetModConfigData("pocket_powertrip"),
     WINTER_BURNING = GetModConfigData("winter_burning"),
     HUNGRY_VOID = GetModConfigData("hungry_void"),
@@ -344,7 +343,7 @@ TUNING.DSTU = {
     RAW_CROPS_NERF = GetModConfigData("rawcropsnerf"),
     WENDY_NERF = GetModConfigData("wendy"),
     TOADS = GetModConfigData("toads"),
-    MONSTER_EGGS = GetModConfigData("monstereggs"),
+    MONSTER_EGGS = GetModConfigData("monster_eggs"),
     IMPASSBLES = GetModConfigData("passibleimpassibles"),
     VETCURSE = GetModConfigData("vetcurse"),
     MOON_TRANSFORMATIONS = GetModConfigData("moon_transformations"),
@@ -358,7 +357,7 @@ TUNING.DSTU = {
     WINONA_GEN = GetModConfigData("winona_gen_"),
     RICE = GetModConfigData("rice"),
     NEWRECIPES = GetModConfigData("newrecipes"),
-    CAVECLOPS = GetModConfigData("caveclops"),
+    CAVECLOPS = GetModConfigData("cave_clops"),
     HOTCAVES = GetModConfigData("hotcaves"),
     ITEMCHECK = GetModConfigData("itemcheck"),
     SEEDS = GetModConfigData("seeds"),
@@ -366,9 +365,10 @@ TUNING.DSTU = {
     BEEFALO_NERF = GetModConfigData("beefalo_nerf"),
     NO_MOCK_DRAGONFLY_BOSS_TIME = GetModConfigData("wiltfly_spawn"),
     NO_MOTHER_GOOSE_BOSS_TIME = GetModConfigData("mother_goose_spawn"),
-    WATHOM_MAX_DAMAGE_CAP = GetModConfigData("wathom_maxdmg"),
+    WATHOM_MAX_DAMAGE_CAP = GetModConfigData("wathom_max_dmg"),
     WATHOM_AMPED_VULNERABILITY = GetModConfigData("wathom_ampvulnerability"),
     WATHOM_ARMOR_DAMAGE = GetModConfigData("wathom_armordamage"),
+    SHADOW_WATHOM = GetModConfigData("wathom_undeath"),
     PK_GUARDS = GetModConfigData("pigking_guards"),
     BERNIE_BUFF = GetModConfigData("bernie_buffs"),
     COMPROMISING_SHADOWVORTEX = GetModConfigData("compromising_vortex"),
@@ -377,44 +377,53 @@ TUNING.DSTU = {
     WIXIE_BIRDS = GetModConfigData("wixie_birds"),
     MONSTERSMALLMEAT = GetModConfigData("monstersmallmeat"),
     THE_COOLER_SACRED_CHEST = GetModConfigData("the_cooler_sacred_chest"),
-    BOSS_RESISTANCE = GetModConfigData("bossresistance"),
+    BOSS_RESISTANCE = GetModConfigData("boss_resistance_"),
     STORMS = GetModConfigData("um_storms"),
     STORMS_PERFORMANCE = GetModConfigData("um_storms_performance"),
     PYRENETTLES = GetModConfigData("pyrenettles"),
     HEATWAVES = GetModConfigData("heatwaves"),
     SMOG = GetModConfigData("smog"),
-	MAXTEMPDAMAGE = GetModConfigData("maxtempdamage"),
-	MAXHUNGERDAMAGE = GetModConfigData("maxhungerdamage"),
-	HARDER_TREPIDATION = GetModConfigData("nodespawn_trepidation"),
-	WINONA_PORTABLES = GetModConfigData("winona_portables_"),
-	TELESTAFF_REWORK = GetModConfigData("telestaff_rework"),
-	BEEBOX_NERF = GetModConfigData("beebox_nerf"),
-	CANEDURABILITY = GetModConfigData("canedurability"),
-    -- boss hp qol
-    BEEQUEEN_HEALTH = GetModConfigData("bee queen health"),
-    TOADSTOOL_HEALTH = GetModConfigData("toadstool health"),
-    TWIN1_HEALTH = GetModConfigData("twins health"),
-    TWIN2_HEALTH = GetModConfigData("twins health"),
+    MAXTEMPDAMAGE = GetModConfigData("maxtempdamage"),
+    MAXHUNGERDAMAGE = GetModConfigData("maxhungerdamage"),
+    HARDER_TREPIDATION = GetModConfigData("nodespawn_trepidation"),
+    WINONA_PORTABLES = GetModConfigData("winona_portables_"),
+    TELESTAFF_REWORK = GetModConfigData("telestaff_rework"),
+    BEEBOX_NERF = GetModConfigData("beebox_nerf"),
+    CANEDURABILITY = GetModConfigData("canedurability"),
+    AC_COOLING = GetModConfigData("ac_does_ac"),
 
     --mod chekcs
     ISLAND_ADVENTURES = ia_check,
     TREATS_FOR_WEBBER = tfw_check,
-	
-	--MEME CONFIG
-	ADVERTISEMENTS = GetModConfigData("um_advertisements"),
-	SHRINK = GetModConfigData("um_shrink"),
+
+    --MEME CONFIG
+    ADVERTISEMENTS = GetModConfigData("um_advertisements"),
+    SHRINK = GetModConfigData("um_shrink"),
 
     --CLIENT CONFIGS
 
     REDUCED_TORNADO_VFX = GetModConfigData("um_storms_over", true),
+
+    -- boss hp qol
+
+    WIDOW_HEALTH = 8000 * GetModConfigData("hoodedwidow_health_"),
+    MOONFLY_HEALTH = 8000 * GetModConfigData("moonmaw_dragonfly_health_"),
+    WILTFLY_HEALTH = 4000 * GetModConfigData("mock_dragonfly_health_"),
+    MOTHER_GOOSE_HEALTH = 6000 * GetModConfigData("mothergoose_health_"),
+
 }
 
 -- [              DST Related Overrides                  ]
 
 if GetModConfigData("beebox_nerf") then
-    TUNING.BEEBOX_BEES = 1
+    TUNING.BEEBOX_BEES = 1.5
     TUNING.BEEBOX_RELEASE_TIME = day_time * 1.5
 end
+
+--if GetModConfigData("woodie_skilltree") then
+--TUNING.WEREMOOSE_DAMAGE = wilson_attack * 1.5
+--TUNING.SKILLS.WOODIE.MOOSE_SMASH_DAMAGE = wilson_attack * 3
+--end
 
 if GetModConfigData("wixie_walter") then
     TUNING.WOBY_BIG_HUNGER = GLOBAL.TUNING.WALTER_HUNGER
@@ -422,13 +431,13 @@ if GetModConfigData("wixie_walter") then
 
     TUNING.WOBY_SMALL_HUNGER = GLOBAL.TUNING.WALTER_HUNGER
     TUNING.WOBY_SMALL_HUNGER_RATE = GLOBAL.TUNING.WILSON_HUNGER_RATE / 2
-	
-	TUNING.WOBY_BIG_SPEED =
-        {
-            FAST = 12,
-            MEDIUM = 11,
-            SLOW = 10
-        }
+
+    TUNING.WOBY_BIG_SPEED =
+    {
+        FAST = 12,
+        MEDIUM = 11,
+        SLOW = 10
+    }
 
     TUNING.GAMEMODE_STARTING_ITEMS.DEFAULT.WALTER = { "walterhat", "meatrack_hat", "meat", "monstermeat" }
     TUNING.GAMEMODE_STARTING_ITEMS.DEFAULT.WIXIE = { "slingshot", "slingshotammo_rock", "slingshotammo_rock",
@@ -445,6 +454,9 @@ TUNING.WINONA_BATTERY_MIN_LOAD = 0 -- generators don't drain when not powering a
 
 -- shield buff
 TUNING.SHIELDOFTERROR_DAMAGE = 59.5
+
+-- shelmet nerf
+TUNING.ARMOR_SLURTLEHAT_ABSORPTION = 0.85
 
 TUNING.NO_BOSS_TIME = 24
 -- TUNING.DISEASE_DELAY_TIME = total_day_time * 50 / 1.5
@@ -468,6 +480,8 @@ TUNING.AFFINITY_15_CALORIES_SUPERHUGE = 1.034
 
 -- TUNING.ANTLION_RAGE_TIME_INITIAL = TUNING.TOTAL_DAY_TIME * 4
 -- TUNING.ANTLION_RAGE_TIME_MAX = TUNING.TOTAL_DAY_TIME * 5
+
+
 
 -- TUNING.ARMORBRAMBLE_DMG = 10
 
@@ -513,8 +527,9 @@ TUNING.CANNONBALL_SPLASH_DAMAGE_PERCENT = 1
 
 -- sea weed changes
 TUNING.WATERPLANT.DAMAGE = TUNING.WATERPLANT.DAMAGE * 0.75
-TUNING.WATERPLANT.ITEM_DAMAGE = TUNING.WATERPLANT.ITEM_DAMAGE * 1.75
-
+if not TUNING.DSTU.UPDATE_CHECK then
+    TUNING.WATERPLANT.ITEM_DAMAGE = TUNING.WATERPLANT.ITEM_DAMAGE * 1.75
+end
 -- shark nerf
 TUNING.SHARK.DAMAGE = 50 / 3
 
@@ -537,11 +552,7 @@ end
 -- TUNING.CRABKING_REGEN_BUFF = TUNING.CRABKING_REGEN * 0.33
 
 -- Wortox
-if GetModConfigData("wortox") == "UMNERF" then
-    TUNING.WORTOX_HEALTH = 150
-end
-
-if GetModConfigData("wortox") == "APOLLO" then
+if GetModConfigData("wortox") then
     TUNING.WORTOX_SOULHEAL_MINIMUM_HEAL = 5
     TUNING.WORTOX_MAPHOP_DISTANCE_SCALER = TUNING.WORTOX_MAPHOP_DISTANCE_SCALER * 1.5 -- 50%
 end
@@ -551,17 +562,16 @@ if GetModConfigData("heatwaves") then
     TUNING.WILDFIRE_RETRY_TIME = TUNING.WILDFIRE_RETRY_TIME * 0.5
 end
 
-if GetModConfigData("changed_shadowpieces") then
-	TUNING.SHADOW_BISHOP.ATTACK_RANGE = {8, 10, 12}
-	TUNING.SHADOW_BISHOP.ATTACK_PERIOD = {14, 15, 16}
-	--TUNING.SHADOW_BISHOP.HIT_RANGE = 2.5 --NUH UH
-	TUNING.SHADOW_BISHOP.DAMAGE = {15, 25, 35}
-	TUNING.SHADOW_KNIGHT.ATTACK_RANGE = 3.2
-	TUNING.SHADOW_KNIGHT.ATTACK_RANGE_LONG = 4
-	TUNING.SHADOW_KNIGHT.HEALTH = {600, 1800, 5400}
-	TUNING.SHADOW_KNIGHT.ATTACK_PERIOD = {3.5, 2.5, 1.5} --evilishly low
+if GetModConfigData("changed_shadow_pieces") then
+    TUNING.SHADOW_BISHOP.ATTACK_RANGE = { 8, 10, 12 }
+    TUNING.SHADOW_BISHOP.ATTACK_PERIOD = { 14, 15, 16 }
+    --TUNING.SHADOW_BISHOP.HIT_RANGE = 2.5 --NUH UH
+    TUNING.SHADOW_BISHOP.DAMAGE = { 15, 25, 35 }
+    --TUNING.SHADOW_KNIGHT.ATTACK_RANGE = 3.2
+    --TUNING.SHADOW_KNIGHT.ATTACK_RANGE_LONG = 4
+    --TUNING.SHADOW_KNIGHT.HEALTH = {600, 1800, 5400}
+    --TUNING.SHADOW_KNIGHT.ATTACK_PERIOD = {3.5, 2.5, 1.5} --evilishly low
 end
-
 
 --flingo emergency buff
 
@@ -570,3 +580,49 @@ TUNING.EMERGENCY_BURNING_NUMBER = 1 -- number of fires to maintain warning level
 TUNING.EMERGENCY_WARNING_TIME = 3   -- minimum length of warning period
 TUNING.EMERGENCY_RESPONSE_TIME = 30 -- BURNT_NUMBER structures must burn within this time period to trigger flingomatic emergency response
 TUNING.EMERGENCY_SHUT_OFF_TIME = 10 -- stay on for this length of time
+
+local extraitems = {
+    "cutgrass",
+    "cutgrass",
+    "cutgrass",
+    "log",
+    "log",
+}
+
+for k, v in ipairs(extraitems) do
+    table.insert(TUNING.EXTRA_STARTING_ITEMS.winter, v)
+end
+
+local um_naughtiness = {
+    fruitbat = 4,
+    woodpecker = 2,
+    snapdragon = 4,
+    snapdragon_buddy = 8,--wtf!!! doin't do that!!
+}
+for k,v in pairs(um_naughtiness) do
+    GLOBAL.NAUGHTY_VALUE[k] = v
+end
+
+-- Kramped buff
+if GetModConfigData("kramped_buff") then
+    GLOBAL.NAUGHTY_VALUE["glommer"] = 100
+    TUNING.KRAMPUS_NAUGHTINESS_DECAY_PERIOD = math.huge
+	TUNING.KRAMPUS_THRESHOLD = 60
+    TUNING.KRAMPUS_THRESHOLD_VARIANCE = 40
+end
+
+if GetModConfigData("waxwell_nerf") then
+    TUNING.SHADOWWAXWELL_SANITY_PENALTY.SHADOWPROTECTOR = 0.2 --can summon 3 fighters
+    TUNING.SHADOWWAXWELL_PROTECTOR_DURATION = seg_time * 2 -- lasts half of the duration
+    TUNING.SHADOW_PILLAR_DURATION_BOSS = 4
+    TUNING.SHADOW_PILLAR_BREAK_MULT =
+    {
+        MIN = 1,  -- but breaks slower
+        MAX = 2,   --breaks faster with the more attacked a cage is.
+    }
+
+    TUNING.WAXWELLJOURNAL_SPELL_COST.SHADOW_PILLARS = 0.25 --costs 25%
+    TUNING.SHADOWWAXWELL_PROTECTOR_HEALTH_CLAMP_TAKEN = 30 --double min dmg take
+end
+
+TUNING.COMPASS_FUEL = total_day_time * 5

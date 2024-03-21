@@ -255,7 +255,7 @@ env.AddStategraphPostInit("SGbeequeen",
                     inst.AnimState:PushAnimation("stomp", false)
                     inst.SoundEmitter:PlaySound("dontstarve/creatures/together/bee_queen/enter")
                     if not inst.tiredcount then
-                        inst.tiredcount = 9
+                        inst.tiredcount = 12
                     end
                 end,
 
@@ -400,7 +400,7 @@ env.AddStategraphPostInit("SGbeequeen",
                     inst.AnimState:PlayAnimation("tired_pre")
                     inst.AnimState:PushAnimation("tired_loop", true)
                     if not inst.tiredcount then
-                        inst.tiredcount = 9
+                        inst.tiredcount = 12
                     end
                     inst.tiredtask = inst:DoPeriodicTask(1, function(inst) inst.tiredcount = inst.tiredcount - 1 end)
                 end,
@@ -551,7 +551,7 @@ env.AddStategraphPostInit("SGbeequeen",
                             end
                         end)
                     else
-                        inst.tiredcount = 14
+                        inst.tiredcount = 15
                         inst:DoTaskInTime(0, function(inst)
                             if inst.components.health and not inst.components.health:IsDead() then
                                 inst.sg:GoToState("tired")
@@ -735,7 +735,7 @@ env.AddStategraphPostInit("SGbeequeen",
                             local x, y, z = inst.Transform:GetWorldPosition()
                             local players = TheSim:FindEntities(x, y, z, 30, { "player" }, { "playerghost" }) --more bees for more players
                             inst.seekercount = math.random(4, 5) + 2 * #players
-                            inst.tiredcount = 10
+                            inst.tiredcount = 12
                             if inst.components.health and not inst.components.health:IsDead() then
                                 inst.sg:GoToState("tired")
                             else

@@ -184,7 +184,7 @@ return Class(function(self, inst)
 	end
 
 	local function SpawnCaveTornado(inst, data)
-		if data ~= nil and data.xdata ~= nil then
+		if data ~= nil and data.xdata ~= nil and TheWorld.state.isspring then
 			local x = data.xdata
 			local z = data.zdata
 			local wise = data.wisedata

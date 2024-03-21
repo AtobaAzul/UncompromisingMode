@@ -103,7 +103,7 @@ local function onunequip(inst, owner)
 	end
 	inst.sparktask = nil
 
-	if owner.components.upgrademoduleowner == nil then
+	if not owner.UM_isBatteryUser then
 		local item = owner.components.inventory:GetEquippedItem(EQUIPSLOTS.HEAD)
 		if item ~= nil then
 			if not item:HasTag("electricaltool") and owner:HasTag("batteryuser") then
@@ -158,9 +158,10 @@ local function onattack(inst, attacker, target)
 				if v ~= inst and v ~= target and v:IsValid() and not v:IsInLimbo() then
 					if (v.components.health ~= nil and not v.components.health:IsDead()) and not v.sg:HasStateTag("noattack") then
 						if not inst.overcharged then
-							v.components.health:DoDelta( -10, false, attacker, false, attacker)
+							--v.components.health:DoDelta( -10, false, attacker, false, attacker)
+							v.components.combat:GetAttacked(attacker, 5, nil)
 						else
-							v.components.combat:GetAttacked(attacker, 10, nil) --overcharge gets hitstun
+							v.components.combat:GetAttacked(attacker, 25, nil)
 						end
 						SpawnPrefab("electrichitsparks"):AlignToTarget(v, attacker, true)
 					end
@@ -185,9 +186,10 @@ local function onattack(inst, attacker, target)
 				if v ~= inst and v ~= target and v:IsValid() and not v:IsInLimbo() then
 					if (v.components.health ~= nil and not v.components.health:IsDead()) and v.components.combat ~= nil and not v.sg:HasStateTag("noattack") then
 						if not inst.overcharged then
-							v.components.health:DoDelta( -10, false, attacker, false, attacker)
+							--v.components.health:DoDelta( -10, false, attacker, false, attacker)
+							v.components.combat:GetAttacked(attacker, 5, nil)
 						else
-							v.components.combat:GetAttacked(attacker, 10, nil) --overcharge gets hitstun
+							v.components.combat:GetAttacked(attacker, 25, nil)
 						end
 						SpawnPrefab("electrichitsparks"):AlignToTarget(v, attacker, true)
 					end
@@ -201,7 +203,7 @@ end
 
 local function OnOvercharge(inst, toggle)
 	inst.overcharged = toggle
-	inst.components.fueled.rate = toggle and 4 or 2
+	inst.components.fueled.rate = toggle and 2 or 1
 end
 
 local function fn()

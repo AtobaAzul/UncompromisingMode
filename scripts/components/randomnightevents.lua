@@ -827,10 +827,17 @@ end
 local function MoonTear(player)
 	if TheWorld.state.isfullmoon then
 		local x, y, z = player.Transform:GetWorldPosition()
-		player:DoTaskInTime(0.6 + math.random(4), function()
-			local tear = SpawnPrefab("moon_tear_meteor")
-			tear.Transform:SetPosition(x + math.random(-5,5), y, z + math.random(-5,5))
-		end)
+		x = x + math.random(-5, 5)
+		z = z + math.random(-5, 5)
+		
+		if TheWorld.Map:IsPassableAtPoint(x, 0, z) then
+			player:DoTaskInTime(0.6 + math.random(4), function()
+				local tear = SpawnPrefab("moon_tear_meteor")
+				tear.Transform:SetPosition(x, y, z)
+			end)
+		else
+			player:DoTaskInTime(0.1, function(player) MoonTear(player) end)
+		end
 	end
 end
 
@@ -880,15 +887,16 @@ end
 
 local function SpawnPhonographFunction(player)
 	local x, y, z = player.Transform:GetWorldPosition()
-	local x2 = x + math.random(-15, 15)
-	local z2 = z + math.random(-15, 15)
-	if TheWorld.state.isnight then
-		if TheWorld.Map:IsPassableAtPoint(x2, 0, z2) then
-			local phonograph = SpawnPrefab("charliephonograph_20")
-			phonograph.Transform:SetPosition(x2, y, z2)
-		else
-			player:DoTaskInTime(0.1, function(player) SpawnPhonographFunction(player) end)
-		end
+	local x2 = x + math.random(-60, 60)
+	local z2 = z + math.random(-60, 60)
+	
+	local playercheck = TheSim:FindEntities(x, y, z, 30, {"player"})
+	
+	if TheWorld.Map:IsPassableAtPoint(x2, 0, z2) and (playercheck == nil or #playercheck == 0) then
+		local phonograph = SpawnPrefab("charliephonograph_20")
+		phonograph.Transform:SetPosition(x2, y, z2)
+	else
+		player:DoTaskInTime(0.1, function(player) SpawnPhonographFunction(player) end)
 	end
 end
 

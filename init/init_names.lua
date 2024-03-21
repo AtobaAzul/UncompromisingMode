@@ -3,6 +3,14 @@ SKINSDESC = GLOBAL.STRINGS.SKIN_DESCRIPTIONS
 STRINGS = GLOBAL.STRINGS.NAMES
 UI = GLOBAL.STRINGS.UI
 
+
+--Re-names to existing items
+STRINGS.AMULET = "Lesser Life Amulet"
+STRINGS.BEESWAX = "Wax"
+
+
+
+
 STRINGS.UNCOMPROMISING_RAT = "Rat"          -- Maybe change the name with a pun with Robber or Raider, any idea ?
 STRINGS.UNCOMPROMISING_CAVERAT = "Cave Rat" -- The aggressive cousin
 STRINGS.UNCOMPROMISING_PACKRAT = "Pack Rat" -- The hoarding cousin
@@ -38,6 +46,7 @@ STRINGS.VIPERJAM = "Gloomberry Jam"
 STRINGS.SNOWMONG = "Abominamole"
 STRINGS.MINOTAUR_BOULDER = "Ancient Stone Slab"
 STRINGS.MINOTAUR_BOULDER_BIG = "Giant Stone Slab"
+STRINGS.MINOTAUR_ORGAN = "Organ"
 STRINGS.MOCK_DRAGONFLY = "Wilting Dragonfly"
 
 STRINGS.MOONMAW_DRAGONFLY = "Moonmaw Dragonfly"
@@ -65,6 +74,16 @@ STRINGS.MONSTERSMALLMEAT_DRIED = "Small Monster Jerky"
 STRINGS.UM_MONSTEREGG = "Monster Egg"
 STRINGS.UM_MONSTEREGG_COOKED = "Cooked Monster Egg"
 STRINGS.VETERANSHRINE = "Melancholic Skull"
+
+STRINGS.UM_RECORD_MENU = "Uncompromising Music"
+STRINGS.UM_RECORD_WALTER = "Follow Me, Woby!"
+STRINGS.UM_RECORD_WIXIE = "The Delinquent"
+STRINGS.UM_RECORD_SHADOW_WIXIE = "Obscuriores Sui"
+STRINGS.UM_RECORD_HOODED_WIDOW = "Arachnophobia"
+STRINGS.UM_RECORD_WATHOM = "Heart Attacked!"
+STRINGS.UM_RECORD_STRANGER = "A Mysterious Stranger"
+STRINGS.UM_RECORD_WINKY = "Funny Little Rat"
+
 STRINGS.RATSKIN = "Diseased Fur"
 
 STRINGS.PLAGUEMASK = "Plague Mask"
@@ -118,6 +137,7 @@ STRINGS.LICELOAF1 = "Liceloaf"
 STRINGS.LICELOAF1 = "Riceloaf"
 STRINGS.MOON_TEAR = "Moon Tear"
 STRINGS.SHADOW_TELEPORTER = "Grasping Shadow"
+STRINGS.WAXWELL_PACT_TRADER = "Pact Maker"
 STRINGS.SCORPIONCARAPACE = "Scorpion Carapace"
 STRINGS.SCORPIONCARAPACECOOKED = "Grilled Scorpion Carapace"
 STRINGS.HARDSHELLTACOS = "Hard Shell Tacos"
@@ -138,6 +158,16 @@ STRINGS.GIANT_TREE = "Giant Redwood"
 STRINGS.WEBBEDCREATURE = "Silky Cocoon"
 STRINGS.WIDOWSGRASP = "Widow's Claw"
 STRINGS.HOODEDWIDOW = "Hooded Widow"
+
+
+STRINGS.WEBBEDCREATURE_BUGGY = "Buggy Cocoon"
+STRINGS.WEBBEDCREATURE_GROSS = "Grotesque Cocoon"
+STRINGS.WEBBEDCREATURE_HAIRY = "Hairy Cocoon"
+STRINGS.WEBBEDCREATURE_HARD = "Hardened Cocoon"
+STRINGS.WEBBEDCREATURE_LEATHER = "Leathery Cocoon"
+STRINGS.WEBBEDCREATURE_FEATHER = "Feathery Cocoon"
+STRINGS.WEBBEDCREATURE_LEAFY = "Leafy Cocoon"
+
 STRINGS.CHOMPER = "Plant"
 STRINGS.BERNIEBOX = "Cuddly Friends Toy Box"
 STRINGS.SNAPDRAGON = "Snapdragon"
@@ -203,7 +233,7 @@ SKINSDESC.ms_ancient_amulet_red = "" --TODO
 
 STRINGS.RAT_WHIP = "Tail o' Twined Rats"
 STRINGS.KLAUS_AMULET = "Naught Lock"
-STRINGS.HOUND_LIGHTNING = "Magic Lightning"
+STRINGS.HOUND_LIGHTNING = "Supercharged Lightning"
 STRINGS.LIGHTNINGHOUND = "Lightning Hound"
 STRINGS.MAGMAHOUND = "Magma Hound"
 STRINGS.SPOREHOUND = "Spore Hound"
@@ -212,7 +242,6 @@ STRINGS.CRABCLAW = "Crab Claw"
 STRINGS.BIGHT = "Comingled Clockwork"
 STRINGS.KNOOK = "Automaton Abomination"
 STRINGS.ROSHIP = "Mechanical Monstrosity"
-STRINGS.AMULET = "Lesser Life Amulet"
 STRINGS.SNOTROAST = "Snot Roast"
 STRINGS.LICELOAF = "Liceloaf" --For the cookbook
 STRINGS.TURF_HOODEDMOSS = "Mossy Forest Turf"
@@ -358,10 +387,6 @@ STRINGS.SLUDGE_SACK = "Sludge Sack"
 STRINGS.ARMOR_REED_UM = "Reed Suit"
 STRINGS.ARMOR_SHARKSUIT_UM = "Rock Hide Armor"
 
-STRINGS.OCUPUS_TENTACLE = "Ocupus Tentacle"
-STRINGS.OCUPUS_TENTACLE_EYE = "Ocupus Eye"
-STRINGS.OCUPUS_TENTACLE_COOKED = "Cooked Tentacle"
-STRINGS.OCUPUS_BEAK = "Ocupus Beak"
 STRINGS.ROCKJAWLEATHER = "Rocky Hide"
 
 STRINGS.LANTERN_ELECTRICAL = "Electrical Lantern"
@@ -466,6 +491,10 @@ STRINGS.SLINGSHOTAMMO_MOONGLASS = "Moon Shard Rounds"
 STRINGS.SLINGSHOTAMMO_SALT = "Salty Rounds"
 STRINGS.SLINGSHOTAMMO_SLIME = "Slimey Rounds"
 STRINGS.SLINGSHOTAMMO_GOOP = "Gloop Rounds"
+STRINGS.SLINGSHOTAMMO_FLARE = "Flare Rounds"
+
+STRINGS.SLINGSHOTAMMO_INSANITY = "Insanity Rounds"
+STRINGS.SLINGSHOTAMMO_LUNARVINE = "Lunarvine Rounds"
 
 STRINGS.BAGOFMARBLES = "Bag O' Marbles"
 
@@ -482,6 +511,9 @@ STRINGS.SMALLFISHMEAT_DRIED = "Small Fish Jerky"
 
 STRINGS.WIXIEGUN =
 "The Glock 17 (Beretta 92FS in the HD Edition), also known as the 9mm Pistol, is a weapon featured in Half-Life and its expansions."
+
+STRINGS.PACT_ARMOR_SANITY = "Shadow Pact Armor"
+STRINGS.PACT_SWORD_SANITY = "Shadow Pact Sword"
 ------------------------
 
 STRINGS.WINONA_CATAPULT_ITEM = "Dismantled " .. STRINGS.WINONA_CATAPULT
@@ -491,8 +523,10 @@ STRINGS.WINONA_BATTERY_HIGH_ITEM = STRINGS.WINONA_BATTERY_HIGH .. " Parts"
 
 STRINGS.STAFF_STARFALL = "Starfall Staff"
 STRINGS.STAFF_MOONFALL = "Moonfall Staff"
+STRINGS.MOONFALL_PROJ = "Shooting Star"
 STRINGS.HAT_CRAB = "Crab Crown"
 STRINGS.HAT_CRAB_ICE = "Frigid Crown"
+STRINGS.KALEIDOSCOPE = "Kaleidoscope"
 STRINGS.ARMOR_CRAB_MAXHP = "Gem Encrusted Shell Armor"
 STRINGS.ARMOR_CRAB_REGEN = "Healing Rock Armor"
 STRINGS.MOON_BEACON_KIT = "Inactive Moon Beacon"
@@ -507,7 +541,20 @@ STRINGS.UM_SMOLDER_SPORE = "Smolder Spore"
 STRINGS.UM_ARMOR_PYRE_NETTLES = "Pyre Mantle"
 STRINGS.UM_BLOWDART_PYRE = "Pyre Dart"
 
+-- Mutation Extrapolation
+STRINGS.UMDEBUFF_MOONBURN = "a moonburn"
+STRINGS.UMDEBUFF_MOONBURN_TESTINGSTICK = "Magic Pain Stick"
+
 -- Under the Weather Part 1
 STRINGS.ALPHA_LIGHTNINGGOAT = "Alpha Volt Goat"
 STRINGS.UM_TORNADO = "Giant Tornado"
 STRINGS.UM_WATERFALL = "Waterfall"
+STRINGS.PORTABLEBOAT = "Portable Raft"
+
+STRINGS.UM_WINDTURBINE = "Wind Turbine"
+STRINGS.MASTUPGRADE_WINDTURBINE = "Wind Turbine"
+
+STRINGS.GARBAGEPATCHFLOTSAM = "Storm Debris"
+
+STRINGS.PIGKING_PIGGUARD = STRINGS.PIGGUARD
+STRINGS.SMOG = "suffocation"

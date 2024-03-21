@@ -178,7 +178,7 @@ env.AddPrefabPostInit("premiumwateringcan", function(inst)
             if inst.components.preserver == nil then
                 inst:AddComponent("preserver")
             end
-            inst.components.preserver:SetPerishRateMultiplier(TUNING.FISH_BOX_PRESERVER_RATE)
+            inst.components.preserver:SetPerishRateMultiplier(0)
             return OnFill_(inst, from_object)
         end
         inst.components.fillable.overrideonfillfn = NewOnFill
@@ -203,7 +203,7 @@ env.AddPrefabPostInit("premiumwateringcan", function(inst)
             function(inst)
                 if inst.components.finiteuses.current > 0 then
                     inst:AddComponent("preserver")
-                    inst.components.preserver:SetPerishRateMultiplier(TUNING.FISH_BOX_PRESERVER_RATE)
+                    inst.components.preserver:SetPerishRateMultiplier(0)
                 end
             end
         )

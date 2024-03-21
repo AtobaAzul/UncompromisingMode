@@ -15,14 +15,14 @@ if TUNING.DSTU.MONSTERSMALLMEAT then
         {
             --{'weevole_carapace', 1},
             { 'monstersmallmeat', 0.25 },
-            { 'steelwool',        0.15 },
+            { 'steelwool', 0.25 },
         })
 else
     SetSharedLootTable("aphid_loot",
         {
             --{'weevole_carapace', 1},
             { 'monstermeat', 0.25 },
-            { 'steelwool',   0.15 },
+            { 'steelwool', 0.25 },
         })
 end
 
@@ -161,6 +161,7 @@ local function fn()
     inst:AddTag("aphid")
     inst:AddTag("animal")
     inst:AddTag("soulless")
+    inst:AddTag("noember")
 
     MakeInventoryFloatable(inst)
 
@@ -191,6 +192,50 @@ local function fn()
 
     inst.components.inventoryitem.atlasname = "images/inventoryimages/aphid.xml"
 
+
+	inst.NymphGroundCheck = function(inst)	
+		--TheNet:Announce("checking")
+		if inst.nymph and inst.nymph:IsValid() and inst.nymph.components.health and not inst.nymph.components.health:IsDead() then
+			local x,y,z = inst.nymph.Transform:GetWorldPosition()
+			if not TheWorld.Map:IsAboveGroundAtPoint(x,y,z) then
+				inst.nymph.aphidpossedigging = true
+				inst.sg:GoToState("flyintree")
+			end
+		else
+			--TheNet:Announce("trying")
+			if not (inst.components.combat and inst.components.combat.target) then
+				inst.sg:GoToState("burrow")
+			end
+		end
+	end,
+
+--[[ --If we seek out making aphids fly over water, do this route.
+    if TheWorld ~= nil then
+        inst:AddComponent("embarker")
+        inst.components.embarker.embark_speed = inst.components.locomotor.walkspeed
+        inst.components.embarker.antic = true
+
+        inst.components.locomotor:SetAllowPlatformHopping(true)
+        inst:AddComponent("amphibiouscreature")
+        inst.components.amphibiouscreature:SetBanks("carrat", "uncompromising_rat_water")
+        inst.components.amphibiouscreature:SetEnterWaterFn(function(inst)
+            inst.AnimState:SetBuild("uncompromising_rat_water")
+            inst.landspeed = inst.components.locomotor.runspeed
+            inst.components.locomotor.runspeed = TUNING.HOUND_SWIM_SPEED
+            inst.hop_distance = inst.components.locomotor.hop_distance
+            inst.components.locomotor.hop_distance = 4
+        end)
+        inst.components.amphibiouscreature:SetExitWaterFn(function(inst)
+            inst.AnimState:SetBuild("uncompromising_rat")
+            if inst.landspeed then inst.components.locomotor.runspeed = inst.landspeed end
+            if inst.hop_distance then inst.components.locomotor.hop_distance = inst.hop_distance end
+        end)
+        -------------------------
+
+        inst.components.locomotor.pathcaps = {allowocean = true}
+    end
+]]
+
     inst:AddComponent("tradable")
 
     inst:AddComponent("lootdropper")
@@ -208,7 +253,7 @@ local function fn()
     inst.components.combat.hiteffectsymbol = "body"
     inst.components.combat:SetKeepTargetFunction(keeptargetfn)
     inst.components.combat:SetRetargetFunction(3, retargetfn)
-    inst.components.combat:SetDefaultDamage(20)
+    inst.components.combat:SetDefaultDamage(10)
     inst.components.combat:SetAttackPeriod(GetRandomMinMax(1, 3))
     inst.components.combat:SetRange(5, 2)
 	inst:AddComponent("follower")
@@ -237,18 +282,7 @@ local function fn()
 
     inst:ListenForEvent("fly_in", OnFlyIn) -- matches enter_loop logic so it does not happen a frame late
 	--inst:DoTaskInTime(0,HomeCheck) --Backup Aphid Extermination....
-	inst.OnSave = function(inst,data)
-		if data and inst.posse then
-			data.posse = inst.posse
-		end
-	end
-	inst.OnLoad = function(inst,data)
-		if data and data.posse then
-			inst.posse = true
-			FindNymph(inst)
-		end
-	end
-	
+
     return inst
 end
 

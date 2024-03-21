@@ -56,7 +56,7 @@ local function RetargetFn(inst)
                 return inst.components.combat:CanTarget(guy)
             end,
             nil,
-            { "prey", "smallcreature", "mossling", "moose" })
+            { "prey", "smallcreature", "mossling", "moose", "webbedcreature" })
     end
 
     if not target then
@@ -64,7 +64,7 @@ local function RetargetFn(inst)
                 return inst.components.combat:CanTarget(guy)
             end,
             nil,
-            { "prey", "smallcreature", "mossling", "moose" })
+            { "prey", "smallcreature", "mossling", "moose", "webbedcreature" })
     end
 	
     if not target then
@@ -72,7 +72,7 @@ local function RetargetFn(inst)
                 return inst.components.combat:CanTarget(guy)
             end,
             { "structure" },
-            { "prey", "smallcreature", "mossling", "moose" })
+            { "prey", "smallcreature", "mossling", "moose", "webbedcreature" })
     end
 
     return target
