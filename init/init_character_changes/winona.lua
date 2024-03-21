@@ -65,78 +65,81 @@ local function ActionHungerDrain(inst, data)
 	local slow = inst.components.hunger:GetPercent() < TUNING.HUNGRY_THRESH
 	local t = GetTime()
 
-	if data.action.action == ACTIONS.CHOP or
-		data.action.action == ACTIONS.MINE or
-		data.action.action == ACTIONS.HAMMER or
-		data.action.action == ACTIONS.ROW or
-		data.action.action == ACTIONS.DIG or
-		data.action.action == ACTIONS.ATTACK or
-		data.action.action == ACTIONS.PICK or
-		data.action.action == ACTIONS.TILL then
-		if fast then
-			if inst._cdtask == nil then
-				inst._cdtask = inst:DoTaskInTime(.3, OnCooldown)
-				if inst.hungryfastbuildtalktime == nil or inst.hungryfastbuildtalktime + 10 < t then
-					inst.hungryfastbuildtalktime = t + GetRandomMinMax(12, 24)
-				elseif inst.hungryfastbuildtalktime < t then
-					inst.hungryfastbuildtalktime = nil
-					if not (inst.components.rider ~= nil and inst.components.rider:IsRiding()) then
-						inst.components.talker:Say(GetString(inst, "ANNOUNCE_HUNGRY_FASTBUILD"))
-					end
-				end
-				if data.action.action == ACTIONS.ROW or data.action.action == ACTIONS.TILL or
-					data.action.action == ACTIONS.PICK and not (inst.components.rider ~= nil and inst.components.rider:IsRiding()) then
-					inst.components.hunger:DoDelta(-0.1 * burnrate, true) --.2
-				elseif data.action.action == ACTIONS.CHOP then
-					if data.action.target ~= nil then
-						local snap = SpawnPrefab("impact")
-						local x, y, z = inst.Transform:GetWorldPosition()
-						local x1, y1, z1 = data.action.target.Transform:GetWorldPosition()
-						if z1 ~= nil then
-							local angle = -math.atan2(z1 - z, x1 - x)
-							snap.Transform:SetPosition(x1, y1, z1)
-							snap.Transform:SetRotation(angle * RADIANS)
-							snap.Transform:SetScale(0.8, 0.8, 0.8)
-						end
-					end
+    local actions = {ACTIONS.CHOP, ACTIONS.MINE, ACTIONS.HAMMER, ACTIONS.ROW, ACTIONS.DIG, ACTIONS.ATTACK, ACTIONS.PICK, ACTIONS.TILL}
+    
+    if ACTIONS.HACK then
+        table.insert(actions, ACTIONS.HACK)
+    end
+	
+	if not table.contains(actions, data.action.action) then
+        return
+    end
 
-					inst.components.hunger:DoDelta(-0.2 * burnrate, true) --.333
-				elseif data.action.action == ACTIONS.MINE or
-					data.action.action == ACTIONS.HAMMER then
-					if data.action.target ~= nil then
-						local snap = SpawnPrefab("impact")
-						local x, y, z = inst.Transform:GetWorldPosition()
-						local x1, y1, z1 = data.action.target.Transform:GetWorldPosition()
-						if z1 ~= nil then
-							local angle = -math.atan2(z1 - z, x1 - x)
-							snap.Transform:SetPosition(x1, y1, z1)
-							snap.Transform:SetRotation(angle * RADIANS)
-							snap.Transform:SetScale(0.8, 0.8, 0.8)
-						end
-					end
-
-					inst.components.hunger:DoDelta(-0.333 * burnrate, true) --.5
-				elseif data.action.action == ACTIONS.DIG then
-					inst.components.hunger:DoDelta(-0.5 * burnrate, true)
-				else
-					inst.components.hunger:DoDelta(-0.15 * burnrate, true) --.25
+	if fast then
+		if inst._cdtask == nil then
+			inst._cdtask = inst:DoTaskInTime(.3, OnCooldown)
+			if inst.hungryfastbuildtalktime == nil or inst.hungryfastbuildtalktime + 10 < t then
+				inst.hungryfastbuildtalktime = t + GetRandomMinMax(12, 24)
+			elseif inst.hungryfastbuildtalktime < t then
+				inst.hungryfastbuildtalktime = nil
+				if not (inst.components.rider ~= nil and inst.components.rider:IsRiding()) then
+					inst.components.talker:Say(GetString(inst, "ANNOUNCE_HUNGRY_FASTBUILD"))
 				end
 			end
-		elseif not fast and not slow then
-			if inst._cdtask == nil then
-				inst._cdtask = inst:DoTaskInTime(.3, OnCooldown)
-				if data.action.action == ACTIONS.ROW or data.action.action == ACTIONS.TILL or data.action.action == ACTIONS.PICK then
-					inst.components.hunger:DoDelta(-0.05 * burnrate, true)
-				elseif data.action.action == ACTIONS.CHOP then
-					inst.components.hunger:DoDelta(-0.1 * burnrate, true)
-				elseif data.action.action == ACTIONS.MINE or
-					data.action.action == ACTIONS.HAMMER then
-					inst.components.hunger:DoDelta(-0.166 * burnrate, true)
-				elseif data.action.action == ACTIONS.DIG then
-					inst.components.hunger:DoDelta(-0.25 * burnrate, true)
-				else
-					inst.components.hunger:DoDelta(-0.1 * burnrate, true)
+			if data.action.action == ACTIONS.ROW or data.action.action == ACTIONS.TILL or
+				data.action.action == ACTIONS.PICK and not (inst.components.rider ~= nil and inst.components.rider:IsRiding()) then
+				inst.components.hunger:DoDelta(-0.1 * burnrate, true) --.2
+			elseif data.action.action == ACTIONS.CHOP then
+				if data.action.target ~= nil then
+					local snap = SpawnPrefab("impact")
+					local x, y, z = inst.Transform:GetWorldPosition()
+					local x1, y1, z1 = data.action.target.Transform:GetWorldPosition()
+					if z1 ~= nil then
+						local angle = -math.atan2(z1 - z, x1 - x)
+						snap.Transform:SetPosition(x1, y1, z1)
+						snap.Transform:SetRotation(angle * RADIANS)
+						snap.Transform:SetScale(0.8, 0.8, 0.8)
+					end
 				end
+
+				inst.components.hunger:DoDelta(-0.2 * burnrate, true) --.333
+			elseif data.action.action == ACTIONS.MINE or
+				data.action.action == ACTIONS.HAMMER or
+				ACTIONS.HACK ~= nil and data.action.action == ACTIONS.HACK then
+				if data.action.target ~= nil then
+					local snap = SpawnPrefab("impact")
+					local x, y, z = inst.Transform:GetWorldPosition()
+					local x1, y1, z1 = data.action.target.Transform:GetWorldPosition()
+					if z1 ~= nil then
+						local angle = -math.atan2(z1 - z, x1 - x)
+						snap.Transform:SetPosition(x1, y1, z1)
+						snap.Transform:SetRotation(angle * RADIANS)
+						snap.Transform:SetScale(0.8, 0.8, 0.8)
+					end
+				end
+
+				inst.components.hunger:DoDelta(-0.333 * burnrate, true) --.5
+			elseif data.action.action == ACTIONS.DIG then
+				inst.components.hunger:DoDelta(-0.5 * burnrate, true)
+			else
+				inst.components.hunger:DoDelta(-0.15 * burnrate, true) --.25
+			end
+		end
+	elseif not fast and not slow then
+		if inst._cdtask == nil then
+			inst._cdtask = inst:DoTaskInTime(.3, OnCooldown)
+			if data.action.action == ACTIONS.ROW or data.action.action == ACTIONS.TILL or data.action.action == ACTIONS.PICK then
+				inst.components.hunger:DoDelta(-0.05 * burnrate, true)
+			elseif data.action.action == ACTIONS.CHOP then
+				inst.components.hunger:DoDelta(-0.1 * burnrate, true)
+			elseif data.action.action == ACTIONS.MINE or
+				data.action.action == ACTIONS.HAMMER or
+				ACTIONS.HACK ~= nil and data.action.action == ACTIONS.HACK then
+				inst.components.hunger:DoDelta(-0.166 * burnrate, true)
+			elseif data.action.action == ACTIONS.DIG then
+				inst.components.hunger:DoDelta(-0.25 * burnrate, true)
+			else
+				inst.components.hunger:DoDelta(-0.1 * burnrate, true)
 			end
 		end
 	end
@@ -145,45 +148,44 @@ end
 local function onhungerchange(inst, data)
 	local fast = inst.components.hunger:GetPercent() >= HUNGRY_THRESH_HIGH
 	local slow = inst.components.hunger:GetPercent() < TUNING.HUNGRY_THRESH
+		
+	local workiplier_actions = {ACTIONS.CHOP, ACTIONS.MINE, ACTIONS.HAMMER, ACTIONS.ROW}
+	local efficient_actions = {ACTIONS.CHOP, ACTIONS.MINE, ACTIONS.HAMMER, ACTIONS.DIG, ACTIONS.ATTACK, ACTIONS.ROW, ACTIONS.TILL}
 
+    if ACTIONS.HACK then
+        table.insert(workiplier_actions, ACTIONS.HACK)
+        table.insert(efficient_actions, ACTIONS.HACK)
+    end
+	
 	if fast then
-		inst.components.workmultiplier:AddMultiplier(ACTIONS.CHOP, 1.5, "ohungy")
-		inst.components.workmultiplier:AddMultiplier(ACTIONS.MINE, 1.5, "ohungy")
-		inst.components.workmultiplier:AddMultiplier(ACTIONS.HAMMER, 1.5, "ohungy")
-		inst.components.workmultiplier:AddMultiplier(ACTIONS.ROW, 1.5, "ohungy")
-		inst.components.efficientuser:AddMultiplier(ACTIONS.CHOP, 0.5, "ohungy")
-		inst.components.efficientuser:AddMultiplier(ACTIONS.MINE, 0.5, "ohungy")
-		inst.components.efficientuser:AddMultiplier(ACTIONS.HAMMER, 0.5, "ohungy")
-		inst.components.efficientuser:AddMultiplier(ACTIONS.DIG, 0.5, "ohungy")
-		inst.components.efficientuser:AddMultiplier(ACTIONS.ATTACK, 0.5, "ohungy")
-		inst.components.efficientuser:AddMultiplier(ACTIONS.TILL, 0.5, "ohungy")
+		for i, v in pairs(workiplier_actions) do
+			inst.components.workmultiplier:AddMultiplier(v, 1.5, "ohungy")
+		end
+		
+		for i, v in pairs(efficient_actions) do
+			inst.components.efficientuser:AddMultiplier(v, 0.5, "ohungy")
+		end
+		
 		inst.multiplierapplied = true
 	elseif slow then
-		inst.components.workmultiplier:AddMultiplier(ACTIONS.CHOP, 0.666, "ohungy")
-		inst.components.workmultiplier:AddMultiplier(ACTIONS.MINE, 0.666, "ohungy")
-		inst.components.workmultiplier:AddMultiplier(ACTIONS.HAMMER, 0.666, "ohungy")
-		inst.components.workmultiplier:AddMultiplier(ACTIONS.ROW, 0.666, "ohungy")
-		inst.components.efficientuser:AddMultiplier(ACTIONS.CHOP, 1.333, "ohungy")
-		inst.components.efficientuser:AddMultiplier(ACTIONS.MINE, 1.333, "ohungy")
-		inst.components.efficientuser:AddMultiplier(ACTIONS.HAMMER, 1.333, "ohungy")
-		inst.components.efficientuser:AddMultiplier(ACTIONS.DIG, 1.333, "ohungy")
-		inst.components.efficientuser:AddMultiplier(ACTIONS.ATTACK, 1.333, "ohungy")
-		inst.components.efficientuser:AddMultiplier(ACTIONS.ROW, 1.333, "ohungy")
-		inst.components.efficientuser:AddMultiplier(ACTIONS.TILL, 1.333, "ohungy")
+		for i, v in pairs(workiplier_actions) do
+			inst.components.workmultiplier:AddMultiplier(v, 0.666, "ohungy")
+		end
+		
+		for i, v in pairs(efficient_actions) do
+			inst.components.efficientuser:AddMultiplier(v, 1.333, "ohungy")
+		end
 		inst.multiplierapplied = true
 	else
 		if inst.multiplierapplied then
-			inst.components.workmultiplier:RemoveMultiplier(ACTIONS.CHOP, "ohungy")
-			inst.components.workmultiplier:RemoveMultiplier(ACTIONS.MINE, "ohungy")
-			inst.components.workmultiplier:RemoveMultiplier(ACTIONS.HAMMER, "ohungy")
-			inst.components.workmultiplier:RemoveMultiplier(ACTIONS.ROW, "ohungy")
-			inst.components.efficientuser:RemoveMultiplier(ACTIONS.CHOP, "ohungy")
-			inst.components.efficientuser:RemoveMultiplier(ACTIONS.MINE, "ohungy")
-			inst.components.efficientuser:RemoveMultiplier(ACTIONS.HAMMER, "ohungy")
-			inst.components.efficientuser:RemoveMultiplier(ACTIONS.DIG, "ohungy")
-			inst.components.efficientuser:RemoveMultiplier(ACTIONS.ATTACK, "ohungy")
-			inst.components.efficientuser:RemoveMultiplier(ACTIONS.ROW, "ohungy")
-			inst.components.efficientuser:RemoveMultiplier(ACTIONS.TILL, "ohungy")
+			for i, v in pairs(workiplier_actions) do
+				inst.components.workmultiplier:RemoveMultiplier(v, "ohungy")
+			end
+		
+			for i, v in pairs(efficient_actions) do
+				inst.components.efficientuser:RemoveMultiplier(v, "ohungy")
+			end
+			
 			inst.multiplierapplied = false
 		end
 	end
@@ -219,23 +221,20 @@ env.AddPrefabPostInit("winona", function(inst)
 		if inst.components.efficientuser == nil then
 			inst:AddComponent("efficientuser")
 		end
-
+		
 		local _PickActionOld = inst.sg.sg.actionhandlers[ACTIONS.PICK].deststate
 		inst.sg.sg.actionhandlers[ACTIONS.PICK].deststate = function(inst, action)
 			local fast = inst.components.hunger:GetPercent() >= HUNGRY_THRESH_HIGH
 			local slow = inst.components.hunger:GetPercent() < TUNING.HUNGRY_THRESH
 			if inst:HasTag("hungrybuilder") then
-				return (inst.components.rider ~= nil and inst.components.rider:IsRiding() and "dolongaction")
-					or (action.target ~= nil
-						and action.target.components.pickable ~= nil
-						and ((action.target.components.pickable.jostlepick and "dojostleaction") or
-							(action.target.components.pickable.quickpick and "doshortaction") or
-							(inst:HasTag("fastpicker") and "doshortaction") or
-							(inst:HasTag("woodiequickpicker") and "dowoodiefastpick") or
-							(inst:HasTag("quagmire_fasthands") or fast and "domediumaction") or
-							(slow and "dohungrybuild") or
-							"dolongaction"))
-					or nil
+				return not (inst.components.rider ~= nil and inst.components.rider:IsRiding())
+					and action.target ~= nil
+					and not action.target:HasTag("noquickpick") 
+					and action.target.components.pickable ~= nil
+					and not action.target.components.pickable.jostlepick
+					and not action.target.components.pickable.quickpick
+					and (fast and "domediumaction" or slow and "dohungrybuild") 
+					or _PickActionOld(inst, action)
 			else
 				return _PickActionOld(inst, action)
 			end

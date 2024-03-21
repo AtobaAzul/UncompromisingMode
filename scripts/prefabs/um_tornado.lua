@@ -885,18 +885,18 @@ local function CanSpawnWaterfall(inst, x, y, z)
 end
 
 local function TrySpawnWaterfall(inst, x, z)
-    local x, y, z = inst.Transform:GetWorldPosition()
-
-    x = x + math.random(-15, 15)
-    z = z + math.random(-15, 15)
-
-    if CanSpawnWaterfall(inst, x, y, z) then
-        SpawnPrefab("um_waterfall_spawner").Transform:SetPosition(x, y, z)
-    end
-
     if not TheWorld.state.isspring then
         inst.persists = false
         inst:Remove()
+	else
+		local x, y, z = inst.Transform:GetWorldPosition()
+
+		x = x + math.random(-15, 15)
+		z = z + math.random(-15, 15)
+
+		if CanSpawnWaterfall(inst, x, y, z) then
+			SpawnPrefab("um_waterfall_spawner").Transform:SetPosition(x, y, z)
+		end
     end
 end
 
