@@ -69,10 +69,10 @@ local function InitEnvelope()
     EnvelopeManager:AddColourEnvelope(
         COLOUR_ENVELOPE_NAME_SMOKE,
         {
-            { 0,  IntColour(255, 255, 255, 24) },
-            { .3, IntColour(255, 255, 255, 24) },
-            { .7, IntColour(255, 255, 255, 24) },
-            { 1,  IntColour(255, 255, 255, 24) },
+            { 0,  IntColour(255, 255, 255, 15) },
+            { .3, IntColour(255, 255, 255, 15) },
+            { .7, IntColour(255, 255, 255, 15) },
+            { 1,  IntColour(255, 255, 255, 15) },
         }
     )
 
@@ -224,16 +224,12 @@ end
 local function fn()
     local inst = CreateEntity()
     inst.entity:AddTransform()
-    inst.entity:AddAnimState()
     inst.entity:AddNetwork()
     inst.entity:AddPhysics()
 
     inst:AddTag("FX")
     inst:AddTag("NOCLICK")
     inst:AddTag("smog")
-    inst.AnimState:SetBuild("marshmist")
-    inst.AnimState:SetBank("marshmist")
-    inst.AnimState:PlayAnimation("idle", true)
 
     inst._diminishing = net_bool(inst.GUID, "smog_cloud._diminishing", "diminishingdirty")
 
@@ -255,14 +251,6 @@ local function fn()
 
         inst:ListenForEvent("onremove", OnRemove_Client)
     end
-
-
-
-    inst.AnimState:SetOrientation(ANIM_ORIENTATION.OnGround)
-    inst.AnimState:SetLayer(LAYER_WORLD)
-    inst.AnimState:SetSortOrder(1)
-    inst.AnimState:SetScale(4, 4, 4)
-    inst.AnimState:SetMultColour(0.05, 0.05, 0.05, 0.0)
 
     inst.entity:SetPristine()
 

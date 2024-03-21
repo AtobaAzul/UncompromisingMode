@@ -46,7 +46,7 @@ AddComponentPostInit("edible", function(self)
         local multiplier = 1
 
         --temp fix we should probably seee *why* eater is being nil.
-        if eater ~= nil then
+        if eater ~= nil and eater.components.foodaffinity ~= nil then
             local foodaffinity = eater.components.foodaffinity
             local found_affinities = {}
 
