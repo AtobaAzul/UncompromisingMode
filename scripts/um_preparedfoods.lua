@@ -404,6 +404,7 @@ local um_preparedfoods =
 		secondaryfoodtype = FOODTYPE.MONSTER,
 		perishtime = TUNING.PERISH_FAST,
 		floater = { nil, 0.1, 0.6 },
+		tags = { "monstermeat" },
 	},
 
 	purplesteamedhams =
