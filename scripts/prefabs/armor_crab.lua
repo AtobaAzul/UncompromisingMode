@@ -17,7 +17,7 @@ local function onequip(inst, owner)
             if owner.components.health ~= nil then
                 local current_health_percent = owner.components.health:GetPercent()
 
-                owner.components.health.maxhealth = owner.components.health.maxhealth + 150
+                owner.components.health.maxhealth = owner.components.health.maxhealth * 1.5
 
                 owner.components.health:SetPercent(current_health_percent)
 
@@ -38,7 +38,7 @@ local function onunequip(inst, owner)
             owner:DoTaskInTime(0, function()
                 local current_health_percent = owner.components.health:GetPercent()
 
-                owner.components.health.maxhealth = owner.components.health.maxhealth - 150
+                owner.components.health.maxhealth = owner.components.health.maxhealth  * (2/3)
 
                 owner.components.health:SetPercent(current_health_percent)
 
