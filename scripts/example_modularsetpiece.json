@@ -254,7 +254,7 @@
             },
             "options": {
                 "Connection": 1,
-                "End": 3
+                "end": 3
             },
             "relative_z": 12,
             "relative_x": 0,
@@ -323,7 +323,7 @@
             },
             "options": {
                 "Connection": 3,
-                "End": 1
+                "end": 1
             },
             "relative_z": 0,
             "relative_x": 12,
@@ -432,7 +432,7 @@
             },
             "options": {
                 "Connection": 1,
-                "End": 3
+                "end": 3
             },
             "relative_z": -12,
             "relative_x": 0,

@@ -104,8 +104,8 @@ local function Capture(inst, channeler)
     local ents = CheckAndGetValidEntities(inst)
     local saved_ents = {}
     local num = tostring(math.random(1000))
-    local text = (inst.components.writeable.text == nil and "returnedTable" .. num) or
-        string.gsub(inst.components.writeable.text, " ", "_")
+    local text = (inst.components.writeable.text == nil and "returnedtable" .. num) or
+        string.lower(string.gsub(inst.components.writeable.text, " ", "_"))
     local file = io.open(output_file, "r+")
     if saved_ents[text] == nil then
         saved_ents[text] = {}
@@ -286,7 +286,7 @@ end
 local function SpawnLayout(inst, extradata)
     if inst.layout ~= nil then
         local layout = weighted_random_choice(inst.layout)
-        if layout ~= "End" then
+        if layout ~= "end" then
             inst.components.writeable.text = layout
         else
             inst:Remove()
@@ -350,7 +350,7 @@ local function SpawnLayout(inst, extradata)
             end
         end
 
-        if TheWorld.dl_tasks == nil then
+        if TheWorld.dl_tasks == nil and group ~= nil then
             TheWorld.dl_tasks = {}
             TheWorld.dl_tasks[group] = {}
         end
