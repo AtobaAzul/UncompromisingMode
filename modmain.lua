@@ -117,9 +117,10 @@ GLOBAL.UPGRADETYPES.SLUDGE_CORK = "SLUDGE_CORK"
 GLOBAL.MATERIALS.SLUDGE = "sludge"
 GLOBAL.MATERIALS.COPPER = "copper"
 
-RemapSoundEvent("dontstarve/together_FE/DST_theme_portaled", "UMMusic/music/uncomp_char_select")
-RemapSoundEvent("dontstarve/music/music_FE", "UMMusic/music/uncomp_main_menu")
-
+if GetModConfigData("um_music", true) then
+    RemapSoundEvent("dontstarve/together_FE/DST_theme_portaled", "UMMusic/music/uncomp_char_select")
+    RemapSoundEvent("dontstarve/music/music_FE", "UMMusic/music/uncomp_main_menu")
+end
 AddShardModRPCHandler("UncompromisingSurvival", "Hayfever_Stop", function() GLOBAL.TheWorld:PushEvent("beequeenkilled") end)
 
 AddShardModRPCHandler("UncompromisingSurvival", "Hayfever_Start", function(...) GLOBAL.TheWorld:PushEvent("beequeenrespawned") end)
