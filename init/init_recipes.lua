@@ -1374,6 +1374,9 @@ if GetModConfigData("wixie_walter") then
             if Prefabs["obsidian"] then
                 AllRecipes["slingshotammo_obsidian"].ingredients = { Ingredient("obsidian", 1) }
             end
+            if Prefabs["hail"] then
+                AllRecipes["ice"].ingredients = { Ingredient("hail", 4) }
+            end
         end)
     end)
 end
