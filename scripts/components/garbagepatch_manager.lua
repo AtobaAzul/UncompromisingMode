@@ -27,13 +27,11 @@ end
 
 function GarbagePatchManager:AddInventory()
     if self.garbage_inventory == nil and TheSim:FindFirstEntityWithTag("garbagepatch_inventory") then
-       
         self.garbage_inventory = TheSim:FindFirstEntityWithTag("garbagepatch_inventory")
     elseif self.garbage_inventory == nil then
-       
         self.garbage_inventory = SpawnPrefab("garbagepatch_inventory")
     else
-       
+
     end
 
     return self.garbage_inventory
@@ -50,12 +48,12 @@ function GarbagePatchManager:SpawnPatch(pos)
     if pos == nil then
         x, y, z = self:FindSpotForPatch():Get()
     else
-        x, y, z = self:FindSpotForPatch():Get()
+        x, y, z = pos:Get()
     end
-
-    for i = 0, math.ceil(#self.garbage_inventory.components.inventory.itemslots / 5) do
+    local slots = #self.garbage_inventory.components.inventory.itemslots
+    for i = 0, math.ceil(slots / 5) do
         local flotsam = SpawnPrefab("garbagepatchflotsam")
-        flotsam.Transform:SetPosition(x + math.random(-10, 10), y, z + math.random(-10, 10))
+        flotsam.Transform:SetPosition(x + math.random(-slots/2, slots/2), y, z + math.random(-slots/2, slots/2))
     end
 end
 
