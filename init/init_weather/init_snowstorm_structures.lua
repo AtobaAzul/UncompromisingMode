@@ -124,23 +124,24 @@ end
 repourposing this file, but am gonna comment that ^ out since this file wasn't loading before.]]
 local SNOWPILE_BLOCKERS =
 {
-	"dragonflyfurnace",
+    "dragonflyfurnace",
 }
 for k, v in pairs(SNOWPILE_BLOCKERS) do
-	AddPrefabPostInit(v, function(inst)
-		if not GLOBAL.TheWorld.ismastersim then
-			return
-		end
-		inst:AddTag("snowpileblocker")
+    AddPrefabPostInit(v, function(inst)
+        if not GLOBAL.TheWorld.ismastersim then
+            return
+        end
 
-		inst:DoPeriodicTask(5, function(inst)
-			local x, y, z = inst.Transform:GetWorldPosition()
-			local snow = GLOBAL.TheSim:FindEntities(x, y, z, 8, { "snowpile" })
-			for k, v in ipairs(snow) do
-				if v.components.workable ~= nil then
-					v.components.workable:Destroy(inst)
-				end
-			end
-		end, 0)
-	end)
+        inst:AddTag("snowpileblocker")
+
+        inst:DoPeriodicTask(5, function(inst)
+            local x, y, z = inst.Transform:GetWorldPosition()
+            local snow = GLOBAL.TheSim:FindEntities(x, y, z, 8, { "snowpile" })
+            for k, v in ipairs(snow) do
+                if v.components.workable ~= nil then
+                    v.components.workable:Destroy(inst)
+                end
+            end
+        end, 0)
+    end)
 end

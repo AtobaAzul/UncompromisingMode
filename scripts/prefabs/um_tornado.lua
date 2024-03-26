@@ -92,110 +92,6 @@ local function teleport_continue(teleportee, locpos, inst)
     end
 end
 
-local QUAKEDEBRIS_CANT_TAGS = { "quakedebris" }
-local QUAKEDEBRIS_ONEOF_TAGS = { "INLIMBO" }
-local SMASHABLE_TAGS = { "smashable", "_combat" }
-local NON_SMASHABLE_TAGS = { "INLIMBO", "playerghost", "irreplaceable" }
-local HEAVY_SMASHABLE_TAGS = { "smashable", "quakedebris", "_combat", "_inventoryitem", "NPC_workable" }
-local HEAVY_NON_SMASHABLE_TAGS = { "INLIMBO", "playerghost", "irreplaceable", "caveindebris", "outofreach" }
-
-local function _GroundDetectionUpdate(debris, override_density)
-    local x, y, z = debris.Transform:GetWorldPosition()
-    if y <= .5 then
-        debris.Transform:SetPosition(x, 0, z)
-        debris.Physics:ClearMotorVelOverride()
-
-        if not debris:IsOnPassablePoint() then
-            debris:PushEvent("detachchild")
-            debris:Remove()
-        else
-            local softbounce = false
-            if debris:HasTag("heavy") then
-                local ents = TheSim:FindEntities(x, 0, z, 2, nil, HEAVY_NON_SMASHABLE_TAGS, HEAVY_SMASHABLE_TAGS)
-                for i, v in ipairs(ents) do
-                    if v ~= debris and v:IsValid() and not v:IsInLimbo() then
-                        softbounce = true
-                        if v.components.combat ~= nil then
-                            v.components.combat:GetAttacked(debris, 30, nil)
-                        elseif v.components.inventoryitem ~= nil then
-                            if v.components.mine ~= nil then
-                                v.components.mine:Deactivate()
-                            end
-                            Launch(v, debris, TUNING.LAUNCH_SPEED_SMALL / 10)
-                        end
-                    end
-                end
-            else
-                local ents = TheSim:FindEntities(x, 0, z, 2, nil, NON_SMASHABLE_TAGS, SMASHABLE_TAGS)
-                for i, v in ipairs(ents) do
-                    if v ~= debris and v:IsValid() and not v:IsInLimbo() then
-                        softbounce = true
-                        if v.components.combat ~= nil and not (v:HasTag("epic") or v:HasTag("wall")) then
-                            v.components.combat:GetAttacked(debris, 20, nil)
-                        end
-                    end
-                end
-            end
-
-            debris.Physics:SetDamping(.9)
-
-            if softbounce then
-                local speed = 3.2 + math.random()
-                local angle = math.random() * 2 * PI
-                debris.Physics:SetMotorVel(0, 0, 0)
-                debris.Physics:SetVel(speed * math.cos(angle), speed * 2.3, speed * math.sin(angle))
-            end
-
-            if debris.shadow ~= nil then
-                debris.shadow:Remove()
-                debris.shadow = nil
-            end
-            if debris.updatetask ~= nil then
-                debris.updatetask:Cancel()
-                debris.updatetask = nil
-            end
-            local density = override_density or DENSITYRADIUS
-            if density <= 0 or debris.prefab == "mole" or debris.prefab == "rabbit" or not (math.random() < .75 or #TheSim:FindEntities(x, 0, y, density, nil, QUAKEDEBRIS_CANT_TAGS, QUAKEDEBRIS_ONEOF_TAGS) > 1) then
-                -- keep it
-
-                debris.entity:SetCanSleep(true)
-                if debris.components.inventoryitem then
-                    debris.components.inventoryitem.canbepickedup = true
-                end
-                debris:PushEvent("stopfalling")
-            elseif debris.components.inventoryitem then
-                debris.components.inventoryitem.canbepickedup = true
-            end
-        end
-    elseif debris:GetTimeAlive() < 3 then
-        if y < 2 then
-            debris.Physics:SetMotorVel(0, 0, 0)
-        end
-        local scaleFactor = Lerp(.5, 1.5, y / 35)
-        debris.shadow.Transform:SetScale(scaleFactor, scaleFactor, scaleFactor)
-        if debris.components.inventoryitem ~= nil then
-            debris.components.inventoryitem.canbepickedup = true
-        end
-    elseif debris:IsInLimbo() then
-        -- failsafe, but maybe we got trapped or picked up somehow, so keep it
-
-        debris.entity:SetCanSleep(true)
-        debris.shadow:Remove()
-        debris.shadow = nil
-        debris.updatetask:Cancel()
-        debris.updatetask = nil
-        if debris._restorepickup then
-            debris._restorepickup = nil
-            if debris.components.inventoryitem ~= nil then
-                debris.components.inventoryitem.canbepickedup = true
-            end
-        end
-        debris:PushEvent("stopfalling")
-        if debris.components.inventoryitem ~= nil then
-            debris.components.inventoryitem.canbepickedup = true
-        end
-    end
-end
 
 
 local destroy_prefabs = {
@@ -250,7 +146,8 @@ local function TornadoEnviromentTask(inst)
         -- PICKABLES
         local pickables = TheSim:FindEntities(x, y, z, 12, nil, { "INLIMBO", "trap", "flower", "tornado_nosucky" }, { "pickable", "HACK_workable" })
         for k, v in ipairs(pickables) do
-            if v.components.pickable ~= nil and v.components.pickable:CanBePicked() then
+            local _x, _y, _z = v.Transform:GetWorldPosition()
+            if v.components.pickable ~= nil and v.components.pickable:CanBePicked() and not IsUnderRainDomeAtXZ(_x, _z) then
                 if not v:IsAsleep() and not config == "reduced" then
                     v.components.pickable:Pick(TheWorld)
                 else
@@ -278,7 +175,9 @@ local function TornadoEnviromentTask(inst)
             { "DIG_workable", "CHOP_workable" })
 
         for k, v in ipairs(workables) do
-            if v.components.workable ~= nil and not v.components.pickable and not v.components.hackable and not string.match(v.prefab, "oceantree") and not v.components.spawner then
+            local _x, _y, _z = v.Transform:GetWorldPosition()
+
+            if v.components.workable ~= nil and not v.components.pickable and not v.components.hackable and not string.match(v.prefab, "oceantree") and not v.components.spawner and not IsUnderRainDomeAtXZ(_x, _z) then
                 if not v:IsAsleep() then
                     if v.components.workable.action == ACTIONS.DIG then
                         local fx = SpawnPrefab("shovel_dirt")
@@ -295,49 +194,11 @@ local function TornadoEnviromentTask(inst)
             end
         end
 
-        -- ITEM SUCKING - Especifically *after* pickables/workables because it then will capture the items produced.
-        local items_suck = config == "reduced" and
-            TheSim:FindEntities(x, y, z, 12, { "_inventoryitem" },
-                { "irreplaceable", "tornado_nosucky", "trap", "INLIMBO", "heavy", "backpack" }) or
-            TheSim:FindEntities(x, y, z, 24, { "_inventoryitem" },
-                { "irreplaceable", "tornado_nosucky", "trap", "INLIMBO", "heavy", "backpack" })
-
-        local ground = TheWorld.Map:IsOceanAtPoint(x, y, z)
-        local angle_deviation = config == "reduced" and 0 or (66 * RADIANS)
-        for k, v in pairs(items_suck) do
-            if v and v.Physics ~= nil and v.components.inventoryitem and not v.components.inventoryitem:IsHeld() and v.replica.inventoryitem ~= nil and v.replica.inventoryitem:CanBePickedUp() and v.prefab ~= "bullkelp_beachedroot" then
-                local _x, _y, _z = v:GetPosition():Get()
-                local item_ground = TheWorld.Map:IsOceanAtPoint(_x, _y, _z)
-                if ground == item_ground then
-                    if not v:IsAsleep() then
-                        if config == "reduced" then
-                            return
-                        end
-                        _y = .1
-                        v.Physics:Teleport(_x, _y, _z)
-                        local dir = v:GetPosition() - inst:GetPosition()
-                        local angle = math.atan2(-dir.z, -dir.x) + angle_deviation
-                        v.Physics:ClearMotorVelOverride()
-                        v.Physics:SetMotorVelOverride(math.cos(angle) * 5, 0, math.sin(angle) * 5)
-                    else
-                        if table.contains(destroy_prefabs, v.prefab) and math.random() > 0.5 then
-                            v:Remove()
-                        else
-                            PickItem(v, inst) --skip all the steps above if you're just gonna do it off-screen.
-                        end
-                    end
-                end
-            else
-                v:AddTag("tornado_nosucky")
-                v:DoTaskInTime(5, function() v:RemoveTag("tornado_nosucky") end)
-            end
-        end
-
         -- ITEM PICKING
-        local items_pick = TheSim:FindEntities(x, y, z, 2, { "_inventoryitem" },
+        local items_pick = TheSim:FindEntities(x, y, z, 6, { "_inventoryitem" },--no dome check because dome component adds nosucky tag.
             { "irreplaceable", "tornado_nosucky", "trap", "INLIMBO", "heavy", "backpack" })
         for k, v in ipairs(items_pick) do
-            if v.components.inventoryitem ~= nil and v.prefab ~= "bullkelp_beachedroot" and v.Physics ~= nil then
+            if v.components.inventoryitem ~= nil and v.prefab ~= "bullkelp_beachedroot"  then
                 if config == "reduced" and v:IsAsleep() then
                     return
                 end
@@ -385,112 +246,6 @@ local function TornadoEnviromentTask(inst)
     end
 end
 
-local function TornadoItemTossTask(inst)
-    for i = 1, math.random(3, 5) do
-        local targetplayers = {}
-        local targetplayer
-        local x, y, z
-
-        for k, v in ipairs(AllPlayers) do
-            if v:HasTag("under_the_weather") then
-                table.insert(targetplayers, v)
-            end
-        end
-
-        targetplayer = targetplayers[#targetplayers > 1 and math.random(#targetplayers) or 1]
-        if targetplayer == nil or math.random() > 0.5 then
-            x, y, z = inst.Transform:GetWorldPosition()
-            x = x + math.random(-50, 50)
-            z = z + math.random(-50, 50)
-        else
-            x, y, z = targetplayer.Transform:GetWorldPosition()
-            x = x + math.random(-10, 10)
-            z = z + math.random(-10, 10)
-        end
-
-        if #inst.components.inventory.itemslots ~= 0 and x ~= nil and TheWorld.Map:IsPassableAtPoint(x, 0, z) then
-            local item =
-                inst.components.inventory.itemslots
-                [math.random(#inst.components.inventory.itemslots)]
-            if item ~= nil and not item:IsValid() then
-                --idk why and wehn this stupid crash started happening
-                return
-            end
-
-            local random_item = inst.components.inventory:RemoveItem(item)
-
-            if random_item ~= nil and random_item:IsValid() then
-                random_item:AddTag("tornado_nosucky")
-
-                random_item.entity:SetCanSleep(false)
-
-                random_item:AddTag("quakedebris")
-                if random_item.components.inventoryitem ~= nil and random_item.components.inventoryitem.canbepickedup then
-                    random_item.components.inventoryitem.canbepickedup = false
-                    random_item._restorepickup = true
-                end
-
-                if math.random() < .5 then
-                    random_item.Transform:SetRotation(180)
-                end
-
-                random_item:DoTaskInTime(8, function(inst) inst:RemoveTag("tornado_nosucky") end)
-
-                if random_item.Physics ~= nil then
-                    random_item.Physics:Teleport(x, 35, z)
-                    random_item.Physics:SetMotorVel(0, math.random(-50, -33), 0)
-                elseif random_item.Transform ~= nil then
-                    random_item.Transform:SetPosition(x, 0, z)
-                end
-
-                random_item.shadow = SpawnPrefab("warningshadow")
-                random_item.shadow:ListenForEvent("onremove", function(debris) debris.shadow:Remove() end, random_item)
-                random_item.shadow.Transform:SetPosition(x, 0, z)
-
-                local scaleFactor = Lerp(.5, 1.5, 1)
-                random_item.shadow.Transform:SetScale(scaleFactor, scaleFactor, scaleFactor)
-                random_item.updatetask = random_item:DoPeriodicTask(.1, _GroundDetectionUpdate, nil, 5)
-
-                random_item.updatetask_timeout = random_item:DoTaskInTime(30, function(inst)
-                    if random_item.Physics ~= nil then
-                        inst.Physics:ClearMotorVelOverride()
-                    end
-
-                    if inst.updatetask ~= nil or inst.shadow ~= nil then
-                        print("PANIC? FALLING ITEM TIMED OUT!")
-                        inst.entity:SetCanSleep(true)
-
-                        if inst.shadow ~= nil then
-                            inst.shadow:Remove()
-                            inst.shadow = nil
-                        end
-
-                        if inst.updatetask ~= nil then
-                            inst.updatetask:Cancel()
-                            inst.updatetask = nil
-                        end
-
-                        if inst._restorepickup then
-                            inst._restorepickup = nil
-                            if inst.components.inventoryitem ~= nil then
-                                inst.components.inventoryitem.canbepickedup = true
-                            end
-                        end
-
-                        inst:PushEvent("stopfalling")
-
-                        if inst.components.inventoryitem ~= nil then
-                            inst.components.inventoryitem.canbepickedup = true
-                        end
-                        local x, y, z = inst.Transform:GetWorldPosition()
-                        inst.Transform:SetPosition(x, 0, z)
-                    end
-                end)
-            end
-        end
-    end
-end
-
 local function TornadoTask(inst)
     if inst.startmoving then
         local x, y, z = inst.Transform:GetWorldPosition()
@@ -498,33 +253,38 @@ local function TornadoTask(inst)
         local players = TheSim:FindEntities(x, y, z, 300, nil, { "playerghost" }, { "player", "um_windturbine" })
 
         if math.random() > 0.99 and config ~= "minimal" then
-            local lightning = SpawnPrefab("hound_lightning")
-            lightning.Transform:SetPosition(x + math.random(-300, 300), 0, z + math.random(-300, 300))
-            lightning.NoTags = { "INLIMBO", "shadow", "structure", "wall", "companion", "abigail", "bird", "prey" }
-            lightning.Delay = 1.5
+            local _x, _y, _z = x + math.random(-150, 150), 0, z + math.random(-150, 150)
+
+            if not IsUnderRainDomeAtXZ(_x, _z) then
+                local lightning = SpawnPrefab("hound_lightning")
+
+                lightning.Transform:SetPosition(_x, _y, _z)
+                lightning.NoTags = { "INLIMBO", "shadow", "structure", "wall", "companion", "abigail", "bird", "prey" }
+                lightning.Delay = 1.25 + math.random() / 2
+            end
         end
 
         for k, v in pairs(players) do
             local px, py, pz = v.Transform:GetWorldPosition()
+            if not IsUnderRainDomeAtXZ(px, pz) then
+                if v:HasTag("player") or v:HasTag("um_windturbine") then
+                    v:AddTag("under_the_weather")
 
-            if v:HasTag("player") or v:HasTag("um_windturbine") then
-                v:AddTag("under_the_weather")
+                    if v.um_tornado_weathertask ~= nil then
+                        v.um_tornado_weathertask:Cancel()
+                        v.um_tornado_weathertask = nil
+                    end
 
-                if v.um_tornado_weathertask ~= nil then
-                    v.um_tornado_weathertask:Cancel()
-                    v.um_tornado_weathertask = nil
+                    v.um_tornado_weathertask = v:DoTaskInTime(1, function()
+                        v:RemoveTag("under_the_weather")
+
+                        v.um_tornado_weathertask = nil
+                    end)
                 end
 
-                v.um_tornado_weathertask = v:DoTaskInTime(1, function()
-                    v:RemoveTag("under_the_weather")
-
-                    v.um_tornado_weathertask = nil
-                end)
-            end
-
-            if not v:HasTag("um_windturbine") then
                 if not v:HasTag("um_windturbine") then
                     local rand = math.random()
+                    local px, py, pz = v.Transform:GetWorldPosition()
                     if (v.prefab == "wes" and rand > 0.95 or rand > 0.99) then
                         local lightning_targeted = SpawnPrefab("hound_lightning")
                         lightning_targeted.Transform:SetPosition(px + math.random(-5, 5), 0, pz + math.random(-5, 5))
@@ -569,7 +329,6 @@ local function TornadoTask(inst)
                                 hat.Physics:SetVel(math.cos(angle) * speed, 10, math.sin(angle) * speed)
                             end
                         end
-
 
                         local rad = math.rad(v:GetAngleToPoint(x, y, z))
                         local velx = math.cos(rad)
@@ -619,14 +378,6 @@ local function TornadoTask(inst)
 
             local ocean_anim = TheWorld.Map:IsOceanTileAtPoint(x_dest2, 0, z_dest2)
             local ground_anim = TheWorld.Map:IsPassableAtPoint(x_dest2, 0, z_dest2)
-
-            if ground_anim then
-                --inst.AnimState:OverrideSymbol("wormmovefx", "um_tornado", "wormmovefx")
-            elseif ocean_anim then
-                --inst.AnimState:OverrideSymbol("wormmovefx", "um_tornado", "wormmovefx_water")
-            else
-                --inst.AnimState:OverrideSymbol("wormmovefx", "um_tornado", "wormmovefx_void")
-            end
 
             if inst.persists and (destination:IsValid() and inst:GetDistanceSqToInst(destination) < 50) --[[or (not TheWorld.Map:IsPassableAtPoint(x, 0, z) and not TheWorld.Map:IsOceanAtPoint(x, 0, z)))]] then
                 inst.AnimState:PlayAnimation("tornado_pst", false)
@@ -777,9 +528,6 @@ local function fn()
         SpawnPrefab("um_tornado_destination_marker2").Transform:SetPosition(x, 0, z)
     end)]]
 
-    if config ~= "minimal" then
-        inst:DoPeriodicTask(2.5, TornadoItemTossTask)
-    end
     inst:DoPeriodicTask(0.25, TornadoEnviromentTask)
 
     inst.OnSave = OnSave
@@ -888,15 +636,15 @@ local function TrySpawnWaterfall(inst, x, z)
     if not TheWorld.state.isspring then
         inst.persists = false
         inst:Remove()
-	else
-		local x, y, z = inst.Transform:GetWorldPosition()
+    else
+        local x, y, z = inst.Transform:GetWorldPosition()
 
-		x = x + math.random(-15, 15)
-		z = z + math.random(-15, 15)
+        x = x + math.random(-15, 15)
+        z = z + math.random(-15, 15)
 
-		if CanSpawnWaterfall(inst, x, y, z) then
-			SpawnPrefab("um_waterfall_spawner").Transform:SetPosition(x, y, z)
-		end
+        if CanSpawnWaterfall(inst, x, y, z) then
+            SpawnPrefab("um_waterfall_spawner").Transform:SetPosition(x, y, z)
+        end
     end
 end
 

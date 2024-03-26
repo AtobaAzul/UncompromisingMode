@@ -98,7 +98,7 @@ function SnowOver:OnUpdate(dt)
 		end
 	end
 
-	if TheWorld.state.iswinter and ((TheWorld.net ~= nil and TheWorld.net:HasTag("snowstormstartnet")) or TheWorld:HasTag("snowstormstart")) then
+	if TheWorld.state.iswinter and ((TheWorld.net ~= nil and TheWorld.net:HasTag("snowstormstartnet")) or TheWorld:HasTag("snowstormstart")) and not IsUnderRainDomeAtXZ(x, z) then
 		if self.changed == nil then
 			self.changed = 0.01
 		elseif self.changed <= 0.8 then

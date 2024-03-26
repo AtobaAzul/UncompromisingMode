@@ -77,7 +77,9 @@ end)
 function Um_StormOver:OnUpdate(dt)
     local tornado = FindClosestEntity(self.owner, 300, true, { "um_tornado" })
 
-    if --[[TheWorld.state.isspring and]] tornado ~= nil and tornado:IsValid() then
+    local x, y, z = self.owner.Transform:GetWorldPosition()
+
+    if --[[TheWorld.state.isspring and]] tornado ~= nil and tornado:IsValid() and not IsUnderRainDomeAtXZ(x, z) then
         if self.changed < 1 then
             self:Show()
             self.changed = self.changed + 0.002

@@ -2,7 +2,6 @@ local env = env
 GLOBAL.setfenv(1, GLOBAL)
 local UpvalueHacker = require("tools/upvaluehacker")
 env.AddComponentPostInit("weather", function(self)
-
     local _CalculatePrecipitationRate = UpvalueHacker.GetUpvalue(self.OnUpdate, "CalculatePrecipitationRate")
 
     local _OnUpdate = self.OnUpdate
@@ -32,15 +31,13 @@ env.AddComponentPostInit("weather", function(self)
             end
         end
 
-        if ThePlayer ~= nil and ThePlayer:HasTag("under_the_weather") then
-			local tornado = TheSim:FindFirstEntityWithTag("um_tornado")
-            if _hasfx and tornado ~= nil and tornado:IsValid() and _rainfx ~= nil then
-                local tornado_dist = math.sqrt(ThePlayer:GetDistanceSqToInst(tornado))
-                local max_intensity = TUNING.DSTU.REDUCED_TORNADO_VFX and 5 or 10
-                local intensity = Lerp(max_intensity, 1, tornado_dist / 300)
-                _rainfx.particles_per_tick = preciprate * 5 + intensity
-                _rainfx.splashes_per_tick = preciprate * 3 + intensity
-            end
+        local tornado = TheSim:FindFirstEntityWithTag("um_tornado")
+        if _hasfx and tornado ~= nil and tornado:IsValid() and _rainfx ~= nil and ThePlayer ~= nil  then
+            local tornado_dist = math.sqrt(ThePlayer:GetDistanceSqToInst(tornado))
+            local max_intensity = TUNING.DSTU.REDUCED_TORNADO_VFX and 5 or 10
+            local intensity = Lerp(max_intensity, 1, tornado_dist / 300)
+            _rainfx.particles_per_tick = preciprate * 5 + intensity
+            _rainfx.splashes_per_tick = preciprate * 3 + intensity
         end
     end
 end)

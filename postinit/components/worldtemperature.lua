@@ -6,7 +6,7 @@ env.AddComponentPostInit("worldtemperature", function(self)
     local _CalculateTemperature = UpvalueHacker.GetUpvalue(self.GetDebugString, "CalculateTemperature") -- This is an old copy of the function, right? This would cause a stackoverflow when it gets set again, right???
 
     local function new_CalculateTemperature()
-        return _CalculateTemperature() * (TheWorld:HasTag("heatwavestart") and 1.66 or 1) -- Is 2 too much?
+        return _CalculateTemperature() * (TheWorld:HasTag("heatwavestart") and 1.2 or 1) -- Is 2 too much?
     end
 
     UpvalueHacker.SetUpvalue(self.GetDebugString, new_CalculateTemperature, "CalculateTemperature")
