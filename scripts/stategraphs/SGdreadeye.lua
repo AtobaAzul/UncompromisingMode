@@ -457,7 +457,7 @@ local states =
 							x = x + math.random(2 * offset) - offset
 							z = z + math.random(2 * offset) - offset
 							
-							local playercheck = TheSim:FindEntities(x, y, z, 5, {"player", "antlion_sinkhole_blocker"})
+							local playercheck = TheSim:FindEntities(x, y, z, 16, {"player", "antlion_sinkhole_blocker"})
 						
 							if not TheWorld.Map:GetPlatformAtPoint(x, z) and (TheWorld.Map:IsOceanAtPoint(x, y, z) or TheWorld.Map:IsPassableAtPoint(x, y, z)) and (playercheck == nil or #playercheck == 0) then
 								inst.Physics:Teleport(x, y, z)
@@ -475,7 +475,7 @@ local states =
 							x = x + math.random(2 * offset) - offset
 							z = z + math.random(2 * offset) - offset
 							
-							local playercheck = TheSim:FindEntities(x, y, z, 5, {"player", "antlion_sinkhole_blocker"})
+							local playercheck = TheSim:FindEntities(x, y, z, 16, {"player", "antlion_sinkhole_blocker"})
 							
 							if not TheWorld.Map:GetPlatformAtPoint(x, z) and (TheWorld.Map:IsOceanAtPoint(x, y, z) or TheWorld.Map:IsPassableAtPoint(x, y, z)) and (playercheck == nil or #playercheck == 0) then
 								inst.Physics:Teleport(x, y, z)
