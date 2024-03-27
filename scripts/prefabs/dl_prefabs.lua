@@ -313,7 +313,9 @@ local function SpawnLayout(inst, extradata)
         local data = json.decode(file_string)
 
         if data[inst.components.writeable.text] == nil or type(data[inst.components.writeable.text]) ~= "table" then
-            TheNet:Announce("Invalid data!")
+            print(data, file)
+            print(data[inst.components.writeable.text] == nil, type(data[inst.components.writeable.text]) ~= "table")
+            print("Invalid data!")
             return
         end
 
