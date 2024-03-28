@@ -7,7 +7,7 @@ local splashprefabs =
 }
 
 local function doprojectilehit(inst, attacker, other)
-	inst.SoundEmitter:PlaySound("dontstarve/creatures/spider/spider_egg_sack")
+    inst.SoundEmitter:PlaySound("dontstarve/creatures/spider/spider_egg_sack")
     local x, y, z = inst.Transform:GetWorldPosition()
     SpawnPrefab("web_net_splat_fx").Transform:SetPosition(x, 0, z)
 
@@ -29,52 +29,52 @@ local function doprojectilehit(inst, attacker, other)
             attacker.components.combat:DoAttack(other, inst.components.complexprojectile.owningweapon, inst)
         end
         if other.components.pinnable ~= nil then
-			
-           other.components.pinnable:Stick("web_net_trap",splashprefabs)
-				local widow = TheSim:FindFirstEntityWithTag("hoodedwidow")
-				if widow ~= nil then
-				widow.sg:GoToState("tossplayer")
-				other:DoTaskInTime(1.3, function(other)
-				other.components.pinnable:Unstick()
-				local widowweb = TheSim:FindFirstEntityWithTag("widowweb")
-				if widowweb ~= nil then
-					if other:HasTag("wereplayer") then
-						other.sg:GoToState("hit")
-					else
-						other.sg:GoToState("knockback")
-					end	
-                    local x, y, z = widowweb.Transform:GetWorldPosition() --Ripped knockback code, but it's rigged to go backwards.
-                    local distsq = other:GetDistanceSqToPoint(x, y, z)
-                    local rot = other.Transform:GetRotation()
-                    local rot1 = distsq > 0 and other:GetAngleToPoint(x, y, z) or widowweb.Transform:GetRotation() + 180
-                    local drot = math.abs(rot - rot1)
-                    while drot > 180 do
-                        drot = math.abs(drot - 360)
+            other.components.pinnable:Stick("web_net_trap", splashprefabs)
+            local widow = TheSim:FindFirstEntityWithTag("hoodedwidow")
+            if widow ~= nil then
+                widow.sg:GoToState("tossplayer")
+                other:DoTaskInTime(1.3, function(other)
+                    other.components.pinnable:Unstick()
+                    local widowweb = TheSim:FindFirstEntityWithTag("widowweb")
+                    if widowweb ~= nil then
+                        if other:HasTag("wereplayer") then
+                            other.sg:GoToState("hit")
+                        else
+                            other.sg:GoToState("knockback")
+                        end
+                        local x, y, z = widowweb.Transform:GetWorldPosition() --Ripped knockback code, but it's rigged to go backwards.
+                        local distsq = other:GetDistanceSqToPoint(x, y, z)
+                        local rot = other.Transform:GetRotation()
+                        local rot1 = distsq > 0 and other:GetAngleToPoint(x, y, z) or
+                            widowweb.Transform:GetRotation() + 180
+                        local drot = math.abs(rot - rot1)
+                        while drot > 180 do
+                            drot = math.abs(drot - 360)
+                        end
+                        if drot > 90 then
+                            other.Transform:SetRotation(rot1 + 180)
+                            other.Physics:SetMotorVel(-30, 0, 0)
+                        else
+                            other.Transform:SetRotation(rot1)
+                            other.Physics:SetMotorVel(30, 0, 0)
+                        end
+                        local strings = TheSim:FindEntities(x, y, z, 20, { "webchord" })
+                        for i, v in ipairs(strings) do
+                            if drot > 90 then
+                                v.Transform:SetRotation(rot1 + 180)
+                                v.Physics:SetMotorVel(-30, 0, 0)
+                            else
+                                v.Transform:SetRotation(rot1)
+                                v.Physics:SetMotorVel(30, 0, 0)
+                            end
+                        end
+                        other:DoTaskInTime(0.6, function(other) other.Physics:SetMotorVel(0, 0, 0) end)
                     end
-                    if drot > 90 then
-                        other.Transform:SetRotation(rot1 + 180)
-                        other.Physics:SetMotorVel(-30, 0, 0)
-                    else
-                        other.Transform:SetRotation(rot1)
-                        other.Physics:SetMotorVel(30, 0, 0)
-                    end
-					local strings = TheSim:FindEntities(x,y,z,20,{"webchord"})
-					for i, v in ipairs(strings) do
-					    if drot > 90 then
-							v.Transform:SetRotation(rot1 + 180)
-							v.Physics:SetMotorVel(-30, 0, 0)
-						else
-							v.Transform:SetRotation(rot1)
-							v.Physics:SetMotorVel(30, 0, 0)
-						end
-					end
-					other:DoTaskInTime(0.6,function(other) other.Physics:SetMotorVel(0, 0, 0) end)
-				end
-			end)
-			end
-       end
+                end)
+            end
+        end
     end
-return other
+    return other
 end
 
 local function OnProjectileHit(inst, attacker, other)
@@ -88,14 +88,14 @@ local function oncollide(inst, other)
 
     local attacker = inst.components.projectile.attacker
     if other ~= doprojectilehit(inst, attacker) and other ~= nil and other:IsValid() and other.components.combat and other.components.pinnable then
-		other.components.pinnable:Stick("web_net_trap", splashprefabs)
+        other.components.pinnable:Stick("web_net_trap", splashprefabs)
     end
     inst:Remove()
 end
 
 local function SpawnString(inst)
-	local x,y,z = inst.Transform:GetWorldPosition()
-	SpawnPrefab("widow_web_detrius").Transform:SetPosition(x,y,z)
+    local x, y, z = inst.Transform:GetWorldPosition()
+    SpawnPrefab("widow_web_detrius").Transform:SetPosition(x, y, z)
 end
 
 local function projectilefn()
@@ -125,9 +125,9 @@ local function projectilefn()
     inst.persists = false
     inst:AddComponent("weapon")
     inst.components.weapon:SetDamage(0)
-	
-	inst:DoPeriodicTask(0.05, SpawnString)
-	inst:AddComponent("projectile")
+
+    inst:DoPeriodicTask(0.05, SpawnString)
+    inst:AddComponent("projectile")
     inst.components.projectile:SetSpeed(25)
     inst.components.projectile:SetHoming(false)
     inst.hitdist = math.sqrt(2)
@@ -141,7 +141,7 @@ local function projectilefn()
 end
 
 local function doprojectilehit_queen(inst, attacker, other)
-	inst.SoundEmitter:PlaySound("dontstarve/creatures/spider/spider_egg_sack")
+    inst.SoundEmitter:PlaySound("dontstarve/creatures/spider/spider_egg_sack")
     local x, y, z = inst.Transform:GetWorldPosition()
     SpawnPrefab("web_net_splat_fx").Transform:SetPosition(x, 0, z)
 
@@ -163,7 +163,7 @@ local function doprojectilehit_queen(inst, attacker, other)
             attacker.components.combat:DoAttack(other, nil, inst)
         end
         if other.components.pinnable ~= nil then
-            other.components.pinnable:Stick("web_net_trap",splashprefabs)
+            other.components.pinnable:Stick("web_net_trap", splashprefabs)
         end
     end
 
@@ -239,22 +239,21 @@ local function queenprojectilefn()
 end
 
 local function OnLand(inst)
-	local x, y, z = inst.Transform:GetWorldPosition()
-	SpawnPrefab("widow_web_combat").Transform:SetPosition(x,y,z)
-	local players = TheSim:FindEntities(x,y,z,1.5,{"player"},{"ghost","wereplayer"})
-	for i, v in ipairs(players) do
-	v.components.pinnable:Stick("web_net_trap",splashprefabs)
-	v:DoTaskInTime(1.5,function(v) v.components.pinnable:Unstick() end)
-	end
+    local x, y, z = inst.Transform:GetWorldPosition()
+    SpawnPrefab("widow_web_combat").Transform:SetPosition(x, y, z)
+    local players = TheSim:FindEntities(x, y, z, 1.5, { "player" }, { "ghost", "wereplayer" })
+    for i, v in ipairs(players) do
+        v.components.pinnable:Stick("web_net_trap", splashprefabs)
+        v:DoTaskInTime(1.5, function(v) v.components.pinnable:Unstick() end)
+    end
     inst:Remove()
-	
 end
 local function TestProjectileLand(inst)
-	local x, y, z = inst.Transform:GetWorldPosition()
-	if y <= inst:GetPhysicsRadius() + 0.001 	then
-		OnLand(inst)
-		inst:Remove()
-	end
+    local x, y, z = inst.Transform:GetWorldPosition()
+    if y <= inst:GetPhysicsRadius() + 0.001 then
+        OnLand(inst)
+        inst:Remove()
+    end
 end
 
 
@@ -262,7 +261,7 @@ local function onthrown(inst)
     inst:AddTag("NOCLICK")
     inst.persists = false
     inst.AnimState:SetBank("spat_bomb")
-    inst.AnimState:SetBuild("web_net_shot")  
+    inst.AnimState:SetBuild("web_net_shot")
     inst.AnimState:PlayAnimation("spin_loop", true)
 
     inst.Physics:SetMass(1)
@@ -290,7 +289,7 @@ local function projectilelobfn()
     inst.AnimState:SetBank("spat_bomb")
     inst.AnimState:SetBuild("web_net_shot")
     inst.AnimState:PlayAnimation("spin_loop", true)
-	
+
 
 
     inst.entity:SetPristine()
@@ -314,69 +313,89 @@ end
 
 
 local function webbingfn()
-	local inst = CreateEntity()
-	inst.entity:AddTransform()
-	inst.entity:AddAnimState()
-	inst.entity:AddNetwork()
-	inst.entity:AddDynamicShadow()
-	inst.entity:AddSoundEmitter()
-	inst.entity:AddGroundCreepEntity()
+    local inst = CreateEntity()
+    inst.entity:AddTransform()
+    inst.entity:AddAnimState()
+    inst.entity:AddNetwork()
+    inst.entity:AddDynamicShadow()
+    inst.entity:AddSoundEmitter()
+    inst.entity:AddGroundCreepEntity()
 
-	inst.AnimState:SetBank("widowwebgoop")
-	inst.AnimState:SetBuild("widowwebgoop")
-	inst.AnimState:PlayAnimation("idle")
-	MakeInventoryPhysics(inst)
-	inst.GroundCreepEntity:SetRadius(3)
-	inst:AddTag("queensstuff")
-	inst:AddTag("noauradamage")
-	
-	inst.entity:SetPristine()
+    inst.AnimState:SetBank("widowwebgoop")
+    inst.AnimState:SetBuild("widowwebgoop")
+    inst.AnimState:PlayAnimation("appear")
+    inst.AnimState:PushAnimation("idle")
+    MakeInventoryPhysics(inst)
+    inst.GroundCreepEntity:SetRadius(3)
+    inst:AddTag("queensstuff")
+    inst:AddTag("noauradamage")
 
-	if not TheWorld.ismastersim then
-		return inst
-	end
-	--inst:DoPeriodicTask(60,function(inst) if inst.components.health ~= nil then inst.components.health:DoDelta(-25) end end)
-	inst:ListenForEvent("death", function(inst) inst:Remove() end)
-	-------------------
-	inst:AddComponent("health")
-	inst.components.health:SetMaxHealth(100)
-	inst:AddTag("soulless")
+    inst.entity:SetPristine()
+
+    if not TheWorld.ismastersim then
+        return inst
+    end
+
+    inst.SoundEmitter:PlaySound("dontstarve/creatures/spider/spiderLair_grow")
+
+    inst:ListenForEvent("attacked", function()
+        inst.AnimState:PlayAnimation("hit")
+        inst.AnimState:PushAnimation("idle")
+        inst.SoundEmitter:PlaySound("dontstarve/creatures/spider/spiderLair_hit")
+    end)
+
+    --inst:DoPeriodicTask(60,function(inst) if inst.components.health ~= nil then inst.components.health:DoDelta(-25) end end)
+    inst:ListenForEvent("death", function()
+        local fx = SpawnPrefab("web_net_splat_fx")
+        fx.Transform:SetPosition(inst.Transform:GetWorldPosition())
+        fx.AnimState:SetScale(0.7, 0.7, 0.7)
+
+        inst.AnimState:SetBuild("none")
+        inst.SoundEmitter:PlaySound("dontstarve/creatures/spider/spiderLair_destroy")
+        inst:DoTaskInTime(1, inst.Remove)
+    end)
+
+    -------------------
+    inst:AddComponent("health")
+    inst.components.health:SetMaxHealth(100)
+    inst:AddTag("soulless")
     inst:AddTag("noember")
-	inst:AddComponent("combat")
-	inst:ListenForEvent("death", function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/spider/spiderLair_destroy") end)
-	inst:DoTaskInTime(0,function(inst)
-		if not TheWorld.Map:IsPassableAtPoint(inst.Transform:GetWorldPosition()) then
-			inst:Remove()
-		end
-	end)
-	--inst:DoPeriodicTask(3,function(inst) if inst.components.health ~= nil then inst.components.health:DoDelta(-5) end end)
-	return inst
+    inst:AddComponent("combat")
+
+    inst:DoTaskInTime(0, function(inst)
+        if not TheWorld.Map:IsPassableAtPoint(inst.Transform:GetWorldPosition()) then
+            inst:Remove()
+        end
+    end)
+
+    --inst:DoPeriodicTask(3,function(inst) if inst.components.health ~= nil then inst.components.health:DoDelta(-5) end end)
+    return inst
 end
 
 local function webdetriusfn()
-	local inst = CreateEntity()
-	inst.entity:AddTransform()
-	inst.entity:AddAnimState()
-	inst.entity:AddNetwork()
-	inst.entity:AddDynamicShadow()
-	inst.entity:AddSoundEmitter()
+    local inst = CreateEntity()
+    inst.entity:AddTransform()
+    inst.entity:AddAnimState()
+    inst.entity:AddNetwork()
+    inst.entity:AddDynamicShadow()
+    inst.entity:AddSoundEmitter()
 
-	inst.AnimState:SetBank("widowwebgoop")
-	inst.AnimState:SetBuild("widowwebgoop")
-	inst.AnimState:PlayAnimation("idle")
-	MakeInventoryPhysics(inst)
-	inst:AddTag("webchord")
-	inst.entity:SetPristine()
+    inst.AnimState:SetBank("widowwebgoop")
+    inst.AnimState:SetBuild("widowwebgoop")
+    inst.AnimState:PlayAnimation("idle")
+    MakeInventoryPhysics(inst)
+    inst:AddTag("webchord")
+    inst.entity:SetPristine()
 
-	if not TheWorld.ismastersim then
-		return inst
-	end
-	inst:DoTaskInTime(1.8,function(inst) inst:Remove() end)
-	return inst
+    if not TheWorld.ismastersim then
+        return inst
+    end
+    inst:DoTaskInTime(1.8, function(inst) inst:Remove() end)
+    return inst
 end
 
 return Prefab("widow_web_detrius", webdetriusfn),
-		Prefab("widow_web_combat", webbingfn),
-		Prefab("web_mortar", projectilelobfn),
-		Prefab("web_bomb", projectilefn),
-		Prefab("queen_web_bomb", queenprojectilefn)
+    Prefab("widow_web_combat", webbingfn),
+    Prefab("web_mortar", projectilelobfn),
+    Prefab("web_bomb", projectilefn),
+    Prefab("queen_web_bomb", queenprojectilefn)
