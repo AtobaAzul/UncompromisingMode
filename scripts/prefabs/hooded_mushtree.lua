@@ -13,7 +13,7 @@ local function tree_burnt(inst)
     if math.random() < 0.5 then
         inst.components.lootdropper:SpawnLootPrefab("charcoal")
     end
-    SpawnPrefab(inst.prefab..(inst.treestate == TREESTATES.BLOOMING and "_bloom_burntfx" or "_burntfx")).Transform:SetPosition(inst.Transform:GetWorldPosition())
+    SpawnPrefab(inst.prefab .. (inst.treestate == TREESTATES.BLOOMING and "_bloom_burntfx" or "_burntfx")).Transform:SetPosition(inst.Transform:GetWorldPosition())
     inst:Remove()
 end
 
@@ -129,9 +129,9 @@ end
 
 local growth_stages =
 {
-    { name = "short", time = function(inst) return GetRandomWithVariance(TUNING.EVERGREEN_GROW_TIME[1].base, TUNING.EVERGREEN_GROW_TIME[1].random) end, fn = SetShort,  growfn = GrowShort },
+    { name = "short",  time = function(inst) return GetRandomWithVariance(TUNING.EVERGREEN_GROW_TIME[1].base, TUNING.EVERGREEN_GROW_TIME[1].random) end, fn = SetShort,  growfn = GrowShort },
     { name = "normal", time = function(inst) return GetRandomWithVariance(TUNING.EVERGREEN_GROW_TIME[2].base, TUNING.EVERGREEN_GROW_TIME[2].random) end, fn = SetNormal, growfn = GrowNormal },
-    { name = "tall", time = function(inst) return GetRandomWithVariance(TUNING.EVERGREEN_GROW_TIME[3].base, TUNING.EVERGREEN_GROW_TIME[3].random) end, fn = SetTall, growfn = GrowTall },
+    { name = "tall",   time = function(inst) return GetRandomWithVariance(TUNING.EVERGREEN_GROW_TIME[3].base, TUNING.EVERGREEN_GROW_TIME[3].random) end, fn = SetTall,   growfn = GrowTall },
 }
 
 local data =
@@ -147,7 +147,7 @@ local data =
         loot = { "log", "green_cap" },
         work = TUNING.MUSHTREE_CHOPS_SMALL,
         lightradius = 1,
-        lightcolour = { 146/255, 225/255, 146/255 },
+        lightcolour = { 146 / 255, 225 / 255, 146 / 255 },
     },
     medium =
     { --Red
@@ -160,7 +160,7 @@ local data =
         loot = { "log", "red_cap" },
         work = TUNING.MUSHTREE_CHOPS_MEDIUM,
         lightradius = 1.25,
-        lightcolour = { 197/255, 126/255, 126/255 },
+        lightcolour = { 197 / 255, 126 / 255, 126 / 255 },
     },
     tall =
     { --Blue
@@ -173,7 +173,7 @@ local data =
         loot = { "log", "log", "blue_cap" },
         work = TUNING.MUSHTREE_CHOPS_TALL,
         lightradius = 1.5,
-        lightcolour = { 111/255, 111/255, 227/255 },
+        lightcolour = { 111 / 255, 111 / 255, 227 / 255 },
         webbable = true,
     },
 }
@@ -384,7 +384,7 @@ local function maketree(name, data, state)
 
         inst.Light:Enable(false)
 
-        inst:StopWatchingWorldState("is"..data.season, onisinseason)
+        inst:StopWatchingWorldState("is" .. data.season, onisinseason)
         inst:ListenForEvent("timerdone", ontimerdone)
 
         if not inst.components.timer:TimerExists("decay") then
@@ -392,7 +392,7 @@ local function maketree(name, data, state)
         end
     end
 
-    local function workfinishcallback(inst)--, worker)
+    local function workfinishcallback(inst) --, worker)
         inst.SoundEmitter:PlaySound("dontstarve/forest/treefall")
         makestump(inst)
 
@@ -452,9 +452,17 @@ local function maketree(name, data, state)
         inst:AddTag("shelter")
         inst:AddTag("mushtree")
         inst:AddTag("cavedweller")
-		inst:AddTag("plant")
-		inst:AddTag("lunarplant_target")
+        inst:AddTag("plant")
+        inst:AddTag("lunarplant_target")
         inst:AddTag("tree")
+
+        for i = 1, 3 do
+            local swap_name = "swap_acidglob" .. i
+            inst.AnimState:HideSymbol(swap_name)
+
+            swap_name = "swap_acidglob_bloom" .. i
+            inst.AnimState:HideSymbol(swap_name)
+        end
 
         if data.webbable then
             inst:AddTag("webbable")
@@ -523,7 +531,7 @@ local function maketree(name, data, state)
         if state == "stump" then
             makestump(inst)
         else
-            inst:WatchWorldState("is"..data.season, onisinseason)
+            inst:WatchWorldState("is" .. data.season, onisinseason)
             if TheWorld.state.season == data.season then
                 if inst.treestate ~= TREESTATES.BLOOMING then
                     bloom_tree(inst, true)
@@ -558,16 +566,16 @@ function treeset(name, data, build, bloombuild)
         "charcoal",
         "ash",
         data.spore,
-        name.."_stump",
-        name.."_burntfx",
-        name.."_bloom_burntfx",
+        name .. "_stump",
+        name .. "_burntfx",
+        name .. "_bloom_burntfx",
         "small_puff",
     }
 
     table.insert(treeprefabs, Prefab(name, maketree(name, data), assets, prefabs))
-    table.insert(treeprefabs, Prefab(name.."_stump", maketree(name, data, "stump"), assets, prefabs))
-    table.insert(treeprefabs, Prefab(name.."_burntfx", makeburntfx(name, data, false), { buildasset }))
-    table.insert(treeprefabs, Prefab(name.."_bloom_burntfx", makeburntfx(name, data, true), { bloombuildasset }))
+    table.insert(treeprefabs, Prefab(name .. "_stump", maketree(name, data, "stump"), assets, prefabs))
+    table.insert(treeprefabs, Prefab(name .. "_burntfx", makeburntfx(name, data, false), { buildasset }))
+    table.insert(treeprefabs, Prefab(name .. "_bloom_burntfx", makeburntfx(name, data, true), { bloombuildasset }))
 end
 
 treeset("hooded_mushtree_tall", data.tall, "anim/mushroom_tree_tall.zip", "anim/mushroom_tree_tall_bloom.zip")
