@@ -507,6 +507,10 @@ local function fn()
     inst:AddComponent("eater")
     inst.components.eater:SetDiet({ FOODGROUP.OMNI }, { FOODGROUP.OMNI })
 
+    inst:AddComponent("acidinfusible")
+    inst.components.acidinfusible:SetFXLevel(1)
+    inst.components.acidinfusible:SetMultipliers(TUNING.ACID_INFUSION_MULT.BERSERKER)
+
     inst:AddComponent("pickable")
     inst.components.pickable.canbepicked = false
     inst.components.pickable.onpickedfn = onpickedfn
