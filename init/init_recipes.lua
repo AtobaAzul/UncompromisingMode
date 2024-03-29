@@ -371,7 +371,7 @@ ChangeSortKey("diseasecurebomb", "premiumwateringcan", "TOOLS", true)
 ChangeSortKey("diseasecurebomb", "lifeinjector", "RESTORATION", true)
 
 if GetModConfigData("snowstorms") then
-    AddRecipe2("ice", { Ingredient("snowball_throwable", 4) }, TECH.SCIENCE_ONE, nil
+    AddRecipe2("ice", { Ingredient("snowball_throwable", 4) }, TECH.SCIENCE_ONE, nil,
         { "REFINE" })
     ChangeSortKey("ice_snowball", "beeswax", "REFINE", true)
 end
