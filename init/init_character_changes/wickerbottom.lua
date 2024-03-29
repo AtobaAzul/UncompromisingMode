@@ -462,7 +462,7 @@ env.AddPrefabPostInit("book_rain", function(inst)
 
                     tornado.resetdanumber_task = nil
 
-                    tornado.resetdanumber_task = tornado:DoTaskInTime(30, function()
+                    tornado.resetdanumber_task = tornado:DoTaskInTime(120, function()
                         if tornado.resetdanumber_task ~= nil then
                             tornado.resetdanumber_task:Cancel()
                         end
@@ -473,7 +473,7 @@ env.AddPrefabPostInit("book_rain", function(inst)
                 end
             end
 
-            reader:DoTaskInTime(1, function(inst)
+            reader:DoTaskInTime(1 + math.random(), function(inst)
                 inst.components.talker:Say("This should steer the extreme weather away from here.")
             end)
 
@@ -486,7 +486,7 @@ env.AddPrefabPostInit("book_rain", function(inst)
 end)
 
 
-env.AddPlayerPostInit(function (inst)
+env.AddPlayerPostInit(function(inst)
     if inst.prefab ~= "wickerbottom" then
         inst:AddTag("notwickerbottom")
     end
