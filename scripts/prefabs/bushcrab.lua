@@ -78,6 +78,10 @@ local function OnWorked(inst)
 	end
 end
 
+local function SoundPath(inst, event)
+    return "dontstarve/creatures/cavespider/" .. event
+end
+
 local function fn()
     local inst = CreateEntity()
 
@@ -123,6 +127,8 @@ local function fn()
     inst.components.locomotor.walkspeed = TUNING.SPIDER_HIDER_WALK_SPEED
     inst.components.locomotor.runspeed = TUNING.SPIDER_HIDER_RUN_SPEED
 
+    inst.SoundPath = SoundPath
+	
     inst:SetStateGraph("SGspider")
 
     inst:AddComponent("lootdropper")

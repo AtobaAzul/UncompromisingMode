@@ -301,6 +301,10 @@ local function SetHappyFace(inst, is_happy)
     end
 end
 
+local function SoundPath(inst, event)
+    return "dontstarve/creatures/spiderwarrior/" .. event
+end
+
 local function create_common(build)
     local inst = CreateEntity()
     
@@ -349,6 +353,8 @@ local function create_common(build)
     inst.components.locomotor:SetTriggersCreep(false)
     inst.components.locomotor.pathcaps = { ignorecreep = true }
 	inst.components.locomotor:SetAllowPlatformHopping(true)
+	
+    inst.SoundPath = SoundPath
 	
     inst:SetStateGraph("SGspider")
 
