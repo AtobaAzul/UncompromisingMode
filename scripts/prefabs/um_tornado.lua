@@ -195,10 +195,10 @@ local function TornadoEnviromentTask(inst)
         end
 
         -- ITEM PICKING
-        local items_pick = TheSim:FindEntities(x, y, z, 6, { "_inventoryitem" },--no dome check because dome component adds nosucky tag.
+        local items_pick = TheSim:FindEntities(x, y, z, 6, { "_inventoryitem" }, --no dome check because dome component adds nosucky tag.
             { "irreplaceable", "tornado_nosucky", "trap", "INLIMBO", "heavy", "backpack" })
         for k, v in ipairs(items_pick) do
-            if v.components.inventoryitem ~= nil and v.prefab ~= "bullkelp_beachedroot"  then
+            if v.components.inventoryitem ~= nil and v.prefab ~= "bullkelp_beachedroot" then
                 if config == "reduced" and v:IsAsleep() then
                     return
                 end
@@ -266,22 +266,21 @@ local function TornadoTask(inst)
 
         for k, v in pairs(players) do
             local px, py, pz = v.Transform:GetWorldPosition()
-            if not IsUnderRainDomeAtXZ(px, pz) then
-                if v:HasTag("player") or v:HasTag("um_windturbine") then
-                    v:AddTag("under_the_weather")
+            if v:HasTag("player") or v:HasTag("um_windturbine") then
+                v:AddTag("under_the_weather")
 
-                    if v.um_tornado_weathertask ~= nil then
-                        v.um_tornado_weathertask:Cancel()
-                        v.um_tornado_weathertask = nil
-                    end
-
-                    v.um_tornado_weathertask = v:DoTaskInTime(1, function()
-                        v:RemoveTag("under_the_weather")
-
-                        v.um_tornado_weathertask = nil
-                    end)
+                if v.um_tornado_weathertask ~= nil then
+                    v.um_tornado_weathertask:Cancel()
+                    v.um_tornado_weathertask = nil
                 end
 
+                v.um_tornado_weathertask = v:DoTaskInTime(1, function()
+                    v:RemoveTag("under_the_weather")
+
+                    v.um_tornado_weathertask = nil
+                end)
+            end
+            if not IsUnderRainDomeAtXZ(px, pz) then
                 if not v:HasTag("um_windturbine") then
                     local rand = math.random()
                     local px, py, pz = v.Transform:GetWorldPosition()
