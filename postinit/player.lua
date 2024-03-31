@@ -54,17 +54,14 @@ local function CheckAndApplyTempDamage(inst, data)
 				end
 			end)
 		elseif TUNING.DSTU.MAXHUNGERDAMAGE and data.cause == "hunger" then
-			print("starving")
 			if inst.um_temp_hungerdelta ~= nil and inst.um_temp_hungerdelta >= 1 then
 				inst.components.health:DeltaPenalty(math.abs(data.amount / inst.components.health.maxhealth))
-				print(inst.um_temp_hungerdelta)
 			else
 				if inst.um_temp_hungerdelta == nil then
 					inst.um_temp_hungerdelta = 0
 				else
 					inst.um_temp_hungerdelta = inst.um_temp_hungerdelta + .5
 				end
-				print(inst.um_temp_hungerdelta)
 			end
 
 			if inst.um_temp_hungerdelta_task ~= nil then

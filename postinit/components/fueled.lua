@@ -11,12 +11,8 @@ env.AddComponentPostInit("fueled", function(self)
         FUELTYPE.CHEMICAL
     }
     function self:CanAcceptFuelItem(item)
-        print(item)
         if self.accepting and item then
             local fuel = item.components.fuel or item.components.fueler
-            print((table.contains(sludge_valid_fuels, self.fueltype) or
-                table.contains(sludge_valid_fuels, self.secondaryfueltype)), fuel.fueltype == FUELTYPE.SLUDGE)
-
             return ((table.contains(sludge_valid_fuels, self.fueltype) or
                         table.contains(sludge_valid_fuels, self.secondaryfueltype)) and
                     fuel.fueltype == FUELTYPE.SLUDGE) or

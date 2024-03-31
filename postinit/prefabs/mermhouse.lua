@@ -2,8 +2,8 @@ local env = env
 GLOBAL.setfenv(1, GLOBAL)
 -----------------------------------------------------------------
 local mermhouses = {
-	"mermhouse",
-	"mermhouse_crafted"
+    "mermhouse",
+    "mermhouse_crafted"
 }
 
 
@@ -11,8 +11,6 @@ local function StartSpawning_Winter(inst)
     if not inst:HasTag("burnt") and TheWorld.state.iswinter and
         inst.components.childspawner ~= nil and not inst.components.childspawner.spawning then
         inst.components.childspawner:StartSpawning()
-		
-		print(inst.components.childspawner.spawning)
     end
 end
 
@@ -30,8 +28,6 @@ local function OnIsDay_Winter(inst, isday)
             inst.components.childspawner:ReleaseAllChildren()
         end
         StartSpawning_Winter(inst)
-		
-		print(inst.components.childspawner.spawning)
     end
 end
 
@@ -48,13 +44,12 @@ local function ToggleWinterTuning_UM(inst, iswinter)
 end
 
 for i, v in pairs(mermhouses) do
-	env.AddPrefabPostInit(v, function(inst)
+    env.AddPrefabPostInit(v, function(inst)
+        if not TheWorld.ismastersim then
+            return
+        end
 
-		if not TheWorld.ismastersim then
-			return
-		end
-
-		--[[if inst.components.childspawner ~= nil then
+        --[[if inst.components.childspawner ~= nil then
 			local _OldOnGoHome = inst.components.childspawner.ongohome
 		
 			inst.components.childspawner:SetGoHomeFn(function(inst, child)
@@ -65,27 +60,26 @@ for i, v in pairs(mermhouses) do
 				end
 			end)
 		end]]
-		
-		inst.um_base_regen_time = v == "mermhouse_crafted" and TUNING.MERMHOUSE_REGEN_TIME / 2 or TUNING.MERMHOUSE_REGEN_TIME
-		
-		StartSpawning_Winter(inst)
+
+        inst.um_base_regen_time = v == "mermhouse_crafted" and TUNING.MERMHOUSE_REGEN_TIME / 2 or TUNING.MERMHOUSE_REGEN_TIME
+
+        StartSpawning_Winter(inst)
 
         inst:WatchWorldState("isday", OnIsDay_Winter)
-		inst:WatchWorldState("iswinter", ToggleWinterTuning_UM)
-	end)
+        inst:WatchWorldState("iswinter", ToggleWinterTuning_UM)
+    end)
 end
 
 env.AddPrefabPostInit("mermwatchtower", function(inst)
+    if not TheWorld.ismastersim then
+        return
+    end
 
-	if not TheWorld.ismastersim then
-		return
-	end
-	
-	inst.um_base_regen_time = TUNING.MERMWATCHTOWER_REGEN_TIME * 8
-	
-	if inst.components.childspawner ~= nil then
-		inst.components.childspawner:SetRegenPeriod(inst.um_base_regen_time)
-	end
-	
+    inst.um_base_regen_time = TUNING.MERMWATCHTOWER_REGEN_TIME * 8
+
+    if inst.components.childspawner ~= nil then
+        inst.components.childspawner:SetRegenPeriod(inst.um_base_regen_time)
+    end
+
     inst:WatchWorldState("iswinter", ToggleWinterTuning_UM)
 end)
