@@ -46,7 +46,7 @@ require "map/terrain"
 local _SetTile = GLOBAL.Map.SetTile
 function GLOBAL.Map:SetTile(x, y, tile, data, ...)
     local original_tile = GLOBAL.TheWorld.Map:GetTile(x, y)
-    if data ~= nil and data.reversible then
+    if data ~= nil and type(data) == "table" and data.reversible then
         table.insert(GLOBAL.TheWorld.components.dynamic_layouts.layouts[data.group].tiles, { x = x, y = y, original_tile = original_tile })
     end
 
