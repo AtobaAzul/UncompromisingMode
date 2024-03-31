@@ -8,7 +8,5 @@ env.AddPrefabPostInit("seedpouch", function(inst)
         return
     end
 
-    if TUNING.DSTU.UPDATE_CHECK then
-        inst.components.container:EnableInfiniteStackSize(true)
-    end
+    inst.components.container:EnableInfiniteStackSize(true)
 end)
