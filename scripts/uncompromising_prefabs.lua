@@ -415,6 +415,7 @@ local prefabs = {
 
 	"mara_boss1",
 	"mara_boss1_bullets",
+	"um_WITCH",
 	"um_sacred_chest",
 	"smog",
     

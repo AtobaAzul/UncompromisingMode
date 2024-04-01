@@ -534,6 +534,7 @@ STRINGS.MOON_BEACON = "Moon Beacon"
 
 STRINGS.MARA_BOSS1 = "Sans Undertale From The Hit Series Super Smash Brothers (Featuring Minecraft Steve) [& Knuckles]"
 STRINGS.MARA_BOSS1_BULLETS = "a bad time"
+STRINGS.UM_WITCH = "Supreme Calamitas"
 
 -- Pyre Nettle stuff
 STRINGS.UM_PYRE_NETTLES = "Pyre Nettles"
