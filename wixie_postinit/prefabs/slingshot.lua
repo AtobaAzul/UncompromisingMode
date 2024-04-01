@@ -251,4 +251,22 @@ env.AddPrefabPostInit("slingshot", function(inst)
 		inst.components.weapon:SetDamage(10)
 		inst.components.weapon:SetRange(0.5)
 	end
+	
+	if inst.components.equippable ~= nil then
+		local _Old_onequipfn = inst.components.equippable.onequipfn
+		
+		if _Old_onequipfn ~= nil then
+			inst.components.equippable:SetOnEquip(function(inst, owner)
+				local current_time = os.time()
+				local current_date = os.date("*t", current_time)
+			
+				_Old_onequipfn(inst, owner)
+
+				if current_date.month == 4 and current_date.day == 1 then
+					print("April Fools!") 
+					owner.AnimState:OverrideSymbol("swap_object", "swap_wixiegun", "swap_wixiegun")
+				end
+			end)
+		end
+	end
 end)

@@ -779,7 +779,14 @@ env.AddStategraphPostInit("wilson", function(inst)
 						equip.powerlevel = inst.slingshot_power
 						equip.slingshot_amount = inst.slingshot_amount
 
-						inst.SoundEmitter:PlaySound("dontstarve/characters/walter/slingshot/shoot")
+						
+						local current_time = os.time()
+						local current_date = os.date("*t", current_time)
+						if current_date.month == 4 and current_date.day == 1 then
+							inst.SoundEmitter:PlaySound("wixie/characters/wixie/glock")
+						else
+							inst.SoundEmitter:PlaySound("dontstarve/characters/walter/slingshot/shoot")
+						end
 						
 						if gnasher_charged then
 							if equip ~= nil and equip.components.weapon ~= nil and equip.components.weapon.projectile ~= nil then
