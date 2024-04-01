@@ -1,4 +1,4 @@
-name = "󰀕 Uncompromising Mode"
+name = "󰀕 Unrelenting Mode"
 -- borrowed from IA
 folder_name = folder_name or "workshop-"
 if not folder_name:find("workshop-") then
@@ -6,11 +6,11 @@ if not folder_name:find("workshop-") then
 end
 
 --RELEASE.MAJOR.MINOR.FIX
-local _version = "1.4.15.5"
+local _version = "1.4.15.6"
 description = [[
 󰀔 [ Version: ]] .. _version .. [[ - "Under the Weather Pt.1" ]
 
-Uncompromising Mode increases the risk and reward for those who have mastered Don't Starve Together.
+Unrelenting Mode increases the risk and reward for those who have mastered Don't Starve Together.
 
 Latest update features:
 - New spring weather, uncluding storms, tornados, and cave flooding.
@@ -20,7 +20,7 @@ Latest update features:
 
 󰀏 NEXT UPDATE: ?????? ?? ??? ????]]
 
-author = "󰀈 The Uncomp Dev Team 󰀈"
+author = "󰀈 The Unrelent Dev Team 󰀈"
 
 version = "Under the Weather Pt.1 v" .. _version
 
@@ -183,11 +183,11 @@ configuration_options = {
     Header("Characters"),
     ------------------------------
     BinaryConfig("wixie_walter", "Wixie & Walter Rework",
-        "Enable Uncompromising Mode's Wixie, the Delinquent, who expands on Walter's slingshot, while Walter gets new interactions and mechanics with Woby!",
+        "Enable Unrelenting Mode's Wixie, the Delinquent, who expands on Walter's slingshot, while Walter gets new interactions and mechanics with Woby!",
         true),
     --BinaryConfig("wixie_birds", "Wixie: Slingshot Nerfs", "Slingshots can't hit birds & rabbits.", true),			
-    BinaryConfig("funny rat", "Winky", "Enable Uncompromising Mode's Winky, the Vile Vermin.", true),
-    BinaryConfig("holy fucking shit it's wathom", "Wathom", "Enable Uncompromising Mode's Wathom, the Forgotten Parody.",
+    BinaryConfig("funny rat", "Winky", "Enable Unrelenting Mode's Winky, the Vile Vermin.", true),
+    BinaryConfig("holy fucking shit it's wathom", "Wathom", "Enable Unrelenting Mode's Wathom, the Forgotten Parody.",
         true),
     {
         name = "wathom_ampvulnerability",
@@ -890,7 +890,7 @@ configuration_options = {
             { description = "Default",       data = 1 },
             { description = "Higher (x1.5)", data = 1.5 },
             { description = "Highest (x2)",  data = 2 },
-            { description = "Uncomp (x3)",   data = 3 } },
+            { description = "Unrelent (x3)",   data = 3 } },
         default = 1
     },
     {
@@ -903,7 +903,7 @@ configuration_options = {
             { description = "Default",       data = 1 },
             { description = "Higher (x1.5)", data = 1.5 },
             { description = "Highest (x2)",  data = 2 },
-            { description = "Uncomp (x3)",   data = 3 } },
+            { description = "Unrelent (x3)",   data = 3 } },
         default = 1
     },
     {
@@ -916,7 +916,7 @@ configuration_options = {
             { description = "Default",       data = 1 },
             { description = "Higher (x1.5)", data = 1.5 },
             { description = "Highest (x2)",  data = 2 },
-            { description = "Uncomp (x3)",   data = 3 } },
+            { description = "Unrelent (x3)",   data = 3 } },
         default = 1
     },
     {
@@ -929,7 +929,7 @@ configuration_options = {
             { description = "Default",       data = 1 },
             { description = "Higher (x1.5)", data = 1.5 },
             { description = "Highest (x2)",  data = 2 },
-            { description = "Uncomp (x3)",   data = 3 } },
+            { description = "Unrelent (x3)",   data = 3 } },
         default = 1
     },
     {
@@ -942,7 +942,7 @@ configuration_options = {
             { description = "Default",       data = 1 },
             { description = "Higher (x1.5)", data = 1.5 },
             { description = "Highest (x2)",  data = 2 },
-            { description = "Uncomp (x3)",   data = 3 } },
+            { description = "Unrelent (x3)",   data = 3 } },
         default = 1
     },
     {
@@ -955,7 +955,7 @@ configuration_options = {
             { description = "Default",       data = 1 },
             { description = "Higher (x1.5)", data = 1.5 },
             { description = "Highest (x2)",  data = 2 },
-            { description = "Uncomp (x3)",   data = 3 } },
+            { description = "Unrelent (x3)",   data = 3 } },
         default = 1
     },
     {
@@ -968,7 +968,7 @@ configuration_options = {
             { description = "Default",       data = 1 },
             { description = "Higher (x1.5)", data = 1.5 },
             { description = "Highest (x2)",  data = 2 },
-            { description = "Uncomp (x3)",   data = 3 } },
+            { description = "Unrelent (x3)",   data = 3 } },
         default = 1
     },
     {
@@ -980,7 +980,7 @@ configuration_options = {
             { description = "Default",       data = 1 },
             { description = "Higher (x1.5)", data = 1.5 },
             { description = "Highest (x2)",  data = 2 },
-            { description = "Uncomp (x3)",   data = 3 } },
+            { description = "Unrelent (x3)",   data = 3 } },
         default = 1
     },
     {
@@ -993,7 +993,7 @@ configuration_options = {
             { description = "Default",       data = 1 },
             { description = "Higher (x1.5)", data = 1.5 },
             { description = "Highest (x2)",  data = 2 },
-            { description = "Uncomp (x3)",   data = 3 } },
+            { description = "Unrelent (x3)",   data = 3 } },
         default = 1
     },
     {
@@ -1006,7 +1006,7 @@ configuration_options = {
             { description = "Default",       data = 1 },
             { description = "Higher (x1.5)", data = 1.5 },
             { description = "Highest (x2)",  data = 2 },
-            { description = "Uncomp (x3)",   data = 3 } },
+            { description = "Unrelent (x3)",   data = 3 } },
         default = 1
     },
     {
@@ -1019,7 +1019,7 @@ configuration_options = {
             { description = "Default",       data = 1 },
             { description = "Higher (x1.5)", data = 1.5 },
             { description = "Highest (x2)",  data = 2 },
-            { description = "Uncomp (x3)",   data = 3 } },
+            { description = "Unrelent (x3)",   data = 3 } },
         default = 1
     },
     {
@@ -1032,7 +1032,7 @@ configuration_options = {
             { description = "Default",       data = 1 },
             { description = "Higher (x1.5)", data = 1.5 },
             { description = "Highest (x2)",  data = 2 },
-            { description = "Uncomp (x3)",   data = 3 } },
+            { description = "Unrelent (x3)",   data = 3 } },
         default = 1
     },
     {
@@ -1045,7 +1045,7 @@ configuration_options = {
             { description = "Default",       data = 1 },
             { description = "Higher (x1.5)", data = 1.5 },
             { description = "Highest (x2)",  data = 2 },
-            { description = "Uncomp (x3)",   data = 3 } },
+            { description = "Unrelent (x3)",   data = 3 } },
         default = 1
     },
     {
@@ -1058,7 +1058,7 @@ configuration_options = {
             { description = "Default",       data = 1 },
             { description = "Higher (x1.5)", data = 1.5 },
             { description = "Highest (x2)",  data = 2 },
-            { description = "Uncomp (x3)",   data = 3 } },
+            { description = "Unrelent (x3)",   data = 3 } },
         default = 1
     },
     {
@@ -1071,7 +1071,7 @@ configuration_options = {
             { description = "Default",       data = 1 },
             { description = "Higher (x1.5)", data = 1.5 },
             { description = "Highest (x2)",  data = 2 },
-            { description = "Uncomp (x3)",   data = 3 } },
+            { description = "Unrelent (x3)",   data = 3 } },
         default = 1
     },
     {
@@ -1084,7 +1084,7 @@ configuration_options = {
             { description = "Default",       data = 1 },
             { description = "Higher (x1.5)", data = 1.5 },
             { description = "Highest (x2)",  data = 2 },
-            { description = "Uncomp (x3)",   data = 3 } },
+            { description = "Unrelent (x3)",   data = 3 } },
         default = 1
     },
     {
@@ -1097,7 +1097,7 @@ configuration_options = {
             { description = "Default",       data = 1 },
             { description = "Higher (x1.5)", data = 1.5 },
             { description = "Highest (x2)",  data = 2 },
-            { description = "Uncomp (x3)",   data = 3 } },
+            { description = "Unrelent (x3)",   data = 3 } },
         default = 1
     },
     {
@@ -1110,7 +1110,7 @@ configuration_options = {
             { description = "Default",       data = 1 },
             { description = "Higher (x1.5)", data = 1.5 },
             { description = "Highest (x2)",  data = 2 },
-            { description = "Uncomp (x3)",   data = 3 } },
+            { description = "Unrelent (x3)",   data = 3 } },
         default = 1
     },
     {
@@ -1123,7 +1123,7 @@ configuration_options = {
             { description = "Default",       data = 1 },
             { description = "Higher (x1.5)", data = 1.5 },
             { description = "Highest (x2)",  data = 2 },
-            { description = "Uncomp (x3)",   data = 3 } },
+            { description = "Unrelent (x3)",   data = 3 } },
         default = 1
     },
     {
@@ -1136,7 +1136,7 @@ configuration_options = {
             { description = "Default",       data = 1 },
             { description = "Higher (x1.5)", data = 1.5 },
             { description = "Highest (x2)",  data = 2 },
-            { description = "Uncomp (x3)",   data = 3 } },
+            { description = "Unrelent (x3)",   data = 3 } },
         default = 1
     },
     --{
@@ -1162,7 +1162,7 @@ configuration_options = {
             { description = "Default",       data = 1 },
             { description = "Higher (x1.5)", data = 1.5 },
             { description = "Highest (x2)",  data = 2 },
-            { description = "Uncomp (x3)",   data = 3 } },
+            { description = "Unrelent (x3)",   data = 3 } },
         default = 1
     },
     {
@@ -1175,7 +1175,7 @@ configuration_options = {
             { description = "Default",       data = 1 },
             { description = "Higher (x1.5)", data = 1.5 },
             { description = "Highest (x2)",  data = 2 },
-            { description = "Uncomp (x3)",   data = 3 } },
+            { description = "Unrelent (x3)",   data = 3 } },
         default = 1
     },
     {
@@ -1188,7 +1188,7 @@ configuration_options = {
             { description = "Default",       data = 1 },
             { description = "Higher (x1.5)", data = 1.5 },
             { description = "Highest (x2)",  data = 2 },
-            { description = "Uncomp (x3)",   data = 3 } },
+            { description = "Unrelent (x3)",   data = 3 } },
         default = 1
     },
     {
@@ -1201,7 +1201,7 @@ configuration_options = {
             { description = "Default",       data = 1 },
             { description = "Higher (x1.5)", data = 1.5 },
             { description = "Highest (x2)",  data = 2 },
-            { description = "Uncomp (x3)",   data = 3 } },
+            { description = "Unrelent (x3)",   data = 3 } },
         default = 1
     },
     {
@@ -1214,7 +1214,7 @@ configuration_options = {
             { description = "Default",       data = 1 },
             { description = "Higher (x1.5)", data = 1.5 },
             { description = "Highest (x2)",  data = 2 },
-            { description = "Uncomp (x3)",   data = 3 } },
+            { description = "Unrelent (x3)",   data = 3 } },
         default = 1
     },
     {
@@ -1227,7 +1227,7 @@ configuration_options = {
             { description = "Default",       data = 1 },
             { description = "Higher (x1.5)", data = 1.5 },
             { description = "Highest (x2)",  data = 2 },
-            { description = "Uncomp (x3)",   data = 3 } },
+            { description = "Unrelent (x3)",   data = 3 } },
         default = 1
     },
     {
@@ -1240,7 +1240,7 @@ configuration_options = {
             { description = "Default",       data = 1 },
             { description = "Higher (x1.5)", data = 1.5 },
             { description = "Highest (x2)",  data = 2 },
-            { description = "Uncomp (x3)",   data = 3 } },
+            { description = "Unrelent (x3)",   data = 3 } },
         default = 1
     },
 
@@ -1254,7 +1254,7 @@ configuration_options = {
             { description = "Default",       data = 1 },
             { description = "Higher (x1.5)", data = 1.5 },
             { description = "Highest (x2)",  data = 2 },
-            { description = "Uncomp (x3)",   data = 3 } },
+            { description = "Unrelent (x3)",   data = 3 } },
         default = 1
     },
 
@@ -1268,7 +1268,7 @@ configuration_options = {
             { description = "Default",       data = 1 },
             { description = "Higher (x1.5)", data = 1.5 },
             { description = "Highest (x2)",  data = 2 },
-            { description = "Uncomp (x3)",   data = 3 } },
+            { description = "Unrelent (x3)",   data = 3 } },
         default = 1
     },
 
