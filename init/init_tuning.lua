@@ -19,9 +19,10 @@ TUNING = GLOBAL.TUNING
 local ia_check = GLOBAL.KnownModIndex:IsModEnabled("workshop-1467214795")
 local tfw_check = GLOBAL.KnownModIndex:IsModEnabled("workshop-1171138081")
 
-local function Date(month, day)
-    local current_time = os.time()
-    local current_date = os.date("*t", current_time)
+--day/month > month/day
+local function Date(day, month)
+    local current_time = GLOBAL.os.time()
+    local current_date = GLOBAL.os.date("*t", current_time)
 
     return current_date.month == month and current_date.day == day or false
 end
@@ -420,7 +421,7 @@ TUNING.DSTU = {
 
 
     DATES = {
-        APRIL_FOOLS = Date(4, 1),
+        APRIL_FOOLS = Date(1, 4),
     }
 }
 
