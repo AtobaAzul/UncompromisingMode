@@ -94,7 +94,7 @@ local function SetFlameOn(inst, flameon, newtarget, freeze)
         if newtarget then
             inst.sg:GoToState("taunt_pre")
         end
-        if math.random(100) == 50 then
+        if math.random(100) == 50 or TUNING.DSTU.DATES.APRIL_FOOLS then
             inst.rainbowtime = inst:DoPeriodicTask(0.25, function(inst)
 
                 inst.hue = inst.hue - 0.01
