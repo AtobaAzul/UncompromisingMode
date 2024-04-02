@@ -780,9 +780,7 @@ env.AddStategraphPostInit("wilson", function(inst)
 						equip.slingshot_amount = inst.slingshot_amount
 
 						
-						local current_time = os.time()
-						local current_date = os.date("*t", current_time)
-						if current_date.month == 4 and current_date.day == 1 then
+						if TUNING.DSTU.DATES.APRIL_FOOLS then
 							inst.SoundEmitter:PlaySound("wixie/characters/wixie/glock")
 						else
 							inst.SoundEmitter:PlaySound("dontstarve/characters/walter/slingshot/shoot")
