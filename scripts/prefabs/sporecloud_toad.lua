@@ -66,13 +66,13 @@ end
 
 local OVERLAY_COORDS =
 {
-    { 0,0,0,               1 },
-    { 5/2,0,0,             0.8, 0 },
-    { 2.5/2,0,-4.330/2,    0.8 , 5/3*180 },
-    { -2.5/2,0,-4.330/2,   0.8, 4/3*180 },
-    { -5/2,0,0,            0.8, 3/3*180 },
-    { 2.5/2,0,4.330/2,     0.8, 1/3*180 },
-    { -2.5/2,0,4.330/2,    0.8, 2/3*180 },
+    { 0,      0, 0,        1 },
+    { 5 / 2,  0, 0,        0.8,  0 },
+    { 2.5 / 2, 0, -4.330 / 2, 0.8, 5 / 3 * 180 },
+    { -2.5 / 2, 0, -4.330 / 2, 0.8, 4 / 3 * 180 },
+    { -5 / 2, 0, 0,        0.8,  3 / 3 * 180 },
+    { 2.5 / 2, 0, 4.330 / 2, 0.8, 1 / 3 * 180 },
+    { -2.5 / 2, 0, 4.330 / 2, 0.8, 2 / 3 * 180 },
 }
 
 local function SpawnOverlayFX(inst, i, set, isnew)
@@ -287,20 +287,24 @@ local function TryPerish(item)
     if item:IsInLimbo() then
         local owner = item.components.inventoryitem ~= nil and item.components.inventoryitem.owner or nil
         if owner == nil or
-            (   owner.components.container ~= nil and
+            (owner.components.container ~= nil and
                 not owner.components.container:IsOpen() and
-                owner:HasTag("structure")   ) then
-            --in limbo but not inventory or container?
-            --or in a closed chest
+                owner:HasOneOfTags({ "structure", "portablestorage" })
+            )
+        then
+            -- In limbo but not inventory or container?
+            -- or in a closed chest/storage.
             return
         end
     end
     item.components.perishable:ReducePercent(TUNING.TOADSTOOL_SPORECLOUD_ROT)
 end
 
+local SPOIL_CANT_TAGS = { "small_livestock" }
+local SPOIL_ONEOF_TAGS = { "fresh", "stale", "spoiled" }
 local function DoAreaSpoil(inst)
     local x, y, z = inst.Transform:GetWorldPosition()
-    local ents = TheSim:FindEntities(x, y, z, inst.components.aura.radius, nil, { "small_livestock" }, { "fresh", "stale", "spoiled" })
+    local ents = TheSim:FindEntities(x, y, z, inst.components.aura.radius, nil, SPOIL_CANT_TAGS, SPOIL_ONEOF_TAGS)
     for i, v in ipairs(ents) do
         TryPerish(v)
     end
