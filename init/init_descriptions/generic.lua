@@ -624,6 +624,7 @@ ANNOUNCE.ATTACKED_CRABKING =
 "That shell is too tough! Maybe I should use the boat instead..."
 
 DESCRIBE.MARA_BOSS1 = "Uhh..."
+DESCRIBE.UM_WITCH = "Added Supreme Calamitas."
 ANNOUNCE.GAS_DAMAGE = "Cough! Cough!"
 
 -- Pyre Nettle stuff
