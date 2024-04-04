@@ -1138,7 +1138,7 @@ AddCreatureScanDataDefinition("spider_healer", "maxhealth2", 4)
 local function modulesrefresh(inst, wx, isactivate)
 	for _, module in ipairs(wx.components.upgrademoduleowner.modules) do --This looks ugly
 		if wx.components.upgrademoduleowner.charge_level ~= 0 and module.prefab ~= "wx78module_cherrift" then
-			print("found one")
+			--print("found one")
 			module.components.upgrademodule:TryDeactivate() --Mr. Klei told me to not use these Activate functions outside of upgrademoduleowner component so if something's wrong
 		end												-- just disable them and make module incrase/decrease wx._cherriftchips count.
 	end
