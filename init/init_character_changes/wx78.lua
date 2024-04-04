@@ -152,7 +152,7 @@ if TUNING.DSTU.WXLESS then --HI ATOBA :3 :3 <3 <3
 			print(oldtimeleft)
 			print("time left now")
 			print(newtimeleft)]]
-                if timedif == 0 then                              --if the amount of occupied slots is the same that means it was just an energy update
+                if timedif == 0 then                                              --if the amount of occupied slots is the same that means it was just an energy update
                     newtimeleft = newtime
                     if inst._hunger_chips ~= nil and inst._hunger_chips ~= 0 then --this used to apply on any module equip/unequip, that caused problems
                         newtimeleft = newtimeleft * (1.2 ^ inst._hunger_chips)
@@ -173,7 +173,6 @@ if TUNING.DSTU.WXLESS then --HI ATOBA :3 :3 <3 <3
 		print("slots in use now")
 		print(slotsinuse)]]
         else
-           
             if inst._chip_inuse == 0 then
                 inst.components.timer:StopTimer(CHARGEDEGEN_TIMERNAME)
                 inst.components.timer:StartTimer(CHARGEREGEN_TIMERNAME, TUNING.WX78_CHARGE_REGENTIME)
@@ -262,7 +261,7 @@ if TUNING.DSTU.WXLESS then --HI ATOBA :3 :3 <3 <3
 	elseif food.components.edible:GetHunger(inst) >= 75 then charge_hungeramount = 3
 	elseif food.components.edible:GetHunger(inst) >= 37.5 then charge_hungeramount = 2
 	elseif food.components.edible:GetHunger(inst) >= 25 then charge_hungeramount = 1 end]]
-                                                                                        --Gonna try a different system, keep it here if there's a sudden feeling to go back :P
+        --Gonna try a different system, keep it here if there's a sudden feeling to go back :P
 
         local hunger_to_charge = 50
 
@@ -422,12 +421,12 @@ if TUNING.DSTU.WXLESS then --HI ATOBA :3 :3 <3 <3
         --inst:ListenForEvent("upgrademoduleowner_popallmodules", OnTryRegenTimerStart) --not needed
         --inst:ListenForEvent("onmoduleadded", inst._onpusheddegen) --not needed
         inst:ListenForEvent("timerdone", OnTimerFinished)
-	inst:ListenForEvent("healthdelta", function(inst, data)
-		if data.cause == "water" then
-			local maxhealth = inst.components.health.maxhealth
-			inst.components.health:DeltaPenalty(math.abs(data.amount/maxhealth/1.25))
-		end
-	end)
+        inst:ListenForEvent("healthdelta", function(inst, data)
+            if data.cause == "water" then
+                local maxhealth = inst.components.health.maxhealth
+                inst.components.health:DeltaPenalty(math.abs(data.amount / maxhealth / 1.25))
+            end
+        end)
         --For some reason I have a habit of keeping commented out stuff, maybe seeing previous mistakes that you overcame just makes me feel good :] :]  feel free to delete the comments anyway :]
     end)
 
@@ -483,161 +482,164 @@ if TUNING.DSTU.WXLESS then --HI ATOBA :3 :3 <3 <3
 
     -- stuff below is mainly ui elements. I really wanted to make those better but FUCK SPRITER I GUESS WHY WON'T IT COMPILE PROPERLY
     -- I had to go out of my way to change it while also avoiding interacting with both Spriter and scml files as a whole, what the fuck
-    local OnUpgradeModulesListDirty = function(inst)
-        if inst._parent ~= nil then
-            local module1 = inst.upgrademodules[1]:value()
-            local module2 = inst.upgrademodules[2]:value()
-            local module3 = inst.upgrademodules[3]:value()
-            local module4 = inst.upgrademodules[4]:value()
-            local module5 = inst.upgrademodules[5]:value()
-            local module6 = inst.upgrademodules[6]:value()
-            local module7 = inst.upgrademodules[7]:value()
-            local module8 = inst.upgrademodules[8]:value()
 
-            if module1 == 0 and module2 == 0 and module3 == 0 and module4 == 0 and module5 == 0 and module6 == 0 and module7 == 0 and module8 == 0 then
-                inst._parent:PushEvent("upgrademoduleowner_popallmodules")
-            else
-                inst._parent:PushEvent("upgrademodulesdirty", { module1, module2, module3, module4, module5, module6, module7, module8 })
+    if not KnownModIndex:IsModEnabled("workshop-2937640068") then
+        local OnUpgradeModulesListDirty = function(inst)
+            if inst._parent ~= nil then
+                local module1 = inst.upgrademodules[1]:value()
+                local module2 = inst.upgrademodules[2]:value()
+                local module3 = inst.upgrademodules[3]:value()
+                local module4 = inst.upgrademodules[4]:value()
+                local module5 = inst.upgrademodules[5]:value()
+                local module6 = inst.upgrademodules[6]:value()
+                local module7 = inst.upgrademodules[7]:value()
+                local module8 = inst.upgrademodules[8]:value()
+
+                if module1 == 0 and module2 == 0 and module3 == 0 and module4 == 0 and module5 == 0 and module6 == 0 and module7 == 0 and module8 == 0 then
+                    inst._parent:PushEvent("upgrademoduleowner_popallmodules")
+                else
+                    inst._parent:PushEvent("upgrademodulesdirty", { module1, module2, module3, module4, module5, module6, module7, module8 })
+                end
             end
         end
-    end
 
-    env.AddPrefabPostInit("player_classified", function(inst)
-        for i = 7, 8, 1 do
-            table.insert(inst.upgrademodules, net_smallbyte(inst.GUID, "upgrademodules.mods" .. i, "upgrademoduleslistdirty"))
-        end
+        env.AddPrefabPostInit("player_classified", function(inst)
+            for i = 7, 8, 1 do
+                table.insert(inst.upgrademodules, net_smallbyte(inst.GUID, "upgrademodules.mods" .. i, "upgrademoduleslistdirty"))
+            end
 
-        if not TheWorld.ismastersim then
-            inst.event_listeners["upgrademoduleslistdirty"] = {}
-            inst.event_listening["upgrademoduleslistdirty"] = {}
-            inst:ListenForEvent("upgrademoduleslistdirty", OnUpgradeModulesListDirty)
-        end
-    end)
-
+            if not TheWorld.ismastersim then
+                inst.event_listeners["upgrademoduleslistdirty"] = {}
+                inst.event_listening["upgrademoduleslistdirty"] = {}
+                inst:ListenForEvent("upgrademoduleslistdirty", OnUpgradeModulesListDirty)
+            end
+        end)
 
 
-    env.AddClassPostConstruct("widgets/upgrademodulesdisplay", function(self, ...)
-        --[[self.battery_frame = self:AddChild(UIAnim())
+
+        env.AddClassPostConstruct("widgets/upgrademodulesdisplay", function(self, ...)
+            --[[self.battery_frame = self:AddChild(UIAnim())
     self.battery_frame:GetAnimState():SetBank("um_status_wx")
     self.battery_frame:GetAnimState():SetBuild("um_status_wx")
     self.battery_frame:GetAnimState():PlayAnimation("frame")
     self.battery_frame:GetAnimState():AnimateWhilePaused(false)]]
-                                                                  --I stretched it without altering default image teehee
+            --I stretched it without altering default image teehee
 
-        self.energy_backing = self:AddChild(UIAnim())
-        self.energy_backing:GetAnimState():SetBank("um_status_wx")
-        self.energy_backing:GetAnimState():SetBuild("um_status_wx")
-        self.energy_backing:GetAnimState():PlayAnimation("energy3")
-        self.energy_backing:GetAnimState():AnimateWhilePaused(false)
+            self.energy_backing = self:AddChild(UIAnim())
+            self.energy_backing:GetAnimState():SetBank("um_status_wx")
+            self.energy_backing:GetAnimState():SetBuild("um_status_wx")
+            self.energy_backing:GetAnimState():PlayAnimation("energy3")
+            self.energy_backing:GetAnimState():AnimateWhilePaused(false)
 
-        self.energy_blinking = self:AddChild(UIAnim())
-        self.energy_blinking:GetAnimState():SetBank("um_status_wx")
-        self.energy_blinking:GetAnimState():SetBuild("um_status_wx")
-        self.energy_blinking:GetAnimState():PlayAnimation("energy2")
-        self.energy_blinking:GetAnimState():AnimateWhilePaused(false)
+            self.energy_blinking = self:AddChild(UIAnim())
+            self.energy_blinking:GetAnimState():SetBank("um_status_wx")
+            self.energy_blinking:GetAnimState():SetBuild("um_status_wx")
+            self.energy_blinking:GetAnimState():PlayAnimation("energy2")
+            self.energy_blinking:GetAnimState():AnimateWhilePaused(false)
 
-        self.anim = self:AddChild(UIAnim())
-        self.anim:GetAnimState():SetBank("um_status_wx")
-        self.anim:GetAnimState():SetBuild("um_status_wx")
-        self.anim:GetAnimState():PlayAnimation("energy1")
-        self.anim:GetAnimState():AnimateWhilePaused(false)
+            self.anim = self:AddChild(UIAnim())
+            self.anim:GetAnimState():SetBank("um_status_wx")
+            self.anim:GetAnimState():SetBuild("um_status_wx")
+            self.anim:GetAnimState():PlayAnimation("energy1")
+            self.anim:GetAnimState():AnimateWhilePaused(false)
 
-        for i = 1, 8 do
-            local chip_object = self:AddChild(UIAnim())
-            --if chip_object ~= nil then print("bazinga") end
-            chip_object:GetAnimState():SetBank("um_status_wx")
-            chip_object:GetAnimState():SetBuild("um_status_wx")
-            chip_object:GetAnimState():AnimateWhilePaused(false)
+            for i = 1, 8 do
+                local chip_object = self:AddChild(UIAnim())
+                --if chip_object ~= nil then print("bazinga") end
+                chip_object:GetAnimState():SetBank("um_status_wx")
+                chip_object:GetAnimState():SetBuild("um_status_wx")
+                chip_object:GetAnimState():AnimateWhilePaused(false)
 
-            chip_object:GetAnimState():Hide("plug_on")
-            chip_object._power_hidden = true
+                chip_object:GetAnimState():Hide("plug_on")
+                chip_object._power_hidden = true
 
-            chip_object:MoveToBack()
-            chip_object:Hide()
+                chip_object:MoveToBack()
+                chip_object:Hide()
 
-            table.insert(self.chip_objectpool, chip_object)
-        end
-
-        for i, v in ipairs(self.chip_objectpool) do
-            v:SetPosition(0, 0)
-        end
-
-        self.battery_frame:SetPosition(0, 22)
-        self.battery_frame:SetScale(1, 1.4, 1)
-        --end)
-
-        --AddClassPostConstruct("widgets/upgrademodulesdisplay",function(self, ...)
-        function self:UpdateChipCharges(plugging_in) -- this part is to make it clearer that modules work as long as you have more than 0 charge
-            if self.chip_poolindex <= 1 then
-                return
+                table.insert(self.chip_objectpool, chip_object)
             end
 
-            local charge = self.energy_level
+            for i, v in ipairs(self.chip_objectpool) do
+                v:SetPosition(0, 0)
+            end
 
-            for i = 1, self.chip_poolindex - 1 do
-                local chip = self.chip_objectpool[i]
+            self.battery_frame:SetPosition(0, 22)
+            self.battery_frame:SetScale(1, 1.4, 1)
+            --end)
 
-                --charge = charge - chip._used_modslots
+            --AddClassPostConstruct("widgets/upgrademodulesdisplay",function(self, ...)
+            function self:UpdateChipCharges(plugging_in) -- this part is to make it clearer that modules work as long as you have more than 0 charge
+                if self.chip_poolindex <= 1 then
+                    return
+                end
 
-                if charge <= 0 and not chip._power_hidden then
-                    if not plugging_in then
-                        chip:GetAnimState():PlayAnimation((self.reversed and "chip_off_reverse") or "chip_off")
-                        chip:HookCallback("animover", function(chip_ui_inst)
+                local charge = self.energy_level
+
+                for i = 1, self.chip_poolindex - 1 do
+                    local chip = self.chip_objectpool[i]
+
+                    --charge = charge - chip._used_modslots
+
+                    if charge <= 0 and not chip._power_hidden then
+                        if not plugging_in then
+                            chip:GetAnimState():PlayAnimation((self.reversed and "chip_off_reverse") or "chip_off")
+                            chip:HookCallback("animover", function(chip_ui_inst)
+                                chip:GetAnimState():Hide("plug_on")
+                                chip:UnhookCallback("animover")
+                            end)
+                        else
                             chip:GetAnimState():Hide("plug_on")
-                            chip:UnhookCallback("animover")
-                        end)
-                    else
-                        chip:GetAnimState():Hide("plug_on")
-                    end
-                    chip._power_hidden = true
+                        end
+                        chip._power_hidden = true
 
-                    --self.owner:DoTaskInTime(0.1, function(self)
-                    if TheFrontEnd ~= nil then
-                        TheFrontEnd:GetSound():PlaySound("WX_rework/tube/HUD_off")
-                    end
-                    --end)
-                elseif charge > 0 and chip._power_hidden then
-                    -- In case we changed charge before the power off animation finished.
-                    chip:UnhookCallback("animover")
+                        --self.owner:DoTaskInTime(0.1, function(self)
+                        if TheFrontEnd ~= nil then
+                            TheFrontEnd:GetSound():PlaySound("WX_rework/tube/HUD_off")
+                        end
+                        --end)
+                    elseif charge > 0 and chip._power_hidden then
+                        -- In case we changed charge before the power off animation finished.
+                        chip:UnhookCallback("animover")
 
-                    chip:GetAnimState():Show("plug_on")
-                    if not plugging_in then
-                        chip:GetAnimState():PlayAnimation((self.reversed and "chip_on_reverse") or "chip_on")
-                    end
-                    chip._power_hidden = false
+                        chip:GetAnimState():Show("plug_on")
+                        if not plugging_in then
+                            chip:GetAnimState():PlayAnimation((self.reversed and "chip_on_reverse") or "chip_on")
+                        end
+                        chip._power_hidden = false
 
-                    --self.owner:DoTaskInTime(0.1, function(self)
-                    if TheFrontEnd ~= nil then
-                        TheFrontEnd:GetSound():PlaySound("WX_rework/tube/HUD_on")
+                        --self.owner:DoTaskInTime(0.1, function(self)
+                        if TheFrontEnd ~= nil then
+                            TheFrontEnd:GetSound():PlaySound("WX_rework/tube/HUD_on")
+                        end
+                        --end)
                     end
-                    --end)
+                end
+            end
+        end)
+
+        env.AddClassPostConstruct("widgets/secondarystatusdisplays", function(self, ...)
+            if self.upgrademodulesdisplay then
+                self.upgrademodulesdisplay:SetPosition(self.column1, -150)
+            end
+        end)
+
+        local function OnAllUpgradeModulesRemoved(inst)
+            SpawnPrefab("wx78_big_spark"):AlignToTarget(inst)
+
+            inst:PushEvent("upgrademoduleowner_popallmodules")
+
+            if inst.player_classified ~= nil then
+                for i = 1, 8, 1 do
+                    inst.player_classified.upgrademodules[i]:set(0)
                 end
             end
         end
-    end)
 
-    env.AddClassPostConstruct("widgets/secondarystatusdisplays", function(self, ...)
-        if self.upgrademodulesdisplay then
-            self.upgrademodulesdisplay:SetPosition(self.column1, -150)
-        end
-    end)
-
-    local function OnAllUpgradeModulesRemoved(inst)
-        SpawnPrefab("wx78_big_spark"):AlignToTarget(inst)
-
-        inst:PushEvent("upgrademoduleowner_popallmodules")
-
-        if inst.player_classified ~= nil then
-            for i = 1, 8, 1 do
-                inst.player_classified.upgrademodules[i]:set(0)
+        env.AddPrefabPostInit("wx78", function(inst)
+            if not TheWorld.ismastersim then
+                return
             end
-        end
+            inst.components.upgrademoduleowner.onallmodulespopped = OnAllUpgradeModulesRemoved
+        end)
     end
-
-    env.AddPrefabPostInit("wx78", function(inst)
-        if not TheWorld.ismastersim then
-            return
-        end
-        inst.components.upgrademoduleowner.onallmodulespopped = OnAllUpgradeModulesRemoved
-    end)
 end
