@@ -22,10 +22,27 @@ local function GetCreatureScanDataDefinition(prefab_name)
 end
 
 ---------------------------------------------------------------
+local function superior_combo(inst, wx)
+	local same_amount = 1 or 2 or 3 or 4 or 5 --surely that's not the best way to go about it
+	if wx.components.upgrademoduleowner:GetModuleTypeCount('maxhealth2') == same_amount and wx.components.upgrademoduleowner:GetModuleTypeCount('maxhunger') == same_amount and wx.components.upgrademoduleowner:GetModuleTypeCount('maxsanity') == same_amount then
+		wx.components.talker:Say("OBSERVE MY SUPERIOR BODY FLESHLINGS")
+	end
+	if wx.components.upgrademoduleowner:GetModuleTypeCount('movespeed2') >= 4 then
+		wx.components.talker:Say("STEPS PER SECOND AT MAXIMUM")
+	end
+	if (wx.components.upgrademoduleowner:GetModuleTypeCount('cherrift') >= 8) or (wx.components.upgrademoduleowner:GetModuleTypeCount('light') >=1 and wx.components.upgrademoduleowner:GetModuleTypeCount('nightvision') >=1 ) then
+		wx.components.talker:Say("WHY DID I DO THAT")
+	end
+	if wx.components.upgrademoduleowner:GetModuleTypeCount('heat') == same_amount and wx.components.upgrademoduleowner:GetModuleTypeCount('cold') == same_amount then
+		wx.components.talker:Say("ELEMENTAL BALANCE ACHIEVED")
+	end
+end
+------------------------------------------------------------
 local function maxhealth_change(inst, wx, amount, isloading)
     if wx.components.health ~= nil then
         local current_health_percent = wx.components.health:GetPercent()
 
+	if wx._cherriftchips and wx._cherriftchips > 0 then amount = amount*(1 + 0.5*wx._cherriftchips) end
         wx.components.health.maxhealth = wx.components.health.maxhealth + amount
 
         if not isloading then
@@ -63,8 +80,13 @@ local function maxsanity1_activate(inst, wx, isloading)
     if wx.components.sanity ~= nil then
         local current_sanity_percent = wx.components.sanity:GetPercent()
 
-        wx.components.sanity.dapperness = wx.components.sanity.dapperness + TUNING.DAPPERNESS_TINY
-        wx.components.sanity:SetMax(wx.components.sanity.max + TUNING.WX78_MAXSANITY1_BOOST)
+        if wx._cherriftchips and wx._cherriftchips > 0 then
+		wx.components.sanity.dapperness = wx.components.sanity.dapperness + TUNING.DAPPERNESS_TINY*(1 + 0.75*wx._cherriftchips)
+		wx.components.sanity:SetMax(wx.components.sanity.max + TUNING.WX78_MAXSANITY1_BOOST*(1 + 0.5*wx._cherriftchips))
+	else
+		wx.components.sanity.dapperness = wx.components.sanity.dapperness + TUNING.DAPPERNESS_TINY
+		wx.components.sanity:SetMax(wx.components.sanity.max + TUNING.WX78_MAXSANITY1_BOOST)
+	end
         wx.components.sanity.neg_aura_modifiers:SetModifier(inst, 0.9)
 
         if not isloading then
@@ -76,9 +98,14 @@ end
 local function maxsanity1_deactivate(inst, wx)
     if wx.components.sanity ~= nil then
         local current_sanity_percent = wx.components.sanity:GetPercent()
-        wx.components.sanity.dapperness = wx.components.sanity.dapperness - TUNING.DAPPERNESS_TINY
+        if wx._cherriftchips and wx._cherriftchips > 0 then
+		wx.components.sanity.dapperness = wx.components.sanity.dapperness - TUNING.DAPPERNESS_TINY*(1 + 0.75*wx._cherriftchips)
+		wx.components.sanity:SetMax(wx.components.sanity.max - TUNING.WX78_MAXSANITY1_BOOST*(1 + 0.5*wx._cherriftchips))
+	else
+		wx.components.sanity.dapperness = wx.components.sanity.dapperness - TUNING.DAPPERNESS_TINY
+		wx.components.sanity:SetMax(wx.components.sanity.max - TUNING.WX78_MAXSANITY1_BOOST)
+	end
         wx.components.sanity.neg_aura_modifiers:RemoveModifier(inst)
-        wx.components.sanity:SetMax(wx.components.sanity.max - TUNING.WX78_MAXSANITY1_BOOST)
         wx.components.sanity:SetPercent(current_sanity_percent, false)
     end
 end
@@ -100,8 +127,13 @@ local function maxsanity_activate(inst, wx, isloading)
     if wx.components.sanity ~= nil then
         local current_sanity_percent = wx.components.sanity:GetPercent()
 
-        wx.components.sanity.dapperness = wx.components.sanity.dapperness + TUNING.WX78_MAXSANITY_DAPPERNESS
-        wx.components.sanity:SetMax(wx.components.sanity.max + TUNING.WX78_MAXSANITY_BOOST)
+        if wx._cherriftchips and wx._cherriftchips > 0 then
+		wx.components.sanity.dapperness = wx.components.sanity.dapperness + TUNING.WX78_MAXSANITY_DAPPERNESS*(1 + 0.75*wx._cherriftchips)
+		wx.components.sanity:SetMax(wx.components.sanity.max + TUNING.WX78_MAXSANITY_BOOST*(1 + 0.5*wx._cherriftchips))
+	else
+		wx.components.sanity.dapperness = wx.components.sanity.dapperness + TUNING.WX78_MAXSANITY_DAPPERNESS
+		wx.components.sanity:SetMax(wx.components.sanity.max + TUNING.WX78_MAXSANITY_BOOST)
+	end
         wx.components.sanity.neg_aura_modifiers:SetModifier(inst, 0.75)
 
         if not isloading then
@@ -114,8 +146,13 @@ local function maxsanity_deactivate(inst, wx)
     if wx.components.sanity ~= nil then
         local current_sanity_percent = wx.components.sanity:GetPercent()
 
-        wx.components.sanity.dapperness = wx.components.sanity.dapperness - TUNING.WX78_MAXSANITY_DAPPERNESS
-        wx.components.sanity:SetMax(wx.components.sanity.max - TUNING.WX78_MAXSANITY_BOOST)
+        if wx._cherriftchips and wx._cherriftchips > 0 then
+		wx.components.sanity.dapperness = wx.components.sanity.dapperness - TUNING.WX78_MAXSANITY_DAPPERNESS*(1 + 0.75*wx._cherriftchips)
+		wx.components.sanity:SetMax(wx.components.sanity.max - TUNING.WX78_MAXSANITY_BOOST*(1 + 0.5*wx._cherriftchips))
+	else
+		wx.components.sanity.dapperness = wx.components.sanity.dapperness - TUNING.WX78_MAXSANITY_DAPPERNESS
+		wx.components.sanity:SetMax(wx.components.sanity.max - TUNING.WX78_MAXSANITY_BOOST)
+	end
         wx.components.sanity.neg_aura_modifiers:RemoveModifier(inst)
         wx.components.sanity:SetPercent(current_sanity_percent, false)
     end
@@ -204,9 +241,15 @@ end
 
 local function accelaratefn(wx, inst)
     local accelarate_limit = 12 - TUNING.WX78_MOVESPEED_CHIPBOOSTS[wx._movespeed_chips + 1]
+    if wx._cherriftchips and wx._cherriftchips > 0 then accelarate_limit = accelarate_limit + 0.5*wx._cherriftchips end
     --local accelarate_increase = 0.025 * (1.2 - TUNING.WX78_MOVESPEED_CHIPBOOSTS[wx._movespeed_chips + 1] * 0.08) --why this? math --I think too much math causes the game to crash sometimes wth
     --No seriously it stopped crashing after I changed it to static value, was this really the reason? Sad cause I wanted it to be faster the more modules you have
     if wx.components.locomotor ~= nil and not wx.components.rider:IsRiding() and wx.sg:HasStateTag("running") and wx.accelarate_speed ~= nil and wx.components.locomotor:GetTimeMoving() >= (TUNING.WX78_MOVESPEED_CHIPBOOSTS[wx._movespeed_chips + 1] - 1) then
+        if wx.speedloosetask ~= nil then
+            wx.speedloosetask:Cancel()
+            wx.speedloosetask = nil
+        end
+		
         if wx.accelarate_speed <= accelarate_limit then
             wx.accelarate_speed = wx.accelarate_speed + 0.015
         end
@@ -229,7 +272,18 @@ local function accelaratefn(wx, inst)
             end
         end
     else
-        wx.accelarate_speed = TUNING.WILSON_RUN_SPEED
+        if wx.accelarate_speed > 8.9 then wx.accelarate_speed = 8.9 end
+	if wx.speedloosetask == nil then
+		wx.speedloosetask = wx:DoPeriodicTask(0.3, function(wx)
+		    if wx.accelarate_speed > TUNING.WILSON_RUN_SPEED then
+			wx.accelarate_speed = wx.accelarate_speed - 0.2
+		    elseif wx.accelarate_speed < TUNING.WILSON_RUN_SPEED then
+			wx.accelarate_speed = TUNING.WILSON_RUN_SPEED
+			wx.speedloosetask:Cancel()
+			wx.speedloosetask = nil
+		    end
+		end)
+	end
         if wx.rooksoundtask ~= nil then
             wx.rooksoundtask:Cancel()
             wx.rooksoundtask = nil
@@ -252,6 +306,7 @@ local function movespeed_activate(inst, wx)
     wx.accelarate_speed = TUNING.WILSON_RUN_SPEED
     wx:ListenForEvent("locomote", inst.accelarate, wx) --Listenning on WX just to not cause any real troubles with multiple modules
     --wx.components.locomotor.runspeed = TUNING.WILSON_RUN_SPEED * (1 + TUNING.WX78_MOVESPEED_CHIPBOOSTS[wx._movespeed_chips + 1])
+    superior_combo(inst, wx)
 end
 
 local function movespeed_deactivate(inst, wx)
@@ -264,6 +319,10 @@ local function movespeed_deactivate(inst, wx)
     if wx.rooksoundtask ~= nil then
         wx.rooksoundtask:Cancel()
         wx.rooksoundtask = nil
+    end
+    if wx.speedloosetask ~= nil then
+        wx.speedloosetask:Cancel()
+        wx.speedloosetask = nil
     end
 
     wx:RemoveEventCallback("locomote", inst.accelarate, wx)
@@ -330,6 +389,8 @@ local function ontemperaturechange(wx, data, inst)
 
     workmult = (cur > 60 and 2.5 + extraheat_bonus) or (cur > 20 and easing.linear(cur - 20, 1, 2.5 + extraheat_bonus - 1, 40)) or 1
 
+    if wx._cherriftchips and wx._cherriftchips > 0 then workmult = workmult * (1.15^wx._cherriftchips) end
+
     for _, act in ipairs(affected_actions) do
         wx.components.efficientuser:AddMultiplier(act, workmult, inst)
         wx.components.workmultiplier:AddMultiplier(act, workmult, inst)
@@ -386,6 +447,7 @@ local function heat_activate(inst, wx)
     if wx.AddTemperatureModuleLeaning ~= nil then
         wx:AddTemperatureModuleLeaning(1)
     end
+    superior_combo(inst, wx)
 end
 
 local function heat_deactivate(inst, wx)
@@ -451,6 +513,12 @@ local function nightvision_activate(inst, wx)
             nightvision_onworldstateupdate(wx)
         end
     end
+    if wx._nightvision_modcount > 1 or (wx._cherriftchips and wx._cherriftchips > 0) then
+	if wx._cherriftchips == nil then wx._cherriftchips = 0 end --should already be 0 due to wx78.lua but still a good failsafe
+	local view_dist = 12*math.max(0, wx._nightvision_modcount-1) + 2*wx._cherriftchips
+	wx:AddCameraExtraDistance(inst, view_dist)
+    end
+    superior_combo(inst, wx)
 end
 
 local function nightvision_deactivate(inst, wx)
@@ -464,6 +532,9 @@ local function nightvision_deactivate(inst, wx)
             wx:StopWatchingWorldState("isfullmoon", nightvision_onworldstateupdate)
             wx:SetForcedNightVision(false)
         end
+    end
+    if wx._nightvision_modcount <= 1 then
+	wx:RemoveCameraExtraDistance(inst)
     end
 end
 
@@ -514,7 +585,10 @@ local function cold_activate(inst, wx)
 
 
     if inst.icemakertask == nil then
-        inst.icemakertask = wx:DoPeriodicTask(25, function(wx)
+	local ice_timer = 25
+	if wx._cherriftchips and wx._cherriftchips > 0 then ice_timer = ice_timer - 2*wx._cherriftchips end
+		
+        inst.icemakertask = wx:DoPeriodicTask(ice_timer, function(wx)
             local x, y, z = wx.Transform:GetWorldPosition()
             --for i = 1, TUNING.WX78_COLD_ICECOUNT do
             local ice = SpawnPrefab("ice")
@@ -533,6 +607,7 @@ local function cold_activate(inst, wx)
 
     --local modvalue = 40 * wx._temperature_modulelean
     --wx.components.temperature:SetModifier("wx78module_cold", modvalue)
+    superior_combo(inst, wx)
 end
 
 local function cold_deactivate(inst, wx)
@@ -607,7 +682,11 @@ local function taser_onblockedorattacked(wx, data, inst)
                 damage_mult = damage_mult + wetness_mult
             end
 
-            data.attacker.components.combat:GetAttacked(wx, damage_mult * TUNING.WX78_TASERDAMAGE, nil, "electric")
+            if wx._cherriftchips and wx._cherriftchips > 0 then
+		data.attacker.components.combat:GetAttacked(wx, damage_mult * (TUNING.WX78_TASERDAMAGE + 10*wx._cherriftchips), nil, "electric")
+	    else
+		data.attacker.components.combat:GetAttacked(wx, damage_mult * TUNING.WX78_TASERDAMAGE, nil, "electric")
+	    end
 
 
             if data.attacker._chargeharvestable == nil then
@@ -715,7 +794,11 @@ local LIGHT_R, LIGHT_G, LIGHT_B = 235 / 255, 121 / 255, 12 / 255
 local function light_activate(inst, wx)
     wx._light_modules = (wx._light_modules or 0) + 1
 
-    wx.Light:SetRadius(TUNING.WX78_LIGHT_BASERADIUS + (wx._light_modules - 1) * TUNING.WX78_LIGHT_EXTRARADIUS)
+    if wx._cherriftchips and wx._cherriftchips > 0 then
+        wx.Light:SetRadius(TUNING.WX78_LIGHT_BASERADIUS + (wx._light_modules - 1) * TUNING.WX78_LIGHT_EXTRARADIUS + 1.5 * wx._cherriftchips)
+    else
+	wx.Light:SetRadius(TUNING.WX78_LIGHT_BASERADIUS + (wx._light_modules - 1) * TUNING.WX78_LIGHT_EXTRARADIUS)
+    end
 
     -- If we had 0 before, set up the light properties.
     if wx._light_modules == 1 then
@@ -725,6 +808,7 @@ local function light_activate(inst, wx)
 
         wx.Light:Enable(true)
     end
+    superior_combo(inst, wx)
 end
 
 local function light_deactivate(inst, wx)
@@ -739,7 +823,11 @@ local function light_deactivate(inst, wx)
 
         wx.Light:Enable(false)
     else
-        wx.Light:SetRadius(TUNING.WX78_LIGHT_BASERADIUS + (wx._light_modules - 1) * TUNING.WX78_LIGHT_EXTRARADIUS)
+        if wx._cherriftchips and wx._cherriftchips > 0 then
+	    wx.Light:SetRadius(TUNING.WX78_LIGHT_BASERADIUS + (wx._light_modules - 1) * TUNING.WX78_LIGHT_EXTRARADIUS + 1.5 * wx._cherriftchips)
+	else
+	    wx.Light:SetRadius(TUNING.WX78_LIGHT_BASERADIUS + (wx._light_modules - 1) * TUNING.WX78_LIGHT_EXTRARADIUS)
+	end
     end
 end
 
@@ -766,7 +854,11 @@ local function maxhunger_activate(inst, wx, isloading)
     if wx.components.hunger ~= nil then
         local current_hunger_percent = wx.components.hunger:GetPercent()
 
-        wx.components.hunger:SetMax(wx.components.hunger.max + TUNING.WX78_MAXHUNGER_BOOST)
+        if wx._cherriftchips and wx._cherriftchips > 0 then
+	    wx.components.hunger:SetMax(wx.components.hunger.max + TUNING.WX78_MAXHUNGER_BOOST * (1 + 0.5*wx._cherriftchips))
+	else
+	    wx.components.hunger:SetMax(wx.components.hunger.max + TUNING.WX78_MAXHUNGER_BOOST)
+	end
 
         if not isloading then
             wx.components.hunger:SetPercent(current_hunger_percent, false)
@@ -779,15 +871,24 @@ local function maxhunger_activate(inst, wx, isloading)
 		end]]
 
         -- Tie it to the module instance so we don't have to think too much about removing them.
-        wx.components.hunger.burnratemodifiers:SetModifier(inst, TUNING.WX78_MAXHUNGER_SLOWPERCENT)
+        if wx._cherriftchips and wx._cherriftchips > 0 then
+	    wx.components.hunger.burnratemodifiers:SetModifier(inst, TUNING.WX78_MAXHUNGER_SLOWPERCENT * (0.9 ^ wx._cherriftchips))
+	else
+	    wx.components.hunger.burnratemodifiers:SetModifier(inst, TUNING.WX78_MAXHUNGER_SLOWPERCENT)
+	end
     end
+    superior_combo(inst, wx)
 end
 
 local function maxhunger_deactivate(inst, wx)
     if wx.components.hunger ~= nil then
         local current_hunger_percent = wx.components.hunger:GetPercent()
 
-        wx.components.hunger:SetMax(wx.components.hunger.max - TUNING.WX78_MAXHUNGER_BOOST)
+        if wx._cherriftchips and wx._cherriftchips > 0 then
+	    wx.components.hunger:SetMax(wx.components.hunger.max - TUNING.WX78_MAXHUNGER_BOOST * (1 + 0.5*wx._cherriftchips))
+	else
+	    wx.components.hunger:SetMax(wx.components.hunger.max - TUNING.WX78_MAXHUNGER_BOOST)
+	end
         wx.components.hunger:SetPercent(current_hunger_percent, false)
 
         wx._hunger_chips = math.max(0, wx._hunger_chips - 1)
@@ -813,13 +914,21 @@ local function maxhunger1_activate(inst, wx, isloading)
     if wx.components.hunger ~= nil then
         local current_hunger_percent = wx.components.hunger:GetPercent()
 
-        wx.components.hunger:SetMax(wx.components.hunger.max + TUNING.WX78_MAXHUNGER1_BOOST)
+        if wx._cherriftchips and wx._cherriftchips > 0 then
+	    wx.components.hunger:SetMax(wx.components.hunger.max + TUNING.WX78_MAXHUNGER1_BOOST * (1 + 0.5*wx._cherriftchips))
+	else
+	    wx.components.hunger:SetMax(wx.components.hunger.max + TUNING.WX78_MAXHUNGER1_BOOST)
+	end
 
         if not isloading then
             wx.components.hunger:SetPercent(current_hunger_percent, false)
         end
 
-        wx.components.hunger.burnratemodifiers:SetModifier(inst, 0.95)
+        if wx._cherriftchips and wx._cherriftchips > 0 then
+	    wx.components.hunger.burnratemodifiers:SetModifier(inst, 0.95 * (0.95 ^ wx._cherriftchips))
+	else
+            wx.components.hunger.burnratemodifiers:SetModifier(inst, 0.95)
+	end
     end
 end
 
@@ -827,7 +936,11 @@ local function maxhunger1_deactivate(inst, wx)
     if wx.components.hunger ~= nil then
         local current_hunger_percent = wx.components.hunger:GetPercent()
 
-        wx.components.hunger:SetMax(wx.components.hunger.max - TUNING.WX78_MAXHUNGER1_BOOST)
+        if wx._cherriftchips and wx._cherriftchips > 0 then
+	    wx.components.hunger:SetMax(wx.components.hunger.max - TUNING.WX78_MAXHUNGER1_BOOST * (1 + 0.5*wx._cherriftchips))
+	else
+	    wx.components.hunger:SetMax(wx.components.hunger.max - TUNING.WX78_MAXHUNGER1_BOOST)
+	end
         wx.components.hunger:SetPercent(current_hunger_percent, false)
 
         wx.components.hunger.burnratemodifiers:RemoveModifier(inst)
@@ -848,6 +961,8 @@ AddCreatureScanDataDefinition("hound", "maxhunger1", 2)
 ---------------------------------------------------------------
 local function music_sanityaura_fn(wx, observer)
     local num_modules = wx._music_modules or 1
+    local cherry_mult = 1
+    if wx._cherriftchips and wx._cherriftchips > 0 then cherry_mult = 1 + (0.25 * wx._cherriftchips) end
     return TUNING.WX78_MUSIC_SANITYAURA * num_modules
 end
 
@@ -872,7 +987,11 @@ local function music_activate(inst, wx)
     wx._music_modules = (wx._music_modules or 0) + 1
 
     -- Sanity auras don't affect their owner, so add dapperness to also give WX sanity regen.
-    wx.components.sanity.dapperness = wx.components.sanity.dapperness + TUNING.WX78_MUSIC_DAPPERNESS
+    if wx._cherriftchips and wx._cherriftchips > 0 then
+        wx.components.sanity.dapperness = wx.components.sanity.dapperness + TUNING.WX78_MUSIC_DAPPERNESS * (1.25 ^ wx._cherriftchips)
+    else
+        wx.components.sanity.dapperness = wx.components.sanity.dapperness + TUNING.WX78_MUSIC_DAPPERNESS
+    end
     if wx.components.birdattractor ~= nil then
         wx.components.birdattractor.spawnmodifier:SetModifier(inst, TUNING.BIRD_SPAWN_MAXDELTA_FEATHERHAT, "maxbirds")
         wx.components.birdattractor.spawnmodifier:SetModifier(inst, TUNING.BIRD_SPAWN_DELAYDELTA_FEATHERHAT.MIN, "mindelay")
@@ -901,7 +1020,11 @@ end
 local function music_deactivate(inst, wx)
     wx._music_modules = math.max(0, wx._music_modules - 1)
 
-    wx.components.sanity.dapperness = wx.components.sanity.dapperness - TUNING.WX78_MUSIC_DAPPERNESS
+    if wx._cherriftchips and wx._cherriftchips > 0 then
+        wx.components.sanity.dapperness = wx.components.sanity.dapperness - TUNING.WX78_MUSIC_DAPPERNESS * (1.25 ^ wx._cherriftchips)
+    else
+        wx.components.sanity.dapperness = wx.components.sanity.dapperness - TUNING.WX78_MUSIC_DAPPERNESS
+    end
 
     wx.components.sanityaura.max_distsq = (wx._music_modules * TUNING.WX78_MUSIC_TENDRANGE) * (wx._music_modules * TUNING.WX78_MUSIC_TENDRANGE)
 
@@ -941,6 +1064,7 @@ AddCreatureScanDataDefinition("hermitcrab", "music", 4)
 local function bee_tick(wx, inst)
     if wx._bee_modcount and wx._bee_modcount > 0 and wx.components.inventory ~= nil then
         local health_tick = wx._bee_modcount * TUNING.WX78_BEE_HEALTHPERTICK
+	if wx._cherriftchips and wx._cherriftchips > 0 then health_tick = health_tick + 0.25 * wx._cherriftchips end
         wx.components.health:DoDelta(health_tick, false, inst, true)
     end
 end
@@ -989,6 +1113,7 @@ local function maxhealth2_activate(inst, wx, isloading)
     local maxhealth2_boost = TUNING.WX78_MAXHEALTH_BOOST * TUNING.WX78_MAXHEALTH2_MULT
     maxhealth_change(inst, wx, maxhealth2_boost, isloading)
     --wx.components.health:SetAbsorptionAmount(wx.components.health.absorb + 0.2)
+    superior_combo(inst, wx)
 end
 
 local function maxhealth2_deactivate(inst, wx)
@@ -1009,6 +1134,65 @@ table.insert(module_definitions, MAXHEALTH2_MODULE_DATA)
 AddCreatureScanDataDefinition("spider_healer", "maxhealth2", 4)
 
 ---------------------------------------------------------------
+---CHERRY FOREST COOL CIRCUIT COMPATIBALITY---		---surely there's a way better way to go about this but this is simple enough
+local function modulesrefresh(inst, wx, isactivate)
+	for _, module in ipairs(wx.components.upgrademoduleowner.modules) do --This looks ugly
+		if wx.components.upgrademoduleowner.charge_level ~= 0 and module.prefab ~= "wx78module_cherrift" then
+			print("found one")
+			module.components.upgrademodule:TryDeactivate() --Mr. Klei told me to not use these Activate functions outside of upgrademoduleowner component so if something's wrong
+		end												-- just disable them and make module incrase/decrease wx._cherriftchips count.
+	end
+	
+	if isactivate then 
+		wx._cherriftchips = (wx._cherriftchips or 0) + 1
+	else
+		wx._cherriftchips = math.max(0, wx._cherriftchips - 1)
+	end
+	
+	for _, module in ipairs(wx.components.upgrademoduleowner.modules) do
+		if wx.components.upgrademoduleowner.charge_level ~= 0 and module.prefab ~= "wx78module_cherrift" then
+		--print("found one")
+       -- module.components.upgrademodule:TryDeactivate()
+		module.components.upgrademodule:TryActivate()
+		module:PushEvent("upgrademodule_moduleactivated")
+	end
+    end
+end
+
+
+local function cherrift_activate(inst, wx)
+	modulesrefresh(inst, wx, true)
+	--wx._cherriftchips = (wx._cherriftchips or 0) + 1
+	--wx.components.upgrademoduleowner:UpdateActivatedModules()
+	superior_combo(inst, wx)
+end
+
+local function cherrift_deactivate(inst, wx)
+	--wx.components.upgrademoduleowner:UpdateActivatedModules()
+	--wx._cherriftchips = math.max(0, wx._cherriftchips - 1) --this is after Update so it would use an older value for deactivation function --SCRAP ALL OF THIS SHIT
+	--[[for _, module in ipairs(wx.components.upgrademoduleowner.modules) do
+		if wx._cherriftchips and wx._cherriftchips == 0 and module.prefab ~= "wx78module_cherrift" then
+			module._cherryboosted = false
+		end
+        --module:PushEvent("upgrademodule_moduleactivated")
+    end]]
+	modulesrefresh(inst, wx, false)
+end
+
+local CHERRIFT_MODULE_DATA =
+{
+	name = "cherrift",
+	cherriftitem = true,
+	slots = 1,
+	activatefn = cherrift_activate,
+	deactivatefn = cherrift_deactivate,
+}
+table.insert(module_definitions, CHERRIFT_MODULE_DATA)
+
+
+
+
+----------------------------------------------------------------
 local module_netid = 1
 local module_netid_lookup = {}
 
