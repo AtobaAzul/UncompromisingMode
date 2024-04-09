@@ -213,15 +213,26 @@ if TUNING.DSTU.WXLESS then --HI ATOBA :3 :3 <3 <3
             inst.components.upgrademodule.onactivatedfn = data.activatefn
             inst.components.upgrademodule.ondeactivatedfn = data.deactivatefn
             inst.components.upgrademodule.onremovedfromownerfn = on_module_removed
-
+	 end)
+     end --shortened this function and made general durability changes global for better mod compatibility
             --------------------------------------------------------------------------
+     env.AddPrefabPostInitAny(function(inst)
+	    if not TheWorld.ismastersim then
+                return inst
+            end
+
+	    if inst.components.upgrademodule then
+				
             inst:RemoveComponent("finiteuses")
 
             inst:AddComponent("fueled")
             --inst.components.fueled:SetSectionCallback(onfuelchange) --somehow only now I realized this nil thing exists??? How did I never got an error for it before?? How did that end up here????
             inst.components.fueled:InitializeFuelLevel(circuit_durability) -- considered giving different sizes different durability but idk
             inst.components.fueled:SetDepletedFn(ondepleted)
-            --feel free to just make circuits refuelable with biodata since circuit box is still work in progress (mainly due to missing animations) so I'm not adding it to Uncomp just yet
+            ----------------------
+	    inst.components.fueled.fueltype = FUELTYPE.CIRCUITBITS --TEMPORARY. REMOVE AFTER ANOTHER METHOD OF REPAIRING CIRCUITS GETS ADDED. EITHER BY KLEI OR CIRCUIT BOX FINALLY BECOMES REAL
+	    inst.components.fueled.accepting = true
+	    ------------------
             local function checkforconsume(inst)
                 if inst.components.upgrademodule.target ~= nil and inst.components.fueled ~= nil and inst.module_in_use == nil and inst.components.upgrademodule.activated == true then
                     inst.module_in_use = 1
@@ -244,14 +255,27 @@ if TUNING.DSTU.WXLESS then --HI ATOBA :3 :3 <3 <3
 
             inst:ListenForEvent("upgrademodule_moduleactivated", checkforconsume) --I didn't know how to know when the module is equipped --UPDATE: added a new one myself, used to check every 0.5 seconds
             inst:ListenForEvent("percentusedchange", overheatwarn)
-        end)
-    end
+				
+	    end
+    end)
 
     for _, def in ipairs(module_definitions) do
         ChangeModule(def)
     end
 
+    env.AddPrefabPostInit("wagpunk_bits", function(inst)
 
+	--inst:AddTag("RAWDATA_fuel")
+	
+    if not TheWorld.ismastersim then
+        return inst
+    end
+	
+    inst:AddComponent("fuel")
+    inst.components.fuel.fueltype = FUELTYPE.CIRCUITBITS
+    inst.components.fuel.fuelvalue = 480*1
+    end)
+    FUELTYPE.CIRCUITBITS = "CIRCUITBITS"
     ---------------------------------------------------------------------
 
     local function OnEatFun(inst, food) -- stuff for charges for food and reversing negative stats from hunger chips
@@ -341,6 +365,7 @@ if TUNING.DSTU.WXLESS then --HI ATOBA :3 :3 <3 <3
                 (current < 45 and easing.linear(current - 20, TUNING.WX78_HEATERTEMPPERMODULE, TUNING.WX78_HEATERTEMPPERMODULE, 25)) or 0
         end
         --if emitting_temp < 0 then emitting_temp = 0 end
+	if inst._cherriftchips and inst._cherriftchips > 0 then emitting_temp = emitting_temp * (1.15 ^ inst._cherriftchips) end
         return inst._temperature_modulelean * emitting_temp
     end
 
@@ -396,6 +421,7 @@ if TUNING.DSTU.WXLESS then --HI ATOBA :3 :3 <3 <3
         inst:AddComponent("workmultiplier")
 
         inst._old_chip_inuse = 0
+	inst._cherriftchips = 0 --For Cherry Forest module. I shouldn't *need* it here since I always check if it's nil when it gets used but it won't hurt to have. I think.
 
         if inst._onpusheddegen == nil then
             inst._onpusheddegen = function(inst)
@@ -450,7 +476,7 @@ if TUNING.DSTU.WXLESS then --HI ATOBA :3 :3 <3 <3
     TUNING.WX78_MINTEMPCHANGEPERMODULE = 20
     TUNING.WX78_HEATERTEMPPERMODULE = 25
     TUNING.WX78_MOVESPEED_CHIPBOOSTS = { 0.00, 4, 3, 2, 1 }
-    TUNING.WX78_LIGHT_BASERADIUS = 4
+    TUNING.WX78_LIGHT_BASERADIUS = 5
     TUNING.WX78_LIGHT_EXTRARADIUS = 6
     TUNING.WX78_MAXHEALTH_BOOST = 40
     TUNING.WX78_MAXHEALTH2_MULT = 2.5

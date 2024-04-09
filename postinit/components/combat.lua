@@ -170,7 +170,13 @@ env.AddComponentPostInit("combat", function(self)
             return _GetAttacked(self, attacker, damage, weapon_check, stimuli)
         elseif self.inst ~= nil and self.inst.components.upgrademoduleowner and damage and (self.inst.components.rider ~= nil and not self.inst.components.rider:IsRiding() or self.inst.components.rider == nil) and TUNING.DSTU.WXLESS then
             -- Hardy circuit flat damage reduction
-            local hpmodulereduct = self.inst.components.upgrademoduleowner:GetModuleTypeCount('maxhealth') * 2 + self.inst.components.upgrademoduleowner:GetModuleTypeCount('maxhealth2') * 5
+            local cherry_mult = 1 --cherry forest circuit compat
+	    local cherry_mult2 = 1
+	    if self.inst._cherriftchips and self.inst._cherriftchips > 0 then
+	        cherry_mult = 1 + 0.5*self.inst._cherriftchips
+	        cherry_mult2 = 1 + 0.25*self.inst._cherriftchips
+	    end
+            local hpmodulereduct = self.inst.components.upgrademoduleowner:GetModuleTypeCount('maxhealth') * 2 * cherry_mult + self.inst.components.upgrademoduleowner:GetModuleTypeCount('maxhealth2') * 5 * cherry_mult2
             damage = damage - hpmodulereduct
             if damage < 2 then damage = 2 end
             return _GetAttacked(self, attacker, damage, weapon_check, stimuli, ...)
