@@ -130,22 +130,6 @@ local SkillTreeDefs = require("prefabs/skilltree_defs")
 
 
 local ONACTIVATE_FNS = {
-    ArsenalSpear = function(inst)
-        local item = inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
-
-        if item ~= nil and item:HasTag("battlespear") then
-            item:ApplySkillsChanges(inst)
-        end
-    end,
-
-    ArsenalHelm = function(inst)
-        local item = inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HEAD)
-
-        if item ~= nil and item:HasTag("battlehelm") then
-            item:ApplySkillsChanges(inst)
-        end
-    end,
-
     CombatDefense = function(inst)
         if inst.components.planardefense ~= nil then
             inst.components.planardefense:AddBonus(inst, TUNING.SKILLS.WATHGRITHR.BONUS_PLANAR_DEF, "wathgrithr_combat_defense")
