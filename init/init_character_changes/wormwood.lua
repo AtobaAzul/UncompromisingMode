@@ -187,23 +187,18 @@ end
 if env.GetModConfigData("wormwood_photosynthesis") then
     local SkillTreeDefs = require("prefabs/skilltree_defs")
 
-   
-
     local function OnSeasonChange(inst, season)
-        if season == "summer" and not inst:HasTag("playerghost") and inst.components.skilltreeupdater ~= nil and inst.components.skilltreeupdater:IsActivated("wormwood_blooming_photosynthesis") then
+        if (season == "summer" or season == "spring") and not inst:HasTag("playerghost") and inst.components.skilltreeupdater ~= nil and inst.components.skilltreeupdater:IsActivated("wormwood_blooming_photosynthesis") then
             inst.components.bloomness:Fertilize()
-           
         end
     end
 
     SkillTreeDefs.SKILLTREE_DEFS["wormwood"].wormwood_blooming_photosynthesis.onactivate   = function(inst)
         inst:WatchWorldState("season", OnSeasonChange)
-       
     end
 
     SkillTreeDefs.SKILLTREE_DEFS["wormwood"].wormwood_blooming_photosynthesis.ondeactivate = function(inst)
         inst:StopWatchingWorldState("season", OnSeasonChange)
-       
     end
 
     STRINGS.SKILLTREE.WORMWOOD.BLOOMING_PHOTOSYNTHESIS_DESC                                = "Continue naturally blooming into Summer."
@@ -222,7 +217,7 @@ if env.GetModConfigData("wormwood_photosynthesis") then
         inst.components.bloomness.calcratefn = function(inst, level, is_blooming, fertilizer)
             if inst.components.skilltreeupdater ~= nil and inst.components.skilltreeupdater:IsActivated("wormwood_blooming_photosynthesis") then
                 local season_mult = 1
-                if TheWorld.state.season == "summer" then
+                if TheWorld.state.season == "summer" or TheWorld.state.season == "spring" then
                     if is_blooming then
                         season_mult = TUNING.WORMWOOD_SPRING_BLOOM_MOD
                     else
