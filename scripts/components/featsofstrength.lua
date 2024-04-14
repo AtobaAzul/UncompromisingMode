@@ -23,7 +23,7 @@ function FeatsOfStrength:MightySwing(target)
 			doubledplanar = true
 		end
 		if target.components.health ~= nil then
-			self.inst.components.combat:DoAttack(target, nil, nil, nil, 2)
+			self.inst.components.combat:DoAttack(target, nil, nil, nil, 2, 4)
 			if self.inst:HasTag("shadow_strikes") then
 				self.inst:IncreaseCombo(1)
 			end
