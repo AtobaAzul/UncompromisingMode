@@ -42,50 +42,41 @@ local function OnHitOther(inst, other)
 	end
 end
 
-local function Perish(inst)
-	inst:Remove()
+
+-- Here's the part where we violently murder anything we so much as lightly graze :D
+-- And anything near it!
+local function OmaeWaMou(inst)
+	local nextvictim = FindClosestEntity(inst, 3, true, { "_health" }, { "sans", "plant", "blocker", "FX", "INLIMBO", "invisible", "notarget", "noattack", "playerghost" })
+	
+	if nextvictim ~= nil and nextvictim.components.health ~= nil then
+		local AREAATTACK_EXCLUDETAGS = { "sans", "FX", "INLIMBO", "invisible", "notarget", "noattack", "playerghost" }
+		
+		inst.components.combat:DoAreaAttack(inst, 3, nil, nil, nil, AREAATTACK_EXCLUDETAGS)
+		
+		local bonebreakfx = SpawnPrefab("rock_break_fx")
+		if bonebreakfx ~= nil then
+			bonebreakfx.Transform:SetPosition(inst.Transform:GetWorldPosition())
+		end
+		inst.SoundEmitter:PlaySound("dontstarve/common/destroy_stone")
+		
+		inst:DoTaskInTime(FRAMES*1, function() inst:Remove() end)
+	end
 end
+
 
 -- Movement here.
 local function WOOSH(inst)
-	local nextvictim = FindClosestEntity(inst, 50, true, nil, { "plant", "blocker", "FX", "INLIMBO", "invisible", "notarget", "noattack", "playerghost" })
+	local nextvictim = FindClosestEntity(inst, 50, true, { "_health" }, { "sans", "plant", "blocker", "FX", "INLIMBO", "invisible", "notarget", "noattack", "playerghost" })
 	
 	if nextvictim ~= nil and nextvictim.components.health ~= nil and math.random() > 0.8 then
 		inst:FacePoint(nextvictim.Transform:GetWorldPosition())
 		inst.components.locomotor:RunForward()
-	--	Maybe mix in a spiral pattern occasionally? Hm.
+--	elseif math.random() > 0.5 then
+	--	Spiral movement pattern.
 	else
 		inst.components.locomotor:RunInDirection(math.random() * 359)
 		inst.components.locomotor:RunForward()
 	end
-	
---	inst:DoTaskInTime(3, Perish)
-end
-
--- Here's the part where we violently murder anything we so much as lightly graze :D
--- And anything near it!
-local function YEET(inst)
-	local AREAATTACK_EXCLUDETAGS = { "FX", "INLIMBO", "invisible", "notarget", "noattack", "playerghost" }
-	
-	inst.components.combat:DoAreaAttack(inst, 3, nil, nil, nil, AREAATTACK_EXCLUDETAGS)
-	
-	local bonebreakfx = SpawnPrefab("rock_break_fx")
-	if bonebreakfx ~= nil then
-		bonebreakfx.Transform:SetPosition(inst.Transform:GetWorldPosition())
-	end
-	inst.SoundEmitter:PlaySound("dontstarve/common/destroy_stone")
-	
-	inst:DoTaskInTime(0, Perish)
-end
-
--- Proximity detonator.
-local function OmaeWaMou(inst)
-	local nextvictim = FindClosestEntity(inst, 50, true, nil, { "plant", "blocker", "FX", "INLIMBO", "invisible", "notarget", "noattack", "playerghost" })
-	
-	if nextvictim ~= nil and nextvictim.components.health ~= nil then
-		YEET(inst)
-	end
-	inst:DoTaskInTime(0.1, OmaeWaMou)
 end
 
 
@@ -111,6 +102,7 @@ local function fn()
 	inst.Transform:SetScale((1 + math.random()), (1 + math.random()), (1 + math.random()))
 	
 	inst:AddTag("scarytoprey")
+	inst:AddTag("sans")
 	
 	inst.Light:Enable(true)
 	inst.Light:SetRadius(1)
@@ -126,8 +118,8 @@ local function fn()
 	end
 	
 	inst:AddComponent("locomotor")
-	inst.components.locomotor.walkspeed = ((30 * math.random()) + 25)
-	inst.components.locomotor.runspeed = ((30 * math.random()) + 25)
+	inst.components.locomotor.walkspeed = ((30 * math.random()) + 35)
+	inst.components.locomotor.runspeed = ((30 * math.random()) + 35)
 	inst.components.locomotor:EnableGroundSpeedMultiplier(false)
 	inst.components.locomotor.pathcaps = { ignorecreep = true }
 	
@@ -136,9 +128,15 @@ local function fn()
 	inst.components.combat.onhitotherfn = OnHitOther
 	
 	inst:DoTaskInTime(0, WOOSH)
-	inst:DoTaskInTime(0, OmaeWaMou)
+	inst:DoPeriodicTask((FRAMES * 4), OmaeWaMou, 0)
 	
 	
+	inst:DoTaskInTime(0.8, function()
+		ErodeAway(inst, 10*FRAMES)
+	end)
+	
+	
+	inst.OnEntitySleep = inst.Remove
 	inst.persists = false
 	
 	return inst
