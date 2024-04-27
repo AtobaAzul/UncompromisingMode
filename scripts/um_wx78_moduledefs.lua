@@ -87,7 +87,7 @@ local function maxsanity1_activate(inst, wx, isloading)
 		wx.components.sanity.dapperness = wx.components.sanity.dapperness + TUNING.DAPPERNESS_TINY
 		wx.components.sanity:SetMax(wx.components.sanity.max + TUNING.WX78_MAXSANITY1_BOOST)
 	end
-        wx.components.sanity.neg_aura_modifiers:SetModifier(inst, 0.9)
+        wx.components.sanity.neg_aura_modifiers:SetModifier(inst, 0.925)
 
         if not isloading then
             wx.components.sanity:SetPercent(current_sanity_percent, false)
@@ -134,7 +134,7 @@ local function maxsanity_activate(inst, wx, isloading)
 		wx.components.sanity.dapperness = wx.components.sanity.dapperness + TUNING.WX78_MAXSANITY_DAPPERNESS
 		wx.components.sanity:SetMax(wx.components.sanity.max + TUNING.WX78_MAXSANITY_BOOST)
 	end
-        wx.components.sanity.neg_aura_modifiers:SetModifier(inst, 0.75)
+        wx.components.sanity.neg_aura_modifiers:SetModifier(inst, 0.8)
 
         if not isloading then
             wx.components.sanity:SetPercent(current_sanity_percent, false)
@@ -925,9 +925,9 @@ local function maxhunger1_activate(inst, wx, isloading)
         end
 
         if wx._cherriftchips and wx._cherriftchips > 0 then
-	    wx.components.hunger.burnratemodifiers:SetModifier(inst, 0.95 * (0.95 ^ wx._cherriftchips))
+	    wx.components.hunger.burnratemodifiers:SetModifier(inst, 0.925 * (0.95 ^ wx._cherriftchips))
 	else
-            wx.components.hunger.burnratemodifiers:SetModifier(inst, 0.95)
+            wx.components.hunger.burnratemodifiers:SetModifier(inst, 0.925)
 	end
     end
 end
