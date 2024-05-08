@@ -532,21 +532,30 @@ local function ResetComboTimer(inst)
 	end
 end
 
-local function IncreaseCombo(inst, num)
+local function IncreaseCombo(inst, num, target)
 	ResetComboTimer(inst)
 	if inst.combo == nil then
 		inst.combo = 0
 	end
+	local max_combo_vfx = false
+	if inst.combo == TUNING.WOLFGANG_SHADOW_STRIKE_MAX_COMBO - 1 then
+		max_combo_vfx = true
+	end
+	if inst.combo == TUNING.WOLFGANG_SHADOW_STRIKE_MAX_COMBO and target and target.Transform then
+		SpawnPrefab("statue_transition_2").Transform:SetPosition(target.Transform:GetWorldPosition())
+	end
 	inst.combo = math.min(inst.combo + num, TUNING.WOLFGANG_SHADOW_STRIKE_MAX_COMBO)
-	if inst.combo == TUNING.WOLFGANG_SHADOW_STRIKE_MAX_COMBO then
-		SpawnPrefab("statue_transition_2").Transform:SetPosition(inst.Transform:GetWorldPosition())
+	if max_combo_vfx then
+		local vfx = SpawnPrefab("dreadstone_spawn_fx")
+		vfx.Transform:SetPosition(inst.Transform:GetWorldPosition())
+		inst.SoundEmitter:PlaySound("wanda2/characters/wanda/watch/weapon/shadow_hit_old")
 	end
 	HandleComboMult(inst)
 end
 
 local function OnHitOther(inst, data)	
 	if inst:HasTag("shadow_strikes") then
-		IncreaseCombo(inst, 1)
+		IncreaseCombo(inst, 1, data.target)
 	end
 end
 
@@ -657,7 +666,7 @@ local function SpecialWorkMultiplierFn(inst, action, target, tool, numworks, rec
 			end
 			tool.components.finiteuses:Use(uses)
 			if inst:HasTag("shadow_strikes") then
-				IncreaseCombo(inst, 1)
+				IncreaseCombo(inst, 1, target)
 			end
 			return 99999
 		end
