@@ -1909,3 +1909,23 @@ env.AddStategraphPostInit("wilson", function(inst)
         inst.actionhandlers[v.action] = v
     end
 end)
+
+-- Lifting dumbbells can now increase mightiness past 100
+if env.GetModConfigData("wolfgang") then
+    env.AddStategraphPostInit("wilson", function(inst)
+        local _AnimOverFn = inst.states.use_dumbbell_loop.events.animover.fn
+        inst.states.use_dumbbell_loop.events.animover.fn = function(inst)
+            inst.sg.statemem.dumbbell_anim_done = true
+            local mightiness_max = inst.components.mightiness:GetMax()
+            local mightiness_overmax = inst.components.mightiness:GetOverMax()
+            local overmax_percent = 1 + mightiness_overmax / mightiness_max
+            if inst.sg.statemem.queue_stop or inst.components.dumbbelllifter.dumbbell == nil then
+                inst.sg:GoToState("use_dumbbell_pst")
+            elseif inst.components.dumbbelllifter:Lift() and inst.components.mightiness:GetPercent() < overmax_percent then
+                inst.sg:GoToState("use_dumbbell_loop")
+            else
+                return _AnimOverFn(inst)
+            end
+        end
+    end)
+end
