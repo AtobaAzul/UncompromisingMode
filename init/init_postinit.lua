@@ -45,7 +45,6 @@ local component_post = {
     "worldtemperature",
     "worldwind",
     "planarentity",
-    "geyserfx",
     "firedetector",
     "slipperyfeet",
     "walkableplatformplayer",
@@ -192,7 +191,6 @@ local prefab_post = {
     "rainometer",
     "winterometer",
     "mooneye",
-    "dragoonegg",
     "bomb_lunarplant",
     "compostingbin",
     "plantables",
@@ -489,6 +487,12 @@ end
 if GetModConfigData("lifeinjector_rework") then
     table.insert(prefab_post, "lifeinjector")
 end
+
+if GetModConfigData("smog") then
+    table.insert(prefab_post, "dragoonegg")
+    table.insert(component_post, "geyserfx")
+end
+
 
 if GetModConfigData("sharpshooter_monkeys_") then
     table.insert(brain_post, "powdermonkey")
