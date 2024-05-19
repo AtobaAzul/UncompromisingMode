@@ -90,6 +90,7 @@ local function ondeploy_high(inst, pt, deployer)
             for k, v in ipairs(inst._gems) do
                 local gem = SpawnPrefab(v)
                 gen.components.trader.onaccept(gen, deployer, gem)
+                gem:Remove()
             end
         end
 
