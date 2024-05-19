@@ -302,6 +302,7 @@ configuration_options = {
     BinaryConfig("wortox", "Wortox",
         "Better teleports, worse sanity and healing from souls. Birds and butterflies are soulless.",
         true),
+        BinaryConfig("wortox_beesouls", "Wortox - Bee Souls", "Toggle wether or not bees have souls.", true),
     --{
     --name = "wortox",
     --label = "Wortox",
