@@ -1,69 +1,71 @@
 local env = env
 GLOBAL.setfenv(1, GLOBAL)
 -----------------------------------------------------------------
+if TUNING.DSTU.MUSHROOM_CHANGES then
 
-env.AddPrefabPostInit("green_mushroom", function(inst)
+	env.AddPrefabPostInit("green_mushroom", function(inst)
 
-	inst:RemoveComponent("lootdropper")
-	inst:RemoveComponent("workable")
+		inst:RemoveComponent("lootdropper")
+		inst:RemoveComponent("workable")
 	
-    inst:AddComponent("lootdropper")
-    inst:AddComponent("workable")	
-	inst.components.workable:SetWorkAction(ACTIONS.DIG)
-    inst.components.workable:SetOnFinishCallback(function(inst, chopper)
-        if inst.components.pickable ~= nil and inst.components.pickable:CanBePicked() then
-            inst.components.lootdropper:SpawnLootPrefab("green_cap")
-        end
+		inst:AddComponent("lootdropper")
+		inst:AddComponent("workable")	
+		inst.components.workable:SetWorkAction(ACTIONS.DIG)
+		inst.components.workable:SetOnFinishCallback(function(inst, chopper)
+			if inst.components.pickable ~= nil and inst.components.pickable:CanBePicked() then
+				inst.components.lootdropper:SpawnLootPrefab("green_cap")
+			end
 		
-		local spore = SpawnPrefab("spore_small")
-		spore.Transform:SetPosition(inst.Transform:GetWorldPosition())
-		spore.AnimState:PlayAnimation("flight_cycle")	
-        inst:Remove()
-    end)
-    inst.components.workable:SetWorkLeft(1)	
-end)
+			local spore = SpawnPrefab("spore_small")
+			spore.Transform:SetPosition(inst.Transform:GetWorldPosition())
+			spore.AnimState:PlayAnimation("flight_cycle")	
+			inst:Remove()
+		end)
+		inst.components.workable:SetWorkLeft(1)	
+	end)
 
-env.AddPrefabPostInit("red_mushroom", function(inst)
+	env.AddPrefabPostInit("red_mushroom", function(inst)
 
-	inst:RemoveComponent("lootdropper")
-	inst:RemoveComponent("workable")
+		inst:RemoveComponent("lootdropper")
+		inst:RemoveComponent("workable")
 	
-    inst:AddComponent("lootdropper")
-    inst:AddComponent("workable")	
-	inst.components.workable:SetWorkAction(ACTIONS.DIG)
-    inst.components.workable:SetOnFinishCallback(function(inst, chopper)
-        if inst.components.pickable ~= nil and inst.components.pickable:CanBePicked() then
-            inst.components.lootdropper:SpawnLootPrefab("red_cap")
-        end
+		inst:AddComponent("lootdropper")
+		inst:AddComponent("workable")	
+		inst.components.workable:SetWorkAction(ACTIONS.DIG)
+		inst.components.workable:SetOnFinishCallback(function(inst, chopper)
+			if inst.components.pickable ~= nil and inst.components.pickable:CanBePicked() then
+				inst.components.lootdropper:SpawnLootPrefab("red_cap")
+			end
 
-		local spore = SpawnPrefab("spore_medium")
-		spore.Transform:SetPosition(inst.Transform:GetWorldPosition())
-		spore.AnimState:PlayAnimation("flight_cycle")
-        inst:Remove()
-    end)
-    inst.components.workable:SetWorkLeft(1)	
-end)
+			local spore = SpawnPrefab("spore_medium")
+			spore.Transform:SetPosition(inst.Transform:GetWorldPosition())
+			spore.AnimState:PlayAnimation("flight_cycle")
+			inst:Remove()
+		end)
+		inst.components.workable:SetWorkLeft(1)	
+	end)
 
-env.AddPrefabPostInit("blue_mushroom", function(inst)
+	env.AddPrefabPostInit("blue_mushroom", function(inst)
 
-	inst:RemoveComponent("lootdropper")
-	inst:RemoveComponent("workable")
+		inst:RemoveComponent("lootdropper")
+		inst:RemoveComponent("workable")
 	
-    inst:AddComponent("lootdropper")
-    inst:AddComponent("workable")	
-	inst.components.workable:SetWorkAction(ACTIONS.DIG)
-    inst.components.workable:SetOnFinishCallback(function(inst, chopper)
-        if inst.components.pickable ~= nil and inst.components.pickable:CanBePicked() then
-            inst.components.lootdropper:SpawnLootPrefab("blue_cap")
-        end
+		inst:AddComponent("lootdropper")
+		inst:AddComponent("workable")	
+		inst.components.workable:SetWorkAction(ACTIONS.DIG)
+		inst.components.workable:SetOnFinishCallback(function(inst, chopper)
+			if inst.components.pickable ~= nil and inst.components.pickable:CanBePicked() then
+				inst.components.lootdropper:SpawnLootPrefab("blue_cap")
+			end
 		
-		local spore = SpawnPrefab("spore_tall")
-		spore.Transform:SetPosition(inst.Transform:GetWorldPosition())
-		spore.AnimState:PlayAnimation("flight_cycle")
-        inst:Remove()
-    end)
-    inst.components.workable:SetWorkLeft(1)	
-end)
+			local spore = SpawnPrefab("spore_tall")
+			spore.Transform:SetPosition(inst.Transform:GetWorldPosition())
+			spore.AnimState:PlayAnimation("flight_cycle")
+			inst:Remove()
+		end)
+		inst.components.workable:SetWorkLeft(1)	
+	end)
+end
 
 env.AddPrefabPostInit("green_cap", function(inst)
 

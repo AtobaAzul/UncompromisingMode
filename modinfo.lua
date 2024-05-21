@@ -681,6 +681,8 @@ configuration_options = {
         "Small creatures like Spiders drop monster morsels instead of Monster Meat.", true),
     BinaryConfig("horriblefood", "More Horrible Foods",
         "More items are considered as the horrible food type.", true),
+	BinaryConfig("mushroom_changes", "Mushroom Changes",
+		"Mushroom Planter accepts more resources to replenish. Mushrooms and Mushtrees now give spores, instead of caps.", true),
     BinaryConfig("no_winter_growing", "No Winter Growing",
         "Makes a few food sources such as Kelp and Stone Fruit not grow in Winter.", true),
     BinaryConfig("rawcropsnerf", "Raw Crops Nerf",
