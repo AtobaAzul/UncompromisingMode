@@ -111,6 +111,7 @@ if TUNING.DSTU.WANDA_NERF then
 
         inst:DoTaskInTime(0, reviver_DoPenalty)
     end)
+end
 
     env.AddPrefabPostInit("pocketwatch_recall", function(inst)
         inst.dest_name = net_string(inst.GUID, "dest_name")
@@ -272,4 +273,3 @@ if TUNING.DSTU.WANDA_NERF then
             end
         end
     end)
-end
