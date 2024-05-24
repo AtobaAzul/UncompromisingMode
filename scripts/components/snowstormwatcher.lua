@@ -7,7 +7,9 @@ local SnowStormWatcher = Class(function(self, inst)
         self.storming = false
         --inst:ListenForEvent("weathertick", function(src, data) self:ToggleSnowstorms() end, TheWorld)
         --inst:ListenForEvent("forcestopsnowstorm", function(src, data) self:ToggleSnowstorms() end, TheWorld)
-        inst:ListenForEvent("seasontick", function(src, data) self:ToggleSnowstorms() end, TheWorld)
+        self.inst:ListenForEvent("seasontick", function(src, data)
+            self:ToggleSnowstorms()
+        end, TheWorld)
         self.inst:StartUpdatingComponent(self)
     end,
     nil,
@@ -19,36 +21,6 @@ local INVALID_TILES = table.invert(
     {
         GROUND.SCALE
     })
-
-local function UpdateSnowstormWalkSpeed(inst)
-    inst.components.snowstormwatcher:UpdateSnowstormWalkSpeed()
-end
-
-local function StormStart(self)
-    self.stormtask = nil
-    self.storming = false
-
-    TheWorld:AddTag("snowstormstart")
-    if TheWorld.net ~= nil then
-        TheWorld.net:AddTag("snowstormstartnet")
-    end
-end
-
-local function StormStop(self)
-    TheWorld:RemoveTag("snowstormstart")
-    if TheWorld.net ~= nil then
-        TheWorld.net:RemoveTag("snowstormstartnet")
-    end
-
-    --self:UpdateSnowstormWalkSpeed()
-    self:PushEvent("snowoff")
-    self:PushEvent("forcestopsnowstorm")
-    self.storming = true
-    self:StopUpdatingComponent(self)
-    self.task = nil
-    self.stormtask = nil
-    self.stopstormtask = nil
-end
 
 function SnowStormWatcher:ToggleSnowstorms(active, src, data)
     if TheWorld.state.iswinter then
@@ -69,7 +41,7 @@ end
 
 function SnowStormWatcher:UpdateSnowstormWalkSpeed(src, data)
     local x, y, z = self.inst.Transform:GetWorldPosition()
-    
+
     local ents = TheSim:FindEntities(x, y, z, 4, { "wall" })
     local suppressorNearby1 = (#ents > 2)
 
@@ -82,16 +54,16 @@ function SnowStormWatcher:UpdateSnowstormWalkSpeed(src, data)
     local ents4 = TheSim:FindEntities(x, y, z, 6, { "snowstorm_protection_high" })
     local suppressorNearby4 = (#ents4 > 0)
 
-    if TheWorld.state.iswinter and
-        ((TheWorld.net ~= nil and TheWorld.net:HasTag("snowstormstartnet")) or TheWorld:HasTag("snowstormstart")) then
+
+    if TheWorld.state.iswinter and ((TheWorld.net ~= nil and TheWorld.net:HasTag("snowstormstartnet")) or TheWorld:HasTag("snowstormstart")) then
         if self.inst.components.playervision:HasGoggleVision() or
             self.inst.components.playervision:HasGhostVision() or
             self.inst.components.rider:IsRiding() or
             suppressorNearby1 or suppressorNearby2 or suppressorNearby3 or suppressorNearby4 or
             (
                 self.inst.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY) ~= nil and
-                self.inst.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY).prefab == "beargervest") or GetRainDomesAtXZ(x,z)
-                then
+                self.inst.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY).prefab == "beargervest") or IsUnderRainDomeAtXZ(x, z)
+        then
             self.inst.components.locomotor:RemoveExternalSpeedMultiplier(self.inst, "snowstorm")
             self.inst:PushEvent("checksnowvision")
         else
