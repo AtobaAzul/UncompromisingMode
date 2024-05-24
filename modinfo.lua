@@ -575,6 +575,8 @@ configuration_options = {
     BinaryConfig("no4crafts", "No 4-Ingredient Recipes", "Changes all 4-ingredient recipes to use 3 instead.", false),
     BinaryConfig("passibleimpassibles", "Remove Cheese-able Collisions",
         "Removes collision from objects like statues to prevent cheesing mobs and bosses.", true),
+    BinaryConfig("telestaff_rework", "Purple Gem Items",
+        "Many changes to items that are made with Purple Gems, including: Telelocator Staf, Telelocator Focus and Nightmare Amulet.", true),		
     BinaryConfig("scalemailbuff", "Scalemail Buff", "Scalemail now spawns 3 Dimvaes to help you in combat.", true),
     BinaryConfig("scaledchestbuff", "Scaled Chest Buff",
         "Enabling this buffs Scaled Chest to 25 slots. Toggling with Scaled Chests existing in the world may cause a crash.",
@@ -604,9 +606,6 @@ configuration_options = {
             { description = "Vanilla",   data = 1 } },
         default = 1.5
     },
-    BinaryConfig("telestaff_rework", "Telelocator Rework",
-        "You can now select the Focus you wish to teleport to. Foci now cost 3 Purple gems instead of gold.\nThe Staff's uses are doubled.",
-        true),
     BinaryConfig("insul_thermalstone", "Thermal Stone Rework",
         "Thermal Stones now have less insulation, but inherit some insulation from clothing.", true),
     BinaryConfig("uncool_chester", "Ther. Stone Snow Chester Nerf",

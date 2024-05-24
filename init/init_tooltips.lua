@@ -161,7 +161,7 @@ end
 
 
 if TUNING.DSTU.TELESTAFF_REWORK then
-    TOOLTIPS.TELESTAFF = "- Can select its destination.\n- Increased uses."
+    TOOLTIPS.TELESTAFF = "- Can select its destination.\n- Increased uses for items and objects.\n- Can teleport other players without PVP enabled."
     TOOLTIPS.TELEBASE = "- No longer requires gems per teleport."
 end
 

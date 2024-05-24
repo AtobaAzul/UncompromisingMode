@@ -281,15 +281,16 @@ end
 
 if GetModConfigData("telestaff_rework") then
     AllRecipes["telebase"].ingredients = {
-        Ingredient("purplegem", 3),
+        Ingredient("nightmarefuel", 4),
         Ingredient("livinglog", 4),
-        Ingredient("nightmarefuel", 4)
+        Ingredient("goldnugget", 8),
+        Ingredient("purplegem", 3)		
     }
-    AllRecipes["telestaff"].ingredients = {
-        Ingredient("nightmarefuel", 2),
-        Ingredient("spear", 1),
-        Ingredient("purplegem", 1)
-    }
+    --AllRecipes["telestaff"].ingredients = {
+        --Ingredient("nightmarefuel", 2),
+        --Ingredient("spear", 1),
+        --Ingredient("purplegem", 1)
+    --}
     AllRecipes["purpleamulet"].ingredients = {
         Ingredient("goldnugget", 3),
         Ingredient("nightmarefuel", 2),
