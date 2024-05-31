@@ -59,7 +59,7 @@ TUNING.WOLFGANG_MIGHTY_WORK_COST_MULT =
 		LOWER_SAIL_BOOST = 1,
 		TILL = 1,				-- ~1.1s
 		TERRAFORM = 1,
-		HACK = 1
+		HACK = 1 -- For IA compatibility
 	}
 
 TUNING.HARD_MATERIAL_MULT = 2.5
@@ -83,7 +83,7 @@ TUNING.WOLFGANG_MIGHTINESS_WORK_GAIN =
 		LOWER_SAIL_BOOST = 0,
 		TILL = 0,				-- ~1.1s
 		TERRAFORM = 0,
-		HACK = 0
+		HACK = 0 -- For IA compatibility
 	}
 
 
@@ -464,10 +464,11 @@ STRINGS.SKILLTREE.WOLFGANG.WOLFGANG_ALLEGIANCE_LUNAR_DESC = "The Cryptic Founder
 STRINGS.SKILLTREE.ALLEGIANCE_LOCK_LUNAR_DESC = "Master your overgrown hunger, but locks other masteries if chosen."
 
 STRINGS.SKILLTREE.WOLFGANG.WOLFGANG_ALLEGIANCE_LUNAR_MASTERY_TITLE = "Lunar Mastery"
-STRINGS.SKILLTREE.WOLFGANG.WOLFGANG_ALLEGIANCE_LUNAR_MASTERY_DESC = "Having insufficient mightiness will drain hunger instead.\nLeaping will create ice platforms on water."
+STRINGS.SKILLTREE.WOLFGANG.WOLFGANG_ALLEGIANCE_LUNAR_MASTERY_DESC = "Having insufficient mightiness will drain hunger instead.\nLeaping will create ice platforms on water.\nYou are immune to accursed trinkets."
 
 STRINGS.CHARACTERS.WOLFGANG.ANNOUNCE_MONSTERTONORMAL = "Wolfgang feel tiny now."
 STRINGS.CHARACTERS.WOLFGANG.ANNOUNCE_NORMALTOMONSTER = "The sea calls to Wolfgang!"
+STRINGS.CHARACTERS.WOLFGANG.ANNOUNCE_IGNOREDTRINKETCURSE = "Puny bracelet no match for mighty scales!"
 
 STRINGS.CHARACTERS.WOLFGANG.ANNOUNCE_WASHED_ASHORE = "Wolfgang glad to be back on land."
 STRINGS.CHARACTERS.WOLFGANG.ANNOUNCE_FELLINTOVOID = "Wolfgang barely managed to grab ledge!"
@@ -501,6 +502,12 @@ end
 
 local function ShouldDropItems(inst)
 	return not inst:HasTag("merm")
+end
+
+local function IARescue(inst)
+    if TheWorld.has_ia_drowning and inst:HasTag("merm") then
+        return "WURT_RESURRECT"
+    end
 end
 
 local function HandleComboMult(inst)
@@ -668,6 +675,18 @@ local function OnDoingHackHelper(inst, data)
 	end
 end
 
+local function OnPickup(inst, data)
+	local thing = data.item
+	if inst:HasTag("mighty_hunger") then
+		if thing ~= nil and thing.prefab == "cursed_monkey_token" then
+			inst.components.cursable:RemoveCurse("MONKEY", 9)
+			inst:DoTaskInTime(2.5, function(inst)
+				inst.components.talker:Say(GetString(inst, "ANNOUNCE_IGNOREDTRINKETCURSE"))
+			end)
+		end
+	end
+end
+
 env.AddPrefabPostInit("wolfgang", function(inst)
 	
 	inst:ListenForEvent("hungerdelta", OnSetOwner)
@@ -693,11 +712,14 @@ env.AddPrefabPostInit("wolfgang", function(inst)
 	inst:ListenForEvent("timerdone", ComboTimerOver)
 	
 	inst:ListenForEvent("fishcaught", getFishingBonus)
-
+	
 	inst:ListenForEvent("working", OnDoingHackHelper)
+
+	inst:ListenForEvent("itemget", OnPickup)
 	
 	if inst.components.drownable ~= nil then
 		inst.components.drownable:SetCustomTuningsFn(GetDowningDamgeTunings)
 		inst.components.drownable.shoulddropitemsfn = ShouldDropItems
+		inst.components.drownable.fallback_rescuefn = IARescue
 	end
 end)
