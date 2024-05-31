@@ -6,7 +6,7 @@ if not folder_name:find("workshop-") then
 end
 
 --RELEASE.MAJOR.MINOR.FIX
-local _version = "1.4.16.0"
+local _version = "1.4.17.0"
 description = [[
 󰀔 [ Version: ]] .. _version .. [[ - "Under the Weather Pt.1" ]
 
@@ -274,7 +274,7 @@ configuration_options = {
         "\"The Angler's Survival Guide\" now takes 2 Hardened Slip Bobbers, instead of 2 Wooden Ball Bobbers.", true),
     BinaryConfig("woodie_skilltree", "Woodie's Skilltree", "Some changes to Woodie's skilltrees to add trade-offs and buff underutilized skills.", true),
     BinaryConfig("waxwell_nerf", "Maxwell - Nerfs", "Several nerfs to Maxwell to bring him down in power.", true),
-    --	BinaryConfig("wolfgang", "Improved/Balanced Wolfgang", "Wolfgang gains new perks and downsides. Read the patch notes included in the mod folder or workshop for details.", false),
+    BinaryConfig("wolfgang", "Wolfgang Rework", "Wolfgang has a new skill tree, and mightiness is now a resource you spend to use special abilities.", true),
     BinaryConfig("wathgrithr_arsenal", "Wigfrid - Arsenal", "Changed wigfrid's new tools to not have infinite skills.", true),
     {
         name = "wathgrithr_rework_",
@@ -1319,8 +1319,8 @@ configuration_options = {
         false),
     BinaryConfig("winonawackycats", "Experimental Winona Catapults",
         "Catapults no longer regenerate, have reduced health, and deal 34 AOE damage.", false),
-    BinaryConfig("wolfgang", "Experimental Wolfgang",
-        "Wolfgang gains mightiness based on hunger level. Hunger drain increases the longer mighty is maintained.", false),
+    --BinaryConfig("wolfgang", "Experimental Wolfgang",
+        --"Wolfgang gains mightiness based on hunger level. Hunger drain increases the longer mighty is maintained.", false),
     BinaryConfig("eyebrellarework", "Eyebrella Rework",
         "Eyebrella stats restored to Vanilla value, must be repaired with Milky Whites, 12 day durability. Isn't affected by clothing degradation.",
         false),
