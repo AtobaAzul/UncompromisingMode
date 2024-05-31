@@ -216,7 +216,7 @@ AddStategraphState("wilson", GLOBAL.State{ name = "mightyjump",
 		inst.Physics:CollidesWith(GLOBAL.COLLISION.GROUND)
 		inst.Physics:CollidesWith(GLOBAL.COLLISION.CHARACTERS)
 		inst.Physics:CollidesWith(GLOBAL.COLLISION.GIANTS)
-	
+		inst:AddTag("voidimmune")
 		inst.AnimState:PlayAnimation("jumpout")
 		inst.Physics:SetMotorVel(13, 0, 0)
 		
@@ -366,6 +366,7 @@ AddStategraphState("wilson", GLOBAL.State{ name = "mightyjump",
 		GLOBAL.ChangeToCharacterPhysics(inst)
 		local x,y,z = inst.Transform:GetWorldPosition()
 		inst.Transform:SetPosition(x,0,z)
+		inst:RemoveTag("voidimmune")
 		inst:DoTaskInTime(1.25, function(inst)
 			if GLOBAL.TheWorld:HasTag("cave") and not GLOBAL.TheWorld.Map:IsVisualGroundAtPoint(x, y, z) then
 				if not inst:HasTag("shadow_mighty") then 
