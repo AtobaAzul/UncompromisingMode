@@ -59,9 +59,15 @@ TUNING.WOLFGANG_MIGHTY_WORK_COST_MULT =
 		LOWER_SAIL_BOOST = 1,
 		TILL = 1,				-- ~1.1s
 		TERRAFORM = 1,
+		HACK = 1
 	}
 
 TUNING.HARD_MATERIAL_MULT = 2.5
+
+TUNING.SKILLS.WOLFGANG_MIGHTY_WORK_CHANCE_3 = 1
+TUNING.SKILLS.WOLFGANG_MIGHTY_WORK_CHANCE_2 = 1
+TUNING.SKILLS.WOLFGANG_MIGHTY_WORK_CHANCE_1 = 1
+TUNING.MIGHTY_WORK_CHANCE = 1
 
 TUNING.WOLFGANG_MIGHTINESS_ATTACK_GAIN_GIANT = 0
 TUNING.WOLFGANG_MIGHTINESS_ATTACK_GAIN_SMALLCREATURE = 0
@@ -77,6 +83,7 @@ TUNING.WOLFGANG_MIGHTINESS_WORK_GAIN =
 		LOWER_SAIL_BOOST = 0,
 		TILL = 0,				-- ~1.1s
 		TERRAFORM = 0,
+		HACK = 0
 	}
 
 
@@ -610,8 +617,8 @@ local function SpecialWorkMultiplierFn(inst, action, target, tool, numworks, rec
 			
 		local mightiness = inst.components.mightiness:GetCurrent()
 		local hunger = inst.components.hunger:GetPercent() * TUNING.WOLFGANG_HUNGER
-		local workleft = target.components.workable:GetWorkLeft()
-		local work_action = target.components.workable:GetWorkAction()
+		local workleft = target.components.hackable and target.components.hackable:GetHacksLeft() or target.components.workable:GetWorkLeft()
+		local work_action = target.components.hackable and ACTIONS.HACK or target.components.workable:GetWorkAction()
 		local work_type_mult = TUNING.WOLFGANG_MIGHTY_WORK_COST_MULT[work_action.id]
 		local cost = (basecost * workleft * work_type_mult) / numworks
 		local golden = string.match(tool.prefab, "golden*")
@@ -650,6 +657,17 @@ local function SpecialWorkMultiplierFn(inst, action, target, tool, numworks, rec
 	end
 end
 
+local function OnDoingHackHelper(inst, data)
+	if data ~= nil and data.hack_target ~= nil then
+		local target = data.hack_target
+		local tool = inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
+		local result = SpecialWorkMultiplierFn(inst, ACTIONS.HACK, target, tool, 1, false)
+		if (result == 99999) then
+			target.components.hackable.hacksleft = 0
+		end
+	end
+end
+
 env.AddPrefabPostInit("wolfgang", function(inst)
 	
 	inst:ListenForEvent("hungerdelta", OnSetOwner)
@@ -675,6 +693,8 @@ env.AddPrefabPostInit("wolfgang", function(inst)
 	inst:ListenForEvent("timerdone", ComboTimerOver)
 	
 	inst:ListenForEvent("fishcaught", getFishingBonus)
+
+	inst:ListenForEvent("working", OnDoingHackHelper)
 	
 	if inst.components.drownable ~= nil then
 		inst.components.drownable:SetCustomTuningsFn(GetDowningDamgeTunings)
