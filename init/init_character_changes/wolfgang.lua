@@ -287,7 +287,7 @@ AddStategraphState("wilson", GLOBAL.State{ name = "mightyjump",
 			local x,y,z = inst.Transform:GetWorldPosition()
 			local AOE_ATTACK_MUST_TAGS = {"_combat", "_health"}
 			local AOE_ATTACK_NO_TAGS = {"FX", "NOCLICK", "DECOR", "INLIMBO"}
-			local isHeavyLifting = inst.components.inventory:IsHeavyLifting()
+			local isHeavyLifting = inst.components.inventory and inst.components.inventory:IsHeavyLifting()
 			local range = (isHeavyLifting and TUNING.FEAT_OF_STRENGTH_MIGHTY_LEAP_AOE_RANGE_HEAVY) or TUNING.DEFAULT_ATTACK_RANGE
 			local damage = (isHeavyLifting and TUNING.FEAT_OF_STRENGTH_MIGHTY_LEAP_DAMAGE_HEAVY) or
 				(inst:HasTag("mightiness_mighty") and TUNING.FEAT_OF_STRENGTH_MIGHTY_LEAP_DAMAGE_MIGHTY) or
@@ -318,7 +318,7 @@ AddStategraphState("wilson", GLOBAL.State{ name = "mightyjump",
 						end
 					end
 				end
-			elseif inst:HasTag("mighty_hunger") and inst.components.drownable:IsOverWater(x,y,z) then
+			elseif inst:HasTag("mighty_hunger") and inst.components.drownable and inst.components.drownable:IsOverWater(x,y,z) then
 				local iceboat = GLOBAL.SpawnPrefab("boat_ice")
 				iceboat.Transform:SetPosition(x,y-1,z)
 				iceboat:DoTaskInTime(28, function(inst)
