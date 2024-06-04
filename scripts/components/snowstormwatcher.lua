@@ -62,7 +62,7 @@ function SnowStormWatcher:UpdateSnowstormWalkSpeed(src, data)
             suppressorNearby1 or suppressorNearby2 or suppressorNearby3 or suppressorNearby4 or
             (
                 self.inst.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY) ~= nil and
-                self.inst.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY).prefab == "beargervest") or IsUnderRainDomeAtXZ(x, z)
+                self.inst.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY).prefab == "beargervest") or IsUnderRainDomeAtXZ(x, z) or self.inst:HasTag("weerclops")
         then
             self.inst.components.locomotor:RemoveExternalSpeedMultiplier(self.inst, "snowstorm")
             self.inst:PushEvent("checksnowvision")
