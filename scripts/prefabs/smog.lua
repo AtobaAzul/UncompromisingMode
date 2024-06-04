@@ -303,7 +303,7 @@ local function fn()
 
     inst:DoPeriodicTask(5 + math.random(5), function(inst)
         local x, y, z = inst.Transform:GetWorldPosition()
-        local ents = TheSim:FindEntities(x, y, z, 8, nil, { "INLIMBO", "playerghost", "has_gasmask", "pyromaniac", "smogimmune", "minifansuppressor" }, { "player", "insect" })
+        local ents = TheSim:FindEntities(x, y, z, 8, nil, { "INLIMBO", "playerghost", "has_gasmask", "pyromaniac", "smogimmune", "minifansuppressor", "scp049", "wragonfly" }, { "player", "insect" })
         for k, v in ipairs(ents) do
             if v.components.health ~= nil and math.random() > 0.25 then
                 if v.components.oldager ~= nil or v.components.health.penalty >= TUNING.MAXIMUM_HEALTH_PENALTY-.05 or not TUNING.HEALTH_PENALTY_ENABLED then
