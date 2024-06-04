@@ -117,7 +117,7 @@ end
 --I also did something! I love mod compatibility :) -CarlosBraw
 if GLOBAL.KnownModIndex:IsModEnabled("workshop-2010472942") then
 STRINGS.CHARACTER_DESCRIPTIONS.wragonfly = STRINGS.CHARACTER_DESCRIPTIONS.wragonfly .. "\n󰀕Can breath in summer's smog"
-STRINGS.CHARACTER_DESCRIPTIONS.weerclops = STRINGS.CHARACTER_DESCRIPTIONS.weerclops .. "\n󰀕Not slowed down by winter's strong winds"
+STRINGS.CHARACTER_DESCRIPTIONS.weerclops = STRINGS.CHARACTER_DESCRIPTIONS.weerclops .. "\n󰀕Not slowed down by winter's strong winds\n󰀕Is well accustomed to snow"
 end
 if GLOBAL.KnownModIndex:IsModEnabled("workshop-1847716441") then
 STRINGS.CHARACTER_DESCRIPTIONS.plaguedoctor = STRINGS.CHARACTER_DESCRIPTIONS.plaguedoctor .. "\n󰀕Mask protects against smog"
