@@ -46,6 +46,7 @@ local component_post = {
     "worldwind",
     "planarentity",
     "firedetector",
+    "playeractionpicker", --required for Wolfgang rework
     "slipperyfeet",
     "walkableplatformplayer",
     "schoolspawner",
