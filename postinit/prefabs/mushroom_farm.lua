@@ -2,6 +2,9 @@ local env = env
 GLOBAL.setfenv(1, GLOBAL)
 -----------------------------------------------------------------
 if TUNING.DSTU.MUSHROOM_CHANGES then
+
+	local UpvalueHacker = require("tools/upvaluehacker")
+	
 	env.AddPrefabPostInit("mushroom_farm", function(inst)
 		if not TheNet:GetIsServer() then
 			return
