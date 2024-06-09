@@ -198,9 +198,8 @@ local prefab_post = {
     "seedpouch",
     --"wormhole",
     "voidcloth_umbrella",
-    "daywalker",
-    "mushroom_farm",
-    "mushtrees"
+	--"mushroom_farm",
+    "toolbox_items",
 }
 
 local stategraph_post = {
