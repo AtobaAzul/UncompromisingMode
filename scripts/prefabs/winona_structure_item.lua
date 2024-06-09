@@ -159,19 +159,19 @@ local function fn(ondeploy, atlas, anim, uses_startingfuel)
 end
 
 local function fn_catapult()
-    return fn(ondeploy_catapult, "winona_catapult_item", "catapult")
+    return fn(ondeploy_catapult, "winona_catapult_item_um", "catapult")
 end
 
 local function fn_spotlight()
-    return fn(ondeploy_spotlight, "winona_spotlight_item", "spotlight", false)
+    return fn(ondeploy_spotlight, "winona_spotlight_item_um", "spotlight", false)
 end
 
 local function fn_low()
-    return fn(ondeploy_low, "winona_battery_low_item", "battery_low")
+    return fn(ondeploy_low, "winona_battery_low_item_um", "battery_low")
 end
 
 local function fn_high()
-    local inst = fn(ondeploy_high, "winona_battery_high_item", "battery_high", 0)
+    local inst = fn(ondeploy_high, "winona_battery_high_item_um", "battery_high", 0)
 
     inst.OnSave = function(inst, data)
         if inst._gems ~= nil then
@@ -351,15 +351,15 @@ local function placer_high(inst)
     inst.AnimState:SetScale(PLACER_SCALE, PLACER_SCALE)
 end
 
-return Prefab("winona_catapult_item", fn_catapult, assets, prefabs_item),
-    MakePlacer("winona_catapult_item_placer", "winona_catapult_placement", "winona_catapult_placement", "idle", true, nil,
+return Prefab("winona_catapult_item_um", fn_catapult, assets, prefabs_item),
+    MakePlacer("winona_catapult_item_um_placer", "winona_catapult_placement", "winona_catapult_placement", "idle", true, nil,
         nil, nil, nil, nil, placer_catapult),
-    Prefab("winona_spotlight_item", fn_spotlight, assets, prefabs_item),
-    MakePlacer("winona_spotlight_item_placer", "winona_spotlight_placement", "winona_spotlight_placement", "idle", true,
+    Prefab("winona_spotlight_item_um", fn_spotlight, assets, prefabs_item),
+    MakePlacer("winona_spotlight_item_um_placer", "winona_spotlight_placement", "winona_spotlight_placement", "idle", true,
         nil, nil, nil, nil, nil, placer_spotlight),
-    Prefab("winona_battery_low_item", fn_low, assets, prefabs_item),
-    MakePlacer("winona_battery_low_item_placer", "winona_battery_placement", "winona_battery_placement", "idle", true,
+    Prefab("winona_battery_low_item_um", fn_low, assets, prefabs_item),
+    MakePlacer("winona_battery_low_item_um_placer", "winona_battery_placement", "winona_battery_placement", "idle", true,
         nil, nil, nil, nil, nil, placer_low),
-    Prefab("winona_battery_high_item", fn_high, assets, prefabs_item),
-    MakePlacer("winona_battery_high_item_placer", "winona_battery_placement", "winona_battery_placement", "idle", true,
+    Prefab("winona_battery_high_item_um", fn_high, assets, prefabs_item),
+    MakePlacer("winona_battery_high_item_um_placer", "winona_battery_placement", "winona_battery_placement", "idle", true,
         nil, nil, nil, nil, nil, placer_high)
