@@ -444,13 +444,13 @@ ANNOUNCE.ANNOUNCE_CHARGE_SUCCESS_ELECTROCUTED =
 DESCRIBE.WINONA_TOOLBOX = "An organized work place is an efficient work place."
 ACTIONFAIL.WINONATOOLBOX =
 "I'm no handywoman myself, I do know a thing or two however."
-DESCRIBE.WINONA_CATAPULT_ITEM =
+DESCRIBE.WINONA_CATAPULT_ITEM_UM =
 "I can't tell what it is, it needs to be put together."
-DESCRIBE.WINONA_SPOTLIGHT_ITEM =
+DESCRIBE.WINONA_SPOTLIGHT_ITEM_UM =
 "I can't tell what it is, it needs to be put together."
-DESCRIBE.WINONA_BATTERY_LOW_ITEM =
+DESCRIBE.WINONA_BATTERY_LOW_ITEM_UM =
 "I can't tell what it is, it needs to be put together."
-DESCRIBE.WINONA_BATTERY_HIGH_ITEM =
+DESCRIBE.WINONA_BATTERY_HIGH_ITEM_UM =
 "I can't tell what it is, it needs to be put together."
 DESCRIBE.POWERCELL = "A box full of electricty, I'm not too familiar with this."
 DESCRIBE.WINONA_UPGRADEKIT_ELECTRICAL =
