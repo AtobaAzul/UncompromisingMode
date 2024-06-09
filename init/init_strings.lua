@@ -73,7 +73,7 @@ STRINGS.PIG_GUARD_PIGKING_TALK_LOOKATWILSON_FRIEND = { "KING SAY PROTECT", "PROT
 -- Hey look! I actually did something! -Canis
 STRINGS.CHARACTER_DESCRIPTIONS.willow = STRINGS.CHARACTER_DESCRIPTIONS.willow .. "\n󰀕Can ignite things in the cold"
 if GetModConfigData("bernie_buffs") then
-	STRINGS.CHARACTER_DESCRIPTIONS.willow = STRINGS.CHARACTER_DESCRIPTIONS.willow .. "\n󰀕Hugging Bernie keeps the shadows at bay"
+    STRINGS.CHARACTER_DESCRIPTIONS.willow = STRINGS.CHARACTER_DESCRIPTIONS.willow .. "\n󰀕Hugging Bernie keeps the shadows at bay"
 end
 if GetModConfigData("wxless") then
     STRINGS.CHARACTER_DESCRIPTIONS.wx78 = STRINGS.CHARACTER_DESCRIPTIONS.wx78 .. "\n󰀕Circuits drain charge and degrade overtime\n󰀕Motherboard has more space and powers all components until last charge\n󰀕Resting and eating refills internal batteries"
@@ -116,11 +116,11 @@ end
 
 --I also did something! I love mod compatibility :) -CarlosBraw
 if GLOBAL.KnownModIndex:IsModEnabled("workshop-2010472942") then
-STRINGS.CHARACTER_DESCRIPTIONS.wragonfly = STRINGS.CHARACTER_DESCRIPTIONS.wragonfly .. "\n󰀕Can breath in summer's smog"
-STRINGS.CHARACTER_DESCRIPTIONS.weerclops = STRINGS.CHARACTER_DESCRIPTIONS.weerclops .. "\n󰀕Not slowed down by winter's strong winds\n󰀕Is well accustomed to snow"
+    STRINGS.CHARACTER_DESCRIPTIONS.wragonfly = STRINGS.CHARACTER_DESCRIPTIONS.wragonfly .. "\n󰀕Can breath in summer's smog"
+    STRINGS.CHARACTER_DESCRIPTIONS.weerclops = STRINGS.CHARACTER_DESCRIPTIONS.weerclops .. "\n󰀕Not slowed down by winter's strong winds\n󰀕Is well accustomed to snow"
 end
 if GLOBAL.KnownModIndex:IsModEnabled("workshop-1847716441") then
-STRINGS.CHARACTER_DESCRIPTIONS.plaguedoctor = STRINGS.CHARACTER_DESCRIPTIONS.plaguedoctor .. "\n󰀕Mask protects against smog"
+    STRINGS.CHARACTER_DESCRIPTIONS.plaguedoctor = STRINGS.CHARACTER_DESCRIPTIONS.plaguedoctor .. "\n󰀕Mask protects against smog"
 end
 
 
@@ -350,10 +350,13 @@ STRINGS.STALKER_ATRIUM_WATHOM_BATTLECRY = {
 STRINGS.ACTIONS.SET_CUSTOM_NAME = "Set Custom Name"
 
 local SkillTreeDefs = GLOBAL.require("prefabs/skilltree_defs")
+if SkillTreeDefs.SKILLTREE_DEFS["wilson"] ~= nil then
+    SkillTreeDefs.SKILLTREE_DEFS["wilson"].wilson_alchemy_4.desc = STRINGS.SKILLTREE.WILSON.WILSON_ALCHEMY_4_DESC .. "\nTransform 3 Monster Morsels into a Monster Meat and Monster Meat into 2 Monster Morsels."
+end
 
-SkillTreeDefs.SKILLTREE_DEFS["wilson"].wilson_alchemy_4.desc = STRINGS.SKILLTREE.WILSON.WILSON_ALCHEMY_4_DESC .. "\nTransform 3 Monster Morsels into a Monster Meat and Monster Meat into 2 Monster Morsels."
-SkillTreeDefs.SKILLTREE_DEFS["willow"].willow_attuned_lighter.desc = STRINGS.SKILLTREE.WILLOW.WILLOW_ATTUNED_LIGHTER_DESC .. " Can also absorb Smog."
-
+if SkillTreeDefs.SKILLTREE_DEFS["willow"] ~= nil then
+    SkillTreeDefs.SKILLTREE_DEFS["willow"].willow_attuned_lighter.desc = STRINGS.SKILLTREE.WILLOW.WILLOW_ATTUNED_LIGHTER_DESC .. " Can also absorb Smog."
+end
 STRINGS.UM_HOUSETAUNTS = {
     PIGMAN = {
         "GET OFF LAWN",

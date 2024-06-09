@@ -59,8 +59,8 @@ local skills =
             "wolfgang_critwork_4",
         },
     },
-	
-	wolfgang_critwork_4 = {
+
+    wolfgang_critwork_4 = {
         title = STRINGS.SKILLTREE.WOLFGANG.WOLFGANG_CRITWORK_4_TITLE,
         desc = STRINGS.SKILLTREE.WOLFGANG.WOLFGANG_CRITWORK_4_DESC,
         icon = "wolfgang_critwork_3",
@@ -553,11 +553,11 @@ local skills =
         tags = { "allegiance", "lunar", "lunar_mastery" },
         onactivate = function(inst, fromload)
             inst:AddTag("mighty_hunger")
-			inst:AddTag("allow_action_on_impassable")
+            inst:AddTag("allow_action_on_impassable")
         end,
         ondeactivate = function(inst, fromload)
             inst:RemoveTag("mighty_hunger")
-			inst:RemoveTag("allow_action_on_impassable")
+            inst:RemoveTag("allow_action_on_impassable")
         end,
     },
 }
@@ -575,6 +575,8 @@ local BuildSkillsData = require("prefabs/skilltree_wolfgang")
 BuildSkillsData(SkillTreeDefs.FN)
 ]]
 
-SkillTreeDefs.SKILLTREE_DEFS["wolfgang"] = {}
-SkillTreeDefs.CreateSkillTreeFor("wolfgang", skills)
-SkillTreeDefs.SKILLTREE_ORDERS["wolfang"] = ORDERS
+if SkillTreeDefs.SKILLTREE_DEFS["wolfgang"] ~= nil then --in case another mod turns it nil beforehand (disabling skill tree)
+    SkillTreeDefs.SKILLTREE_DEFS["wolfgang"] = {}
+    SkillTreeDefs.CreateSkillTreeFor("wolfgang", skills)
+    SkillTreeDefs.SKILLTREE_ORDERS["wolfang"] = ORDERS
+end
