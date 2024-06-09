@@ -29,7 +29,7 @@ function CheckWardrobeItem(container, item, slot)
 end
 
 function CheckToolboxItem(container, item, slot)
-    return item:HasTag("toolbox_item") or item:HasTag("gem") or item:HasTag("tool") or item.prefab == "nitre" or item.prefab == "sewing_tape" or item:HasTag("portableitem") or item:HasTag("NIGHTMARE_fuel") or item.prefab == "alterguardianhatshard" or item.prefab == "purebrilliance"
+    return item:HasTag("toolbox_item") or item:HasTag("gem") or item:HasTag("tool") or item:HasTag("portableitem") or item:HasTag("NIGHTMARE_fuel")
 end
 
 function CheckEquipItem(container, item, slot)
