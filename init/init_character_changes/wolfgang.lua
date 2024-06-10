@@ -608,8 +608,16 @@ local function getFishingBonus(inst, data)
 			inst.components.inventory:GiveItem(gold)
 		end
 		if math.random() >= TUNING.LUNAR_MIGHTY_FISHING_CATCH_EXTRA_FISH_CHANCE then
-			local fish = SpawnPrefab(data.fish.prefab.."_inv")
-			inst.components.inventory:GiveItem(fish)
+			local fish_prefab = data.fish.prefab
+			local fish = nil
+			if fish_prefab == "wobster_sheller" or fish_prefab == "wobster_moonglass" then
+				fish = SpawnPrefab(fish_prefab.."_land")
+			else
+				fish = SpawnPrefab(fish_prefab.."_inv")
+			end
+			if fish ~= nil then
+				inst.components.inventory:GiveItem(fish)
+			end
 		end
 	end
 end
