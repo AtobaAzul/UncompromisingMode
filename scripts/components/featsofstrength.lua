@@ -5,11 +5,11 @@ end)
 function FeatsOfStrength:MightySwing(target)
 
 	local cost = 
-		(self.inst:HasTag("mighty_strikes_5") and TUNING.FEAT_OF_STRENGTH_MIGHTY_STRIKE_5_COST) or
-		(self.inst:HasTag("mighty_strikes_4") and TUNING.FEAT_OF_STRENGTH_MIGHTY_STRIKE_4_COST) or
-		(self.inst:HasTag("mighty_strikes_3") and TUNING.FEAT_OF_STRENGTH_MIGHTY_STRIKE_3_COST) or
-		(self.inst:HasTag("mighty_strikes_2") and TUNING.FEAT_OF_STRENGTH_MIGHTY_STRIKE_2_COST) or
-		(self.inst:HasTag("mighty_strikes_1") and TUNING.FEAT_OF_STRENGTH_MIGHTY_STRIKE_1_COST) or
+		(self.inst.components.skilltreeupdater:IsActivated("wolfgang_mighty_strikes_5") and TUNING.FEAT_OF_STRENGTH_MIGHTY_STRIKE_5_COST) or
+		(self.inst.components.skilltreeupdater:IsActivated("wolfgang_mighty_strikes_4") and TUNING.FEAT_OF_STRENGTH_MIGHTY_STRIKE_4_COST) or
+		(self.inst.components.skilltreeupdater:IsActivated("wolfgang_mighty_strikes_3") and TUNING.FEAT_OF_STRENGTH_MIGHTY_STRIKE_3_COST) or
+		(self.inst.components.skilltreeupdater:IsActivated("wolfgang_mighty_strikes_2") and TUNING.FEAT_OF_STRENGTH_MIGHTY_STRIKE_2_COST) or
+		(self.inst.components.skilltreeupdater:IsActivated("wolfgang_mighty_strikes_1") and TUNING.FEAT_OF_STRENGTH_MIGHTY_STRIKE_1_COST) or
 		TUNING.FEAT_OF_STRENGTH_MIGHTY_STRIKE_BASE_COST
 	local mightiness = self.inst.components.mightiness and self.inst.components.mightiness:GetCurrent()
 	local hunger = self.inst.components.hunger:GetPercent() * TUNING.WOLFGANG_HUNGER

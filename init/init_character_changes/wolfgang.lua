@@ -100,18 +100,20 @@ MIGHTYSWING.distance = TUNING.DEFAULT_ATTACK_RANGE * 1.1
 local MIGHTYLEAP = AddAction("MIGHTYJUMP", "Leap", function(act)
 	if act.doer ~= nil and act.doer.components.mightiness ~= nil and act.doer:HasTag("strongman") then
 		local mightiness = act.doer.components.mightiness:GetCurrent()
-		local cost = (act.doer:HasTag("mighty_leap_expert") and TUNING.FEAT_OF_STRENGTH_MIGHTY_LEAP_EXPERT_COST) or
-			(act.doer:HasTag("mighty_leap_4") and TUNING.FEAT_OF_STRENGTH_MIGHTY_LEAP_4_COST) or
-			(act.doer:HasTag("mighty_leap_3") and TUNING.FEAT_OF_STRENGTH_MIGHTY_LEAP_3_COST) or
-			(act.doer:HasTag("mighty_leap_2") and TUNING.FEAT_OF_STRENGTH_MIGHTY_LEAP_2_COST) or
-			(act.doer:HasTag("mighty_leap") and TUNING.FEAT_OF_STRENGTH_MIGHTY_LEAP_1_COST) or
+		local leapexpert = act.doer.components.skilltreeupdater:IsActivated("wolfgang_mighty_legs_expert")
+		local cost = 
+			(leapexpert and TUNING.FEAT_OF_STRENGTH_MIGHTY_LEAP_EXPERT_COST) or
+			(act.doer.components.skilltreeupdater:IsActivated("wolfgang_mighty_legs_4") and TUNING.FEAT_OF_STRENGTH_MIGHTY_LEAP_4_COST) or
+			(act.doer.components.skilltreeupdater:IsActivated("wolfgang_mighty_legs_3") and TUNING.FEAT_OF_STRENGTH_MIGHTY_LEAP_3_COST) or
+			(act.doer.components.skilltreeupdater:IsActivated("wolfgang_mighty_legs_2") and TUNING.FEAT_OF_STRENGTH_MIGHTY_LEAP_2_COST) or
+			(act.doer.components.skilltreeupdater:IsActivated("wolfgang_mighty_legs") and TUNING.FEAT_OF_STRENGTH_MIGHTY_LEAP_1_COST) or
 			TUNING.FEAT_OF_STRENGTH_MIGHTY_LEAP_COST
 		local hunger = act.doer.components.hunger:GetPercent() * TUNING.WOLFGANG_HUNGER
 		local canmightyhunger = act.doer:HasTag("mighty_hunger") and (hunger >= (mightiness - cost)/TUNING.LUNAR_MIGHTY_HUNGER_TO_MIGHTINESS_RATIO)
 		if mightiness >= cost or canmightyhunger then
 			act.doer.components.mightiness:DoDelta(-cost)
 			act.doer:AddTag("mighty_leap_cooldown")
-			act.doer:DoTaskInTime((act.doer:HasTag("mighty_leap_expert") and TUNING.FEAT_OF_STRENGTH_MIGHTY_LEAP_EXPERT_COOLDOWN) or TUNING.FEAT_OF_STRENGTH_MIGHTY_LEAP_COOLDOWN, function(inst) inst:RemoveTag("mighty_leap_cooldown") end)
+			act.doer:DoTaskInTime((leapexpert and TUNING.FEAT_OF_STRENGTH_MIGHTY_LEAP_EXPERT_COOLDOWN) or TUNING.FEAT_OF_STRENGTH_MIGHTY_LEAP_COOLDOWN, function(inst) inst:RemoveTag("mighty_leap_cooldown") end)
 			if mightiness < cost then
 				act.doer:DoTaskInTime(1.25, function(inst) inst.components.hunger:DoDelta((mightiness - cost)/TUNING.LUNAR_MIGHTY_HUNGER_TO_MIGHTINESS_RATIO) end) --to prevent it cancelling the jump with a transformation
 			end
@@ -305,7 +307,7 @@ AddStategraphState("wilson", GLOBAL.State{ name = "mightyjump",
 					inst.SoundEmitter:PlaySound("dontstarve/common/deathpoof")
 					inst:ShakeCamera(GLOBAL.CAMERASHAKE.VERTICAL, 0.1, 0.03, 1)
 				end
-				if inst:HasTag("mighty_leap") then
+				if inst.components.skilltreeupdater:IsActivated("wolfgang_mighty_legs") then
 					for i, ent in ipairs(ents) do
 						local canfreeze = inst:HasTag("mighty_hunger")
 						if CanDamage(inst, ent) then
@@ -672,7 +674,9 @@ local function SpecialWorkMultiplierFn(inst, action, target, tool, numworks, rec
 			if mightiness < cost then
 				inst.components.hunger:DoDelta((mightiness - cost)/TUNING.LUNAR_MIGHTY_HUNGER_TO_MIGHTINESS_RATIO)
 			end
-			tool.components.finiteuses:Use(uses)
+			if tool.components.finiteuses ~= nil then
+				tool.components.finiteuses:Use(uses)
+			end
 			if inst:HasTag("shadow_strikes") then
 				IncreaseCombo(inst, 1, target)
 			end
