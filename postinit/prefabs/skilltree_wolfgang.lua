@@ -121,8 +121,6 @@ local skills =
         pos = { X + CATGAP + GAP, Y - GAP },
         group = "training",
         tags = { "training" },
-        onactivate = function(inst, fromload) inst:AddTag("mighty_leap_2") end,
-        ondeactivate = function(inst, fromload) inst:RemoveTag("mighty_leap_2") end,
         connects = {
             "wolfgang_mighty_legs_3",
         },
@@ -135,8 +133,6 @@ local skills =
         pos = { X + CATGAP + GAP, Y - GAP * 2 },
         group = "training",
         tags = { "training" },
-        onactivate = function(inst, fromload) inst:AddTag("mighty_leap_3") end,
-        ondeactivate = function(inst, fromload) inst:RemoveTag("mighty_leap_3") end,
         connects = {
             "wolfgang_mighty_legs_4",
         },
@@ -149,8 +145,6 @@ local skills =
         pos = { X + CATGAP + GAP, Y - GAP * 3 },
         group = "training",
         tags = { "training" },
-        onactivate = function(inst, fromload) inst:AddTag("mighty_leap_4") end,
-        ondeactivate = function(inst, fromload) inst:RemoveTag("mighty_leap_4") end,
         connects = {
             "wolfgang_mighty_legs_expert",
         },
@@ -163,8 +157,6 @@ local skills =
         pos = { X + CATGAP + GAP, Y - GAP * 4 },
         group = "training",
         tags = { "training" },
-        onactivate = function(inst, fromload) inst:AddTag("mighty_leap_expert") end,
-        ondeactivate = function(inst, fromload) inst:RemoveTag("mighty_leap_expert") end,
     },
 
     wolfgang_dumbbell_crafting = {
@@ -217,7 +209,6 @@ local skills =
         group = "training",
         tags = { "overbuff" },
         onactivate = function(inst, fromload)
-            inst:AddTag("wolfgang_overbuff_1")
             if inst.components.mightiness:GetOverMax() < TUNING.SKILLS.WOLFGANG_OVERBUFF_1 then
                 inst.components.mightiness:SetOverMax(TUNING.SKILLS.WOLFGANG_OVERBUFF_1)
             end
@@ -238,7 +229,6 @@ local skills =
         group = "training",
         tags = { "overbuff" },
         onactivate = function(inst, fromload)
-            inst:AddTag("wolfgang_overbuff_2")
             if inst.components.mightiness:GetOverMax() < TUNING.SKILLS.WOLFGANG_OVERBUFF_2 then
                 inst.components.mightiness:SetOverMax(TUNING.SKILLS.WOLFGANG_OVERBUFF_2)
             end
@@ -257,7 +247,6 @@ local skills =
         group = "training",
         tags = { "overbuff" },
         onactivate = function(inst, fromload)
-            inst:AddTag("wolfgang_overbuff_3")
             if inst.components.mightiness:GetOverMax() < TUNING.SKILLS.WOLFGANG_OVERBUFF_3 then
                 inst.components.mightiness:SetOverMax(TUNING.SKILLS.WOLFGANG_OVERBUFF_3)
             end
@@ -276,7 +265,6 @@ local skills =
         group = "training",
         tags = { "overbuff" },
         onactivate = function(inst, fromload)
-            inst:AddTag("wolfgang_overbuff_4")
             if inst.components.mightiness:GetOverMax() < TUNING.SKILLS.WOLFGANG_OVERBUFF_4 then
                 inst.components.mightiness:SetOverMax(TUNING.SKILLS.WOLFGANG_OVERBUFF_4)
             end
@@ -295,7 +283,6 @@ local skills =
         group = "training",
         tags = { "overbuff", "overbuff_expert" },
         onactivate = function(inst, fromload)
-            inst:AddTag("wolfgang_overbuff_5")
             inst:AddTag("wolfgang_overbuff_expert")
             if inst.components.mightiness:GetOverMax() < TUNING.SKILLS.WOLFGANG_OVERBUFF_5 then
                 inst.components.mightiness:SetOverMax(TUNING.SKILLS.WOLFGANG_OVERBUFF_5)
@@ -314,12 +301,6 @@ local skills =
         --pos = {1,0},
         group = "planardamage",
         tags = { "planardamage" },
-        onactivate = function(inst, fromload)
-            inst:AddTag("mighty_strikes_1")
-        end,
-        ondeactivate = function(inst, fromload)
-            inst:RemoveTag("mighty_strikes_1")
-        end,
         root = true,
         connects = {
             "wolfgang_mighty_strikes_2",
@@ -334,12 +315,6 @@ local skills =
         --pos = {1,0},
         group = "planardamage",
         tags = { "planardamage" },
-        onactivate = function(inst, fromload)
-            inst:AddTag("mighty_strikes_2")
-        end,
-        ondeactivate = function(inst, fromload)
-            inst:RemoveTag("mighty_strikes_2")
-        end,
         connects = {
             "wolfgang_mighty_strikes_3",
         },
@@ -353,12 +328,6 @@ local skills =
         --pos = {1,0},
         group = "planardamage",
         tags = { "planardamage" },
-        onactivate = function(inst, fromload)
-            inst:AddTag("mighty_strikes_3")
-        end,
-        ondeactivate = function(inst, fromload)
-            inst:RemoveTag("mighty_strikes_3")
-        end,
         connects = {
             "wolfgang_mighty_strikes_4",
         },
@@ -372,12 +341,6 @@ local skills =
         --pos = {1,0},
         group = "planardamage",
         tags = { "planardamage" },
-        onactivate = function(inst, fromload)
-            inst:AddTag("mighty_strikes_4")
-        end,
-        ondeactivate = function(inst, fromload)
-            inst:RemoveTag("mighty_strikes_4")
-        end,
         connects = {
             "wolfgang_mighty_strikes_5",
         },
@@ -391,12 +354,6 @@ local skills =
         --pos = {1,0},
         group = "planardamage",
         tags = { "planardamage" },
-        onactivate = function(inst, fromload)
-            inst:AddTag("mighty_strikes_5")
-        end,
-        ondeactivate = function(inst, fromload)
-            inst:RemoveTag("mighty_strikes_5")
-        end,
     },
 
     wolfgang_allegiance_lock_1 = {
