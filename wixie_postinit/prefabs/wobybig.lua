@@ -45,26 +45,14 @@ local function OnHungerDelta2(inst, data)
 		TriggerTransformation(inst)
     end
 	
-	if data.newpercent <= 0.4 and inst.hungerpercent ~= 0.4 then
-		inst.hungerpercent = 0.4
+	if data.newpercent <= 0.4 and not inst.wobyhungry then
+		inst.wobyhungry = true
 			
 		if inst._playerlink ~= nil and data.newpercent < data.oldpercent then
 			inst._playerlink.components.talker:Say(GetString(inst._playerlink, "ANNOUNCE_BIGWOBYHUNGRY"))
 		end
-	elseif data.newpercent <= 0.6 and data.newpercent > 0.4 and inst.hungerpercent ~= 0.6 then
-		inst.hungerpercent = 0.6
-		
-		if inst._playerlink ~= nil and data.newpercent < data.oldpercent then
-			inst._playerlink.components.talker:Say(GetString(inst._playerlink, "ANNOUNCE_BIGWOBYNORMAL"))
-		end
-	elseif data.newpercent <= 0.8 and data.newpercent > 0.6 and inst.hungerpercent ~= 0.8 then
-		inst.hungerpercent = 0.8
-		
-		if inst._playerlink ~= nil and data.newpercent < data.oldpercent then
-			inst._playerlink.components.talker:Say(GetString(inst._playerlink, "ANNOUNCE_BIGWOBYFULL"))
-		end
-	elseif data.newpercent > 0.8 then
-		inst.hungerpercent = 1
+	else
+		inst.wobyhungry = false
 	end
 	
 	if inst._playerlink ~= nil then
@@ -158,6 +146,7 @@ local function RemoveTarget(inst)
 end
 
 env.AddPrefabPostInit("wobybig", function(inst)
+	inst.scrapbook_hidehealth = true
 
 	inst:AddTag("customwobytag")
 	inst:AddTag("noauradamage")
@@ -171,7 +160,7 @@ env.AddPrefabPostInit("wobybig", function(inst)
 	
     inst:SetBrain(brain)
 	
-	inst.hungerpercent = 1
+	inst.wobyhungry = false
 	
 	if inst.components.eater ~= nil then
 		inst.components.eater:SetOnEatFn(checkfav)
