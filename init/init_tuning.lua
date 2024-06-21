@@ -314,7 +314,7 @@ TUNING.DSTU = {
     GREEN_VOMIT_NUTRIENTS = { 0, 0, 24 },
     PINK_VOMIT_NUTRIENTS = { 24, 0, 0 },
     PALE_VOMIT_NUTRIENTS = { 8, 8, 8 },
-	MUSHROOM_CHANGES = GetModConfigData("mushroom_changes"),
+    MUSHROOM_CHANGES = GetModConfigData("mushroom_changes"),
 
     ----------------------------------------------------------------------------
     -- Dynamic Boss Resistance
@@ -343,7 +343,7 @@ TUNING.DSTU = {
     ANNOUNCE_BASESTATUS = GetModConfigData("announce_basestatus"),
     EYEBRELLAREWORK = GetModConfigData("eyebrellarework"),
     -- More Config
-    UPDATE_CHECK = CurrentRelease.GreaterOrEqualTo("R33_QOL_SPRINGCLEANING"), -- REMEMBER TO ALWAYS UPDATE THIS WITH NEW BETAS.
+    UPDATE_CHECK = CurrentRelease.GreaterOrEqualTo("R34_OCEANQOL_WINONAWURT"), -- REMEMBER TO ALWAYS UPDATE THIS WITH NEW BETAS.
     POCKET_POWERTRIP = GetModConfigData("pocket_powertrip"),
     WINTER_BURNING = GetModConfigData("winter_burning"),
     HUNGRY_VOID = GetModConfigData("hungry_void"),
@@ -520,7 +520,9 @@ TUNING.HAWAIIANSHIRT_PERISHTIME = TUNING.HAWAIIANSHIRT_PERISHTIME + total_day_ti
 -- trident buff
 TUNING.TRIDENT.DAMAGE = wilson_attack * 1.5
 TUNING.TRIDENT.OCEAN_DAMAGE = wilson_attack * 2.4
-TUNING.TRIDENT.USES = TUNING.TRIDENT.USES + 50
+if not TUNING.DSTU.UPDATE_CHECK then
+    TUNING.TRIDENT.USES = TUNING.TRIDENT.USES + 50
+end
 TUNING.TRIDENT.SPELL.USE_COUNT = TUNING.TRIDENT.USES * 2
 TUNING.TRIDENT.SPELL.DAMAGE = wilson_attack * 1.33
 
@@ -538,11 +540,11 @@ TUNING.CANNONBALL_SPLASH_DAMAGE_PERCENT = 1
 
 -- sea weed changes
 TUNING.WATERPLANT.DAMAGE = TUNING.WATERPLANT.DAMAGE * 0.75
+
 if not TUNING.DSTU.UPDATE_CHECK then
-    TUNING.WATERPLANT.ITEM_DAMAGE = TUNING.WATERPLANT.ITEM_DAMAGE * 1.75
+    -- shark nerf
+    TUNING.SHARK.DAMAGE = 50 / 3
 end
--- shark nerf
-TUNING.SHARK.DAMAGE = 50 / 3
 
 -- more treasures
 TUNING.MESSAGEBOTTLE_NOTE_CHANCE = 0.66

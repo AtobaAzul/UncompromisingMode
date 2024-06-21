@@ -29,7 +29,7 @@ function CheckWardrobeItem(container, item, slot)
 end
 
 function CheckToolboxItem(container, item, slot)
-    return item:HasTag("toolbox_item") or item:HasTag("gem") or item:HasTag("tool") or item.prefab == "nitre" or item.prefab == "sewing_tape"
+    return item:HasTag("toolbox_item") or item:HasTag("gem") or item:HasTag("tool") or item:HasTag("portableitem") or item:HasTag("NIGHTMARE_fuel")
 end
 
 function CheckEquipItem(container, item, slot)
@@ -477,7 +477,7 @@ containers.params.winona_toolbox =
         side_align_tip = 160,
     },
     type = "chest",
-    itemtestfn = GetModConfigData("winona_portables_") and CheckToolboxItem or CheckWardrobeItem,
+    itemtestfn = (GetModConfigData("winona_portables_") or TUNING.DSTU.UPDATE_CHECK) and CheckToolboxItem or CheckWardrobeItem,
 }
 
 containers.params.winona_toolbox.widget.slotpos = containers.params.shadowchester.widget.slotpos
