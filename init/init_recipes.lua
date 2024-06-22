@@ -312,7 +312,7 @@ end
 local winona_portables = { "battery_high", "battery_low", "spotlight", "catapult" }
 if GetModConfigData("winona_portables_") and not TUNING.DSTU.UPDATE_CHECK then
     for k, v in ipairs(winona_portables) do
-        AllRecipes["winona_" .. v].product = "winona_" .. v .. "_item"
+        AllRecipes["winona_" .. v].product = "winona_" .. v .. "_item_um"
         AllRecipes["winona_" .. v].placer = nil
     end
 end
