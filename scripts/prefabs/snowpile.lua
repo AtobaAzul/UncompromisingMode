@@ -487,7 +487,7 @@ local function snowpilefn(Sim)
     inst:AddComponent("pickable")
     inst.components.pickable.picksound = "dontstarve/wilson/harvest_berries"
 
-    inst.components.pickable.getregentimefn = 0.1
+    --inst.components.pickable.getregentimefn = 0.1
     inst.components.pickable.onpickedfn = onpickedfn
     inst.components.pickable.makebarrenfn = makebarrenfn
     inst.components.pickable.makefullfn = makefullfn
