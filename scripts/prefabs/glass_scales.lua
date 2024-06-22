@@ -31,6 +31,8 @@ local function fngeode()
     inst.AnimState:PlayAnimation("idle")
 
     inst.entity:SetPristine()
+	
+	inst.AddTag("moonglass_geode")
 
     if not TheWorld.ismastersim then
         return inst
