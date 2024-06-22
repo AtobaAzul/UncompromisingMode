@@ -439,7 +439,7 @@ end
 --	table.insert(prefab_post, "boat")
 -- end
 
-if GetModConfigData("winona_portables_") and not TUNING.DSTU.UPDATE_CHECK then
+if GetModConfigData("winona_portables") and not TUNING.DSTU.UPDATE_CHECK then
     table.insert(prefab_post, "winona_portables")
 end
 

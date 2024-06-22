@@ -477,7 +477,7 @@ containers.params.winona_toolbox =
         side_align_tip = 160,
     },
     type = "chest",
-    itemtestfn = (GetModConfigData("winona_portables_") or TUNING.DSTU.UPDATE_CHECK) and CheckToolboxItem or CheckWardrobeItem,
+    itemtestfn = (GetModConfigData("winona_portables") or TUNING.DSTU.UPDATE_CHECK) and CheckToolboxItem or CheckWardrobeItem,
 }
 
 containers.params.winona_toolbox.widget.slotpos = containers.params.shadowchester.widget.slotpos
