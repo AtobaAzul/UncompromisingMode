@@ -278,7 +278,6 @@ end
 local function OnDropped(inst)
 	inst.Light:Enable(true)
 	inst.persists = false
-	inst.OnEntitySleep = inst.Remove
 
 	if inst:GetIsWet() then
 		PlantSelf(inst)
@@ -306,7 +305,6 @@ end
 local function OnPickup(inst)
 	inst.Light:Enable(false)
 	inst.persists = true
-	inst.OnEntitySleep = nil
 
 	TaskCancel(inst)
 
@@ -450,22 +448,18 @@ local function fn()
 	inst.components.edible.sanityvalue = 0
 	inst.components.edible.foodtype = FOODTYPE.GOODIES
 	inst.components.edible:SetOnEatenFn(OnEaten)
-	
-	
+
+
 	--	inst:DoTaskInTime(0, WorldCheck) -- Only check for world tags after server startup is complete.
-	
+
+	TaskStartup(inst)
+
 	OnSeasonChange(inst)
 	inst:WatchWorldState("season", OnSeasonChange)
-	
-	
-	inst:DoTaskInTime(0, function() -- Wait a frame, because if we start too early, the item doesn't know if it's in an inventory.
-		if inst.components.inventoryitem:IsHeld() then
-			OnPickup(inst)
-		else
-			OnDropped(inst)
-		end
-	end)
-	
+
+
+	inst.persists = false
+
 	return inst
 end
 
@@ -483,7 +477,6 @@ local function pop_fn()
 	inst.AnimState:SetBank("um_smolder_spore")
 	inst.AnimState:SetBuild("um_smolder_spore")
 	inst.Transform:SetScale(1.25, 1.25, 1.25)
-	inst.AnimState:PlayAnimation("explode", false)
 
 	inst:AddTag("PyreToxinImmune")
 	inst:AddTag("flying")
@@ -514,7 +507,6 @@ local function pop_fn()
 
 
 	inst.persists = false
-	inst.OnEntitySleep = inst.Remove
 
 	return inst
 end
@@ -697,7 +689,6 @@ local function projectile_fn()
 
 
 	inst.persists = false
-	inst.OnEntitySleep = inst.Remove
 
 	return inst
 end
@@ -712,4 +703,4 @@ return Prefab("um_smolder_spore", fn, nil, prefabs),
 
 
 
--- https://i.postimg.cc/CKQXJTLh/Live-Wilson-Reaction.png
+-- https://cdn.discordapp.com/attachments/497450801191583787/1115361079950839829/Live_Wilson_Reaction.png
