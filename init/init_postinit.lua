@@ -198,7 +198,8 @@ local prefab_post = {
     "voidcloth_umbrella",
 	"mushroom_farm",
     "toolbox_items",
-	"otter"
+	"otter",
+    "winona_telebrella"
 }
 
 local stategraph_post = {

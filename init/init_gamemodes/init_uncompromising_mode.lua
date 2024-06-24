@@ -54,6 +54,8 @@ modimport("init/init_rpctrackers")
 modimport("init/init_creatures/init_ediblebugs")
 modimport("init/init_creatures/init_bear_trap_immune")
 modimport("init/init_generatorcharging")
+modimport("init/init_generatorcharging2")
+
 --	[ 	Console Commands for tests !	]	--
 
 require("uncompromisingcommands")

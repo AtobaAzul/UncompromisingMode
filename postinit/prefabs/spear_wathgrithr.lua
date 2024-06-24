@@ -112,18 +112,18 @@ local function Lightning_OnLungedHit(inst, doer, target)
 end
 
 env.AddPrefabPostInit("spear_wathgrithr_lightning", function(inst)
-	inst:AddTag("electricaltool")
-	
+    inst:AddTag("electricaltool")
+
     if not TheWorld.ismastersim then
         return
     end
 
     if env.GetModConfigData("wathgrithr_arsenal") then
-		inst:AddTag("lightningrod")
+        inst:AddTag("lightningrod")
         inst:ListenForEvent("lightningstrike", onlightningground)
-		inst.components.aoeweapon_lunge:SetOnLungedFn(Lightning_OnLunged)
+        inst.components.aoeweapon_lunge:SetOnLungedFn(Lightning_OnLunged)
         inst.components.aoeweapon_lunge:SetOnHitFn(Lightning_OnLungedHit)
-		
+
         if inst.components.equippable ~= nil then
             local OnEquip_old = inst.components.equippable.onequipfn
             inst.components.equippable.onequipfn = function(inst, owner)
@@ -161,14 +161,18 @@ env.AddPrefabPostInit("spear_wathgrithr_lightning", function(inst)
                     OnUnequip_old(inst, owner)
                 end
             end
-        end		
+        end
     end
 end)
 
 -------------------------------------------------------------------------------------------------------
 
+--local GeneratorGroundCharging = require("generatorcharging")
+
 env.AddPrefabPostInit("spear_wathgrithr_lightning_charged", function(inst)
     inst:AddTag("electricaltool")
+
+    --GeneratorGroundCharging(inst) --fueled only.
 
     if not TheWorld.ismastersim then
         return

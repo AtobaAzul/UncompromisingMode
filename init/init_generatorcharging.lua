@@ -91,7 +91,9 @@ env.AddPlayerPostInit(function(inst)
 
         if selected_item.components.fueled ~= nil then
             selected_item.components.fueled:SetPercent(refuelnumber)
-            selected_item.components.fueled.ontakefuelfn(selected_item, 0)
+            if selected_item.components.fueled.ontakefuelfn ~= nil then
+                selected_item.components.fueled.ontakefuelfn(selected_item, 0)
+            end
         elseif selected_item.components.finiteuses ~= nil then
             selected_item.components.finiteuses:SetPercent(refuelnumber)
         end
