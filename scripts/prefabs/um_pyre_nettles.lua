@@ -161,7 +161,16 @@ local function SetStage(inst)
 		inst:RemoveTag("PyreNettle" .. i)
 	end
 	inst:AddTag("PyreNettle" .. inst.stage)
-
+	
+	-- Safety mechanisms, in case we're at an invalid stage (loading shenanigans probably).
+	if inst.stage > 5 then
+		print("um_pyre_nettles.lua has auto-recovered from an invalid SetStage! Stage was: " .. inst.stage)
+		inst.stage = 5
+	elseif inst.stage < 1 then
+		print("um_pyre_nettles.lua has auto-recovered from an invalid SetStage! Stage was: " .. inst.stage)
+		inst:Remove()
+	end
+	
 	-- Anim selector.
 	inst.AnimState:PushAnimation("pn" .. inst.stage .. "_idle", true)
 
