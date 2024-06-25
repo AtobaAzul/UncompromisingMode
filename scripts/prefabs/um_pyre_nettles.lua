@@ -296,7 +296,7 @@ local function OnShrink(inst)
 		local x, y, z = inst.Transform:GetWorldPosition()
 		local tile_at_position = TheWorld.Map:GetTileAtPoint(x, y, z)
 
-		if inst.stage == 0 then
+		if inst.stage < 1 then
 			inst:Remove()
 		elseif TheWorld.state.season ~= "summer" and not HOME_TILES[tile_at_position] then
 			inst:DoTaskInTime(((30 * 3 * math.random()) + 30), OnShrink)
