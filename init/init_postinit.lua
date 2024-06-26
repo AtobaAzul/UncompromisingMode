@@ -198,11 +198,7 @@ local prefab_post = {
     "plantables",
     "compass",
     "seedpouch",
-    --"wormhole",
-    "voidcloth_umbrella",
-    "daywalker",
-    "mushroom_farm",
-    "mushtrees"
+    "voidcloth_umbrella"
 }
 
 local stategraph_post = {
