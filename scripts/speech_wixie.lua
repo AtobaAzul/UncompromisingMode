@@ -3839,10 +3839,10 @@ return{
         PORTABLETENT_ITEM = "I'm fine with a sleeping bag, honest.",
 
         -- Wigfrid
-        BATTLESONG_DURABILITY = "This is amateur stuff!",
-        BATTLESONG_HEALTHGAIN = "This is amateur stuff!",
-        BATTLESONG_SANITYGAIN = "This is amateur stuff!",
-        BATTLESONG_SANITYAURA = "This is amateur stuff!",
+        BATTLESONG_DURABILITY = "This is ametuer stuff!",
+        BATTLESONG_HEALTHGAIN = "This is ametuer stuff!",
+        BATTLESONG_SANITYGAIN = "This is ametuer stuff!",
+        BATTLESONG_SANITYAURA = "This is ametuer stuff!",
         BATTLESONG_FIRERESISTANCE = "Fire proof indeed.",
         BATTLESONG_INSTANT_TAUNT = "Her vocabulary is... lacking.",
         BATTLESONG_INSTANT_PANIC = "Any song would make people panic with how awful she sings.",
@@ -5058,7 +5058,7 @@ return{
 
         -- Meta 3
 
-        BATTLESONG_INSTANT_REVIVE = "This is amateur stuff!",
+        BATTLESONG_INSTANT_REVIVE = "This is ametuer stuff!",
 
         WATHGRITHR_IMPROVEDHAT = "Are you planning to FLY with this thing?",
         SPEAR_WATHGRITHR_LIGHTNING = "Puts the 'charge' in 'charge head first like an idiot'.",
@@ -5069,8 +5069,8 @@ return{
 
         WATHGRITHR_SHIELD = "This won't protect you from my verbal assault!",
 
-        BATTLESONG_SHADOWALIGNED = "This is amateur stuff!",
-        BATTLESONG_LUNARALIGNED = "This is amateur stuff!",
+        BATTLESONG_SHADOWALIGNED = "This is ametuer stuff!",
+        BATTLESONG_LUNARALIGNED = "This is ametuer stuff!",
 
 		SHARKBOI = "Nothing better than a glass jaw!",
         BOOTLEG = "All I got was a boot?!",

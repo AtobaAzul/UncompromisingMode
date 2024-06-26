@@ -152,7 +152,7 @@ STRINGS.ENGINEERING_TOOLTIP = {
     WINONA_UPGRADEKIT_ELECTRICAL = ""
 }
 
-if TUNING.DSTU.WINONA_PORTABLES and not TUNING.DSTU.UPDATE_CHECK then
+if TUNING.DSTU.WINONA_PORTABLES then
     STRINGS.ENGINEERING_TOOLTIP.WINONA_CATAPULT = "- Now portable."
     STRINGS.ENGINEERING_TOOLTIP.WINONA_SPOTLIGHT = "- Now portable."
     STRINGS.ENGINEERING_TOOLTIP.WINONA_BATTERY_LOW = "- Now portable."
@@ -161,7 +161,7 @@ end
 
 
 if TUNING.DSTU.TELESTAFF_REWORK then
-    TOOLTIPS.TELESTAFF = "- Can select its destination.\n- Increased uses for items and objects.\n- Can teleport other players without PVP enabled."
+    TOOLTIPS.TELESTAFF = "- Can select its destination.\n- Increased uses."
     TOOLTIPS.TELEBASE = "- No longer requires gems per teleport."
 end
 
@@ -339,7 +339,7 @@ if TUNING.DSTU.WICKERNERF_BEEBOOK then
 end
 
 if TUNING.DSTU.WATHGRITHR_ARSENAL then
-    TOOLTIPS.SPEAR_WATHGRITHR_LIGHTNING = "- The lightning charge attack will consume additional durability per mob hit up to a limit.\n - Regains durability when struck by lightning or when charged at generators."
+    TOOLTIPS.SPEAR_WATHGRITHR_LIGHTNING = "- The lightning charge attack will consume additional durability per mob hit up to a limit.\n - The Charged Elding Spear can be recharged with lightning."
     TOOLTIPS.WATHGRITHR_SHIELD = "- Blocking attacks will consume durability by 60% of the damage taken.\n - Each additional perk reduces it by 20%."
 end
 

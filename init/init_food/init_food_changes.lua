@@ -348,13 +348,11 @@ AddPrefabPostInit("cactus_meat_cooked", function(inst)
 	end
 end)
 
-if TUNING.DSTU.MUSHROOM_CHANGES then
-	AddPrefabPostInit("green_cap_cooked", function(inst)
-		if inst ~= nil and inst.components.edible ~= nil then
-			inst.components.edible.healthvalue = -5
-		end
-	end)
-end
+AddPrefabPostInit("green_cap_cooked", function(inst)
+	if inst ~= nil and inst.components.edible ~= nil then
+		inst.components.edible.healthvalue = -5
+	end
+end)
 
 AddPrefabPostInit("cookedmonstermeat", function(inst)
 	if inst ~= nil and inst.components.edible ~= nil then

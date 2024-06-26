@@ -338,8 +338,8 @@ if env.GetModConfigData("telestaff_rework") then
         if not TheWorld.ismastersim then return end
 
         if inst.components.finiteuses ~= nil then
-            inst.components.finiteuses:SetUses(15)
-            inst.components.finiteuses:SetMaxUses(15)
+            inst.components.finiteuses:SetUses(30)
+            inst.components.finiteuses:SetMaxUses(30)
         end
 
         local _OnUnequip = inst.components.equippable.onunequipfn

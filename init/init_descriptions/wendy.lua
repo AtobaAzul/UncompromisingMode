@@ -400,10 +400,10 @@ ANNOUNCE.ANNOUNCE_CHARGE_SUCCESS_ELECTROCUTED =
 
 DESCRIBE.WINONA_TOOLBOX = "If empty it has no purpose."
 ACTIONFAIL.WINONATOOLBOX = "It is not mine to take from."
-DESCRIBE.WINONA_CATAPULT_ITEM_UM = "I'm not interested in lifeless machines."
-DESCRIBE.WINONA_SPOTLIGHT_ITEM_UM = "I'm not interested in lifeless machines."
-DESCRIBE.WINONA_BATTERY_LOW_ITEM_UM = "I'm not interested in lifeless machines."
-DESCRIBE.WINONA_BATTERY_HIGH_ITEM_UM = "I'm not interested in lifeless machines."
+DESCRIBE.WINONA_CATAPULT_ITEM = "I'm not interested in lifeless machines."
+DESCRIBE.WINONA_SPOTLIGHT_ITEM = "I'm not interested in lifeless machines."
+DESCRIBE.WINONA_BATTERY_LOW_ITEM = "I'm not interested in lifeless machines."
+DESCRIBE.WINONA_BATTERY_HIGH_ITEM = "I'm not interested in lifeless machines."
 DESCRIBE.POWERCELL = "It sustains the electronics."
 DESCRIBE.WINONA_UPGRADEKIT_ELECTRICAL =
 "Perhaps this is the future of humanity?"

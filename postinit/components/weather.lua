@@ -9,7 +9,6 @@ env.AddComponentPostInit("weather", function(self)
     local _snowfx
     local _pollenfx
     local _hasfx = not TheNet:IsDedicated()
-
     for i, v in pairs(Ents) do
         if v.prefab then
             if v.prefab == "rain" then
@@ -29,12 +28,6 @@ env.AddComponentPostInit("weather", function(self)
         if TheWorld.state.issummer and TheWorld.net:HasTag("heatwavestartnet") then
             if _hasfx and _pollenfx ~= nil then
                 _pollenfx.particles_per_tick = _pollenfx.particles_per_tick * 20 + 1 -- MOREEEEEEEEEEEEEEEE
-            end
-        end
-
-        if TheWorld.state.iswinter and TheWorld.net:HasTag("snowstormstartnet") then
-            if _hasfx and _snowfx ~= nil then
-                _snowfx.particles_per_tick = _snowfx.particles_per_tick * 10 + 1
             end
         end
 

@@ -34,6 +34,28 @@ local function OnHungerDelta2(inst, data)
 	if inst.wobystarving and data.newpercent > 0 then
 		inst.wobystarving = false
 	end
+	
+	if data.newpercent <= 0.2 and inst.hungerpercent ~= 0.2 then
+		inst.hungerpercent = 0.2
+			
+		if inst._playerlink ~= nil and data.newpercent < data.oldpercent then
+			inst._playerlink.components.talker:Say(GetString(inst._playerlink, "ANNOUNCE_SMALLWOBYVERYHUNGRY"))
+		end
+	elseif data.newpercent <= 0.4 and data.newpercent > 0.2 and inst.hungerpercent ~= 0.4 then
+		inst.hungerpercent = 0.4
+		
+		if inst._playerlink ~= nil and data.newpercent < data.oldpercent then
+			inst._playerlink.components.talker:Say(GetString(inst._playerlink, "ANNOUNCE_SMALLWOBYHUNGRY"))
+		end
+	elseif data.newpercent <= 0.6 and data.newpercent > 0.4 and inst.hungerpercent ~= 0.6 then
+		inst.hungerpercent = 0.6
+		
+		if inst._playerlink ~= nil and data.newpercent < data.oldpercent then
+			inst._playerlink.components.talker:Say(GetString(inst._playerlink, "ANNOUNCE_SMALLWOBYNORMAL"))
+		end
+	elseif data.newpercent > 0.6 then
+		inst.hungerpercent = 1
+	end
 
 	if inst._playerlink ~= nil then
 		inst._playerlink:PushEvent("updatewobyhunger", {wobyhunger = inst.components.hunger:GetPercent()})

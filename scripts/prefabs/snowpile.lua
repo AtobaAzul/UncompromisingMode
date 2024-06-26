@@ -231,7 +231,7 @@ local function workcallback(inst, worker, workleft)
     end
     if inst.components.workable.workleft <= 0 then
 	inst.components.lootdropper:SpawnLootPrefab("snowball_throwable")
-	if IsSpecialEventActive(SPECIAL_EVENTS.WINTERS_FEAST) or worker:HasTag("weerclops") then --IT'S INSANE HOW JOLLY AND FESTIVE I AM BRAGHHGGH
+	if IsSpecialEventActive(SPECIAL_EVENTS.WINTERS_FEAST) then --IT'S INSANE HOW JOLLY AND FESTIVE I AM BRAGHHGGH
 		local more_balls = math.floor(math.random(1.5,4))
 		for i = 1, more_balls do
 			local ball = inst.components.lootdropper:SpawnLootPrefab("snowball_throwable")
@@ -282,7 +282,7 @@ local function LongUpdate(inst, dt)
     end
 end
 local function TryColdness(v)
-    if v.components.moisture ~= nil and not v:HasTag("weerclops") then
+    if v.components.moisture ~= nil then
         if v.components.inventory ~= nil and (v.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY) ~= nil and v.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY).prefab ~= "beargervest" or v.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY) == nil) or v.components.inventory == nil then
             v.components.moisture:DoDelta(5)
         end
@@ -316,7 +316,7 @@ local function DoAreaColdness(inst)
 end
 
 local function onpickedfn(inst, picker)
-    if picker ~= nil and picker:IsValid() and not picker:HasTag("weerclops") then
+    if picker ~= nil and picker:IsValid() then
         if picker.components.moisture then
             if picker.components.talker and picker == ThePlayer then
                 ThePlayer.components.talker:Say(GetString(ThePlayer.prefab, "ANNOUNCE_COLD"))
@@ -487,7 +487,7 @@ local function snowpilefn(Sim)
     inst:AddComponent("pickable")
     inst.components.pickable.picksound = "dontstarve/wilson/harvest_berries"
 
-    --inst.components.pickable.getregentimefn = 0.1
+    inst.components.pickable.getregentimefn = 0.1
     inst.components.pickable.onpickedfn = onpickedfn
     inst.components.pickable.makebarrenfn = makebarrenfn
     inst.components.pickable.makefullfn = makefullfn

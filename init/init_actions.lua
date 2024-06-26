@@ -106,29 +106,6 @@ charge_powercell.instant = true
 charge_powercell.rmb = true
 charge_powercell.priority = HIGH_ACTION_PRIORITY
 
--- Rummaging is opening containers.
--- Any character can open Warly's Portable Crock Pot.
-local _RummageFn = GLOBAL.ACTIONS.RUMMAGE.fn
-GLOBAL.ACTIONS.RUMMAGE.fn = function(act)
-    local target = act.target or act.invobject
-    if target == nil then
-        return
-    end
-    if target.prefab == "portablecookpot" and target ~= nil and target.components.container ~= nil
-        and target.components.container.canbeopened and GLOBAL.CanEntitySeeTarget(act.doer, target) then
-
-            if target.components.container:IsOpenedBy(act.doer) then
-                target.components.container:Close(act.doer)
-                act.doer:PushEvent("closecontainer", { container = target })
-                return true
-            end
-        act.doer:PushEvent("opencontainer", { container = target })
-        target.components.container:Open(act.doer)
-        return true
-    end
-    return _RummageFn(act)
-end
-
 if TUNING.DSTU.WICKERNERF then
     local _ReadFn = GLOBAL.ACTIONS.READ.fn
 
@@ -138,31 +115,6 @@ if TUNING.DSTU.WICKERNERF then
 
         return _ReadFn(act)
     end
-end
-
--- Storing is drag-clicking an item into a container.
--- Any character can store items into Warly's Portable Crock Pot.
-local _StoreFn = GLOBAL.ACTIONS.STORE.fn
-GLOBAL.ACTIONS.STORE.fn = function(act)
-    local target = act.target
-    if target.prefab == "portablecookpot" and target.components.container ~= nil and act.invobject.components.inventoryitem ~= nil 
-        and act.doer.components.inventory ~= nil and target.components.container:CanTakeItemInSlot(act.invobject) then
-
-        local item = act.invobject.components.inventoryitem:RemoveFromOwner(target.components.container.acceptsstacks)
-        if item ~= nil then
-            if not target.components.container:GiveItem(item, targetslot, nil, false) then
-                if act.doer.components.playercontroller ~= nil and
-                    act.doer.components.playercontroller.isclientcontrollerattached then
-                    act.doer.components.inventory:GiveItem(item)
-                else
-                    act.doer.components.inventory:GiveActiveItem(item)
-                end
-                return false
-            end
-            return true
-        end
-    end
-    return _StoreFn(act)
 end
 
 local _UpgradeStrFn = GLOBAL.ACTIONS.UPGRADE.strfn

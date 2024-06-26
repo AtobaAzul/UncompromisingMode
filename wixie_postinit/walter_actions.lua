@@ -356,23 +356,6 @@ end
 wobybark.distance = 10
 wobybark.mount_valid = false
 
-local wixie_taunt = AddAction(
-	"WIXIE_TAUNT",
-	"WIXIE_TAUNT",
-	function(act)
-		print(act.doer)
-		print(act.target)
-		if act.doer ~= nil and act.target ~= nil then
-			act.doer.wixie_taunt_target = act.target
-			print("do taunt")
-		end
-	end
-)
-
-wixie_taunt.priority = HIGH_ACTION_PRIORITY
-wixie_taunt.rmb = true
-wixie_taunt.distance = 36
-wixie_taunt.mount_valid = false
 
 GLOBAL.ACTIONS.CAST_NET.mount_valid = false
 GLOBAL.ACTIONS.DRY.mount_valid = true

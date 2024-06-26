@@ -19,7 +19,6 @@ TUNING.DSTU.NORATCHECK =--defining it here for simplicity's sake.
 	"moonglass_charged",
 	"trinket_4",
 	"trinket_13",
-	"moonglass_geode",
 }
 
 for k, v in ipairs(TUNING.DSTU.NORATCHECK) do

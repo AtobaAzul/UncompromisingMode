@@ -316,7 +316,7 @@ local function IsNearFloodTile(map, x, y, z)
 end
 
 local function OnEntitySleep(inst)
-	if inst.persists and TheWorld.state.isspring then
+	if inst.persists then
 		inst.SoundEmitter:KillSound("um_waterfall_loop")
 		
 		if inst.raindroptask ~= nil then
@@ -329,7 +329,7 @@ local function OnEntitySleep(inst)
 end
 
 local function OnEntityWake(inst)
-	if inst.persists and TheWorld.state.isspring then
+	if inst.persists then
 		if not inst.SoundEmitter:PlayingSound("um_waterfall_loop") then
 			inst.SoundEmitter:PlaySound("UCSounds/um_waterfall/um_waterfall", "um_waterfall_loop")
 		end
@@ -477,35 +477,27 @@ local function fn()
 end
 
 local function SpawnerInit(inst)
-	if TheWorld.state.isspring then
-		inst.SoundEmitter:PlaySound("UCSounds/um_waterfall/um_waterfall", "um_waterfall_loop")
-		inst.SoundEmitter:PlaySound("dontstarve/cave/earthquake", "miniearthquake")
-		inst.SoundEmitter:SetParameter("miniearthquake", "intensity", 1)
-		
-		local x, y, z = inst.Transform:GetWorldPosition()
-		local x1, y1, z1 = TheWorld.Map:GetTileCenterPoint(x, y, z)
-		
-		if x1 ~= nil then
-			inst.Transform:SetPosition(x1, y1, z1)
-			inst.AnimState:PlayAnimation("waterfall_start")
+	local x, y, z = inst.Transform:GetWorldPosition()
+	local x1, y1, z1 = TheWorld.Map:GetTileCenterPoint(x, y, z)
+	
+	if x1 ~= nil then
+		inst.Transform:SetPosition(x1, y1, z1)
+		inst.AnimState:PlayAnimation("waterfall_start")
 
-			inst:ListenForEvent("animover", function()
-				SpawnPrefab("um_waterfall").Transform:SetPosition(x1, y1, z1)
-				inst.persists = false
-				inst:DoTaskInTime(0, inst.Remove)
-			end)
-		else
-			inst.Transform:SetPosition(x, y, z)
-			inst.AnimState:PlayAnimation("waterfall_start")
-
-			inst:ListenForEvent("animover", function()
-				SpawnPrefab("um_waterfall").Transform:SetPosition(x, y, z)
-				inst.persists = false
-				inst:DoTaskInTime(0, inst.Remove)
-			end)
-		end
+		inst:ListenForEvent("animover", function()
+			SpawnPrefab("um_waterfall").Transform:SetPosition(x1, y1, z1)
+			inst.persists = false
+			inst:DoTaskInTime(0, inst.Remove)
+		end)
 	else
-		inst:Remove()
+		inst.Transform:SetPosition(x, y, z)
+		inst.AnimState:PlayAnimation("waterfall_start")
+
+		inst:ListenForEvent("animover", function()
+			SpawnPrefab("um_waterfall").Transform:SetPosition(x, y, z)
+			inst.persists = false
+			inst:DoTaskInTime(0, inst.Remove)
+		end)
 	end
 end
 
@@ -542,6 +534,10 @@ local function spawnfn()
     end
 	
 	inst:DoTaskInTime(0, SpawnerInit)
+	
+	inst.SoundEmitter:PlaySound("UCSounds/um_waterfall/um_waterfall", "um_waterfall_loop")
+	inst.SoundEmitter:PlaySound("dontstarve/cave/earthquake", "miniearthquake")
+	inst.SoundEmitter:SetParameter("miniearthquake", "intensity", 1)
 
     return inst
 end

@@ -96,8 +96,8 @@ AddPrefabPostInit("world", function(inst)
 end)
 
 modimport("init/init_gamemodes/init_uncompromising_mode")
-modimport("init/init_descriptions/announcestrings.lua")
 modimport("init/init_wathom")
+modimport("init/init_descriptions/announcestrings.lua")
 
 if GetModConfigData("funny rat") then
     AddModCharacter("winky", "FEMALE")
@@ -393,4 +393,3 @@ GLOBAL.ancient_amulet_red_clear_fn = function(inst) GLOBAL.basic_clear_fn(inst, 
 
 GLOBAL.TUNING.DSTU.MODROOT = MODROOT
 modimport("init/init_insightcompat")
-modimport("init/init_statusannouncements")

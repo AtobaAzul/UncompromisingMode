@@ -425,13 +425,13 @@ ANNOUNCE.ANNOUNCE_CHARGE_SUCCESS_ELECTROCUTED =
 DESCRIBE.WINONA_TOOLBOX =
     "I wonder what kind of gadgets and do-hickeys are inside."
 ACTIONFAIL.WINONATOOLBOX = "I don't have a badge for this yet."
-DESCRIBE.WINONA_CATAPULT_ITEM_UM =
+DESCRIBE.WINONA_CATAPULT_ITEM =
     "Machines aren't covered in the Pinetree Pioneers."
-DESCRIBE.WINONA_SPOTLIGHT_ITEM_UM =
+DESCRIBE.WINONA_SPOTLIGHT_ITEM =
     "Machines aren't covered in the Pinetree Pioneers."
-DESCRIBE.WINONA_BATTERY_LOW_ITEM_UM =
+DESCRIBE.WINONA_BATTERY_LOW_ITEM =
     "Machines aren't covered in the Pinetree Pioneers."
-DESCRIBE.WINONA_BATTERY_HIGH_ITEM_UM =
+DESCRIBE.WINONA_BATTERY_HIGH_ITEM =
     "Machines aren't covered in the Pinetree Pioneers."
 DESCRIBE.POWERCELL = "Is this safe?"
 DESCRIBE.WINONA_UPGRADEKIT_ELECTRICAL =

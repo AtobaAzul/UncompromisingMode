@@ -36,7 +36,7 @@ return Class(
         local function CheckLand(inst) --"VoidDoomed" tag prevents cheesing
             if TheWorld:HasTag("cave") then
                 local x, y, z = inst.Transform:GetWorldPosition()
-                if (not inst:HasTag("voidimmune") and x ~= nil and y ~= nil and z ~= nil and not TheWorld.Map:IsVisualGroundAtPoint(x, y, z) and inst.components.health ~= nil) or (inst:HasTag("VoidDoomed") and not ((inst.sg ~= nil) and (inst.sg.currentstate.name == "teleportato_teleport" or inst.sg.currentstate.name == "death"))) then
+                if (x ~= nil and y ~= nil and z ~= nil and not TheWorld.Map:IsVisualGroundAtPoint(x, y, z) and inst.components.health ~= nil) or (inst:HasTag("VoidDoomed") and not ((inst.sg ~= nil) and (inst.sg.currentstate.name == "teleportato_teleport" or inst.sg.currentstate.name == "death"))) then
                     inst:AddTag("VoidDoomed")
                     Consume(inst)
                 end

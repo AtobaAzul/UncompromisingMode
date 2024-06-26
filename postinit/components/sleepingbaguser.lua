@@ -40,10 +40,6 @@ AddComponentPostInit("sleepingbaguser", function(SleepingBagUser)
 				self.healthtask:Cancel()
 				self.healthtask = nil
 			end
-			if self._wxsleepchargetask ~= nil then
-				self._wxsleepchargetask:Cancel()
-				self._wxsleepchargetask = nil
-			end
 			_DoWakeUp(self, nostatechange)
 		end
 	end

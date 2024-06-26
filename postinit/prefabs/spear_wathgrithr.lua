@@ -63,26 +63,6 @@ env.AddPrefabPostInit("spear_wathgrithr", function(inst)
     end
 end)
 
-local function onlightningground(inst)
-    inst.components.finiteuses:Repair(TUNING.DSTU.SPEAR_WATHGRITHR_LIGHTNING_CHARGED_LIGHTNINGREPAIR)
-end
-
-local function Strike(owner)
-    --onlightningground(inst)
-
-    if owner ~= nil then
-        local fx = SpawnPrefab("electrichitsparks")
-
-        fx.entity:SetParent(owner.entity)
-        fx.entity:AddFollower()
-        fx.Follower:FollowSymbol(owner.GUID, "swap_object", 0, -145, 0)
-        local item = owner.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
-        if item ~= nil then
-            item.components.finiteuses:Repair(TUNING.DSTU.SPEAR_WATHGRITHR_LIGHTNING_CHARGED_LIGHTNINGREPAIR)
-        end
-    end
-end
-
 -------------------------------------------------------------------------------------------------------
 
 local function Lightning_OnLunged(inst, doer, startingpos, targetpos)
@@ -112,60 +92,39 @@ local function Lightning_OnLungedHit(inst, doer, target)
 end
 
 env.AddPrefabPostInit("spear_wathgrithr_lightning", function(inst)
-	inst:AddTag("electricaltool")
-	
     if not TheWorld.ismastersim then
         return
     end
 
     if env.GetModConfigData("wathgrithr_arsenal") then
-		inst:AddTag("lightningrod")
-        inst:ListenForEvent("lightningstrike", onlightningground)
-		inst.components.aoeweapon_lunge:SetOnLungedFn(Lightning_OnLunged)
+        inst.components.aoeweapon_lunge:SetOnLungedFn(Lightning_OnLunged)
         inst.components.aoeweapon_lunge:SetOnHitFn(Lightning_OnLungedHit)
-		
-        if inst.components.equippable ~= nil then
-            local OnEquip_old = inst.components.equippable.onequipfn
-            inst.components.equippable.onequipfn = function(inst, owner)
-                owner:AddTag("batteryuser")
-
-                owner.lightningpriority = 0
-                owner:ListenForEvent("lightningstrike", Strike, owner)
-                owner:RemoveTag("lightningrod")
-                owner.lightningpriority = nil
-                owner:RemoveEventCallback("lightningstrike", Strike)
-
-
-                if OnEquip_old ~= nil then
-                    OnEquip_old(inst, owner)
-                end
-            end
-
-            local OnUnequip_old = inst.components.equippable.onunequipfn
-            inst.components.equippable.onunequipfn = function(inst, owner)
-                if not owner.UM_isBatteryUser then
-                    local item = owner.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
-
-                    if item ~= nil then
-                        if not item:HasTag("electricaltool") and owner:HasTag("batteryuser") then
-                            owner:RemoveTag("batteryuser")
-                        end
-                    else
-                        if owner:HasTag("batteryuser") then
-                            owner:RemoveTag("batteryuser")
-                        end
-                    end
-                end
-
-                if OnUnequip_old ~= nil then
-                    OnUnequip_old(inst, owner)
-                end
-            end
-        end		
     end
 end)
 
+
 -------------------------------------------------------------------------------------------------------
+
+local function onlightningground(inst)
+    inst.components.finiteuses:Repair(TUNING.DSTU.SPEAR_WATHGRITHR_LIGHTNING_CHARGED_LIGHTNINGREPAIR)
+end
+
+local function Strike(owner)
+    --onlightningground(inst)
+
+    if owner ~= nil then
+        local fx = SpawnPrefab("electrichitsparks")
+
+        fx.entity:SetParent(owner.entity)
+        fx.entity:AddFollower()
+        fx.Follower:FollowSymbol(owner.GUID, "swap_object", 0, -145, 0)
+        local item = owner.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
+        if item ~= nil then
+            item.components.finiteuses:Repair(TUNING.DSTU.SPEAR_WATHGRITHR_LIGHTNING_CHARGED_LIGHTNINGREPAIR)
+        end
+    end
+end
+
 
 env.AddPrefabPostInit("spear_wathgrithr_lightning_charged", function(inst)
     inst:AddTag("electricaltool")

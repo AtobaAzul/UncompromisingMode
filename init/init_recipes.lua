@@ -281,16 +281,15 @@ end
 
 if GetModConfigData("telestaff_rework") then
     AllRecipes["telebase"].ingredients = {
-        Ingredient("nightmarefuel", 4),
+        Ingredient("purplegem", 3),
         Ingredient("livinglog", 4),
-        Ingredient("goldnugget", 8),
-        Ingredient("purplegem", 3)
+        Ingredient("nightmarefuel", 4)
     }
-    --AllRecipes["telestaff"].ingredients = {
-    --Ingredient("nightmarefuel", 2),
-    --Ingredient("spear", 1),
-    --Ingredient("purplegem", 1)
-    --}
+    AllRecipes["telestaff"].ingredients = {
+        Ingredient("nightmarefuel", 2),
+        Ingredient("spear", 1),
+        Ingredient("purplegem", 1)
+    }
     AllRecipes["purpleamulet"].ingredients = {
         Ingredient("goldnugget", 3),
         Ingredient("nightmarefuel", 2),
@@ -309,9 +308,9 @@ if GetModConfigData("longpig") then
 end
 
 local winona_portables = { "battery_high", "battery_low", "spotlight", "catapult" }
-if GetModConfigData("winona_portables_") and not TUNING.DSTU.UPDATE_CHECK then
+if GetModConfigData("winona_portables_") then
     for k, v in ipairs(winona_portables) do
-        AllRecipes["winona_" .. v].product = "winona_" .. v .. "_item_um"
+        AllRecipes["winona_" .. v].product = "winona_" .. v .. "_item"
         AllRecipes["winona_" .. v].placer = nil
     end
 end
@@ -673,7 +672,7 @@ ChangeSortKey("powercell", "winona_battery_high", "CHARACTER", true)
 
 AddRecipe2(
     "winona_upgradekit_electrical",
-    { Ingredient("goldnugget", 6), Ingredient("sewing_tape", 2), Ingredient("wagpunk_bits", 4) },
+    { Ingredient("goldnugget", 6), Ingredient("sewing_tape", 2), Ingredient("wagpunk_bits", 2) },
     TECH.SCIENCE_TWO,
     { builder_tag = "handyperson" },
     { "CHARACTER", "LIGHT" }
@@ -951,19 +950,21 @@ AddRecipe2(
 )
 ChangeSortKey("hermitshop_cookies", "hermitshop_supertacklecontainer", "CRAFTING_STATION", true)
 
-if not TUNING.DSTU.UPDATE_CHECK then
-    AddRecipe2(
-        "chum",
-        { Ingredient("spoiled_food", 2), Ingredient("rope", 1), Ingredient("waterplant_bomb", 1) },
-        TECH.FISHING_ONE,
-        { numtogive = 2 },
-        { "FISHING" }
-    )
-    AllRecipes["chum"].ingredients = {
-        Ingredient("spoiled_food", 1),
-        Ingredient("rope", 1),
-        Ingredient("waterplant_bomb", 1)
-    }
+AddRecipe2(
+    "chum",
+    { Ingredient("spoiled_food", 2), Ingredient("rope", 1), Ingredient("waterplant_bomb", 1) },
+    TECH.FISHING_ONE,
+    { numtogive = 2 },
+    { "FISHING" }
+)
+AllRecipes["chum"].ingredients = {
+    Ingredient("spoiled_food", 1),
+    Ingredient("rope", 1),
+    Ingredient("waterplant_bomb", 1)
+}
+if not GLOBAL.TUNING.DSTU.UPDATE_CHECK then
+    AllRecipes["hermitshop_chum"].ingredients = { Ingredient("messagebottleempty", 1) }
+    AllRecipes["hermitshop_chum"].numtogive = 3
 end
 --[[
 AddRecipe2(
@@ -1564,10 +1565,10 @@ STRINGS.RECIPE_DESC.HERMIT_BUNDLE_LURES = "Get to fishing, today!"
 STRINGS.RECIPE_DESC.UM_ARMOR_PYRE_NETTLES = "Hurts you a little, hurts them a lot."
 STRINGS.RECIPE_DESC.UM_BLOWDART_PYRE = "Warm and fuzzy, inside AND out!"
 
-STRINGS.RECIPE_DESC.WINONA_CATAPULT_ITEM_UM = STRINGS.RECIPE_DESC.WINONA_CATAPULT
-STRINGS.RECIPE_DESC.WINONA_SPOTLIGHT_ITEM_UM = STRINGS.RECIPE_DESC.WINONA_SPOTLIGHT
-STRINGS.RECIPE_DESC.WINONA_BATTERY_LOW_ITEM_UM = STRINGS.RECIPE_DESC.WINONA_BATTERY_LOW
-STRINGS.RECIPE_DESC.WINONA_BATTERY_HIGH_ITEM_UM = STRINGS.RECIPE_DESC.WINONA_BATTERY_HIGH
+STRINGS.RECIPE_DESC.WINONA_CATAPULT_ITEM = STRINGS.RECIPE_DESC.WINONA_CATAPULT
+STRINGS.RECIPE_DESC.WINONA_SPOTLIGHT_ITEM = STRINGS.RECIPE_DESC.WINONA_SPOTLIGHT
+STRINGS.RECIPE_DESC.WINONA_BATTERY_LOW_ITEM = STRINGS.RECIPE_DESC.WINONA_BATTERY_LOW
+STRINGS.RECIPE_DESC.WINONA_BATTERY_HIGH_ITEM = STRINGS.RECIPE_DESC.WINONA_BATTERY_HIGH
 
 GLOBAL.STRINGS.RECIPE_DESC.PACT_ARMOR_SANITY = "Wrapped in your sins."
 GLOBAL.STRINGS.RECIPE_DESC.PACT_SWORD_SANITY = "Hefty, like the weight on your shoulders."

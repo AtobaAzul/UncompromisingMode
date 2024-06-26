@@ -15,7 +15,7 @@ env.AddComponentPostInit("schoolspawner", function(self)
         local map = TheWorld.Map
 
         local ret = _SpawnSchool(self, spawnpoint, target, override_spawn_offset)
-        if math.random() > 0.995 then
+        if math.random() > .99 then
             local sea_players = {}
 
             for k, v in pairs(AllPlayers) do
