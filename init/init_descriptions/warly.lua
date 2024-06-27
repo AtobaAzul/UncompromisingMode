@@ -410,10 +410,10 @@ ANNOUNCE.ANNOUNCE_CHARGE_SUCCESS_ELECTROCUTED =
 
 DESCRIBE.WINONA_TOOLBOX = "Not meant for pots and pans, but I can make do."
 ACTIONFAIL.WINONATOOLBOX = "Not full of utensils I presume."
-DESCRIBE.WINONA_CATAPULT_ITEM_UM = "I'll stick to my kitchenware."
-DESCRIBE.WINONA_SPOTLIGHT_ITEM_UM = "I'll stick to my kitchenware."
-DESCRIBE.WINONA_BATTERY_LOW_ITEM_UM = "I'll stick to my kitchenware."
-DESCRIBE.WINONA_BATTERY_HIGH_ITEM_UM = "I'll stick to my kitchenware."
+DESCRIBE.WINONA_CATAPULT_ITEM = "I'll stick to my kitchenware."
+DESCRIBE.WINONA_SPOTLIGHT_ITEM = "I'll stick to my kitchenware."
+DESCRIBE.WINONA_BATTERY_LOW_ITEM = "I'll stick to my kitchenware."
+DESCRIBE.WINONA_BATTERY_HIGH_ITEM = "I'll stick to my kitchenware."
 DESCRIBE.POWERCELL = "Food for the batteries, I suppose."
 DESCRIBE.WINONA_UPGRADEKIT_ELECTRICAL =
 "I could use a battery charged... well, everything."

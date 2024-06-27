@@ -4,7 +4,7 @@ GLOBAL.setfenv(1, GLOBAL)
 
 
 local function OnDismantle_catapult(inst)
-    local item = SpawnPrefab("winona_catapult_item_um")
+    local item = SpawnPrefab("winona_catapult_item")
     local fx = SpawnPrefab("collapse_small")
 
     item.Transform:SetPosition(inst.Transform:GetWorldPosition())
@@ -17,7 +17,7 @@ local function OnDismantle_catapult(inst)
 end
 
 local function OnDismantle_spotlight(inst)
-    local item = SpawnPrefab("winona_spotlight_item_um")
+    local item = SpawnPrefab("winona_spotlight_item")
     local fx = SpawnPrefab("collapse_small")
 
     item.Transform:SetPosition(inst.Transform:GetWorldPosition())
@@ -29,7 +29,7 @@ local function OnDismantle_spotlight(inst)
 end
 
 local function OnDismantle_low(inst)
-    local item = SpawnPrefab("winona_battery_low_item_um")
+    local item = SpawnPrefab("winona_battery_low_item")
     local fx = SpawnPrefab("collapse_small")
 
     item.Transform:SetPosition(inst.Transform:GetWorldPosition())
@@ -43,7 +43,7 @@ local function OnDismantle_low(inst)
 end
 
 local function OnDismantle_high(inst)
-    local item = SpawnPrefab("winona_battery_high_item_um")
+    local item = SpawnPrefab("winona_battery_high_item")
     local fx = SpawnPrefab("collapse_small")
 
     item.Transform:SetPosition(inst.Transform:GetWorldPosition())
