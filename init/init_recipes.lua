@@ -283,14 +283,13 @@ if GetModConfigData("telestaff_rework") then
     AllRecipes["telebase"].ingredients = {
         Ingredient("purplegem", 3),
         Ingredient("livinglog", 4),
-        Ingredient("goldnugget", 8),
-        Ingredient("purplegem", 3)
+        Ingredient("nightmarefuel", 4)
     }
-    --AllRecipes["telestaff"].ingredients = {
-    --Ingredient("nightmarefuel", 2),
-    --Ingredient("spear", 1),
-    --Ingredient("purplegem", 1)
-    --}
+    AllRecipes["telestaff"].ingredients = {
+        Ingredient("nightmarefuel", 2),
+        Ingredient("spear", 1),
+        Ingredient("purplegem", 1)
+    }
     AllRecipes["purpleamulet"].ingredients = {
         Ingredient("goldnugget", 3),
         Ingredient("nightmarefuel", 2),
@@ -951,19 +950,21 @@ AddRecipe2(
 )
 ChangeSortKey("hermitshop_cookies", "hermitshop_supertacklecontainer", "CRAFTING_STATION", true)
 
-if not TUNING.DSTU.UPDATE_CHECK then
-    AddRecipe2(
-        "chum",
-        { Ingredient("spoiled_food", 2), Ingredient("rope", 1), Ingredient("waterplant_bomb", 1) },
-        TECH.FISHING_ONE,
-        { numtogive = 2 },
-        { "FISHING" }
-    )
-    AllRecipes["chum"].ingredients = {
-        Ingredient("spoiled_food", 1),
-        Ingredient("rope", 1),
-        Ingredient("waterplant_bomb", 1)
-    }
+AddRecipe2(
+    "chum",
+    { Ingredient("spoiled_food", 2), Ingredient("rope", 1), Ingredient("waterplant_bomb", 1) },
+    TECH.FISHING_ONE,
+    { numtogive = 2 },
+    { "FISHING" }
+)
+AllRecipes["chum"].ingredients = {
+    Ingredient("spoiled_food", 1),
+    Ingredient("rope", 1),
+    Ingredient("waterplant_bomb", 1)
+}
+if not GLOBAL.TUNING.DSTU.UPDATE_CHECK then
+    AllRecipes["hermitshop_chum"].ingredients = { Ingredient("messagebottleempty", 1) }
+    AllRecipes["hermitshop_chum"].numtogive = 3
 end
 --[[
 AddRecipe2(

@@ -22,6 +22,7 @@ local component_post = {
     "eater",
     "edible",
     "inventory", -- This is an attempt at manually fixing an issue when people are checked for insulation. -scrimbles
+    "weighable",
     "messagebottlemanager",
     "fishingnet",
     "boatleak", -- for custom boat patches.
@@ -182,6 +183,7 @@ local prefab_post = {
     "mermhat",
     "wptags",
     "inventoryitem_classified",
+    "cannonballs",
     --	"renameable_items",
     "lightninggoatherd",
     "archive_centipede",
@@ -441,11 +443,11 @@ end
 --	table.insert(prefab_post, "boat")
 -- end
 
-if GetModConfigData("winona_portables_") and not TUNING.DSTU.UPDATE_CHECK then
+if GetModConfigData("winona_portables_") then
     table.insert(prefab_post, "winona_portables")
 end
 
-if GetModConfigData("reworked_ck") and not TUNING.DSTU.UPDATE_CHECK then
+if GetModConfigData("reworked_ck") then
     table.insert(prefab_post, "crabking")
     table.insert(prefab_post, "crabking_claw")
     table.insert(stategraph_post, "crabkingclaw")
@@ -491,17 +493,7 @@ if GetModConfigData("lifeinjector_rework") then
     table.insert(prefab_post, "lifeinjector")
 end
 
-if GetModConfigData("smog") then
-    table.insert(prefab_post, "dragoonegg")
-    table.insert(component_post, "geyserfx")
-end
-
-if not TUNING.DSTU.UPDATE_CHECK then
-    table.insert(prefab_post, "cannonballs")
-    table.insert(component_post, "weighable")
-end
-
-if GetModConfigData("sharpshooter_monkeys_") and not TUNING.DSTU.UPDATE_CHECK then
+if GetModConfigData("sharpshooter_monkeys_") then
     table.insert(brain_post, "powdermonkey")
 end
 
