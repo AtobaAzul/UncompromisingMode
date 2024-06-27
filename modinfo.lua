@@ -7,7 +7,7 @@ end
 
 --RELEASE.MAJOR.MINOR.FIX
 
-local _version = "1.4.16.1"
+local _version = "1.4.16.2"
 
 description = [[
 󰀔 [ Version: ]] .. _version .. [[ - "Under the Weather Pt.1" ]
