@@ -6,9 +6,7 @@ if not folder_name:find("workshop-") then
 end
 
 --RELEASE.MAJOR.MINOR.FIX
-
-local _version = "1.4.16.2"
-
+local _version = "1.4.18.2"
 description = [[
 󰀔 [ Version: ]] .. _version .. [[ - "Under the Weather Pt.1" ]
 
@@ -226,6 +224,7 @@ configuration_options = {
         true),
     BinaryConfig("bernie_buffs", "Willow - Bernie Buffs",
         "Holding Bernie prevents shadows from aggroing.", true),
+        BinaryConfig("no_bee_embers", "Willow - Reduced Embers", "All bees, birds and butterflies no longer drop embers.", true),
     --BinaryConfig("willow insulation", "Willow's Experimental Insulation",
     --"Willow's insulation is tweaked to be 120 on Summer and -120 on Winter.", false),
     BinaryConfig("wendy", "Wendy", "Abigail is nerfed to not increase Wendy's maximum damage above average.", true),
@@ -275,7 +274,7 @@ configuration_options = {
         "\"The Angler's Survival Guide\" now takes 2 Hardened Slip Bobbers, instead of 2 Wooden Ball Bobbers.", true),
     BinaryConfig("woodie_skilltree", "Woodie's Skilltree", "Some changes to Woodie's skilltrees to add trade-offs and buff underutilized skills.", true),
     BinaryConfig("waxwell_nerf", "Maxwell - Nerfs", "Several nerfs to Maxwell to bring him down in power.", true),
-    --	BinaryConfig("wolfgang", "Improved/Balanced Wolfgang", "Wolfgang gains new perks and downsides. Read the patch notes included in the mod folder or workshop for details.", false),
+    BinaryConfig("wolfgang", "Wolfgang Rework", "Wolfgang has a new skill tree, and mightiness is now a resource you spend to use special abilities.", true),
     BinaryConfig("wathgrithr_arsenal", "Wigfrid - Arsenal", "Changed wigfrid's new tools to not have infinite skills.", true),
     {
         name = "wathgrithr_rework_",
@@ -303,6 +302,7 @@ configuration_options = {
     BinaryConfig("wortox", "Wortox",
         "Better teleports, worse sanity and healing from souls. Birds and butterflies are soulless.",
         true),
+        BinaryConfig("wortox_beesouls", "Wortox - Bee Souls", "Toggle wether or not bees have souls.", true),
     --{
     --name = "wortox",
     --label = "Wortox",
@@ -328,7 +328,7 @@ configuration_options = {
     BinaryConfig("wormwood_trapbuffs", "Wormwood - Trap Buffs",
         "Bramble traps do no player damage, reset when you are bloomed near them, and create multiple when crafted.",
         true),
-    BinaryConfig("wormwood_photosynthesis", "Wormwood - Photosynthesis", "Photosynthesis now allows Wormwood to naturally bloom in summer, instead of healing health during the day.", true),
+    BinaryConfig("wormwood_photosynthesis", "Wormwood - SkillTree", "Enables changes to a few of the skills in Wormwood's tree.", true), --kept the name but this should be an overall skilltree config now for potential future changes
     BinaryConfig("wanda_nerf", "Wanda",
         "A bunch of changes to some of Wanda's more overpowered items to make them more balanced.", true),
     SkipSpace(),
@@ -680,6 +680,8 @@ configuration_options = {
         "Small creatures like Spiders drop monster morsels instead of Monster Meat.", true),
     BinaryConfig("horriblefood", "More Horrible Foods",
         "More items are considered as the horrible food type.", true),
+	BinaryConfig("mushroom_changes", "Mushroom Changes",
+		"Mushroom Planter accepts more resources to replenish. Mushrooms and Mushtrees now give spores, instead of caps.", true),
     BinaryConfig("no_winter_growing", "No Winter Growing",
         "Makes a few food sources such as Kelp and Stone Fruit not grow in Winter.", true),
     BinaryConfig("rawcropsnerf", "Raw Crops Nerf",
@@ -1317,8 +1319,8 @@ configuration_options = {
         false),
     BinaryConfig("winonawackycats", "Experimental Winona Catapults",
         "Catapults no longer regenerate, have reduced health, and deal 34 AOE damage.", false),
-    BinaryConfig("wolfgang", "Experimental Wolfgang",
-        "Wolfgang gains mightiness based on hunger level. Hunger drain increases the longer mighty is maintained.", false),
+    --BinaryConfig("wolfgang", "Experimental Wolfgang",
+        --"Wolfgang gains mightiness based on hunger level. Hunger drain increases the longer mighty is maintained.", false),
     BinaryConfig("eyebrellarework", "Eyebrella Rework",
         "Eyebrella stats restored to Vanilla value, must be repaired with Milky Whites, 12 day durability. Isn't affected by clothing degradation.",
         false),

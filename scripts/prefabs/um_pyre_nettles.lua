@@ -161,7 +161,16 @@ local function SetStage(inst)
 		inst:RemoveTag("PyreNettle" .. i)
 	end
 	inst:AddTag("PyreNettle" .. inst.stage)
-
+	
+	-- Safety mechanisms, in case we're at an invalid stage (loading shenanigans probably).
+	if inst.stage > 5 then
+		print("um_pyre_nettles.lua has auto-recovered from an invalid SetStage! Stage was: " .. inst.stage)
+		inst.stage = 5
+	elseif inst.stage < 1 then
+		print("um_pyre_nettles.lua has auto-recovered from an invalid SetStage! Stage was: " .. inst.stage)
+		inst:Remove()
+	end
+	
 	-- Anim selector.
 	inst.AnimState:PushAnimation("pn" .. inst.stage .. "_idle", true)
 
@@ -296,7 +305,7 @@ local function OnShrink(inst)
 		local x, y, z = inst.Transform:GetWorldPosition()
 		local tile_at_position = TheWorld.Map:GetTileAtPoint(x, y, z)
 
-		if inst.stage == 0 then
+		if inst.stage < 1 then
 			inst:Remove()
 		elseif TheWorld.state.season ~= "summer" and not HOME_TILES[tile_at_position] then
 			inst:DoTaskInTime(((30 * 3 * math.random()) + 30), OnShrink)

@@ -284,12 +284,12 @@ if GetModConfigData("telestaff_rework") then
         Ingredient("nightmarefuel", 4),
         Ingredient("livinglog", 4),
         Ingredient("goldnugget", 8),
-        Ingredient("purplegem", 3)		
+        Ingredient("purplegem", 3)
     }
     --AllRecipes["telestaff"].ingredients = {
-        --Ingredient("nightmarefuel", 2),
-        --Ingredient("spear", 1),
-        --Ingredient("purplegem", 1)
+    --Ingredient("nightmarefuel", 2),
+    --Ingredient("spear", 1),
+    --Ingredient("purplegem", 1)
     --}
     AllRecipes["purpleamulet"].ingredients = {
         Ingredient("goldnugget", 3),
@@ -673,7 +673,7 @@ ChangeSortKey("powercell", "winona_battery_high", "CHARACTER", true)
 
 AddRecipe2(
     "winona_upgradekit_electrical",
-    { Ingredient("goldnugget", 6), Ingredient("sewing_tape", 2), Ingredient("wagpunk_bits", 2) },
+    { Ingredient("goldnugget", 6), Ingredient("sewing_tape", 2), Ingredient("wagpunk_bits", 4) },
     TECH.SCIENCE_TWO,
     { builder_tag = "handyperson" },
     { "CHARACTER", "LIGHT" }

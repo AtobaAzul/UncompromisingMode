@@ -3,22 +3,11 @@ GLOBAL.setfenv(1, GLOBAL)
 -----------------------------------------------------------------
 
 local function NewCustom(inst, dt)
-	inst.sanitytrail = 0
-	
-	local x, y, z = inst.Transform:GetWorldPosition()
-	local bordomtrails = TheSim:FindEntities(x, y, z, 17, { "bordomtrail" })
-
-	for i, v in ipairs(bordomtrails) do
-		if v.sanitylevel ~= nil and  v.ownerid == inst.userid then
-			inst.sanitytrail = inst.sanitytrail - v.sanitylevel
-		end
-	end
-	
 	local wobystarving = inst.woby ~= nil and inst.woby.wobystarving and -0.1 or 0
 	
 	local rate = inst._OldRate(inst, dt)
 
-    return rate + inst.sanitytrail + wobystarving
+    return rate + wobystarving
 end
 
 local function RightClickPicker(inst, target, pos)
@@ -156,6 +145,8 @@ env.AddPrefabPostInit("walter", function(inst)
 		inst.components.foodaffinity:AddPrefabAffinity("kelp_dried", TUNING.AFFINITY_15_CALORIES_TINY)
 		inst.components.foodaffinity:AddPrefabAffinity("fishmeat_dried", TUNING.AFFINITY_15_CALORIES_MED)
 		inst.components.foodaffinity:AddPrefabAffinity("smallfishmeat_dried", TUNING.AFFINITY_15_CALORIES_SMALL)
+		inst.components.foodaffinity:AddPrefabAffinity("seaweed_dried", TUNING.AFFINITY_15_CALORIES_SMALL)
+		inst.components.foodaffinity:AddPrefabAffinity("jellyjerky", TUNING.AFFINITY_15_CALORIES_MED)
 	end
 	
 	if inst.components.builder ~= nil then
@@ -175,5 +166,5 @@ env.AddPrefabPostInit("walter", function(inst)
 		inst.components.sanity.custom_rate_fn = NewCustom
 	end
 	
-	inst:ListenForEvent("killed", OnKilledOther)
+	--inst:ListenForEvent("killed", OnKilledOther)
 end)

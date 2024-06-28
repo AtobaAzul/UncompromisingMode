@@ -158,8 +158,11 @@ local ORANGE_PICKUP_CANT_TAGS = {
     "catchable",
     "fire",
     "minesprung",
-    "mineactive"
+    "mineactive",
+	"irreplaceable",
+	"moonglass_geode"	
 }
+
 local function pickup_UM(inst, owner)
     if owner == nil or owner.components.inventory == nil then
         return

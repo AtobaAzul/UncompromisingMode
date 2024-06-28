@@ -145,9 +145,14 @@ modimport("init/init_character_changes/waxwell")
 --modimport("init/init_character_changes/warly")
 --end
 
---if GetModConfigData("wolfgang") then
---modimport("init/init_character_changes/wolfgang")
-modimport("init/init_character_changes/wolfgang2")
+if GetModConfigData("wolfgang") then
+    modimport("init/init_character_changes/wolfgang")
+    modimport("postinit/components/coach")
+    modimport("postinit/components/mightiness")
+    modimport("postinit/prefabs/skilltree_wolfgang")
+    modimport("postinit/prefabs/wolfgang_whistle")
+end
+--modimport("init/init_character_changes/wolfgang2")
 modimport("init/init_character_changes/wormwood")
 --end
 

@@ -5,7 +5,7 @@ AddPrefabPostInitAny(function(inst)
 		return inst
 	end
 	--if inst.components.health ~= nil and inst:HasTag("insect") and inst.components.health ~= nil and not inst.components.health:IsDead() and inst.components.health.maxhealth <= 100 then
-	if inst:HasTag("butterfly") or inst:HasTag("bird") then
+	if inst:HasTag("butterfly") or inst:HasTag("bird") or (not GetModConfigData("wortox_beesouls") and inst:HasTag("bee")) then
 		inst:AddTag("soulless")
 	end
 end)

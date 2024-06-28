@@ -44,8 +44,8 @@ local component_post = {
     "worldtemperature",
     "worldwind",
     "planarentity",
-    "geyserfx",
     "firedetector",
+    "playeractionpicker", --required for Wolfgang rework
     "slipperyfeet",
     "walkableplatformplayer",
     "schoolspawner",
@@ -190,14 +190,13 @@ local prefab_post = {
     "rainometer",
     "winterometer",
     "mooneye",
-    "dragoonegg",
     "bomb_lunarplant",
     "compostingbin",
     "plantables",
     "compass",
     "seedpouch",
     "voidcloth_umbrella",
-	--"mushroom_farm",
+	"mushroom_farm",
     "toolbox_items",
 }
 

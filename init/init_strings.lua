@@ -71,9 +71,13 @@ STRINGS.PIG_GUARD_PIGKING_TALK_LOOKATWILSON_FRIEND = { "KING SAY PROTECT", "PROT
     "PROTECT KING!", "PROTECT FRIEND!" }
 
 -- Hey look! I actually did something! -Canis
-STRINGS.CHARACTER_DESCRIPTIONS.willow = STRINGS.CHARACTER_DESCRIPTIONS.willow ..
-    "\n󰀕Can ignite things in the cold"
-
+STRINGS.CHARACTER_DESCRIPTIONS.willow = STRINGS.CHARACTER_DESCRIPTIONS.willow .. "\n󰀕Can ignite things in the cold"
+if GetModConfigData("bernie_buffs") then
+    STRINGS.CHARACTER_DESCRIPTIONS.willow = STRINGS.CHARACTER_DESCRIPTIONS.willow .. "\n󰀕Hugging Bernie keeps the shadows at bay"
+end
+if GetModConfigData("wxless") then
+    STRINGS.CHARACTER_DESCRIPTIONS.wx78 = STRINGS.CHARACTER_DESCRIPTIONS.wx78 .. "\n󰀕Circuits drain charge and degrade overtime\n󰀕Motherboard has more space and powers all components until last charge\n󰀕Resting and eating refills internal batteries"
+end
 if GetModConfigData("wx78") then
     STRINGS.CHARACTER_DESCRIPTIONS.wx78 = STRINGS.CHARACTER_DESCRIPTIONS.wx78 .. "\n󰀕Systems are not repaired via lightning"
 end
@@ -82,26 +86,18 @@ if GetModConfigData("wickerbottom") then
         "\n󰀕Reading requires brainpower"
 end
 STRINGS.CHARACTER_DESCRIPTIONS.wes = STRINGS.CHARACTER_DESCRIPTIONS.wes .. "\n󰀕Expanded inner dialogue" --"\n󰀕Pengulls are fond of mimes"
-if GetModConfigData("waxwell") then
-    STRINGS.CHARACTER_DESCRIPTIONS.waxwell = STRINGS.CHARACTER_DESCRIPTIONS.waxwell .. "\n󰀕Can summon his old puppets"
-end
+STRINGS.CHARACTER_DESCRIPTIONS.waxwell = STRINGS.CHARACTER_DESCRIPTIONS.waxwell .. "\n󰀕Can make a pact to summon his old puppets and shadow equipment at will"
 if GetModConfigData("wolfgang") then
-    STRINGS.CHARACTER_DESCRIPTIONS.wolfgang = STRINGS.CHARACTER_DESCRIPTIONS.wolfgang .. "\n󰀕Gains mightiness when well fed"
+    STRINGS.CHARACTER_DESCRIPTIONS.wolfgang = "*Stronger on a full belly\n*Grows mightier when well fed and calm minded\n*Is afraid of monsters and the dark\n*Is quite the showboat"
 end
-
-STRINGS.CHARACTER_DESCRIPTIONS.wolfgang = STRINGS.CHARACTER_DESCRIPTIONS.wolfgang ..
-    "\n󰀕Too big to push around when mighty"
-
 if GetModConfigData("warly_food_taste_") then
     STRINGS.CHARACTER_DESCRIPTIONS.warly = STRINGS.CHARACTER_DESCRIPTIONS.warly ..
         "\n󰀕Absorbs nutrients better, but prefers more variety"
 end
-
 if GetModConfigData("warly_butcher_") then
     STRINGS.CHARACTER_DESCRIPTIONS.warly = STRINGS.CHARACTER_DESCRIPTIONS.warly ..
         "\n󰀕Is a certified butcher"
 end
-
 if GetModConfigData("winona_gen_") then
     STRINGS.CHARACTER_DESCRIPTIONS.winona = STRINGS.CHARACTER_DESCRIPTIONS.winona .. "\n󰀕Generators are for workers only"
 end
@@ -109,7 +105,7 @@ if GetModConfigData("winonaworker") then
     STRINGS.CHARACTER_DESCRIPTIONS.winona = STRINGS.CHARACTER_DESCRIPTIONS.winona .. "\n󰀕Works hard until lunch"
 end
 if GetModConfigData("wortox") then
-    STRINGS.CHARACTER_DESCRIPTIONS.wortox = STRINGS.CHARACTER_DESCRIPTIONS.wortox .. "\n󰀕Souls take time to heal, and heal less\n󰀕Some weak creatures have no soul."
+    STRINGS.CHARACTER_DESCRIPTIONS.wortox = STRINGS.CHARACTER_DESCRIPTIONS.wortox .. "\n󰀕Souls take time to heal and heal less\n󰀕Some weak creatures have no soul"
 end
 if GetModConfigData("wigfrid") then
     STRINGS.CHARACTER_DESCRIPTIONS.wathgrithr = STRINGS.CHARACTER_DESCRIPTIONS.wathgrithr .. "\n󰀕Combat is less sustaining"
@@ -117,6 +113,16 @@ end
 if TUNING.DSTU.WORMWOOD_CONFIG_FIRE then
     STRINGS.CHARACTER_DESCRIPTIONS.wormwood = STRINGS.CHARACTER_DESCRIPTIONS.wormwood .. "\n󰀕Is dangerously flammable"
 end
+
+--I also did something! I love mod compatibility :) -CarlosBraw
+if GLOBAL.KnownModIndex:IsModEnabled("workshop-2010472942") then
+    STRINGS.CHARACTER_DESCRIPTIONS.wragonfly = STRINGS.CHARACTER_DESCRIPTIONS.wragonfly .. "\n󰀕Can breath in summer's smog"
+    STRINGS.CHARACTER_DESCRIPTIONS.weerclops = STRINGS.CHARACTER_DESCRIPTIONS.weerclops .. "\n󰀕Not slowed down by winter's strong winds\n󰀕Is well accustomed to snow"
+end
+if GLOBAL.KnownModIndex:IsModEnabled("workshop-1847716441") then
+    STRINGS.CHARACTER_DESCRIPTIONS.plaguedoctor = STRINGS.CHARACTER_DESCRIPTIONS.plaguedoctor .. "\n󰀕Mask protects against smog"
+end
+
 
 STRINGS.STANTON_GREET = { "Care to drink with the dead?", "How's about a drink?", "C'mon and drink with me." }
 STRINGS.STANTON_GIVE = { "There ya go.", "The finest." }
@@ -344,10 +350,13 @@ STRINGS.STALKER_ATRIUM_WATHOM_BATTLECRY = {
 STRINGS.ACTIONS.SET_CUSTOM_NAME = "Set Custom Name"
 
 local SkillTreeDefs = GLOBAL.require("prefabs/skilltree_defs")
+if SkillTreeDefs.SKILLTREE_DEFS["wilson"] ~= nil then
+    SkillTreeDefs.SKILLTREE_DEFS["wilson"].wilson_alchemy_4.desc = STRINGS.SKILLTREE.WILSON.WILSON_ALCHEMY_4_DESC .. "\nTransform 3 Monster Morsels into a Monster Meat and Monster Meat into 2 Monster Morsels."
+end
 
-SkillTreeDefs.SKILLTREE_DEFS["wilson"].wilson_alchemy_4.desc = STRINGS.SKILLTREE.WILSON.WILSON_ALCHEMY_4_DESC .. "\nTransform 3 Monster Morsels into a Monster Meat and Monster Meat into 2 Monster Morsels."
-SkillTreeDefs.SKILLTREE_DEFS["willow"].willow_attuned_lighter.desc = STRINGS.SKILLTREE.WILLOW.WILLOW_ATTUNED_LIGHTER_DESC .. " Can also absorb Smog."
-
+if SkillTreeDefs.SKILLTREE_DEFS["willow"] ~= nil then
+    SkillTreeDefs.SKILLTREE_DEFS["willow"].willow_attuned_lighter.desc = STRINGS.SKILLTREE.WILLOW.WILLOW_ATTUNED_LIGHTER_DESC .. " Can also absorb Smog."
+end
 STRINGS.UM_HOUSETAUNTS = {
     PIGMAN = {
         "GET OFF LAWN",

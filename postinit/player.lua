@@ -25,7 +25,7 @@ local function CheckAndApplyTempDamage(inst, data)
 			local temp_buffer = 7 - worldtemperature
 			
 			if inst.um_temp_healthdelta ~= nil and inst.um_temp_healthdelta >= temp_buffer then
-				if (data.cause == "hot" and not inst:HasTag("heatresistant")) or (data.cause == "cold" and not inst:HasTag("coldresistant")) then
+				if (data.cause == "hot" and not inst:HasTag("heatresistant")) or (data.cause == "cold" and not inst:HasTag("coldresistant") and not inst:HasTag("weerclops")) then
 					inst.components.health:DeltaPenalty(math.abs(data.amount / inst.components.health.maxhealth))
 				end
 			else
