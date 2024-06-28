@@ -201,7 +201,7 @@ local prefabs = {
 	"uncompromising_blowguns",
 	"uncompromising_blowgun_ammo",
 	"bearger_boulder",
-	"nymph",
+	--"nymph",
 	"deerclops_barrier",
 	"roship_projectile",
 	"electric_ring",
