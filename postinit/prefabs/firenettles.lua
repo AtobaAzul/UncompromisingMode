@@ -22,4 +22,4 @@ end)
 
 
 
--- https://cdn.discordapp.com/attachments/497450801191583787/1111061148566032384/FRONDS.jpg
+-- https://i.postimg.cc/bNfXKh0d/FRONDS.jpg
