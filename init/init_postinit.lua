@@ -198,6 +198,7 @@ local prefab_post = {
     "voidcloth_umbrella",
 	"mushroom_farm",
     "toolbox_items",
+	"otter"
 }
 
 local stategraph_post = {
