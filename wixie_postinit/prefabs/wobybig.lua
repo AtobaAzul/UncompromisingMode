@@ -51,7 +51,7 @@ local function OnHungerDelta2(inst, data)
 		if inst._playerlink ~= nil and data.newpercent < data.oldpercent then
 			inst._playerlink.components.talker:Say(GetString(inst._playerlink, "ANNOUNCE_BIGWOBYHUNGRY"))
 		end
-	else
+	elseif data.newpercent > 0.4 then
 		inst.wobyhungry = false
 	end
 	
@@ -146,7 +146,7 @@ local function RemoveTarget(inst)
 end
 
 env.AddPrefabPostInit("wobybig", function(inst)
-	inst.scrapbook_hidehealth = true
+	inst.scrapbook_hidehealth = true 
 
 	inst:AddTag("customwobytag")
 	inst:AddTag("noauradamage")
