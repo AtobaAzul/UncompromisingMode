@@ -98,9 +98,6 @@ if GetModConfigData("warly_butcher_") then
     STRINGS.CHARACTER_DESCRIPTIONS.warly = STRINGS.CHARACTER_DESCRIPTIONS.warly ..
         "\n󰀕Is a certified butcher"
 end
-if GetModConfigData("winona_gen_") then
-    STRINGS.CHARACTER_DESCRIPTIONS.winona = STRINGS.CHARACTER_DESCRIPTIONS.winona .. "\n󰀕Generators are for workers only"
-end
 if GetModConfigData("winonaworker") then
     STRINGS.CHARACTER_DESCRIPTIONS.winona = STRINGS.CHARACTER_DESCRIPTIONS.winona .. "\n󰀕Works hard until lunch"
 end

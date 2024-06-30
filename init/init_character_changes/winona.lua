@@ -7,49 +7,6 @@ local env = env
 GLOBAL.setfenv(1, GLOBAL)
 -----------------------------------------------------------------
 local HUNGRY_THRESH_HIGH = 0.666
-
-if TUNING.DSTU.WINONA_GEN and not TUNING.DSTU.UPDATE_CHECK then
-    local function ItemTradeTest(inst, item, giver)
-        if giver:HasTag("handyperson") then
-            return inst._OldItemTradeTest(inst, item)
-        else
-            return false, "WINONAGEN"
-        end
-    end
-
-    env.AddPrefabPostInit("winona_battery_high", function(inst)
-        if not TheWorld.ismastersim then
-            return
-        end
-
-        if inst.components.trader ~= nil then
-            inst._OldItemTradeTest = inst.components.trader.abletoaccepttest
-            inst.components.trader:SetAbleToAcceptTest(ItemTradeTest)
-        end
-    end)
-
-    local function ItemTradeTestLow(inst, item, giver)
-        if giver:HasTag("handyperson") and item.prefab == "nitre" then
-            return true
-        else
-            return false, "WINONAGEN"
-        end
-    end
-
-    local function OnFuelGiven(inst, giver, item)
-        inst.components.fueled:TakeFuelItem(item, giver)
-    end
-
-    env.AddPrefabPostInit("winona_battery_low", function(inst)
-        if not TheWorld.ismastersim then
-            return
-        end
-        inst:AddComponent("trader")
-        inst.components.trader:SetAbleToAcceptTest(ItemTradeTestLow)
-        inst.components.trader.onaccept = OnFuelGiven
-    end)
-end
-
 local function OnCooldown(inst)
     inst._cdtask = nil
 end
@@ -421,9 +378,6 @@ end)
 
 --]]
 
-if not TUNING.DSTU.UPDATE_CHECK then
-    TUNING.WINONA_SPOTLIGHT_RADIUS    = TUNING.WINONA_SPOTLIGHT_RADIUS * 2
-    TUNING.WINONA_SPOTLIGHT_MAX_RANGE = PLAYER_CAMERA_SEE_DISTANCE * 1.1
 
 local chargeable_items = {
     "winona_telebrella",

@@ -363,7 +363,6 @@ TUNING.DSTU = {
     UNCOOL_CHESTER = GetModConfigData("uncool_chester"),
     HOODEDFOREST = GetModConfigData("hoodedforest"),
     GHOSTWALRUS = GetModConfigData("ghostwalrus"),
-    WINONA_GEN = GetModConfigData("winona_gen_"),
     RICE = GetModConfigData("rice"),
     NEWRECIPES = GetModConfigData("newrecipes"),
     CAVECLOPS = GetModConfigData("cave_clops"),
@@ -395,7 +394,6 @@ TUNING.DSTU = {
     MAXTEMPDAMAGE = GetModConfigData("maxtempdamage"),
     MAXHUNGERDAMAGE = GetModConfigData("maxhungerdamage"),
     HARDER_TREPIDATION = GetModConfigData("nodespawn_trepidation"),
-    WINONA_PORTABLES = GetModConfigData("winona_portables_"),
     TELESTAFF_REWORK = GetModConfigData("telestaff_rework"),
     BEEBOX_NERF = GetModConfigData("beebox_nerf"),
     CANEDURABILITY = GetModConfigData("canedurability"),
@@ -520,9 +518,6 @@ TUNING.HAWAIIANSHIRT_PERISHTIME = TUNING.HAWAIIANSHIRT_PERISHTIME + total_day_ti
 -- trident buff
 TUNING.TRIDENT.DAMAGE = wilson_attack * 1.5
 TUNING.TRIDENT.OCEAN_DAMAGE = wilson_attack * 2.4
-if not TUNING.DSTU.UPDATE_CHECK then
-    TUNING.TRIDENT.USES = TUNING.TRIDENT.USES + 50
-end
 TUNING.TRIDENT.SPELL.USE_COUNT = TUNING.TRIDENT.USES * 2
 TUNING.TRIDENT.SPELL.DAMAGE = wilson_attack * 1.33
 
@@ -541,10 +536,6 @@ TUNING.CANNONBALL_SPLASH_DAMAGE_PERCENT = 1
 -- sea weed changes
 TUNING.WATERPLANT.DAMAGE = TUNING.WATERPLANT.DAMAGE * 0.75
 
-if not TUNING.DSTU.UPDATE_CHECK then
-    -- shark nerf
-    TUNING.SHARK.DAMAGE = 50 / 3
-end
 
 -- more treasures
 TUNING.MESSAGEBOTTLE_NOTE_CHANCE = 0.66
@@ -558,10 +549,6 @@ TUNING.BOAT.BOAT_MAGNET.CATCH_UP_SPEED = TUNING.BOAT.BOAT_MAGNET.CATCH_UP_SPEED 
 -- lowered CK health
 -- TUNING.CRABKING_HEALTH = TUNING.CRABKING_HEALTH * 0.66
 -- TUNING.CRABKING_HEALTH_BONUS = TUNING.CRABKING_HEALTH_BONUS * 0.66
-if GetModConfigData("reworked_ck") then
-    TUNING.CRABKING_REGEN = 400
-    TUNING.CRABKING_BASE_CLAWS = 3.5
-end
 -- TUNING.CRABKING_REGEN_BUFF = TUNING.CRABKING_REGEN * 0.33
 
 -- Wortox
