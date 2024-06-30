@@ -326,7 +326,7 @@ if TUNING.DSTU.WICKERNERF_BEEBOOK then
 end
 
 if TUNING.DSTU.WATHGRITHR_ARSENAL then
-    TOOLTIPS.SPEAR_WATHGRITHR_LIGHTNING = "- The lightning charge attack will consume additional durability per mob hit up to a limit.\n - Regains durability when struck by lightning or when charged at generators."
+    TOOLTIPS.SPEAR_WATHGRITHR_LIGHTNING = "- Regains durability when struck by lightning or when charged at generators."
     TOOLTIPS.WATHGRITHR_SHIELD = "- Blocking attacks will consume durability by 60% of the damage taken.\n - Each additional perk reduces it by 20%."
 end
 
