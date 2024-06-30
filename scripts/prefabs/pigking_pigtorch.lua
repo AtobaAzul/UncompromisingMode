@@ -614,7 +614,7 @@ local function common(moonbeast)
     inst.AnimState:SetBank("pigman")
     inst.AnimState:PlayAnimation("idle_loop", true)
     inst.AnimState:Hide("hat")
-
+	inst.AnimState:Hide("ARM_carry_up")
     --Sneak these into pristine state for optimization
     inst:AddTag("_named")
 
@@ -735,7 +735,7 @@ local function guard()
     inst.components.locomotor:SetAllowPlatformHopping(true)
     inst:AddComponent("embarker")
     inst:AddComponent("drownable")
-
+	
     inst.build = guardbuilds[math.random(#guardbuilds)]
     inst.AnimState:SetBuild(inst.build)
     inst.components.werebeast:SetOnNormalFn(SetGuardPig)
