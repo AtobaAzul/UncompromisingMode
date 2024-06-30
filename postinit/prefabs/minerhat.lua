@@ -1,6 +1,8 @@
 local env = env
 GLOBAL.setfenv(1, GLOBAL)
 
+local GeneratorGroundCharging = require("generatorcharging")
+
 local function OnOvercharge(inst, toggle)
     if inst._light ~= nil then
         inst._light.Light:SetRadius(toggle and 5 or 2.5)
@@ -57,6 +59,8 @@ env.AddPrefabPostInit("minerhat", function(inst)
             inst.components.fueled.maxfuel = TUNING.MINERHAT_LIGHTTIME * 2
             inst.components.fueled:DoDelta(0)--do a 0delta to update the %, maybe?
             inst:AddTag("electricaltool")
+            GeneratorGroundCharging(inst)
+
             inst.components.named:SetName(STRINGS.NAMES.MINERHAT_ELECTRICAL)--this seems to actually set the name, since it has a replica for clients
 
             local owner = inst.components.inventoryitem:GetGrandOwner()

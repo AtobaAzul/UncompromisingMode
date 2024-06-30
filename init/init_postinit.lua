@@ -198,7 +198,9 @@ local prefab_post = {
     "voidcloth_umbrella",
 	"mushroom_farm",
     "toolbox_items",
-	"otter"
+	"otter",
+    "winona_telebrella",
+    "stash_map"
 }
 
 local stategraph_post = {
@@ -440,15 +442,6 @@ end
 --	table.insert(prefab_post, "boat")
 -- end
 
-if GetModConfigData("winona_portables_") and not TUNING.DSTU.UPDATE_CHECK then
-    table.insert(prefab_post, "winona_portables")
-end
-
-if GetModConfigData("reworked_ck") and not TUNING.DSTU.UPDATE_CHECK then
-    table.insert(prefab_post, "crabking")
-    table.insert(prefab_post, "crabking_claw")
-    table.insert(stategraph_post, "crabkingclaw")
-end
 
 table.insert(prefab_post, "shadowchesspieces") --changes to  all 3 pieces. (no collision and shadowcrown loot)
 

@@ -152,19 +152,7 @@ env.AddComponentPostInit("combat", function(self)
             end
         end
 
-        if (self.inst ~= nil and (self.inst.prefab == "crabking" or self.inst.prefab == "crabking_claw") and attacker ~= nil and (attacker.prefab == "cannonball_rock" or attacker.prefab == "cannonball_sludge")) and env.GetModConfigData("reworked_ck") then
-            damage = damage * (attacker.prefab == "cannonball_rock" and 4 or attacker.prefab == "cannonball_sludge" and 3)
-            if self.inst.attack_count ~= nil then self.inst.attack_count = math.clamp(self.inst.attack_count - 1, 0, 10) end
-
-            if self.inst.finishfixing ~= nil then self.inst.finishfixing(self.inst) end
-
-            if self.inst.prefab == "crabking_claw" then
-                local crab = FindEntity(self.inst, 30, nil, { "crabking" })
-                if crab ~= nil and crab.finishfixing ~= nil then crab.finishfixing(crab) end
-            end
-
-            return _GetAttacked(self, attacker, damage, weapon_check, stimuli)
-        elseif self.inst ~= nil and self.inst:HasTag("wathom") and self.inst.AmpDamageTakenModifier ~= nil and damage and (self.inst.components.rider ~= nil and not self.inst.components.rider:IsRiding() or self.inst.components.rider == nil) and TUNING.DSTU.WATHOM_ARMOR_DAMAGE then
+        if self.inst ~= nil and self.inst:HasTag("wathom") and self.inst.AmpDamageTakenModifier ~= nil and damage and (self.inst.components.rider ~= nil and not self.inst.components.rider:IsRiding() or self.inst.components.rider == nil) and TUNING.DSTU.WATHOM_ARMOR_DAMAGE then
             -- Take extra damage
             damage = damage * self.inst.AmpDamageTakenModifier
             return _GetAttacked(self, attacker, damage, weapon_check, stimuli)

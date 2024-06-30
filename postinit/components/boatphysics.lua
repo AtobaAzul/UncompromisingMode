@@ -127,7 +127,7 @@ env.AddComponentPostInit("boatphysics", function(self)
                 local platform = sailor ~= nil and sailor:GetCurrentPlatform() or nil
 
                 if platform ~= nil and platform == self.inst and sailor ~= nil and sailor:HasTag("boat_health_buffer") then
-                    piratehat_mult = TUNING.DSTU.UPDATE_CHECK and 2 or 1.25
+                    piratehat_mult = 2
                 end
             end
         end

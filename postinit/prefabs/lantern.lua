@@ -1,6 +1,7 @@
 local env = env
 GLOBAL.setfenv(1, GLOBAL)
 
+local GeneratorGroundCharging = require("generatorcharging")
 
 
 env.AddPrefabPostInit("lantern", function(inst)
@@ -54,6 +55,7 @@ env.AddPrefabPostInit("lantern", function(inst)
             inst.components.fueled:DoDelta(0)--do a 0delta to update the %, maybe?
             inst:AddTag("electricaltool")
             inst.components.named:SetName(STRINGS.NAMES.LANTERN_ELECTRICAL)
+            GeneratorGroundCharging(inst)
             local owner = inst.components.inventoryitem:GetGrandOwner()
 
             if owner ~= nil and owner.components.inventory ~= nil and owner.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS) == inst then

@@ -308,13 +308,6 @@ if GetModConfigData("longpig") then
     )
 end
 
-local winona_portables = { "battery_high", "battery_low", "spotlight", "catapult" }
-if GetModConfigData("winona_portables_") and not TUNING.DSTU.UPDATE_CHECK then
-    for k, v in ipairs(winona_portables) do
-        AllRecipes["winona_" .. v].product = "winona_" .. v .. "_item_um"
-        AllRecipes["winona_" .. v].placer = nil
-    end
-end
 
 AllRecipes["mast_item"].ingredients = { Ingredient("log", 3), Ingredient("rope", 2), Ingredient("silk", 3) }
 AllRecipes["mast"].ingredients = { Ingredient("log", 3), Ingredient("rope", 2), Ingredient("silk", 3) }
@@ -652,33 +645,35 @@ AddRecipe2(
 )
 ChangeSortKey("floral_bandage", "bandage", "RESTORATION", true)
 
-AddRecipe2(
-    "winona_toolbox",
-    { Ingredient("boards", 2), Ingredient("goldnugget", 4), Ingredient("sewing_tape", 2) },
-    TECH.NONE,
-    { builder_tag = "handyperson" },
-    { "CONTAINERS", "CHARACTER" }
-)
-ChangeSortKey("winona_toolbox", "treasurechest", "CONTAINERS", true)
-ChangeSortKey("winona_toolbox", "sewing_tape", "CHARACTER", true)
+if GetModConfigData("winona_items") then
+    AddRecipe2(
+        "winona_toolbox",
+        { Ingredient("boards", 2), Ingredient("goldnugget", 4), Ingredient("sewing_tape", 2) },
+        TECH.NONE,
+        { builder_tag = "handyperson" },
+        { "CONTAINERS", "CHARACTER" }
+    )
+    ChangeSortKey("winona_toolbox", "treasurechest", "CONTAINERS", true)
+    ChangeSortKey("winona_toolbox", "sewing_tape", "CHARACTER", true)
 
-AddRecipe2(
-    "powercell",
-    { Ingredient("sewing_tape", 1), Ingredient("goldnugget", 1), Ingredient("nitre", 2) },
-    TECH.NONE,
-    { builder_tag = "handyperson", numtogive = 3 },
-    { "CHARACTER" }
-)
-ChangeSortKey("powercell", "winona_battery_high", "CHARACTER", true)
+    AddRecipe2(
+        "powercell",
+        { Ingredient("sewing_tape", 1), Ingredient("goldnugget", 1), Ingredient("nitre", 2) },
+        TECH.NONE,
+        { builder_tag = "handyperson", numtogive = 3 },
+        { "CHARACTER" }
+    )
+    ChangeSortKey("powercell", "winona_battery_high", "CHARACTER", true)
 
-AddRecipe2(
-    "winona_upgradekit_electrical",
-    { Ingredient("goldnugget", 6), Ingredient("sewing_tape", 2), Ingredient("wagpunk_bits", 4) },
-    TECH.SCIENCE_TWO,
-    { builder_tag = "handyperson" },
-    { "CHARACTER", "LIGHT" }
-)
-ChangeSortKey("winona_upgradekit_electrical", "winona_toolbox", "CHARACTER", true)
+    AddRecipe2(
+        "winona_upgradekit_electrical",
+        { Ingredient("goldnugget", 6), Ingredient("sewing_tape", 2), Ingredient("wagpunk_bits", 4) },
+        TECH.SCIENCE_TWO,
+        { builder_tag = "handyperson" },
+        { "CHARACTER", "LIGHT" }
+    )
+    ChangeSortKey("winona_upgradekit_electrical", "winona_toolbox", "CHARACTER", true)
+end
 
 AddRecipeToFilter("wardrobe", "CONTAINERS")
 ChangeSortKey("wardrobe", "icebox", "CONTAINERS", false)
@@ -951,20 +946,6 @@ AddRecipe2(
 )
 ChangeSortKey("hermitshop_cookies", "hermitshop_supertacklecontainer", "CRAFTING_STATION", true)
 
-if not TUNING.DSTU.UPDATE_CHECK then
-    AddRecipe2(
-        "chum",
-        { Ingredient("spoiled_food", 2), Ingredient("rope", 1), Ingredient("waterplant_bomb", 1) },
-        TECH.FISHING_ONE,
-        { numtogive = 2 },
-        { "FISHING" }
-    )
-    AllRecipes["chum"].ingredients = {
-        Ingredient("spoiled_food", 1),
-        Ingredient("rope", 1),
-        Ingredient("waterplant_bomb", 1)
-    }
-end
 --[[
 AddRecipe2(
 "hermitshop_oil",

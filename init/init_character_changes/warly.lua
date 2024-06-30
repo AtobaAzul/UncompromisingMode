@@ -96,3 +96,21 @@ env.AddPrefabPostInit("portablecookpot", function(inst)
     --hacky but it wokrs
     inst:RemoveTag("mastercookware")
 end)]]
+
+
+env.AddPrefabPostInit("spicepack", function(inst)
+    inst:RemoveTag("backpack")
+    inst:AddTag("portablestorage")
+
+    if not TheWorld.ismastersim then return end
+
+    inst:RemoveComponent("equippable")
+
+    inst.components.inventoryitem.cangoincontainer = true
+    inst.components.inventoryitem.canonlygoinpocket = true
+
+
+    inst.components.container.skipclosesnd = true
+    inst.components.container.skipopensnd = true
+    inst.components.container.droponopen = true
+end)

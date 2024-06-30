@@ -49,20 +49,6 @@ local function launch_away(inst, position, use_variant_angle)
     end
 end
 
-local function DoBubbleFX(inst)
-    for i = 1, math.random(2, 4) do
-        local x, y, z = inst.Transform:GetWorldPosition()
-        if x == nil or y == nil or z == nil then
-            break
-        end
-        local fx = SpawnPrefab("crab_king_bubble" .. math.random(3))
-        local x1, y1, z1 = x + math.random(-5, 5), 0, z + math.random(-5, 5)
-        if TheWorld.Map:IsOceanAtPoint(x1, y1, z1) and TheWorld.Map:GetPlatformAtPoint(x1, z1) == nil then
-            fx.Transform:SetPosition(x1, y1, z1)
-        end
-    end
-end
-
 local function OnHit(inst, attacker, target)
     -- Do splash damage upon hitting the ground
     inst.components.combat:DoAreaAttack(inst, CANNONBALL_SPLASH_RADIUS, nil, nil, nil, AREAATTACK_EXCLUDETAGS)
@@ -351,5 +337,41 @@ local function cannonball_item_fn()
     return inst
 end
 
+local function mortarball_item_fn()
+    local inst = CreateEntity()
+
+    inst.entity:AddTransform()
+    inst.entity:AddAnimState()
+    inst.entity:AddNetwork()
+
+    MakeInventoryPhysics(inst)
+
+    inst.AnimState:SetBank("cannonball_sludge")
+    inst.AnimState:SetBuild("cannonball_sludge")
+    inst.AnimState:PlayAnimation("idle")
+
+    inst.entity:AddTag("boatcannon_ammo")
+
+    inst.projectileprefab = "mortarball"
+
+    inst.entity:SetPristine()
+
+    if not TheWorld.ismastersim then return inst end
+
+    inst:AddComponent("inspectable")
+
+    inst:AddComponent("inventoryitem")
+    inst.components.inventoryitem.atlasname = "images/inventoryimages/cannonball_sludge_item.xml"
+
+    inst.components.inventoryitem:SetSinks(true)
+
+    inst:AddComponent("stackable")
+    inst.components.stackable.maxsize = TUNING.STACK_SIZE_MEDITEM
+
+    return inst
+end
+
+
 return Prefab("cannonball_sludge", cannonball_fn, cannonball_assets),
-    Prefab("cannonball_sludge_item", cannonball_item_fn, cannonball_assets)
+    Prefab("cannonball_sludge_item", cannonball_item_fn, cannonball_assets),
+    Prefab("mortarball_monkey_item", mortarball_item_fn) --only exists to fire the mortarball.

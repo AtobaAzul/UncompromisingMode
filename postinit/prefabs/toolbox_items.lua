@@ -3,8 +3,8 @@ GLOBAL.setfenv(1, GLOBAL)
 
 local toolbox_items = {
     "sewing_tape",
-    "winona_machine1parts_1",
-    "winona_machine1parts_2",
+    "winona_machineparts_1",
+    "winona_machineparts_2",
     "winona_recipescanner",
     "winona_telebrella",
     "inspectacleshat",

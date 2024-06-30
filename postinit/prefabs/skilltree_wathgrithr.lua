@@ -171,13 +171,13 @@ local ONACTIVATE_FNS = {
             inst.components.battleborn:SetBattlebornBonus(0.25 * TUNING.DSTU.WATHGRITHR_SHADOW_BATTLEBORN_BONUS_MULT)
         end
 
-        if inst.components.hunger ~= nil then
-            inst.components.hunger:SetRate(TUNING.WILSON_HUNGER_RATE * TUNING.DSTU.WATHGRITHR_SHADOW_HUNGER_MULT)
-        end
+        --if inst.components.hunger ~= nil then
+            --inst.components.hunger:SetRate(TUNING.WILSON_HUNGER_RATE * TUNING.DSTU.WATHGRITHR_SHADOW_HUNGER_MULT)
+        --end
 
-        if inst.components.hunger ~= nil then
-            inst.components.health:SetMaxHealth(TUNING.WATHGRITHR_HEALTH * TUNING.DSTU.WATHGRITHR_MAXHEALTH_MULT)
-        end
+        --if inst.components.hunger ~= nil then
+            --inst.components.health:SetMaxHealth(TUNING.WATHGRITHR_HEALTH * TUNING.DSTU.WATHGRITHR_MAXHEALTH_MULT)
+        --end
 
         UpdateInspirationBadge(inst)
     end,
@@ -264,13 +264,13 @@ local ONDEACTIVATE_FNS = {
             inst.components.battleborn:SetBattlebornBonus(0.25 * TUNING.DSTU.WATHGRITHR_BASE_BATTLEBORN_BONUS_MULT)
         end
 
-        if inst.components.hunger ~= nil then
-            inst.components.hunger:SetRate(TUNING.WILSON_HUNGER_RATE)
-        end
+        --if inst.components.hunger ~= nil then
+            --inst.components.hunger:SetRate(TUNING.WILSON_HUNGER_RATE)
+        --end
 
-        if inst.components.hunger ~= nil then
-            inst.components.health:SetMaxHealth(TUNING.WATHGRITHR_HEALTH)
-        end
+        --if inst.components.hunger ~= nil then
+            --inst.components.health:SetMaxHealth(TUNING.WATHGRITHR_HEALTH)
+        --end
 
         UpdateInspirationBadge()
     end,
@@ -769,16 +769,16 @@ if SkillTreeDefs.SKILLTREE_DEFS["wathgrithr"] ~= nil then
     -- AFFINITY
     --------------------------------------------------------------------------
 
-    STRINGS.SKILLTREE.WATHGRITHR.WATHGRITHR_ALLEGIANCE_LOCK_1_DESC = "Have no skills learned to unlock.\n Affinity can only be chosen as the first pick."
+    STRINGS.SKILLTREE.WATHGRITHR.WATHGRITHR_ALLEGIANCE_LOCK_1_DESC = "Have no skills learned to unlock.\nAffinity can only be chosen as the first pick."
     SkillTreeDefs.SKILLTREE_DEFS["wathgrithr"].wathgrithr_allegiance_lock_1.desc = STRINGS.SKILLTREE.WATHGRITHR.WATHGRITHR_ALLEGIANCE_LOCK_1_DESC
 
     STRINGS.SKILLTREE.WATHGRITHR.WATHGRITHR_ALLEGIANCE_SHADOW_TITLE = "Shadow Huntress"
     SkillTreeDefs.SKILLTREE_DEFS["wathgrithr"].wathgrithr_allegiance_shadow.title = STRINGS.SKILLTREE.WATHGRITHR.WATHGRITHR_ALLEGIANCE_SHADOW_TITLE
 
-    STRINGS.SKILLTREE.WATHGRITHR.WATHGRITHR_ALLEGIANCE_SHADOW_DESC = "Life and sanity steal are greatly increased. Max health increased by 50.\n Hunger rate increased by 20%.\n Inspiration is no longer gained through normal means."
+    STRINGS.SKILLTREE.WATHGRITHR.WATHGRITHR_ALLEGIANCE_SHADOW_DESC = "Life and sanity steal are greatly increased.\nInspiration is no longer gained through normal means."
     SkillTreeDefs.SKILLTREE_DEFS["wathgrithr"].wathgrithr_allegiance_shadow.desc = STRINGS.SKILLTREE.WATHGRITHR.WATHGRITHR_ALLEGIANCE_SHADOW_DESC
 
     --STRINGS.SKILLTREE.WATHGRITHR.WATHGRITHR_ALLEGIANCELUNAR_TITLE = "Lunar Melodist"
-    STRINGS.SKILLTREE.WATHGRITHR.WATHGRITHR_ALLEGIANCE_LUNAR_DESC = "Gain stronger buffs from your own songs.\n Inspiration raises faster and depletes slower.\n Life and sanity steal are removed."
+    STRINGS.SKILLTREE.WATHGRITHR.WATHGRITHR_ALLEGIANCE_LUNAR_DESC = "Gain stronger buffs from your own songs;\nInspiration raises faster and depletes slower.\nLife and sanity steal are removed."
     SkillTreeDefs.SKILLTREE_DEFS["wathgrithr"].wathgrithr_allegiance_lunar.desc = STRINGS.SKILLTREE.WATHGRITHR.WATHGRITHR_ALLEGIANCE_LUNAR_DESC
 end
