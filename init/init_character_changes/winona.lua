@@ -424,4 +424,21 @@ end)
 if not TUNING.DSTU.UPDATE_CHECK then
     TUNING.WINONA_SPOTLIGHT_RADIUS    = TUNING.WINONA_SPOTLIGHT_RADIUS * 2
     TUNING.WINONA_SPOTLIGHT_MAX_RANGE = PLAYER_CAMERA_SEE_DISTANCE * 1.1
+local holoitems = {
+    "winona_machineparts_1",
+    "winona_machineparts_2",
+    "winona_holotelepad",
+    "winona_holotelebrella",
+    "winona_recipescanner",
+}
+
+for i, v in ipairs(holoitems) do
+    env.AddPrefabPostInit(v, function(inst)
+        inst:AddTag("holoitem")
+
+        if not TheWorld.ismastersim then return end
+
+        inst.components.inventoryitem.canonlygoinpocket = false --stupidiest thing ever. I hate it.
+    end)
 end
+
