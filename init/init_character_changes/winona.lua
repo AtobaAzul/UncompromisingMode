@@ -424,6 +424,20 @@ end)
 if not TUNING.DSTU.UPDATE_CHECK then
     TUNING.WINONA_SPOTLIGHT_RADIUS    = TUNING.WINONA_SPOTLIGHT_RADIUS * 2
     TUNING.WINONA_SPOTLIGHT_MAX_RANGE = PLAYER_CAMERA_SEE_DISTANCE * 1.1
+
+local chargeable_items = {
+    "winona_telebrella",
+    "winona_remote",
+    "winona_storage_robot",
+}
+for i, v in ipairs(chargeable_items) do
+    env.AddPrefabPostInit(v, function(inst)
+        if not TheWorld.ismastersim then return end
+
+        inst.components.fueled.fueltype = FUELTYPE.BATTERYPOWER
+    end)
+end
+
 local holoitems = {
     "winona_machineparts_1",
     "winona_machineparts_2",
@@ -441,4 +455,3 @@ for i, v in ipairs(holoitems) do
         inst.components.inventoryitem.canonlygoinpocket = false --stupidiest thing ever. I hate it.
     end)
 end
-
