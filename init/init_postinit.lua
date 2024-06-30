@@ -199,7 +199,7 @@ local prefab_post = {
 	"mushroom_farm",
     "toolbox_items",
 	"otter",
-    "winona_telebrella"
+    "winona_telebrella",
     "stash_map"
 }
 
