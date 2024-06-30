@@ -307,57 +307,15 @@ local treasure_templates =
                     moonglass = { 10, 15 },
                     messagebottleempty = { 5, 10 },
                     messagebottle = 2,
-                    alterguardianhatshard = { 3, 4 },
+                    --alterguardianhatshard = { 3, 4 },
                 },
                 randomly_selected_loot =
                 {
-                    { opalstaff = 0.2,     yellowstaff = 0.2,   greenstaff = 0.2,   orangestaff = 0.2,  telestaff = 0.2 },
+                    {    yellowstaff = 0.2,   greenstaff = 0.2,   orangestaff = 0.2,  telestaff = 0.2 },
                     { yellowamulet = 0.25, orangeamulet = 0.25, greenamulet = 0.25, purpleamulet = 0.25 },
                     { trinket_26 = 0.1 },
                 },
-            },
-            uncompromsing =
-            {
-                preset_weight = 1,
-                guaranteed_loot =
-                {
-                },
-                randomly_selected_loot =
-                {
-                    { nightstick = 0.5,      bugzapper = 0.5 },
-                    { ancient_amulet_red = 1 },
-                    { plaguemask = 0.33,     widowshead = 0.33,       sunglasses = 0.33 },
-                    { viperjam = 0.33,       beefalowings = 0.33,     zaspberryparfait = 0.33 },
-                    { glass_scales = 0.33,   pied_piper_flute = 0.33, widowsgrasp = 0.33 },
-                    {
-                        hat_bagmask = 0.41,
-                        hat_blackcatmask = 0.41,
-                        hat_clownmask = 0.41,
-                        hat_orangecatmask = 0.41,
-                        hat_devilmask = 0.41,
-                        hat_fiendmask = 0.41,
-                        hat_ghostmask = 0.41,
-                        hat_oozemask = 0.41,
-                        hat_globmask = 0.41,
-                        hat_hockeymask = 0.41,
-                        hat_joyousmask = 0.41,
-                        hat_mermmask = 0.41,
-                        hat_phantommask = 0.41,
-                        hat_pigmask = 0.41,
-                        hat_pumpgoremask = 0.41,
-                        hat_wathommask = 0.41,
-                        hat_redskullmask = 0.41,
-                        hat_skullmask = 0.41,
-                        hat_spectremask = 0.41,
-                        hat_ratmask = 0.41,
-                        hat_whitecatmask = 0.41,
-                        hat_technomask = 0.41,
-                        hat_mandrakemask = 0.41,
-                        hat_opossummask = 0.41
-                    },
-                },
-            }
-        }
+            },        }
     },
 
     sunkenchest_royal_red =
