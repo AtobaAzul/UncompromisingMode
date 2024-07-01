@@ -10,6 +10,8 @@ if not TheNet:GetPVPEnabled() then
     table.insert(AURA_EXCLUDE_TAGS, "player")
 end
 
+require("wixie_shove")
+
 -- temp aggro system for the slingshots
 local function no_aggro(attacker, target)
     local targets_target = target.components.combat ~= nil and target.components.combat.target or nil
@@ -43,10 +45,19 @@ local function DealDamage(inst, attacker, target, salty)
                 target.wixieammo_hitstuncd = nil
             end)
 			
-			target.components.combat:GetAttacked(weapon ~= nil and attacker or inst, inst.finaldamage, weapon)
+			target.components.combat:GetAttacked(weapon ~= nil and attacker or inst, inst.planar_ammo and 0 or inst.finaldamage, weapon, nil, {planar = inst.planar_ammo and inst.finaldamage or 0})
         else
 			target.components.combat:GetAttacked(weapon ~= nil and attacker or inst, 0, weapon)
 
+			if target.components.planarentity then
+				if not inst.planar_ammo then
+					inst.finaldamage = (math.sqrt(inst.finaldamage * 4 + 64) - 8) * 4
+					target.components.planarentity:OnResistNonPlanarAttack(attacker)
+				else
+					target.components.planarentity:OnPlanarAttackUndefended(target)
+				end
+			end
+		
             target.components.health:DoDelta(-inst.finaldamage, false, attacker, false, attacker, false)
         end
 
@@ -103,39 +114,7 @@ local function OnHit_Limestone(inst, attacker, target)
     DealDamage(inst, attacker, target)
     ImpactFx(inst, attacker, target)
 
-    local x, y, z = inst.Transform:GetWorldPosition()
-    local tx, ty, tz = target.Transform:GetWorldPosition()
-
-    local rad = math.rad(inst:GetAngleToPoint(tx, ty, tz))
-
-    for i = 1, 50 do
-        target:DoTaskInTime((i - 1) / 50, function(target)
-            if target ~= nil and inst ~= nil then
-                -- local x, y, z = inst.Transform:GetWorldPosition()
-                -- local tx, ty, tz = target.Transform:GetWorldPosition()
-                local tx2, ty2, tz2 = target.Transform:GetWorldPosition()
-
-                -- local rad = math.rad(inst:GetAngleToPoint(tx, ty, tz))
-                local velx = math.cos(rad)  -- * 4.5
-                local velz = -math.sin(rad) -- * 4.5
-
-                local giantreduction = target:HasTag("epic") and 6 or target:HasTag("smallcreature") and 2 or 3
-
-                local dx, dy, dz = tx2 + (((inst.powerlevel) / (i + 1.5)) * velx) / giantreduction, ty2, tz2 + (((inst.powerlevel) / (i + 1.5)) * velz) / giantreduction
-                local ground = TheWorld.Map:IsPassableAtPoint(dx, dy, dz)
-                local boat = TheWorld.Map:GetPlatformAtPoint(dx, dz)
-                local ocean = TheWorld.Map:IsOceanAtPoint(dx, dy, dz)
-                if not (target.sg ~= nil and (target.sg:HasStateTag("swimming") or target.sg:HasStateTag("invisible"))) then
-                    if target ~= nil and target.components.locomotor ~= nil and dx ~= nil and (ground or boat or ocean and target.components.locomotor:CanPathfindOnWater() or target.components.tiletracker ~= nil and not target:HasTag("whale")) then
-                        --[[if ocean and target.components.amphibiouscreature and not target.components.amphibiouscreature.in_water then
-								target.components.amphibiouscreature:OnEnterOcean()
-							end]]
-                        target.Transform:SetPosition(dx, dy, dz)
-                    end
-                end
-            end
-        end)
-    end
+	WixieShove(attacker, target, inst.powerlevel, false, nil, true, false)
 
     inst:Remove()
 end
@@ -421,9 +400,36 @@ local function OnHit_Flare(inst, attacker, target)
     local flare = SpawnPrefab("slingshotammo_flare_projectile")
     flare.Transform:SetPosition(x, y, z)
 	flare.igniteradius = inst.powerlevel + 1
+    flare.planar_ammo = inst.planar_ammo
     Launch2(flare, target, 2, 1, 2, .45)
 
     inst:Remove()
+end
+
+local function SpawnGestalt(target, attacker)
+	local gestalt = SpawnPrefab("alterguardianhat_projectile")
+	local x, y, z = target.Transform:GetWorldPosition()
+	local r = GetRandomMinMax(3, 5)
+	local delta_angle = GetRandomMinMax(-90, 90)
+	local angle = (attacker:GetAngleToPoint(x, y, z) + delta_angle) * DEGREES
+	gestalt.Transform:SetPosition(x + r * math.cos(angle), y, z + r * -math.sin(angle))
+	gestalt:ForceFacePoint(x, y, z)
+	gestalt:SetTargetPosition(Vector3(x, y, z))
+	gestalt.components.follower:SetLeader(attacker)
+end
+
+local function OnHit_Alter(inst, attacker, target)
+	if attacker ~= nil then
+		local sanity = attacker.components.sanity ~= nil and attacker.components.sanity:GetPercent() or 0
+		if math.random() < TUNING.SLINGSHOT_AMMO_CHANCE_ALTER and sanity > TUNING.SANITY_BECOME_ENLIGHTENED_THRESH then
+			SpawnGestalt(target, attacker)
+			attacker.components.sanity:DoDelta(-1, true)
+		end
+	end
+	
+	DealDamage(inst, attacker, target)
+	ImpactFx(inst, attacker, target)
+	inst:Remove()
 end
 
 local function oncollide(inst, other)
@@ -467,7 +473,7 @@ local function CollisionCheck(inst)
     end
 end
 
-local function secondaryproj_fn(symbol)
+local function secondaryproj_fn(symbol, special)
     local inst = CreateEntity()
 
     inst.entity:AddTransform()
@@ -491,7 +497,7 @@ local function secondaryproj_fn(symbol)
     inst.AnimState:SetBank("slingshotammo")
     inst.AnimState:SetBuild("wixieammo_IA")
     inst.AnimState:PlayAnimation("spin_loop", true)
-    inst.AnimState:OverrideSymbol("rock", "wixieammo_IA", symbol)
+    inst.AnimState:OverrideSymbol("rock", special ~= nil and special or "wixieammo_IA", symbol)
 
     -- projectile (from projectile component) added to pristine state for optimization
     inst:AddTag("projectile")
@@ -504,6 +510,7 @@ local function secondaryproj_fn(symbol)
     end
 
     inst.persists = false
+    inst.planar_ammo = false
 
     if inst.powerlevel == nil then
         inst.powerlevel = 1
@@ -687,7 +694,61 @@ local function coconutproj_fn()
     return inst
 end
 
-local function fncommon(symbol, inv)
+local function CherryHit(inst, attacker, target)
+    if target:HasDebuff("wixiecurse_debuff") then
+        inst.powerlevel = inst.powerlevel + 1
+        target:PushEvent("wixiebite")
+    end
+	
+	inst.planar_ammo = true
+
+    DealDamage(inst, attacker, target)
+    ImpactFx(inst, attacker, target)
+
+    inst:Remove()
+end
+
+local function cherryproj_fn()
+    local inst = secondaryproj_fn("cherrift", "slingshotammo_cherrift")
+
+    if not TheWorld.ismastersim then
+        return inst
+    end
+
+    inst.Physics:SetCollisionCallback(nil)
+    inst.components.projectile:SetOnHitFn(CherryHit)
+
+    inst.impactfx = "slingshotammo_hitfx_slow"
+
+    inst.damage = TUNING.SLINGSHOT_AMMO_DAMAGE_MARBLE
+
+    inst.OnHit = CherryHit
+
+    return inst
+end
+
+local function alterproj_fn()
+    local inst = secondaryproj_fn("alter", "slingshotammo_alter")
+
+    if not TheWorld.ismastersim then
+        return inst
+    end
+
+    inst.Physics:SetCollisionCallback(nil)
+    inst.components.projectile:SetOnHitFn(OnHit_Alter)
+	
+	inst.planar_ammo = true
+
+	inst.impactfx = "slingshotammo_hitfx_alter"
+
+    inst.damage = TUNING.SLINGSHOT_AMMO_DAMAGE_ALTER or TUNING.SLINGSHOT_AMMO_DAMAGE_MARBLE
+
+	inst.OnHit = OnHit_Alter
+
+    return inst
+end
+
+local function fncommon(symbol, inv, special)
     local inst = CreateEntity()
 
     inst.entity:AddTransform()
@@ -702,6 +763,12 @@ local function fncommon(symbol, inv)
     inst.AnimState:SetBuild("wixieammo_IA")
     inst.AnimState:PlayAnimation("idle")
     inst.AnimState:OverrideSymbol("rock", "wixieammo_IA", symbol)
+
+	if special then
+		inst:AddTag("wixieammo_special")
+	else
+		inst:AddTag("wixieammo_basic")
+	end
 
     inst:AddTag("molebait")
     inst:AddTag("slingshotammo")
@@ -741,7 +808,7 @@ local function fncommon(symbol, inv)
 end
 
 local function limestone_fn()
-    local inst = fncommon("marble", "slingshotammo_limestone")
+    local inst = fncommon("marble", "slingshotammo_limestone", false)
 
     if not TheWorld.ismastersim then
         return inst
@@ -751,7 +818,7 @@ local function limestone_fn()
 end
 
 local function tar_fn()
-    local inst = fncommon("poop", "slingshotammo_tar")
+    local inst = fncommon("poop", "slingshotammo_tar", true)
 
     if not TheWorld.ismastersim then
         return inst
@@ -761,7 +828,7 @@ local function tar_fn()
 end
 
 local function obsidian_fn()
-    local inst = fncommon("thulecite", "slingshotammo_obsidian")
+    local inst = fncommon("thulecite", "slingshotammo_obsidian", true)
 
     if not TheWorld.ismastersim then
         return inst
@@ -771,7 +838,7 @@ local function obsidian_fn()
 end
 
 local function insanity_fn()
-    local inst = fncommon("thulecite", "slingshotammo_obsidian")
+    local inst = fncommon("thulecite", "slingshotammo_obsidian", true)
 
     if not TheWorld.ismastersim then
         return inst
@@ -781,8 +848,8 @@ local function insanity_fn()
 end
 
 local function lunarvine_fn()
-    local inst = fncommon("thulecite", "slingshotammo_obsidian")
-
+    local inst = fncommon("thulecite", "slingshotammo_obsidian", true)
+	
     if not TheWorld.ismastersim then
         return inst
     end
@@ -791,7 +858,7 @@ local function lunarvine_fn()
 end
 
 local function flare_fn()
-    local inst = fncommon("trinket_1", "slingshotammo_flare")
+    local inst = fncommon("trinket_1", "slingshotammo_flare", true)
 
     if not TheWorld.ismastersim then
         return inst
@@ -946,12 +1013,16 @@ local function doflareprojectilehit(inst, other)
 			if not v.components.burnable:IsBurning() then
 				v.components.burnable:Ignite()
 				
+				local damage = 15
+				
 				if v.components.combat ~= nil and v.components.health ~= nil and not v.components.health:IsDead() then
-					v.components.combat:GetAttacked(inst.attacker ~= nil and inst.attacker or inst, 15, inst)
+					v.components.combat:GetAttacked(inst.attacker ~= nil and inst.attacker or inst, inst.planar_ammo and 0 or damage, inst, nil, {planar = inst.planar_ammo and damage or 0})
 				end
 			else
+				local damage = 30
+					
 				if v.components.combat ~= nil and v.components.health ~= nil and not v.components.health:IsDead() then
-					v.components.combat:GetAttacked(inst.attacker ~= nil and inst.attacker or inst, 30, inst)
+					v.components.combat:GetAttacked(inst.attacker ~= nil and inst.attacker or inst, inst.planar_ammo and 0 or damage, inst, nil, {planar = inst.planar_ammo and damage or 0})
 				end
 			end
 		end
@@ -1039,4 +1110,5 @@ return Prefab("slingshotammo_limestone", limestone_fn, assets, prefabs),
     Prefab("slingshotammo_lunarvine_proj_secondary", lunarvineproj_fn, assets, prefabs),
     Prefab("slingshotammo_flare", flare_fn, assets, prefabs),
     Prefab("slingshotammo_flare_proj_secondary", flareproj_fn, assets, prefabs),
-    Prefab("slingshotammo_flare_projectile", flareprojectilefn, assets, prefabs)
+    Prefab("slingshotammo_flare_projectile", flareprojectilefn, assets, prefabs),
+    Prefab("slingshotammo_cherrift_proj_secondary", cherryproj_fn, assets, prefabs)

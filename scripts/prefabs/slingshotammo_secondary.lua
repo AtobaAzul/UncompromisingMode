@@ -6,6 +6,7 @@ end
 local assets = { Asset("ANIM", "anim/slingshotammo.zip") }
 
 local easing = require("easing")
+require("wixie_shove")
 
 -- temp aggro system for the slingshots
 local function no_aggro(attacker, target)
@@ -36,6 +37,7 @@ local function OnAttack(inst, attacker, target)
         if inst.ammo_def ~= nil and inst.ammo_def.damage ~= nil then
             inst.finaldamage = (inst.ammo_def.damage * (1 + (inst.powerlevel / 2))) * (attacker.components.combat ~= nil and attacker.components.combat.externaldamagemultipliers:Get() or 1)
 
+		
             if no_aggro(attacker, target) and target.components.combat ~= nil then
                 target.components.combat:SetShouldAvoidAggro(attacker)
             end
@@ -49,10 +51,19 @@ local function OnAttack(inst, attacker, target)
                     target.wixieammo_hitstuncd = nil
                 end)
 
-				target.components.combat:GetAttacked(weapon ~= nil and attacker or inst, inst.finaldamage, weapon)
+				target.components.combat:GetAttacked(weapon ~= nil and attacker or inst, inst.planar_ammo and 0 or inst.finaldamage, weapon, nil, {planar = inst.planar_ammo and inst.finaldamage or 0})
             else
                 target.components.combat:GetAttacked(weapon ~= nil and attacker or inst, 0, weapon)
 
+				if target.components.planarentity then
+					if not inst.planar_ammo then
+						inst.finaldamage = (math.sqrt(inst.finaldamage * 4 + 64) - 8) * 4
+						target.components.planarentity:OnResistNonPlanarAttack(attacker)
+					else
+						target.components.planarentity:OnPlanarAttackUndefended(target)
+					end
+				end
+			
                 target.components.health:DoDelta(-inst.finaldamage, false, attacker, false, attacker, false)
             end
         end
@@ -321,42 +332,7 @@ local function OnHit_Marble(inst, attacker, target)
     -- ImpactFx(inst, attacker, target)
 
     if target ~= nil and target:IsValid() and target.components and target.components.locomotor and not target:HasTag("stageusher") and not target:HasTag("toadstool") then
-        local x, y, z = inst.Transform:GetWorldPosition()
-        local tx, ty, tz = target.Transform:GetWorldPosition()
-
-        local rad = math.rad(inst:GetAngleToPoint(tx, ty, tz))
-
-        for i = 1, 50 do
-            target:DoTaskInTime((i - 1) / 50, function(target)
-                if target ~= nil and inst ~= nil then
-                    -- local x, y, z = inst.Transform:GetWorldPosition()
-                    -- local tx, ty, tz = target.Transform:GetWorldPosition()
-                    local tx2, ty2, tz2 = target.Transform:GetWorldPosition()
-
-                    -- local rad = math.rad(inst:GetAngleToPoint(tx, ty, tz))
-                    local velx = math.cos(rad)  -- * 4.5
-                    local velz = -math.sin(rad) -- * 4.5
-
-                    local giantreduction = target:HasTag("epic") and 8 or target:HasTag("smallcreature") and 2 or 3
-
-                    local dx, dy, dz = tx2 + (((inst.powerlevel) / (i + 1)) * velx) / giantreduction, ty2, tz2 + (((inst.powerlevel) / (i + 1)) * velz) / giantreduction
-
-                    local ground = TheWorld.Map:IsPassableAtPoint(dx, dy, dz)
-                    local boat = TheWorld.Map:GetPlatformAtPoint(dx, dz)
-                    local ocean = TheWorld.Map:IsOceanAtPoint(dx, dy, dz)
-
-                    if not (target.sg ~= nil and (target.sg:HasStateTag("swimming") or target.sg:HasStateTag("invisible"))) then
-                        if target ~= nil and target.components.locomotor ~= nil and dx ~= nil and (ground or boat or ocean and target.components.locomotor:CanPathfindOnWater() or target.components.tiletracker ~= nil and not target:HasTag("whale")) then
-                            --[[if ocean and target.components.amphibiouscreature and not target.components.amphibiouscreature.in_water then
-									target.components.amphibiouscreature:OnEnterOcean()
-								end]]
-
-                            target.Transform:SetPosition(dx, dy, dz)
-                        end
-                    end
-                end
-            end)
-        end
+		WixieShove(attacker, target, inst.powerlevel, false, nil, true, false)
     end
 
     inst:Remove()
@@ -399,7 +375,7 @@ local function OnHit_Gold(inst, attacker, target)
 
         local ents = TheSim:FindEntities(x, y, z, 1.5 + inst.powerlevel, { "_combat" }, AURA_EXCLUDE_TAGS)
         local damage = (inst.ammo_def.damage * (1 + (inst.powerlevel / 2))) * (attacker.components.combat ~= nil and attacker.components.combat.externaldamagemultipliers:Get() or 1)
-
+		
         for i, v in ipairs(ents) do
             if v ~= target and v:IsValid() and not v:IsInLimbo() and (v:HasTag("bird_mutant") or not v:HasTag("bird")) then
                 if not (v.components.follower ~= nil and v.components.follower:GetLeader() ~= nil and v.components.follower:GetLeader():HasTag("player")) then
@@ -410,7 +386,7 @@ local function OnHit_Gold(inst, attacker, target)
 		
 						local weapon = attacker.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS) or nil
 
-						v.components.combat:GetAttacked(weapon ~= nil and attacker or inst, damage, weapon)
+						v.components.combat:GetAttacked(weapon ~= nil and attacker or inst, inst.planar_ammo and 0 or damage, weapon, nil, {planar = inst.planar_ammo and damage or 0})
 
                         if v.components.sleeper ~= nil and v.components.sleeper:IsAsleep() then
                             v.components.sleeper:WakeUp()
@@ -501,6 +477,7 @@ local function projectile_fn(ammo_def)
     end
 
     inst.persists = false
+    inst.planar_ammo = false
 
     inst.ammo_def = ammo_def
 
@@ -542,8 +519,8 @@ local ammo = {
         damage = TUNING.SLINGSHOT_AMMO_DAMAGE_THULECITE,
         hit_sound = "dontstarve/characters/walter/slingshot/gold"
     },
-    { name = "slingshotammo_freeze", symbol = "freeze", onhit = OnHit_Ice,    tags = { "extinguisher" },                  onloadammo = onloadammo_ice,                              onunloadammo = onunloadammo_ice, damage = nil, hit_sound = "dontstarve/characters/walter/slingshot/frozen" },
-    { name = "slingshotammo_slow",   symbol = "slow",   onhit = OnHit_Vortex, damage = TUNING.SLINGSHOT_AMMO_DAMAGE_SLOW, hit_sound = "dontstarve/characters/walter/slingshot/slow" },
+    { name = "slingshotammo_freeze", symbol = "freeze", onhit = OnHit_Ice,    tags = { "extinguisher" },                  onloadammo = onloadammo_ice,                              onunloadammo = onunloadammo_ice, damage = TUNING.SLINGSHOT_AMMO_DAMAGE_GOLD, hit_sound = "dontstarve/characters/walter/slingshot/frozen" },
+    { name = "slingshotammo_slow",   symbol = "slow",   onhit = OnHit_Vortex, damage = TUNING.SLINGSHOT_AMMO_DAMAGE_GOLD, hit_sound = "dontstarve/characters/walter/slingshot/slow" },
     {
         name = "slingshotammo_poop", -- distraction (drop target, note: hostile creatures will probably retarget you very shortly after)
         symbol = "poop",
