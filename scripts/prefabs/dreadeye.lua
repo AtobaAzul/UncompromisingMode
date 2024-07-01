@@ -256,9 +256,11 @@ local function Disguise(inst)
 end
 
 local function TryDisguise(inst, target)
-	inst.disguisetarget = target
-	inst.sg:GoToState("disguise_pre")
-	--Disguise(inst)
+	if not inst.components.combat:HasTarget() then
+		inst.disguisetarget = target
+		inst.sg:GoToState("disguise_pre")
+		--Disguise(inst)
+	end
 end
 
 local function ResetCooldown(inst)

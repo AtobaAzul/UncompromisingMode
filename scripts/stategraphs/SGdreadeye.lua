@@ -481,13 +481,13 @@ local states =
                     end
                 end
 
-                inst.Transform:SetRotation(math.random(360))
+                --inst.Transform:SetRotation(math.random(360))
 
-                if math.random() <= 0.33 then
-                    inst.sg:GoToState("disguise")
-                else
+                --if math.random() <= 0.33 then
+                    --inst.sg:GoToState("disguise")
+                --else
                     inst.sg:GoToState("appear")
-                end
+                --end
             end),
         },
     },
