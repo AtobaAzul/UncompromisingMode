@@ -58,7 +58,7 @@ TUNING.DSTU = {
     FOOD_SPOILED_FOOD_SANITY = -5,
     FOOD_SEEDS_HUNGER = 1.5,
     -- Food production
-    FOOD_HONEY_PRODUCTION_PER_STAGE = { 0, 1, 3, 6 },
+    FOOD_HONEY_PRODUCTION_PER_STAGE = { 0, 1, 2, 3 },
     -- Respawn time increases
     BUNNYMAN_RESPAWN_TIME_DAYS = 3,
     ----------------------------------------------------------------------------""""

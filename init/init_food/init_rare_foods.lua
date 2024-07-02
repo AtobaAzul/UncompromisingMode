@@ -338,83 +338,136 @@ end)
 -----------------------------------------------------------------
 local HONEY_PER_STAGE = GLOBAL.TUNING.DSTU.FOOD_HONEY_PRODUCTION_PER_STAGE
 
-levels = {
-    { amount = HONEY_PER_STAGE[4], idle = "honey3",    hit = "hit_honey3" },
-    { amount = HONEY_PER_STAGE[3], idle = "honey2",    hit = "hit_honey2" },
-    { amount = HONEY_PER_STAGE[2], idle = "honey1",    hit = "hit_honey1" },
-    { amount = HONEY_PER_STAGE[1], idle = "bees_loop", hit = "hit_idle" },
+local beebox_prefabs = {
+	"beebox",
+	"beebox_hermit",
 }
 
-local function setlevel(inst, level)
-    if not inst:HasTag("burnt") then
-        if inst.anims == nil then
-            inst.anims = { idle = level.idle, hit = level.hit }
-        else
-            inst.anims.idle = level.idle
-            inst.anims.hit = level.hit
-        end
-        inst.AnimState:PlayAnimation(inst.anims.idle)
-    end
-end
-
-local function updatelevel(inst)
-    if not inst:HasTag("burnt") then
-        for k, v in pairs(levels) do
-            if inst.components.harvestable.produce >= v.amount then
-                setlevel(inst, v)
-                break
-            end
-        end
-    end
-end
-
-local function onharvest(inst, picker, produce)
-    if not inst:HasTag("burnt") then
-        updatelevel(inst)
-		if (picker ~= nil and picker.components.skilltreeupdater ~= nil and picker.components.skilltreeupdater:IsActivated("wormwood_bugs")) then
-			if inst.components.childspawner ~= nil and not GLOBAL.TheWorld.state.iswinter and not GLOBAL.TheWorld.state.isdusk and not GLOBAL.TheWorld.state.isnight then
-				inst.components.childspawner:ReleaseAllChildren()
+local function ReleaseBees(inst, picker)
+	if not inst:HasTag("burnt") and picker and not GLOBAL.TheWorld.state.iswinter then
+		local protection
+		local isspring = GLOBAL.TheWorld.state.isspring
+		
+		if picker.components.inventory then
+			for k, eslot in pairs(GLOBAL.EQUIPSLOTS) do
+				local equip = picker.components.inventory:GetEquippedItem(eslot)
+				if equip and equip.components.armor and equip.components.armor.tags then
+					for i, tag in ipairs(equip.components.armor.tags) do
+						if tag == "bee" then
+							protection = equip
+							break
+						end
+					end
+				end
 			end
 		end
-        
-		if not (picker ~= nil and picker.components.skilltreeupdater ~= nil and picker.components.skilltreeupdater:IsActivated("wormwood_bugs")) then
-			if inst.components.childspawner ~= nil and not GLOBAL.TheWorld.state.iswinter then
-				inst.components.childspawner:ReleaseAllChildren(picker)
+		
+		if picker.components.combat and picker.components.skilltreeupdater and not picker.components.skilltreeupdater:IsActivated("wormwood_bugs") then
+			if isspring then
+				if protection then
+					protection.components.armor:TakeDamage(40)
+				elseif picker:HasTag("pinetreepioneer") then				
+					picker.components.health:DoDelta(-30, false, inst.prefab, false, nil, inst, false)
+					picker.sg:GoToState("hit", inst)					
+				else			
+					picker.components.health:DoDelta(-20, false, inst.prefab, false, nil, inst, false)
+					picker.sg:GoToState("hit", inst)					
+				end	
+			else
+				if protection then
+					protection.components.armor:TakeDamage(20)
+				elseif picker:HasTag("pinetreepioneer") then
+					picker.components.health:DoDelta(-20, false, inst.prefab, false, nil, inst, false)
+					picker.sg:GoToState("hit", inst)	
+				else
+					picker.components.health:DoDelta(-10, false, inst.prefab, false, nil, inst, false)
+					picker.sg:GoToState("hit", inst)
+				end	
 			end
+		end
+		
+		if picker.components.skilltreeupdater and picker.components.skilltreeupdater:IsActivated("wormwood_bugs")
+		and inst.components.childspawner and not GLOBAL.TheWorld.state.isdusk and not GLOBAL.TheWorld.state.isnight then
+			inst.components.childspawner:ReleaseAllChildren()
 		end
 	end
 end
 
-if GetModConfigData("beebox_nerf") then
-    AddPrefabPostInit("beebox", function(inst)
-        -- TODO, test this
-        if not GLOBAL.TheWorld.ismastersim then
-            return
-        end
+local function UpdateHoneyLevels(inst)
+	for i, amt in pairs(HONEY_PER_STAGE) do
+		if inst.components.harvestable.produce == amt or i >= #HONEY_PER_STAGE then
+			inst.anims = {
+				idle = amt <= 0 and "bees_loop" or "honey"..i - 1,
+				hit = amt <= 0 and "hit_idle" or "hit_honey"..i - 1,
+			}
+			inst.AnimState:PlayAnimation(inst.anims.idle)
+			
+			break
+		end
+	end
+end
 
-        if inst.components.harvestable ~= nil then
-            inst.components.harvestable:SetUp("honey", HONEY_PER_STAGE[4], nil, onharvest, updatelevel)
-        end
+for i, v in ipairs(beebox_prefabs) do
+	AddPrefabPostInit(v, function(inst)
+		if not GLOBAL.TheWorld.ismastersim then
+			return
+		end
 		
-		inst:ListenForEvent("onharvest", onharvest)
-
-        updatelevel(inst)
-    end)
-
-    AddPrefabPostInit("beebox_hermit", function(inst)
-        -- TODO, test this
-        if not GLOBAL.TheWorld.ismastersim then
-            return
-        end
-
-        if inst.components.harvestable ~= nil then
-            inst.components.harvestable:SetUp("honey", HONEY_PER_STAGE[4], nil, onharvest, updatelevel)
-        end
+		inst.ReleaseBees = ReleaseBees
+		inst.UpdateHoneyLevels = UpdateHoneyLevels
 		
-		inst:ListenForEvent("onharvest", onharvest)
-
-        updatelevel(inst)
-    end)
+		if inst.components.harvestable then
+			local OldOnGrow
+			local OldOnHarvest
+			local OldOnLoad
+			
+			if not OldOnGrow then
+				OldOnGrow = inst.components.harvestable.ongrowfn
+			end
+			
+			if not OldOnHarvest then
+				OldOnHarvest = inst.components.harvestable.onharvestfn
+			end
+			
+			if not OldOnLoad then
+				OldOnLoad = inst.OnLoad
+			end
+			
+			local function OnGrow(inst, ...)
+				if OldOnGrow then
+					OldOnGrow(inst, ...)
+				end
+				
+				inst:UpdateHoneyLevels(inst)
+			end
+			
+			local function OnHarvest(inst, picker, ...)
+				inst:ReleaseBees(picker)
+				
+				if OldOnHarvest then
+					OldOnHarvest(inst, picker, ...)
+				end
+				
+				inst:UpdateHoneyLevels(inst)
+			end
+			
+			local function OnLoad(inst, ...)
+				if OldOnLoad then
+					OldOnLoad(inst, ...)
+				end
+				
+				inst:UpdateHoneyLevels(inst)
+			end
+			
+			inst.components.harvestable.maxproduce = HONEY_PER_STAGE[4]
+			inst.components.harvestable.ongrowfn = OnGrow
+			inst.components.harvestable.onharvestfn = OnHarvest
+			
+			inst.OnLoad = OnLoad
+			
+			inst:UpdateHoneyLevels(inst)
+		end
+	end)
 end
 -----------------------------------------------------------------
 -- Haunting pig torches only creates the pig with 10% chance
