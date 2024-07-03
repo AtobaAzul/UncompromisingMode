@@ -59,6 +59,12 @@ CONSTRUCTION_PLANS["multiplayer_portal_moonrock_constr"] = {
 --while AllRecipes doesn't. Not sure if there's any issues with that.
 
 -- Recipe changes
+
+--I HATE FRAZZLED WIRES!!!!!!!!
+AllRecipes["boat_magnet_kit"].ingredients = {Ingredient("boards", 2), Ingredient("cutstone", 2), Ingredient("transistor", 1), Ingredient("wagpunk_bits", 1)}
+AllRecipes["boat_magnet"].ingredients = {Ingredient("boards", 2), Ingredient("cutstone", 2), Ingredient("transistor", 1), Ingredient("wagpunk_bits", 1)}
+AllRecipes["boat_magnet_beacon"].ingredients = {Ingredient("cutstone", 2), Ingredient("transistor", 1), Ingredient("wagpunk_bits", 1)}	
+
 AllRecipes["compass"].ingredients = { Ingredient("goldnugget", 4), Ingredient("flint", 2) }
 
 if GetModConfigData("longpig") then
