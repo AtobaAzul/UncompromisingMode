@@ -2,5 +2,5 @@
 AddPlayerPostInit(function(inst)
 	inst:AddComponent("uncompromising_lungs")
 	inst:AddComponent("uncompromising_voidtracker")
-	inst:AddComponent("firerain")
+	--inst:AddComponent("firerain")
 end)

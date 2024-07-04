@@ -121,7 +121,7 @@ local function RandomizeLevel()
     return math.random(#SHOWER_LEVELS)
 end
 
-local FireRain = Class(function(self,inst)
+local FireRain = Class(function(self, inst)
     self.inst = inst
 
     self.dt = nil
@@ -157,8 +157,8 @@ function FireRain:SpawnMeteor(mod)
         function(offset)
             return not map:IsPassableAtPoint(x + offset.x, y + offset.y, z + offset.z)
         end)
-		
-	local function IsValidSinkholePosition(offset2)
+
+    local function IsValidSinkholePosition(offset2)
         local x1, z1 = x + offset2.x, z + offset2.z
         for dx = -1, 1 do
             for dz = -1, 1 do
@@ -179,15 +179,15 @@ function FireRain:SpawnMeteor(mod)
         nil
 
     if fan_offset ~= nil and offset2 ~= nil then
-		local xrandom = x + math.random(-5, 5)
-		local zrandom = z + math.random(-5, 5)
-		
-		local met = SpawnPrefab("antlion_sinkhole_boat")
-		
-		if math.random() >= 0.33 then
-			met.Transform:SetPosition(xrandom, y, zrandom)
-		end
-		
+        local xrandom = x + math.random(-5, 5)
+        local zrandom = z + math.random(-5, 5)
+
+        local met = SpawnPrefab("antlion_sinkhole_boat")
+
+        if math.random() >= 0.33 then
+            met.Transform:SetPosition(xrandom, y, zrandom)
+        end
+
         if mod == nil then
             mod = 1
         end
@@ -196,10 +196,10 @@ function FireRain:SpawnMeteor(mod)
         local peripheral = radius > TUNING.METEOR_SHOWER_SPAWN_RADIUS - TUNING.METEOR_SHOWER_CLEANUP_BUFFER
         local rand = not peripheral and math.random() or 1
         local cost = math.floor(1 / mod + .5)
-        
+
         return met
     end
-	--[[
+    --[[
 	local x = GetRandomWithVariance(spawnpt.x, TUNING.ANTLION_SINKHOLE.RADIUS)
     local z = GetRandomWithVariance(spawnpt.z, TUNING.ANTLION_SINKHOLE.RADIUS)
 
@@ -243,7 +243,7 @@ local function OnUpdate(inst, self)
         self.spawn_mod = (self.spawn_mod or 1) - TUNING.METEOR_SHOWER_OFFSCREEN_MOD
         if self.spawn_mod <= 0 then
             self.spawn_mod = self.spawn_mod + 1
-            self:SpawnMeteor(TUNING.METEOR_SHOWER_OFFSCREEN_MOD)            
+            self:SpawnMeteor(TUNING.METEOR_SHOWER_OFFSCREEN_MOD)
         end
     end
 
@@ -283,6 +283,7 @@ function FireRain:StopShower()
     self.large_remaining = nil
     self.retries_remaining = nil
 end
+
 --[[
 local function OnCooldown(inst, self)
     if inst:IsNearPlayer(TUNING.METEOR_SHOWER_SPAWN_RADIUS + 60) then
@@ -344,7 +345,7 @@ end
 
 function FireRain:GetDebugString()
     return string.format("Level %d ", self.level)
-        ..((self:IsShowering() and string.format("SHOWERING: %2.2f, interval: %2.2f (mod: %s), stock: (%d large, %d medium, unlimited small)", self.tasktotime - GetTime(), self.dt, self.spawn_mod ~= nil and string.format("%1.1f", TUNING.METEOR_SHOWER_OFFSCREEN_MOD) or "---", self.large_remaining, self.medium_remaining)) or
+        .. ((self:IsShowering() and string.format("SHOWERING: %2.2f, interval: %2.2f (mod: %s), stock: (%d large, %d medium, unlimited small)", self.tasktotime - GetTime(), self.dt, self.spawn_mod ~= nil and string.format("%1.1f", TUNING.METEOR_SHOWER_OFFSCREEN_MOD) or "---", self.large_remaining, self.medium_remaining)) or
             (self:IsCoolingDown() and string.format("COOLDOWN: %2.2f, retry: %d/%d", self.tasktotime - GetTime(), NUM_RETRIES - self.retries_remaining, NUM_RETRIES)) or
             "STOPPED")
 end
