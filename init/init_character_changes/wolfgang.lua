@@ -579,7 +579,7 @@ local function GetPointSpecialActions(inst, pos, useitem, right)
 		local tooClose = distance < TUNING.FEAT_OF_STRENGTH_MIGHTY_LEAP_MIN_DIST
         local rider = inst.replica.rider
 		local isHeavyLifting = inst.replica.inventory:IsHeavyLifting()
-		local leapExpert = inst:HasTag("mighty_leap_expert")
+		local leapExpert = inst.components.skilltreeupdater:IsActivated("wolfgang_mighty_legs_expert")
 		if TheWorld:HasTag("cave") and not TheWorld.Map:IsVisualGroundAtPoint(pos.x, pos.y, pos.z) then
 			return {} --prevent void leaping
 		end
