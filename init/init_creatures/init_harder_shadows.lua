@@ -161,11 +161,14 @@ local function inducedcheck(inst)
 end
 
 local function purplepostinit(inst)
+    inst:AddTag("NOBLOCK")
+
     if not GLOBAL.TheWorld.ismastersim then
         return
     end
     inst:DoTaskInTime(0.1, inducedcheck) --0.1... sometimes it seems certain nm creatures don't actualy see the fuel farmer upon spawn if we use 0 instead.
 end
+
 AddPrefabPostInit("crawlinghorror", purplepostinit)
 AddPrefabPostInit("terrorbeak", purplepostinit)
 

@@ -128,7 +128,7 @@ env.AddPlayerPostInit(function(inst)
                         end
                         v.AnimState:SetMultColour(0, 0, 0, 0) --go invis
                         v:AddTag("NOCLICK")
-                        v:AddTag("noblock")
+                        v:AddTag("NOBLOCK")
                         v.components.inventoryitem.canbepicked = false
                         v:DoTaskInTime(5, v.Remove) --lenient time
                     end)
