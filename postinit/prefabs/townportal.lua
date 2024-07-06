@@ -21,10 +21,11 @@ local PICKUP_CANT_TAGS = {
     "heatrock", "deploykititem", "boatbuilder", "singingshell",
     "archive_lockbox", "simplebook", "furnituredecor",
     -- Pickables
-    "flower", "gemsocket", "structure",
+    "flower", "gemsocket", --"structure",
     -- Either
     "donotautopick",
-    "moonglass_geode"
+    "moonglass_geode",
+    "engineeringbatterypowered"
 }
 
 local function pickup(inst, channeler)
@@ -35,6 +36,7 @@ local function pickup(inst, channeler)
     local ents = TheSim:FindEntities(x, y, z, TUNING.FIRE_DETECTOR_RANGE * 1.1, nil, PICKUP_CANT_TAGS,
         ORANGE_PICKUP_MUST_TAGS)
     for i, v in ipairs(ents) do
+        print("what the fuck")
         if v.components.inventoryitem ~= nil and --Inventory stuff
             v.components.inventoryitem.canbepickedup and
             v.components.inventoryitem.cangoincontainer and
