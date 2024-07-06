@@ -344,7 +344,7 @@ TUNING.DSTU = {
     EYEBRELLAREWORK = GetModConfigData("eyebrellarework"),
     -- More Config
     UPDATE_CHECK = CurrentRelease.GreaterOrEqualTo("R34_OCEANQOL_WINONAWURT"), -- REMEMBER TO ALWAYS UPDATE THIS WITH NEW BETAS.
-    POCKET_POWERTRIP = GetModConfigData("pocket_powertrip"),
+    POCKET_POWERTRIP = GetModConfigData("pocket_powertrip_"),
     WINTER_BURNING = GetModConfigData("winter_burning"),
     HUNGRY_VOID = GetModConfigData("hungry_void"),
     BUTTERFLYWINGS_NERF = GetModConfigData("butterflywings_nerf"),
