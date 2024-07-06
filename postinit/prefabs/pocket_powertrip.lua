@@ -16,40 +16,28 @@ local function ExplodeInventoryPerish(inst)
 end
 
 
-local function Folded(inst)
-    if inst.components.container ~= nil then
-        inst:DoTaskInTime(0, function(inst)
-            local owner = inst.components.inventoryitem.owner
-
-            if not inst.components.equippable:IsEquipped() and owner ~= nil then
-                if #inst.components.container:FindItems(function(item) return item.components.inventoryitem ~= nil end) > 0 then
-                    if owner:HasTag("winky") then
-                        for i = 1, inst.components.container:NumItems() do
-                            owner.components.sanity:DoDelta(-5)
-                        end
-                    end
-
-                    if owner.SoundEmitter ~= nil and TUNING.DSTU.POCKET_POWERTRIP == 1 then
-                        owner.SoundEmitter:PlaySound("dontstarve/common/tool_slip")
-                    end
-                end
-                if TUNING.DSTU.POCKET_POWERTRIP == 1 then
-                    inst.components.container:DropEverything()
-                end
-            end
-        end)
+local function OnContainerChanged(inst)
+    if inst.components.container:IsEmpty() then
+        inst.components.inventoryitem.cangoincontainer = true
+    else
+        inst.components.inventoryitem.cangoincontainer = false
     end
 end
 
 local function DoPockets(inst, widget)
+    inst:AddTag("backpack")
+
     if not TheWorld.ismastersim then
         inst.OnEntityReplicated = function(inst)
             inst.replica.container:WidgetSetup(widget)
         end
         return inst
     end
+
     inst:AddComponent("container")
+
     inst.components.container:WidgetSetup(widget)
+
     if inst.components.equippable ~= nil then
         local OnEquip_old = inst.components.equippable.onequipfn
 
@@ -74,15 +62,11 @@ local function DoPockets(inst, widget)
         end
     end
 
-    if TUNING.DSTU.POCKET_POWERTRIP == 2 then
-        inst.components.inventoryitem.cangoincontainer = false
-    end
 
     if inst.components.inventoryitem ~= nil then
         local _onputininventoryfn = inst.components.inventoryitem.onputininventoryfn
 
         inst.components.inventoryitem:SetOnPutInInventoryFn(function(inst)
-            Folded(inst)
 
             if _onputininventoryfn ~= nil then
                 _onputininventoryfn(inst)
@@ -107,7 +91,9 @@ local function DoPockets(inst, widget)
         end
     end
 
-    inst:ListenForEvent("itemget", Folded)
+    inst:ListenForEvent("itemget", OnContainerChanged)
+    inst:ListenForEvent("itemlose", OnContainerChanged)
+
 end
 
 env.AddPrefabPostInit("trunkvest_summer", function(inst)

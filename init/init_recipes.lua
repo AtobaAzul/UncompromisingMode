@@ -418,7 +418,7 @@ AddRecipe2(
 ChangeSortKey("sporepack", "icepack", "CLOTHING", true)
 ChangeSortKey("sporepack", "icepack", "CONTAINERS", true)
 
-if GetModConfigData("pocket_powertrip") ~= 0 then
+if GetModConfigData("pocket_powertrip") then
     AddRecipeToFilter("raincoat", "CONTAINERS")
     ChangeSortKey("raincoat", "sporepack", "CONTAINERS", true)
 
