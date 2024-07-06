@@ -1526,7 +1526,7 @@ end
 
 local function IsAVersionOfRot(v) if v.prefab == "spoiled_food" or v.prefab == "rottenegg" or v.prefab == "spoiled_fish" or v.prefab == "spoiled_fish_small" then return true end end
 
-local NOTAGS = {"smallcreature", "_container", "spore", "NORATCHECK", "_combat", "_health", "balloon", "heavy", "projectile", "frozen"}
+local NOTAGS = {"engineeringbatterypowered", "smallcreature", "_container", "spore", "NORATCHECK", "_combat", "_health", "balloon", "heavy", "projectile", "frozen"}
 
 local function FoodScoreCalculations(inst, container, v)
     local delta = 0
