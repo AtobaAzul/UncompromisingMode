@@ -181,6 +181,8 @@ local function fn()
         inst:AddTag("weapon")
     end
 
+    inst:AddTag("donotautopick")
+
     MakeInventoryFloatable(inst, "small", 0.1, 0.8)
 
     inst.entity:SetPristine()

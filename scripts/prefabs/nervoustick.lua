@@ -183,7 +183,8 @@ local function fn()
     inst:AddTag("nervoustick")
     inst:AddTag("notraptrigger")
     inst:AddTag("nosteal")
-
+    inst:AddTag("donotautopick")
+    
     inst.AnimState:SetBank("nervoustick")
     inst.AnimState:SetBuild("nervoustick")
     inst.AnimState:PlayAnimation("idle", true)

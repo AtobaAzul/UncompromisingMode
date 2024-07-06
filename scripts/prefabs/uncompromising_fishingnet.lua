@@ -39,6 +39,7 @@ local function fn()
 
     inst:AddTag("allow_action_on_impassable")
     inst:AddTag("uncompromising_fishingnetvisualizer")
+    inst:AddTag("donotautopick")
 
     MakeInventoryPhysics(inst)
 
@@ -48,15 +49,15 @@ local function fn()
 
     inst.MiniMapEntity:SetIcon("boat_net.png")
 
-    MakeInventoryFloatable(inst, "large", nil, {0.68, 0.5, 0.68})
+    MakeInventoryFloatable(inst, "large", nil, { 0.68, 0.5, 0.68 })
 
     inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then
         return inst
     end
-	
-	inst.netweight = 1
+
+    inst.netweight = 1
 
     inst:AddComponent("finiteuses")
     inst.components.finiteuses:SetMaxUses(TUNING.FISHING_NET_USES)
@@ -65,8 +66,8 @@ local function fn()
     --inst.components.finiteuses:SetConsumption(ACTIONS.CAST_NET, 1)
 
     inst:AddComponent("inventoryitem")
-	inst.components.inventoryitem.atlasname = "images/inventoryimages/uncompromising_fishingnet.xml"
-	
+    inst.components.inventoryitem.atlasname = "images/inventoryimages/uncompromising_fishingnet.xml"
+
     inst:AddComponent("fishingnet")
     inst:AddComponent("inspectable")
 

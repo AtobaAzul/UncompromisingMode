@@ -44,7 +44,7 @@ local function fn()
     inst:AddTag("fishingrod")
 
 	inst:AddTag("allow_action_on_impassable")
-
+    inst:AddTag("donotautopick")
 	inst:AddTag("weapon")
 
     local floater_swap_data = {sym_build = "swap_driftwood_fishingrod"}

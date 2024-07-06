@@ -157,7 +157,8 @@ local function fn()
 
     inst:AddTag("resurrector")
     inst:AddTag("NORATCHECK")
-
+    inst:AddTag("donotautopick")
+    
     inst.foleysound = "dontstarve/movement/foley/jewlery"
 
     MakeInventoryFloatable(inst, "med", nil, 0.6)
@@ -180,6 +181,7 @@ local function fn()
     inst.components.equippable.is_magic_dapperness = true
 
     inst:AddComponent("inventoryitem")
+    
 	inst.components.inventoryitem.atlasname = "images/inventoryimages/ancient_amulet_red.xml"
 
     inst.components.equippable:SetOnEquip(onequip_blue)

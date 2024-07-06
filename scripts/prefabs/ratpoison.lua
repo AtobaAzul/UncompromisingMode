@@ -117,6 +117,8 @@ local function itemfn()
     inst.AnimState:SetBuild("tar")
     inst.AnimState:PlayAnimation("idle")
 	
+    inst:AddTag("donotautopick")
+
 	inst.entity:SetPristine()
 	
 	if not TheWorld.ismastersim then 

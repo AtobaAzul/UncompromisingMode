@@ -50,7 +50,8 @@ local function fn_crab()
     inst.AnimState:PlayAnimation("idle")
 
     inst:AddTag("hat")
-
+    inst:AddTag("donotautopick")
+    
     MakeInventoryFloatable(inst)
 
     inst.entity:SetPristine()

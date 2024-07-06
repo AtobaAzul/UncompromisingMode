@@ -263,7 +263,7 @@ local function TileFlag(inst)
     inst.AnimState:SetMultColour(math.random(5, 10) / 10, math.random(5, 10) / 10, 0, 1)
 
     inst:AddTag("DYNLAYOUT_FLAG")
-
+    inst:AddTag("donotautopick")
     -- MakeInventoryPhysics(inst)
 
     inst.entity:SetPristine()

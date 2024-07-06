@@ -64,7 +64,8 @@ local function common_fn(type)
     inst.AnimState:PlayAnimation("anim")
 
     inst:AddTag("grass")
-
+    inst:AddTag("donotautopick")
+    
     inst.foleysound = "dontstarve/movement/foley/shellarmour"
 
     local swap_data = { bank = "armor_grass", anim = "anim" }

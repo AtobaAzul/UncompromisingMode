@@ -337,7 +337,7 @@ local function frockfn()
 	--inst:AddTag("wingsuit")
 	--inst:AddTag("backpack")
 	inst:AddTag("vetcurse_item")
-
+    inst:AddTag("donotautopick")
 	--inst.foleysound = "dontstarve/movement/foley/cactus_armor"
 
 	MakeInventoryFloatable(inst)

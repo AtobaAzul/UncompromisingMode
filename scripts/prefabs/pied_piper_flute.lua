@@ -45,7 +45,8 @@ local function fn()
 
     --tool (from tool component) added to pristine state for optimization
     inst:AddTag("tool")
-
+    inst:AddTag("donotautopick")
+    
     inst.AnimState:SetBank("pied_piper_flute")
     inst.AnimState:SetBuild("pied_piper_flute")
     inst.AnimState:PlayAnimation("idle")

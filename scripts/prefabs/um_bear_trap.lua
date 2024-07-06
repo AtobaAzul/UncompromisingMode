@@ -8,7 +8,7 @@ local function onfinished_normal(inst)
     if inst.components.finiteuses ~= nil and
         inst.components.finiteuses:GetUses() > 0 and inst.traptype ~= nil then
         local trapprefab = SpawnPrefab("um_bear_trap_equippable_" ..
-                                           inst.traptype)
+            inst.traptype)
 
         if inst.latchedtarget ~= nil then
             trapprefab.Transform:SetPosition(
@@ -102,22 +102,22 @@ local function OnExplode(inst, target)
             if inst.traptype == "gold" then
                 if target.components.combat.target ~= nil then
                     target.components.combat:GetAttacked(target.components
-                                                             .combat.target,
-                                                         TUNING.TRAP_TEETH_DAMAGE *
-                                                             1.5)
+                        .combat.target,
+                        TUNING.TRAP_TEETH_DAMAGE *
+                        1.5)
                 else
                     target.components.combat:GetAttacked(inst,
-                                                         TUNING.TRAP_TEETH_DAMAGE *
-                                                             1.5)
+                        TUNING.TRAP_TEETH_DAMAGE *
+                        1.5)
                 end
             else
                 if target.components.combat.target ~= nil then
                     target.components.combat:GetAttacked(target.components
-                                                             .combat.target,
-                                                         TUNING.TRAP_TEETH_DAMAGE)
+                        .combat.target,
+                        TUNING.TRAP_TEETH_DAMAGE)
                 else
                     target.components.combat:GetAttacked(inst,
-                                                         TUNING.TRAP_TEETH_DAMAGE)
+                        TUNING.TRAP_TEETH_DAMAGE)
                 end
             end
 
@@ -252,7 +252,7 @@ end
 
 local function calculate_mine_test_time()
     return TUNING.STARFISH_TRAP_TIMING.BASE +
-               (math.random() * TUNING.STARFISH_TRAP_TIMING.VARIANCE)
+        (math.random() * TUNING.STARFISH_TRAP_TIMING.VARIANCE)
 end
 
 local function common_fn()
@@ -280,6 +280,7 @@ local function common_fn()
     inst:AddTag("smallcreature")
     inst:AddTag("mech")
     inst:AddTag("noclaustrophobia")
+    inst:AddTag("donotautopick")
 
     MakeInventoryFloatable(inst)
 
@@ -496,13 +497,12 @@ local function projectilefn()
 end
 
 local function SpawnNearVacantSpot(x, y, z)
-
-    local spots = TheSim:FindEntities(x, y, z, 14, {"walrus_trap_spot"})
+    local spots = TheSim:FindEntities(x, y, z, 14, { "walrus_trap_spot" })
     local spotfound = false
     for i, v in ipairs(spots) do
         if spotfound == false then
             local x1, y1, z1 = v.Transform:GetWorldPosition()
-            if #TheSim:FindEntities(x1, y1, z1, 2, {"bear_trap"}) == 0 then
+            if #TheSim:FindEntities(x1, y1, z1, 2, { "bear_trap" }) == 0 then
                 spotfound = true
                 local trap = SpawnPrefab("um_bear_trap_old")
                 local offset1, offset2
@@ -517,19 +517,17 @@ local function SpawnNearVacantSpot(x, y, z)
                     offset2 = -math.random(25, 50) / 100
                 end
                 trap.Transform:SetPosition(x1 + offset1, y1, z1 + offset2)
-
             end
         end
     end
 end
 
 local function VacantSpotNearby(x, y, z)
-
-    local spots = TheSim:FindEntities(x, y, z, 14, {"walrus_trap_spot"})
+    local spots = TheSim:FindEntities(x, y, z, 14, { "walrus_trap_spot" })
     local spotfound = false
     for i, v in ipairs(spots) do
         local x1, y1, z1 = v.Transform:GetWorldPosition()
-        if #TheSim:FindEntities(x1, y1, z1, 2, {"bear_trap"}) == 0 then
+        if #TheSim:FindEntities(x1, y1, z1, 2, { "bear_trap" }) == 0 then
             spotfound = true
         end
     end
@@ -544,9 +542,9 @@ local function DoSpawnTrap(x, y, z)
     local xi = x + math.random(-7, 7)
     local zi = z + math.random(-7, 7) -- Prevent traps from being placed inside things. Add more things to list as you please
     if TheWorld.Map:IsAboveGroundAtPoint(xi, 0, zi) and
-        #TheSim:FindEntities(xi, y, zi, 1.5, {"giant_tree"}) and
-        #TheSim:FindEntities(xi, y, zi, 1.5, {"bear_trap"}) == 0 and
-        #TheSim:FindEntities(xi, y, zi, 5, {"bear_trap"}) < 2 then
+        #TheSim:FindEntities(xi, y, zi, 1.5, { "giant_tree" }) and
+        #TheSim:FindEntities(xi, y, zi, 1.5, { "bear_trap" }) == 0 and
+        #TheSim:FindEntities(xi, y, zi, 5, { "bear_trap" }) < 2 then
         local trap = SpawnPrefab("um_bear_trap_old")
         trap.Transform:SetPosition(xi, y, zi)
     end
@@ -556,9 +554,9 @@ local function Spawntrap(inst)
     -- TheNet:Announce("spawntrap")
     if TheWorld.state.iswinter then
         local x, y, z = inst.Transform:GetWorldPosition() -- If the area is heavily lived in, bear traps will become a nuisance rather than a danger, know when to stop.
-        if #TheSim:FindEntities(x, y, z, 10, {"bear_trap"}) < 7 and
-            #TheSim:FindEntities(x, y, z, 30, {"structure"}, {"webbedcreature"}) <
-            20 and #TheSim:FindEntities(x, y, z, 40, {"player"}) == 0 then
+        if #TheSim:FindEntities(x, y, z, 10, { "bear_trap" }) < 7 and
+            #TheSim:FindEntities(x, y, z, 30, { "structure" }, { "webbedcreature" }) <
+            20 and #TheSim:FindEntities(x, y, z, 40, { "player" }) == 0 then
             DoSpawnTrap(x, y, z)
         end
         inst.components.timer:StartTimer("spawntrap", 600 + math.random(0, 300))
@@ -591,7 +589,7 @@ local function ghost_walrusfn() -- ghost walrus
             if not inst.components.timer:TimerExists("spawntrap") and
                 TheWorld.state.iswinter then
                 inst.components.timer:StartTimer("spawntrap",
-                                                 600 + math.random(0, 300)) -- ghost walrus leaves bear traps in the player's fridge
+                    600 + math.random(0, 300))                              -- ghost walrus leaves bear traps in the player's fridge
             end
         end
     end)
@@ -602,7 +600,6 @@ local function ghost_walrusfn() -- ghost walrus
 end
 
 local function OnHitInk(inst, target)
-
     inst:RemoveTag("NOCLICK")
     inst:RemoveTag("projectile")
 
@@ -622,7 +619,6 @@ local function OnHitInk(inst, target)
 end
 
 local function OnHitTarget_player(inst, target)
-
     inst:RemoveTag("NOCLICK")
     inst:RemoveTag("projectile")
 
@@ -661,8 +657,8 @@ end
 
 local function onequip(inst, owner)
     owner.AnimState:OverrideSymbol("swap_object",
-                                   "swap_um_beartrap_" .. inst.traptype,
-                                   "swap_um_beartrap")
+        "swap_um_beartrap_" .. inst.traptype,
+        "swap_um_beartrap")
     owner.AnimState:Show("ARM_carry")
     owner.AnimState:Hide("ARM_normal")
 end
@@ -705,7 +701,9 @@ local function ReticuleTargetFn()
     for r = 6.5, 3.5, -.25 do
         pos.x, pos.y, pos.z = player.entity:LocalToWorldSpace(r, 0, 0)
         if ground:IsPassableAtPoint(pos:Get()) and
-            not ground:IsGroundTargetBlocked(pos) then return pos end
+            not ground:IsGroundTargetBlocked(pos) then
+            return pos
+        end
     end
     return pos
 end
@@ -736,6 +734,7 @@ local function equiptoothfn()
     inst:AddTag("smallcreature")
     inst:AddTag("mech")
     inst:AddTag("noclaustrophobia")
+    inst:AddTag("donotautopick")
 
     MakeInventoryFloatable(inst, "med", 0.05, 0.65)
 
@@ -779,7 +778,7 @@ local function equiptoothfn()
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem:SetOnDroppedFn(OnDropped)
     inst.components.inventoryitem.atlasname =
-        "images/inventoryimages/um_bear_trap_equippable_tooth.xml"
+    "images/inventoryimages/um_bear_trap_equippable_tooth.xml"
 
     inst:AddComponent("inspectable")
 
@@ -831,7 +830,7 @@ local function equipgoldfn()
     inst:AddTag("smallcreature")
     inst:AddTag("mech")
     inst:AddTag("noclaustrophobia")
-
+    inst:AddTag("donotautopick")
     MakeInventoryFloatable(inst, "med", 0.05, 0.65)
 
     inst.entity:SetPristine()
@@ -877,7 +876,7 @@ local function equipgoldfn()
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem:SetOnDroppedFn(OnDropped)
     inst.components.inventoryitem.atlasname =
-        "images/inventoryimages/um_bear_trap_equippable_gold.xml"
+    "images/inventoryimages/um_bear_trap_equippable_gold.xml"
 
     inst:AddComponent("inspectable")
 
@@ -904,8 +903,8 @@ local function equipgoldfn()
 end
 
 return Prefab("um_bear_trap", common_fn), Prefab("um_bear_trap_old", old_fn),
-       MakePlacer("um_bear_trap_placer", "trap_teeth", "trap_teeth", "idle"),
-       Prefab("um_bear_trap_projectile", projectilefn),
-       Prefab("ghost_walrus", ghost_walrusfn),
-       Prefab("um_bear_trap_equippable_tooth", equiptoothfn),
-       Prefab("um_bear_trap_equippable_gold", equipgoldfn)
+    MakePlacer("um_bear_trap_placer", "trap_teeth", "trap_teeth", "idle"),
+    Prefab("um_bear_trap_projectile", projectilefn),
+    Prefab("ghost_walrus", ghost_walrusfn),
+    Prefab("um_bear_trap_equippable_tooth", equiptoothfn),
+    Prefab("um_bear_trap_equippable_gold", equipgoldfn)

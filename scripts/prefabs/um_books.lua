@@ -66,7 +66,8 @@ local function MakeBook(def)
 
         inst:AddTag("book")
         inst:AddTag("bookcabinet_item")
-
+        inst:AddTag("donotautopick")
+        
         inst.entity:SetPristine()
 
         if not TheWorld.ismastersim then

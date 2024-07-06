@@ -451,7 +451,8 @@ local function fn()
     inst:AddTag("weapon")
     inst:AddTag("rangedweapon")
     inst:AddTag("moonfallstaff")
-
+    inst:AddTag("donotautopick")
+    
     inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then

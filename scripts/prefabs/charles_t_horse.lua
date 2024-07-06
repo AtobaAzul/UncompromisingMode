@@ -127,7 +127,8 @@ local function fn()
     inst:AddTag("weapon")
     inst:AddTag("irreplaceable")
     inst:AddTag("puzzle_charles")
-
+    inst:AddTag("donotautopick")
+    
     -- inst.foleysound = "dontstarve/creatures/together/deer/bell"
 
     local swap_data = {

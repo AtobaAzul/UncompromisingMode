@@ -16,38 +16,38 @@ local function OnUnequip(inst, owner)
     end
 end
 local function OnProjectileLaunched(inst, attacker, target)
-	if inst.components.container ~= nil then
-		local ammo_stack = inst.components.container:GetItemInSlot(1)
-		local item = inst.components.container:RemoveItem(ammo_stack, false)
-		if item ~= nil then
-			if item == ammo_stack then
-				item:PushEvent("ammounloaded", {slingshot = inst})
-			end
+    if inst.components.container ~= nil then
+        local ammo_stack = inst.components.container:GetItemInSlot(1)
+        local item = inst.components.container:RemoveItem(ammo_stack, false)
+        if item ~= nil then
+            if item == ammo_stack then
+                item:PushEvent("ammounloaded", { slingshot = inst })
+            end
 
-			item:Remove()
-		end
-	end
+            item:Remove()
+        end
+    end
 end
 
 local function OnAmmoLoaded(inst, data)
-	if inst.components.weapon ~= nil then
-		if data ~= nil and data.item ~= nil then
-			inst.components.weapon:SetProjectile(data.item.prefab.."_proj")
-			data.item:PushEvent("ammoloaded", {slingshot = inst})
-		end
-	end
+    if inst.components.weapon ~= nil then
+        if data ~= nil and data.item ~= nil then
+            inst.components.weapon:SetProjectile(data.item.prefab .. "_proj")
+            data.item:PushEvent("ammoloaded", { slingshot = inst })
+        end
+    end
 end
 
 local function OnAmmoUnloaded(inst, data)
-	if inst.components.weapon ~= nil then
-		inst.components.weapon:SetProjectile(nil)
-		if data ~= nil and data.prev_item ~= nil then
-			data.prev_item:PushEvent("ammounloaded", {slingshot = inst})
-		end
-	end
+    if inst.components.weapon ~= nil then
+        inst.components.weapon:SetProjectile(nil)
+        if data ~= nil and data.prev_item ~= nil then
+            data.prev_item:PushEvent("ammounloaded", { slingshot = inst })
+        end
+    end
 end
 
-local floater_swap_data = {sym_build = "swap_slingshot"}
+local floater_swap_data = { sym_build = "swap_slingshot" }
 
 local function fn()
     local inst = CreateEntity()
@@ -66,26 +66,27 @@ local function fn()
     inst:AddTag("rangedweapon")
     inst:AddTag("blowdart")
     inst:AddTag("sharp")
-	--inst:AddTag("slingshot")
+    --inst:AddTag("slingshot")
     --weapon (from weapon component) added to pristine state for optimization
     inst:AddTag("weapon")
+    inst:AddTag("donotautopick")
 
     --inst.projectiledelay = PROJECTILE_DELAY
 
-    MakeInventoryFloatable(inst, "small", 0.05, {0.75, 0.5, 0.75})
+    MakeInventoryFloatable(inst, "small", 0.05, { 0.75, 0.5, 0.75 })
 
     inst.entity:SetPristine()
 
-	if not TheWorld.ismastersim then
-		inst.OnEntityReplicated = function(inst) 
-			inst.replica.container:WidgetSetup("um_blowgun") 
-		end
+    if not TheWorld.ismastersim then
+        inst.OnEntityReplicated = function(inst)
+            inst.replica.container:WidgetSetup("um_blowgun")
+        end
         return inst
     end
     inst:AddComponent("inspectable")
 
     inst:AddComponent("inventoryitem")
-	inst.components.inventoryitem.atlasname = "images/inventoryimages/uncompromising_blowgun.xml"
+    inst.components.inventoryitem.atlasname = "images/inventoryimages/uncompromising_blowgun.xml"
     inst:AddComponent("equippable")
     inst.components.equippable:SetOnEquip(OnEquip)
     inst.components.equippable:SetOnUnequip(OnUnequip)
@@ -95,11 +96,11 @@ local function fn()
     inst.components.weapon:SetRange(8, 10)
     inst.components.weapon:SetOnProjectileLaunched(OnProjectileLaunched)
     inst.components.weapon:SetProjectile(nil)
-	inst.components.weapon:SetProjectileOffset(1)
+    inst.components.weapon:SetProjectileOffset(1)
 
     inst:AddComponent("container")
     inst.components.container:WidgetSetup("um_blowgun")
-	inst.components.container.canbeopened = false
+    inst.components.container.canbeopened = false
     inst:ListenForEvent("itemget", OnAmmoLoaded)
     inst:ListenForEvent("itemlose", OnAmmoUnloaded)
 

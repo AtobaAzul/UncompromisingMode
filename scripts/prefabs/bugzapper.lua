@@ -223,8 +223,9 @@ local function fn()
 	inst:AddTag("light")
 	inst:AddTag("electricaltool")
 	inst:AddTag("overchargeable")
-
-	MakeInventoryFloatable(inst, "med", 0.2, 0.65)
+    inst:AddTag("donotautopick")
+    
+    MakeInventoryFloatable(inst, "med", 0.2, 0.65)
 
 	inst.entity:SetPristine()
 

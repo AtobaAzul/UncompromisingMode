@@ -155,7 +155,7 @@ local function fn()
 	
 	inst:AddTag("show_spoilage")
     inst:AddTag("icebox_valid")
-
+    inst:AddTag("donotautopick")
 
     inst.entity:SetPristine()
 

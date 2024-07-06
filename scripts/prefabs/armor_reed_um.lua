@@ -43,7 +43,8 @@ local function fn()
     inst.AnimState:PlayAnimation("anim")
 
     inst:AddTag("grass")
-
+    inst:AddTag("donotautopick")
+    
     inst.foleysound = "dontstarve/movement/foley/grassarmour"
 
     local swap_data = {bank = "armor_grass", anim = "anim"}

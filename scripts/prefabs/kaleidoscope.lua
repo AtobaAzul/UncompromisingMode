@@ -75,7 +75,7 @@ local function fn()
     inst.AnimState:PlayAnimation("idle")
 
     inst:AddTag("whip")
-
+    inst:AddTag("donotautopick")
     --weapon (from weapon component) added to pristine state for optimization
     inst:AddTag("weapon")
 

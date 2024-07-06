@@ -53,7 +53,8 @@ local function create_common(bankandbuild, iswaterproofer)
         --waterproofer (from waterproofer component) added to pristine state for optimization
         inst:AddTag("waterproofer")
     end
-
+    inst:AddTag("donotautopick")
+    
     MakeInventoryFloatable(inst, "small", 0.1, 0.8)
 
     inst.entity:SetPristine()

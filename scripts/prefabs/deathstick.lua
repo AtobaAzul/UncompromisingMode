@@ -75,7 +75,7 @@ local function fn()
     MakeInventoryPhysics(inst)
 
     inst:AddTag("wildfireprotected")
-
+    inst:AddTag("donotautopick")
     --weapon (from weapon component) added to pristine state for optimization
     inst:AddTag("weapon")
 

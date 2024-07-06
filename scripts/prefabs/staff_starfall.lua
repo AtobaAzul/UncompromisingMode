@@ -81,7 +81,8 @@ local function fn()
 
     inst:AddTag("weapon")
     inst:AddTag("rangedweapon")
-
+    inst:AddTag("donotautopick")
+    
     if not TheWorld.ismastersim then
         return inst
     end

@@ -52,7 +52,8 @@ local function fn()
     inst.AnimState:SetBank("widowsgrasp")
     inst.AnimState:SetBuild("widowsgrasp")
     inst.AnimState:PlayAnimation("idle")
-
+    
+    inst:AddTag("donotautopick")
 
     MakeInventoryFloatable(inst, "med", 0.2, 0.65)
 

@@ -217,7 +217,7 @@ local function fn()
 
 	inst:AddTag("book")
     inst:AddTag("shadowmagic")
-
+    inst:AddTag("donotautopick")
     --prototyper (from prototyper component) added to pristine state for optimization
     inst:AddTag("prototyper")
 

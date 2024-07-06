@@ -155,7 +155,8 @@ local function staff_fn()
     inst.AnimState:PlayAnimation("idle")
 
     inst:AddTag("nopunch")
-
+    inst:AddTag("donotautopick")
+    
     --Sneak these into pristine state for optimization
     inst:AddTag("beargerclaw")
     inst:AddTag("quickcast")

@@ -162,7 +162,8 @@ local function fn()
     inst:AddTag("animal")
     inst:AddTag("soulless")
     inst:AddTag("noember")
-
+    inst:AddTag("donotautopick")
+    
     MakeInventoryFloatable(inst)
 
     MakeFeedableSmallLivestockPristine(inst)

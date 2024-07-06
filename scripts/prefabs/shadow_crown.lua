@@ -69,7 +69,7 @@ local function fn()
     inst.AnimState:PlayAnimation("anim")
 
     inst:AddTag("hat")
-
+    inst:AddTag("donotautopick")
     inst:AddTag("sanity")
     inst:AddTag("shadow")
     inst:AddTag("shadow_item")

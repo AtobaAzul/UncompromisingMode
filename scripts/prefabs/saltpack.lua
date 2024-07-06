@@ -133,7 +133,8 @@ local function fn()
     inst.salttask = nil
 
     MakeInventoryFloatable(inst, "med", 0.2, 0.65)
-
+    inst:AddTag("donotautopick")
+    
     inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then

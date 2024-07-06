@@ -69,7 +69,8 @@ local function fn() --Drown the world.
     inst:AddTag("gnarwail_horn")
     inst:AddTag("nopunch")
     inst:AddTag("allow_action_on_impassable")
-
+    inst:AddTag("donotautopick")
+    
     inst.spelltype = "MUSIC"
 
     inst:AddComponent("reticule")

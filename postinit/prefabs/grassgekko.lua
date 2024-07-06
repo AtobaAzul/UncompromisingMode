@@ -15,8 +15,10 @@ env.AddPrefabPostInit("grassgekko", function(inst)
 	
 	inst:AddTag("canbetrapped")
 	inst:AddTag("animal")
+    inst:AddTag("donotautopick")
 	inst.components.lootdropper:AddChanceLoot("dug_grass",1.00)
 	inst:AddComponent("inventoryitem")
+    
 	inst.components.inventoryitem.atlasname = "images/inventoryimages/grassgekko.xml"
     inst.components.inventoryitem.nobounce = true
     inst.components.inventoryitem.canbepickedup = false

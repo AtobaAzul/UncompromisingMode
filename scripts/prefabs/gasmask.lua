@@ -75,7 +75,8 @@ local function fn()
 	inst:AddTag("hats")
 	inst:AddTag("has_gasmask")
     inst:AddTag("goggles")
-	
+	inst:AddTag("donotautopick")
+    
     inst.entity:SetPristine()
 	
     if not TheWorld.ismastersim then

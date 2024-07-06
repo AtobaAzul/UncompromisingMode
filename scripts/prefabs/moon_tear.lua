@@ -47,6 +47,8 @@ local function fn()
     inst.AnimState:SetBuild("moontear")
     inst.AnimState:PlayAnimation("idle")
 
+    inst:AddTag("donotautopick")--sucks to pick this up on accident lol
+
     inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then

@@ -16,20 +16,18 @@ local function SetCharging(inst, powered, duration)
             --RefreshLedStatus(inst)
         end
     else
-        
         local waspowered = inst._powertask ~= nil
         local remaining = waspowered and GetTaskRemaining(inst._powertask) or 0
-        
-        
+
+
         if duration > remaining then
             if inst._powertask then
                 inst._powertask:Cancel()
             end
             inst._powertask = inst:DoTaskInTime(duration, SetCharging, false)
-             --idk why klei does the "not waspowered" thing here. doesn't seem to do anything other than prevent the thing from wokring???
+            --idk why klei does the "not waspowered" thing here. doesn't seem to do anything other than prevent the thing from wokring???
             if waspowered then
-                
-                inst.components.fueled.rate = (TUNING.WINONA_TELEBRELLA_RECHARGE_RATE/2) * (inst._quickcharge and TUNING.SKILLS.WINONA.QUICKCHARGE_MULT or 1)
+                inst.components.fueled.rate = (TUNING.WINONA_TELEBRELLA_RECHARGE_RATE / 2) * (inst._quickcharge and TUNING.SKILLS.WINONA.QUICKCHARGE_MULT or 1)
                 inst.components.fueled:SetUpdateFn(OnUpdateChargingFuel)
                 inst.components.fueled:StartConsuming()
                 inst.components.powerload:SetLoad(TUNING.WINONA_TELEBRELLA_POWER_LOAD_CHARGING)
@@ -129,10 +127,8 @@ end
 
 local function AddBatteryPower(inst, power)
     if inst.components.fueled:IsFull() then
-        
         SetCharging(inst, false)
     else
-        
         SetCharging(inst, true, power)
     end
 end
@@ -192,10 +188,8 @@ local function OnDisconnectCircuit(inst) --, node)
 end
 
 local function fn(inst)
-    
     inst:AddTag("engineering")
     inst:AddTag("engineeringbatterypowered")
-
 
     if not TheWorld.ismastersim then
         return inst
