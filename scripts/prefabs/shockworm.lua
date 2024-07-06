@@ -36,6 +36,7 @@ local MAX_LIGHT_FRAME = 20
 local function OnAttacked(inst, data)
     if data ~= nil and data.attacker ~= nil and not data.redirected then
 		if data.attacker.components.health ~= nil and not data.attacker.components.health:IsDead() and
+			data.attacker.components.combat ~= nil and not data.attacker.components.combat.ignoredamagereflect and
 			(data.weapon == nil or ((data.weapon.components.weapon == nil or data.weapon.components.weapon.projectile == nil) and data.weapon.components.projectile == nil)) and
 			not (data.attacker.components.inventory ~= nil and data.attacker.components.inventory:IsInsulated()) then
 
