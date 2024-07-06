@@ -35,6 +35,9 @@ local function DoPockets(inst, widget)
     end
 
     inst:AddComponent("container")
+    inst.components.container.itemtestfn = function(container, item)
+        return container.inst.components.equippable.isequipped
+    end
 
     inst.components.container:WidgetSetup(widget)
 
@@ -67,7 +70,6 @@ local function DoPockets(inst, widget)
         local _onputininventoryfn = inst.components.inventoryitem.onputininventoryfn
 
         inst.components.inventoryitem:SetOnPutInInventoryFn(function(inst)
-
             if _onputininventoryfn ~= nil then
                 _onputininventoryfn(inst)
             end
@@ -93,7 +95,6 @@ local function DoPockets(inst, widget)
 
     inst:ListenForEvent("itemget", OnContainerChanged)
     inst:ListenForEvent("itemlose", OnContainerChanged)
-
 end
 
 env.AddPrefabPostInit("trunkvest_summer", function(inst)
