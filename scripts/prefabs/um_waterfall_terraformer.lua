@@ -146,6 +146,27 @@ local function on_day_change(inst)
 	end
 end
 
+local function OnEntitySleep(inst)
+	if not TheWorld.state.isspring then
+        for task_index, task_data in pairs(inst._terraform_tasks) do
+			task_data.is_revert = true
+			_RevertTile(inst, task_data.tx, task_data.ty)
+		end
+	end
+
+	inst:DoTaskInTime(1, inst.Remove)
+end
+
+local function OnEntityWake(inst)
+	if not TheWorld.state.isspring then
+        for task_index, task_data in pairs(inst._terraform_tasks) do
+			task_data.is_revert = true
+			_RevertTile(inst, task_data.tx, task_data.ty)
+		end
+	end
+
+	inst:DoTaskInTime(1, inst.Remove)
+end
 ------------------------------------------------------------------
 local function terraformerfn()
     local inst = CreateEntity()
