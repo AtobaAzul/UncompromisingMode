@@ -16,10 +16,10 @@ if TUNING.DSTU.MUSHROOM_CHANGES then
 
 		-- 8 compost nutrients = 1 refuel
 		inst.refuel_items = {
-			["compost"] = 2,			
-			["glommerfuel"] = 2,
-			["compostwrap"] = max_harvests,
-			["treegrowthsolution"] = max_harvests,
+			["compost"] = 1,			
+			["glommerfuel"] = 1,
+			["compostwrap"] = 3,
+			["treegrowthsolution"] = 3,
 			["livinglog"] = max_harvests,
 		}
 
