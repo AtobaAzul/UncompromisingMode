@@ -200,6 +200,8 @@ configuration_options = {
             { description = "2x",           data = 2 } },
         default = 5
     },
+    BinaryConfig("wathom_nightvision", "Wathom - Alt Night Vision Filter",
+        "Enable this for a alternate Night Vision filter if you experience eye strain.", true),
     {
         name = "wathom_armordamage",
         label = "Wathom - Armor Damage",

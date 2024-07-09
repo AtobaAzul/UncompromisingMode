@@ -274,6 +274,14 @@ local WATHOM_COLOURCUBES =
     full_moon = "images/colour_cubes/fungus_cc.tex",
 }
 
+local NIGHTVISION_COLOURCUBES =
+{
+    day = "images/colour_cubes/mole_vision_on_cc.tex",
+    dusk = "images/colour_cubes/mole_vision_on_cc.tex",
+    night = "images/colour_cubes/mole_vision_on_cc.tex",
+    full_moon = "images/colour_cubes/fungus_cc.tex",
+}
+
 local function GetMusicValues(inst)
     if inst:HasTag("amped") then
         return "wathom_amped"
@@ -291,7 +299,7 @@ end
 local function CheckLight(inst)
 	if inst:IsInLight() then
 		if inst.updatewathomvisiontask == nil then
-			inst.updatewathomvisiontask = inst:DoTaskInTime(1, function()
+			inst.updatewathomvisiontask = inst:DoTaskInTime(2, function()
 				inst.components.playervision:SetCustomCCTable(nil)
 				inst.components.playervision:ForceNightVision(false)
 				inst:RemoveTag("WathomInDark")
@@ -307,7 +315,7 @@ local function CheckLight(inst)
 		end
 				
 		inst.updatewathomvisiontask = nil
-		inst.components.playervision:SetCustomCCTable(WATHOM_COLOURCUBES)
+		inst.components.playervision:SetCustomCCTable(TUNING.DSTU.WATHOM_ALT_NIGHTVISION and NIGHTVISION_COLOURCUBES or WATHOM_COLOURCUBES)
 		inst.components.playervision:ForceNightVision(true)
 		inst:AddTag("WathomInDark")
 	end

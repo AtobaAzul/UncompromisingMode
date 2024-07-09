@@ -39,6 +39,8 @@ TUNING.DSTU = {
     ----------------------------------------------------------------------------
     -- Food changes
     ----------------------------------------------------------------------------
+	-- Goodie nerf
+    GOODIESNERF = GetModConfigData("goodies_nerf"),	
     -- Global appearance rate of foods
     FOOD_CARROT_PLANTED_APPEARANCE_PERCENT = 0.75,
     FOOD_BERRY_NORMAL_APPEARANCE_PERCENT = 0.6,
@@ -377,6 +379,7 @@ TUNING.DSTU = {
     WATHOM_AMPED_VULNERABILITY = GetModConfigData("wathom_ampvulnerability"),
     WATHOM_ARMOR_DAMAGE = GetModConfigData("wathom_armordamage"),
     SHADOW_WATHOM = GetModConfigData("wathom_undeath"),
+    WATHOM_ALT_NIGHTVISION = GetModConfigData("wathom_nightvision"),
     PK_GUARDS = GetModConfigData("pigking_guards"),
     BERNIE_BUFF = GetModConfigData("bernie_buffs"),
     COMPROMISING_SHADOWVORTEX = GetModConfigData("compromising_vortex"),

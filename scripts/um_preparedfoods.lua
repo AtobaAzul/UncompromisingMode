@@ -428,7 +428,7 @@ local um_preparedfoods =
     greensteamedhams =
     {
         test = function(cooker, names, tags)
-            return names.greenfoliage and tags.veggie and tags.veggie >= 1.5 and
+            return (names.greenfoliage or names.firenettles) and tags.veggie and tags.veggie >= 1.5 and
                 (tags.meat and tags.meat >= 1) and
                 not (tags.monster or tags.inedible or names.smallmeat or names.cookedsmallmeat or tags.fish)
         end,
