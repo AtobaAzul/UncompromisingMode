@@ -201,7 +201,6 @@ local prefab_post = {
 	"otter",
     "winona_telebrella",
     "stash_map",
-    "daywalker",
     "mushtrees"
 }
 
