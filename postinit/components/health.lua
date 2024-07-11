@@ -7,7 +7,7 @@ local function MayKill(self, amount)
     end
 end
 
-local function GetSLEEPED(inst, revived)
+local function DoSleep(inst, revived)
     if inst ~= revived and
         (TheNet:GetPVPEnabled() or not inst:HasTag("player")) and
         not (inst.components.freezable ~= nil and inst.components.freezable:IsFrozen()) and
@@ -27,19 +27,19 @@ local function GetSLEEPED(inst, revived)
     end
 end
 
-local function FindSleepoPeepo(inst)
+local function FindSleepable(inst)
     local x, y, z = inst.Transform:GetWorldPosition()
     local ents = TheSim:FindEntities(x, y, z, 7, { "_combat", "_health" }, { "player" })
     if ents then
         for i, v in ipairs(ents) do
             if v.components.health and not v.components.health:IsDead() then
-                GetSLEEPED(v, inst)
+                DoSleep(v, inst)
             end
         end
     end
 end
 
-local function TriggerLLA(self)
+local function TriggerAmulet(self)
     if self.inst.components.timer ~= nil and self.inst:HasTag("wathom") then
         if self.inst.components.timer:TimerExists("shadowwathomcooldown") then
             self.inst.components.timer:StopTimer("shadowwathomcooldown")
@@ -55,7 +55,7 @@ local function TriggerLLA(self)
     end
 
     local item2
-    FindSleepoPeepo(self.inst)
+    FindSleepable(self.inst)
     self:SetCurrentHealth(1)
     if self.inst.components.oldager ~= nil then
         self.inst.components.oldager:StopDamageOverTime()
@@ -93,11 +93,43 @@ local function HasLLA(self)
         end
     end
 end
+local function IsCharlieRose(item)
+    return item.prefab == "charlierose"
+end
+
+
+local function HasCharlieRose(self)
+    return self.inst.components.inventory:FindItem(IsCharlieRose) ~= nil
+end
+
+local function TriggerRose(self)
+    local rose = self.inst.components.inventory:FindItem(IsCharlieRose)
+
+    if rose then
+        if rose.components.stackable then
+            rose.components.stackable:Get():Remove()
+        else
+            rose:Remove()
+        end
+    end
+
+    self.inst.components.sanity:SetPercent(.5, true)
+    self.inst.components.hunger:SetPercent(2 / 3, true)
+    self.inst.components.temperature:SetTemp(TUNING.STARTING_TEMP)
+    self:DeltaPenalty(0.25)
+    self:SetPercent(0.5)
+
+    for i = 0, 3 do
+        self.inst:DoTaskInTime(math.random(), function(inst)
+            local x, y, z = inst.Transform:GetWorldPosition()
+            local fx = SpawnPrefab("rose_petals_fx")
+            fx.Transform:SetPosition(x + GetRandomMinMax(-1, 1), y, z + GetRandomMinMax(-1, 1))
+        end)
+    end
+end
 
 env.AddComponentPostInit("health", function(self)
     if not TheWorld.ismastersim then return end
-
-
 
     local _DoDelta = self.DoDelta
     --(self:HasTag("wathom") and self:HasTag("amped")
@@ -108,13 +140,13 @@ env.AddComponentPostInit("health", function(self)
                 self.inst.sg:GoToState("blackpuddle_death")
                 return 1
             elseif MayKill(self, amount) and HasLLA(self) and not self.inst:HasTag("deathamp") then --and not (self.inst:HasTag("deathamp")) then
-                TriggerLLA(self)
+                TriggerAmulet(self)
                 return 49
             elseif MayKill(self, amount) and HasLLA(self) and self.inst:HasTag("deathamp") and cause == "deathamp" and self.inst.components.timer ~= nil and not self.inst.components.timer:TimerExists("shadowwathomcooldown") then
                 if not self.inst:HasTag("playerghost") and self.inst.ToggleUndeathState ~= nil then
                     self.inst:ToggleUndeathState(self.inst, false)
                 end
-                TriggerLLA(self) --Don't trigger the LLA here, let it happen in our own component, so this doesn't break whenever canis moves it to his own mod.
+                TriggerAmulet(self) --Don't trigger the LLA here, let it happen in our own component, so this doesn't break whenever canis moves it to his own mod.
                 return 49
             elseif self.inst:HasTag("deathamp") and cause ~= "deathamp" then
                 self.inst.components.adrenaline:DoDelta(amount * 1)
@@ -128,8 +160,10 @@ env.AddComponentPostInit("health", function(self)
                 return _DoDelta(self, amount, overtime, cause, ignore_invincible, afflicter, ignore_absorb, ...)
             end
         elseif MayKill(self, amount) and HasLLA(self) then
-            TriggerLLA(self)
+            TriggerAmulet(self)
             return 49
+        elseif MayKill(self, amount) and HasCharlieRose(self) then
+            TriggerRose(self)
         else
             return _DoDelta(self, amount, overtime, cause, ignore_invincible, afflicter, ignore_absorb, ...)
         end
