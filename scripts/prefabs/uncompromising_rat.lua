@@ -1,17 +1,17 @@
-local assets = {Asset("ANIM", "anim/uncompromising_rat.zip"), Asset("ANIM", "anim/uncompromising_caverat.zip"), Asset("ANIM", "anim/carrat_basic.zip"), Asset("ANIM", "anim/uncompromising_rat_water.zip"), Asset("ANIM", "anim/uncompromising_rat_burrow.zip"), Asset("ANIM", "anim/uncompromising_junkrat.zip"), Asset("ANIM", "anim/ratdroppings.zip")}
+local assets = { Asset("ANIM", "anim/uncompromising_rat.zip"), Asset("ANIM", "anim/uncompromising_caverat.zip"), Asset("ANIM", "anim/carrat_basic.zip"), Asset("ANIM", "anim/uncompromising_rat_water.zip"), Asset("ANIM", "anim/uncompromising_rat_burrow.zip"), Asset("ANIM", "anim/uncompromising_junkrat.zip"), Asset("ANIM", "anim/ratdroppings.zip") }
 
 local prefabs = {}
 
-local carratsounds = {idle = "turnoftides/creatures/together/carrat/idle", hit = "turnoftides/creatures/together/carrat/hit", sleep = "turnoftides/creatures/together/carrat/sleep", death = "turnoftides/creatures/together/carrat/death", emerge = "turnoftides/creatures/together/carrat/emerge", submerge = "turnoftides/creatures/together/carrat/submerge", eat = "turnoftides/creatures/together/carrat/eat", stunned = "turnoftides/creatures/together/carrat/stunned"}
+local carratsounds = { idle = "turnoftides/creatures/together/carrat/idle", hit = "turnoftides/creatures/together/carrat/hit", sleep = "turnoftides/creatures/together/carrat/sleep", death = "turnoftides/creatures/together/carrat/death", emerge = "turnoftides/creatures/together/carrat/emerge", submerge = "turnoftides/creatures/together/carrat/submerge", eat = "turnoftides/creatures/together/carrat/eat", stunned = "turnoftides/creatures/together/carrat/stunned" }
 --[[
 SetSharedLootTable("raidrat",
 {
 })]]
-SetSharedLootTable("ratburrow", {{"redgem", 0.10}, {"bluegem", 0.10}, {"goldnugget", 1.00}, {"goldnugget", 0.25}, {"goldnugget", 0.10}, {"boneshard", 1.00}, {"boneshard", 0.25}, {"boneshard", 0.10}})
+SetSharedLootTable("ratburrow", { { "redgem", 0.10 }, { "bluegem", 0.10 }, { "goldnugget", 1.00 }, { "goldnugget", 0.25 }, { "goldnugget", 0.10 }, { "boneshard", 1.00 }, { "boneshard", 0.25 }, { "boneshard", 0.10 } })
 
-SetSharedLootTable("ratburrow_small", {{"redgem", 0.10}, {"bluegem", 0.10}, {"goldnugget", 1.00}, {"goldnugget", 0.25}, {"boneshard", 1.00}, {"boneshard", 0.25}})
+SetSharedLootTable("ratburrow_small", { { "redgem", 0.10 }, { "bluegem", 0.10 }, { "goldnugget", 1.00 }, { "goldnugget", 0.25 }, { "boneshard", 1.00 }, { "boneshard", 0.25 } })
 
-SetSharedLootTable("packrat", {{"redgem", 0.10}, {"bluegem", 0.10}, {"goldnugget", 1.00}, {"goldnugget", 0.25}, {"goldnugget", 0.10}, {"boneshard", 1.00}, {"boneshard", 0.25}, {"boneshard", 0.10}})
+SetSharedLootTable("packrat", { { "redgem", 0.10 }, { "bluegem", 0.10 }, { "goldnugget", 1.00 }, { "goldnugget", 0.25 }, { "goldnugget", 0.10 }, { "boneshard", 1.00 }, { "boneshard", 0.25 }, { "boneshard", 0.10 } })
 
 local brain = require "brains/uncompromising_ratbrain"
 local junkbrain = require "brains/uncompromising_junkratbrain"
@@ -131,7 +131,7 @@ local function DoRipple(inst) if inst.components.drownable ~= nil and inst.compo
 local function Trapped(inst)
     local x, y, z = inst.Transform:GetWorldPosition()
 
-    local ents = TheSim:FindEntities(x, y, z, 2, {"trap"})
+    local ents = TheSim:FindEntities(x, y, z, 2, { "trap" })
 
     for i, v in ipairs(ents) do
         v:DoTaskInTime(5, function(v)
@@ -142,7 +142,7 @@ end
 
 local function OnHitOther(inst, other) inst.components.thief:StealItem(other) end
 
-local RETARGET_CANT_TAGS = {"wall", "raidrat", "ratfriend"}
+local RETARGET_CANT_TAGS = { "wall", "raidrat", "ratfriend" }
 local function rattargetfn(inst)
     return FindEntity(inst, 3, function(guy)
         local validitem = guy.components.inventory ~= nil and guy.components.inventory:FindItem(function(item) return not item:HasTag("nosteal") end)
@@ -156,7 +156,7 @@ local function KeepTargetFn(inst, target)
     return not inst:HasTag("carrying") and validitem ~= nil and inst.components.combat:CanTarget(target) and inst:IsNear(target, TUNING.HOUND_TARGET_DIST)
 end
 
-local function StealItem(inst, victim, stolenitem) inst:PushEvent("onpickupitem", {item = stolenitem}) end
+local function StealItem(inst, victim, stolenitem) inst:PushEvent("onpickupitem", { item = stolenitem }) end
 
 local function CancelBuff(inst)
     inst.components.locomotor.walkspeed = TUNING.DSTU.RAIDRAT_WALKSPEED
@@ -326,11 +326,11 @@ local function fn()
         end)
         -------------------------
 
-        inst.components.locomotor.pathcaps = {allowocean = true}
+        inst.components.locomotor.pathcaps = { allowocean = true }
     end
 
     inst:AddComponent("eater")
-    inst.components.eater:SetDiet({FOODTYPE.MEAT, FOODTYPE.VEGGIE}, {FOODTYPE.MEAT, FOODTYPE.VEGGIE})
+    inst.components.eater:SetDiet({ FOODTYPE.MEAT, FOODTYPE.VEGGIE }, { FOODTYPE.MEAT, FOODTYPE.VEGGIE })
     -- inst.components.eater:SetCanEatHorrible()
     inst.components.eater:SetCanEatRaw()
     inst.components.eater:SetStrongStomach(true) -- can eat monster meat!
@@ -389,13 +389,13 @@ local function fn()
 
     inst:AddComponent("inspectable")
 
-    inst:AddComponent("periodicspawner")
+    --[[inst:AddComponent("periodicspawner")
     inst.components.periodicspawner:SetPrefab("ratdroppings")
     inst.components.periodicspawner:SetRandomTimes(5, 15)
     -- inst.components.periodicspawner:SetDensityInRange(20, 2)
     inst.components.periodicspawner:SetMinimumSpacing(10)
     inst.components.periodicspawner:Start()
-    -- inst.components.periodicspawner.spawnoffscreen = true
+    -- inst.components.periodicspawner.spawnoffscreen = true]]
 
     inst:AddComponent("trader")
     inst.components.trader:SetAcceptTest(ShouldAcceptItem_Winky)
@@ -430,7 +430,7 @@ end
 local function junkretargetfn(inst)
     local x, y, z = inst.Transform:GetWorldPosition()
     if inst.shouldhide == false then
-        local rats = TheSim:FindEntities(x, y, z, 10, {"raidrat"})
+        local rats = TheSim:FindEntities(x, y, z, 10, { "raidrat" })
         if #rats > 5 then -- Only try and target the player this way if there's a bunch of rats nearby
             local victim = FindEntity(inst, TUNING.HOUND_TARGET_DIST, function(guy) return inst.components.combat:CanTarget(guy) end, nil, RETARGET_CANT_TAGS)
 
@@ -568,7 +568,7 @@ local function junkfn()
     inst.Transform:SetScale(1.25, 1.25, 1.25)
 
     inst:AddComponent("eater")
-    inst.components.eater:SetDiet({FOODTYPE.MEAT, FOODTYPE.VEGGIE}, {FOODTYPE.MEAT, FOODTYPE.VEGGIE})
+    inst.components.eater:SetDiet({ FOODTYPE.MEAT, FOODTYPE.VEGGIE }, { FOODTYPE.MEAT, FOODTYPE.VEGGIE })
     inst.components.eater:SetCanEatHorrible()
     inst.components.eater:SetCanEatRaw()
     inst.components.eater:SetStrongStomach(true) -- can eat monster meat!
@@ -610,13 +610,13 @@ local function junkfn()
 
     inst:AddComponent("inspectable")
 
-    inst:AddComponent("periodicspawner")
+    --[[inst:AddComponent("periodicspawner")
     inst.components.periodicspawner:SetPrefab("ratdroppings")
     inst.components.periodicspawner:SetRandomTimes(5, 15)
     -- inst.components.periodicspawner:SetDensityInRange(20, 2)
     inst.components.periodicspawner:SetMinimumSpacing(10)
     inst.components.periodicspawner:Start()
-    -- inst.components.periodicspawner.spawnoffscreen = true
+    -- inst.components.periodicspawner.spawnoffscreen = true]]
 
     inst:ListenForEvent("onattackother", OnAttackOther)
     inst:ListenForEvent("attacked", OnJunkAttacked)
@@ -721,11 +721,11 @@ local function packfn()
         end)
         -------------------------
 
-        inst.components.locomotor.pathcaps = {allowocean = true}
+        inst.components.locomotor.pathcaps = { allowocean = true }
     end
 
     inst:AddComponent("eater")
-    inst.components.eater:SetDiet({FOODTYPE.MEAT, FOODTYPE.VEGGIE}, {FOODTYPE.MEAT, FOODTYPE.VEGGIE})
+    inst.components.eater:SetDiet({ FOODTYPE.MEAT, FOODTYPE.VEGGIE }, { FOODTYPE.MEAT, FOODTYPE.VEGGIE })
     inst.components.eater:SetCanEatHorrible()
     inst.components.eater:SetCanEatRaw()
     inst.components.eater:SetStrongStomach(true) -- can eat monster meat!
@@ -739,7 +739,7 @@ local function packfn()
     inst.components.combat:SetRange(TUNING.DSTU.RAIDRAT_ATTACK_RANGE)
     inst.components.combat.hiteffectsymbol = "carrat_body"
     inst.components.combat:SetPlayerStunlock(PLAYERSTUNLOCK.RARELY)
-	inst.components.combat.canattack = false
+    inst.components.combat.canattack = false
 
     inst:AddComponent("health")
     inst.components.health:SetMaxHealth(TUNING.DSTU.RAIDRAT_HEALTH * 1.5)
@@ -775,13 +775,13 @@ local function packfn()
 
     inst:AddComponent("inspectable")
 
-    inst:AddComponent("periodicspawner")
+    --[[inst:AddComponent("periodicspawner")
     inst.components.periodicspawner:SetPrefab("ratdroppings")
     inst.components.periodicspawner:SetRandomTimes(5, 15)
     -- inst.components.periodicspawner:SetDensityInRange(20, 2)
     inst.components.periodicspawner:SetMinimumSpacing(10)
     inst.components.periodicspawner:Start()
-    -- inst.components.periodicspawner.spawnoffscreen = true
+    -- inst.components.periodicspawner.spawnoffscreen = true]]
 
     inst:ListenForEvent("onattackother", OnAttackOther)
     inst:ListenForEvent("attacked", OnAttacked)
@@ -877,11 +877,11 @@ local function MakeRatBurrow(inst)
     local x, y, z = inst.Transform:GetWorldPosition()
 
     local function IsValidRatBurrowPosition(x, z)
-        if #TheSim:FindEntities(x, 0, z, TUNING.ANTLION_SINKHOLE.RADIUS * 2, nil, nil, {"antlion_sinkhole_blocker", "structure", "giant_tree"}) > 0 then return false end
+        if #TheSim:FindEntities(x, 0, z, TUNING.ANTLION_SINKHOLE.RADIUS * 2, nil, nil, { "antlion_sinkhole_blocker", "structure", "giant_tree" }) > 0 then return false end
 
-        if #TheSim:FindEntities(x, 0, z, 60, {"player", "playerghost"}) > 0 then return false end
+        if #TheSim:FindEntities(x, 0, z, 60, { "player", "playerghost" }) > 0 then return false end
 
-        if #TheSim:FindEntities(x, 0, z, 60, {"ratburrow"}) > 0 then return false end
+        if #TheSim:FindEntities(x, 0, z, 60, { "ratburrow" }) > 0 then return false end
 
         for dx = -1, 1 do for dz = -1, 1 do if not TheWorld.Map:IsPassableAtPoint(x + dx * TUNING.ANTLION_SINKHOLE.RADIUS, 0, z + dz * TUNING.ANTLION_SINKHOLE.RADIUS, false, true) then return false end end end
         return true
@@ -896,7 +896,7 @@ local function MakeRatBurrow(inst)
             local x, y, z = inst.Transform:GetWorldPosition()
 
             if math.random() >= 0.7 then
-                local players = #TheSim:FindEntities(x, y, z, 30, {"player"})
+                local players = #TheSim:FindEntities(x, y, z, 30, { "player" })
 
                 if players < 1 then
                     local piper = SpawnPrefab("pied_rat")
@@ -1078,11 +1078,11 @@ local function MakeScoutBurrow(inst)
     local x, y, z = inst.Transform:GetWorldPosition()
 
     local function IsValidRatBurrowPosition(x, z)
-        if #TheSim:FindEntities(x, 0, z, TUNING.ANTLION_SINKHOLE.RADIUS * 2, nil, nil, {"antlion_sinkhole_blocker", "structure", "giant_tree"}) > 0 then return false end
+        if #TheSim:FindEntities(x, 0, z, TUNING.ANTLION_SINKHOLE.RADIUS * 2, nil, nil, { "antlion_sinkhole_blocker", "structure", "giant_tree" }) > 0 then return false end
 
-        if #TheSim:FindEntities(x, 0, z, 80, {"player", "playerghost"}) > 0 then return false end
+        if #TheSim:FindEntities(x, 0, z, 80, { "player", "playerghost" }) > 0 then return false end
 
-        if #TheSim:FindEntities(x, 0, z, 80, {"ratburrow"}) > 0 then return false end
+        if #TheSim:FindEntities(x, 0, z, 80, { "ratburrow" }) > 0 then return false end
 
         for dx = -1, 1 do for dz = -1, 1 do if not TheWorld.Map:IsPassableAtPoint(x + dx * TUNING.ANTLION_SINKHOLE.RADIUS, 0, z + dz * TUNING.ANTLION_SINKHOLE.RADIUS, false, true) then return false end end end
         return true
@@ -1109,7 +1109,7 @@ local function MakeScoutBurrow(inst)
             burrow.components.herd:AddMember(ratcrew)
             burrow.components.herd:AddMember(ratcrew2)
             burrow.components.herd:AddMember(ratcrew3)
-			
+
             break
         end
 
@@ -1123,7 +1123,7 @@ local function OnTimerDone(inst, data)
     if data.name == "scoutingparty" then
         local x, y, z = inst.Transform:GetWorldPosition()
 
-		print(TheWorld.components.ratcheck ~= nil and TheWorld.components.ratcheck:GetBurrows())
+        print(TheWorld.components.ratcheck ~= nil and TheWorld.components.ratcheck:GetBurrows())
 
         if TheWorld.components.ratcheck ~= nil and TheWorld.components.ratcheck:GetBurrows() >= 10 then
             inst.components.timer:StartTimer("scoutingparty", 1920 + math.random(480))
@@ -1458,13 +1458,13 @@ local function SlumberParty(inst)
     if inst.components.herd.members ~= nil and inst.components.herd.membercount > 0 then
         local x, y, z = inst.Transform:GetWorldPosition()
 
-        local ents = #TheSim:FindEntities(x, y, z, 8, {"ratscout"})
+        local ents = #TheSim:FindEntities(x, y, z, 8, { "ratscout" })
         if ents ~= nil and ents > 0 then
             local burrow = SpawnPrefab("uncompromising_ratburrow")
             burrow.Transform:SetPosition(x, 0, z)
             burrow.AnimState:PlayAnimation("spawn")
 
-            local players = #TheSim:FindEntities(x, y, z, 30, {"player"})
+            local players = #TheSim:FindEntities(x, y, z, 30, { "player" })
 
             if math.random() >= 0.7 then
                 if players < 1 then
@@ -1526,7 +1526,7 @@ end
 
 local function IsAVersionOfRot(v) if v.prefab == "spoiled_food" or v.prefab == "rottenegg" or v.prefab == "spoiled_fish" or v.prefab == "spoiled_fish_small" then return true end end
 
-local NOTAGS = {"engineeringbatterypowered", "smallcreature", "_container", "spore", "NORATCHECK", "_combat", "_health", "balloon", "heavy", "projectile", "frozen"}
+local NOTAGS = { "engineeringbatterypowered", "smallcreature", "_container", "spore", "NORATCHECK", "_combat", "_health", "balloon", "heavy", "projectile", "frozen" }
 
 local function FoodScoreCalculations(inst, container, v)
     local delta = 0
@@ -1549,7 +1549,7 @@ end
 local function TimeForACheckUp(inst, dev)
     local x, y, z = inst.Transform:GetWorldPosition()
 
-    local ents = TheSim:FindEntities(x, 0, z, 40, {"_inventoryitem"}, NOTAGS)
+    local ents = TheSim:FindEntities(x, 0, z, 40, { "_inventoryitem" }, NOTAGS)
     --[[print("THE RAT SNIFFS")
 	print("                o")
 	print("    =========B  *sniff* *sniff*")
@@ -1559,7 +1559,7 @@ local function TimeForACheckUp(inst, dev)
     inst.ratscore = -60
     inst.itemscore = 0
     inst.foodscore = 0
-	
+
     inst.ratburrows = TheWorld.components.ratcheck ~= nil and TheWorld.components.ratcheck:GetBurrows() or 0
     inst.burrowbonus = 15 * inst.ratburrows
 
@@ -1568,9 +1568,9 @@ local function TimeForACheckUp(inst, dev)
             if (inst.ratscore + inst.itemscore + inst.foodscore + inst.burrowbonus) < 240 then
                 if v.components.inventoryitem:IsHeld() then
                     if v.components.inventoryitem and v.components.inventoryitem:GetGrandOwner() ~= nil and not (v.components.inventoryitem:GetGrandOwner().prefab == "lureplant" or v.components.inventoryitem:GetGrandOwner().prefab == "catcoon") then
-                        if not (v:HasTag("frozen") or v:HasTag("NORATCHECK")) then 
-							FoodScoreCalculations(inst, true, v) 
-						end
+                        if not (v:HasTag("frozen") or v:HasTag("NORATCHECK")) then
+                            FoodScoreCalculations(inst, true, v)
+                        end
                     end
                 else
                     if not (v:HasTag("frozen") or v:HasTag("NORATCHECK")) then FoodScoreCalculations(inst, false, v) end
@@ -1579,7 +1579,7 @@ local function TimeForACheckUp(inst, dev)
                         if (v:HasTag("_equippable") or v:HasTag("gem") or v:HasTag("tool")) then
                             inst.itemscore = inst.itemscore + 30 -- Oooh, wants wants! We steal!
                         elseif v:HasTag("molebait") then
-                            inst.itemscore = inst.itemscore + 2 -- Oooh, wants wants! We steal!
+                            inst.itemscore = inst.itemscore + 2  -- Oooh, wants wants! We steal!
                         end
                     end
                 end
@@ -1610,7 +1610,7 @@ local function TimeForACheckUp(inst, dev)
     end
 
     if not dev then
-        TheWorld:PushEvent("reducerattimer", {value = inst.ratscore})
+        TheWorld:PushEvent("reducerattimer", { value = inst.ratscore })
 
         inst.ratwarning = inst.ratscore / 48
 
@@ -1639,7 +1639,7 @@ local function TimeForACheckUp(inst, dev)
                     end)
                 end
 
-                local players = TheSim:FindEntities(x, y, z, 40, {"player"}, {"playerghost"})
+                local players = TheSim:FindEntities(x, y, z, 40, { "player" }, { "playerghost" })
                 for a, b in ipairs(players) do
                     if math.random() > 0.5 then
                         if inst.burrowbonus > inst.itemscore and inst.burrowbonus > inst.foodscore then
@@ -1717,7 +1717,7 @@ local function PlayWarningSound(inst)
     inst.Transform:SetPosition(x + (15 * math.cos(theta)), 0, z + 15 * (math.sin(theta)))
 
     local x, y, z = inst.Transform:GetWorldPosition()
-	
+
     inst.SoundEmitter:PlaySound("UCSounds/ratsniffer/warning")
 
     inst:DoTaskInTime(3, inst.Remove)
@@ -1743,4 +1743,5 @@ local function fn_warning()
     return inst
 end
 
-return Prefab("uncompromising_rat", fn, assets, prefabs), Prefab("uncompromising_junkrat", junkfn), Prefab("uncompromising_packrat", packfn, assets, prefabs), Prefab("uncompromising_ratherd", fn_herd, assets, prefabs), Prefab("uncompromising_ratburrow", fn_burrow, assets, prefabs), Prefab("uncompromising_winkyburrow", fn_winkyburrow, assets, prefabs), Prefab("uncompromising_winkyhomeburrow", fn_winkyhomeburrow, assets, prefabs), Prefab("uncompromising_scoutburrow", fn_scoutburrow, assets, prefabs), Prefab("uncompromising_ratsniffer", fn_sniffer, assets, prefabs), Prefab("ratdroppings", fn_droppings, assets), Prefab("uncompromising_ratwarning", fn_warning)
+return Prefab("uncompromising_rat", fn, assets, prefabs), Prefab("uncompromising_junkrat", junkfn), Prefab("uncompromising_packrat", packfn, assets, prefabs), Prefab("uncompromising_ratherd", fn_herd, assets, prefabs), Prefab("uncompromising_ratburrow", fn_burrow, assets, prefabs), Prefab("uncompromising_winkyburrow", fn_winkyburrow, assets, prefabs), Prefab("uncompromising_winkyhomeburrow", fn_winkyhomeburrow, assets, prefabs),
+    Prefab("uncompromising_scoutburrow", fn_scoutburrow, assets, prefabs), Prefab("uncompromising_ratsniffer", fn_sniffer, assets, prefabs), Prefab("ratdroppings", fn_droppings, assets), Prefab("uncompromising_ratwarning", fn_warning)
