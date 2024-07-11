@@ -266,20 +266,25 @@ local function OnSetOwner(inst)
     end
 end
 
-local WATHOM_COLOURCUBES =
-{
-    day = resolvefilepath("images/colour_cubes/bat_vision_on_cc.tex"),
-    dusk = resolvefilepath("images/colour_cubes/bat_vision_on_cc.tex"),
-    night = resolvefilepath("images/colour_cubes/bat_vision_on_cc.tex"),
-    full_moon = "images/colour_cubes/fungus_cc.tex",
-}
-
-local NIGHTVISION_COLOURCUBES =
-{
-    day = "images/colour_cubes/mole_vision_on_cc.tex",
-    dusk = "images/colour_cubes/mole_vision_on_cc.tex",
-    night = "images/colour_cubes/mole_vision_on_cc.tex",
-    full_moon = "images/colour_cubes/fungus_cc.tex",
+local NIGHTVISION_CCS = {
+    blue = {
+        day = resolvefilepath("images/colour_cubes/bat_vision_on_cc.tex"),
+        dusk = resolvefilepath("images/colour_cubes/bat_vision_on_cc.tex"),
+        night = resolvefilepath("images/colour_cubes/bat_vision_on_cc.tex"),
+        full_moon = "images/colour_cubes/fungus_cc.tex",
+    },
+    red  = {
+        day = "images/colour_cubes/mole_vision_on_cc.tex",
+        dusk = "images/colour_cubes/mole_vision_on_cc.tex",
+        night = "images/colour_cubes/mole_vision_on_cc.tex",
+        full_moon = "images/colour_cubes/fungus_cc.tex",
+    },
+    bnw  = {
+        day = "images/colour_cubes/ruins_dim_cc.tex",
+        dusk = "images/colour_cubes/ruins_dim_cc.tex",
+        night = "images/colour_cubes/ruins_dim_cc.tex",
+        full_moon = "images/colour_cubes/ruins_dim_cc.tex",
+    }
 }
 
 local function GetMusicValues(inst)
@@ -297,48 +302,49 @@ local function WathomEnterDark(inst)
 end
 
 local function CheckLight(inst)
-	if inst:IsInLight() then
-		if inst.updatewathomvisiontask == nil then
-			inst.updatewathomvisiontask = inst:DoTaskInTime(2, function()
-				inst.components.playervision:SetCustomCCTable(nil)
-				inst.components.playervision:ForceNightVision(false)
-				inst:RemoveTag("WathomInDark")
-				
-				if inst.updatewathomvisiontask ~= nil then
-					inst.updatewathomvisiontask:Cancel()
-				end
-			end)
-		end
-	else	
-		if inst.updatewathomvisiontask ~= nil then
-			inst.updatewathomvisiontask:Cancel()
-		end
-				
-		inst.updatewathomvisiontask = nil
-		inst.components.playervision:SetCustomCCTable(TUNING.DSTU.WATHOM_ALT_NIGHTVISION and NIGHTVISION_COLOURCUBES or WATHOM_COLOURCUBES)
-		inst.components.playervision:ForceNightVision(true)
-		inst:AddTag("WathomInDark")
-	end
+    if inst:IsInLight() then
+        if inst.updatewathomvisiontask == nil then
+            inst.updatewathomvisiontask = inst:DoTaskInTime(2, function()
+                inst.components.playervision:SetCustomCCTable(nil)
+                inst.components.playervision:ForceNightVision(false)
+                inst:RemoveTag("WathomInDark")
+
+                if inst.updatewathomvisiontask ~= nil then
+                    inst.updatewathomvisiontask:Cancel()
+                end
+            end)
+        end
+    else
+        if inst.updatewathomvisiontask ~= nil then
+            inst.updatewathomvisiontask:Cancel()
+        end
+
+        inst.updatewathomvisiontask = nil
+        print(NIGHTVISION_CCS, TUNING.DSTU.WATHOM_NIGHTVISON_CC, NIGHTVISION_CCS[TUNING.DSTU.WATHOM_NIGHTVISON_CC])
+        inst.components.playervision:SetCustomCCTable(NIGHTVISION_CCS[TUNING.DSTU.WATHOM_NIGHTVISON_CC])
+        inst.components.playervision:ForceNightVision(true)
+        inst:AddTag("WathomInDark")
+    end
 end
 
 -- When loading or spawning the character
 local function onload(inst, data)
     inst:ListenForEvent("ms_respawnedfromghost", onbecamehuman)
     inst:ListenForEvent("ms_becameghost", onbecameghost)
-	
+
     if inst:HasTag("playerghost") then
         onbecameghost(inst)
     else
         onbecamehuman(inst)
     end
-	
+
     if data then
         if data.amped then
             inst:AddTag("amped")
             SendModRPCToClient(GetClientModRPC("UncompromisingSurvival", "WathomMusicToggle"), inst.userid,
                 GetMusicValues(inst))
         end
-		
+
         if data.deathamped then
             inst:AddTag("deathamp")
             SendModRPCToClient(GetClientModRPC("UncompromisingSurvival", "WathomMusicToggle"), inst.userid,
@@ -470,9 +476,9 @@ local common_postinit = function(inst)
     inst.OnLoad = onload
     inst.OnNewSpawn = onload
 
-	inst:DoPeriodicTask(.3, CheckLight)
-	inst:ListenForEvent("enterdark", WathomEnterDark)
-	inst:ListenForEvent("enterlight", WathomEnterLight)
+    inst:DoPeriodicTask(.3, CheckLight)
+    inst:ListenForEvent("enterdark", WathomEnterDark)
+    inst:ListenForEvent("enterlight", WathomEnterLight)
 
     --t'was revealed to me in a dream, and I'm not even kidding.
     inst:ListenForEvent("wathommusic_start", UpdateMusic)
@@ -555,9 +561,9 @@ local master_postinit = function(inst)
         end
     end
 
-	inst:DoPeriodicTask(.3, CheckLight)
-	inst:ListenForEvent("enterdark", WathomEnterDark)
-	inst:ListenForEvent("enterlight", WathomEnterLight)
+    inst:DoPeriodicTask(.3, CheckLight)
+    inst:ListenForEvent("enterdark", WathomEnterDark)
+    inst:ListenForEvent("enterlight", WathomEnterLight)
 
     -- stuff relating to Wathom's adrenaline timer. This can most likely be optimized.
     inst:DoPeriodicTask(1.5, function() AmpTimer(inst) end)

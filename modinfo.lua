@@ -74,14 +74,16 @@ end
 ---@param label string
 ---@param hover string
 ---@param default boolean
-local function BinaryConfig(name, label, hover, default)
+---@param client? boolean
+local function BinaryConfig(name, label, hover, default, client)
     return {
         name = name,
         label = label,
         hover = hover,
         options = { { description = "Enabled", data = true, hover = "Enabled." },
             { description = "Disabled", data = false, hover = "Disabled." } },
-        default = default
+        default = default,
+        client = client
     }
 end
 ------------------------------
@@ -100,8 +102,31 @@ configuration_options = {
     ------------------------------
 
     Header("Client-Side"),
-    BinaryConfig("um_music", "Official Soundtrack", "Disable this if you are crashing when using client music mods or some other incompatibility.", true),
-    BinaryConfig("um_storms_over", "Tornadoes - Reduced VFX", "Reduces the overall intensity of the visual effects on both the overlay and rain near tornadoes.", false),
+    {
+        name = "",
+        label = "How to access client section",
+        hover = "Access client options here:\nMain Menu → Mods → Server Mods → " .. name,
+        options =
+        {
+            { description = "󰀏", data = "", hover = "" },
+        },
+        default = "",
+    },
+    BinaryConfig("um_music", "Official Soundtrack", "Disable this if you are crashing when using client music mods or some other incompatibility.", true, true),
+    BinaryConfig("um_storms_over", "Tornadoes - Reduced VFX", "Reduces the overall intensity of the visual effects on both the overlay and rain near tornadoes.", false, true),
+    {
+        name = "wathom_nightvision",
+        label = "Wathom - Alt Night Vision Filter",
+        hover = "Enable this for a alternate Night Vision filter if you experience eye strain.",
+        options =
+        {
+            { description = "Red", data = "red", hover = "Red filter, like moggles." },
+            { description = "Black and White", data = "bnw", hover = "Black and White, like the original night vision." },
+            { description = "Default", data = "blue", hover = "Default, blue filter." }
+        },
+        default = "blue",
+    },
+
     SkipSpace(),
 
     Header("Mod Compatibility"),
@@ -200,8 +225,6 @@ configuration_options = {
             { description = "2x",           data = 2 } },
         default = 5
     },
-    BinaryConfig("wathom_nightvision", "Wathom - Alt Night Vision Filter",
-        "Enable this for a alternate Night Vision filter if you experience eye strain.", true),
     {
         name = "wathom_armordamage",
         label = "Wathom - Armor Damage",
