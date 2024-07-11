@@ -495,6 +495,18 @@ for k, v in pairs(modparams) do
     containers.MAXITEMSLOTS = math.max(containers.MAXITEMSLOTS, v.widget.slotpos ~= nil and #v.widget.slotpos or 0)
 end
 
+
+containers.params.spicepack = GLOBAL.deepcopy(containers.params.beargerfur_sack)
+containers.params.spicepack.itemtestfn = function(container, item, slot)
+    for i, v in ipairs(GLOBAL.FOODGROUP.OMNI.types) do
+        if item:HasTag("edible_" .. v) or item:HasTag("spice") then return true end
+    end
+end
+
+for k, v in pairs(containers.params.spicepack.widget.slotbg) do
+    containers.params.spicepack.widget.slotbg[k] = { image = "inv_slot_morsel.tex" }
+end
+
 local function addItemSlotNetvarsInContainer(inst)
     if (#inst._itemspool < containers.MAXITEMSLOTS) then
         for i = #inst._itemspool + 1, containers.MAXITEMSLOTS do
