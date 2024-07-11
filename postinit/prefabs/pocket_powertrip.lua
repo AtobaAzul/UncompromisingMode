@@ -36,7 +36,7 @@ local function DoPockets(inst, widget)
 
     inst:AddComponent("container")
     inst.components.container.itemtestfn = function(container, item)
-        return container.inst.components.equippable.isequipped
+        return container.inst.components.equippable.isequipped or not container.components.container:IsEmpty()
     end
 
     inst.components.container:WidgetSetup(widget)
