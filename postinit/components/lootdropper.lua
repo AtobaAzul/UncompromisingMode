@@ -119,7 +119,7 @@ env.AddComponentPostInit("lootdropper", function(self)
             local prefabs = self:GenerateLoot(self)
             local isstructure = self.inst:HasTag("structure")
 
-            if self.inst.components.burnable ~= nil and
+            if self.inst.components.burnable ~= nil and not self.inst.components.burnable:IsControlledBurn() and
                 self.inst.components.burnable:IsBurning() and
                 (not isstructure and not self.inst:HasTag("tree"))
                 and not self.inst:HasTag("hive")

@@ -6,7 +6,7 @@ local function OnHitOtherBurn(inst, data)
     if other ~= nil then
         if not (other.components.health ~= nil and other.components.health:IsDead()) then
             if other.components.burnable ~= nil and not (other.components.rider and other.components.rider:IsRiding()) then
-                other.components.burnable:Ignite(true, inst)
+                other.components.burnable:Ignite(true, inst, inst)
             end
         end
     end
