@@ -36,7 +36,7 @@ local function pickup(inst, channeler)
     local ents = TheSim:FindEntities(x, y, z, TUNING.FIRE_DETECTOR_RANGE * 1.1, nil, PICKUP_CANT_TAGS,
         ORANGE_PICKUP_MUST_TAGS)
     for i, v in ipairs(ents) do
-s        if v.components.inventoryitem ~= nil and --Inventory stuff
+        if v.components.inventoryitem ~= nil and --Inventory stuff
             v.components.inventoryitem.canbepickedup and
             v.components.inventoryitem.cangoincontainer and
             not v.components.inventoryitem:IsHeld() and
