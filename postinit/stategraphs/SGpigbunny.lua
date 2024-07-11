@@ -77,9 +77,13 @@ env.AddStategraphPostInit("pig", function(inst)
                 end
             end
 
-            if inst.components.health ~= nil and not inst.components.health:IsDead() and (not inst.sg:HasStateTag("busy") or inst.sg:HasStateTag("caninterrupt") or inst.sg:HasStateTag("frozen")) then
-                inst.sg:GoToState("hit")
-            end
+			if inst.components.health ~= nil and not inst.components.health:IsDead()
+				and not hit_recovery_delay(inst)
+				and (not inst.sg:HasStateTag("busy")
+					or inst.sg:HasStateTag("caninterrupt")
+					or inst.sg:HasStateTag("frozen")) then
+						inst.sg:GoToState("hit")
+			end	
         end),
     }
 
