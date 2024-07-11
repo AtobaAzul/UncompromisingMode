@@ -26,6 +26,7 @@ end
 
 local function DoPockets(inst, widget)
     inst:AddTag("backpack")
+    inst:AddTag("pocketbackpack")
 
     if not TheWorld.ismastersim then
         inst.OnEntityReplicated = function(inst)
@@ -36,7 +37,7 @@ local function DoPockets(inst, widget)
 
     inst:AddComponent("container")
     inst.components.container.itemtestfn = function(container, item)
-        return container.inst.components.equippable.isequipped or not container.components.container:IsEmpty()
+        return true--container.inst.components.equippable.isequipped or not container:IsEmpty()
     end
 
     inst.components.container:WidgetSetup(widget)
@@ -79,7 +80,7 @@ local function DoPockets(inst, widget)
     if inst.components.fueled ~= nil then
         local _depleted = inst.components.fueled.depleted
         inst.components.fueled:SetDepletedFn(function(inst)
-            ExplodeInventory(inst)
+            --ExplodeInventory(inst)
 
             if _depleted ~= nil then
                 _depleted(inst)
@@ -95,6 +96,7 @@ local function DoPockets(inst, widget)
 
     inst:ListenForEvent("itemget", OnContainerChanged)
     inst:ListenForEvent("itemlose", OnContainerChanged)
+
 end
 
 env.AddPrefabPostInit("trunkvest_summer", function(inst)
@@ -122,7 +124,7 @@ env.AddPrefabPostInit("hawaiianshirt", function(inst)
     DoPockets(inst, "puffvest")
 
     if inst.components.perishable ~= nil then
-        inst.components.perishable:SetOnPerishFn(ExplodeInventoryPerish)
+        --inst.components.perishable:SetOnPerishFn(ExplodeInventoryPerish)
     end
 end)
 

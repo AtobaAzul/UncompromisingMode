@@ -116,12 +116,11 @@ GLOBAL.ACTIONS.RUMMAGE.fn = function(act)
     end
     if target.prefab == "portablecookpot" and target ~= nil and target.components.container ~= nil
         and target.components.container.canbeopened and GLOBAL.CanEntitySeeTarget(act.doer, target) then
-
-            if target.components.container:IsOpenedBy(act.doer) then
-                target.components.container:Close(act.doer)
-                act.doer:PushEvent("closecontainer", { container = target })
-                return true
-            end
+        if target.components.container:IsOpenedBy(act.doer) then
+            target.components.container:Close(act.doer)
+            act.doer:PushEvent("closecontainer", { container = target })
+            return true
+        end
         act.doer:PushEvent("opencontainer", { container = target })
         target.components.container:Open(act.doer)
         return true
@@ -145,9 +144,11 @@ end
 local _StoreFn = GLOBAL.ACTIONS.STORE.fn
 GLOBAL.ACTIONS.STORE.fn = function(act)
     local target = act.target
-    if target.prefab == "portablecookpot" and target.components.container ~= nil and act.invobject.components.inventoryitem ~= nil 
-        and act.doer.components.inventory ~= nil and target.components.container:CanTakeItemInSlot(act.invobject) then
 
+    if target:HasTag("pocketbackpack") and not target.components.equippable.isequipped and act.target.components.inventoryitem.owner ~= nil then
+        return false
+    elseif target.prefab == "portablecookpot" and target.components.container ~= nil and act.invobject.components.inventoryitem ~= nil
+        and act.doer.components.inventory ~= nil and target.components.container:CanTakeItemInSlot(act.invobject) then
         local item = act.invobject.components.inventoryitem:RemoveFromOwner(target.components.container.acceptsstacks)
         if item ~= nil then
             if not target.components.container:GiveItem(item, targetslot, nil, false) then
