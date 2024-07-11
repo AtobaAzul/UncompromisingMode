@@ -162,7 +162,7 @@ env.AddComponentPostInit("health", function(self)
         elseif MayKill(self, amount) and HasLLA(self) then
             TriggerAmulet(self)
             return 49
-        elseif MayKill(self, amount) and HasCharlieRose(self) then
+        elseif self.inst:HasTag("handyperson") and self.inst.components.inventory ~= nil and MayKill(self, amount) and HasCharlieRose(self) then
             TriggerRose(self)
         else
             return _DoDelta(self, amount, overtime, cause, ignore_invincible, afflicter, ignore_absorb, ...)

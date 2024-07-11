@@ -11,6 +11,8 @@ local function OnCooldown(inst)
     inst._cdtask = nil
 end
 
+local UpvalueHacker = require("tools/upvaluehacker")
+
 local function ActionHungerDrain(inst, data)
     if inst.components.rider ~= nil and inst.components.rider:IsRiding() then
         return
@@ -409,3 +411,58 @@ for i, v in ipairs(holoitems) do
         inst.components.inventoryitem.canonlygoinpocket = false --stupidiest thing ever. I hate it.
     end)
 end
+
+local OCEAN_ONE_OF_TAGS = { "oceanfishable", "wave" }
+local OCEAN_NO_TAGS = { "INLIMBO", "noattack", "flight", "invisible" }
+local WORK_RADIUS_PADDING = 0.5
+local COLLAPSIBLE_WORK_ACTIONS =
+{
+	CHOP = true,
+	DIG = true,
+	HAMMER = true,
+	MINE = true,
+}
+local COLLAPSIBLE_TAGS = { "NPC_workable" }
+local COLLAPSIBLE_TAGS_OCEAN = { "kelp", "NPC_workable" }
+for k, v in pairs(COLLAPSIBLE_WORK_ACTIONS) do
+	local tag = k.."_workable"
+	table.insert(COLLAPSIBLE_TAGS, tag)
+	table.insert(COLLAPSIBLE_TAGS_OCEAN, tag)
+end
+
+local SPEED = 8
+
+local function DoOceanFishing(inst, x, z)
+    -- Set y to zero to look for objects floating on the ocean
+    for i, v in ipairs(TheSim:FindEntities(x, 0, z, inst.AOE_RADIUS + WORK_RADIUS_PADDING, nil, OCEAN_NO_TAGS, OCEAN_ONE_OF_TAGS)) do
+        -- Look for fish in the splash radius, kill and spawn their loot if hit
+        if v.components.oceanfishable ~= nil then
+            -- Launch fishable things because why not.
+
+            local projectile = v.components.oceanfishable:MakeProjectile()
+            if projectile.components.weighable ~= nil then
+                projectile.components.weighable.prefab_override_owner = inst.fisher_prefab
+            end
+            local position = Vector3(x, 0, z)
+            if projectile.components.complexprojectile then
+                projectile.components.complexprojectile:SetHorizontalSpeed(16)
+                projectile.components.complexprojectile:SetGravity(-30)
+                projectile.components.complexprojectile:SetLaunchOffset(Vector3(0, 0.5, 0))
+                projectile.components.complexprojectile:SetTargetOffset(Vector3(0, 0.5, 0))
+
+                local v_position = v:GetPosition()
+                local launch_position = v_position + (v_position - position):Normalize() * SPEED
+                projectile.components.complexprojectile:Launch(launch_position, projectile)
+            elseif v.waveactive then
+                v:DoSplash()
+            end
+        end
+    end
+    SpawnPrefab("crab_king_waterspout").Transform:SetPosition(x, 0, z)
+end
+
+env.AddPrefabPostInit("winona_catapult_projectile", function(inst)
+    if not TheWorld.ismastersim then return end
+
+    UpvalueHacker.SetUpvalue(inst.components.complexprojectile.onhitfn, DoOceanFishing, "DoOceanFishing")
+end)
