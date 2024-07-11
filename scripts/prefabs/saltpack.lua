@@ -61,7 +61,7 @@ local function Salted(inst)
         end
     end
 
-    local ents2 = TheSim:FindEntities(x, y, z, 6, { "snowish" })
+    local ents2 = TheSim:FindEntities(x, y, z, 6, nil, nil, { "snowish", "slurtle", "snurtle" })
     if #ents2 > 0 then
         for i, v2 in ipairs(ents2) do
             if v2:IsValid() and v2.components.health ~= nil and not v2.components.health:IsDead() and inst.components.combat:CanTarget(v2) then
@@ -94,6 +94,41 @@ local function ontakefuel(inst)
     inst.components.useableitem.inuse = false
 end
 
+
+-------------------------------------------------
+-- Changed to Turn on and off
+local function PeriodicSalt(inst)
+	if not FindEntity(inst,2^2,nil,{"salt"}) then
+		inst.components.fueled:SetPercent(inst.components.fueled:GetPercent() - 0.0125)
+		Salted(inst)
+		--inst.components.rechargeable:Discharge(1)
+		if inst.components.fueled:IsEmpty() then -- Just ran out
+			inst.SoundEmitter:PlaySound("dangerous_sea/common/water_pump/LP", "pump")
+			inst:DoTaskInTime(0.5, function(inst) inst.SoundEmitter:KillSound("pump") end)		
+			inst.salt_task:Cancel()
+			inst.salt_task = nil
+		end
+	end
+end
+
+local function OnUse(inst)
+	inst.components.rechargeable:Discharge(0)
+	if inst.salt_task then
+		inst.salt_task:Cancel()
+		inst.salt_task = nil
+	else
+		if not inst.components.fueled:IsEmpty() then
+			Salted(inst)
+			inst.salt_task = inst:DoPeriodicTask(0.25,PeriodicSalt)
+		else
+			inst.SoundEmitter:PlaySound("dangerous_sea/common/water_pump/LP", "pump")
+			inst:DoTaskInTime(0.5, function(inst) inst.SoundEmitter:KillSound("pump") end)
+		end
+	end
+end
+-------------------------------------------------
+
+--[[ Old OnUse
 local function OnUse(inst)
     if inst.components.rechargeable:IsCharged() and not inst.components.fueled:IsEmpty() then
         inst.components.fueled:SetPercent(inst.components.fueled:GetPercent() - 0.0125) -- test num, feel free to tune
@@ -103,10 +138,18 @@ local function OnUse(inst)
         inst.SoundEmitter:PlaySound("dangerous_sea/common/water_pump/LP", "pump")
         inst:DoTaskInTime(0.5, function(inst) inst.SoundEmitter:KillSound("pump") end)
     end
-end
+end]]
 
 local function OnCharged(inst)
     inst.components.useableitem.inuse = false
+end
+
+
+local function OnPutOnInventory(inst, owner)
+    if inst.salt_task then
+		inst.salt_task:Cancel()
+    end
+    inst.salt_task = nil
 end
 
 --------------------------------------------------------------------------
@@ -145,7 +188,7 @@ local function fn()
 
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.atlasname = "images/inventoryimages/saltpack.xml"
-
+    inst.components.inventoryitem:SetOnPutInInventoryFn(OnPutOnInventory)
 
     inst:AddComponent("equippable")
     inst.components.equippable.equipslot = EQUIPSLOTS.BODY

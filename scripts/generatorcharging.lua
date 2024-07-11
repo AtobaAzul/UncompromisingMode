@@ -198,9 +198,12 @@ local function fn(inst)
     inst:AddComponent("updatelooper")
     inst:AddComponent("colouradder")
 
+    local _onputininventoryfn = inst.components.inventoryitem.onputininventoryfn
+    inst.components.inventoryitem.onputininventoryfn = function(inst, owner) _onputininventoryfn(inst) OnPutInInventory(inst, owner) end
 
-    inst.components.inventoryitem:SetOnPutInInventoryFn(OnPutInInventory)
-    inst.components.inventoryitem:SetOnDroppedFn(OnDropped)
+
+    local _ondropfn = inst.components.inventoryitem.ondropfn
+    inst.components.inventoryitem.ondropfn = function(inst) _ondropfn(inst) OnDropped(inst) end
 
 
     inst:AddComponent("circuitnode")
