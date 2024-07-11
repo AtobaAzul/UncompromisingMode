@@ -115,4 +115,13 @@ env.AddComponentPostInit("fueled", function(self)
             return _GetPercent(self)
         end
     end
+
+    local _IsFull = self.IsFull
+    function self:IsFull()
+        if self.inst:HasTag("overchargeable") then
+            return self.maxfuel > 0 and self.currentfuel >= self.maxfuel * 2
+        else
+            return _IsFull(self)
+        end
+    end
 end)
