@@ -417,17 +417,17 @@ local OCEAN_NO_TAGS = { "INLIMBO", "noattack", "flight", "invisible" }
 local WORK_RADIUS_PADDING = 0.5
 local COLLAPSIBLE_WORK_ACTIONS =
 {
-	CHOP = true,
-	DIG = true,
-	HAMMER = true,
-	MINE = true,
+    CHOP = true,
+    DIG = true,
+    HAMMER = true,
+    MINE = true,
 }
 local COLLAPSIBLE_TAGS = { "NPC_workable" }
 local COLLAPSIBLE_TAGS_OCEAN = { "kelp", "NPC_workable" }
 for k, v in pairs(COLLAPSIBLE_WORK_ACTIONS) do
-	local tag = k.."_workable"
-	table.insert(COLLAPSIBLE_TAGS, tag)
-	table.insert(COLLAPSIBLE_TAGS_OCEAN, tag)
+    local tag = k .. "_workable"
+    table.insert(COLLAPSIBLE_TAGS, tag)
+    table.insert(COLLAPSIBLE_TAGS_OCEAN, tag)
 end
 
 local SPEED = 8
@@ -461,8 +461,10 @@ local function DoOceanFishing(inst, x, z)
     SpawnPrefab("crab_king_waterspout").Transform:SetPosition(x, 0, z)
 end
 
-env.AddPrefabPostInit("winona_catapult_projectile", function(inst)
-    if not TheWorld.ismastersim then return end
+if env.GetModConfigData("winonafishing") then
+    env.AddPrefabPostInit("winona_catapult_projectile", function(inst)
+        if not TheWorld.ismastersim then return end
 
-    UpvalueHacker.SetUpvalue(inst.components.complexprojectile.onhitfn, DoOceanFishing, "DoOceanFishing")
-end)
+        UpvalueHacker.SetUpvalue(inst.components.complexprojectile.onhitfn, DoOceanFishing, "DoOceanFishing")
+    end)
+end

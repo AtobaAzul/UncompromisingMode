@@ -120,9 +120,9 @@ configuration_options = {
         hover = "Enable this for a alternate Night Vision filter if you experience eye strain.",
         options =
         {
-            { description = "Red", data = "red", hover = "Red filter, like moggles." },
-            { description = "Black and White", data = "bnw", hover = "Black and White, like the original night vision." },
-            { description = "Default", data = "blue", hover = "Default, blue filter." }
+            { description = "Red",             data = "red",  hover = "Red filter, like moggles." },
+            { description = "Black and White", data = "bnw",  hover = "Black and White, like the original night vision." },
+            { description = "Default",         data = "blue", hover = "Default, blue filter." }
         },
         default = "blue",
     },
@@ -314,6 +314,8 @@ configuration_options = {
     BinaryConfig("winonaworker", "Winona - Faster Working",
         "Winona now scales her work/picking efficiency, and tool/weapon durability, off of her hunger level. Drains hunger when taking actions.",
         true),
+    BinaryConfig("winonarose", "Winona - Fragile Rose", "Nerfs the fragile rose to not revive the player, instead preventing death when taking lethal damage.", true),
+    BinaryConfig("winonafishing", "Winona - Catapult Fishing", "Nerfs catapult fishing. Instead of killing fishes, catapults now launch fish.", true),
     BinaryConfig("winona_items", "Winona - New Items",
         "Gives Winona a toolbox, Electrical Upgrade Kit and Powercells.", true),
     BinaryConfig("winona_overcharging", "Winona - Overcharging", "Winona can overcharge several different items to further enhance their effects.", true),
