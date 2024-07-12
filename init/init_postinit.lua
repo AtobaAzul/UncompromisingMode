@@ -50,7 +50,9 @@ local component_post = {
     "walkableplatformplayer",
     "schoolspawner",
     "builder",
-    "raindome"
+    --"raindome"
+    "stewer",
+    "boatmagnet",
 }
 
 local prefab_post = {
