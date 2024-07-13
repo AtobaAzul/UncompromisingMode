@@ -59,7 +59,7 @@ local function OnActivate_Clock(inst, doer)
         local nearbyplayers = TheSim:FindEntities(x, y, z, 30, { "player" })
 
         if inst.final_code_ready and inst.hourdangle.count == 12 and inst.minutedangle.count == 2 and inst.seconddangle.count == 7 then
-            if nearbyplayers ~= nil and #nearbyplayers == #AllPlayers or not TUNING.DSTU.EVERYONE_TOGETHER then
+            if nearbyplayers ~= nil and #nearbyplayers == #AllPlayers or not TUNING.DSTU.ALL_MUST_BE_GATHERED  then
                 inst.canbeused = false
                 --print("ding dong the witch is dead")
                 for i = 1, 8 do
