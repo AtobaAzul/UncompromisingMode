@@ -199,11 +199,19 @@ local function fn(inst)
     inst:AddComponent("colouradder")
 
     local _onputininventoryfn = inst.components.inventoryitem.onputininventoryfn
-    inst.components.inventoryitem.onputininventoryfn = function(inst, owner) _onputininventoryfn(inst) OnPutInInventory(inst, owner) end
+    inst.components.inventoryitem.onputininventoryfn = function(inst, owner)
+        if _onputininventoryfn ~= nil then _onputininventoryfn(inst) end
+        OnPutInInventory(inst, owner)
+    end
 
 
     local _ondropfn = inst.components.inventoryitem.ondropfn
-    inst.components.inventoryitem.ondropfn = function(inst) _ondropfn(inst) OnDropped(inst) end
+    inst.components.inventoryitem.ondropfn = function(inst)
+        if _ondropfn ~= nil then 
+            _ondropfn(inst) 
+        end
+        OnDropped(inst)
+    end
 
 
     inst:AddComponent("circuitnode")

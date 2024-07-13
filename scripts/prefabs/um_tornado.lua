@@ -144,34 +144,36 @@ local function TornadoEnviromentTask(inst)
     if config ~= "minimal" then
         -- if GetClosestInstWithTag("player", inst, PLAYER_CAMERA_SEE_DISTANCE * 1.125) ~= nil then -- tornado doesn't sleep. Using alt distance-based check.
         -- PICKABLES
-        local pickables = TheSim:FindEntities(x, y, z, 12, nil, { "INLIMBO", "trap", "flower", "tornado_nosucky" }, { "pickable", "HACK_workable" })
+        local pickables = TheSim:FindEntities(x, y, z, 12, nil, { "prototyper", "INLIMBO", "trap", "flower", "heavy", "tornado_nosucky" }, { "pickable", "HACK_workable" })
         for k, v in ipairs(pickables) do
-            local _x, _y, _z = v.Transform:GetWorldPosition()
-            if v.components.pickable ~= nil and v.components.pickable:CanBePicked() and not IsUnderRainDomeAtXZ(_x, _z) then
-                if not v:IsAsleep() and not config == "reduced" then
-                    v.components.pickable:Pick(TheWorld)
-                else
-                    if v:IsAsleep() and config == "reduced" then
-                        return
-                    end
+            if v.prefab ~= "sculptingtable" then
+                local _x, _y, _z = v.Transform:GetWorldPosition()
+                if v.components.pickable ~= nil and v.components.pickable:CanBePicked() and not IsUnderRainDomeAtXZ(_x, _z) then
+                    if not v:IsAsleep() and not config == "reduced" then
+                        v.components.pickable:Pick(TheWorld)
+                    else
+                        if v:IsAsleep() and config == "reduced" then
+                            return
+                        end
 
-                    v.components.pickable:Pick(inst)
-                end
-            elseif v.components.hackable and v.components.hackable:CanBeHacked() then
-                if not v:IsAsleep() and not config == "reduced" then
-                    v.components.hackable:Hack(TheWorld, 1)
-                else
-                    if v:IsAsleep() and config == "reduced" then
-                        return
+                        v.components.pickable:Pick(inst)
                     end
+                elseif v.components.hackable and v.components.hackable:CanBeHacked() then
+                    if not v:IsAsleep() and not config == "reduced" then
+                        v.components.hackable:Hack(TheWorld, 1)
+                    else
+                        if v:IsAsleep() and config == "reduced" then
+                            return
+                        end
 
-                    v.components.hackable:Hack(inst, 1)
+                        v.components.hackable:Hack(inst, 1)
+                    end
                 end
             end
         end
 
         -- WORKING
-        local workables = TheSim:FindEntities(x, y, z, 6, nil, { "irreplaceable", "INLIMBO", "trap", "winter_tree", "farm_plant", "_inventory", "sign", "drawable", "tornado_nosucky" },
+        local workables = TheSim:FindEntities(x, y, z, 6, nil, { "heavy", "irreplaceable", "INLIMBO", "trap", "winter_tree", "farm_plant", "_inventory", "sign", "drawable", "tornado_nosucky" },
             { "DIG_workable", "CHOP_workable" })
 
         for k, v in ipairs(workables) do

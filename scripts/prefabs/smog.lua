@@ -69,10 +69,10 @@ local function InitEnvelope()
     EnvelopeManager:AddColourEnvelope(
         COLOUR_ENVELOPE_NAME_SMOKE,
         {
-            { 0,  IntColour(255, 255, 255, 15) },
-            { .3, IntColour(255, 255, 255, 15) },
-            { .7, IntColour(255, 255, 255, 15) },
-            { 1,  IntColour(255, 255, 255, 15) },
+            { 0,  IntColour(255, 255, 255, 20) },
+            { .3, IntColour(255, 255, 255, 20) },
+            { .7, IntColour(255, 255, 255, 20) },
+            { 1,  IntColour(255, 255, 255, 20) },
         }
     )
 
