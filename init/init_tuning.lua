@@ -317,6 +317,7 @@ TUNING.DSTU = {
     PINK_VOMIT_NUTRIENTS = { 24, 0, 0 },
     PALE_VOMIT_NUTRIENTS = { 8, 8, 8 },
     MUSHROOM_CHANGES = GetModConfigData("mushroom_changes"),
+	ALL_MUST_BE_GATHERED = GetModConfigData("all_must_be_gathered"),
 
     ----------------------------------------------------------------------------
     -- Dynamic Boss Resistance

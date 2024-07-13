@@ -16,7 +16,7 @@ SetSharedLootTable( 'snowmong',
     {'ice',  			 	1.00},
 	{'ice',  			 	1.00},
 	{'ice',  			 	1.00},
-    {'iceboomerang',      	0.25},
+    {'iceboomerang',      	0.10},
 	{'snowball_throwable',  1.00},
 	{'snowball_throwable',  2.00},
 	

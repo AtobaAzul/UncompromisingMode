@@ -158,7 +158,8 @@ if TUNING.DSTU.TELESTAFF_REWORK then
 end
 
 if TUNING.DSTU.BEEBOX_NERF then
-    TOOLTIPS.BEEBOX = "- Reduced maximum active Bees."
+    TOOLTIPS.BEEBOX = "- Reduced maximum amount of Bees.\n- Reduced maximun amount of Honey.\n- Will deal damage to unprepared players."
+    TOOLTIPS.BEEHAT = "- Will protect players from Bee Box damage."	
 end
 
 if not TUNING.DSTU.ELECTRICALMISHAP then

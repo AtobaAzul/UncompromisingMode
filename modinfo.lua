@@ -663,7 +663,6 @@ configuration_options = {
     SkipSpace(),
 
     Header("General Food Tweaks"),
-    BinaryConfig("beebox_nerf", "Bee Box Nerf", "Bee Boxes only release 2 Bees max.", true),
     BinaryConfig("butterflywings_nerf", "Butterfly Wings Nerf",
         "Butterfly Wings have been nerfed to not be cheap healing.", true),
     {
@@ -676,6 +675,7 @@ configuration_options = {
             { description = "3x", data = 3 } },
         default = 1.5
     },
+    BinaryConfig("beebox_nerf", "Honey Nerf", "Bee Boxes can only hold 2 Bees and 3 Honey at max. Bee Boxes deal damage to unprepared players. Honey stats nerfed.", true),	
     BinaryConfig("seeds", "Lowered Seeds Hunger", "Seeds have had their hunger lowered.", true),
     {
         name = "monster_eggs",
@@ -693,7 +693,7 @@ configuration_options = {
     BinaryConfig("horriblefood", "More Horrible Foods",
         "More items are considered as the horrible food type.", true),
     BinaryConfig("mushroom_changes", "Mushroom Changes",
-        "Mushroom Planter accepts more resources to replenish. Mushrooms and Mushtrees now give spores, instead of caps.", true),
+        "Mushroom Planter accepts more resources to replenish. Mushrooms now give spores, instead of caps. Mushtrees will give spores when off-season.", true),
     BinaryConfig("no_winter_growing", "No Winter Growing",
         "Makes a few food sources such as Kelp and Stone Fruit not grow in Winter.", true),
     BinaryConfig("rawcropsnerf", "Raw Crops Nerf",
@@ -1401,6 +1401,7 @@ configuration_options = {
     -- Mara =)
 
     --	Header("General"),
+	BinaryConfig("all_must_be_gathered", "All must be gathered", "Before you can proceed...", true),	
     BinaryConfig("um_shrink", "Don't Shrink", "Shrink when losing Health / Hunger, become flat when insane.", false),
     BinaryConfig("um_advertisements", "Fun Mode", "Enables FUN new messages for an enhanced experience!", false),
     BinaryConfig("maraboss_bottomtext", "JUDGEMENT", "Enables a particular lunar mutation. Yup!", false),
