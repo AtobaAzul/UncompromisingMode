@@ -1877,7 +1877,7 @@ return{
 			COOKING_LONG = "Meantime, hunting time.",
 			COOKING_SHORT = "Momentary.",
 			DONE = "Food, equals food.",
-			EMPTY = "Fruit, vegetables, majority incompatible. However, nutritous accessory.",
+			EMPTY = "Fruit, vegetables, majority incompatible. However, nutritious accessory.",
 			BURNT = "How, mistake? Simple task, flames below!",
 		},
 		CORN = "Hard, awkward, no.",
@@ -3886,7 +3886,7 @@ return{
 
 			COOKING_LONG = "Meantime, hunting time.",
 			COOKING_SHORT = "Momentary.",
-			EMPTY = "Fruit, vegetables, majority incompatible. However, nutritous accessory.",
+			EMPTY = "Fruit, vegetables, majority incompatible. However, nutritious accessory.",
         },
 
         PORTABLEBLENDER_ITEM = "Grinding machine, produces flavor powder.",
@@ -4078,7 +4078,7 @@ return{
 			COOKING_LONG = "Meantime, hunting time.",
 			COOKING_SHORT = "Momentary.",
 			DONE = "Food, equals food.",
-			EMPTY = "Fruit, vegetables, majority incompatible. However, nutritous accessory.",
+			EMPTY = "Fruit, vegetables, majority incompatible. However, nutritious accessory.",
 			BURNT = "How, mistake? Simple task, flames below!",
         },
 
