@@ -368,6 +368,9 @@ local function ReleaseBees(inst, picker)
 					protection.components.armor:TakeDamage(40)
 				elseif picker:HasTag("pinetreepioneer") then				
 					picker.components.health:DoDelta(-30, false, inst.prefab, false, nil, inst, false)
+					picker.sg:GoToState("hit", inst)
+				elseif picker:HasTag("valkyrie") then
+					picker.components.health:DoDelta(-15, false, inst.prefab, false, nil, inst, false)
 					picker.sg:GoToState("hit", inst)					
 				else			
 					picker.components.health:DoDelta(-20, false, inst.prefab, false, nil, inst, false)
@@ -379,6 +382,9 @@ local function ReleaseBees(inst, picker)
 				elseif picker:HasTag("pinetreepioneer") then
 					picker.components.health:DoDelta(-20, false, inst.prefab, false, nil, inst, false)
 					picker.sg:GoToState("hit", inst)	
+				elseif picker:HasTag("valkyrie") then
+					picker.components.health:DoDelta(-7.5, false, inst.prefab, false, nil, inst, false)
+					picker.sg:GoToState("hit", inst)					
 				else
 					picker.components.health:DoDelta(-10, false, inst.prefab, false, nil, inst, false)
 					picker.sg:GoToState("hit", inst)
