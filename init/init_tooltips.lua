@@ -140,6 +140,7 @@ STRINGS.PINETREE_TOOLTIP = {
     PORTABLETENT_ITEM = "- A pine tree pioneer knows how to conserve energy when relaxing!",
     MEATRACK_HAT = "- If I go fast enough, it will dry even faster!",
     BRINE_BALM = "- My first aid training helps me get more out of this!",
+	BEEHAT = "- Wearing it should help me deal with my allergy!",
 }
 
 STRINGS.ENGINEERING_TOOLTIP = {

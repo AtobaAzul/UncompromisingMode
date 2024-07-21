@@ -440,6 +440,7 @@ local function pawn_nightmare()
     if not TheWorld.ismastersim then return inst end
 
     inst:AddTag("landmine")
+	inst:AddTag("shadow_aligned")
 
     return inst
 end

@@ -185,6 +185,7 @@ local function fn(Sim)
     inst:AddTag("chess")
     inst:AddTag("bight")
     inst:AddTag("electricdamageimmune")
+	inst:AddTag("shadow_aligned")	
     ------------------
     inst:AddComponent("health")
     inst.components.health:SetMaxHealth(900)

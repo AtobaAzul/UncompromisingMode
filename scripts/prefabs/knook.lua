@@ -99,6 +99,7 @@ local function fn(Sim)
     inst:AddTag("hostile")
     inst:AddTag("chess")
     inst:AddTag("knook")
+	inst:AddTag("shadow_aligned")	
 
     ------------------
     inst:AddComponent("health")

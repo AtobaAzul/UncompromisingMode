@@ -168,3 +168,46 @@ env.AddPrefabPostInit("walter", function(inst)
 	
 	--inst:ListenForEvent("killed", OnKilledOther)
 end)
+
+local function new_bonus_damage_via_allergy(inst, target, damage, weapon)
+	if target.components.inventory ~= nil then
+		local helm = target.components.inventory:GetEquippedItem(EQUIPSLOTS.HEAD)
+		if target.components.inventory ~= nil and helm and helm.components.armor and helm.components.armor.tags then
+			for i, tag in ipairs(helm.components.armor.tags) do
+				if tag == "bee" then
+					return (target:HasTag("allergictobees") and TUNING.DSTU.BEE_ALLERGY_PROTECTION_EXTRADAMAGE) or 0
+				else
+					return (target:HasTag("allergictobees") and TUNING.BEE_ALLERGY_EXTRADAMAGE) or 0
+				end	
+			end
+		else 	
+			return (target:HasTag("allergictobees") and TUNING.BEE_ALLERGY_EXTRADAMAGE) or 0
+		end	
+	else
+		return (target:HasTag("allergictobees") and TUNING.BEE_ALLERGY_EXTRADAMAGE) or 0
+	end
+end
+
+env.AddPrefabPostInit("bee", function(inst)	
+    if inst.components.combat ~= nil then	
+		inst.components.combat.bonusdamagefn = new_bonus_damage_via_allergy
+	end
+end)
+
+env.AddPrefabPostInit("killerbee", function(inst)	
+    if inst.components.combat ~= nil then	
+		inst.components.combat.bonusdamagefn = new_bonus_damage_via_allergy
+	end
+end)
+
+env.AddPrefabPostInit("beequeen", function(inst)	
+    if inst.components.combat ~= nil then	
+		inst.components.combat.bonusdamagefn = new_bonus_damage_via_allergy
+	end
+end)
+
+env.AddPrefabPostInit("beeguard", function(inst)	
+    if inst.components.combat ~= nil then	
+		inst.components.combat.bonusdamagefn = new_bonus_damage_via_allergy
+	end
+end)

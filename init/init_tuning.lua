@@ -32,6 +32,7 @@ TUNING.DSTU = {
     -- Armor
     ----------------------------------------------------------------------------
     ARMORREED_UM = TUNING.WILSON_HEALTH * 2 * multiplayer_armor_durability_modifier,
+	BEE_ALLERGY_PROTECTION_EXTRADAMAGE = 5,	
     ----------------------------------------------------------------------------
     -- Acid colour
     ----------------------------------------------------------------------------

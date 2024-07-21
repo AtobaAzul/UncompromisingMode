@@ -78,8 +78,8 @@ local function fn()
 	inst:AddTag("notraptrigger")
 	inst:AddTag("shadowchesspiece")
     inst:AddTag("treparm")
-	
-    --inst:AddTag("shadowcreature")
+	inst:AddTag("shadow_aligned")	
+
     inst.entity:SetPristine()
     inst.AnimState:SetMultColour(0, 0, 0, 0.8)
     if not TheWorld.ismastersim then

@@ -119,6 +119,7 @@ local function fn(Sim)
     inst:AddTag("hostile")
     inst:AddTag("chess")
     inst:AddTag("roship")
+	inst:AddTag("shadow_aligned")	
 
     ------------------
     inst:AddComponent("health")
