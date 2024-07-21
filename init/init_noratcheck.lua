@@ -20,6 +20,13 @@ TUNING.DSTU.NORATCHECK =--defining it here for simplicity's sake.
 	"trinket_4",
 	"trinket_13",
 	"moonglass_geode",
+	"aip_leaf_note",
+	"ash",
+	"bernie_inactive",
+	"blue_mushed_room",
+	"green_mushed_room",
+	"red_mushed_room",
+	"ancientfruit_gem", 	
 }
 
 for k, v in ipairs(TUNING.DSTU.NORATCHECK) do
