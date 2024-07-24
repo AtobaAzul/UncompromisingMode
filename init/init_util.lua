@@ -17,3 +17,10 @@ function TestForIA()
     end
 end
 
+env.AddPrefabPostInit("wonderwhy", function(inst)
+    if not TheWorld.ismastersim then
+        return
+    end
+
+    inst:AddTag("ignores_healthregen")
+end)
