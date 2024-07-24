@@ -400,17 +400,19 @@ local function ReleaseBees(inst, picker)
 end
 
 local function UpdateHoneyLevels(inst)
-	for i, amt in pairs(HONEY_PER_STAGE) do
-		if inst.components.harvestable.produce == amt or i >= #HONEY_PER_STAGE then
-			inst.anims = {
-				idle = amt <= 0 and "bees_loop" or "honey"..i - 1,
-				hit = amt <= 0 and "hit_idle" or "hit_honey"..i - 1,
-			}
-			inst.AnimState:PlayAnimation(inst.anims.idle)
-			
-			break
-		end
-	end
+    if inst.components.harvestable then
+        for i, amt in pairs(HONEY_PER_STAGE) do
+            if inst.components.harvestable.produce == amt or i >= #HONEY_PER_STAGE then
+                inst.anims = {
+                    idle = amt <= 0 and "bees_loop" or "honey"..i - 1,
+                    hit = amt <= 0 and "hit_idle" or "hit_honey"..i - 1,
+                }
+                inst.AnimState:PlayAnimation(inst.anims.idle)
+                
+                break
+            end
+        end
+    end
 end
 
 for i, v in ipairs(beebox_prefabs) do
