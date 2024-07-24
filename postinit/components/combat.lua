@@ -158,15 +158,20 @@ env.AddComponentPostInit("combat", function(self)
             return _GetAttacked(self, attacker, damage, weapon_check, stimuli)
         elseif self.inst ~= nil and self.inst.components.upgrademoduleowner and damage and (self.inst.components.rider ~= nil and not self.inst.components.rider:IsRiding() or self.inst.components.rider == nil) and TUNING.DSTU.WXLESS then
             -- Hardy circuit flat damage reduction
-            local cherry_mult = 1 --cherry forest circuit compat
-	    local cherry_mult2 = 1
-	    if self.inst._cherriftchips and self.inst._cherriftchips > 0 then
-	        cherry_mult = 1 + 0.5*self.inst._cherriftchips
-	        cherry_mult2 = 1 + 0.25*self.inst._cherriftchips
+            local small_absorb_table = {0, 2, 4, 5.5, 7, 8, 9, 9.5, 10}
+	    local big_absorb_table = {0, 5, 9, 12, 15}
+	    local small_modules = self.inst.components.upgrademoduleowner:GetModuleTypeCount('maxhealth') or 0
+	    local big_modules = self.inst.components.upgrademoduleowner:GetModuleTypeCount('maxhealth2') or 0
+	    if small_modules > 8 then small_modules = 8 end
+	    if big_modules > 4 then big_modules = 4 end
+	    local hpmodulereduct = small_absorb_table[small_modules+1] + big_absorb_table[big_modules+1]
+            if self.inst._cherriftchips and self.inst._cherriftchips > 0 then 
+	        hpmodulereduct = hpmodulereduct + self.inst._cherriftchips * 1.5
 	    end
-            local hpmodulereduct = self.inst.components.upgrademoduleowner:GetModuleTypeCount('maxhealth') * 2 * cherry_mult + self.inst.components.upgrademoduleowner:GetModuleTypeCount('maxhealth2') * 5 * cherry_mult2
-            damage = damage - hpmodulereduct
-            if damage < 2 then damage = 2 end
+	    if damage > 5 then
+	        damage = damage - hpmodulereduct
+	        if damage < 5 then damage = 5 end
+	    end
             return _GetAttacked(self, attacker, damage, weapon_check, stimuli, ...)
         elseif self.inst ~= nil and attacker ~= nil and attacker:HasTag("wathom") and TUNING.DSTU.WATHOM_MAX_DAMAGE_CAP then
             if damage > 600 then damage = 600 end

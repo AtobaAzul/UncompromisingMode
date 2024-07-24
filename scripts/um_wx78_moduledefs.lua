@@ -21,22 +21,6 @@ local function GetCreatureScanDataDefinition(prefab_name)
     return scandata_definitions[prefab_name]
 end
 
----------------------------------------------------------------
-local function superior_combo(inst, wx)
-	local same_amount = 1 or 2 or 3 or 4 or 5 --surely that's not the best way to go about it
-	if wx.components.upgrademoduleowner:GetModuleTypeCount('maxhealth2') == same_amount and wx.components.upgrademoduleowner:GetModuleTypeCount('maxhunger') == same_amount and wx.components.upgrademoduleowner:GetModuleTypeCount('maxsanity') == same_amount then
-		wx.components.talker:Say("OBSERVE MY SUPERIOR BODY FLESHLINGS")
-	end
-	if wx.components.upgrademoduleowner:GetModuleTypeCount('movespeed2') >= 4 then
-		wx.components.talker:Say("STEPS PER SECOND AT MAXIMUM")
-	end
-	if (wx.components.upgrademoduleowner:GetModuleTypeCount('cherrift') >= 8) or (wx.components.upgrademoduleowner:GetModuleTypeCount('light') >=1 and wx.components.upgrademoduleowner:GetModuleTypeCount('nightvision') >=1 ) then
-		wx.components.talker:Say("WHY DID I DO THAT")
-	end
-	if wx.components.upgrademoduleowner:GetModuleTypeCount('heat') == same_amount and wx.components.upgrademoduleowner:GetModuleTypeCount('cold') == same_amount then
-		wx.components.talker:Say("ELEMENTAL BALANCE ACHIEVED")
-	end
-end
 ------------------------------------------------------------
 local function maxhealth_change(inst, wx, amount, isloading)
     if wx.components.health ~= nil then
@@ -272,11 +256,11 @@ local function accelaratefn(wx, inst)
             end
         end
     else
-        if wx.accelarate_speed > 8.9 then wx.accelarate_speed = 8.9 end
+        if wx.accelarate_speed > 8.95 then wx.accelarate_speed = 8.95 end
 	if wx.speedloosetask == nil then
-		wx.speedloosetask = wx:DoPeriodicTask(0.3, function(wx)
+		wx.speedloosetask = wx:DoPeriodicTask(0.2, function(wx)
 		    if wx.accelarate_speed > TUNING.WILSON_RUN_SPEED then
-			wx.accelarate_speed = wx.accelarate_speed - 0.2
+			wx.accelarate_speed = wx.accelarate_speed - 0.1
 		    elseif wx.accelarate_speed < TUNING.WILSON_RUN_SPEED then
 			wx.accelarate_speed = TUNING.WILSON_RUN_SPEED
 			wx.speedloosetask:Cancel()
@@ -306,7 +290,6 @@ local function movespeed_activate(inst, wx)
     wx.accelarate_speed = TUNING.WILSON_RUN_SPEED
     wx:ListenForEvent("locomote", inst.accelarate, wx) --Listenning on WX just to not cause any real troubles with multiple modules
     --wx.components.locomotor.runspeed = TUNING.WILSON_RUN_SPEED * (1 + TUNING.WX78_MOVESPEED_CHIPBOOSTS[wx._movespeed_chips + 1])
-    superior_combo(inst, wx)
 end
 
 local function movespeed_deactivate(inst, wx)
@@ -395,6 +378,13 @@ local function ontemperaturechange(wx, data, inst)
         wx.components.efficientuser:AddMultiplier(act, workmult, inst)
         wx.components.workmultiplier:AddMultiplier(act, workmult, inst)
     end
+    if workmult > 1 then
+	wx.components.expertsailor:SetRowForceMultiplier(1+workmult/8)
+	wx.components.expertsailor:SetRowExtraMaxVelocity(workmult/6)
+    else
+	wx.components.expertsailor:SetRowForceMultiplier(1)
+	wx.components.expertsailor:SetRowExtraMaxVelocity(0)
+    end
 end
 
 local function onworkingwarmup(wx, data, inst, isattack)
@@ -413,7 +403,10 @@ local function heat_activate(inst, wx)
     --wx.components.temperature.mintemp = wx.components.temperature.mintemp + TUNING.WX78_MINTEMPCHANGEPERMODULE
     --wx.components.temperature.maxtemp = wx.components.temperature.maxtemp + TUNING.WX78_MINTEMPCHANGEPERMODULE
 
-
+    if wx.components.expertsailor == nil then
+        wx:AddComponent('expertsailor')
+    end
+	
     if wx._ontempmodulechange == nil then
         wx._ontempmodulechange = function(owner, data)
             ontemperaturechange(owner, data, inst)
@@ -447,7 +440,7 @@ local function heat_activate(inst, wx)
     if wx.AddTemperatureModuleLeaning ~= nil then
         wx:AddTemperatureModuleLeaning(1)
     end
-    superior_combo(inst, wx)
+    
 end
 
 local function heat_deactivate(inst, wx)
@@ -472,7 +465,9 @@ local function heat_deactivate(inst, wx)
             wx.components.workmultiplier:RemoveMultiplier(act, inst)
         end
     end)
-
+    if wx._heat_chips == 0 then
+        wx:RemoveComponent('expertsailor')
+    end
 
     wx.components.moisture.maxDryingRate = wx.components.moisture.maxDryingRate - EXTRA_DRYRATE
     wx.components.moisture.baseDryingRate = wx.components.moisture.baseDryingRate - EXTRA_DRYRATE
@@ -515,10 +510,10 @@ local function nightvision_activate(inst, wx)
     end
     if wx._nightvision_modcount > 1 or (wx._cherriftchips and wx._cherriftchips > 0) then
 	if wx._cherriftchips == nil then wx._cherriftchips = 0 end --should already be 0 due to wx78.lua but still a good failsafe
-	local view_dist = 12*math.max(0, wx._nightvision_modcount-1) + 2*wx._cherriftchips
+	local view_dist = 14*math.max(0, wx._nightvision_modcount-1) + 2*wx._cherriftchips
 	wx:AddCameraExtraDistance(inst, view_dist)
     end
-    superior_combo(inst, wx)
+    
 end
 
 local function nightvision_deactivate(inst, wx)
@@ -607,7 +602,7 @@ local function cold_activate(inst, wx)
 
     --local modvalue = 40 * wx._temperature_modulelean
     --wx.components.temperature:SetModifier("wx78module_cold", modvalue)
-    superior_combo(inst, wx)
+    
 end
 
 local function cold_deactivate(inst, wx)
@@ -691,7 +686,7 @@ local function taser_onblockedorattacked(wx, data, inst)
 
             if data.attacker._chargeharvestable == nil then
                 data.attacker._chargeharvestable = true
-                data.attacker:DoTaskInTime(3, function() data.attacker._chargeharvestable = nil end)
+                data.attacker:DoTaskInTime(3.5, function() data.attacker._chargeharvestable = nil end)
             end
             --local function tasedamaged(data)
 
@@ -732,7 +727,7 @@ local function taser_onattackother(wx, data, inst)
     if data.target._chargeharvestable == true then
         wx._taserchip_attackcounter = wx._taserchip_attackcounter + 1
     end
-    if wx._taserchip_attackcounter >= 12 then
+    if wx._taserchip_attackcounter >= 8 then
         wx._taserchip_attackcounter = 0
         wx.components.upgrademoduleowner:AddCharge(1)
     end
@@ -808,7 +803,7 @@ local function light_activate(inst, wx)
 
         wx.Light:Enable(true)
     end
-    superior_combo(inst, wx)
+    
 end
 
 local function light_deactivate(inst, wx)
@@ -877,7 +872,7 @@ local function maxhunger_activate(inst, wx, isloading)
 	    wx.components.hunger.burnratemodifiers:SetModifier(inst, TUNING.WX78_MAXHUNGER_SLOWPERCENT)
 	end
     end
-    superior_combo(inst, wx)
+    
 end
 
 local function maxhunger_deactivate(inst, wx)
@@ -1113,7 +1108,7 @@ local function maxhealth2_activate(inst, wx, isloading)
     local maxhealth2_boost = TUNING.WX78_MAXHEALTH_BOOST * TUNING.WX78_MAXHEALTH2_MULT
     maxhealth_change(inst, wx, maxhealth2_boost, isloading)
     --wx.components.health:SetAbsorptionAmount(wx.components.health.absorb + 0.2)
-    superior_combo(inst, wx)
+    
 end
 
 local function maxhealth2_deactivate(inst, wx)
@@ -1164,7 +1159,7 @@ local function cherrift_activate(inst, wx)
 	modulesrefresh(inst, wx, true)
 	--wx._cherriftchips = (wx._cherriftchips or 0) + 1
 	--wx.components.upgrademoduleowner:UpdateActivatedModules()
-	superior_combo(inst, wx)
+	
 end
 
 local function cherrift_deactivate(inst, wx)

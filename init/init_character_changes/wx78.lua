@@ -56,7 +56,7 @@ end)
 -------------WX RE-WIRED CHANGES :]------------------
 if TUNING.DSTU.WXLESS then --HI ATOBA :3 :3 <3 <3
     --btw I'm not sure if formatting translated correctly when I uploaded the file? It kinda gets messed up even if I copy pasted so sorry Atober if it ends up being converted into 4 spaces isntead of tab or smth :]
-
+    --also I got accepted to an Uni for software engineer btw yupiie yay woohoo hooray
     local module_definitions = require("um_wx78_moduledefs").module_definitions -- this is where things circuit definitions actually get loaded from
     local UIAnim = require "widgets/uianim"
     local easing = require("easing")
@@ -155,7 +155,7 @@ if TUNING.DSTU.WXLESS then --HI ATOBA :3 :3 <3 <3
                 if timedif == 0 then                                              --if the amount of occupied slots is the same that means it was just an energy update
                     newtimeleft = newtime
                     if inst._hunger_chips ~= nil and inst._hunger_chips ~= 0 then --this used to apply on any module equip/unequip, that caused problems
-                        newtimeleft = newtimeleft * (1.2 ^ inst._hunger_chips)
+                        newtimeleft = newtimeleft + (45 * inst._hunger_chips)
                         --print("hunger chip detected, increased time")
                     end
                     --print(newtimeleft)
@@ -224,15 +224,18 @@ if TUNING.DSTU.WXLESS then --HI ATOBA :3 :3 <3 <3
 	    if inst.components.upgrademodule then
 				
             inst:RemoveComponent("finiteuses")
-
+				
+	    inst:AddTag('upgrademodule')
             inst:AddComponent("fueled")
             --inst.components.fueled:SetSectionCallback(onfuelchange) --somehow only now I realized this nil thing exists??? How did I never got an error for it before?? How did that end up here????
             inst.components.fueled:InitializeFuelLevel(circuit_durability) -- considered giving different sizes different durability but idk
             inst.components.fueled:SetDepletedFn(ondepleted)
+	    inst:AddComponent("lootdropper")
             ----------------------
-	    inst.components.fueled.fueltype = FUELTYPE.CIRCUITBITS --TEMPORARY. REMOVE AFTER ANOTHER METHOD OF REPAIRING CIRCUITS GETS ADDED. EITHER BY KLEI OR CIRCUIT BOX FINALLY BECOMES REAL
-	    inst.components.fueled.accepting = true
-	    ------------------
+	    --inst.components.fueled.fueltype = FUELTYPE.CIRCUITBITS --TEMPORARY. REMOVE AFTER ANOTHER METHOD OF REPAIRING CIRCUITS GETS ADDED. EITHER BY KLEI OR CIRCUIT BOX FINALLY BECOMES REAL
+	    --inst.components.fueled.accepting = true --added a system that allows to dismantle circuits with unplugging tool
+	    ----------------------
+	    
             local function checkforconsume(inst)
                 if inst.components.upgrademodule.target ~= nil and inst.components.fueled ~= nil and inst.module_in_use == nil and inst.components.upgrademodule.activated == true then
                     inst.module_in_use = 1
@@ -253,6 +256,39 @@ if TUNING.DSTU.WXLESS then --HI ATOBA :3 :3 <3 <3
                 end
             end
 
+	    local function circuits_combo(inst)
+		local wx = inst.components.upgrademodule.target
+		local moduleowner = wx.components.upgrademoduleowner
+		local num = moduleowner:NumModules()
+		
+		if moduleowner:GetModuleTypeCount('maxhealth2') == 1 and moduleowner:GetModuleTypeCount('maxhunger') == 1 and moduleowner:GetModuleTypeCount('maxsanity') == 1 and num == 3 then
+			wx.components.talker:Say("OBSERVE MY SUPERIOR BODY FLESHLINGS")
+		elseif moduleowner:GetModuleTypeCount('movespeed2') == 4 then
+			wx.components.talker:Say("STEPS PER SECOND AT MAXIMUM")
+		elseif (moduleowner:GetModuleTypeCount('cherrift') >= 8 and num == 8) or (moduleowner:GetModuleTypeCount('light') == 1 and moduleowner:GetModuleTypeCount('nightvision') == 1 and num == 2) then
+			wx.components.talker:Say("WHY DID I DO THAT")
+		elseif moduleowner:GetModuleTypeCount('heat') == 1 and moduleowner:GetModuleTypeCount('cold') == 1 and num == 2 then
+			wx.components.talker:Say("ELEMENTAL BALANCE ACHIEVED")
+		elseif moduleowner:GetModuleTypeCount('music') == 2 and num == 2 then
+			wx.components.talker:Say('IS THE HAPPINESS KICKING IN YET?')
+		elseif moduleowner:GetModuleTypeCount('music') == 1 and moduleowner:GetModuleTypeCount('light') == 1 and num == 2 then
+			wx.components.talker:Say("MY SUPERIOR GARDENING SKILLS OUTCLASS THAT FILTHY PLANT")
+		elseif moduleowner:GetModuleTypeCount('bee') == 2 and num == 2 then
+			wx.components.talker:Say('BOW DOWN BEFORE YOUR DRONEMASTER')
+		else 
+			return
+		end
+		--wx._combophrasecd = true
+		--end
+	    end
+			
+	    local _activatefn = inst.components.upgrademodule.onactivatedfn
+	    local wx = inst.components.upgrademodule.target
+	    inst.components.upgrademodule.onactivatedfn = function(inst, wx)
+	        _activatefn(inst, wx)
+	        circuits_combo(inst)
+	    end
+
             inst:ListenForEvent("upgrademodule_moduleactivated", checkforconsume) --I didn't know how to know when the module is equipped --UPDATE: added a new one myself, used to check every 0.5 seconds
             inst:ListenForEvent("percentusedchange", overheatwarn)
 				
@@ -263,7 +299,7 @@ if TUNING.DSTU.WXLESS then --HI ATOBA :3 :3 <3 <3
         ChangeModule(def)
     end
 
-    env.AddPrefabPostInit("wagpunk_bits", function(inst)
+    env.AddPrefabPostInit("wx78_moduleremover", function(inst) --for an action that allows to dismantle circuits
 
 	--inst:AddTag("RAWDATA_fuel")
 	
@@ -271,11 +307,8 @@ if TUNING.DSTU.WXLESS then --HI ATOBA :3 :3 <3 <3
         return inst
     end
 	
-    inst:AddComponent("fuel")
-    inst.components.fuel.fueltype = FUELTYPE.CIRCUITBITS
-    inst.components.fuel.fuelvalue = 480*1
+    inst:AddComponent("data_extractor")
     end)
-    FUELTYPE.CIRCUITBITS = "CIRCUITBITS"
     ---------------------------------------------------------------------
 
     local function OnEatFun(inst, food) -- stuff for charges for food and reversing negative stats from hunger chips
@@ -300,22 +333,6 @@ if TUNING.DSTU.WXLESS then --HI ATOBA :3 :3 <3 <3
         if charge_hungeramount ~= nil then
             inst.components.upgrademoduleowner:AddCharge(charge_hungeramount)
         end
-
-        --[[if inst._hunger_chips ~= nil and inst._hunger_chips ~= 0 then
-		if food.components.edible:GetHealth(inst) < 0 then
-			local health = food.components.edible:GetHealth(inst) * HUNGER_TABLES[inst._hunger_chips + 1]
-			inst.components.health:DoDelta(-health, false)
-		end
-		if food.components.edible:GetSanity(inst) < 0 then
-			local sanity = food.components.edible:GetSanity(inst) * HUNGER_TABLES[inst._hunger_chips + 1]
-			inst.components.sanity:DoDelta(-sanity, false)
-		end
-		if food.components.edible:GetHunger(inst) < 0 then
-			local hunger = food.components.edible:GetHunger(inst) * HUNGER_TABLES[inst._hunger_chips + 1]
-			inst.components.health:DoDelta(-hunger, false)
-		end
-	end]]
-        -- moved to a separate function, keeping it here to basically remind myself that there's a better way to do custom food stats than events and deltas
     end
 
     local function stats_negate(inst, health_delta, hunger_delta, sanity_delta) --altered the system for UM specifically so it wouldn't cancel out negative stats with only one circuit
@@ -405,7 +422,7 @@ if TUNING.DSTU.WXLESS then --HI ATOBA :3 :3 <3 <3
                 end
             end
 
-            inst.components.eater.custom_stats_mod_fn = stats_negate
+            --inst.components.eater.custom_stats_mod_fn = stats_negate    --Sorry my friend, maybe I'll find a way to readd you when skill tree comes out
         end
 
 
@@ -478,8 +495,12 @@ if TUNING.DSTU.WXLESS then --HI ATOBA :3 :3 <3 <3
     TUNING.WX78_MOVESPEED_CHIPBOOSTS = { 0.00, 4, 3, 2, 1 }
     TUNING.WX78_LIGHT_BASERADIUS = 5
     TUNING.WX78_LIGHT_EXTRARADIUS = 6
-    TUNING.WX78_MAXHEALTH_BOOST = 40
+    TUNING.WX78_MAXHEALTH_BOOST = 30
     TUNING.WX78_MAXHEALTH2_MULT = 2.5
+    TUNING.WX78_MAXSANITY1_BOOST = 30
+    TUNING.WX78_MAXSANITY_BOOST = 75
+    TUNING.WX78_MAXHUNGER1_BOOST = 30
+    TUNING.WX78_MAXHUNGER_BOOST = 75
     TUNING.WX78_MAXHUNGER_SLOWPERCENT = 0.80
     TUNING.WX78_MAXSANITY_DAPPERNESS = 100 / (day_time * 6)
     TUNING.WX78_MUSIC_DAPPERNESS = 100 / (day_time * 3)

@@ -276,6 +276,26 @@ if TUNING.DSTU.WARLY_BUTCHER then
     end
 end
 
+if TUNING.DSTU.WXLESS then
+	local BREAK_DOWN_MODULE = GLOBAL.Action({ priority=4, mount_valid=true})
+	BREAK_DOWN_MODULE.id = "BREAK_DOWN_MODULE"
+	BREAK_DOWN_MODULE.str = "Dismantle"
+	AddAction(BREAK_DOWN_MODULE)
+	BREAK_DOWN_MODULE.fn = function(act)
+		if act.invobject and act.invobject.components.data_extractor and act.target.components.upgrademodule then
+			return act.invobject.components.data_extractor:BreakDown(act.target, act.doer)
+		end
+	end
+	AddComponentAction("USEITEM", "data_extractor", function(inst, doer, target, actions, right) 
+		if doer:HasTag('upgrademoduleowner') and target:HasTag('upgrademodule') then 
+			table.insert(actions, GLOBAL.ACTIONS.BREAK_DOWN_MODULE) 
+		end 
+	end)
+
+	AddStategraphActionHandler("wilson", GLOBAL.ActionHandler(GLOBAL.ACTIONS.BREAK_DOWN_MODULE, "dolongaction"))
+	AddStategraphActionHandler("wilson_client", GLOBAL.ActionHandler(GLOBAL.ACTIONS.BREAK_DOWN_MODULE, "dolongaction"))
+end
+
 GLOBAL.STRINGS.ACTIONS.START_CHANNELCAST.MOONFALL = "Start Casting"
 
 local _Start_ChannelCastStrFn = GLOBAL.ACTIONS.START_CHANNELCAST.strfn
