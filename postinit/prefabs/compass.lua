@@ -8,7 +8,7 @@ env.AddPlayerPostInit(function(inst)
     end
 
     inst:ListenForEvent("itemget", function(inst, data)
-        if data.item.prefab == "compass" then
+        if data.item ~= nil and data.item.prefab == "compass" then
             data.item.components.fueled:StartConsuming()
 
             inst:AddTag("compassbearer")
@@ -20,7 +20,7 @@ env.AddPlayerPostInit(function(inst)
     end)
 
     inst:ListenForEvent("itemlose", function(inst, data)
-        if data.prev_item.prefab == "compass" and not inst.components.inventory:HasItemWithTag("compass", 1) then
+        if data.prev_item ~= nil and data.prev_item.prefab == "compass" and not inst.components.inventory:HasItemWithTag("compass", 1) then
             inst:RemoveTag("compassbearer")
 
             if inst.components.maprevealable ~= nil then
