@@ -2,6 +2,9 @@ local PlayerHud = GLOBAL.require("screens/playerhud")
 local TUNING = GLOBAL.TUNING
 
 local function AddStatAnnouncements(statusAnnouncer, statName, badge, currentMaxFn)
+    -- This shouldn't really ever be nil with status announcements installed.
+    -- Some people crash without this line however: might be something to do with mod priority.
+    if statusAnnouncer.RegisterStat == nil then return end
     statusAnnouncer:RegisterStat(
         statName,
         badge,
