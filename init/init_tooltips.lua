@@ -351,8 +351,8 @@ if TUNING.DSTU.WXLESS then
         MUSIC = "- Provides more sanity.\n- Attracts birds.",
         MAXHEALTH = "- Provides a bit of static damage reduction.\n- Now increases health by 30.",
         MAXHEALTH2 = "- Provides static damage reduction.\n- Now increases health by 75.",
-        MAXSANITY = "- Provides a bit more sanity over time.\n- Reduces insanity aura effects.\n- Now increases hunger by 75.",
-        MAXSANITY1 = "- Provides a bit of sanity over time.\n- Slighly reduces insanity aura effects.\n- Now increases hunger by 30.",
+        MAXSANITY = "- Provides a bit more sanity over time.\n- Reduces insanity aura effects.\n- Now increases sanity by 75.",
+        MAXSANITY1 = "- Provides a bit of sanity over time.\n- Slighly reduces insanity aura effects.\n- Now increases sanity by 30.",
         TASER = "- Getting hit stuns the attacker.\n- Gives you charge when you attack a shocked target enough times.",
         COLD = "- Periodically produces ice.\n- No longer changes max and min temperature.\n- Decreases food spoilage rate.\n- Decreased drying threshold\n- Chills you significantly, if idle.",
         MAXHUNGER = "- Slows down charge drain.\n- Now increases hunger by 75.", --WHOEVER AT KLEI WHO DECIDED THEY'D MAKE THE MAXHUNGER1 THE WEAK VERSION AND MAXHUNGER THE STRONG VERSION SHOULD HAVE THEIR FINGERS BOILED.
