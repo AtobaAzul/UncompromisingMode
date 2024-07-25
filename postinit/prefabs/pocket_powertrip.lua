@@ -80,7 +80,7 @@ local function DoPockets(inst, widget)
     if inst.components.fueled ~= nil then
         local _depleted = inst.components.fueled.depleted
         inst.components.fueled:SetDepletedFn(function(inst)
-            --ExplodeInventory(inst)
+            ExplodeInventory(inst)
 
             if _depleted ~= nil then
                 _depleted(inst)
@@ -124,7 +124,7 @@ env.AddPrefabPostInit("hawaiianshirt", function(inst)
     DoPockets(inst, "puffvest")
 
     if inst.components.perishable ~= nil then
-        --inst.components.perishable:SetOnPerishFn(ExplodeInventoryPerish)
+        inst.components.perishable:SetOnPerishFn(ExplodeInventoryPerish)
     end
 end)
 
