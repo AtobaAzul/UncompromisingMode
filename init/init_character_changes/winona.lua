@@ -408,7 +408,8 @@ for i, v in ipairs(holoitems) do
 
         if not TheWorld.ismastersim then return end
 
-        inst.components.inventoryitem.canonlygoinpocket = false --stupidiest thing ever. I hate it.
+        --inst.components.inventoryitem.canonlygoinpocket = false --stupidiest thing ever. I hate it.
+        --HEY GUESS WHAT IT BREAKS IT
     end)
 end
 
