@@ -11,7 +11,7 @@ end
 
 local function OnKilled(inst)
 	inst.AnimState:PlayAnimation("death")
-	TellMinotaurImDead(inst)
+	inst:ListenForEvent("animover",TellMinotaurImDead)
 end
 
 local function AnimNext(inst)
