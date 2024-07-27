@@ -348,7 +348,7 @@ STRINGS.ACTIONS.SET_CUSTOM_NAME = "Set Custom Name"
 
 local SkillTreeDefs = GLOBAL.require("prefabs/skilltree_defs")
 if SkillTreeDefs.SKILLTREE_DEFS["wilson"] ~= nil then
-    SkillTreeDefs.SKILLTREE_DEFS["wilson"].wilson_alchemy_4.desc = STRINGS.SKILLTREE.WILSON.WILSON_ALCHEMY_4_DESC .. "\nTransform 3 Monster Morsels into a Monster Meat and Monster Meat into 2 Monster Morsels."
+    SkillTreeDefs.SKILLTREE_DEFS["wilson"].wilson_alchemy_4.desc = "Transform 3 Morsels into a Meat. Transform a Meat into 2 Morsels.\nTransform 3 Monster Morsels into a Monster Meat.\nTransform a Monster Meat into 2 Monster Morsels."
 end
 
 if SkillTreeDefs.SKILLTREE_DEFS["willow"] ~= nil then
