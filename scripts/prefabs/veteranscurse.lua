@@ -96,6 +96,7 @@ local function oneat(inst, data)
     local stack_mult = inst.components.eater.eatwholestack and data.food.components.stackable ~= nil and data.food.components.stackable:StackSize() or 1
 
     local base_mult = inst.components.foodmemory ~= nil and inst.components.foodmemory:GetFoodMultiplier(data.food.prefab) or 1
+    local maxhp_heal = string.find(data.food.prefab, "spice_salt") ~= nil
 
     local warlybuff = inst:HasTag("warlybuffed") and 1.2 or 1
 
