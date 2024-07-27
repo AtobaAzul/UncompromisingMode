@@ -319,6 +319,11 @@ State{ --This state is for the guardian belching a bunch of shadow goo out! It's
 				end
 			end
         end,
+		onexit = function(inst)
+			if inst.components.combat and inst.components.combat.target then
+				inst.components.combat.target = nil
+			end	
+		end,
     },
 	}
 
