@@ -122,7 +122,7 @@ TUNING.WIXIE_SANITY = 200
 
 TUNING.GAMEMODE_STARTING_ITEMS.DEFAULT.WIXIE = {"slingshot", "slingshotammo_rock", "slingshotammo_rock", "slingshotammo_rock", "slingshotammo_rock", "slingshotammo_rock", "slingshotammo_rock", "slingshotammo_rock", "slingshotammo_rock", "slingshotammo_rock", "slingshotammo_rock"}
 
-STRINGS.CHARACTER_DESCRIPTIONS.walter = "*Not afraid of anything, except getting hurt \n*Is a master of survival tactics \n*Has a four-legged friend \n*Is an expert dog trainer \n*Hates to see innocent animals get hurt"
+STRINGS.CHARACTER_DESCRIPTIONS.walter = "*Not afraid of anything, except getting hurt\n󰀕Is a master of survival tactics\n󰀕Is an expert dog trainer\n*Allergic to bees\n*Has no interest in fashion"
 
 TUNING.GAMEMODE_STARTING_ITEMS.DEFAULT.WALTER = {"walterhat", "meatrack_hat", "meat", "monstermeat"}
 

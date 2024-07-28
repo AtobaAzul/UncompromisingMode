@@ -76,7 +76,7 @@ if GetModConfigData("bernie_buffs") then
     STRINGS.CHARACTER_DESCRIPTIONS.willow = STRINGS.CHARACTER_DESCRIPTIONS.willow .. "\n󰀕Hugging Bernie keeps the shadows at bay"
 end
 if GetModConfigData("wxless") then
-    STRINGS.CHARACTER_DESCRIPTIONS.wx78 = STRINGS.CHARACTER_DESCRIPTIONS.wx78 .. "\n󰀕Circuits drain charge and degrade overtime\n󰀕Motherboard has more space and powers all components until last charge\n󰀕Resting and eating refills internal batteries"
+    STRINGS.CHARACTER_DESCRIPTIONS.wx78 = STRINGS.CHARACTER_DESCRIPTIONS.wx78 .. "\n󰀕Circuits drain charge and degrade overtime\n󰀕Powers all components until last charge\n󰀕Resting and eating refills internal batteries"
 end
 if GetModConfigData("wx78") then
     STRINGS.CHARACTER_DESCRIPTIONS.wx78 = STRINGS.CHARACTER_DESCRIPTIONS.wx78 .. "\n󰀕Systems are not repaired via lightning"
@@ -86,13 +86,13 @@ if GetModConfigData("wickerbottom") then
         "\n󰀕Reading requires brainpower"
 end
 STRINGS.CHARACTER_DESCRIPTIONS.wes = STRINGS.CHARACTER_DESCRIPTIONS.wes .. "\n󰀕Expanded inner dialogue" --"\n󰀕Pengulls are fond of mimes"
-STRINGS.CHARACTER_DESCRIPTIONS.waxwell = STRINGS.CHARACTER_DESCRIPTIONS.waxwell .. "\n󰀕Can make a pact to summon his old puppets and shadow equipment at will"
+STRINGS.CHARACTER_DESCRIPTIONS.waxwell = STRINGS.CHARACTER_DESCRIPTIONS.waxwell .. "\n󰀕Can make a pact to regain his old tricks"
 if GetModConfigData("wolfgang") then
-    STRINGS.CHARACTER_DESCRIPTIONS.wolfgang = "*Stronger on a full belly\n*Grows mightier when well fed and calm minded\n*Is afraid of monsters and the dark\n*Is quite the showboat"
+    STRINGS.CHARACTER_DESCRIPTIONS.wolfgang = "󰀕Stronger on a full belly\n󰀕Grows mightier when fed and calm\n󰀕Is quite the showboat\n*Is afraid of monsters and the dark"
 end
 if GetModConfigData("warly_food_taste_") then
     STRINGS.CHARACTER_DESCRIPTIONS.warly = STRINGS.CHARACTER_DESCRIPTIONS.warly ..
-        "\n󰀕Absorbs nutrients better, but prefers more variety"
+        "\n󰀕Absorbs nutrients better...\n󰀕But prefers more variety"
 end
 if GetModConfigData("warly_butcher_") then
     STRINGS.CHARACTER_DESCRIPTIONS.warly = STRINGS.CHARACTER_DESCRIPTIONS.warly ..

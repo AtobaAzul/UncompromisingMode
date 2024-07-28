@@ -21,7 +21,7 @@ STRINGS.SKIN_DESCRIPTIONS.wixie_none =
 
 if GetModConfigData("wixie_walter") then
     STRINGS.CHARACTER_DESCRIPTIONS.walter =
-        "*Not afraid of anything, except getting hurt \n*Is a master of survival tactics \n*Has a four-legged friend \n*Is an expert dog trainer \n*Hates to see innocent animals get hurt"
+        "*Not afraid of anything, except getting hurt\n󰀕Is a master of survival tactics\n󰀕Is an expert dog trainer\n*Allergic to bees\n*Has no interest in fashion"
 end
 
 --	[ 		Wixie Descriptions		]	--
