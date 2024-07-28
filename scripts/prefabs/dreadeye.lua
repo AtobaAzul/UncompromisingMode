@@ -199,33 +199,33 @@ local function ShadowSuprise(inst)
 	end
 end
 
-local function TryEyeSpawn(inst, v)
+--local function TryEyeSpawn(inst, v)
 
-	local x1, y1, z1 = v.Transform:GetWorldPosition()
-	if x1 ~= nil and z1 ~= nil and v.components.sanity and v.components.sanity:IsInsane() then
-		local eye = TheSim:FindEntities(x1, y1, z1, 8, {"shadow_eye"})
+	--local x1, y1, z1 = v.Transform:GetWorldPosition()
+	--if x1 ~= nil and z1 ~= nil and v.components.sanity and v.components.sanity:IsInsane() then
+		--local eye = TheSim:FindEntities(x1, y1, z1, 8, {"shadow_eye"})
 			
-		if eye ~= nil and #eye ~= 0 then
-			return
-		end
+		--if eye ~= nil and #eye ~= 0 then
+			--return
+		--end
 			
-		local myeye = SpawnPrefab("mini_dreadeye")
-		myeye.Transform:SetPosition(v.Transform:GetWorldPosition())
-		myeye.leader = inst
+		--local myeye = SpawnPrefab("mini_dreadeye")
+		--myeye.Transform:SetPosition(v.Transform:GetWorldPosition())
+		--myeye.leader = inst
 		
 		--SpawnPrefab("mini_dreadeye").Transform:SetPosition(x1 + math.random(-5,5), 0, z1 + math.random(-5,5))
-	end
+	--end
 	
-end
+--end
 
-local function ShadowEyeSpawn(inst)
-	local x, y, z = inst.Transform:GetWorldPosition()
-    local ents = TheSim:FindEntities(x, y, z, 50, nil, NOTAGS, { "player" })
+--local function ShadowEyeSpawn(inst)
+	--local x, y, z = inst.Transform:GetWorldPosition()
+    --local ents = TheSim:FindEntities(x, y, z, 50, nil, NOTAGS, { "player" })
 	
-	for i, v in ipairs(ents) do
-        TryEyeSpawn(inst, v)
-    end
-end
+	--for i, v in ipairs(ents) do
+        --TryEyeSpawn(inst, v)
+    --end
+--end
 
 local function Disguise(inst)
 	if not inst.components.health:IsDead() then
@@ -249,17 +249,21 @@ local function Disguise(inst)
 			inst.shadoweye_task = nil
 		end
 		
-		if inst.components.combat:HasTarget() then
-			inst.shadoweye_task = inst:DoPeriodicTask(4, ShadowEyeSpawn)
-		end
+		--if inst.components.combat:HasTarget() then
+			--inst.shadoweye_task = inst:DoPeriodicTask(4, ShadowEyeSpawn)
+		--end
 	end
 end
 
 local function TryDisguise(inst, target)
-	if not inst.components.combat:HasTarget() then
-		inst.disguisetarget = target
-		inst.sg:GoToState("disguise_pre")
-		--Disguise(inst)
+	local x, y, z = inst.Transform:GetWorldPosition()
+	local ents = TheSim:FindEntities(x, y, z, 50, nil, NOTAGS, { "player" })
+		
+    for i, v in ipairs(ents) do
+		if v.components.sanity and not v.components.sanity:IsInsane() and not inst.components.combat:HasTarget() then
+			inst.disguisetarget = target
+			inst.sg:GoToState("disguise_pre")
+		end	
 	end
 end
 

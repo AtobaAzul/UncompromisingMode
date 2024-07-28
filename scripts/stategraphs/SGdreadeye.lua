@@ -216,7 +216,11 @@ local states =
                         end
                     end
                 end
-
+				
+				if inst.components.combat and inst.components.combat.target then
+					inst.components.combat.target = nil
+				end				
+				
                 inst.sg:GoToState("disguise")
             end)
         },
