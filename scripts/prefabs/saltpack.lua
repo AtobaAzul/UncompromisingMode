@@ -118,7 +118,6 @@ local function OnUse(inst)
 		inst.salt_task = nil
 	else
 		if not inst.components.fueled:IsEmpty() then
-			Salted(inst)
 			inst.salt_task = inst:DoPeriodicTask(0.25,PeriodicSalt)
 		else
 			inst.SoundEmitter:PlaySound("dangerous_sea/common/water_pump/LP", "pump")
