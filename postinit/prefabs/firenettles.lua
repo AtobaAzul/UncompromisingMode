@@ -16,6 +16,8 @@ env.AddPrefabPostInit("firenettles", function(inst)
 	inst.components.burnable:SetFXLevel(1)
 	inst.components.burnable:SetBurnTime(3)
 	inst.components.burnable:SetOnBurntFn(nil)
+	
+    inst.components.edible.healthvalue = -15 -- Increased health loss on-eat due to increased item availability.
 end)
 
 
