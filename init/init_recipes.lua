@@ -809,7 +809,7 @@ if GetModConfigData("monstersmallmeat") then
         "transmute_monstermeat",
         { Ingredient("monstersmallmeat", 3) },
         TECH.NONE,
-        { product = "monstermeat", builder_tag = "ick_alchemistI", description = "transmute_monstermeat" },
+        { product = "monstermeat", builder_skill="wilson_alchemy_4", description = "transmute_monstermeat" },
         { "CHARACTER" }
     )
 
@@ -819,7 +819,7 @@ if GetModConfigData("monstersmallmeat") then
         TECH.NONE,
         {
             product = "monstersmallmeat",
-            builder_tag = "ick_alchemistI",
+            builder_skill="wilson_alchemy_4",
             description = "transmute_monstersmallmeat",
             numtogive = 2
         },
