@@ -378,8 +378,8 @@ local skills =
         group        = "arsenal",
         tags         = { "spear" },
 
-        onactivate   = CreateAddTagFn(UPGRADETYPES.SPEAR_LIGHTNING .. "_upgradeuser"),
-        ondeactivate = CreateRemoveTagFn(UPGRADETYPES.SPEAR_LIGHTNING .. "_upgradeuser"),
+        onactivate   = CreateAddTagFn(UPGRADETYPES.SPEAR_LIGHTNING.."_upgradeuser"),
+        ondeactivate = CreateRemoveTagFn(UPGRADETYPES.SPEAR_LIGHTNING.."_upgradeuser"),
     },
 
     --------------------------------------------------------------------------
@@ -416,8 +416,6 @@ local skills =
         connects     = {
             "wathgrithr_arsenal_helmet_4",
             "wathgrithr_arsenal_helmet_5",
-
-            --"wathgrithr_arsenal_shield_1",
         },
 
         onactivate   = CreateAddTagFn("wathgrithrimprovedhatmaker"),
@@ -455,8 +453,8 @@ local skills =
             "wathgrithr_arsenal_shield_3",
         },
 
-        onactivate   = CreateAddTagFn("wathgrithrshieldmaker"),
-        ondeactivate = CreateRemoveTagFn("wathgrithrshieldmaker"),
+        onactivate   = CreateAddTagFn("wathgrithrshielduser"),
+        ondeactivate = CreateRemoveTagFn("wathgrithrshielduser"),
     },
 
     -- The duration of the Battle Rönd's ability to block attacks will be increased.
