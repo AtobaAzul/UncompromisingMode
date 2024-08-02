@@ -209,6 +209,7 @@ local skills =
         group = "training",
         tags = { "overbuff" },
         onactivate = function(inst, fromload)
+            inst:AddTag("wolfgang_overbuff_1")
             if inst.components.mightiness:GetOverMax() < TUNING.SKILLS.WOLFGANG_OVERBUFF_1 then
                 inst.components.mightiness:SetOverMax(TUNING.SKILLS.WOLFGANG_OVERBUFF_1)
             end
@@ -229,6 +230,7 @@ local skills =
         group = "training",
         tags = { "overbuff" },
         onactivate = function(inst, fromload)
+            inst:AddTag("wolfgang_overbuff_2")
             if inst.components.mightiness:GetOverMax() < TUNING.SKILLS.WOLFGANG_OVERBUFF_2 then
                 inst.components.mightiness:SetOverMax(TUNING.SKILLS.WOLFGANG_OVERBUFF_2)
             end
@@ -247,6 +249,7 @@ local skills =
         group = "training",
         tags = { "overbuff" },
         onactivate = function(inst, fromload)
+            inst:AddTag("wolfgang_overbuff_3")
             if inst.components.mightiness:GetOverMax() < TUNING.SKILLS.WOLFGANG_OVERBUFF_3 then
                 inst.components.mightiness:SetOverMax(TUNING.SKILLS.WOLFGANG_OVERBUFF_3)
             end
@@ -265,6 +268,7 @@ local skills =
         group = "training",
         tags = { "overbuff" },
         onactivate = function(inst, fromload)
+            inst:AddTag("wolfgang_overbuff_4")
             if inst.components.mightiness:GetOverMax() < TUNING.SKILLS.WOLFGANG_OVERBUFF_4 then
                 inst.components.mightiness:SetOverMax(TUNING.SKILLS.WOLFGANG_OVERBUFF_4)
             end
@@ -284,6 +288,7 @@ local skills =
         tags = { "overbuff", "overbuff_expert" },
         onactivate = function(inst, fromload)
             inst:AddTag("wolfgang_overbuff_expert")
+            inst:AddTag("wolfgang_overbuff_5")
             if inst.components.mightiness:GetOverMax() < TUNING.SKILLS.WOLFGANG_OVERBUFF_5 then
                 inst.components.mightiness:SetOverMax(TUNING.SKILLS.WOLFGANG_OVERBUFF_5)
             end
