@@ -219,12 +219,12 @@ local function onattack(inst, attacker, target)
             target:AddComponent("debuffable")
         end
 
-        if not target:HasTag("epic") and not target:HasTag("shadow") or (target:HasTag("chess") or target:HasTag("uncompromising_pawn") or target:HasTag("twinofterror") and not target:HasTag("fleshyeye")) then
+        if not target:HasTag("epic") and not target:HasTag("shadow") or (target:HasTag("chess") or target:HasTag("uncompromising_pawn")) then
             target.components.debuffable:AddDebuff("shockstundebuff", "shockstundebuff")
         end
 
         if (target:HasTag("chess") or target:HasTag("uncompromising_pawn") or target:HasTag("twinofterror") and not target:HasTag("fleshyeye")) and (target.components.health ~= nil and not target.components.health:IsDead()) and not target.sg:HasStateTag("noattack") then
-            target.components.health:DoDelta(-34, false, attacker, false, attacker)
+            target.components.health:DoDelta(-17, false, attacker, false, attacker)
         end
     end
 end
