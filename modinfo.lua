@@ -620,8 +620,6 @@ configuration_options = {
     },
     BinaryConfig("insul_thermalstone", "Thermal Stone Rework",
         "Thermal Stones now have less insulation, but inherit some insulation from clothing.", true),
-    BinaryConfig("uncool_chester", "Ther. Stone Snow Chester Nerf",
-        "Snow Chester will no longer freeze Thermal Stones.", true),
 	BinaryConfig("watering_thermal", "Watering Can Temperature",
 		"Watering Cans don't reduce temperature, removing its exploit with Thermal Stones.", true),
 
@@ -1345,13 +1343,15 @@ configuration_options = {
     -----------------------------
     Header("> Legacy Options <"),
     -----------------------------
-    BinaryConfig("pinelings", "Pinelings",
-        "Stumps will become pinelings if awoken by a treeguard, or if stumps are left for long enough.", false),	
     BinaryConfig("durability", "Clothing Degradation",
         "Winter and Rain protection clothing items become less effective when their durability drops.", false),	
     BinaryConfig("hangyperds", "Starving Gobblers",
         "Gobblers are now more agressive and will attempt to take berries out of the player's inventory.", false),
     BinaryConfig("woodie_wet_goose", "Weregoose Wetness", "Weregoose gains wetness when over water.", false),
+    BinaryConfig("pinelings", "Pinelings",
+        "Stumps will become pinelings if awoken by a treeguard, or if stumps are left for long enough.", false),
+    BinaryConfig("uncool_chester", "Ther. Stone Snow Chester Nerf",
+        "Snow Chester will no longer freeze Thermal Stones.", false),			
     BinaryConfig("cave_clops", "[BROKEN] Cave Deerclops",
         "During winter, Deerclops can break through the cave ceiling to reach you.", false),
     {
