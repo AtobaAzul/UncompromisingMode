@@ -1350,7 +1350,7 @@ configuration_options = {
     BinaryConfig("woodie_wet_goose", "Weregoose Wetness", "Weregoose gains wetness when over water.", false),
     BinaryConfig("pinelings", "Pinelings",
         "Stumps will become pinelings if awoken by a treeguard, or if stumps are left for long enough.", false),
-    BinaryConfig("uncool_chester", "Ther. Stone Snow Chester Nerf",
+    BinaryConfig("uncool_chester_", "Ther. Stone Snow Chester Nerf",
         "Snow Chester will no longer freeze Thermal Stones.", false),			
     BinaryConfig("cave_clops", "[BROKEN] Cave Deerclops",
         "During winter, Deerclops can break through the cave ceiling to reach you.", false),
