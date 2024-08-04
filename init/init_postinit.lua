@@ -203,7 +203,7 @@ local prefab_post = {
 	"otter",
     "winona_telebrella",
     "stash_map",
-    "mushtrees"
+    "mushtrees",
     "monkeyhut",
 	"lava_pond",
 	"cookiecutter",
