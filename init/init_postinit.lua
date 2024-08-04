@@ -204,6 +204,9 @@ local prefab_post = {
     "winona_telebrella",
     "stash_map",
     "mushtrees"
+    "monkeyhut",
+	"lava_pond",
+	"cookiecutter",
 }
 
 local stategraph_post = {
