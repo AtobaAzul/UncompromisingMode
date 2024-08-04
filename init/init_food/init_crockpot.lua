@@ -236,7 +236,7 @@ end
 -- Original:	test = function(cooker, names, tags) return tags.fish and (names.corn or names.corn_cooked) end,
 
 recipes.fishsticks.test = function(cooker, names, tags)
-    return tags.fish and names.twigs and
+    return (tags.fish and tags.fish >= 1)  and names.twigs and
         UncompromisingFillers(tags) and not (tags.insectoid and tags.insectoid >= 1)
 end
 -- Original:	test = function(cooker, names, tags) return tags.fish and names.twigs and (tags.inedible and tags.inedible <= 1) end,
@@ -248,8 +248,7 @@ end
 -- Original:	test = function(cooker, names, tags) return tags.egg and tags.meat and tags.veggie and not tags.inedible end,
 
 recipes.kabobs.test = function(cooker, names, tags)
-    return tags.meat and names.twigs and
-        (not tags.monster or tags.monster <= 3.5) and UncompromisingFillers(tags) and not (tags.insectoid and tags.insectoid >= 1)
+    return tags.meat and names.twigs and UncompromisingFillers(tags) and not (tags.insectoid and tags.insectoid >= 1)
 end
 -- Original:	test = function(cooker, names, tags) return tags.meat and names.twigs and (not tags.monster or tags.monster <= 1) and (tags.inedible and tags.inedible <= 1) end,
 
