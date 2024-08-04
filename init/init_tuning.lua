@@ -319,6 +319,7 @@ TUNING.DSTU = {
     PALE_VOMIT_NUTRIENTS = { 8, 8, 8 },
     MUSHROOM_CHANGES = GetModConfigData("mushroom_changes"),
 	ALL_MUST_BE_GATHERED = GetModConfigData("all_must_be_gathered"),
+	WATERING_TEMPERATURE = GetModConfigData("watering_thermal"),
 
     ----------------------------------------------------------------------------
     -- Dynamic Boss Resistance
