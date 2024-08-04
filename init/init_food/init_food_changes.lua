@@ -491,23 +491,23 @@ if GetModConfigData("sr_foodrebalance") then
 		)
 	end
 
-	local fishsticks = {
-		"fishsticks",
-		"fishsticks_spice_chili",
-		"fishsticks_spice_garlic",
-		"fishsticks_spice_salt",
-		"fishsticks_spice_sugar"
-	}
-	for k, v in pairs(fishsticks) do
-		AddPrefabPostInit(
-			v,
-			function(inst)
-				if inst ~= nil and inst.components.edible ~= nil then
-					inst.components.edible.healthvalue = 20
-				end
-			end
-		)
-	end
+	--local fishsticks = {
+		--"fishsticks",
+		--"fishsticks_spice_chili",
+		--"fishsticks_spice_garlic",
+		--"fishsticks_spice_salt",
+		--"fishsticks_spice_sugar"
+	--}
+	--for k, v in pairs(fishsticks) do
+		--AddPrefabPostInit(
+			--v,
+			--function(inst)
+				--if inst ~= nil and inst.components.edible ~= nil then
+					--inst.components.edible.healthvalue = 20
+				--end
+			--end
+		--)
+	--end
 end
 --[[
 	do whatever you want
