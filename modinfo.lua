@@ -1345,13 +1345,13 @@ configuration_options = {
     -----------------------------
     BinaryConfig("durability", "Clothing Degradation",
         "Winter and Rain protection clothing items become less effective when their durability drops.", false),	
+    BinaryConfig("pinelings", "Pinelings",
+        "Stumps will become pinelings if awoken by a treeguard, or if stumps are left for long enough.", false),		
     BinaryConfig("hangyperds", "Starving Gobblers",
         "Gobblers are now more agressive and will attempt to take berries out of the player's inventory.", false),
-    BinaryConfig("woodie_wet_goose", "Weregoose Wetness", "Weregoose gains wetness when over water.", false),
-    BinaryConfig("pinelings", "Pinelings",
-        "Stumps will become pinelings if awoken by a treeguard, or if stumps are left for long enough.", false),
     BinaryConfig("uncool_chester_", "Ther. Stone Snow Chester Nerf",
         "Snow Chester will no longer freeze Thermal Stones.", false),			
+    BinaryConfig("woodie_wet_goose", "Weregoose Wetness", "Weregoose gains wetness when over water.", false),
     BinaryConfig("cave_clops", "[BROKEN] Cave Deerclops",
         "During winter, Deerclops can break through the cave ceiling to reach you.", false),
     {
