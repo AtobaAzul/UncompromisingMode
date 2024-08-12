@@ -30,3 +30,21 @@ env.AddPrefabPostInitAny(function(inst)
         end
     end)
 end)
+
+env.AddStategraphState("wilson", State {
+    name = "um_smog_cough",
+    tags = { "idle", "talking" },
+
+    onenter = function(inst)
+        inst.AnimState:PlayAnimation("sing_fail", false)
+    end,
+
+    events =
+    {
+        EventHandler("animover", function(inst)
+            if inst.AnimState:AnimDone() then
+                inst.sg:GoToState("idle")
+            end
+        end),
+    },
+})
