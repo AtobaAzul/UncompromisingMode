@@ -16,7 +16,6 @@ local zombies = --Keep the stunning clockworks less likely, roship the least
 	bight = 0.75,
 	knook = 1,
 	roship = 0.5,
-	um_pawn_nightmare = 1,
 }
 
 local function ZombieClockwork(inst,target)
