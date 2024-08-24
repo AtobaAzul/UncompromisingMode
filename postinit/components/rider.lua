@@ -7,7 +7,7 @@ env.AddComponentPostInit("rider", function(self)
     function self:Mount(target, instant, ...)
         local ret = _Mount(self, target, instant, ...)
 
-        -- If only Mount() returned true or false if the mount was successful or not.
+        -- If only Mount() returned if the mount was successful or not.
         if target.components.combat == nil
             or not target.components.rideable:TestObedience()
             or not target.components.rideable:TestRider(self.inst)
