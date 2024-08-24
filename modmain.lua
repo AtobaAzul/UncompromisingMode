@@ -328,10 +328,3 @@ AddUserCommand("mayonaise_update", {
     end
 })
 
-
-AddSimPostInit(function()
-    if not GLOBAL.TheNet:IsDedicated() then
-        GLOBAL.ShadeRenderer:SetShadeTexture(GLOBAL.ShadeTypes.HoodedForestCanopy, GLOBAL.resolvefilepath("images/giant_tree.tex"))
-    end
-end)
-
