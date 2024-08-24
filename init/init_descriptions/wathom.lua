@@ -44,7 +44,7 @@ DESCRIBE.CALIFORNIAKING = "Entire being, begging not."
 DESCRIBE.CCTRINKET_DON = "Detailed history, previous scribe. \"Don.\""
 DESCRIBE.CCTRINKET_JAZZY = "Engravings. \"J a z z y\"?"
 DESCRIBE.CCTRINKET_FREDDO = "Engravings. \"F r e d d o\"?"
-DESCRIBE.CCTRINKET_NAMES = "Thank you for everything you've done for Uncompromising Mode! \n Keep making your amazing content and we'll keep eagerly watching every second of it!" -Canis and the Uncomp Dev Team"
+DESCRIBE.CCTRINKET_NAMES = "Thank you for everything you've done for Uncompromising Mode! \n Keep making your amazing content and we'll keep eagerly watching every second of it! -Canis and the Uncomp Dev Team"
 
 -- Content Creators
 DESCRIBE.UNCOMPROMISING_RAT = "Instigator, problems. Rather dead."
