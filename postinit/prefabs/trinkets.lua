@@ -3,10 +3,11 @@ GLOBAL.setfenv(1, GLOBAL)
 -----------------------------------------------------------------
 local UMTRINKETS =
 {
-"cctrinket_don",
-"cctrinket_jazzy",
-"cctrinket_freddo",
-"corncan", --Your welcome, Nikolai.
+	"cctrinket_don",
+	"cctrinket_jazzy",
+	"cctrinket_names",
+	"cctrinket_freddo",
+	"corncan", --Your welcome, Nikolai.
 }
 
 local function onfinishcallbackUM(inst, worker)

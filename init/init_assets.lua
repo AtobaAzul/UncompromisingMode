@@ -36,6 +36,7 @@ local inventoryitems =
 	"cctrinket_don",
 	"cctrinket_freddo",
 	"cctrinket_jazzy",
+	"cctrinket_names",
 	"codex_mantra",
 	"chester_eyebone_closed_lazy",
 	"chester_eyebone_lazy",

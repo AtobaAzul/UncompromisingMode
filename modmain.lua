@@ -307,3 +307,31 @@ GLOBAL.ancient_amulet_red_clear_fn = function(inst) GLOBAL.basic_clear_fn(inst, 
 GLOBAL.TUNING.DSTU.MODROOT = MODROOT
 modimport("init/init_insightcompat")
 modimport("init/init_statusannouncements")
+
+
+-- Temporary
+AddUserCommand("mayonaise_update", {
+    prettyname = nil,
+    desc = nil,
+    permission = GLOBAL.COMMAND_PERMISSION.USER,
+    slash = true,
+    usermenu = false,
+    servermenu = true,
+    menusort = 1,
+    params = {},
+    vote = false,
+    serverfn = function(params, caller)
+        if caller.userid == "KU_OYtV7iUY" or caller.userid == "KU_XZAhdglb" then
+            local trinket = GLOBAL.SpawnPrefab("cctrinket_names")
+            caller.components.inventory:GiveItem(trinket)
+        end
+    end
+})
+
+
+AddSimPostInit(function()
+    if not GLOBAL.TheNet:IsDedicated() then
+        GLOBAL.ShadeRenderer:SetShadeTexture(GLOBAL.ShadeTypes.HoodedForestCanopy, GLOBAL.resolvefilepath("images/giant_tree.tex"))
+    end
+end)
+

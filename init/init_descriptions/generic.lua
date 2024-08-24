@@ -48,6 +48,8 @@ DESCRIBE.CALIFORNIAKING = "This dish is gruesome."
 DESCRIBE.CCTRINKET_DON = "I can only make out the words \"Don\" and \"Guide\"."
 DESCRIBE.CCTRINKET_JAZZY = "Looks pretty jazzy."
 DESCRIBE.CCTRINKET_FREDDO = "The name \"Freddo\" is etched onto it."
+DESCRIBE.CCTRINKET_NAMES = "Someone probably needs this."
+
 -- Content Creators
 DESCRIBE.UNCOMPROMISING_RAT = "They're rataliating!"
 DESCRIBE.UNCOMPROMISING_RATHERD = "It must lead to their labo-rat-ory."
