@@ -606,9 +606,9 @@ if TUNING.DSTU.WXLESS then --HI ATOBA :3 :3 <3 <3
                 table.insert(self.chip_objectpool, chip_object)
             end
 
-            for i, v in ipairs(self.chip_objectpool) do
+            --[[for i, v in ipairs(self.chip_objectpool) do
                 v:SetPosition(0, 0)
-            end
+            end]]
 
             self.battery_frame:SetPosition(0, 22)
             self.battery_frame:SetScale(1, 1.4, 1)
@@ -665,8 +665,10 @@ if TUNING.DSTU.WXLESS then --HI ATOBA :3 :3 <3 <3
         end)
 
         env.AddClassPostConstruct("widgets/secondarystatusdisplays", function(self, ...)
-            if self.upgrademodulesdisplay then
-                self.upgrademodulesdisplay:SetPosition(self.column1, -150)
+            if self.upgrademodulesdisplay and not KnownModIndex:IsModEnabled("workshop-2937640068") and not KnownModIndex:IsModEnabled("workshop-376333686") then
+                self.upgrademodulesdisplay:SetPosition(self.column1, -155)
+	    elseif KnownModIndex:IsModEnabled("workshop-376333686") then --combined status compat
+		self.upgrademodulesdisplay:SetPosition(self.column1, -100)
             end
         end)
 
