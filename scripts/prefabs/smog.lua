@@ -17,7 +17,8 @@ local SMOG_PARTICLE_RADIUS = MIASMA_PARTICLE_RADIUS * 1.25
 
 -- Small overlap is good to make sure players are always in a fog when all squares are in one.
 local SMOG_RADIUS = math.ceil(SMOG_SPACING_RADIUS) - math.random()
-local SMOKE_RADIUS = SMOG_RADIUS - 0.75 * 1.3 -- 1.3 is scale factor for texture size and is constant to the smoke "cloud.
+local SMOKE_RADIUS = SMOG_RADIUS -
+0.75 * 1.3                                    -- 1.3 is scale factor for texture size and is constant to the smoke "cloud.
 
 
 local _OldHeading = nil
@@ -122,7 +123,8 @@ local function emit_smoke_fn(effect, smoke_circle_emitter, px, pz, ex, ez, isdim
 
 
     local vx, vy, vz = -.025, 0.01 * UnitRand(), .001 * UnitRand()
-    local lifetime = SMOKE_MAX_LIFETIME -- Do not vary VFX will make it pop on the engine side and we do not want any pops.
+    local lifetime =
+    SMOKE_MAX_LIFETIME                  -- Do not vary VFX will make it pop on the engine side and we do not want any pops.
     local oy = 0.5 * (1 + math.random())
 
     local uv_offset = 0 --math.random(0, 1) * 0.5
@@ -303,17 +305,19 @@ local function fn()
 
     inst:DoPeriodicTask(5 + math.random(5), function(inst)
         local x, y, z = inst.Transform:GetWorldPosition()
-        local ents = TheSim:FindEntities(x, y, z, 8, nil, { "INLIMBO", "playerghost", "has_gasmask", "pyromaniac", "smogimmune", "minifansuppressor", "scp049", "wragonfly" }, { "player", "insect" })
+        local ents = TheSim:FindEntities(x, y, z, 8, nil,
+            { "INLIMBO", "playerghost", "has_gasmask", "pyromaniac", "smogimmune", "minifansuppressor", "scp049",
+                "wragonfly" }, { "player", "insect" })
         for k, v in ipairs(ents) do
             if v.components.health ~= nil and math.random() > 0.25 then
-                if v.components.oldager ~= nil or v.components.health.penalty >= TUNING.MAXIMUM_HEALTH_PENALTY-.05 or not TUNING.HEALTH_PENALTY_ENABLED then
+                if v.components.oldager ~= nil or v.components.health.penalty >= TUNING.MAXIMUM_HEALTH_PENALTY - .05 or not TUNING.HEALTH_PENALTY_ENABLED then
                     v.components.health:DoDelta(-1, false, "smog")
                 elseif v:HasTag("player") then
                     v.components.health:DeltaPenalty(0.025)
                 end
 
-                if v.components.talker ~= nil and v:HasTag("player") then
-                    v.components.talker:Say(GetString(v, "GAS_DAMAGE"))
+                if v.sg ~= nil and not v.sg:HasStateTag("um_smog_cough") and v:HasTag("player") then
+                    v.sg:GoToState("um_smog_cough", true)
                 end
 
                 if v:HasTag("insect") then
