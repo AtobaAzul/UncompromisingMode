@@ -326,7 +326,7 @@ if TUNING.DSTU.WXLESS then --HI ATOBA :3 :3 <3 <3
 
         if inst._hungercharge_stored >= 1 then
             local leftovers = inst._hungercharge_stored - math.floor(inst._hungercharge_stored)
-            charge_hungeramount = math.floor(inst._hungercharge_stored + 0.5)
+            charge_hungeramount = math.floor(inst._hungercharge_stored)
             inst._hungercharge_stored = leftovers
         end
 
@@ -665,11 +665,13 @@ if TUNING.DSTU.WXLESS then --HI ATOBA :3 :3 <3 <3
         end)
 
         env.AddClassPostConstruct("widgets/secondarystatusdisplays", function(self, ...)
-            if self.upgrademodulesdisplay and not KnownModIndex:IsModEnabled("workshop-2937640068") and not KnownModIndex:IsModEnabled("workshop-376333686") then
-                self.upgrademodulesdisplay:SetPosition(self.column1, -155)
-	    elseif KnownModIndex:IsModEnabled("workshop-376333686") then --combined status compat
-		self.upgrademodulesdisplay:SetPosition(self.column1, -100)
-            end
+            if self.upgrademodulesdisplay then
+	       if KnownModIndex:IsModEnabled("workshop-376333686") then
+	           self.upgrademodulesdisplay:SetPosition(self.column1, -100)
+	       else --combined status compat
+	           self.upgrademodulesdisplay:SetPosition(self.column1, -155)
+	       end
+	   end
         end)
 
         local function OnAllUpgradeModulesRemoved(inst)
