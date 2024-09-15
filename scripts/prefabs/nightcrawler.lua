@@ -82,7 +82,7 @@ local function fn()
 	if not TheWorld.ismastersim then
         return inst
     end
-
+	inst.HostileToPlayerTest = function() return true end
     -- locomotor must be constructed before the stategraph!
     inst:AddComponent("locomotor")
     inst.components.locomotor:SetTriggersCreep(false)

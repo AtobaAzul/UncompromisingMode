@@ -104,7 +104,7 @@ local function fn(Sim)
 	if not TheWorld.ismastersim then
         return inst
     end
-	
+	inst.HostileToPlayerTest = function() return true end
     inst.AnimState:SetBank("wilson")
     inst.AnimState:SetBuild("wilton")
     inst.AnimState:PlayAnimation("idle",true)
