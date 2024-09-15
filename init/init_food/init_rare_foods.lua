@@ -110,7 +110,7 @@ function GLOBAL.MakeNoGrowInWinter(inst)
     _MakeNoGrowInWinter(inst)
 end
 
-if GetModConfigData("no_winter_growing") then
+if GetModConfigData("no_winter_growing_") then
     -- Stone fruits bushs
     AddPrefabPostInit("rock_avocado_bush", function(inst)
         if inst ~= nil and inst.components.pickable ~= nil then
