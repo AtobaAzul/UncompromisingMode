@@ -79,7 +79,7 @@ local function SpikeAoE(inst)
     fx1.Transform:SetPosition(ix, iy, iz)
     inst:DoTaskInTime(1.2, function()
         inst.SoundEmitter:PlaySound("dontstarve/sanity/creature2/attack")
-        local ents = TheSim:FindEntities(ix, iy, iz, 1.2, nil, { "FX", "NOCLICK", "INLIMBO", "shadowdominant" })
+        local ents = TheSim:FindEntities(ix, iy, iz, 1.2, nil, { "FX", "NOCLICK", "INLIMBO", "shadowdominance" })
         for k, v in ipairs(ents) do
             if not target_index[v] and v ~= inst and inst.components.combat:IsValidTarget(v) and v.components.combat and ((v.components.sanity and v.components.sanity:IsInsane()) or v == target) then
                 target_index[v] = true
