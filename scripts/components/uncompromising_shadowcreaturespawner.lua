@@ -137,7 +137,7 @@ return Class(function(self, inst)
             end
         end
 
-        if player:HasTag("shadowdominant") or
+        if player:HasTag("shadowdominance") or
             player:HasTag("fuelfarming") or
             bossesnearby > 0 or
             sanity > TUNING.DSTU.CREEPINGFEAR_SPAWN_THRESH then
