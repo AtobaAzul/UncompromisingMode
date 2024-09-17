@@ -130,9 +130,6 @@ configuration_options = {
     SkipSpace(),
 
     Header("Mod Compatibility"),
-
-    BinaryConfig("hungry_void", "Anti-Voidwalk",
-        "Disable this if you are using any mods that allow flight or traversal over the cave void.", true),
     BinaryConfig("nofishyincrockpot", "No Fish in Crockpot", "Disable this if a mod requires live fish for some recipes.", true),
     BinaryConfig("worldgenmastertoggle", "Worldgen Master Toggle", "Toggles ALL worldgen.", true),
     SkipSpace(),
