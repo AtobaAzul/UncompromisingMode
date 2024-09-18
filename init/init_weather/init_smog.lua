@@ -122,8 +122,9 @@ env.AddStategraphPostInit("wilson", function(sg)
             inst.sg.mem.um_smog_cough = nil
             return
         end
-
-        inst.sg:GoToState("um_smog_cough")
+		if not inst:HasTag("wereplayer") then
+			inst.sg:GoToState("um_smog_cough")
+		end
         inst.sg.mem.queuetalk_timeout = nil
     end
 end)
