@@ -919,7 +919,7 @@ return {
         WX78 =
         {
             GENERIC = "%s, you are a metal head.",
-            ATTACKER = "He has a cold metal heart.",
+            ATTACKER = "They have a cold metal heart.",
             MURDERER = "You do not like me, well I hate you too.",
             REVIVER = "This is very nice.",
             GHOST = "",
