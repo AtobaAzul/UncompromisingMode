@@ -332,10 +332,10 @@ AddPrefabPostInit("killerbee", function(inst)
         inst.components.lootdropper:SetLoot(stinger_only)
     end
 end)
-
 -----------------------------------------------------------------
 -- Bee box levels are 0,1,2,4 honey (from 0,1,3,6)
 -----------------------------------------------------------------
+if TUNING.DSTU.BEEBOX_NERF then
 local HONEY_PER_STAGE = GLOBAL.TUNING.DSTU.FOOD_HONEY_PRODUCTION_PER_STAGE
 
 local beebox_prefabs = {
@@ -476,6 +476,7 @@ for i, v in ipairs(beebox_prefabs) do
 			inst:UpdateHoneyLevels(inst)
 		end
 	end)
+end
 end
 -----------------------------------------------------------------
 -- Haunting pig torches only creates the pig with 10% chance
