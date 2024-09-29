@@ -102,7 +102,6 @@ local prefab_post = {
     "armor_ruins",
     "sweatervest",
     "fans",
-    "skeletonhat",
     --	"rock_avocado_fruit_sprout_sapling",
     "icepack",
     "heatrock",

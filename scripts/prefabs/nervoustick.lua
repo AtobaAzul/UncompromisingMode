@@ -191,13 +191,14 @@ local function fn()
     inst.AnimState:SetMultColour(1, 1, 1, .5)
     inst.AnimState:SetOrientation(ANIM_ORIENTATION.OnGround)
     inst.AnimState:SetLayer(LAYER_WORLD_BACKGROUND)
-
+	
+	
+	inst.HostileToPlayerTest = function() return true end
     inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then
         return inst
     end
-	inst.HostileToPlayerTest = function() return true end
     inst:AddComponent("locomotor")
     inst.components.locomotor.walkspeed = 5
     inst.components.locomotor.runspeed = 5
@@ -259,6 +260,22 @@ local function OnKilled(inst)
 	inst:Remove()
 end
 
+local function retargetfn2(inst)
+    local maxrangesq = TUNING.SHADOWCREATURE_TARGET_DIST * TUNING.SHADOWCREATURE_TARGET_DIST
+    local rangesq = maxrangesq
+    local target = nil
+    for i, v in ipairs(AllPlayers) do
+        if --[[v.components.sanity:IsCrazy() and]] not v:HasTag("playerghost") then
+            local distsq = v:GetDistanceSqToInst(inst)
+            if distsq < rangesq then
+				target = v
+				rangesq = distsq
+            end
+        end
+    end
+    return target
+end
+
 local function denfn()
 	local inst = CreateEntity()
 
@@ -295,6 +312,8 @@ local function denfn()
     inst.components.childspawner.childreninside = 0
 	
 	inst:AddComponent("combat")
+	inst.components.combat:SetRetargetFunction(3, retargetfn)
+	
 	inst:ListenForEvent("death", OnKilled)
 	
     inst.beattask = inst:DoTaskInTime(.75 + math.random() * .75, beat)

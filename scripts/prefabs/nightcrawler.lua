@@ -76,13 +76,14 @@ local function fn()
 	inst:AddTag("shadow")
     inst:AddTag("shadow_aligned")
 	inst:AddTag("notraptrigger")
-	
+	inst.HostileToPlayerTest = function() return true end
+		
 	inst.entity:SetPristine()
 	
 	if not TheWorld.ismastersim then
         return inst
     end
-	inst.HostileToPlayerTest = function() return true end
+
     -- locomotor must be constructed before the stategraph!
     inst:AddComponent("locomotor")
     inst.components.locomotor:SetTriggersCreep(false)
