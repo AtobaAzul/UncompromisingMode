@@ -9,7 +9,9 @@ env.AddPlayerPostInit(function(inst)
 
     inst:ListenForEvent("itemget", function(inst, data)
         if data.item ~= nil and data.item.prefab == "compass" then
-            data.item.components.fueled:StartConsuming()
+            if data.item.components.fueled ~= nil then
+                data.item.components.fueled:StartConsuming()
+            end
 
             inst:AddTag("compassbearer")
 
@@ -26,8 +28,9 @@ env.AddPlayerPostInit(function(inst)
             if inst.components.maprevealable ~= nil then
                 inst.components.maprevealable:RemoveRevealSource(inst)
             end
-
-            data.prev_item.components.fueled:StopConsuming()
+            if data.prev_item.components.fueled ~= nil then
+                data.prev_item.components.fueled:StopConsuming()
+            end
         end
     end)
 end)
