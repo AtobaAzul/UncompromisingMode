@@ -714,8 +714,6 @@ configuration_options = {
     SkipSpace(),
 
     Header("Wave Changes"),
-    BinaryConfig("lategamehoundspread", "Decreased Lategame Frequency",
-        "Enabling this decreases the frequency in the lategame so Hounds are still a threat, but not annoying.", true),
 
     --[[ This section has overlap with a vanilla update.
 	BinaryConfig("vargwaves", "Vargs in Hound Waves", "In the lategame, vargs will accompany hounds in houndwaves.", true),
