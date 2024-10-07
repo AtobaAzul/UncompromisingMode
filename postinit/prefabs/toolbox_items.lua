@@ -16,7 +16,8 @@ local toolbox_items = {
     "nitre",
     "alterguardianhatshard",
     "purebrilliance",
-    "sewing_tape"
+    "sewing_tape",
+    "winona_storage_robot"
 }
 
 
