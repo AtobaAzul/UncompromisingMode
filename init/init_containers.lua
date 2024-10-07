@@ -29,7 +29,7 @@ function CheckWardrobeItem(container, item, slot)
 end
 
 function CheckToolboxItem(container, item, slot)
-    return item:HasTag("toolbox_item") or item:HasTag("gem") or item:HasTag("tool") or item:HasTag("portableitem") or item:HasTag("NIGHTMARE_fuel")
+    return item:HasTag("toolbox_item") or item:HasTag("gem") or (GetModConfigData("toolbox_tools") and item:HasTag("tool")) or item:HasTag("portableitem") or item:HasTag("NIGHTMARE_fuel")
 end
 
 function CheckEquipItem(container, item, slot)

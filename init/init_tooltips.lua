@@ -77,7 +77,7 @@ STRINGS.UNCOMP_TOOLTIP = {
     ARMOR_CRAB_MAXHP = "- Increases maximum health when worn.",
     ARMOR_CRAB_REGEN = "- Self-healing.",
     UM_ARMOR_PYRE_NETTLES = "- Panics and damages nearby miscreants.\n- Ignores tiny, shadow, or fire-aligned creatures.",
-    WINONA_TOOLBOX = "- Portable storage for tools, dismantled structures and related items.", --putting these here for the icon
+    WINONA_TOOLBOX = "- Portable storage for dismantled structures and all things engineering.",
     WINONA_UPGRADEKIT_ELECTRICAL = "- Upgrades a Miner Hat or Latern to use electricity.\n- Increases max fuel.",
 	CODEX_MANTRA = "- Will spawn Classic Shadows when read.\n- Acts as a Prestihatitator (Tier 1 Magic) when dropped.",
 	PACT_ARMOR_SANITY = "- Creates temporary Night Armor.\n- Disappears when unequipped.",
@@ -361,4 +361,8 @@ if TUNING.DSTU.WXLESS then
     for k, v in pairs(CircuitDefs) do
         TOOLTIPS["WX78MODULE_" .. k] = v
     end
+end
+
+if GetModConfigData("toolbox_tools") then
+    TOOLTIPS.WINONA_TOOLBOX = "- Portable storage for dismantled structures, tools and all things engineering."
 end
