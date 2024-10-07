@@ -632,3 +632,4 @@ if GetModConfigData("waxwell_nerf") then
 end
 
 TUNING.COMPASS_FUEL = total_day_time * 5
+TUNING.FISHINGROD_USES = TUNING.FISHINGROD_USES + 1  --this is gonna cause a merge conflict later. Too bad!
