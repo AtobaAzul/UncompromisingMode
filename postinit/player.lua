@@ -148,10 +148,6 @@ env.AddPlayerPostInit(function(inst)
 
     inst:DoTaskInTime(0, RegisterNetListeners)
 
-	inst.Advertisee = net_entity(inst.GUID, "SetAdvertisee.plyr", "SetAdvertiseedirty")
-	
-	inst:DoTaskInTime(0, RegisterNetListeners)
-
     if inst.components.areaaware then
         inst.components.areaaware:StartWatchingTile(WORLD_TILES.UM_FLOODWATER)
     end
