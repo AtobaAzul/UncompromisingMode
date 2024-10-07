@@ -316,7 +316,7 @@ local function fn()
                     v.components.health:DeltaPenalty(0.025)
                 end
 
-                if v.sg ~= nil and not v.sg:HasStateTag("um_smog_cough") and v:HasTag("player") then
+                if v.sg ~= nil and not v.sg.HasStateTag("dead") and not v.sg:HasStateTag("um_smog_cough") and v:HasTag("player") then
                     v.sg:GoToState("um_smog_cough", true)
                 end
 
