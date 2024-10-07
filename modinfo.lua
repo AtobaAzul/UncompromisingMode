@@ -130,7 +130,6 @@ configuration_options = {
     SkipSpace(),
 
     Header("Mod Compatibility"),
-    BinaryConfig("nofishyincrockpot", "No Fish in Crockpot", "Disable this if a mod requires live fish for some recipes.", true),
     BinaryConfig("worldgenmastertoggle", "Worldgen Master Toggle", "Toggles ALL worldgen.", true),
     SkipSpace(),
 
