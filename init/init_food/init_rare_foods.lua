@@ -136,18 +136,18 @@ if GetModConfigData("no_winter_growing") then
     for k, v in pairs(PLANT_DEFS) do
         print(k, v)
         AddPrefabPostInit(v.prefab, function(inst)
-            inst:WatchWorldState("iswinter", ToggleGrowable)
-            ToggleGrowable(inst, GLOBAL.TheWorld.state.iswinter)
+            if not GLOBAL.TheWorld.ismastersim then return end
+            GLOBAL.MakeNoGrowInWinter(inst)
         end)
-    end
+    end 
 
     -- Weeds
     local WEED_DEFS = require("prefabs/weed_defs").WEED_DEFS
     for k, v in pairs(WEED_DEFS) do
         print(k, v)
         AddPrefabPostInit(v.prefab, function(inst)
-            inst:WatchWorldState("iswinter", ToggleGrowable)
-            ToggleGrowable(inst, GLOBAL.TheWorld.state.iswinter)
+            if not GLOBAL.TheWorld.ismastersim then return end
+            GLOBAL.MakeNoGrowInWinter(inst)
         end)
     end
 
