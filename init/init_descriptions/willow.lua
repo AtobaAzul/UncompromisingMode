@@ -479,7 +479,7 @@ DESCRIBE.UM_DREAMCATCHER = "Can you catch all my bad dreams?"
 DESCRIBE.UM_BRINEISHMOSS = "Moist and gross."
 DESCRIBE.UM_COALESCED_NIGHTMARE =
 "I don't even want to think about where it came from."
-DESCRIBE.SLUDGE_CORK = "Atleast now I can plug that sludge up!"
+DESCRIBE.SLUDGE_CORK = "At least now I can plug that sludge up!"
 DESCRIBE.SLUDGESTACK = "C'moooon, wouldn't it be fun to watch it combust?"
 DESCRIBE.SPECTER_SHIPWRECK = "It's in the water, but it looks burnable enough."
 
