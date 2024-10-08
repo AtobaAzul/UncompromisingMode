@@ -75,80 +75,66 @@ GLOBAL.TUNING.ROCK_FRUIT_REGROW = {
     EMPTY = { BASE = 2 * day_time * GLOBAL.TUNING.DSTU.STONE_FRUIT_GROWTH_INCREASE, VAR = 2 * seg_time },
     PREPICK = { BASE = seg_time * GLOBAL.TUNING.DSTU.STONE_FRUIT_GROWTH_INCREASE, VAR = 0 },
     PICK = { BASE = 3 * day_time * GLOBAL.TUNING.DSTU.STONE_FRUIT_GROWTH_INCREASE, VAR = 2 * seg_time },
-    CRUMBLE = { BASE = day_time * GLOBAL.TUNING.DSTU.STONE_FRUIT_GROWTH_INCREASE, VAR = 2 * seg_time } }
+    CRUMBLE = { BASE = day_time * GLOBAL.TUNING.DSTU.STONE_FRUIT_GROWTH_INCREASE, VAR = 2 * seg_time }
+}
 
 -----------------------------------------------------------------
 -- No grow in winter
 -----------------------------------------------------------------
 -- Relevant: MakeNoGrowInWinter in standardcomponents.lua
 
-local function ToggleGrowable(inst, iswinter)
+local function ToggleGrowable(growable, iswinter)
     if iswinter then
-        if inst.components.growable ~= nil then
-            inst.components.growable:Pause()
-        end
-
-        if inst.components.pickable ~= nil then
-            inst.components.pickable:Pause()
-        end
+        growable:Pause()
     else
-        if inst.components.growable ~= nil then
-            inst.components.growable:Resume()
-        end
-
-        if inst.components.pickable ~= nil then
-            inst.components.pickable:Resume()
-        end
+        growable:Resume()
     end
 end
 
 local _MakeNoGrowInWinter = GLOBAL.MakeNoGrowInWinter
 
 function GLOBAL.MakeNoGrowInWinter(inst)
-    inst:WatchWorldState("iswinter", ToggleGrowable)
-    ToggleGrowable(inst, GLOBAL.TheWorld.state.iswinter)
-    _MakeNoGrowInWinter(inst)
+    if inst.components.pickable then
+        _MakeNoGrowInWinter(inst)
+    elseif inst.components.growable then
+        inst.components.growable:WatchWorldState("iswinter", ToggleGrowable)
+        ToggleGrowable(inst.components.growable, TheWorld.state.iswinter)
+    end
 end
 
-if GetModConfigData("no_winter_growing_") then
-    -- Stone fruits bushs
-    AddPrefabPostInit("rock_avocado_bush", function(inst)
-        if inst ~= nil and inst.components.pickable ~= nil then
-            GLOBAL.MakeNoGrowInWinter(inst)
-        end
-    end)
+-- Probably gonna get a config for this eventually... I'm sure...
+GLOBAL.TUNING.ROCK_FRUIT_LOOT =
+{
+    ANGLE = 65,
+    SPEED = -1.8,
+    HEIGHT = 0.5,
+    RIPE_CHANCE = 0.32,
+    SEED_CHANCE = 0.01,
+    MAX_SPAWNS = 10,
+}
 
-    -- cherry tomatos
-    AddPrefabPostInit("cherrytomato_planted", function(inst)
-        if inst ~= nil and inst.components.pickable ~= nil then
-            GLOBAL.MakeNoGrowInWinter(inst)
-        end
-    end)
+if GetModConfigData("no_winter_growing") then
+    local nowintergrowing = {
+        "rock_avocado_bush",
+        "cherrytomato_planted",
+        "cactus",
+        "oasis_cactus",
+        "bullkelp_plant",
 
-    -- Cactus
-    AddPrefabPostInit("cactus", function(inst)
-        if inst ~= nil and inst.components.pickable ~= nil then
-            GLOBAL.MakeNoGrowInWinter(inst)
-        end
-    end)
+    }
 
-    -- Oasis Cactus
-    AddPrefabPostInit("oasis_cactus", function(inst)
-        if inst ~= nil and inst.components.pickable ~= nil then
+    for k, v in pairs(nowintergrowing) do
+        print(k, v)
+        AddPrefabPostInit(v, function(inst)
+            if not GLOBAL.TheWorld.ismastersim then return end
             GLOBAL.MakeNoGrowInWinter(inst)
-        end
-    end)
-
-    -- Bullkelp
-    AddPrefabPostInit("bullkelp_plant", function(inst)
-        if inst ~= nil and inst.components.pickable ~= nil then
-            GLOBAL.MakeNoGrowInWinter(inst)
-        end
-    end)
+        end)
+    end
 
     -- Farm Crops
     local PLANT_DEFS = require("prefabs/farm_plant_defs").PLANT_DEFS
     for k, v in pairs(PLANT_DEFS) do
+        print(k, v)
         AddPrefabPostInit(v.prefab, function(inst)
             inst:WatchWorldState("iswinter", ToggleGrowable)
             ToggleGrowable(inst, GLOBAL.TheWorld.state.iswinter)
@@ -158,17 +144,12 @@ if GetModConfigData("no_winter_growing_") then
     -- Weeds
     local WEED_DEFS = require("prefabs/weed_defs").WEED_DEFS
     for k, v in pairs(WEED_DEFS) do
+        print(k, v)
         AddPrefabPostInit(v.prefab, function(inst)
             inst:WatchWorldState("iswinter", ToggleGrowable)
             ToggleGrowable(inst, GLOBAL.TheWorld.state.iswinter)
         end)
     end
-
-    -- Banana Bushes
-    AddPrefabPostInit("bananabush", function(inst)
-        inst:WatchWorldState("iswinter", ToggleGrowable)
-        ToggleGrowable(inst, GLOBAL.TheWorld.state.iswinter)
-    end)
 
     -- Extra check for Farm Crops, Banana Bushes, and Stone Fruit
     AddComponentPostInit("growable", function(self)
@@ -176,7 +157,7 @@ if GetModConfigData("no_winter_growing_") then
 
         function self:Resume()
             if (self.inst:HasTag("farm_plant") or self.inst:HasTag("bananabush") or self.inst.prefab == "rock_avocado_bush") and GLOBAL.TheWorld.state.iswinter then
-				return false
+                return false
             else
                 return _OldResume(self)
             end
@@ -186,24 +167,24 @@ if GetModConfigData("no_winter_growing_") then
 
         function self:StartGrowing(time)
             if (self.inst:HasTag("bananabush") or self.inst.prefab == "rock_avocado_bush") and GLOBAL.TheWorld.state.iswinter then
-				return false
+                return false
             else
                 return _OldStartGrowing(self, time)
             end
         end
     end)
 
-	AddComponentPostInit("pickable", function(self)
-		local _OldResume = self.Resume
+    AddComponentPostInit("pickable", function(self)
+        local _OldResume = self.Resume
 
-		function self:Resume()
-			if (self.inst:HasTag("bananabush") or self.inst.prefab == "rock_avocado_bush") and GLOBAL.TheWorld.state.iswinter then
-				return false
-			else
-				return _OldResume(self)
-			end
-		end
-	end)
+        function self:Resume()
+            if (self.inst:HasTag("bananabush") or self.inst.prefab == "rock_avocado_bush") and GLOBAL.TheWorld.state.iswinter then
+                return false
+            else
+                return _OldResume(self)
+            end
+        end
+    end)
 
     PLANT_DEFS.potato.good_seasons = { autumn = true, spring = true }
     PLANT_DEFS.carrot.good_seasons = { autumn = true, spring = true, summer = true }
@@ -226,8 +207,8 @@ end
 local function IsCrazyGuy(guy)
     local sanity = guy ~= nil and guy.replica.sanity or nil
     return sanity ~= nil and sanity:IsInsanityMode() and
-    sanity:GetPercentNetworked() <=
-    (guy:HasTag("dappereffects") and TUNING.DAPPER_BEARDLING_SANITY or TUNING.BEARDLING_SANITY)
+        sanity:GetPercentNetworked() <=
+        (guy:HasTag("dappereffects") and TUNING.DAPPER_BEARDLING_SANITY or TUNING.BEARDLING_SANITY)
 end
 --[[
 local function LootSetupFunction(lootdropper)
@@ -332,150 +313,151 @@ AddPrefabPostInit("killerbee", function(inst)
         inst.components.lootdropper:SetLoot(stinger_only)
     end
 end)
-
 -----------------------------------------------------------------
 -- Bee box levels are 0,1,2,4 honey (from 0,1,3,6)
 -----------------------------------------------------------------
-local HONEY_PER_STAGE = GLOBAL.TUNING.DSTU.FOOD_HONEY_PRODUCTION_PER_STAGE
+if TUNING.DSTU.BEEBOX_NERF then
+    local HONEY_PER_STAGE = GLOBAL.TUNING.DSTU.FOOD_HONEY_PRODUCTION_PER_STAGE
 
-local beebox_prefabs = {
-	"beebox",
-	"beebox_hermit",
-}
+    local beebox_prefabs = {
+        "beebox",
+        "beebox_hermit",
+    }
 
-local function ReleaseBees(inst, picker)
-	if not inst:HasTag("burnt") and picker and not GLOBAL.TheWorld.state.iswinter then
-		local protection
-		local isspring = GLOBAL.TheWorld.state.isspring
-		
-		if picker.components.inventory then
-			for k, eslot in pairs(GLOBAL.EQUIPSLOTS) do
-				local equip = picker.components.inventory:GetEquippedItem(eslot)
-				if equip and equip.components.armor and equip.components.armor.tags then
-					for i, tag in ipairs(equip.components.armor.tags) do
-						if tag == "bee" then
-							protection = equip
-							break
-						end
-					end
-				end
-			end
-		end
-		
-		if picker.components.combat and picker.components.skilltreeupdater and not picker.components.skilltreeupdater:IsActivated("wormwood_bugs") then
-			if isspring then
-				if protection then
-					protection.components.armor:TakeDamage(40)
-				elseif picker:HasTag("pinetreepioneer") then				
-					picker.components.health:DoDelta(-30, false, inst.prefab, false, nil, inst, false)
-					picker.sg:GoToState("hit", inst)
-				elseif picker:HasTag("valkyrie") then
-					picker.components.health:DoDelta(-15, false, inst.prefab, false, nil, inst, false)
-					picker.sg:GoToState("hit", inst)					
-				else			
-					picker.components.health:DoDelta(-20, false, inst.prefab, false, nil, inst, false)
-					picker.sg:GoToState("hit", inst)					
-				end	
-			else
-				if protection then
-					protection.components.armor:TakeDamage(20)
-				elseif picker:HasTag("pinetreepioneer") then
-					picker.components.health:DoDelta(-20, false, inst.prefab, false, nil, inst, false)
-					picker.sg:GoToState("hit", inst)	
-				elseif picker:HasTag("valkyrie") then
-					picker.components.health:DoDelta(-7.5, false, inst.prefab, false, nil, inst, false)
-					picker.sg:GoToState("hit", inst)					
-				else
-					picker.components.health:DoDelta(-10, false, inst.prefab, false, nil, inst, false)
-					picker.sg:GoToState("hit", inst)
-				end	
-			end
-		end
-		
-		if picker.components.skilltreeupdater and picker.components.skilltreeupdater:IsActivated("wormwood_bugs")
-		and inst.components.childspawner and not GLOBAL.TheWorld.state.isdusk and not GLOBAL.TheWorld.state.isnight then
-			inst.components.childspawner:ReleaseAllChildren()
-		end
-	end
-end
+    local function ReleaseBees(inst, picker)
+        if not inst:HasTag("burnt") and picker and not GLOBAL.TheWorld.state.iswinter then
+            local protection
+            local isspring = GLOBAL.TheWorld.state.isspring
 
-local function UpdateHoneyLevels(inst)
-    if inst.components.harvestable then
-        for i, amt in pairs(HONEY_PER_STAGE) do
-            if inst.components.harvestable.produce == amt or i >= #HONEY_PER_STAGE then
-                inst.anims = {
-                    idle = amt <= 0 and "bees_loop" or "honey"..i - 1,
-                    hit = amt <= 0 and "hit_idle" or "hit_honey"..i - 1,
-                }
-                inst.AnimState:PlayAnimation(inst.anims.idle)
-                
-                break
+            if picker.components.inventory then
+                for k, eslot in pairs(GLOBAL.EQUIPSLOTS) do
+                    local equip = picker.components.inventory:GetEquippedItem(eslot)
+                    if equip and equip.components.armor and equip.components.armor.tags then
+                        for i, tag in ipairs(equip.components.armor.tags) do
+                            if tag == "bee" then
+                                protection = equip
+                                break
+                            end
+                        end
+                    end
+                end
+            end
+
+            if picker.components.combat and picker.components.skilltreeupdater and not picker.components.skilltreeupdater:IsActivated("wormwood_bugs") then
+                if isspring then
+                    if protection then
+                        protection.components.armor:TakeDamage(40)
+                    elseif picker:HasTag("pinetreepioneer") then
+                        picker.components.health:DoDelta(-30, false, inst.prefab, false, nil, inst, false)
+                        picker.sg:GoToState("hit", inst)
+                    elseif picker:HasTag("valkyrie") then
+                        picker.components.health:DoDelta(-15, false, inst.prefab, false, nil, inst, false)
+                        picker.sg:GoToState("hit", inst)
+                    else
+                        picker.components.health:DoDelta(-20, false, inst.prefab, false, nil, inst, false)
+                        picker.sg:GoToState("hit", inst)
+                    end
+                else
+                    if protection then
+                        protection.components.armor:TakeDamage(20)
+                    elseif picker:HasTag("pinetreepioneer") then
+                        picker.components.health:DoDelta(-20, false, inst.prefab, false, nil, inst, false)
+                        picker.sg:GoToState("hit", inst)
+                    elseif picker:HasTag("valkyrie") then
+                        picker.components.health:DoDelta(-7.5, false, inst.prefab, false, nil, inst, false)
+                        picker.sg:GoToState("hit", inst)
+                    else
+                        picker.components.health:DoDelta(-10, false, inst.prefab, false, nil, inst, false)
+                        picker.sg:GoToState("hit", inst)
+                    end
+                end
+            end
+
+            if picker.components.skilltreeupdater and picker.components.skilltreeupdater:IsActivated("wormwood_bugs")
+                and inst.components.childspawner and not GLOBAL.TheWorld.state.isdusk and not GLOBAL.TheWorld.state.isnight then
+                inst.components.childspawner:ReleaseAllChildren()
             end
         end
     end
-end
 
-for i, v in ipairs(beebox_prefabs) do
-	AddPrefabPostInit(v, function(inst)
-		if not GLOBAL.TheWorld.ismastersim then
-			return
-		end
-		
-		inst.ReleaseBees = ReleaseBees
-		inst.UpdateHoneyLevels = UpdateHoneyLevels
-		
-		if inst.components.harvestable then
-			local OldOnGrow
-			local OldOnHarvest
-			local OldOnLoad
-			
-			if not OldOnGrow then
-				OldOnGrow = inst.components.harvestable.ongrowfn
-			end
-			
-			if not OldOnHarvest then
-				OldOnHarvest = inst.components.harvestable.onharvestfn
-			end
-			
-			if not OldOnLoad then
-				OldOnLoad = inst.OnLoad
-			end
-			
-			local function OnGrow(inst, ...)
-				if OldOnGrow then
-					OldOnGrow(inst, ...)
-				end
-				
-				inst:UpdateHoneyLevels(inst)
-			end
-			
-			local function OnHarvest(inst, picker, ...)
-				inst:ReleaseBees(picker)
-				
-				if OldOnHarvest then
-					OldOnHarvest(inst, picker, ...)
-				end
-				
-				inst:UpdateHoneyLevels(inst)
-			end
-			
-			local function OnLoad(inst, ...)
-				if OldOnLoad then
-					OldOnLoad(inst, ...)
-				end
-				
-				inst:UpdateHoneyLevels(inst)
-			end
-			
-			inst.components.harvestable.maxproduce = HONEY_PER_STAGE[4]
-			inst.components.harvestable.ongrowfn = OnGrow
-			inst.components.harvestable.onharvestfn = OnHarvest
-			
-			inst.OnLoad = OnLoad
-			
-			inst:UpdateHoneyLevels(inst)
-		end
-	end)
+    local function UpdateHoneyLevels(inst)
+        if inst.components.harvestable then
+            for i, amt in pairs(HONEY_PER_STAGE) do
+                if inst.components.harvestable.produce == amt or i >= #HONEY_PER_STAGE then
+                    inst.anims = {
+                        idle = amt <= 0 and "bees_loop" or "honey" .. i - 1,
+                        hit = amt <= 0 and "hit_idle" or "hit_honey" .. i - 1,
+                    }
+                    inst.AnimState:PlayAnimation(inst.anims.idle)
+
+                    break
+                end
+            end
+        end
+    end
+
+    for i, v in ipairs(beebox_prefabs) do
+        AddPrefabPostInit(v, function(inst)
+            if not GLOBAL.TheWorld.ismastersim then
+                return
+            end
+
+            inst.ReleaseBees = ReleaseBees
+            inst.UpdateHoneyLevels = UpdateHoneyLevels
+
+            if inst.components.harvestable then
+                local OldOnGrow
+                local OldOnHarvest
+                local OldOnLoad
+
+                if not OldOnGrow then
+                    OldOnGrow = inst.components.harvestable.ongrowfn
+                end
+
+                if not OldOnHarvest then
+                    OldOnHarvest = inst.components.harvestable.onharvestfn
+                end
+
+                if not OldOnLoad then
+                    OldOnLoad = inst.OnLoad
+                end
+
+                local function OnGrow(inst, ...)
+                    if OldOnGrow then
+                        OldOnGrow(inst, ...)
+                    end
+
+                    inst:UpdateHoneyLevels(inst)
+                end
+
+                local function OnHarvest(inst, picker, ...)
+                    inst:ReleaseBees(picker)
+
+                    if OldOnHarvest then
+                        OldOnHarvest(inst, picker, ...)
+                    end
+
+                    inst:UpdateHoneyLevels(inst)
+                end
+
+                local function OnLoad(inst, ...)
+                    if OldOnLoad then
+                        OldOnLoad(inst, ...)
+                    end
+
+                    inst:UpdateHoneyLevels(inst)
+                end
+
+                inst.components.harvestable.maxproduce = HONEY_PER_STAGE[4]
+                inst.components.harvestable.ongrowfn = OnGrow
+                inst.components.harvestable.onharvestfn = OnHarvest
+
+                inst.OnLoad = OnLoad
+
+                inst:UpdateHoneyLevels(inst)
+            end
+        end)
+    end
 end
 -----------------------------------------------------------------
 -- Haunting pig torches only creates the pig with 10% chance
@@ -500,23 +482,23 @@ local xc = GLOBAL.TUNING.DSTU.TREE_GROWTH_TIME_INCREASE
 
 GLOBAL.TUNING.EVERGREEN_GROW_TIME = {
     { base = 1.5 * day_time * xc, random = 0.5 * day_time }, -- short
-    { base = 5 * day_time * xc,   random = 2 * day_time }, -- normal
-    { base = 5 * day_time * xc,   random = 2 * day_time }, -- tall
-    { base = 1 * day_time * xc,   random = 0.5 * day_time } -- old
+    { base = 5 * day_time * xc,   random = 2 * day_time },   -- normal
+    { base = 5 * day_time * xc,   random = 2 * day_time },   -- tall
+    { base = 1 * day_time * xc,   random = 0.5 * day_time }  -- old
 }
 
 GLOBAL.TUNING.TWIGGY_TREE_GROW_TIME = {
     { base = 1.5 * day_time * xc, random = 0.5 * day_time }, -- short
-    { base = 3 * day_time * xc,   random = 1 * day_time }, -- normal
-    { base = 3 * day_time * xc,   random = 1 * day_time }, -- tall
-    { base = 5 * day_time * xc,   random = 0.5 * day_time } -- old
+    { base = 3 * day_time * xc,   random = 1 * day_time },   -- normal
+    { base = 3 * day_time * xc,   random = 1 * day_time },   -- tall
+    { base = 5 * day_time * xc,   random = 0.5 * day_time }  -- old
 }
 
 GLOBAL.TUNING.PINECONE_GROWTIME = { base = 0.75 * day_time * xc, random = 0.25 * day_time }
 
 GLOBAL.TUNING.DECIDUOUS_GROW_TIME = {
     { base = 1.5 * day_time * xc, random = 0.5 * day_time }, -- short
-    { base = 5 * day_time * xc,   random = 2 * day_time }, -- normal
-    { base = 5 * day_time * xc,   random = 2 * day_time }, -- tall
-    { base = 1 * day_time * xc,   random = 0.5 * day_time } -- old
-}   
+    { base = 5 * day_time * xc,   random = 2 * day_time },   -- normal
+    { base = 5 * day_time * xc,   random = 2 * day_time },   -- tall
+    { base = 1 * day_time * xc,   random = 0.5 * day_time }  -- old
+}

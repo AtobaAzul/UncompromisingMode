@@ -165,7 +165,6 @@ TUNING.DSTU = {
     VARGWAVES = false,           -- GetModConfigData("vargwaves"),
     VARGWAVES_BOSS_GRACE = 15,   -- GetModConfigData("vargwaves grace"),
     VARGWAVES_DELAY_PERIOD = 15, -- GetModConfigData("vargwaves delay"),
-    LATEGAMEHOUNDSPREAD = GetModConfigData("lategamehoundspread"),
     -- Worm inclusion
     DEPTHSEELS = GetModConfigData("depthseels"),
     DEPTHSVIPERS = GetModConfigData("depthsvipers"),
@@ -351,7 +350,6 @@ TUNING.DSTU = {
     UPDATE_CHECK = CurrentRelease.GreaterOrEqualTo("R34_OCEANQOL_WINONAWURT"), -- REMEMBER TO ALWAYS UPDATE THIS WITH NEW BETAS.
     POCKET_POWERTRIP = GetModConfigData("pocket_powertrip_"),
     WINTER_BURNING = GetModConfigData("winter_burning"),
-    HUNGRY_VOID = GetModConfigData("hungry_void"),
     BUTTERFLYWINGS_NERF = GetModConfigData("butterflywings_nerf"),
     LONGPIG = GetModConfigData("longpig"),
     RAW_CROPS_NERF = GetModConfigData("rawcropsnerf"),
@@ -633,3 +631,4 @@ if GetModConfigData("waxwell_nerf") then
 end
 
 TUNING.COMPASS_FUEL = total_day_time * 5
+TUNING.FISHINGROD_USES = TUNING.FISHINGROD_USES + 1  --this is gonna cause a merge conflict later. Too bad!

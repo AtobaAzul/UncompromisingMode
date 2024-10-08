@@ -236,7 +236,7 @@ end
 -- Original:	test = function(cooker, names, tags) return tags.fish and (names.corn or names.corn_cooked) end,
 
 recipes.fishsticks.test = function(cooker, names, tags)
-    return (tags.fish and tags.fish >= 1)  and names.twigs and
+    return (tags.fish and tags.fish >= 1) and names.twigs and
         UncompromisingFillers(tags) and not (tags.insectoid and tags.insectoid >= 1)
 end
 -- Original:	test = function(cooker, names, tags) return tags.fish and names.twigs and (tags.inedible and tags.inedible <= 1) end,
@@ -600,143 +600,34 @@ AddPrefabPostInitAny(function(inst)
 end)
 
 if TUNING.DSTU.GOODIESNERF then
-    AddPrefabPostInit("shroomcake", function(inst)
-        if not GLOBAL.TheWorld.ismastersim then
-            return
-        end
-        inst.components.edible.foodtype = GLOBAL.FOODTYPE.VEGGIE
-    end)
+    print("HERE")
+    local foods = {
+        GENERIC = { "icecream", "taffy",
+        },
+        VEGGIE = { "shroomcake", "frozenbananadaiquiri" },
+    }
 
-    AddPrefabPostInit("shroomcake_spice_salt", function(inst)
-        if not GLOBAL.TheWorld.ismastersim then
-            return
-        end
-        inst.components.edible.foodtype = GLOBAL.FOODTYPE.VEGGIE
-    end)
+    local spices = { "salt", "chili", "garlic", "sugar" }
 
-    AddPrefabPostInit("shroomcake_spice_chili", function(inst)
-        if not GLOBAL.TheWorld.ismastersim then
-            return
+    for type, dishes in pairs(foods) do
+        print(type, dishes)
+        for k, dish in pairs(dishes) do
+            print(k, dish)
+            AddPrefabPostInit(dish, function(inst)
+                if not GLOBAL.TheWorld.ismastersim then
+                    return
+                end
+                inst.components.edible.foodtype = GLOBAL.FOODTYPE[type]
+            end)
+            for k, v in pairs(spices) do
+                print(k,v)
+                AddPrefabPostInit(dish .. "_spice_" .. v, function(inst)
+                    if not GLOBAL.TheWorld.ismastersim then
+                        return
+                    end
+                    inst.components.edible.foodtype = GLOBAL.FOODTYPE[type]
+                end)
+            end
         end
-        inst.components.edible.foodtype = GLOBAL.FOODTYPE.VEGGIE
-    end)
-
-    AddPrefabPostInit("shroomcake_spice_sugar", function(inst)
-        if not GLOBAL.TheWorld.ismastersim then
-            return
-        end
-        inst.components.edible.foodtype = GLOBAL.FOODTYPE.VEGGIE
-    end)
-
-    AddPrefabPostInit("shroomcake_spice_garlic", function(inst)
-        if not GLOBAL.TheWorld.ismastersim then
-            return
-        end
-        inst.components.edible.foodtype = GLOBAL.FOODTYPE.VEGGIE
-    end)
-
-    AddPrefabPostInit("icecream", function(inst)
-        if not GLOBAL.TheWorld.ismastersim then
-            return
-        end
-        inst.components.edible.foodtype = GLOBAL.FOODTYPE.GENERIC
-    end)
-
-    AddPrefabPostInit("icecream_spice_chili", function(inst)
-        if not GLOBAL.TheWorld.ismastersim then
-            return
-        end
-        inst.components.edible.foodtype = GLOBAL.FOODTYPE.GENERIC
-    end)
-
-    AddPrefabPostInit("icecream_spice_salt", function(inst)
-        if not GLOBAL.TheWorld.ismastersim then
-            return
-        end
-        inst.components.edible.foodtype = GLOBAL.FOODTYPE.GENERIC
-    end)
-
-    AddPrefabPostInit("icecream_spice_sugar", function(inst)
-        if not GLOBAL.TheWorld.ismastersim then
-            return
-        end
-        inst.components.edible.foodtype = GLOBAL.FOODTYPE.GENERIC
-    end)
-
-    AddPrefabPostInit("icecream_spice_garlic", function(inst)
-        if not GLOBAL.TheWorld.ismastersim then
-            return
-        end
-        inst.components.edible.foodtype = GLOBAL.FOODTYPE.GENERIC
-    end)
-
-    AddPrefabPostInit("taffy", function(inst)
-        if not GLOBAL.TheWorld.ismastersim then
-            return
-        end
-        inst.components.edible.foodtype = GLOBAL.FOODTYPE.GENERIC
-    end)
-
-    AddPrefabPostInit("taffy_spice_chili", function(inst)
-        if not GLOBAL.TheWorld.ismastersim then
-            return
-        end
-        inst.components.edible.foodtype = GLOBAL.FOODTYPE.GENERIC
-    end)
-
-    AddPrefabPostInit("taffy_spice_salt", function(inst)
-        if not GLOBAL.TheWorld.ismastersim then
-            return
-        end
-        inst.components.edible.foodtype = GLOBAL.FOODTYPE.GENERIC
-    end)
-
-    AddPrefabPostInit("taffy_spice_sugar", function(inst)
-        if not GLOBAL.TheWorld.ismastersim then
-            return
-        end
-        inst.components.edible.foodtype = GLOBAL.FOODTYPE.GENERIC
-    end)
-
-    AddPrefabPostInit("taffy_spice_garlic", function(inst)
-        if not GLOBAL.TheWorld.ismastersim then
-            return
-        end
-        inst.components.edible.foodtype = GLOBAL.FOODTYPE.GENERIC
-    end)
-
-    AddPrefabPostInit("frozenbananadaiquiri", function(inst)
-        if not GLOBAL.TheWorld.ismastersim then
-            return
-        end
-        inst.components.edible.foodtype = GLOBAL.FOODTYPE.VEGGIE
-    end)
-
-    AddPrefabPostInit("frozenbananadaiquiri_spice_chili", function(inst)
-        if not GLOBAL.TheWorld.ismastersim then
-            return
-        end
-        inst.components.edible.foodtype = GLOBAL.FOODTYPE.VEGGIE
-    end)
-
-    AddPrefabPostInit("frozenbananadaiquiri_spice_salt", function(inst)
-        if not GLOBAL.TheWorld.ismastersim then
-            return
-        end
-        inst.components.edible.foodtype = GLOBAL.FOODTYPE.VEGGIE
-    end)
-
-    AddPrefabPostInit("frozenbananadaiquiri_spice_sugar", function(inst)
-        if not GLOBAL.TheWorld.ismastersim then
-            return
-        end
-        inst.components.edible.foodtype = GLOBAL.FOODTYPE.VEGGIE
-    end)
-
-    AddPrefabPostInit("frozenbananadaiquiri_spice_garlic", function(inst)
-        if not GLOBAL.TheWorld.ismastersim then
-            return
-        end
-        inst.components.edible.foodtype = GLOBAL.FOODTYPE.VEGGIE
-    end)
+    end
 end

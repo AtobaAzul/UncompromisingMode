@@ -7,27 +7,34 @@ end
 
 env.AddStategraphPostInit("shadowcreature", function(inst)
 
-local events=
-{
-	EventHandler("attacked", function(inst)
+
+
+	local _OldAttacked = inst.events["attacked"].fn -- crawling h/n have a special hit state
+	inst.events["attacked"].fn = function(inst, data)
         if not (inst.sg:HasStateTag("attack") or inst.sg:HasStateTag("hit") or inst.sg:HasStateTag("noattack") or inst.components.health:IsDead()) then
 			if inst._cdtask == nil and inst:HasTag("crawlinghorror") then
 				inst._cdtask = inst:DoTaskInTime(1, OnCooldown)
 				inst.sg:GoToState("hit_goo")
 			else
-				inst.sg:GoToState("hit")
+				_OldAttacked(inst, data)
 			end
-        end
-    end),
-
-    EventHandler("doattack", function(inst, data)
-        if not (inst.sg:HasStateTag("busy") or inst.components.health:IsDead()) then
-            inst.sg:GoToState("attack", data.target)
-        end
-    end),
-    
-}
-
+		end
+	end
+	
+	local _OldAttack = inst.events["doattack"].fn -- t/n beaks have a special attack state
+	inst.events["doattack"].fn = function(inst, data)
+        if not (inst.sg:HasStateTag("attack") or inst.sg:HasStateTag("hit") or inst.sg:HasStateTag("noattack") or inst.components.health:IsDead()) then
+			if inst.prefab == "nightmarebeak" or inst.prefab == "terrorbeak" then
+				if not (inst.sg:HasStateTag("busy") or inst.components.health:IsDead()) then
+					inst.sg:GoToState("attack", data.target)
+				end				
+			else
+				_OldAttack(inst, data)
+			end
+		end
+	end	
+	
+	
 local function FinishExtendedSound(inst, soundid)
     inst.SoundEmitter:KillSound("sound_"..tostring(soundid))
     inst.sg.mem.soundcache[soundid] = nil
@@ -200,11 +207,6 @@ local states = {
         },
     }
 }
-
-for k, v in pairs(events) do
-    assert(v:is_a(EventHandler), "Non-event added in mod events table!")
-    inst.events[v.name] = v
-end
 
 for k, v in pairs(states) do
     assert(v:is_a(State), "Non-state added in mod state table!")

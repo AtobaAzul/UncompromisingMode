@@ -38,6 +38,23 @@ local function Init(inst)
 	inst.fire = fx
 end
 
+
+local function retargetfn(inst)
+    local maxrangesq = TUNING.SHADOWCREATURE_TARGET_DIST * TUNING.SHADOWCREATURE_TARGET_DIST
+    local rangesq = maxrangesq
+    local target = nil
+    for i, v in ipairs(AllPlayers) do
+        if --[[v.components.sanity:IsCrazy() and]] not v:HasTag("playerghost") then
+            local distsq = v:GetDistanceSqToInst(inst)
+            if distsq < rangesq then
+				target = v
+				rangesq = distsq
+            end
+        end
+    end
+    return target
+end
+
 local function fn(Sim)
 	local inst = CreateEntity()
 
@@ -50,14 +67,16 @@ local function fn(Sim)
 	MakeCharacterPhysics(inst, 10, 1.5)
 	RemovePhysicsColliders(inst)
 
-	--inst.Transform:SetFourFaced()
-	inst:AddTag("monster")
-    inst:AddTag("hostile")   
-    inst:AddTag("swilson") 
+	
 	inst:AddTag("nightmarecreature")
+	inst:AddTag("gestaltnoloot")
+	inst:AddTag("monster")
+	inst:AddTag("hostile")
 	inst:AddTag("shadow")
-    inst:AddTag("shadow_aligned")
 	inst:AddTag("notraptrigger")
+	inst:AddTag("shadow_aligned")
+	
+
 
     inst.AnimState:SetBank("fuelseeker")
     inst.AnimState:SetBuild("fuelseeker")
@@ -66,13 +85,15 @@ local function fn(Sim)
 	inst.AnimState:UsePointFiltering(true)
 	
 	inst.Transform:SetScale(0.44, 0.44, 0.44)
-
+	
+	inst.HostileToPlayerTest = function() return true end
+	
 	inst.entity:SetPristine()
 	
 	if not TheWorld.ismastersim then
         return inst
     end
-	inst.HostileToPlayerTest = function() return true end
+	
     inst:AddComponent("health")
     inst.components.health:SetMaxHealth(400)
 	
@@ -88,6 +109,7 @@ local function fn(Sim)
 	inst.components.lootdropper:SetChanceLootTable('fuelseeker')
 	
     inst:AddComponent("combat")
+	inst.components.combat:SetRetargetFunction(3, retargetfn)
 	
     inst.sounds = sounds 
 	inst.cooldown = false

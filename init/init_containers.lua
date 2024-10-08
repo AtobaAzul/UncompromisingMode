@@ -392,13 +392,6 @@ if GetModConfigData("scaledchestbuff") then
     end
 end
 
-if GetModConfigData("nofishyincrockpot") then
-    local _itemtestfn = containers.params.cookpot.itemtestfn
-    containers.params.cookpot.itemtestfn = function(container, item, slot)
-        return _itemtestfn(container, item, slot) and item ~= nil and not item:HasTag("oceanfish")
-    end
-end
-
 containers.params.wardrobe =
 {
     widget =

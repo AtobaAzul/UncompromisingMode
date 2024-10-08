@@ -6,7 +6,7 @@ if not folder_name:find("workshop-") then
 end
 
 --RELEASE.MAJOR.MINOR.FIX
-local _version = "1.4.21.6"
+local _version = "1.4.21.8"
 description = [[
 󰀔 [ Version: ]] .. _version .. [[ - "Under the Weather Pt.1" ]
 
@@ -125,15 +125,12 @@ configuration_options = {
             { description = "Default",         data = "blue", hover = "Default, blue filter." }
         },
         default = "blue",
+        client = true
     },
 
     SkipSpace(),
 
     Header("Mod Compatibility"),
-
-    BinaryConfig("hungry_void", "Anti-Voidwalk",
-        "Disable this if you are using any mods that allow flight or traversal over the cave void.", true),
-    BinaryConfig("nofishyincrockpot", "No Fish in Crockpot", "Disable this if a mod requires live fish for some recipes.", true),
     BinaryConfig("worldgenmastertoggle", "Worldgen Master Toggle", "Toggles ALL worldgen.", true),
     SkipSpace(),
 
@@ -694,8 +691,6 @@ configuration_options = {
         "More items are considered as the horrible food type.", true),
     BinaryConfig("mushroom_changes", "Mushroom Changes",
         "Mushroom Planter accepts more resources to replenish. Mushrooms now give spores, instead of caps. Mushtrees will give spores when off-season.", true),
-    BinaryConfig("no_winter_growing_", "No Winter Growing",
-        "Makes a few food sources such as Kelp and Stone Fruit not grow in Winter.", false),
     BinaryConfig("rawcropsnerf", "Raw Crops Nerf",
         "Farm crops are nerfed in their base value when raw/cooked to incentivize using Crockpot recipes.", true),
 
@@ -719,8 +714,6 @@ configuration_options = {
     SkipSpace(),
 
     Header("Wave Changes"),
-    BinaryConfig("lategamehoundspread", "Decreased Lategame Frequency",
-        "Enabling this decreases the frequency in the lategame so Hounds are still a threat, but not annoying.", true),
 
     --[[ This section has overlap with a vanilla update.
 	BinaryConfig("vargwaves", "Vargs in Hound Waves", "In the lategame, vargs will accompany hounds in houndwaves.", true),

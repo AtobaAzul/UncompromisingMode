@@ -27,6 +27,8 @@ function SnowStormWatcher:ToggleSnowstorms(active, src, data)
         self.inst:StartUpdatingComponent(self)
     else
         self.inst:StopUpdatingComponent(self)
+		-- Test Failsafe
+		self.inst.components.locomotor:RemoveExternalSpeedMultiplier(self.inst, "snowstorm")
     end
 end
 

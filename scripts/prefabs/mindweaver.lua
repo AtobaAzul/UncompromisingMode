@@ -111,6 +111,22 @@ local function ScanForPlayer(inst)
 	end
 end
 
+local function retargetfn(inst)
+    local maxrangesq = TUNING.SHADOWCREATURE_TARGET_DIST * TUNING.SHADOWCREATURE_TARGET_DIST
+    local rangesq = maxrangesq
+    local target = nil
+    for i, v in ipairs(AllPlayers) do
+        if --[[v.components.sanity:IsCrazy() and]] not v:HasTag("playerghost") then
+            local distsq = v:GetDistanceSqToInst(inst)
+            if distsq < rangesq then
+				target = v
+				rangesq = distsq
+            end
+        end
+    end
+    return target
+end
+
 local function fn(Sim)
 	local inst = CreateEntity()
 
@@ -145,13 +161,14 @@ local function fn(Sim)
 	inst.AnimState:UsePointFiltering(true)
 	
 	inst.Transform:SetScale(1.6, 1.6, 1.6)
-
+	inst.HostileToPlayerTest = function() return true end
+	
 	inst.entity:SetPristine()
 	
 	if not TheWorld.ismastersim then
         return inst
     end
-	inst.HostileToPlayerTest = function() return true end
+	
     inst:AddComponent("health")
     inst.components.health:SetMaxHealth(300)
 	
@@ -174,7 +191,9 @@ local function fn(Sim)
     --inst.components.playerprox:SetPlayerAliveMode(true)
 	
     inst:AddComponent("combat")
-    inst.sounds = sounds 
+	inst.components.combat:SetRetargetFunction(3, retargetfn)
+    
+	inst.sounds = sounds 
 	inst.cooldown = false
 	
     inst:SetStateGraph("SGmindweaver")
