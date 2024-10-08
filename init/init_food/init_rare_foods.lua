@@ -98,7 +98,7 @@ function GLOBAL.MakeNoGrowInWinter(inst)
         _MakeNoGrowInWinter(inst)
     elseif inst.components.growable then
         inst.components.growable:WatchWorldState("iswinter", ToggleGrowable)
-        ToggleGrowable(inst.components.growable, TheWorld.state.iswinter)
+        ToggleGrowable(inst.components.growable, GLOBAL.TheWorld.state.iswinter)
     end
 end
 
