@@ -2,7 +2,10 @@ local env = env
 GLOBAL.setfenv(1, GLOBAL)
 
 local function PreReveal(inst, doer)
-    doer.player_classified.MapExplorer:RevealArea(TheSim:FindFirstEntityWithTag("monkeyqueen").Transform:GetWorldPosition())
+    local queen = TheSim:FindFirstEntityWithTag("monkeyqueen")
+    if queen ~= nil then
+        doer.player_classified.MapExplorer:RevealArea(queen.Transform:GetWorldPosition())
+    end
     return true
 end
 
@@ -13,5 +16,4 @@ env.AddPrefabPostInit("stash_map", function(inst)
     end
 
     inst.components.mapspotrevealer:SetPreRevealFn(PreReveal)
-
 end)
