@@ -84,13 +84,12 @@ GLOBAL.TUNING.ROCK_FRUIT_REGROW = {
 -- Relevant: MakeNoGrowInWinter in standardcomponents.lua
 
 local function ToggleGrowable(growable, iswinter)
-    if iswinter then
+    if iswinter and growable.Pause then
         growable:Pause()
-    else
+    elseif growable.Resume then
         growable:Resume()
     end
 end
-
 local _MakeNoGrowInWinter = GLOBAL.MakeNoGrowInWinter
 
 function GLOBAL.MakeNoGrowInWinter(inst)
