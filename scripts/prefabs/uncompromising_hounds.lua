@@ -953,7 +953,7 @@ local function OnMagmaAttacked(inst, data)
                 not data.attacker.components.health:IsDead() and
                 (data.weapon == nil or ((data.weapon.components.weapon == nil or data.weapon.components.weapon.projectile == nil) and
                     data.weapon.components.projectile == nil)) and data.attacker.components.health.redirect == nil then
-                data.attacker.components.health:DoFireDamage(5, inst.prefab, true)     --redirect calls "afllicter"
+                data.attacker.components.health:DoFireDamage(5, inst, true)     --redirect calls "afllicter"
                 if data.attacker:HasTag("player") and not data.attacker.components.burnable ~= nil then
                     data.attacker.components.burnable:Ignite()
                 end
