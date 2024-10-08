@@ -326,7 +326,7 @@ if TUNING.DSTU.WXLESS then --HI ATOBA :3 :3 <3 <3
 
         if inst._hungercharge_stored >= 1 then
             local leftovers = inst._hungercharge_stored - math.floor(inst._hungercharge_stored)
-            charge_hungeramount = math.floor(inst._hungercharge_stored + 0.5)
+            charge_hungeramount = math.floor(inst._hungercharge_stored)
             inst._hungercharge_stored = leftovers
         end
 
@@ -606,9 +606,9 @@ if TUNING.DSTU.WXLESS then --HI ATOBA :3 :3 <3 <3
                 table.insert(self.chip_objectpool, chip_object)
             end
 
-            for i, v in ipairs(self.chip_objectpool) do
+            --[[for i, v in ipairs(self.chip_objectpool) do
                 v:SetPosition(0, 0)
-            end
+            end]]
 
             self.battery_frame:SetPosition(0, 22)
             self.battery_frame:SetScale(1, 1.4, 1)
@@ -666,8 +666,12 @@ if TUNING.DSTU.WXLESS then --HI ATOBA :3 :3 <3 <3
 
         env.AddClassPostConstruct("widgets/secondarystatusdisplays", function(self, ...)
             if self.upgrademodulesdisplay then
-                self.upgrademodulesdisplay:SetPosition(self.column1, -150)
-            end
+	       if KnownModIndex:IsModEnabled("workshop-376333686") then
+	           self.upgrademodulesdisplay:SetPosition(self.column1, -100)
+	       else --combined status compat
+	           self.upgrademodulesdisplay:SetPosition(self.column1, -155)
+	       end
+	   end
         end)
 
         local function OnAllUpgradeModulesRemoved(inst)

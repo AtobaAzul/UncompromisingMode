@@ -106,7 +106,7 @@ local shadow = inst.entity:AddDynamicShadow()
     --MakeMediumFreezableCharacter(inst, "torso")    
     --inst.components.burnable.flammability = 0.33
     ---------------------       
-    
+    inst.HostileToPlayerTest = function() return true end
 	
 	inst:AddTag("monster")
     inst:AddTag("hostile")   

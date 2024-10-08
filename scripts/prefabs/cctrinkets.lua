@@ -20,7 +20,7 @@ local function fn()
     inst.AnimState:PlayAnimation(name)
     MakeInventoryFloatable(inst)
 	if name == "jazzy" then
-	inst.Transform:SetScale(.66,.66,.66)	
+		inst.Transform:SetScale(.66,.66,.66)	
 	end
 
 	inst:AddTag("specialtrinket_"..name)
@@ -48,5 +48,6 @@ return Prefab("cctrinket_"..name, fn, assets)
 end
 return makecctrinkets("don"),
 makecctrinkets("jazzy"),
-makecctrinkets("freddo")
+makecctrinkets("freddo"),
+makecctrinkets("names")
 

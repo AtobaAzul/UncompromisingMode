@@ -49,10 +49,10 @@ local function doprojectilehit(inst, other)
 	for i,other in ipairs(others) do
 		if other ~= nil and other ~= caster and other.components.combat ~= nil  then
 			if inst.prefab == "shadow_goo" then
-				if other.components.sanity ~= nil and other.components.health ~= nil and not other.components.health:IsDead() and other.components.sanity:IsInsane() and other.components.inkable and not other:HasTag("shadowdominant") then
+				if other.components.sanity ~= nil and other.components.health ~= nil and not other.components.health:IsDead() and other.components.sanity:IsInsane() and other.components.inkable and not other:HasTag("shadowdominance") then
 					other.components.inkable:Ink()
 					other.components.combat:GetAttacked(caster, TUNING.WARG_GOO_DAMAGE/2)
-				elseif other.components.sanity ~= nil and not other:HasTag("shadowdominant") then
+				elseif other.components.sanity ~= nil and not other:HasTag("shadowdominance") then
 					other.components.sanity:DoDelta(-5)
 				end
 			end
