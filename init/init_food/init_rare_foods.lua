@@ -113,7 +113,7 @@ GLOBAL.TUNING.ROCK_FRUIT_LOOT =
     MAX_SPAWNS = 10,
 }
 
-if GetModConfigData("no_winter_growing") then
+if GetModConfigData("no_winter_growing_") then
     local nowintergrowing = {
         "rock_avocado_bush",
         "cherrytomato_planted",
