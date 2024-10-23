@@ -426,9 +426,6 @@ if GetModConfigData("harder_krampus") then
     table.insert(stategraph_post, "krampus")
 end
 
-if GetModConfigData("noauradamage_butterfly") then
-    table.insert(prefab_post, "butterfly")
-end
 
 if GetModConfigData("beefalo_nerf") then
     table.insert(component_post, "rider")

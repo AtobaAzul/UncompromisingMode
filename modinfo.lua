@@ -796,8 +796,6 @@ configuration_options = {
     SkipSpace(),
 
     Header("Misc Monsters"),
-    BinaryConfig("noauradamage_butterfly", "AoE Immune Butterflies",
-        "Butterflies are immune to AoE damage, such as catapults and Abigail.", true),
     BinaryConfig("_bushcrabs", "Bush Crabs", "Bush Crabs ambush the player when digging up berry bushes.", true),
     BinaryConfig("harder_krampus", "Harder Krampus", "Krampii now have a new attack, with knockback.", true),
     BinaryConfig("kramped_buff", "No Naughtiness Decay", "Prevents naughtiness decay.", true),
